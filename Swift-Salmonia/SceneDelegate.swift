@@ -8,11 +8,12 @@
 
 import UIKit
 import SwiftUI
+import SafariServices
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    @State var isVisible = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -61,20 +62,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     {
+        
+        debugPrint(scene.delegate)
         guard let url = URLContexts.first?.url else { return }
         guard let session_token_code = url.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { return }
-        let verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
-        debugPrint("DeepLink", session_token_code, verifier)
-        // ホスト名の取得
-        guard let components = URLComponents(string: url.absoluteString), let host = components.host else {
-            return
-        }
-
-        if host == "call_test" {
-            // クエリパラメータを受けて色々処理
-            // ...
-        }
+        let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
+        SplatNet2.getSessionToken(session_token_code: session_token_code, session_token_code_verifier: session_token_code_verifier)
     }
-
 }
 

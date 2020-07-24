@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		105C5BF524C722F700BDF477 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C5BF424C722F700BDF477 /* WebView.swift */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
+		10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */; };
+		10B15CC424C6FAA300C1E78A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B15CC224C6FAA300C1E78A /* Alamofire.framework */; };
+		10B15CC524C6FAA300C1E78A /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10B15CC224C6FAA300C1E78A /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		10B15CC624C6FAA300C1E78A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */; };
+		10B15CC724C6FAA300C1E78A /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6364124C662D000A39FD2 /* AppDelegate.swift */; };
 		10B6364424C662D000A39FD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6364324C662D000A39FD2 /* SceneDelegate.swift */; };
 		10B6364624C662D000A39FD2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6364524C662D000A39FD2 /* ContentView.swift */; };
@@ -35,8 +41,27 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		10B15CC824C6FAA300C1E78A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				10B15CC724C6FAA300C1E78A /* SwiftyJSON.framework in Embed Frameworks */,
+				10B15CC524C6FAA300C1E78A /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		105C5BF424C722F700BDF477 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		10B15CBB24C6F78C00C1E78A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplatNet2.swift; sourceTree = "<group>"; };
+		10B15CC224C6FAA300C1E78A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		10B6363E24C662D000A39FD2 /* Salmonia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B6364124C662D000A39FD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10B6364324C662D000A39FD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10B15CC624C6FAA300C1E78A /* SwiftyJSON.framework in Frameworks */,
+				10B15CC424C6FAA300C1E78A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +105,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10B15CBE24C6FA0300C1E78A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				10B15CBB24C6F78C00C1E78A /* Extension.swift */,
+				10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */,
+				105C5BF424C722F700BDF477 /* WebView.swift */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		10B15CC124C6FAA300C1E78A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10B15CC224C6FAA300C1E78A /* Alamofire.framework */,
+				10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		10B6363524C662D000A39FD2 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +131,7 @@
 				10B6365724C662D200A39FD2 /* Swift-SalmoniaTests */,
 				10B6366224C662D200A39FD2 /* Swift-SalmoniaUITests */,
 				10B6363F24C662D000A39FD2 /* Products */,
+				10B15CC124C6FAA300C1E78A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,9 +148,9 @@
 		10B6364024C662D000A39FD2 /* Swift-Salmonia */ = {
 			isa = PBXGroup;
 			children = (
+				10B15CBE24C6FA0300C1E78A /* Assets */,
 				10B6364124C662D000A39FD2 /* AppDelegate.swift */,
 				10B6364324C662D000A39FD2 /* SceneDelegate.swift */,
-				10B15CBB24C6F78C00C1E78A /* Extension.swift */,
 				10B6364524C662D000A39FD2 /* ContentView.swift */,
 				10B6364724C662D200A39FD2 /* Assets.xcassets */,
 				10B6364C24C662D200A39FD2 /* LaunchScreen.storyboard */,
@@ -149,6 +196,8 @@
 				10B6363A24C662D000A39FD2 /* Sources */,
 				10B6363B24C662D000A39FD2 /* Frameworks */,
 				10B6363C24C662D000A39FD2 /* Resources */,
+				10B15CBD24C6F9C500C1E78A /* ShellScript */,
+				10B15CC824C6FAA300C1E78A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -265,6 +314,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		10B15CBD24C6F9C500C1E78A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		10B6363A24C662D000A39FD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -273,6 +344,8 @@
 				10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */,
 				10B6364424C662D000A39FD2 /* SceneDelegate.swift in Sources */,
 				10B6364624C662D000A39FD2 /* ContentView.swift in Sources */,
+				105C5BF524C722F700BDF477 /* WebView.swift in Sources */,
+				10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */,
 				10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +515,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Swift-Salmonia/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -464,6 +541,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Swift-Salmonia/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
