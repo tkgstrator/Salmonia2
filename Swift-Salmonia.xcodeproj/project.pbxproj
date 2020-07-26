@@ -3,10 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10505E6A24CB5D5B00CF4E04 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10505E6924CB5D5A00CF4E04 /* LoadingView.swift */; };
+		10505E7024CB653800CF4E04 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10505E6F24CB653800CF4E04 /* Realm.swift */; };
+		10505E7324CB655800CF4E04 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7124CB655800CF4E04 /* RealmSwift.framework */; };
+		10505E7424CB655800CF4E04 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7124CB655800CF4E04 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		10505E7524CB655800CF4E04 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7224CB655800CF4E04 /* Realm.framework */; };
+		10505E7624CB655800CF4E04 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7224CB655800CF4E04 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		10505E7D24CBDE2B00CF4E04 /* Splatfont2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */; };
+		10505E7F24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */; };
 		105C5BF524C722F700BDF477 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C5BF424C722F700BDF477 /* WebView.swift */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
 		10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */; };
@@ -22,6 +30,9 @@
 		10B6364E24C662D200A39FD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10B6364C24C662D200A39FD2 /* LaunchScreen.storyboard */; };
 		10B6365924C662D200A39FD2 /* Swift_SalmoniaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6365824C662D200A39FD2 /* Swift_SalmoniaTests.swift */; };
 		10B6366424C662D200A39FD2 /* Swift_SalmoniaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6366324C662D200A39FD2 /* Swift_SalmoniaUITests.swift */; };
+		C5113F046241D2C1F2018BA4 /* Pods_Swift_SalmoniaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6776318790644E82D0B26F /* Pods_Swift_SalmoniaTests.framework */; };
+		D7E02E303A1404B92452290A /* Pods_Swift_Salmonia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9314225124683A3C26DE05 /* Pods_Swift_Salmonia.framework */; };
+		F2A7D13604AE8290D8D753AA /* Pods_Swift_Salmonia_Swift_SalmoniaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E44E93D95379A8FB77A009 /* Pods_Swift_Salmonia_Swift_SalmoniaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +59,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				10505E7624CB655800CF4E04 /* Realm.framework in Embed Frameworks */,
 				10B15CC724C6FAA300C1E78A /* SwiftyJSON.framework in Embed Frameworks */,
 				10B15CC524C6FAA300C1E78A /* Alamofire.framework in Embed Frameworks */,
+				10505E7424CB655800CF4E04 /* RealmSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -57,6 +70,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E9A55168B8C5AC47A7E71A7 /* Pods-Swift-Salmonia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-Salmonia.debug.xcconfig"; path = "Target Support Files/Pods-Swift-Salmonia/Pods-Swift-Salmonia.debug.xcconfig"; sourceTree = "<group>"; };
+		10505E6924CB5D5A00CF4E04 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		10505E6F24CB653800CF4E04 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		10505E7124CB655800CF4E04 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		10505E7224CB655800CF4E04 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont2.ttf; sourceTree = "<group>"; };
+		10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
 		105C5BF424C722F700BDF477 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		10B15CBB24C6F78C00C1E78A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplatNet2.swift; sourceTree = "<group>"; };
@@ -76,6 +96,14 @@
 		10B6365F24C662D200A39FD2 /* Swift-SalmoniaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift-SalmoniaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B6366324C662D200A39FD2 /* Swift_SalmoniaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_SalmoniaUITests.swift; sourceTree = "<group>"; };
 		10B6366524C662D200A39FD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D6776318790644E82D0B26F /* Pods_Swift_SalmoniaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift_SalmoniaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F434B997E7E6166C9A0D375 /* Pods-Swift-SalmoniaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-SalmoniaTests.release.xcconfig"; path = "Target Support Files/Pods-Swift-SalmoniaTests/Pods-Swift-SalmoniaTests.release.xcconfig"; sourceTree = "<group>"; };
+		4E4ADB16475744E5D5E57D1C /* Pods-Swift-Salmonia-Swift-SalmoniaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-Salmonia-Swift-SalmoniaUITests.release.xcconfig"; path = "Target Support Files/Pods-Swift-Salmonia-Swift-SalmoniaUITests/Pods-Swift-Salmonia-Swift-SalmoniaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6F9314225124683A3C26DE05 /* Pods_Swift_Salmonia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift_Salmonia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F56126B33D89177D663F195 /* Pods-Swift-Salmonia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-Salmonia.release.xcconfig"; path = "Target Support Files/Pods-Swift-Salmonia/Pods-Swift-Salmonia.release.xcconfig"; sourceTree = "<group>"; };
+		A3E44E93D95379A8FB77A009 /* Pods_Swift_Salmonia_Swift_SalmoniaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift_Salmonia_Swift_SalmoniaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEEBF4F22298733D1B480722 /* Pods-Swift-Salmonia-Swift-SalmoniaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-Salmonia-Swift-SalmoniaUITests.debug.xcconfig"; path = "Target Support Files/Pods-Swift-Salmonia-Swift-SalmoniaUITests/Pods-Swift-Salmonia-Swift-SalmoniaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		EC4E64552CE20947300582BC /* Pods-Swift-SalmoniaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-SalmoniaTests.debug.xcconfig"; path = "Target Support Files/Pods-Swift-SalmoniaTests/Pods-Swift-SalmoniaTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +111,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10505E7524CB655800CF4E04 /* Realm.framework in Frameworks */,
 				10B15CC624C6FAA300C1E78A /* SwiftyJSON.framework in Frameworks */,
 				10B15CC424C6FAA300C1E78A /* Alamofire.framework in Frameworks */,
+				10505E7324CB655800CF4E04 /* RealmSwift.framework in Frameworks */,
+				D7E02E303A1404B92452290A /* Pods_Swift_Salmonia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5113F046241D2C1F2018BA4 /* Pods_Swift_SalmoniaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,18 +131,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2A7D13604AE8290D8D753AA /* Pods_Swift_Salmonia_Swift_SalmoniaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10505E7B24CBDDF100CF4E04 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */,
+				10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		10B15CBE24C6FA0300C1E78A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				10505E7B24CBDDF100CF4E04 /* Fonts */,
 				10B15CBB24C6F78C00C1E78A /* Extension.swift */,
 				10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */,
 				105C5BF424C722F700BDF477 /* WebView.swift */,
+				10505E6924CB5D5A00CF4E04 /* LoadingView.swift */,
+				10505E6F24CB653800CF4E04 /* Realm.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -118,8 +163,13 @@
 		10B15CC124C6FAA300C1E78A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10505E7224CB655800CF4E04 /* Realm.framework */,
+				10505E7124CB655800CF4E04 /* RealmSwift.framework */,
 				10B15CC224C6FAA300C1E78A /* Alamofire.framework */,
 				10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */,
+				6F9314225124683A3C26DE05 /* Pods_Swift_Salmonia.framework */,
+				A3E44E93D95379A8FB77A009 /* Pods_Swift_Salmonia_Swift_SalmoniaUITests.framework */,
+				3D6776318790644E82D0B26F /* Pods_Swift_SalmoniaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -132,6 +182,7 @@
 				10B6366224C662D200A39FD2 /* Swift-SalmoniaUITests */,
 				10B6363F24C662D000A39FD2 /* Products */,
 				10B15CC124C6FAA300C1E78A /* Frameworks */,
+				8DE6A8BE9536CAE9BD459513 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +237,19 @@
 			path = "Swift-SalmoniaUITests";
 			sourceTree = "<group>";
 		};
+		8DE6A8BE9536CAE9BD459513 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0E9A55168B8C5AC47A7E71A7 /* Pods-Swift-Salmonia.debug.xcconfig */,
+				7F56126B33D89177D663F195 /* Pods-Swift-Salmonia.release.xcconfig */,
+				AEEBF4F22298733D1B480722 /* Pods-Swift-Salmonia-Swift-SalmoniaUITests.debug.xcconfig */,
+				4E4ADB16475744E5D5E57D1C /* Pods-Swift-Salmonia-Swift-SalmoniaUITests.release.xcconfig */,
+				EC4E64552CE20947300582BC /* Pods-Swift-SalmoniaTests.debug.xcconfig */,
+				3F434B997E7E6166C9A0D375 /* Pods-Swift-SalmoniaTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,11 +257,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10B6366824C662D200A39FD2 /* Build configuration list for PBXNativeTarget "Swift-Salmonia" */;
 			buildPhases = (
+				4C091F37389C8751AC438F16 /* [CP] Check Pods Manifest.lock */,
 				10B6363A24C662D000A39FD2 /* Sources */,
 				10B6363B24C662D000A39FD2 /* Frameworks */,
 				10B6363C24C662D000A39FD2 /* Resources */,
 				10B15CBD24C6F9C500C1E78A /* ShellScript */,
 				10B15CC824C6FAA300C1E78A /* Embed Frameworks */,
+				B1C72A7B5CBEFDA9F24BE155 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -212,6 +278,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10B6366B24C662D200A39FD2 /* Build configuration list for PBXNativeTarget "Swift-SalmoniaTests" */;
 			buildPhases = (
+				2741EA4ECD16E91223ACC1CC /* [CP] Check Pods Manifest.lock */,
 				10B6365024C662D200A39FD2 /* Sources */,
 				10B6365124C662D200A39FD2 /* Frameworks */,
 				10B6365224C662D200A39FD2 /* Resources */,
@@ -230,9 +297,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 10B6366E24C662D200A39FD2 /* Build configuration list for PBXNativeTarget "Swift-SalmoniaUITests" */;
 			buildPhases = (
+				22C648FD24E55ED1BDC12A45 /* [CP] Check Pods Manifest.lock */,
 				10B6365B24C662D200A39FD2 /* Sources */,
 				10B6365C24C662D200A39FD2 /* Frameworks */,
 				10B6365D24C662D200A39FD2 /* Resources */,
+				D5D6EF2BADE56F79244BBC31 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -293,8 +362,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B6364E24C662D200A39FD2 /* LaunchScreen.storyboard in Resources */,
+				10505E7F24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf in Resources */,
 				10B6364B24C662D200A39FD2 /* Preview Assets.xcassets in Resources */,
 				10B6364824C662D200A39FD2 /* Assets.xcassets in Resources */,
+				10505E7D24CBDE2B00CF4E04 /* Splatfont2.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +396,8 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -333,6 +406,106 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+		22C648FD24E55ED1BDC12A45 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Swift-Salmonia-Swift-SalmoniaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2741EA4ECD16E91223ACC1CC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Swift-SalmoniaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C091F37389C8751AC438F16 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Swift-Salmonia-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B1C72A7B5CBEFDA9F24BE155 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Swift-Salmonia/Pods-Swift-Salmonia-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Swift-Salmonia/Pods-Swift-Salmonia-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swift-Salmonia/Pods-Swift-Salmonia-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5D6EF2BADE56F79244BBC31 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Swift-Salmonia-Swift-SalmoniaUITests/Pods-Swift-Salmonia-Swift-SalmoniaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Swift-Salmonia-Swift-SalmoniaUITests/Pods-Swift-Salmonia-Swift-SalmoniaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swift-Salmonia-Swift-SalmoniaUITests/Pods-Swift-Salmonia-Swift-SalmoniaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -346,7 +519,9 @@
 				10B6364624C662D000A39FD2 /* ContentView.swift in Sources */,
 				105C5BF524C722F700BDF477 /* WebView.swift in Sources */,
 				10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */,
+				10505E6A24CB5D5B00CF4E04 /* LoadingView.swift in Sources */,
 				10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */,
+				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +684,7 @@
 		};
 		10B6366924C662D200A39FD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E9A55168B8C5AC47A7E71A7 /* Pods-Swift-Salmonia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -535,6 +711,7 @@
 		};
 		10B6366A24C662D200A39FD2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F56126B33D89177D663F195 /* Pods-Swift-Salmonia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -561,6 +738,7 @@
 		};
 		10B6366C24C662D200A39FD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC4E64552CE20947300582BC /* Pods-Swift-SalmoniaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -583,6 +761,7 @@
 		};
 		10B6366D24C662D200A39FD2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F434B997E7E6166C9A0D375 /* Pods-Swift-SalmoniaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -605,6 +784,7 @@
 		};
 		10B6366F24C662D200A39FD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEEBF4F22298733D1B480722 /* Pods-Swift-Salmonia-Swift-SalmoniaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -625,6 +805,7 @@
 		};
 		10B6367024C662D200A39FD2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E4ADB16475744E5D5E57D1C /* Pods-Swift-Salmonia-Swift-SalmoniaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,2 +1,4 @@
 github "Alamofire/Alamofire" "5.0.0-rc.2"
 github "SwiftyJSON/SwiftyJSON" "4.3.0"
+github "dmytro-anokhin/url-image" "0.9.19"
+github "realm/realm-cocoa" "v5.3.2"

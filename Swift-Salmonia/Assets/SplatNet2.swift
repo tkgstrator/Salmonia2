@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class SplatNet2 {
     
@@ -17,7 +18,9 @@ class SplatNet2 {
     static var splatoon_token: String = ""
     static var splatoon_access_token: String = ""
     static var iksm_session: String = ""
+    static var nsaid: String = ""
     static var user: (name: String, image: String) = (name: "", image: "")
+    static let realm = try! Realm() // 多分存在するやろ
 
     class func getSessionToken(session_token_code: String, session_token_code_verifier: String) {
         let url = "https://salmonia.mydns.jp/api/session_token"
@@ -166,7 +169,9 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    let iksm_session = JSON(value)["iksm_session"].stringValue
+                    iksm_session = JSON(value)["iksm_session"].stringValue
+                    nsaid = JSON(value)["nsaid"].stringValue
+                    SplatNet2.setUserInfoFromSplatNet2()
                     debugPrint("IKSM SESSION", iksm_session)
                 case .failure(let error):
                     debugPrint(error)
@@ -176,5 +181,62 @@ class SplatNet2 {
         
     }
     
+    class func setUserInfoFromSplatNet2() {
+        let userinfo = UserInfoRealm()
+        
+        userinfo.name = user.name
+        userinfo.image = user.image
+        userinfo.iksm_session = iksm_session
+        userinfo.session_token = session_token
+        userinfo.nsaid = nsaid
+        
+        do {
+            try realm.write {
+                realm.add(userinfo, update: .all)
+            }
+        } catch {
+            debugPrint("Realm Write Error")
+        }
+        debugPrint("Write New Record")
+    }
     
+    class func getResultFromSplatNet2(job_id: Int, completion: (JSON) -> ()) {
+        let url = "https://app.splatoon2.nintendo.net/api/coop_results/" + String(job_id)
+        let header: HTTPHeaders = [
+            "cookie" : "iksm_session=" + iksm_session
+        ]
+        var json: JSON = JSON()
+        
+        AF.request(url, method: .get, headers: header)
+            .validate(contentType: ["application/json"])
+            .responseJSON{ response in
+                switch response.result {
+                case .success(let value):
+                    json = JSON(value)
+                    print(json)
+                case .failure(let error):
+                    print(error)
+                }
+        }
+        completion(json)
+    }
+    
+    class func getSummaryFromSplatNet2(completion: @escaping (JSON) -> ()) {
+        guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
+        let url = "https://app.splatoon2.nintendo.net/api/coop_results"
+        let header: HTTPHeaders = [
+            "cookie" : "iksm_session=" + iksm_session
+        ]
+        
+        AF.request(url, method: .get, headers: header)
+            .validate(contentType: ["application/json"])
+            .responseJSON{ response in
+                switch response.result {
+                case .success(let value):
+                    completion(JSON(value))
+                case .failure(let error):
+                    print(error)
+                }
+        }
+    }
 }

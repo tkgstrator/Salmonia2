@@ -2,7 +2,7 @@
   "commitish" : "5.0.0-rc.2",
   "iOS" : [
     {
-      "hash" : "9ef04c6ed360efa401ad78c4dfe4a4b7fae95a75652331002b9660eae825f7da",
+      "hash" : "fe21e30e68b9bd6ae570ac8601e606e85c7bff4aa3e8f6674d120c7d2597f9f6",
       "name" : "Alamofire",
       "linking" : "dynamic",
       "swiftToolchainVersion" : "5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)"

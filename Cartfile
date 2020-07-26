@@ -1,2 +1,4 @@
 github "Alamofire/Alamofire" "5.0.0-rc.2"
 github "SwiftyJSON/SwiftyJSON" ~> 4.0
+github "realm/realm-cocoa"
+github "krzyzanowskim/CryptoSwift"
