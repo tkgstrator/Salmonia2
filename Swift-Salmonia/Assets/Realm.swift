@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import CryptoSwift
 
 class UserInfoRealm: Object {
     @objc dynamic var name = "" // username from SplatNet2
@@ -28,6 +29,7 @@ class UserInfoRealm: Object {
         realm.objects(UserInfoRealm.self)
     }
 }
+
 class ShiftResultsRealm: Object {
     @objc dynamic var start_time = 0
     @objc dynamic var nsaid = ""
@@ -43,12 +45,13 @@ class ShiftResultsRealm: Object {
     @objc dynamic var my_golden_ikura_total = 0
     @objc dynamic var team_ikura_total = 0
     @objc dynamic var my_ikura_total = 0
+    dynamic var weapons = List<Int>()
     dynamic var failure_count = List<Int>()
 
-    func configure(pid: String, start_time: Int) {
-        self.pid = pid
+    func configure(nsaid: String, start_time: Int) {
+        self.nsaid = nsaid
         self.start_time = start_time
-        self.sash = (pid + String(start_time)).sha256()
+        self.sash = (nsaid + String(start_time)).sha256()
     }
     
     override static func primaryKey() -> String? {

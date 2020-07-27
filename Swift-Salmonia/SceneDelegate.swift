@@ -62,10 +62,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     {
-        
-//        debugPrint(scene.delegate)
+        print("Login Method.")
         guard let url = URLContexts.first?.url else { return }
         guard let session_token_code = url.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { return }
+        print("URL", url, "CODE", session_token_code)
         let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
         SplatNet2.getSessionToken(session_token_code: session_token_code, session_token_code_verifier: session_token_code_verifier)
     }

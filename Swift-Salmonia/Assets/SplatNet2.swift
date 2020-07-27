@@ -21,7 +21,7 @@ class SplatNet2 {
     static var nsaid: String = ""
     static var user: (name: String, image: String) = (name: "", image: "")
     static let realm = try! Realm() // 多分存在するやろ
-
+    
     class func getSessionToken(session_token_code: String, session_token_code_verifier: String) {
         let url = "https://salmonia.mydns.jp/api/session_token"
         let header: HTTPHeaders = [
@@ -105,11 +105,11 @@ class SplatNet2 {
         ]
         // ここもっと簡単に書けるだろ
         let body = [
-                "f": result["f"].stringValue,
-                "p1": result["p1"].stringValue,
-                "p2": result["p2"].stringValue,
-                "p3": result["p3"].stringValue
-            ]
+            "f": result["f"].stringValue,
+            "p1": result["p1"].stringValue,
+            "p2": result["p2"].stringValue,
+            "p3": result["p3"].stringValue
+        ]
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
@@ -134,10 +134,10 @@ class SplatNet2 {
         // ここもっと簡単に書けるだろ
         let body = [
             "parameter" : [
-            "f": result["f"].stringValue,
-            "p1": result["p1"].stringValue,
-            "p2": result["p2"].stringValue,
-            "p3": result["p3"].stringValue
+                "f": result["f"].stringValue,
+                "p1": result["p1"].stringValue,
+                "p2": result["p2"].stringValue,
+                "p3": result["p3"].stringValue
             ],
             "splatoon_token": splatoon_token
             ] as [String : Any]
@@ -200,25 +200,46 @@ class SplatNet2 {
         debugPrint("Write New Record")
     }
     
-    class func getResultFromSplatNet2(job_id: Int, completion: (JSON) -> ()) {
+    class func getResultFromSplatNet2(job_id: Int) {
+        guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
+        guard let api_token: String = realm.objects(UserInfoRealm.self).first?.api_token else { return }
+
         let url = "https://app.splatoon2.nintendo.net/api/coop_results/" + String(job_id)
         let header: HTTPHeaders = [
             "cookie" : "iksm_session=" + iksm_session
         ]
-        var json: JSON = JSON()
         
         AF.request(url, method: .get, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    json = JSON(value)
-                    print(json)
+                    uploadResultToSalmonStats(result: JSON(value), token: api_token)
                 case .failure(let error):
                     print(error)
                 }
         }
-        completion(json)
+    }
+    
+    class func uploadResultToSalmonStats(result: JSON, token: String) {
+        let url = "https://salmon-stats-api.yuki.games/api/results"
+        let header: HTTPHeaders = [
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + token
+        ]
+        let body = ["results": [result.dictionaryObject]]
+        print(body)
+        
+        AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print(value)
+                case .failure(let error):
+                    print(error)
+                }
+        }
     }
     
     class func getSummaryFromSplatNet2(completion: @escaping (JSON) -> ()) {
@@ -239,4 +260,23 @@ class SplatNet2 {
                 }
         }
     }
+    
+//    class func getSummaryFromSplatNet2(completion: @escaping (JSON) -> ()) {
+//        guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
+//        let url = "https://app.splatoon2.nintendo.net/api/coop_results"
+//        let header: HTTPHeaders = [
+//            "cookie" : "iksm_session=" + iksm_session
+//        ]
+//
+//        AF.request(url, method: .get, headers: header)
+//            .validate(contentType: ["application/json"])
+//            .responseJSON{ response in
+//                switch response.result {
+//                case .success(let value):
+//                    completion(JSON(value))
+//                case .failure(let error):
+//                    print(error)
+//                }
+//        }
+//    }
 }
