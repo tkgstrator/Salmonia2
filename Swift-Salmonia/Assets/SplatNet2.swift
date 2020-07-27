@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import RealmSwift
+import WebKit
 
 class SplatNet2 {
     
@@ -261,6 +262,46 @@ class SplatNet2 {
         }
     }
     
+    
+    class func getTokenFromSalmonStats(session_token: String, completion: @escaping (JSON?) -> ()) {
+        let url = "https://salmon-stats-api.yuki.games/api-token"
+        let header: HTTPHeaders = [
+            "Cookie" : "laravel_session=" + session_token
+        ]
+        
+        AF.request(url, method: .get, headers: header)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    completion(JSON(value))
+                case .failure(let error):
+                    print(error)
+                }
+        }
+    }
+    
+    class func loginSalmonStats() {
+        WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
+            cookies in
+            for cookie in cookies {
+                if cookie.name == "laravel_session" {
+                    let laravel_session = cookie.value
+                    getTokenFromSalmonStats(session_token: laravel_session) {
+                        response in
+                        guard let token = response?["api_token"].stringValue else { return }
+                        print("API TOKEN",token)
+                        guard let user = realm.objects(UserInfoRealm.self).first else { return }
+                        do {
+                            try realm.write {
+                                user.setValue(token, forKey: "api_token")
+                            }
+                        } catch { }
+                    }
+                }
+            }
+        }
+    }
 //    class func getSummaryFromSplatNet2(completion: @escaping (JSON) -> ()) {
 //        guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
 //        let url = "https://app.splatoon2.nintendo.net/api/coop_results"
