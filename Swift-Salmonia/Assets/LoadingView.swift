@@ -21,6 +21,9 @@ struct LoadingView: View {
             
             // 最初にサマリー情報を取得
             SplatNet2.getSummaryFromSplatNet2() { response in
+                // エラーが出ていたらiksm_sessionを再生成する（ダサくね？
+                // 別にvalidation用意したほうが良くね？
+                print("LOADING VIEW")
                 guard let nsaid = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
                 for (_, stats) in response["summary"]["stats"] {
                     let summary = ShiftResultsRealm()
@@ -54,11 +57,11 @@ struct LoadingView: View {
                 // そこにバイト回数情報が載っているのでそれを利用（ネストがダサくなるが...
                 let job_num = response["summary"]["card"]["job_num"].intValue
                 // 最も新しいバイトIDをDBから取得する、なければ最新のものから49引いたものにする
-                let latest_job_num = realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "start_time", ascending: false).first?.job_id ?? max(0, job_num - 49)
+                let latest_job_num = realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "job_id", ascending: false).first?.job_id ?? max(0, job_num - 49)
+                if job_num == latest_job_num { return } // 新規リザルトがなければ即戻る（もっと上手に書けんか？？？
                 for id in (latest_job_num ... job_num) {
                     SplatNet2.getResultFromSplatNet2(job_id: id) { response in
                         let result = CoopResultsRealm()
-                        
                         // ここ、もっと上手い書き方できるので要リファクタリング
                         var players: [JSON] = []
                         players.append(response["my_result"])

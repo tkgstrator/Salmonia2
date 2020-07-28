@@ -117,11 +117,23 @@ struct SettingsView: View {
     var body: some View {
         List {
             Section(header: Text("Login")) {
-                Text("SplatNet2").onTapGesture {
+                Button(action: {
                     UIApplication.shared.open(URL(string: self.url)!)
+                }) {
+                    HStack {
+                        Text("SplatNet2")
+                        Spacer()
+                        Image(systemName: "safari").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)
+                    }
                 }
-                Text("Salmon Stats").onTapGesture {
+                Button(action: {
                     SplatNet2.loginSalmonStats()
+                }) {
+                    HStack {
+                        Text("Salmon Stats")
+                        Spacer()
+                        Image(systemName: "snow").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)
+                    }
                 }
             }
             Section(header: Text("UserInfo")) {

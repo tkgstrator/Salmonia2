@@ -206,20 +206,59 @@ class SplatNet2 {
     
     class func getSummaryFromSplatNet2(completion: @escaping (JSON) -> ()) {
         guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
+        
         let url = "https://app.splatoon2.nintendo.net/api/coop_results"
         let header: HTTPHeaders = [
             "cookie" : "iksm_session=" + iksm_session
         ]
         
         AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
+                    print("GET SUCCESS")
                     completion(JSON(value))
                 case .failure(let error):
+                    print("REGENERATE")
                     print(error)
+                    SplatNet2.genIksmSession() { response in
+                        completion(response)
+                    }
                 }
+        }
+    }
+    
+    class func genIksmSession(complition: @escaping (JSON) -> ()) {
+        guard let session_token: String = realm.objects(UserInfoRealm.self).first?.session_token else { return }
+        guard let user = realm.objects(UserInfoRealm.self).first else { return }
+        
+        SplatNet2.getAccessToken(session_token: session_token) { response in
+            let access_token = response["access_token"].stringValue
+            SplatNet2.callFlapgAPI(access_token: access_token, type: "nso") { response in
+                SplatNet2.getSplatoonToken(result: response) { response in
+                    let splatoon_token = response["splatoon_token"].stringValue
+                    let username = response["user"]["name"].stringValue
+                    let imageUri = response["user"]["image"].stringValue
+                    SplatNet2.callFlapgAPI(access_token: splatoon_token, type: "app") { response in
+                        SplatNet2.getSplatoonAccessToken(result: response, splatoon_token: splatoon_token) { response in
+                            let splatoon_access_token = response["splatoon_access_token"].stringValue
+                            SplatNet2.getIksmSession(splatoon_access_token: splatoon_access_token) { response in
+                                let iksm_session = response["iksm_session"].stringValue
+                                try? realm.write {
+                                    user.setValue(iksm_session, forKey: "iksm_session")
+                                    user.setValue(username, forKey: "name")
+                                    user.setValue(imageUri, forKey: "image")
+                                }
+                                SplatNet2.getSummaryFromSplatNet2() { response in
+                                    complition(response)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
