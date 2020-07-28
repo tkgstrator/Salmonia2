@@ -19,6 +19,13 @@ struct ContentView: View {
                         Text("Salmonia")
                     }
             }.tag("Salmonia")
+            PlayerStatsView()
+                .tabItem {
+                    VStack {
+                        Image(systemName: "snow")
+                        Text("Stats")
+                    }
+            }.tag("Stats")
             SalmonStatsView()
                 .tabItem {
                     VStack {

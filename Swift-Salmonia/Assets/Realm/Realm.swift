@@ -87,6 +87,13 @@ class CoopResultsRealm: Object {
     dynamic var wave = List<WaveDetailRealm>()
     dynamic var player = List<PlayerResultsRealm>()
     
+    private static let realm = try! Realm()
+    
+    static func all() -> Results<CoopResultsRealm>
+    {
+        realm.objects(CoopResultsRealm.self)
+    }
+    
     override static func primaryKey() -> String? {
         return "play_time"
     }
