@@ -78,7 +78,7 @@ struct SettingsView: View {
                         result.grade_point_delta = -1 // なさそうな気がするのでやはりプレースホルダを代入
                         result.job_result_is_clear = response["clear_waves"].intValue == 3 // OK?
                         result.job_result_failure_reason = response["fail_reason_id"].intValue.reasonid // OK?
-                        result.job_result_failure_wave.value = response["clear_waves"].intValue % 3 //OK?
+                        result.job_result_failure_wave.value = response["clear_waves"].intValue == 3 ? nil : response["clear_waves"].intValue + 1 //OK?
                         // Salmon Statsは別枠で保存しているのでこれが利用できる
                         result.power_eggs = response["power_egg_collected"].intValue
                         result.golden_eggs = response["golden_egg_delivered"].intValue

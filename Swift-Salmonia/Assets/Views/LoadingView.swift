@@ -83,9 +83,9 @@ struct LoadingView: View {
                         result.grade_id = response["grade"]["id"].intValue
                         result.grade_point = response["grade_point"].intValue
                         result.grade_point_delta = response["grade_point_delta"].intValue
-                        result.job_result_is_clear = response["job_result"]["is_clear"].stringValue == "true"
-                        result.job_result_failure_reason = response["job_result"]["failure_reason"].stringValue
-                        result.job_result_failure_wave.value = response["job_result"]["failure_wave"].intValue
+                        result.job_result_is_clear = response["job_result"]["is_clear"].boolValue
+                        result.job_result_failure_reason = response["job_result"]["failure_reason"] == JSON.null ? nil :  response["job_result"]["failure_reason"].stringValue
+                        result.job_result_failure_wave.value = response["job_result"]["failure_wave"] == JSON.null ? nil :  response["job_result"]["failure_wave"].intValue
                         for (_, boss) in response["boss_counts"].sorted(by: { Int($0.0)! < Int($1.0)! }) {
                             result.appear.append(boss["count"].intValue)
                         }
@@ -130,7 +130,7 @@ struct LoadingView: View {
                         
                         // データベースに書き込み
                         try? realm.write {
-                            realm.add(result, update: .all)
+                            realm.add(result, update: .modified)
                         }
                     }
                 }
