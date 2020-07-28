@@ -62,14 +62,14 @@ struct SalmoniaView: View {
             VStack {
                 ScrollView {
                     HStack(alignment: .center, spacing: 0) {
-                        URLImage(URL(string: realm.users.first?.image ?? url)!, processors: [Resize(size: CGSize(width: 40, height: 40), scale: UIScreen.main.scale)])
+                        URLImage(URL(string: realm.users.first?.image ?? url)!, content:  {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 80, height: 80)
                         Spacer()
                         Text(realm.users.first?.name ?? "Salmonia").font(.custom("Splatfont2", size: 30)).frame(maxWidth: .infinity, alignment: .center)
                     }
-                    .frame(maxWidth: .infinity)
-                    //Text("UNDER CONSTRUCTION")
+                    OverView()
                 }
             }
+            .padding(.horizontal, 10)
             .navigationBarTitle(Text("Salmonia"))
             .navigationBarItems(leading:
                 NavigationLink(destination: SettingsView())
@@ -110,27 +110,47 @@ struct SalmonStatsView: View {
 
 // 設定画面を表示するビュー
 struct SettingsView: View {
-    @State var isVisible = false
+    private let url = "https://accounts.nintendo.com/connect/1.0.0/authorize?state=V6DSwHXbqC4rspCn_ArvfkpG1WFSvtNYrhugtfqOHsF6SYyX&redirect_uri=npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119&scope=openid+user+user.birthday+user.mii+user.screenName&response_type=session_token_code&session_token_code_challenge=tYLPO5PxpK-DTcAHJXugD7ztvAZQlo0DQQp3au5ztuM&session_token_code_challenge_method=S256&theme=login_form"
     
+    @ObservedObject var realm = UserInfoModel()
+
     var body: some View {
         List {
-            Button(action: {
-                self.isVisible.toggle()
-            }) {
-                Text("SplatNet2")
+            Section(header: Text("Login")) {
+                Text("SplatNet2").onTapGesture {
+                    UIApplication.shared.open(URL(string: self.url)!)
+                }
+                Text("Salmon Stats").onTapGesture {
+                    SplatNet2.loginSalmonStats()
+                }
             }
-            .sheet(isPresented: $isVisible) {
-                WebView(request: URLRequest(url: URL(string: "https://accounts.nintendo.com/connect/1.0.0/authorize?state=V6DSwHXbqC4rspCn_ArvfkpG1WFSvtNYrhugtfqOHsF6SYyX&redirect_uri=npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119&scope=openid+user+user.birthday+user.mii+user.screenName&response_type=session_token_code&session_token_code_challenge=tYLPO5PxpK-DTcAHJXugD7ztvAZQlo0DQQp3au5ztuM&session_token_code_challenge_method=S256&theme=login_form")!))
-            }
-            Button(action: {
-                SplatNet2.loginSalmonStats()
-                //                self.isVisible.toggle()
-            }) {
-                Text("Salmon Stats")
+            Section(header: Text("UserInfo")) {
+                SettingColumn(title: "iksm_session", value: realm.users.first?.iksm_session)
+                SettingColumn(title: "session_token", value: realm.users.first?.session_token)
+                SettingColumn(title: "api_token", value: realm.users.first?.api_token)
             }
         }
+        .listStyle(DefaultListStyle())
         .navigationBarTitle(Text("Settings"))
         .tag("Settings")
+    }
+}
+
+struct SettingColumn: View {
+    var title: String
+    var value: String
+
+    init(title: String, value: String?) {
+        self.title = title
+        self.value = value != nil ? "Registered" : "Unregistered"
+    }
+    
+    var body: some View {
+        HStack {
+            Text(self.title)
+            Spacer()
+            Text(self.value).foregroundColor(Color.gray)
+        }
     }
 }
 

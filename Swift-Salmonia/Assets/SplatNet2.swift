@@ -14,16 +14,9 @@ import WebKit
 
 class SplatNet2 {
     
-    static var session_token: String = ""
-    static var access_token: String = ""
-    static var splatoon_token: String = ""
-    static var splatoon_access_token: String = ""
-    static var iksm_session: String = ""
-    static var nsaid: String = ""
-    static var user: (name: String, image: String) = (name: "", image: "")
     static let realm = try! Realm() // 多分存在するやろ
     
-    class func getSessionToken(session_token_code: String, session_token_code_verifier: String) {
+    class func getSessionToken(session_token_code: String, session_token_code_verifier: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/session_token"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -37,16 +30,14 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    session_token = JSON(value)["session_token"].stringValue
-                    debugPrint("SESSION TOKEN", session_token)
-                    SplatNet2.getAccessToken(session_token: session_token)
+                    complition(JSON(value))
                 case .failure:
                     break
                 }
         }
     }
     
-    class func getAccessToken(session_token: String) {
+    class func getAccessToken(session_token: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/access_token"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -54,21 +45,20 @@ class SplatNet2 {
         let body = [
             "session_token": session_token
         ]
+        
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    access_token = JSON(value)["access_token"].stringValue
-                    debugPrint("ACCESS TOKEN", access_token)
-                    SplatNet2.callFlapgAPI(access_token: access_token, type: "nso")
+                    complition(JSON(value))
                 case .failure:
                     break
                 }
         }
     }
     
-    class func callFlapgAPI(access_token: String, type: String) {
+    class func callFlapgAPI(access_token: String, type: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/login"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -77,29 +67,20 @@ class SplatNet2 {
             "access_token": access_token,
             "type": type
         ]
+        
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    let body = JSON(value)
-                    switch type {
-                    case "app":
-                        debugPrint("FLAPG API(APP)", value)
-                        SplatNet2.getSplatoonAccessToken(result: body, splatoon_token: splatoon_token)
-                    case "nso":
-                        debugPrint("FLAPG API(NSO)", value)
-                        SplatNet2.getSplatoonToken(result: body)
-                    default:
-                        break
-                    }
+                    complition(JSON(value))
                 case .failure:
                     break
                 }
         }
     }
     
-    class func getSplatoonToken(result: JSON) {
+    class func getSplatoonToken(result: JSON, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/splatoon_token"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -111,15 +92,13 @@ class SplatNet2 {
             "p2": result["p2"].stringValue,
             "p3": result["p3"].stringValue
         ]
+        
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    splatoon_token = JSON(value)["splatoon_token"].stringValue
-                    user = (name: JSON(value)["user"]["name"].stringValue, image: JSON(value)["user"]["image"].stringValue)
-                    debugPrint("SPLATOON TOKEN", splatoon_token)
-                    SplatNet2.callFlapgAPI(access_token: splatoon_token, type: "app")
+                    complition(JSON(value))
                 case .failure(let error):
                     debugPrint(error)
                     break
@@ -127,7 +106,7 @@ class SplatNet2 {
         }
     }
     
-    class func getSplatoonAccessToken(result: JSON, splatoon_token: String) {
+    class func getSplatoonAccessToken(result: JSON, splatoon_token: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/splatoon_access_token"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -142,14 +121,13 @@ class SplatNet2 {
             ],
             "splatoon_token": splatoon_token
             ] as [String : Any]
+        
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    splatoon_access_token = JSON(value)["splatoon_access_token"].stringValue
-                    debugPrint("SPLATOON ACCESS TOKEN", splatoon_access_token)
-                    SplatNet2.getIksmSession(splatoon_access_token: splatoon_access_token)
+                    complition(JSON(value))
                 case .failure(let error):
                     debugPrint(error)
                     break
@@ -157,7 +135,7 @@ class SplatNet2 {
         }
     }
     
-    class func getIksmSession(splatoon_access_token: String) {
+    class func getIksmSession(splatoon_access_token: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/iksm_session"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -165,40 +143,22 @@ class SplatNet2 {
         let body = [
             "splatoon_access_token": splatoon_access_token
         ]
+        
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    iksm_session = JSON(value)["iksm_session"].stringValue
-                    nsaid = JSON(value)["nsaid"].stringValue
-                    SplatNet2.setUserInfoFromSplatNet2()
-                    debugPrint("IKSM SESSION", iksm_session)
+                    complition(JSON(value))
+//                    iksm_session = JSON(value)["iksm_session"].stringValue
+//                    nsaid = JSON(value)["nsaid"].stringValue
+//                    SplatNet2.setUserInfoFromSplatNet2()
+//                    debugPrint("IKSM SESSION", iksm_session)
                 case .failure(let error):
                     debugPrint(error)
                     break
                 }
         }
-        
-    }
-    
-    class func setUserInfoFromSplatNet2() {
-        let userinfo = UserInfoRealm()
-        
-        userinfo.name = user.name
-        userinfo.image = user.image
-        userinfo.iksm_session = iksm_session
-        userinfo.session_token = session_token
-        userinfo.nsaid = nsaid
-        
-        do {
-            try realm.write {
-                realm.add(userinfo, update: .all)
-            }
-        } catch {
-            debugPrint("Realm Write Error")
-        }
-        debugPrint("Write New Record")
     }
     
     class func getResultFromSplatNet2(job_id: Int) {
@@ -215,7 +175,8 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    uploadResultToSalmonStats(result: JSON(value), token: api_token)
+//                    uploadResultToSalmonStats(result: JSON(value), token: api_token)
+                    break
                 case .failure(let error):
                     print(error)
                 }
@@ -229,8 +190,7 @@ class SplatNet2 {
             "Authorization": "Bearer " + token
         ]
         let body = ["results": [result.dictionaryObject]]
-        print(body)
-        
+
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON { response in
@@ -261,7 +221,6 @@ class SplatNet2 {
                 }
         }
     }
-    
     
     class func getTokenFromSalmonStats(session_token: String, completion: @escaping (JSON?) -> ()) {
         let url = "https://salmon-stats-api.yuki.games/api-token"

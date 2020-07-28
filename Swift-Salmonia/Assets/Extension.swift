@@ -28,3 +28,16 @@ extension String {
         }
     }
 }
+
+extension Optional {
+    var string: String {
+        switch self {
+        case is Int:
+            return String(self as! Int)
+        case is Double:
+            return String(self as! Double)
+        default:
+            return "-"
+        }
+    }
+}

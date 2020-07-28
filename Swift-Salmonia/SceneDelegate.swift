@@ -9,11 +9,11 @@
 import UIKit
 import SwiftUI
 import SafariServices
+import RealmSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    @State var isVisible = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -30,6 +30,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+//        guard let _ = (scene as? UIWindowScene) else { return }
+//        self.scene(scene, openURLContexts: connectionOptions.urlContexts)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -62,12 +64,64 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     {
-        print("Login Method.")
         guard let url = URLContexts.first?.url else { return }
         guard let session_token_code = url.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { return }
-        print("URL", url, "CODE", session_token_code)
         let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
-        SplatNet2.getSessionToken(session_token_code: session_token_code, session_token_code_verifier: session_token_code_verifier)
+        
+        // この辺でモーダルを閉じたい
+        // session_tokenの取得
+        SplatNet2.getSessionToken(session_token_code: session_token_code, session_token_code_verifier: session_token_code_verifier) { response in
+            let session_token = response["session_token"].stringValue
+            print("SESSION TOKEN", session_token)
+            // access_tokenの取得
+            SplatNet2.getAccessToken(session_token: session_token) { response in
+                let access_token = response["access_token"].stringValue
+                print("ACCESS TOKEN", access_token)
+                // fの取得
+                SplatNet2.callFlapgAPI(access_token: access_token, type: "nso") { response in
+                    // splatoon_tokenの取得
+                    SplatNet2.getSplatoonToken(result: response) { response in
+                        let splatoon_token = response["splatoon_token"].stringValue
+                        print("SPLATOON TOKEN", splatoon_token)
+                        let username = response["user"]["name"].stringValue
+                        let imageUri = response["user"]["image"].stringValue
+                        // fの取得
+                        SplatNet2.callFlapgAPI(access_token: splatoon_token, type: "app") { response in
+                            // splatoon_access_tokenの取得
+                            SplatNet2.getSplatoonAccessToken(result: response, splatoon_token: splatoon_token) { response in
+                                let splatoon_access_token = response["splatoon_access_token"].stringValue
+                                print("SPLATOON ACCESS TOKEN", splatoon_access_token)
+                                SplatNet2.getIksmSession(splatoon_access_token: splatoon_access_token) { response in
+                                    let iksm_session = response["iksm_session"].stringValue
+                                    let nsaid = response["nsaid"].stringValue
+                                    print("IKSM SESSION", iksm_session)
+                            
+                                    // Realmインスタンスの呼び出し
+                                    guard let realm = try? Realm() else { return }
+                                    let userinfo = UserInfoRealm()
+                                    
+                                    userinfo.name = username
+                                    userinfo.image = imageUri
+                                    userinfo.nsaid = nsaid
+                                    userinfo.iksm_session = iksm_session
+                                    userinfo.session_token = session_token
+
+                                    do {
+                                        try realm.write {
+                                            realm.add(userinfo, update: .all)
+                                        }
+                                    } catch {
+                                        print("Realm Write Error")
+                                    }
+                                    // 処理が完了したのでアラート表示したい
+                                    print("Write New Record")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
