@@ -161,7 +161,7 @@ class SplatNet2 {
         }
     }
     
-    class func getResultFromSplatNet2(job_id: Int) {
+    class func getResultFromSplatNet2(job_id: Int, complition: @escaping (JSON) -> ()) {
         guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
         guard let api_token: String = realm.objects(UserInfoRealm.self).first?.api_token else { return }
 
@@ -175,6 +175,7 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
+                    complition(JSON(value))
 //                    uploadResultToSalmonStats(result: JSON(value), token: api_token)
                     break
                 case .failure(let error):

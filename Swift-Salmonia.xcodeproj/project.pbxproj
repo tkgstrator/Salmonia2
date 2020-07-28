@@ -15,6 +15,7 @@
 		10505E7F24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */; };
 		105112A224CEED3000EEC0EF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106B14E524CE1B7F0033011A /* CryptoSwift.framework */; };
 		105112A624CFE02E00EEC0EF /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112A524CFE02E00EEC0EF /* OverView.swift */; };
+		105112AB24D0061000EEC0EF /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112AA24D0061000EEC0EF /* Enum.swift */; };
 		105C5BF524C722F700BDF477 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C5BF424C722F700BDF477 /* WebView.swift */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
 		10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */; };
@@ -59,6 +60,7 @@
 		10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont2.ttf; sourceTree = "<group>"; };
 		10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
 		105112A524CFE02E00EEC0EF /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
+		105112AA24D0061000EEC0EF /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		105C5BF424C722F700BDF477 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		10B15CBB24C6F78C00C1E78A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				105C5BF424C722F700BDF477 /* WebView.swift */,
 				10505E6924CB5D5A00CF4E04 /* LoadingView.swift */,
 				105112A524CFE02E00EEC0EF /* OverView.swift */,
+				105112AA24D0061000EEC0EF /* Enum.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */,
 				10505E6A24CB5D5B00CF4E04 /* LoadingView.swift in Sources */,
 				10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */,
+				105112AB24D0061000EEC0EF /* Enum.swift in Sources */,
 				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
