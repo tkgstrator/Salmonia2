@@ -16,6 +16,9 @@
 		105112A224CEED3000EEC0EF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106B14E524CE1B7F0033011A /* CryptoSwift.framework */; };
 		105112A624CFE02E00EEC0EF /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112A524CFE02E00EEC0EF /* OverView.swift */; };
 		105112AB24D0061000EEC0EF /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112AA24D0061000EEC0EF /* Enum.swift */; };
+		105112AD24D0A52A00EEC0EF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112AC24D0A52A00EEC0EF /* SettingsView.swift */; };
+		105112B024D0A5AA00EEC0EF /* SalmoniaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */; };
+		105112B224D0A5DF00EEC0EF /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112B124D0A5DF00EEC0EF /* SalmonStatsView.swift */; };
 		105C5BF524C722F700BDF477 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C5BF424C722F700BDF477 /* WebView.swift */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
 		10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */; };
@@ -61,6 +64,9 @@
 		10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
 		105112A524CFE02E00EEC0EF /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
 		105112AA24D0061000EEC0EF /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		105112AC24D0A52A00EEC0EF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaView.swift; sourceTree = "<group>"; };
+		105112B124D0A5DF00EEC0EF /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		105C5BF424C722F700BDF477 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		10B15CBB24C6F78C00C1E78A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -141,6 +147,19 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
+		105112AE24D0A57F00EEC0EF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				105C5BF424C722F700BDF477 /* WebView.swift */,
+				105112A524CFE02E00EEC0EF /* OverView.swift */,
+				10505E6924CB5D5A00CF4E04 /* LoadingView.swift */,
+				105112AC24D0A52A00EEC0EF /* SettingsView.swift */,
+				105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */,
+				105112B124D0A5DF00EEC0EF /* SalmonStatsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		10B15CBE24C6FA0300C1E78A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,10 +167,8 @@
 				10505E7B24CBDDF100CF4E04 /* Fonts */,
 				10B15CBB24C6F78C00C1E78A /* Extension.swift */,
 				10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */,
-				105C5BF424C722F700BDF477 /* WebView.swift */,
-				10505E6924CB5D5A00CF4E04 /* LoadingView.swift */,
-				105112A524CFE02E00EEC0EF /* OverView.swift */,
 				105112AA24D0061000EEC0EF /* Enum.swift */,
+				105112AE24D0A57F00EEC0EF /* Views */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -519,8 +536,11 @@
 				10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */,
 				10505E6A24CB5D5B00CF4E04 /* LoadingView.swift in Sources */,
 				10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */,
+				105112B024D0A5AA00EEC0EF /* SalmoniaView.swift in Sources */,
+				105112B224D0A5DF00EEC0EF /* SalmonStatsView.swift in Sources */,
 				105112AB24D0061000EEC0EF /* Enum.swift in Sources */,
 				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
+				105112AD24D0A52A00EEC0EF /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
