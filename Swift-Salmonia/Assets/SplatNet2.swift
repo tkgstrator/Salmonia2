@@ -12,10 +12,12 @@ import SwiftyJSON
 import RealmSwift
 import WebKit
 
+let semaphore = DispatchSemaphore(value: 0)
+let queue = DispatchQueue.global(qos: .utility)
+
 class SplatNet2 {
     
     static let realm = try! Realm() // 多分存在するやろ
-    
     class func getSessionToken(session_token_code: String, session_token_code_verifier: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/session_token"
         let header: HTTPHeaders = [
@@ -324,42 +326,51 @@ class SplatNet2 {
         
         SplatNet2.getIDFromSalmonStats() { response in
             let pages = response["last_page"].intValue
-            for page in (20 ... 20) {
-                let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?page=\(page)"
-                AF.request(url, method: .get)
-                    .validate(contentType: ["application/json"])
-                    .responseJSON { response in
-                        switch response.result {
-                        case .success(let value):
-                            let results = JSON(value)["data"]
-                            for data in (0 ..< 3) {
-                                print("ID", results[data]["id"].intValue)
-                                SplatNet2.getResultFromSalmonStats(id: results[data]["id"].intValue) { response in
+            
+            for page in (1 ... 5) {
+                DispatchQueue.global().asyncAfter(deadline: .now() + .seconds((page - 1) * 100)) {
+                    print(Int(Date().timeIntervalSince1970), "GET JOBID", page)
+                    let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?page=\(page)"
+                    AF.request(url, method: .get)
+                        .validate(contentType: ["application/json"])
+                        .responseJSON(queue: queue) { response in
+                            switch response.result {
+                            case .success(let value):
+                                //                                print(Int(Date().timeIntervalSince1970), "CALL FUNCTION")
+                                SplatNet2.getResultFromSalmonStats(json: JSON(value)["data"]) { response in
+                                    //                                    print("OUT COMPLITION", Int(Date().timeIntervalSince1970), response["id"].intValue)
+                                    semaphore.signal()
                                     complition(response)
                                 }
+                            case .failure(let error):
+                                print(error)
                             }
-                        case .failure(let error):
-                            print(error)
-                        }
+                    }
+                    semaphore.wait()
                 }
             }
         }
     }
     
     // リザルト自体のJSONを返す関数
-    class func getResultFromSalmonStats(id: Int, complition: @escaping (JSON) -> ()) {
-        print("GET RESULT", Int(Date().timeIntervalSince1970), id)
-        let url = "https://salmon-stats-api.yuki.games/api/results/\(id)"
-        
-        AF.request(url, method: .get)
-            .validate(contentType: ["application/json"])
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    complition(JSON(value))
-                case .failure(let error):
-                    print(error)
+    class func getResultFromSalmonStats(json: JSON, complition: @escaping (JSON) -> ()) {
+        for (i, (_, result)) in json.enumerated() {
+            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(i * 5)) {
+                print(Int(Date().timeIntervalSince1970), "GET RESULT")
+
+                let id = result["id"].intValue
+                let url = "https://salmon-stats-api.yuki.games/api/results/\(id)"
+                AF.request(url, method: .get)
+                    .validate(contentType: ["application/json"])
+                    .responseJSON { response in
+                        switch response.result {
+                        case .success(let value):
+                            complition(JSON(value))
+                        case .failure(let error):
+                            print(error)
+                        }
                 }
+            }
         }
     }
 }

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "10B6363D24C662D000A39FD2"
-               BuildableName = "Salmonia.app"
+               BuildableName = "Salmonia2.app"
                BlueprintName = "Swift-Salmonia"
                ReferencedContainer = "container:Swift-Salmonia.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "10B6363D24C662D000A39FD2"
-            BuildableName = "Salmonia.app"
+            BuildableName = "Salmonia2.app"
             BlueprintName = "Swift-Salmonia"
             ReferencedContainer = "container:Swift-Salmonia.xcodeproj">
          </BuildableReference>
@@ -89,7 +89,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "10B6363D24C662D000A39FD2"
-            BuildableName = "Salmonia.app"
+            BuildableName = "Salmonia2.app"
             BlueprintName = "Swift-Salmonia"
             ReferencedContainer = "container:Swift-Salmonia.xcodeproj">
          </BuildableReference>

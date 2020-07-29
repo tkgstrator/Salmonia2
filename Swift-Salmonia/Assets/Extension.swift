@@ -89,6 +89,12 @@ extension Int {
     }
 }
 
+extension Double {
+    func round(digit: Int) -> Double {
+        return floor((pow(10.0, digit) as NSDecimalNumber).doubleValue * self) / (pow(10.0, digit) as NSDecimalNumber).doubleValue
+    }
+}
+
 extension Optional {
     var string: String {
         switch self {
@@ -101,3 +107,4 @@ extension Optional {
         }
     }
 }
+
