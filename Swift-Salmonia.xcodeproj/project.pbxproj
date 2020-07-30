@@ -20,6 +20,7 @@
 		105112B024D0A5AA00EEC0EF /* SalmoniaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */; };
 		105112B224D0A5DF00EEC0EF /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112B124D0A5DF00EEC0EF /* SalmonStatsView.swift */; };
 		105112B424D0A71700EEC0EF /* PlayerStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112B324D0A71700EEC0EF /* PlayerStatsView.swift */; };
+		10511DA724D256B400466620 /* StageRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10511DA624D256B400466620 /* StageRecordsView.swift */; };
 		105C5BF524C722F700BDF477 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C5BF424C722F700BDF477 /* WebView.swift */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
 		10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */; };
@@ -69,6 +70,7 @@
 		105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaView.swift; sourceTree = "<group>"; };
 		105112B124D0A5DF00EEC0EF /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		105112B324D0A71700EEC0EF /* PlayerStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsView.swift; sourceTree = "<group>"; };
+		10511DA624D256B400466620 /* StageRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordsView.swift; sourceTree = "<group>"; };
 		105C5BF424C722F700BDF477 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		10B15CBB24C6F78C00C1E78A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -152,15 +154,48 @@
 		105112AE24D0A57F00EEC0EF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				105C5BF424C722F700BDF477 /* WebView.swift */,
-				105112A524CFE02E00EEC0EF /* OverView.swift */,
-				10505E6924CB5D5A00CF4E04 /* LoadingView.swift */,
+				10511DA824D2588700466620 /* Salmonia */,
+				10511DA924D2589D00466620 /* Stats */,
+				10511DAB24D258FE00466620 /* Others */,
 				105112AC24D0A52A00EEC0EF /* SettingsView.swift */,
-				105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */,
 				105112B124D0A5DF00EEC0EF /* SalmonStatsView.swift */,
-				105112B324D0A71700EEC0EF /* PlayerStatsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		10511DA824D2588700466620 /* Salmonia */ = {
+			isa = PBXGroup;
+			children = (
+				105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */,
+				105112A524CFE02E00EEC0EF /* OverView.swift */,
+			);
+			path = Salmonia;
+			sourceTree = "<group>";
+		};
+		10511DA924D2589D00466620 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				105112B324D0A71700EEC0EF /* PlayerStatsView.swift */,
+				10511DAA24D258CF00466620 /* StageRecords */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		10511DAA24D258CF00466620 /* StageRecords */ = {
+			isa = PBXGroup;
+			children = (
+				10511DA624D256B400466620 /* StageRecordsView.swift */,
+			);
+			path = StageRecords;
+			sourceTree = "<group>";
+		};
+		10511DAB24D258FE00466620 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				105C5BF424C722F700BDF477 /* WebView.swift */,
+				10505E6924CB5D5A00CF4E04 /* LoadingView.swift */,
+			);
+			path = Others;
 			sourceTree = "<group>";
 		};
 		10B15CBE24C6FA0300C1E78A /* Assets */ = {
@@ -544,6 +579,7 @@
 				105112AB24D0061000EEC0EF /* Enum.swift in Sources */,
 				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
 				105112AD24D0A52A00EEC0EF /* SettingsView.swift in Sources */,
+				10511DA724D256B400466620 /* StageRecordsView.swift in Sources */,
 				105112B424D0A71700EEC0EF /* PlayerStatsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

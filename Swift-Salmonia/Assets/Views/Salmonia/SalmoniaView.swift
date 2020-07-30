@@ -20,24 +20,32 @@ class UserInfoModel: ObservableObject {
     init() {
         notificationTokens.append(users.observe { _ in
             self.objectWillChange.send()
-            })
+        })
     }
+}
+
+struct UserView: View {
+    @ObservedObject var realm = UserInfoModel()
+    let url = "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
+    
+    var body: some View {
+        HStack(alignment: .center, spacing: 0) {
+            URLImage(URL(string: realm.users.first?.image ?? url)!, content:  {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 80, height: 80)
+            Spacer()
+            Text(realm.users.first?.name ?? "Salmonia").font(.custom("Splatfont2", size: 30)).frame(maxWidth: .infinity, alignment: .center)
+        }
+    }
+    
 }
 
 // Salmoniaのビュー（まだなんにも書いてない）
 struct SalmoniaView: View {
-    @ObservedObject var realm = UserInfoModel()
-    let url = "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
 
     var body: some View {
         NavigationView {
-            VStack {
-                ScrollView {
-                    HStack(alignment: .center, spacing: 0) {
-                        URLImage(URL(string: realm.users.first?.image ?? url)!, content:  {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 80, height: 80)
-                        Spacer()
-                        Text(realm.users.first?.name ?? "Salmonia").font(.custom("Splatfont2", size: 30)).frame(maxWidth: .infinity, alignment: .center)
-                    }
+            ScrollView {
+                VStack {
+                    UserView()
                     OverView()
                 }
             }

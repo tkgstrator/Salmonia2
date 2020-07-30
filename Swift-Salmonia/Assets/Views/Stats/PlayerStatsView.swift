@@ -24,7 +24,7 @@ struct StatsColumn: View {
             Text(self.title).font(.custom("Splatfont2", size: 20))
             Spacer()
             Text(self.value).font(.custom("Splatfont2", size: 20))
-        }.frame(height: 20)
+        }.frame(height: 30)
     }
 }
 
@@ -89,11 +89,9 @@ struct PlayerStatsView: View {
                 }
             }
             .listStyle(DefaultListStyle())
-            .environment(\.defaultMinListRowHeight, 10)
+            .environment(\.defaultMinListRowHeight, 30)
             .navigationBarTitle(Text("Stats"))
         }
-        .padding(0.0)
-        .frame(width: nil)
     }
 }
 

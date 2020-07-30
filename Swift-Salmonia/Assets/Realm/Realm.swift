@@ -30,6 +30,20 @@ class UserInfoRealm: Object {
     }
 }
 
+class CoopCardRealm: Object {
+    @objc dynamic var nsaid: String = ""
+    @objc dynamic var job_num: Int = 0
+    @objc dynamic var ikura_total: Int = 0
+    @objc dynamic var golden_ikura_total: Int = 0
+    @objc dynamic var kuma_point: Int = 0
+    @objc dynamic var kuma_point_total: Int = 0
+    @objc dynamic var help_total: Int = 0
+
+    override static func primaryKey() -> String? {
+        return "nsaid"
+    }
+}
+
 class ShiftResultsRealm: Object {
     @objc dynamic var start_time = 0
     @objc dynamic var nsaid = ""
