@@ -129,19 +129,20 @@ class Stats: ObservableObject {
             guard let start_time = self.realm?.sorted(byKeyPath: "start_time", ascending: false).first?.start_time else { return }
             guard let results = self.realm?.filter("start_time=%@", start_time) else { return }
             guard let summary = try? Realm().objects(ShiftResultsRealm.self).sorted(byKeyPath: "start_time", ascending: false).first else { return }
+            
             self.job_num = summary.job_num
-            self.clear_ratio = Double(Double(results.filter("job_result_is_clear=%@", true).count) / Double(summary.job_num)).round(digit: 4)
+            self.clear_ratio = Double(Double(results.lazy.filter("job_result_is_clear=%@", true).count) / Double(summary.job_num)).round(digit: 4)
             self.total_golden_eggs = summary.team_golden_ikura_total
             self.total_power_eggs = summary.team_ikura_total
             self.total_grizzco_points = summary.kuma_point_total
             self.max_grade_point = results.max(ofProperty: "grade_point")
             self.max_team_golden_eggs = results.max(ofProperty: "golden_eggs")
             self.max_team_power_eggs = results.max(ofProperty: "power_eggs")
-            self.max_my_power_eggs = results.map({ $0.player[0].ikura_num }).max()
-            self.max_my_golden_eggs = results.map({ $0.player[0].golden_ikura_num }).max()
-            self.max_defeated = results.map({ $0.player[0].defeat.reduce(0, +) }).max()
+            self.max_my_power_eggs = results.lazy.map({ $0.player[0].ikura_num }).max()
+            self.max_my_golden_eggs = results.lazy.map({ $0.player[0].golden_ikura_num }).max()
+            self.max_defeated = results.lazy.map({ $0.player[0].defeat.reduce(0, +) }).max()
             self.avg_clear_wave = Double(Double(results.map({ ($0.job_result_failure_wave.value ?? 4) - 1}).reduce(0, +)) / Double(summary.job_num)).round(digit: 2)
-            self.avg_crew_grade = (results.map({ 20 * $0.danger_rate + Double($0.grade_point_delta) - Double($0.grade_point) - 1600.0}).reduce(0.0, +) / Double(summary.job_num * 3)).round(digit: 2)
+            self.avg_crew_grade = (results.lazy.map({ 20 * $0.danger_rate + Double($0.grade_point_delta) - Double($0.grade_point) - 1600.0}).lazy.reduce(0.0, +) / Double(summary.job_num * 3)).round(digit: 2)
             self.avg_team_golden_eggs = Double(Double(summary.team_golden_ikura_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_team_power_eggs = Double(Double(summary.team_ikura_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_my_golden_eggs = Double(Double(summary.my_golden_ikura_total) / Double(summary.job_num)).round(digit: 2)
@@ -149,7 +150,6 @@ class Stats: ObservableObject {
             self.avg_dead = Double(Double(summary.dead_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_rescue = Double(Double(summary.help_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_defeated = Double((Double(results.map({ $0.player[0].defeat.reduce(0, +) }).reduce(0, +)) / Double(summary.job_num))).round(digit: 2)
-            
         }
     }
     

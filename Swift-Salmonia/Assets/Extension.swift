@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 extension String {
     var localized: String {
         return NSLocalizedString(self, comment: self)
@@ -64,7 +63,7 @@ extension Int {
         default:
             return "normal"
         }
-
+        
     }
     
     var eventid: String {
@@ -107,4 +106,3 @@ extension Optional {
         }
     }
 }
-
