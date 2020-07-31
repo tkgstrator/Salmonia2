@@ -21,10 +21,10 @@ struct StatsColumn: View {
     
     var body: some View {
         HStack {
-            Text(self.title).font(.custom("Splatfont2", size: 20))
+            Text(self.title).font(.custom("Splatfont2", size: 18))
             Spacer()
-            Text(self.value).font(.custom("Splatfont2", size: 20))
-        }.frame(height: 30)
+            Text(self.value).font(.custom("Splatfont2", size: 18))
+        }.frame(height: 20)
     }
 }
 
@@ -89,7 +89,7 @@ struct PlayerStatsView: View {
                 }
             }
             .listStyle(DefaultListStyle())
-            .environment(\.defaultMinListRowHeight, 30)
+            .environment(\.defaultMinListRowHeight, 24)
             .navigationBarTitle(Text("Stats"))
         }
     }

@@ -22,6 +22,7 @@
 		105112B424D0A71700EEC0EF /* PlayerStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112B324D0A71700EEC0EF /* PlayerStatsView.swift */; };
 		10511DA724D256B400466620 /* StageRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10511DA624D256B400466620 /* StageRecordsView.swift */; };
 		105C5BF524C722F700BDF477 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C5BF424C722F700BDF477 /* WebView.swift */; };
+		1065431D24D40F82005D7D13 /* ResultsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */; };
 		1098BCD324D2A92B003E95E3 /* Splatfont1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1098BCD224D2A884003E95E3 /* Splatfont1.ttf */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
 		10B15CC024C6FA2B00C1E78A /* SplatNet2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBF24C6FA2B00C1E78A /* SplatNet2.swift */; };
@@ -73,6 +74,7 @@
 		105112B324D0A71700EEC0EF /* PlayerStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsView.swift; sourceTree = "<group>"; };
 		10511DA624D256B400466620 /* StageRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordsView.swift; sourceTree = "<group>"; };
 		105C5BF424C722F700BDF477 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionView.swift; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		1098BCD224D2A884003E95E3 /* Splatfont1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont1.ttf; sourceTree = "<group>"; };
 		10B15CBB24C6F78C00C1E78A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		105112AE24D0A57F00EEC0EF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1065431B24D40F65005D7D13 /* Results */,
 				10511DA824D2588700466620 /* Salmonia */,
 				10511DA924D2589D00466620 /* Stats */,
 				10511DAB24D258FE00466620 /* Others */,
@@ -199,6 +202,14 @@
 				10505E6924CB5D5A00CF4E04 /* LoadingView.swift */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		1065431B24D40F65005D7D13 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */,
+			);
+			path = Results;
 			sourceTree = "<group>";
 		};
 		10B15CBE24C6FA0300C1E78A /* Assets */ = {
@@ -585,6 +596,7 @@
 				105112AD24D0A52A00EEC0EF /* SettingsView.swift in Sources */,
 				10511DA724D256B400466620 /* StageRecordsView.swift in Sources */,
 				105112B424D0A71700EEC0EF /* PlayerStatsView.swift in Sources */,
+				1065431D24D40F82005D7D13 /* ResultsCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,7 +778,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -796,7 +808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";

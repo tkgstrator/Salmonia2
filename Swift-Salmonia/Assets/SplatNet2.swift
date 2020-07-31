@@ -165,7 +165,7 @@ class SplatNet2 {
     
     class func getResultFromSplatNet2(job_id: Int, complition: @escaping (JSON) -> ()) {
         guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
-        guard let api_token: String = realm.objects(UserInfoRealm.self).first?.api_token else { return }
+//        guard let api_token: String = realm.objects(UserInfoRealm.self).first?.api_token else { return }
         
         let url = "https://app.splatoon2.nintendo.net/api/coop_results/" + String(job_id)
         let header: HTTPHeaders = [
@@ -288,16 +288,13 @@ class SplatNet2 {
             for cookie in cookies {
                 if cookie.name == "laravel_session" {
                     let laravel_session = cookie.value
-                    getTokenFromSalmonStats(session_token: laravel_session) {
-                        response in
+                    getTokenFromSalmonStats(session_token: laravel_session) { response in
                         guard let token = response?["api_token"].stringValue else { return }
                         print("API TOKEN",token)
                         guard let user = realm.objects(UserInfoRealm.self).first else { return }
-                        do {
-                            try realm.write {
-                                user.setValue(token, forKey: "api_token")
-                            }
-                        } catch { }
+                        try? realm.write {
+                            user.setValue(token, forKey: "api_token")
+                        }
                     }
                 }
             }

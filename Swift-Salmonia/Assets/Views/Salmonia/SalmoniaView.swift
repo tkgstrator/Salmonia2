@@ -30,7 +30,9 @@ struct UserView: View {
     
     var body: some View {
         HStack(spacing: 0) {
-            URLImage(URL(string: realm.users.first?.image ?? url)!, content:  {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 80, height: 80)
+            NavigationLink(destination: ResultsCollectionView()) {
+                URLImage(URL(string: realm.users.first?.image ?? url)!, content:  {$0.image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 80, height: 80)
+            }
             Spacer()
             Text(realm.users.first?.name ?? "Salmonia").font(.custom("Splatfont2", size: 30)).frame(maxWidth: .infinity, alignment: .center)
         }

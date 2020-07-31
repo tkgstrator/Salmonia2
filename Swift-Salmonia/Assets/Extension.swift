@@ -86,6 +86,11 @@ extension Int {
             return "-"
         }
     }
+    
+    var weapon: String {
+        let base = "https://app.splatoon2.nintendo.net/images/weapon/"
+        return base + (Enum().Weapon.filter({ $0.id == self}).first?.url ?? "")
+    }
 }
 
 extension Double {
