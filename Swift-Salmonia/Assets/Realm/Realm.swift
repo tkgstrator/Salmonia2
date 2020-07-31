@@ -21,13 +21,6 @@ class UserInfoRealm: Object {
     override static func primaryKey() -> String? {
         return "nsaid"
     }
-    
-    private static let realm = try! Realm()
-    
-    static func all() -> Results<UserInfoRealm>
-    {
-        realm.objects(UserInfoRealm.self)
-    }
 }
 
 class CoopCardRealm: Object {

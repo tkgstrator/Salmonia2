@@ -177,3 +177,23 @@ struct ResultAbout: Hashable {
         self.power_eggs = power_eggs
     }
 }
+
+struct UserInformation: Hashable {
+    public var username: String?
+    public var imageUri: String?
+    public var iksm_session: String?
+    public var session_token: String?
+    public var api_token: String?
+    
+    init() {
+        
+    }
+    
+    init(name: String?, url: String?, iksm_session: String?, session_token: String?, api_token: String?) {
+        self.username = name
+        self.imageUri = url
+        self.iksm_session = iksm_session
+        self.session_token = session_token
+        self.api_token = api_token
+    }
+}

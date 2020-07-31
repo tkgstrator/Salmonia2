@@ -163,7 +163,6 @@
 				10511DA824D2588700466620 /* Salmonia */,
 				10511DA924D2589D00466620 /* Stats */,
 				10511DAB24D258FE00466620 /* Others */,
-				105112AC24D0A52A00EEC0EF /* SettingsView.swift */,
 				105112B124D0A5DF00EEC0EF /* SalmonStatsView.swift */,
 			);
 			path = Views;
@@ -173,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */,
+				105112AC24D0A52A00EEC0EF /* SettingsView.swift */,
 				105112A524CFE02E00EEC0EF /* OverView.swift */,
 			);
 			path = Salmonia;

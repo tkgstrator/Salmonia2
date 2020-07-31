@@ -12,29 +12,42 @@ import Combine
 import URLImage
 
 class UserInfoModel: ObservableObject {
-    public var users: Results<UserInfoRealm> = UserInfoRealm.all()
-    public var objectWillChange: ObservableObjectPublisher = .init()
-    private var notificationTokens: [NotificationToken] = []
-    
-    // 最初にDBから読み込むのだが、一度しか呼ばれないので発火しない
+    private var token: NotificationToken?
+    public let realm = try? Realm().objects(CoopResultsRealm.self) // 監視対象
+//    @Published var information: UserInformation = UserInformation(name:nil, url: nil, iksm_session: nil, session_token: nil, api_token: nil)
+    @Published var information: UserInformation = UserInformation()
+
     init() {
-        notificationTokens.append(users.observe { _ in
-            self.objectWillChange.send()
-        })
+        token = realm?.observe{ _ in
+            self.information = UserInformation(name: nil, url: nil, iksm_session: nil, session_token: nil, api_token: nil)
+            // 変更があったときに実行されるハンドラ
+            guard let user = try? Realm().objects(UserInfoRealm.self).first else { return }
+            let iksm_session = user.iksm_session
+            let session_token = user.session_token
+            let api_token = user.api_token
+//
+            self.information = UserInformation(name: user.name, url: user.image, iksm_session: iksm_session, session_token: session_token, api_token: api_token)
+        }
     }
 }
 
-struct UserView: View {
-    @ObservedObject var realm = UserInfoModel()
-    let url = "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
+struct UserInformationView: View {
+
+    private var name: String
+    private var image: String
+    
+    init(user: UserInformation){
+        name = user.username ?? "Salmonia"
+        image = user.imageUri ?? "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
+    }
     
     var body: some View {
         HStack(spacing: 0) {
             NavigationLink(destination: ResultsCollectionView()) {
-                URLImage(URL(string: realm.users.first?.image ?? url)!, content:  {$0.image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 80, height: 80)
+                URLImage(URL(string: image)!, content:  {$0.image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 80, height: 80)
             }
             Spacer()
-            Text(realm.users.first?.name ?? "Salmonia").font(.custom("Splatfont2", size: 30)).frame(maxWidth: .infinity, alignment: .center)
+            Text(name).font(.custom("Splatfont2", size: 30)).frame(maxWidth: .infinity, alignment: .center)
         }
     }
     
@@ -42,12 +55,13 @@ struct UserView: View {
 
 // Salmoniaのビュー（まだなんにも書いてない）
 struct SalmoniaView: View {
+    @ObservedObject var users = UserInfoModel()
 
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack {
-                    UserView()
+                    UserInformationView(user: users.information)
                     OverView()
                 }
             }
