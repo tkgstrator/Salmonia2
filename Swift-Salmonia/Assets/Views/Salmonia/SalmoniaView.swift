@@ -68,7 +68,7 @@ struct SalmoniaView: View {
             .padding(.horizontal, 10)
             .navigationBarTitle(Text("Salmonia"))
             .navigationBarItems(leading:
-                NavigationLink(destination: SettingsView())
+                NavigationLink(destination: SettingsView(user: users.information))
                 {
                     Image(systemName: "gear").resizable().scaledToFit().frame(width: 30, height: 30)
                 }, trailing:
