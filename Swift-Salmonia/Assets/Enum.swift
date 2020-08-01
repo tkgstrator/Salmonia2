@@ -102,62 +102,34 @@ struct Enum {
         "high"
     ]
     
-    public let Records: [Int: [Int: [Int?]]] = [
-        0: [ // シェケナダムの情報
-            0: [nil, nil, nil],
-            1: [nil, nil, nil],
-            2: [nil, nil, nil],
-            3: [nil, nil, nil],
-            4: [nil, nil, nil],
-            5: [nil, nil, nil],
-            6: [nil, nil, nil]
-        ],
-        1: [ // ドンブラコの情報
-            0: [nil, nil, nil],
-            1: [nil, nil, nil],
-            2: [nil, nil, nil],
-            3: [nil, nil, nil],
-            4: [nil, nil, nil],
-            5: [nil, nil, nil],
-            6: [nil, nil, nil]
-        ],
-        2: [ // シャケト場の記録
-            0: [nil, nil, nil],
-            1: [nil, nil, nil],
-            2: [nil, nil, nil],
-            3: [nil, nil, nil],
-            4: [nil, nil, nil],
-            5: [nil, nil, nil],
-            6: [nil, nil, nil]
-        ],
-        3: [ // トキシラズの記録
-            0: [nil, nil, nil],
-            1: [nil, nil, nil],
-            2: [nil, nil, nil],
-            3: [nil, nil, nil],
-            4: [nil, nil, nil],
-            5: [nil, nil, nil],
-            6: [nil, nil, nil]
-        ],
-        4: [ // ポラリスの情報
-            0: [nil, nil, nil],
-            1: [nil, nil, nil],
-            2: [nil, nil, nil],
-            3: [nil, nil, nil],
-            4: [nil, nil, nil],
-            5: [nil, nil, nil],
-            6: [nil, nil, nil]
-        ],
-        5: [ // 全ステージの記録
-            0: [nil, nil, nil],
-            1: [nil, nil, nil],
-            2: [nil, nil, nil],
-            3: [nil, nil, nil],
-            4: [nil, nil, nil],
-            5: [nil, nil, nil],
-            6: [nil, nil, nil]
-        ]
+}
+
+struct RecordsData: Hashable {
+    
+}
+
+struct StageRecords: Hashable {
+    public var grade_point: Int?
+    public var team_golden_eggs: Int?
+    public var my_golden_eggs: Int?
+    
+    public var data: [Int : [Int?]] = [
+        0: [nil, nil, nil],
+        1: [nil, nil, nil],
+        2: [nil, nil, nil],
+        3: [nil, nil, nil],
+        4: [nil, nil, nil],
+        5: [nil, nil, nil],
+        6: [nil, nil, nil]
     ]
+    
+    init() {
+    }
+    
+    // データを上書きする処理
+    mutating func set(event: Int, tide: Int, value: Int?) {
+        data[tide]?[event] = value
+    }
 }
 
 struct ResultAbout: Hashable {
@@ -179,11 +151,16 @@ struct ResultAbout: Hashable {
 }
 
 struct UserInformation: Hashable {
+    public var nsaid: String?
     public var username: String?
     public var imageUri: String?
     public var iksm_session: String?
     public var session_token: String?
     public var api_token: String?
+    public var overview: PlayerOverview = PlayerOverview()
+    
+    // ここちょいダサい
+    public var records: [StageRecords] = [StageRecords(), StageRecords(), StageRecords(), StageRecords(), StageRecords(), StageRecords()]
     
     init() {
         
@@ -195,5 +172,29 @@ struct UserInformation: Hashable {
         self.iksm_session = iksm_session
         self.session_token = session_token
         self.api_token = api_token
+    }
+}
+
+struct PlayerOverview: Hashable {
+    public var job_count: Int?
+    public var ikura_total: Int?
+    public var golden_ikura_total: Int?
+    public var kuma_point_total: Int?
+    // 追加情報
+    public var golden_eggs_ratio: Double?
+    public var power_eggs_ratio: Double?
+    public var defeated: Double?
+    public var clear_wave: Double?
+    public var clear_ratio: Double?
+    
+    init() {
+        
+    }
+    
+    init(job_count: Int?, ikura_total: Int?, golden_ikura_total: Int?, kuma_point_total: Int?) {
+        self.job_count = job_count
+        self.ikura_total = ikura_total
+        self.golden_ikura_total = golden_ikura_total
+        self.kuma_point_total = kuma_point_total
     }
 }

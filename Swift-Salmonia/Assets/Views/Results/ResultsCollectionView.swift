@@ -84,7 +84,9 @@ struct ResultsCollectionView: View {
     var body: some View {
         List {
             ForEach(results.data, id: \.self) { result in
-                ResultStack(data: result)
+                NavigationLink(destination: PlayerInformationView()) {
+                    ResultStack(data: result)
+                }
             }
         }
         .navigationBarTitle("Results")

@@ -14,25 +14,49 @@ import URLImage
 class UserInfoModel: ObservableObject {
     private var token: NotificationToken?
     public let realm = try? Realm().objects(CoopResultsRealm.self) // 監視対象
-//    @Published var information: UserInformation = UserInformation(name:nil, url: nil, iksm_session: nil, session_token: nil, api_token: nil)
     @Published var information: UserInformation = UserInformation()
-
+    
     init() {
         token = realm?.observe{ _ in
-            self.information = UserInformation(name: nil, url: nil, iksm_session: nil, session_token: nil, api_token: nil)
             // 変更があったときに実行されるハンドラ
+            self.information = UserInformation(name: nil, url: nil, iksm_session: nil, session_token: nil, api_token: nil)
             guard let user = try? Realm().objects(UserInfoRealm.self).first else { return }
+            guard let card = try? Realm().objects(CoopCardRealm.self).first else { return }
+            guard let results = try? Realm().objects(CoopResultsRealm.self) else { return }
+
             let iksm_session = user.iksm_session
             let session_token = user.session_token
             let api_token = user.api_token
-//
+            
             self.information = UserInformation(name: user.name, url: user.image, iksm_session: iksm_session, session_token: session_token, api_token: api_token)
+            self.information.overview = PlayerOverview(job_count: card.job_num, ikura_total: card.ikura_total, golden_ikura_total: card.golden_ikura_total, kuma_point_total: card.kuma_point_total)
+
+            for (i, stage) in Enum().Stage.map({ $0.name }).enumerated() {
+                // そのステージのWAVEだけ抜き出す mapとfilterで上手く書けなかった
+                let stage_records = results.lazy.filter({$0.stage_name == stage}).lazy.map({ $0.wave })
+                let wave_records = RealmSwift.List<WaveDetailRealm>()
+                for waves in stage_records {
+                    for wave in waves {
+                        wave_records.append(wave)
+                    }
+                }
+                self.information.records[i].grade_point = results.filter("stage_name=%@", stage).max(ofProperty: "grade_point")
+                self.information.records[i].team_golden_eggs =  results.filter("stage_name=%@", stage).max(ofProperty: "golden_eggs")
+                // イベントと潮位ごとに最高納品数を取得
+                for (j, event) in Enum().Event.enumerated() {
+                    for (k, tide) in Enum().Tide.enumerated() {
+                        //
+                         let eggs = wave_records.filter({$0.event_type == event && $0.water_level == tide}).map{ $0.golden_ikura_num }.max()
+                        self.information.records[i].set(event: k, tide: j, value: eggs)
+                    }
+                }
+            }
         }
     }
 }
 
 struct UserInformationView: View {
-
+    
     private var name: String
     private var image: String
     
@@ -56,13 +80,13 @@ struct UserInformationView: View {
 // Salmoniaのビュー（まだなんにも書いてない）
 struct SalmoniaView: View {
     @ObservedObject var users = UserInfoModel()
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack {
                     UserInformationView(user: users.information)
-                    OverView()
+                    PlayerOverView(data: users.information)
                 }
             }
             .padding(.horizontal, 10)

@@ -14,7 +14,7 @@
 		10505E7D24CBDE2B00CF4E04 /* Splatfont2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */; };
 		10505E7F24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */; };
 		105112A224CEED3000EEC0EF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106B14E524CE1B7F0033011A /* CryptoSwift.framework */; };
-		105112A624CFE02E00EEC0EF /* OverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112A524CFE02E00EEC0EF /* OverView.swift */; };
+		105112A624CFE02E00EEC0EF /* PlayerOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112A524CFE02E00EEC0EF /* PlayerOverView.swift */; };
 		105112AB24D0061000EEC0EF /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112AA24D0061000EEC0EF /* Enum.swift */; };
 		105112AD24D0A52A00EEC0EF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112AC24D0A52A00EEC0EF /* SettingsView.swift */; };
 		105112B024D0A5AA00EEC0EF /* SalmoniaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */; };
@@ -22,6 +22,7 @@
 		105112B424D0A71700EEC0EF /* PlayerStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105112B324D0A71700EEC0EF /* PlayerStatsView.swift */; };
 		10511DA724D256B400466620 /* StageRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10511DA624D256B400466620 /* StageRecordsView.swift */; };
 		105C5BF524C722F700BDF477 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C5BF424C722F700BDF477 /* WebView.swift */; };
+		1061132C24D4EFDC000771FD /* PlayerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061132B24D4EFDC000771FD /* PlayerInformationView.swift */; };
 		1065431D24D40F82005D7D13 /* ResultsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */; };
 		1098BCD324D2A92B003E95E3 /* Splatfont1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1098BCD224D2A884003E95E3 /* Splatfont1.ttf */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
@@ -66,7 +67,7 @@
 		10505E7224CB655800CF4E04 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont2.ttf; sourceTree = "<group>"; };
 		10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
-		105112A524CFE02E00EEC0EF /* OverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverView.swift; sourceTree = "<group>"; };
+		105112A524CFE02E00EEC0EF /* PlayerOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerOverView.swift; sourceTree = "<group>"; };
 		105112AA24D0061000EEC0EF /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		105112AC24D0A52A00EEC0EF /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaView.swift; sourceTree = "<group>"; };
@@ -74,6 +75,7 @@
 		105112B324D0A71700EEC0EF /* PlayerStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsView.swift; sourceTree = "<group>"; };
 		10511DA624D256B400466620 /* StageRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordsView.swift; sourceTree = "<group>"; };
 		105C5BF424C722F700BDF477 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		1061132B24D4EFDC000771FD /* PlayerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationView.swift; sourceTree = "<group>"; };
 		1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionView.swift; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		1098BCD224D2A884003E95E3 /* Splatfont1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont1.ttf; sourceTree = "<group>"; };
@@ -173,7 +175,7 @@
 			children = (
 				105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */,
 				105112AC24D0A52A00EEC0EF /* SettingsView.swift */,
-				105112A524CFE02E00EEC0EF /* OverView.swift */,
+				105112A524CFE02E00EEC0EF /* PlayerOverView.swift */,
 			);
 			path = Salmonia;
 			sourceTree = "<group>";
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */,
+				1061132B24D4EFDC000771FD /* PlayerInformationView.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -582,7 +585,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */,
-				105112A624CFE02E00EEC0EF /* OverView.swift in Sources */,
+				105112A624CFE02E00EEC0EF /* PlayerOverView.swift in Sources */,
 				10B6364424C662D000A39FD2 /* SceneDelegate.swift in Sources */,
 				10B6364624C662D000A39FD2 /* ContentView.swift in Sources */,
 				105C5BF524C722F700BDF477 /* WebView.swift in Sources */,
@@ -594,6 +597,7 @@
 				105112AB24D0061000EEC0EF /* Enum.swift in Sources */,
 				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
 				105112AD24D0A52A00EEC0EF /* SettingsView.swift in Sources */,
+				1061132C24D4EFDC000771FD /* PlayerInformationView.swift in Sources */,
 				10511DA724D256B400466620 /* StageRecordsView.swift in Sources */,
 				105112B424D0A71700EEC0EF /* PlayerStatsView.swift in Sources */,
 				1065431D24D40F82005D7D13 /* ResultsCollectionView.swift in Sources */,

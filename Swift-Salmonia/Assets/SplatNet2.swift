@@ -370,4 +370,37 @@ class SplatNet2 {
             }
         }
     }
+    
+    class func getPlayerInformationFromSplatNet2(nsaid: String, complition: @escaping (JSON) -> ()) {
+        guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
+        
+        let url = "https://app.splatoon2.nintendo.net/api/nickname_and_icon?id=" + nsaid
+        let header: HTTPHeaders = [
+            "cookie" : "iksm_session=" + iksm_session
+        ]
+
+        AF.request(url, method: .get, headers: header).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                complition(JSON(value))
+                break
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    class func getPlayerInformationFromSalmonStats(nsaid: String, complition: @escaping (JSON) -> ()){
+        let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=" + nsaid
+        
+        AF.request(url, method: .get).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                complition(JSON(value))
+                break
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
