@@ -14,6 +14,7 @@ struct SalmonStatsView: View {
     
     var body: some View {
         WebView(request: URLRequest(url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter")!))
+            .navigationBarTitle("SalmonStats", displayMode: .inline)
     }
 }
 

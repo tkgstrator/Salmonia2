@@ -165,6 +165,7 @@
 		105112AE24D0A57F00EEC0EF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1061133124D54C20000771FD /* Components */,
 				1065431B24D40F65005D7D13 /* Results */,
 				10511DA824D2588700466620 /* Salmonia */,
 				10511DA924D2589D00466620 /* Stats */,
@@ -208,6 +209,13 @@
 				10505E6924CB5D5A00CF4E04 /* LoadingView.swift */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		1061133124D54C20000771FD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		1065431B24D40F65005D7D13 /* Results */ = {

@@ -8,6 +8,8 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
+
 
 struct Enum {
     public let Stage: [(url: String, name: String)] = [
@@ -102,4 +104,8 @@ struct Enum {
         "high"
     ]
     
+}
+
+enum APPError: Error {
+    case Response(Int, String)
 }
