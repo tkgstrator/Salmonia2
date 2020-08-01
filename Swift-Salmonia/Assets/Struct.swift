@@ -35,7 +35,8 @@ struct StageRecords: Hashable {
 }
 
 // リザルトの概要情報を保持する構造体（名前がダサいので変えたい）
-struct ResultAbout: Hashable {
+struct ResultCollection: Hashable {
+    public var job_id: Int?
     public var danger_rate: Double?
     public var is_clear: Bool?
     public var weapons: RealmSwift.List<Int>
@@ -43,7 +44,8 @@ struct ResultAbout: Hashable {
     public var golden_eggs: Int?
     public var power_eggs: Int?
     
-    init(danger_rate: Double?, is_clear: Bool?, weapons: List<Int>, special: Int?, golden_eggs: Int?, power_eggs: Int?) {
+    init(job_id: Int?, danger_rate: Double?, is_clear: Bool?, weapons: List<Int>, special: Int?, golden_eggs: Int?, power_eggs: Int?) {
+        self.job_id = job_id
         self.danger_rate = danger_rate
         self.is_clear = is_clear
         self.weapons = weapons

@@ -23,14 +23,14 @@ class UserInfoModel: ObservableObject {
             guard let user = try? Realm().objects(UserInfoRealm.self).first else { return }
             guard let card = try? Realm().objects(CoopCardRealm.self).first else { return }
             guard let results = try? Realm().objects(CoopResultsRealm.self) else { return }
-
+            
             let iksm_session = user.iksm_session
             let session_token = user.session_token
             let api_token = user.api_token
             
             self.information = UserInformation(name: user.name, url: user.image, iksm_session: iksm_session, session_token: session_token, api_token: api_token)
             self.information.overview = PlayerOverview(job_count: card.job_num, ikura_total: card.ikura_total, golden_ikura_total: card.golden_ikura_total, kuma_point_total: card.kuma_point_total)
-
+            
             for (i, stage) in Enum().Stage.map({ $0.name }).enumerated() {
                 // そのステージのWAVEだけ抜き出す mapとfilterで上手く書けなかった
                 let stage_records = results.lazy.filter({$0.stage_name == stage}).lazy.map({ $0.wave })
@@ -46,7 +46,7 @@ class UserInfoModel: ObservableObject {
                 for (j, event) in Enum().Event.enumerated() {
                     for (k, tide) in Enum().Tide.enumerated() {
                         //
-                         let eggs = wave_records.filter({$0.event_type == event && $0.water_level == tide}).map{ $0.golden_ikura_num }.max()
+                        let eggs = wave_records.filter({$0.event_type == event && $0.water_level == tide}).map{ $0.golden_ikura_num }.max()
                         self.information.records[i].set(event: k, tide: j, value: eggs)
                     }
                 }

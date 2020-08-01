@@ -81,9 +81,9 @@ struct SettingsView: View {
                     let play_time = response["start_at"].stringValue.unixtime
                     result.play_time = play_time
                     result.end_time = response["schedule"]["end_at"].stringValue.unixtime
-                    result.grade_id = -1 // なさそうな気がするのでやはりプレースホルダを代入
-                    result.grade_point = -1 // なさそうな気がするのでやはりプレースホルダを代入
-                    result.grade_point_delta = -1 // なさそうな気がするのでやはりプレースホルダを代入
+                    result.grade_id = 0 // なさそうな気がするのでやはりプレースホルダを代入
+                    result.grade_point = 0 // なさそうな気がするのでやはりプレースホルダを代入
+                    result.grade_point_delta = 0 // なさそうな気がするのでやはりプレースホルダを代入
                     result.job_result_is_clear = response["clear_waves"].intValue == 3 // OK?
                     result.job_result_failure_reason = response["fail_reason_id"].intValue.reasonid // OK?
                     result.job_result_failure_wave.value = response["clear_waves"].intValue == 3 ? nil : response["clear_waves"].intValue + 1 //OK?

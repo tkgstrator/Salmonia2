@@ -24,6 +24,7 @@
 		105C5BF524C722F700BDF477 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C5BF424C722F700BDF477 /* WebView.swift */; };
 		1061132C24D4EFDC000771FD /* PlayerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061132B24D4EFDC000771FD /* PlayerInformationView.swift */; };
 		1061132E24D50AE5000771FD /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061132D24D50AE5000771FD /* Struct.swift */; };
+		1061133024D50D3E000771FD /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061132F24D50D3E000771FD /* ResultDetailView.swift */; };
 		1065431D24D40F82005D7D13 /* ResultsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */; };
 		1098BCD324D2A92B003E95E3 /* Splatfont1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1098BCD224D2A884003E95E3 /* Splatfont1.ttf */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
@@ -78,6 +79,7 @@
 		105C5BF424C722F700BDF477 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		1061132B24D4EFDC000771FD /* PlayerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationView.swift; sourceTree = "<group>"; };
 		1061132D24D50AE5000771FD /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
+		1061132F24D50D3E000771FD /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
 		1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionView.swift; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		1098BCD224D2A884003E95E3 /* Splatfont1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont1.ttf; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */,
+				1061132F24D50D3E000771FD /* ResultDetailView.swift */,
 				1061132B24D4EFDC000771FD /* PlayerInformationView.swift */,
 			);
 			path = Results;
@@ -596,6 +599,7 @@
 				10505E6A24CB5D5B00CF4E04 /* LoadingView.swift in Sources */,
 				10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */,
 				105112B024D0A5AA00EEC0EF /* SalmoniaView.swift in Sources */,
+				1061133024D50D3E000771FD /* ResultDetailView.swift in Sources */,
 				105112B224D0A5DF00EEC0EF /* SalmonStatsView.swift in Sources */,
 				105112AB24D0061000EEC0EF /* Enum.swift in Sources */,
 				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
@@ -772,7 +776,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -786,7 +790,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -802,7 +806,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -816,7 +820,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";
