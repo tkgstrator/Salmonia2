@@ -84,7 +84,6 @@ struct UserInformationView: View {
     
 }
 
-// Salmoniaのビュー（まだなんにも書いてない）
 struct SalmoniaView: View {
     @ObservedObject var users = UserInfoModel()
     

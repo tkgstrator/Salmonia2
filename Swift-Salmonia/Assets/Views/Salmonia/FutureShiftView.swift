@@ -31,28 +31,26 @@ struct ShiftCollectionView: View {
         ZStack {
             VStack(spacing: 5) {
                 HStack {
-                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 30, height: 20)})
-                    Text(start_time.unix.date).frame(height: 20)
-                    Text("-").frame(height: 20)
-                    Text(end_time.unix.date).frame(height: 20)
+                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 9.vw, height: 6.vw)})
+                    Text(start_time.unix.date).frame(height: 6.vw)
+                    Text("-").frame(height: 6.vw)
+                    Text(end_time.unix.date).frame(height: 6.vw)
                     Spacer()
                 }
-                Rectangle().strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [10, 5])).frame(height: 2)
-                //                Path()
                 HStack {
-                    URLImage(URL(string: stageid.stage)!, content: {$0.image.renderingMode(.original).resizable().frame(width: 136, height: 76.5)
+                    URLImage(URL(string: stageid.stage)!, content: {$0.image.renderingMode(.original).resizable().frame(width: 32.vw, height: 18.vw)
                     }).clipShape(RoundedRectangle(cornerRadius: 8.0))
                     Spacer()
                     HStack {
                         ForEach(weapons, id:\.self) { id in
-                            URLImage(URL(string: id.weapon)!, content: {$0.image.resizable().frame(width: 40, height: 40)})
+                            URLImage(URL(string: id.weapon)!, content: {$0.image.resizable().frame(width: 12.vw, height: 12.vw)})
                         }
                     }
                 }
             }
         }
-        .frame(height: 120)
-        .font(.custom("Splatfont2", size: 18))
+        .frame(height: 30.vw)
+        .font(.custom("Splatfont2", size: 5.vw))
     }
 }
 

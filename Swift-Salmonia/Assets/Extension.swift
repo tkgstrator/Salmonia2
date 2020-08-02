@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 extension String {
     //　文字列をローカライズする
@@ -51,6 +52,9 @@ extension String {
 }
 
 extension Int {
+    var vw: CGFloat {
+        return CGFloat(Double(self) * Double(UIScreen.main.bounds.width) / 100)
+    }
     
     // Salmon Stats型のIDをSplatNet2型に変換する（ダサいからExtention以外で対応したい
     var reasonid: String? {
@@ -123,6 +127,11 @@ extension Int {
 }
 
 extension Double {
+    // Int型と同じやつをコピーしただけ
+    var vw: CGFloat {
+        return CGFloat(Double(self) * Double(UIScreen.main.bounds.width) / 100)
+    }
+
     // Swiftは桁丸めに対応していなので丸めるやつ
     func round(digit: Int) -> Double {
         return floor((pow(10.0, digit) as NSDecimalNumber).doubleValue * self) / (pow(10.0, digit) as NSDecimalNumber).doubleValue
