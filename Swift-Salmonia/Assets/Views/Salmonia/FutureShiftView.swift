@@ -34,7 +34,7 @@ struct ShiftCollectionView: View {
                     URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 30, height: 20)})
                     Text(start_time.unix.date).frame(height: 20)
                     Text("-").frame(height: 20)
-                    Text(start_time.unix.date).frame(height: 20)
+                    Text(end_time.unix.date).frame(height: 20)
                     Spacer()
                 }
                 Rectangle().strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [10, 5])).frame(height: 2)
@@ -71,6 +71,7 @@ struct FutureShiftView: View {
     
     var body: some View {
         ForEach(phases.indices) { i in
+//            NavigationLink(destination: PlayerStatsView()
             ShiftCollectionView(data: self.phases[i])
         }
     }

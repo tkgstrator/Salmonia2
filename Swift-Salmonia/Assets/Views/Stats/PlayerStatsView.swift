@@ -164,8 +164,8 @@ class Stats: ObservableObject {
     //
 }
 
-struct PlayerStatsView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayerStatsView()
-    }
-}
+//struct PlayerStatsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlayerStatsView()
+//    }
+//}
