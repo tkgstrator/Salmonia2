@@ -52,8 +52,10 @@ extension String {
 }
 
 extension Int {
+    // レスポンシブデザイン対応用
     var vw: CGFloat {
-        return CGFloat(Double(self) * Double(UIScreen.main.bounds.width) / 100)
+        guard let size = [UIScreen.main.bounds.width, UIScreen.main.bounds.height].min() else { return 0 }
+        return CGFloat(Double(self) * Double(size) / 100)
     }
     
     // Salmon Stats型のIDをSplatNet2型に変換する（ダサいからExtention以外で対応したい
@@ -129,7 +131,8 @@ extension Int {
 extension Double {
     // Int型と同じやつをコピーしただけ
     var vw: CGFloat {
-        return CGFloat(Double(self) * Double(UIScreen.main.bounds.width) / 100)
+        guard let size = [UIScreen.main.bounds.width, UIScreen.main.bounds.height].min() else { return 0 }
+        return CGFloat(Double(self) * Double(size) / 100)
     }
 
     // Swiftは桁丸めに対応していなので丸めるやつ
