@@ -12,12 +12,12 @@ import SwiftyJSON
 
 
 struct Enum {
-    public let Stage: [(url: String, name: String)] = [
-        ("65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png", "Spawning Grounds"),
-        ("e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png", "Marooner's Bay"),
-        ("6d68f5baa75f3a94e5e9bfb89b82e7377e3ecd2c.png", "Lost Outpost"),
-        ("e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png", "Salmonid Smokeyard"),
-        ("50064ec6e97aac91e70df5fc2cfecf61ad8615fd.png", "Ruins of Ark Polaris"),
+    public let Stage: [(url: String, name: String, id: Int)] = [
+        ("65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png", "Spawning Grounds", 5000),
+        ("e07d73b7d9f0c64e552b34a2e6c29b8564c63388.png", "Marooner's Bay", 5001),
+        ("6d68f5baa75f3a94e5e9bfb89b82e7377e3ecd2c.png", "Lost Outpost", 5002),
+        ("e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png", "Salmonid Smokeyard", 5003),
+        ("50064ec6e97aac91e70df5fc2cfecf61ad8615fd.png", "Ruins of Ark Polaris", 5004),
     ]
     
     public let Weapon: [(url: String, id: Int)] = [
@@ -31,7 +31,7 @@ struct Enum {
         ("3d274190988ad20dd1b02825448edbb6e12c720c.png", 1020),
         ("e32ed68bb18628c5ede5816a2fbc2b8fcdd04124.png", 1030),
         ("1f94c29067c918ac9143b756dc607ff0f8cf4e63.png", 1100),
-        ("f1d5740dfb7d87f7e43974bbe5585445368741b8.png", 1100),
+        ("f1d5740dfb7d87f7e43974bbe5585445368741b8.png", 1110),
         ("e5a97d52f12a83a037526588363021f2c1f718b0.png", 20),
         ("3f840ce3cc5ac0b8cbf7451079b57e807d8b95f1.png", 200),
         ("5a0a20324f1374a363363d721a605849e36ffff2.png", 2000),
@@ -107,5 +107,7 @@ struct Enum {
 }
 
 enum APPError: Error {
-    case Response(Int, String)
+    case Response(id: Int, message: String)
+    case Internal(id: Int, message: String)
+    case Database(id: Int, message: String)
 }

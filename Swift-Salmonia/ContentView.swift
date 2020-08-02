@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-// タブを表示しているビュー
 struct ContentView: View {
     var body: some View {
         SalmoniaView()

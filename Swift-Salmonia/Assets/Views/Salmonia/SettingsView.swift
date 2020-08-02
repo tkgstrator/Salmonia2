@@ -15,6 +15,8 @@ struct SettingsView: View {
     private let url = "https://accounts.nintendo.com/connect/1.0.0/authorize?state=V6DSwHXbqC4rspCn_ArvfkpG1WFSvtNYrhugtfqOHsF6SYyX&redirect_uri=npf71b963c1b7b6d119://auth&client_id=71b963c1b7b6d119&scope=openid+user+user.birthday+user.mii+user.screenName&response_type=session_token_code&session_token_code_challenge=tYLPO5PxpK-DTcAHJXugD7ztvAZQlo0DQQp3au5ztuM&session_token_code_challenge_method=S256&theme=login_form"
     
     @State private var isVisible: Bool = false
+    @State private var title: String = ""
+    @State private var text: String = ""
     
     private var iksm_session: String?
     private var session_token: String?
@@ -39,9 +41,17 @@ struct SettingsView: View {
                     }
                 }
                 Button(action: {
-                    SplatNet2.loginSalmonStats() { error in
-                        print(error)
-                        // エラー処理をする
+                    SplatNet2.loginSalmonStats() { response in
+                        // エラー処理をする（何事もなければ単にリターンして終わり
+                        guard let error = response else { return }
+                        switch error {
+                        case let APPError.Response(id, message):
+                            self.title = "Error Code \(id)"
+                            self.text = message
+                            self.isVisible = true
+                        default:
+                            break
+                        }
                     }
                 }) {
                     HStack {
@@ -50,7 +60,7 @@ struct SettingsView: View {
                         Image(systemName: "snow").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)
                     }
                 }.alert(isPresented: $isVisible) {
-                    Alert(title: Text("TEST"))
+                    Alert(title: Text(title),message: Text(text))
                 }
             }
             Section(header: Text("UserInfo")) {

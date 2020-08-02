@@ -67,7 +67,7 @@ struct PlayerOverView: View {
                 Spacer()
                 PlayerOverViewColumn(title: "Points", value: overview.kuma_point_total)
             }.frame(maxWidth: .infinity)
-            Spacer()
+            FutureShiftView()
             HStack {
                 StageStack(stage: "Spawning Grounds", value: records[0])
                 Spacer()

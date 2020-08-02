@@ -279,7 +279,7 @@ class SplatNet2 {
                     completion(JSON(value), nil)
                 case .failure:
                     // レスポンスがおかしいことを示した上でリターン
-                    completion(nil, APPError.Response(1000, "Invalid response"))
+                    completion(nil, APPError.Response(id: 1000, message: "Invalid response"))
                 }
         }
     }
@@ -293,14 +293,14 @@ class SplatNet2 {
                     let laravel_session = cookie.value
                     getTokenFromSalmonStats(session_token: laravel_session) { response, error in
                         guard let token = response?["api_token"].stringValue else {
-                            complition(APPError.Response(1001, "Invalid response"))
+                            complition(APPError.Response(id: 1001, message: "Invalid response"))
                             return }
                         guard let user = realm.objects(UserInfoRealm.self).first else { return }
                         // データベース書き込み
                         do {
                             try realm.write { user.setValue(token, forKey: "api_token") }
                         } catch {
-                            complition(APPError.Response(1001, "Realm write error"))
+                            complition(APPError.Database(id: 1001, message: "Realm write error"))
                         }
                     }
                 }

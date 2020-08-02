@@ -20,6 +20,13 @@ extension String {
         return Int((f.date(from: self) ?? Date()).timeIntervalSince1970)
     }
     
+    var unix: Int {
+        let f = DateFormatter()
+        f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return Int((f.date(from: self) ?? Date()).timeIntervalSince1970)
+    }
+    
     func capture(pattern: String, group: Int) -> String? {
         let result = capture(pattern: pattern, group: [group])
         return result.isEmpty ? nil : result[0]
@@ -90,6 +97,18 @@ extension Int {
     var weapon: String {
         let base = "https://app.splatoon2.nintendo.net/images/weapon/"
         return base + (Enum().Weapon.filter({ $0.id == self}).first?.url ?? "")
+    }
+    
+    var stage: String {
+        let base = "https://app.splatoon2.nintendo.net/images/coop_stage/"
+        return base + (Enum().Stage.filter({ $0.id == self}).first?.url ?? "")
+    }
+    
+    var date: String {
+        let f = DateFormatter()
+//        f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+        f.dateFormat = "MM/dd HH:mm"
+        return f.string(from: Date(timeIntervalSince1970: TimeInterval(self)))
     }
 }
 

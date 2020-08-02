@@ -68,7 +68,7 @@ struct UserInformationView: View {
     private var image: String
     
     init(user: UserInformation){
-        name = user.username ?? "Salmonia"
+        name = user.username ?? "-"
         image = user.imageUri ?? "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
     }
     

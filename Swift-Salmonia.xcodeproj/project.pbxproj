@@ -25,6 +25,8 @@
 		1061132C24D4EFDC000771FD /* PlayerInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061132B24D4EFDC000771FD /* PlayerInformationView.swift */; };
 		1061132E24D50AE5000771FD /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061132D24D50AE5000771FD /* Struct.swift */; };
 		1061133024D50D3E000771FD /* ResultDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061132F24D50D3E000771FD /* ResultDetailView.swift */; };
+		1061133A24D597C4000771FD /* coop.json in Resources */ = {isa = PBXBuildFile; fileRef = 1061133924D597C4000771FD /* coop.json */; };
+		1061133C24D597F9000771FD /* FutureShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1061133B24D597F9000771FD /* FutureShiftView.swift */; };
 		1065431D24D40F82005D7D13 /* ResultsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */; };
 		1098BCD324D2A92B003E95E3 /* Splatfont1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1098BCD224D2A884003E95E3 /* Splatfont1.ttf */; };
 		10B15CBC24C6F78C00C1E78A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B15CBB24C6F78C00C1E78A /* Extension.swift */; };
@@ -80,6 +82,8 @@
 		1061132B24D4EFDC000771FD /* PlayerInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInformationView.swift; sourceTree = "<group>"; };
 		1061132D24D50AE5000771FD /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
 		1061132F24D50D3E000771FD /* ResultDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDetailView.swift; sourceTree = "<group>"; };
+		1061133924D597C4000771FD /* coop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coop.json; sourceTree = "<group>"; };
+		1061133B24D597F9000771FD /* FutureShiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureShiftView.swift; sourceTree = "<group>"; };
 		1065431C24D40F82005D7D13 /* ResultsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionView.swift; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		1098BCD224D2A884003E95E3 /* Splatfont1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont1.ttf; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 			children = (
 				105112AF24D0A5AA00EEC0EF /* SalmoniaView.swift */,
 				105112AC24D0A52A00EEC0EF /* SettingsView.swift */,
+				1061133B24D597F9000771FD /* FutureShiftView.swift */,
 				105112A524CFE02E00EEC0EF /* PlayerOverView.swift */,
 			);
 			path = Salmonia;
@@ -218,6 +223,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		1061133824D597C4000771FD /* Coop */ = {
+			isa = PBXGroup;
+			children = (
+				1061133924D597C4000771FD /* coop.json */,
+			);
+			path = Coop;
+			sourceTree = "<group>";
+		};
 		1065431B24D40F65005D7D13 /* Results */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +244,7 @@
 		10B15CBE24C6FA0300C1E78A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1061133824D597C4000771FD /* Coop */,
 				105112A924CFE43800EEC0EF /* Realm */,
 				10505E7B24CBDDF100CF4E04 /* Fonts */,
 				10B15CBB24C6F78C00C1E78A /* Extension.swift */,
@@ -444,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B6364E24C662D200A39FD2 /* LaunchScreen.storyboard in Resources */,
+				1061133A24D597C4000771FD /* coop.json in Resources */,
 				10B6364B24C662D200A39FD2 /* Preview Assets.xcassets in Resources */,
 				10B6364824C662D200A39FD2 /* Assets.xcassets in Resources */,
 				10505E7F24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf in Resources */,
@@ -598,6 +613,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1061133C24D597F9000771FD /* FutureShiftView.swift in Sources */,
 				10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */,
 				105112A624CFE02E00EEC0EF /* PlayerOverView.swift in Sources */,
 				10B6364424C662D000A39FD2 /* SceneDelegate.swift in Sources */,
