@@ -75,10 +75,10 @@ struct UserInformationView: View {
     var body: some View {
         HStack(spacing: 0) {
             NavigationLink(destination: ResultsCollectionView()) {
-                URLImage(URL(string: image)!, content:  {$0.image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 80, height: 80)
+                URLImage(URL(string: image)!, content:  {$0.image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}).frame(width: 22.vw, height: 22.vw)
             }
             Spacer()
-            Text(name).font(.custom("Splatfont2", size: 30)).frame(maxWidth: .infinity, alignment: .center)
+            Text(name).font(.custom("Splatfont2", size: 8.vw)).frame(maxWidth: .infinity, alignment: .center)
         }
     }
     

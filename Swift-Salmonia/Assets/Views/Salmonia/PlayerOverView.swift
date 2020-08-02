@@ -26,7 +26,7 @@ struct StageStack: View {
         VStack(spacing: 0) {
             NavigationLink(destination: StageRecordsView(name: stage_name, value: records.data)) {
                 URLImage(URL(string: imageUri)!, content: {$0.image.renderingMode(.original).resizable().aspectRatio(contentMode: .fill)})
-                    .frame(width: 110, height: 60)
+                    .frame(width: 28.8.vw, height: 16.2.vw)
                     .clipped()
                     .clipShape(RoundedRectangle(cornerRadius: 8.0))
             }
@@ -34,7 +34,7 @@ struct StageStack: View {
                 Text(records.grade_point.string).foregroundColor(.red)
                 Text(records.team_golden_eggs.string).foregroundColor(.yellow)
             }
-            .font(.custom("Splatfont2", size: 18))
+            .font(.custom("Splatfont2", size: 5.vw))
             .padding(.top, 0)
         }
     }
@@ -51,19 +51,19 @@ struct PlayerOverView: View {
     }
     
     var body: some View {
-        VStack(spacing: 5) {
+        VStack(spacing: 1.vw) {
             HStack {
                 PlayerOverViewColumn(title: "Jobs", value: overview.job_count)
                 Spacer()
                 VStack(spacing: 0) {
-                    Text("Eggs").frame(height: 20).padding(2)
+                    Text("Eggs").frame(height: 5.vw).padding(2)
                     HStack {
                         Text(overview.golden_ikura_total.string).foregroundColor(.yellow)
                         Text("/")
                         Text(overview.ikura_total.string).foregroundColor(.red)
                     }
-                    .frame(height: 20).padding(2).foregroundColor(.yellow)
-                }.font(.custom("Splatfont2", size: 20)).padding(0).frame(alignment: .center)
+                    .frame(height: 5.vw).padding(2).foregroundColor(.yellow)
+                }.font(.custom("Splatfont2", size: 5.vw)).padding(0).frame(alignment: .center)
                 Spacer()
                 PlayerOverViewColumn(title: "Points", value: overview.kuma_point_total)
             }.frame(maxWidth: .infinity)
