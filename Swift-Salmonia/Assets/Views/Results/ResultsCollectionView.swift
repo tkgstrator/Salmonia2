@@ -11,25 +11,6 @@ import Combine
 import URLImage
 import RealmSwift
 
-class ResultsModel: ObservableObject {
-    private var token: NotificationToken? // 変更を伝えるトークン
-    public let realm = try? Realm().objects(CoopResultsRealm.self) // 監視対象
-    
-    @Published var data: [ResultCollection] = []
-    
-    init() {
-        // リアルタイム更新のためのメソッド
-        token = realm?.observe{ _ in
-            self.data = [] // このコードダッサｗｗｗｗｗ
-            guard let results = self.realm?.sorted(byKeyPath: "play_time", ascending: false).prefix(10).map({$0}) else { return }
-            // とりあえず最新の十件とれるようにするか？
-            for result in results {
-                self.data.append(ResultCollection(job_id: result.job_id, danger_rate: result.danger_rate, is_clear: result.job_result_is_clear, weapons: result.player[0].weapon, special: result.player[0].special_id, golden_eggs: result.golden_eggs, power_eggs: result.power_eggs))
-            }
-        }
-    }
-}
-
 struct ResultStack: View {
     private var result: ResultCollection
     

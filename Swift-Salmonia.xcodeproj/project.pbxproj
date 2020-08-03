@@ -41,6 +41,7 @@
 		10B6364E24C662D200A39FD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10B6364C24C662D200A39FD2 /* LaunchScreen.storyboard */; };
 		10B6365924C662D200A39FD2 /* Swift_SalmoniaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6365824C662D200A39FD2 /* Swift_SalmoniaTests.swift */; };
 		10B6366424C662D200A39FD2 /* Swift_SalmoniaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6366324C662D200A39FD2 /* Swift_SalmoniaUITests.swift */; };
+		10D2368924D7D37F00B2E27E /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D2368824D7D37F00B2E27E /* Model.swift */; };
 		C5113F046241D2C1F2018BA4 /* Pods_Swift_SalmoniaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6776318790644E82D0B26F /* Pods_Swift_SalmoniaTests.framework */; };
 		D7E02E303A1404B92452290A /* Pods_Swift_Salmonia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F9314225124683A3C26DE05 /* Pods_Swift_Salmonia.framework */; };
 		F2A7D13604AE8290D8D753AA /* Pods_Swift_Salmonia_Swift_SalmoniaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E44E93D95379A8FB77A009 /* Pods_Swift_Salmonia_Swift_SalmoniaUITests.framework */; };
@@ -105,6 +106,7 @@
 		10B6365F24C662D200A39FD2 /* Swift-SalmoniaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Swift-SalmoniaUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B6366324C662D200A39FD2 /* Swift_SalmoniaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swift_SalmoniaUITests.swift; sourceTree = "<group>"; };
 		10B6366524C662D200A39FD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10D2368824D7D37F00B2E27E /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		3D6776318790644E82D0B26F /* Pods_Swift_SalmoniaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift_SalmoniaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F434B997E7E6166C9A0D375 /* Pods-Swift-SalmoniaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-SalmoniaTests.release.xcconfig"; path = "Target Support Files/Pods-Swift-SalmoniaTests/Pods-Swift-SalmoniaTests.release.xcconfig"; sourceTree = "<group>"; };
 		4E4ADB16475744E5D5E57D1C /* Pods-Swift-Salmonia-Swift-SalmoniaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-Salmonia-Swift-SalmoniaUITests.release.xcconfig"; path = "Target Support Files/Pods-Swift-Salmonia-Swift-SalmoniaUITests/Pods-Swift-Salmonia-Swift-SalmoniaUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		1061133124D54C20000771FD /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				10D2368824D7D37F00B2E27E /* Model.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10D2368924D7D37F00B2E27E /* Model.swift in Sources */,
 				1061133C24D597F9000771FD /* FutureShiftView.swift in Sources */,
 				10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */,
 				105112A624CFE02E00EEC0EF /* PlayerOverView.swift in Sources */,
@@ -800,7 +804,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -830,7 +834,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

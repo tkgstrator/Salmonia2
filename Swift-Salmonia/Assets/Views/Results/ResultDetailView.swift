@@ -27,15 +27,15 @@ struct WaveView: View {
                     Text(String(wave.golden_ikura_num)).padding(0)
                     Text("/").padding(0)
                     Text(String(wave.quota_num)).padding(0)
-                }
-                .frame(height: 36).frame(minWidth: 120)
+                }.foregroundColor(.white)
+                .frame(height: 9.vw).frame(minWidth: 30.vw)
                 .background(Color.black)
-                .font(.custom("Splatfont2", size: 28))
-                Text(String(wave.ikura_num)).foregroundColor(.red).frame(height: 28).font(.custom("Splatfont2", size: 22))
-                Text(wave.water_level).foregroundColor(.black).frame(height: 28)
-                Text(wave.event_type).foregroundColor(.black).frame(height: 28)
+                .font(.custom("Splatfont2", size: 7.vw))
+                Text(String(wave.ikura_num)).foregroundColor(.red).frame(height: 7.vw).font(.custom("Splatfont2", size: 6.vw))
+                Text(wave.water_level).foregroundColor(.black).frame(height: 7.vw)
+                Text(wave.event_type).foregroundColor(.black).frame(height: 7.vw)
             }.background(Color.yellow).clipShape(RoundedRectangle(cornerRadius: 8.0))
-            Text(String(wave.golden_ikura_pop_num)).foregroundColor(.white).frame(height: 28)
+            Text(String(wave.golden_ikura_pop_num)).foregroundColor(.white).frame(height: 7.vw)
         }
     }
 }
@@ -57,17 +57,17 @@ struct PlayerView: View {
             }
             HStack {
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
-                    .frame(width: 20, height: 20)
-                Text(String(player.golden_ikura_num)).frame(width: 30)
+                    .frame(width: 5.vw, height: 5.vw)
+                Text(String(player.golden_ikura_num)).frame(width: 7.5.vw)
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
-                    .frame(width: 20, height: 20)
-                Text(String(player.ikura_num)).frame(width: 45)
+                    .frame(width: 5.vw, height: 5.vw)
+                Text(String(player.ikura_num)).frame(width: 12.vw)
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/c003ffe0a5580e4c8b1bc9df1e0a30d2.png")!, content: {$0.image.resizable()})
-                    .frame(width: 50, height: 20)
-                Text(String(player.help_count)).frame(width: 30)
+                    .frame(width: 12.5.vw, height: 5.vw)
+                Text(String(player.help_count)).frame(width: 7.5.vw)
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5d447dcfcb3b0c31ffb2efca58a6e799.png")!, content: {$0.image.resizable()})
-                    .frame(width: 50, height: 20)
-                Text(String(player.dead_count)).frame(width: 30)
+                    .frame(width: 12.5.vw, height: 5.vw)
+                Text(String(player.dead_count)).frame(width: 7.5.vw)
             }
         }
     }
@@ -98,9 +98,9 @@ struct ResultDetailView: View {
                 }
             }
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 2.vw)
         .navigationBarTitle("Result")
-        .font(.custom("Splatfont2", size: 18))
+        .font(.custom("Splatfont2", size: 5.vw))
     }
 }
 
