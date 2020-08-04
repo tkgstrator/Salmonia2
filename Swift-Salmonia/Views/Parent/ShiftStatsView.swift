@@ -21,7 +21,7 @@ struct ShiftStatsView: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("OVERVIEW").font(.custom("Splatfont2", size: 20))
+                Text("OVERVIEW").font(.custom("Splatoon1", size: 18))
                 Spacer()
             }) {
                 StatsStackView(title: "JOB NUM", value: stats.job_num)
@@ -34,7 +34,7 @@ struct ShiftStatsView: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("MAX").font(.custom("Splatfont2", size: 20))
+                Text("MAX").font(.custom("Splatoon1", size: 18))
                 Spacer()
             }){
                 StatsStackView(title: "GRADE POINT", value: stats.max_grade_point)
@@ -46,10 +46,9 @@ struct ShiftStatsView: View {
             }
             Section(header:HStack {
                 Spacer()
-                Text("AVERAGE").font(.custom("Splatfont2", size: 20))
+                Text("AVERAGE").font(.custom("Splatoon1", size: 18))
                 Spacer()
             }) {
-                Text("STATS STACK")
                 StatsStackView(title: "CLEAR WAVE", value: stats.avg_clear_wave)
                 StatsStackView(title: "CREW GRADE", value: stats.avg_crew_grade)
                 StatsStackView(title: "TEAM POWER EGGS", value: stats.avg_team_power_eggs)

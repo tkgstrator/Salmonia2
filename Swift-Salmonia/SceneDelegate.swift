@@ -83,8 +83,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     SplatNet2.getSplatoonToken(result: response) { response in
                         let splatoon_token = response["splatoon_token"].stringValue
                         print("SPLATOON TOKEN", splatoon_token)
-                        let username = response["user"]["name"].stringValue
-                        let imageUri = response["user"]["image"].stringValue
+                        let username = response["user"]["name"].string
+                        let imageUri = response["user"]["image"].string
                         // fの取得
                         SplatNet2.callFlapgAPI(access_token: splatoon_token, type: "app") { response in
                             // splatoon_access_tokenの取得

@@ -12,7 +12,6 @@ import SwiftyJSON
 import RealmSwift
 
 class SplatNet2 {
-    static let realm = try! Realm() // 多分存在するやろ
     class func getSessionToken(session_token_code: String, session_token_code_verifier: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/session_token"
         let header: HTTPHeaders = [
@@ -159,6 +158,7 @@ class SplatNet2 {
     }
     
     class func getResultFromSplatNet2(job_id: Int, complition: @escaping (JSON) -> ()) {
+        guard let realm = try? Realm() else { return }
         guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
         //        guard let api_token: String = realm.objects(UserInfoRealm.self).first?.api_token else { return }
         
@@ -182,6 +182,7 @@ class SplatNet2 {
     }
     
     class func getSummaryFromSplatNet2(completion: @escaping (JSON) -> ()) {
+        guard let realm = try? Realm() else { return }
         guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
         
         let url = "https://app.splatoon2.nintendo.net/api/coop_results"
@@ -208,6 +209,7 @@ class SplatNet2 {
     }
     
     class func genIksmSession(complition: @escaping (JSON) -> ()) {
+        guard let realm = try? Realm() else { return }
         guard let session_token: String = realm.objects(UserInfoRealm.self).first?.session_token else { return }
         guard let user = realm.objects(UserInfoRealm.self).first else { return }
         

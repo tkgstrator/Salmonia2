@@ -129,7 +129,7 @@ class UserInfoCore: ObservableObject {
     @Published var nickname: String?
     // URLImageの仕様上, URL文字列にnilが入っていると落ちるのでその対策
     // 可愛いからこれでもいいよねっていう感じ
-    @Published var imageUri: String? = "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
+    @Published var imageUri: String?// = "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
     @Published var iksm_session: String?
     @Published var session_token: String?
     @Published var api_token: String?
@@ -140,7 +140,7 @@ class UserInfoCore: ObservableObject {
             guard let realm = try? Realm().objects(UserInfoRealm.self).first else { return }
             self.nsaid = realm.nsaid
             self.nickname = realm.name
-            self.imageUri = realm.image
+            self.imageUri = realm.image ?? "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
             self.iksm_session = realm.iksm_session
             self.session_token = realm.session_token
             self.api_token = realm.api_token
