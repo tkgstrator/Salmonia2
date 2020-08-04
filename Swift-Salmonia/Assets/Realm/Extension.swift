@@ -27,3 +27,26 @@ extension String {
         }
     }
 }
+
+
+extension Double {
+    // Swiftは桁丸めに対応していなので丸めるやつ
+    func round(digit: Int) -> Double {
+        return floor((pow(10.0, digit) as NSDecimalNumber).doubleValue * self) / (pow(10.0, digit) as NSDecimalNumber).doubleValue
+    }
+}
+
+extension Optional {
+    var value: String {
+        switch self {
+        case is Int:
+            return String(self as! Int)
+        case is Double:
+            return String(self as! Double)
+        case is String:
+            return self as! String
+        default:
+            return "-"
+        }
+    }
+}

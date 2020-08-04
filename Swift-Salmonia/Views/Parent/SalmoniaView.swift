@@ -16,18 +16,19 @@ struct SalmoniaView: View {
             FutureShiftView() // 将来のシフトを表示
             StageListView() // 記録を表示
         }
-        // なんかここダサいけど直し方わからん
-        .navigationBarTitle(Text("Salmonia"))
-        .navigationBarItems(leading:
-            NavigationLink(destination: SettingView())
-            {
-                Image(systemName: "gear").resizable().scaledToFit().frame(width: 30, height: 30)
-            }, trailing:
-            NavigationLink(destination: LoadingView())
-            {
-                Image(systemName: "arrow.clockwise.icloud").resizable().scaledToFit().frame(width: 30, height: 30)
-            }
+            // なんかここダサいけど直し方わからん
+            .navigationBarTitle(Text("Salmonia"))
+            .navigationBarItems(leading:
+                NavigationLink(destination: SettingView())
+                {
+                    Image(systemName: "gear").resizable().scaledToFit().frame(width: 30, height: 30)
+                }, trailing:
+                NavigationLink(destination: LoadingView())
+                {
+                    Image(systemName: "arrow.clockwise.icloud").resizable().scaledToFit().frame(width: 30, height: 30)
+                }
         )
+    .padding(.horizontal, 10)
     }
 }
 

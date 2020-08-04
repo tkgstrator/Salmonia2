@@ -24,6 +24,7 @@
 		10A0AC2424D7E99700ADD56E /* StageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2324D7E99700ADD56E /* StageListView.swift */; };
 		10A0AC2624D7EB3700ADD56E /* StageRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */; };
 		10A0AC2824D804D000ADD56E /* SalmoniaCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2724D804D000ADD56E /* SalmoniaCore.swift */; };
+		10A0AC2A24D8374700ADD56E /* Salmonia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2924D8374700ADD56E /* Salmonia.swift */; };
 		10B15CC424C6FAA300C1E78A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B15CC224C6FAA300C1E78A /* Alamofire.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		10B15CC624C6FAA300C1E78A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */; };
 		10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6364124C662D000A39FD2 /* AppDelegate.swift */; };
@@ -79,6 +80,7 @@
 		10A0AC2324D7E99700ADD56E /* StageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageListView.swift; sourceTree = "<group>"; };
 		10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordsView.swift; sourceTree = "<group>"; };
 		10A0AC2724D804D000ADD56E /* SalmoniaCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaCore.swift; sourceTree = "<group>"; };
+		10A0AC2924D8374700ADD56E /* Salmonia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salmonia.swift; sourceTree = "<group>"; };
 		10B15CC224C6FAA300C1E78A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		10B6363E24C662D000A39FD2 /* Salmonia2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +159,7 @@
 			children = (
 				10505E6F24CB653800CF4E04 /* Realm.swift */,
 				10A0AC1324D7E47300ADD56E /* Extension.swift */,
+				10A0AC2924D8374700ADD56E /* Salmonia.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				10A0AC2624D7EB3700ADD56E /* StageRecordsView.swift in Sources */,
 				10B6364624C662D000A39FD2 /* ContentView.swift in Sources */,
 				10D2369024D7DB3600B2E27E /* SettingView.swift in Sources */,
+				10A0AC2A24D8374700ADD56E /* Salmonia.swift in Sources */,
 				10A0AC1024D7E04E00ADD56E /* SalmonStatsView.swift in Sources */,
 				10A0AC0824D7DD5B00ADD56E /* ResultsCollectionView.swift in Sources */,
 				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
