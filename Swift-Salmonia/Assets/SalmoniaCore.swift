@@ -18,15 +18,19 @@ class SalmoniaCore: ObservableObject {
 
 class UserResultsCore: ObservableObject {
     private var token: NotificationToken?
+    // あれ、やっぱりこれ要らんかったかも
+    private let realm = try? Realm().objects(CoopResultsRealm.self)
     
     // 自分のリザルトをすべて保存している
-    @Published var results: Results<CoopResultsRealm>?
+    // データが全くなくても空情報が返ってくるだけでnilではない
+    // データベースファイルがなかったりすると危ないかもしれないが、その危険性は多分ない
+    @Published var results = try! Realm().objects(CoopResultsRealm.self)
     
     // ちょいダサい？
     init() {
-        token = try? Realm().objects(CoopResultsRealm.self).observe { _ in
-            guard let realm = try? Realm().objects(CoopResultsRealm.self) else { return }
-            self.results = realm
+        token = realm?.observe { _ in
+            // データベースを再読込して上書きする
+            self.results = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "job_id", ascending: false)
         }
     }
     

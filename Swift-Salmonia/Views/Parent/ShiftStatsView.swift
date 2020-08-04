@@ -12,7 +12,6 @@ struct ShiftStatsView: View {
     @Binding var start_time: Int
     @ObservedObject var stats: UserStatsCore
     
-
     init(start_time: Binding<Int>) {
         _start_time = start_time
         _stats = ObservedObject(initialValue: UserStatsCore(start_time: start_time))

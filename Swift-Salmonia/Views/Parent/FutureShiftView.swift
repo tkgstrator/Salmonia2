@@ -21,8 +21,8 @@ struct FutureShiftView: View {
     init () {
         let start_time = phases.map({ Unixtime(date: $0["StartDateTime"].stringValue) })
         _start_time = State(initialValue: start_time)
-        
     }
+    
     var body: some View {
         ForEach(phases.indices) { idx in
             NavigationLink(destination: ShiftStatsView(start_time: self.$start_time[idx])) {
