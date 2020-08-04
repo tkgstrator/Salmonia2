@@ -37,8 +37,12 @@ func Stage(id: Int) -> String {
 }
 
 func Stage(url: String) -> String {
-    return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.url == url }).first!.name
+    return stages.filter({ $0.url == url }).first!.name
 }
+
+//func Stage(url: String) -> String {
+//    return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.url == url }).first!.name
+//}
 
 private let stages: [(url: String, name: String, id: Int)] = [
     // https://app.splatoon2.nintendo.net/images/weapon/

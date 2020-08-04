@@ -2,7 +2,7 @@
 //  SplatNet2.swift
 //  Swift-Salmonia
 //
-//  Created by devonly on 2020-07-21.
+//  Created by devonly on 2020-08-03.
 //  Copyright © 2020 devonly. All rights reserved.
 //
 
@@ -10,13 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 import RealmSwift
-import WebKit
-
-let semaphore = DispatchSemaphore(value: 0)
-let queue = DispatchQueue.global(qos: .utility)
 
 class SplatNet2 {
-    
     static let realm = try! Realm() // 多分存在するやろ
     class func getSessionToken(session_token_code: String, session_token_code_verifier: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/session_token"
@@ -165,7 +160,7 @@ class SplatNet2 {
     
     class func getResultFromSplatNet2(job_id: Int, complition: @escaping (JSON) -> ()) {
         guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
-//        guard let api_token: String = realm.objects(UserInfoRealm.self).first?.api_token else { return }
+        //        guard let api_token: String = realm.objects(UserInfoRealm.self).first?.api_token else { return }
         
         let url = "https://app.splatoon2.nintendo.net/api/coop_results/" + String(job_id)
         let header: HTTPHeaders = [
@@ -180,26 +175,6 @@ class SplatNet2 {
                     complition(JSON(value))
                     //                    uploadResultToSalmonStats(result: JSON(value), token: api_token)
                     break
-                case .failure(let error):
-                    print(error)
-                }
-        }
-    }
-    
-    class func uploadResultToSalmonStats(result: JSON, token: String) {
-        let url = "https://salmon-stats-api.yuki.games/api/results"
-        let header: HTTPHeaders = [
-            "Content-type": "application/json",
-            "Authorization": "Bearer " + token
-        ]
-        let body = ["results": [result.dictionaryObject]]
-        
-        AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
-            .validate(contentType: ["application/json"])
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    print(value)
                 case .failure(let error):
                     print(error)
                 }
@@ -264,143 +239,15 @@ class SplatNet2 {
         }
     }
     
-    // エラーコード1000を返す
-    class func getTokenFromSalmonStats(session_token: String, completion: @escaping  (JSON?, Error?) -> ()) {
-        let url = "https://salmon-stats-api.yuki.games/api-token"
-        let header: HTTPHeaders = [
-            "Cookie" : "laravel_session=" + session_token
-        ]
-        
-        AF.request(url, method: .get, headers: header)
-            .validate(contentType: ["application/json"])
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    completion(JSON(value), nil)
-                case .failure:
-                    // レスポンスがおかしいことを示した上でリターン
-                    completion(nil, APPError.Response(id: 1000, message: "Invalid response"))
-                }
-        }
-    }
-    
-    // エラーコード1001を返す
-    class func loginSalmonStats(complition: @escaping (Error?) -> ()) {
-        WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
-            cookies in
-            for cookie in cookies {
-                if cookie.name == "laravel_session" {
-                    let laravel_session = cookie.value
-                    getTokenFromSalmonStats(session_token: laravel_session) { response, error in
-                        guard let token = response?["api_token"].stringValue else {
-                            complition(APPError.Response(id: 1001, message: "Invalid response"))
-                            return }
-                        guard let user = realm.objects(UserInfoRealm.self).first else { return }
-                        // データベース書き込み
-                        do {
-                            try realm.write { user.setValue(token, forKey: "api_token") }
-                        } catch {
-                            complition(APPError.Database(id: 1001, message: "Realm write error"))
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    // 取得すべきリザルトのIDを返す関数
-    class func getIDFromSalmonStats(completion: @escaping (JSON) -> ()) {
-        guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
-        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results"
-        AF.request(url, method: .get)
-            .validate(contentType: ["application/json"])
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    completion(JSON(value))
-                case .failure(let error):
-                    print(error)
-                }
-        }
-    }
-    
-    // 呼び出すとnsaidからSalmon Statsの全記録を取得して返す
-    class func importResultsFromSalmonStats(complition: @escaping (JSON) -> ()) {
-        guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
-        
-        SplatNet2.getIDFromSalmonStats() { response in
-            let pages = response["last_page"].intValue
-            
-            for page in (1 ... 5) {
-                DispatchQueue.global().asyncAfter(deadline: .now() + .seconds((page - 1) * 100)) {
-                    print(Int(Date().timeIntervalSince1970), "GET JOBID", page)
-                    let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?page=\(page)"
-                    AF.request(url, method: .get)
-                        .validate(contentType: ["application/json"])
-                        .responseJSON(queue: queue) { response in
-                            switch response.result {
-                            case .success(let value):
-                                //                                print(Int(Date().timeIntervalSince1970), "CALL FUNCTION")
-                                SplatNet2.getResultFromSalmonStats(json: JSON(value)["data"]) { response in
-                                    //                                    print("OUT COMPLITION", Int(Date().timeIntervalSince1970), response["id"].intValue)
-                                    semaphore.signal()
-                                    complition(response)
-                                }
-                            case .failure(let error):
-                                print(error)
-                            }
-                    }
-                    semaphore.wait()
-                }
-            }
-        }
-    }
-    
-    // リザルト自体のJSONを返す関数
-    class func getResultFromSalmonStats(json: JSON, complition: @escaping (JSON) -> ()) {
-        for (i, (_, result)) in json.enumerated() {
-            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(i * 5)) {
-                print(Int(Date().timeIntervalSince1970), "GET RESULT")
-
-                let id = result["id"].intValue
-                let url = "https://salmon-stats-api.yuki.games/api/results/\(id)"
-                AF.request(url, method: .get)
-                    .validate(contentType: ["application/json"])
-                    .responseJSON { response in
-                        switch response.result {
-                        case .success(let value):
-                            complition(JSON(value))
-                        case .failure(let error):
-                            print(error)
-                        }
-                }
-            }
-        }
-    }
-    
-    class func getPlayerInformationFromSplatNet2(nsaid: String, complition: @escaping (JSON) -> ()) {
-        guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
+    class func getPlayerNickname(nsaid: String, complition: @escaping (JSON) -> ()) {
+        guard let iksm_session: String = try? Realm().objects(UserInfoRealm.self).first?.iksm_session else { return }
         
         let url = "https://app.splatoon2.nintendo.net/api/nickname_and_icon?id=" + nsaid
         let header: HTTPHeaders = [
             "cookie" : "iksm_session=" + iksm_session
         ]
-
-        AF.request(url, method: .get, headers: header).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                complition(JSON(value))
-                break
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    class func getPlayerInformationFromSalmonStats(nsaid: String, complition: @escaping (JSON) -> ()){
-        let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=" + nsaid
         
-        AF.request(url, method: .get).responseJSON { response in
+        AF.request(url, method: .get, headers: header).responseJSON { response in
             switch response.result {
             case .success(let value):
                 complition(JSON(value))

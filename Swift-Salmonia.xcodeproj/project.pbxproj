@@ -25,6 +25,11 @@
 		10A0AC2624D7EB3700ADD56E /* StageRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */; };
 		10A0AC2824D804D000ADD56E /* SalmoniaCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2724D804D000ADD56E /* SalmoniaCore.swift */; };
 		10A0AC2A24D8374700ADD56E /* Salmonia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2924D8374700ADD56E /* Salmonia.swift */; };
+		10A0AC2C24D90BB300ADD56E /* SplatNet2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2B24D90BB300ADD56E /* SplatNet2.swift */; };
+		10A0AC2E24D90BC000ADD56E /* SalmonStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2D24D90BC000ADD56E /* SalmonStats.swift */; };
+		10A0AC3124D9281C00ADD56E /* SalmonStatsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC3024D9281C00ADD56E /* SalmonStatsResultsView.swift */; };
+		10A0AC3324D93EC000ADD56E /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC3224D93EC000ADD56E /* Error.swift */; };
+		10A0AC3524D93F2E00ADD56E /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC3424D93F2E00ADD56E /* WebView.swift */; };
 		10B15CC424C6FAA300C1E78A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B15CC224C6FAA300C1E78A /* Alamofire.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		10B15CC624C6FAA300C1E78A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */; };
 		10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6364124C662D000A39FD2 /* AppDelegate.swift */; };
@@ -81,6 +86,11 @@
 		10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordsView.swift; sourceTree = "<group>"; };
 		10A0AC2724D804D000ADD56E /* SalmoniaCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaCore.swift; sourceTree = "<group>"; };
 		10A0AC2924D8374700ADD56E /* Salmonia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salmonia.swift; sourceTree = "<group>"; };
+		10A0AC2B24D90BB300ADD56E /* SplatNet2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplatNet2.swift; sourceTree = "<group>"; };
+		10A0AC2D24D90BC000ADD56E /* SalmonStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStats.swift; sourceTree = "<group>"; };
+		10A0AC3024D9281C00ADD56E /* SalmonStatsResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsResultsView.swift; sourceTree = "<group>"; };
+		10A0AC3224D93EC000ADD56E /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		10A0AC3424D93F2E00ADD56E /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		10B15CC224C6FAA300C1E78A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		10B15CC324C6FAA300C1E78A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		10B6363E24C662D000A39FD2 /* Salmonia2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,7 +169,6 @@
 			children = (
 				10505E6F24CB653800CF4E04 /* Realm.swift */,
 				10A0AC1324D7E47300ADD56E /* Extension.swift */,
-				10A0AC2924D8374700ADD56E /* Salmonia.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -189,13 +198,35 @@
 			path = Coop;
 			sourceTree = "<group>";
 		};
+		10A0AC2F24D927C500ADD56E /* SalmonStats */ = {
+			isa = PBXGroup;
+			children = (
+				10A0AC0F24D7E04E00ADD56E /* SalmonStatsView.swift */,
+				10A0AC3024D9281C00ADD56E /* SalmonStatsResultsView.swift */,
+			);
+			path = SalmonStats;
+			sourceTree = "<group>";
+		};
+		10A0AC3624D9414800ADD56E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				10A0AC2B24D90BB300ADD56E /* SplatNet2.swift */,
+				10A0AC2D24D90BC000ADD56E /* SalmonStats.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		10B15CBE24C6FA0300C1E78A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				1061133824D597C4000771FD /* Coop */,
 				105112A924CFE43800EEC0EF /* Realm */,
 				10505E7B24CBDDF100CF4E04 /* Fonts */,
+				10A0AC3624D9414800ADD56E /* Networking */,
 				10A0AC2724D804D000ADD56E /* SalmoniaCore.swift */,
+				10A0AC2924D8374700ADD56E /* Salmonia.swift */,
+				10A0AC3224D93EC000ADD56E /* Error.swift */,
+				10A0AC3424D93F2E00ADD56E /* WebView.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -282,10 +313,10 @@
 		10D2368A24D7D93500B2E27E /* Parent */ = {
 			isa = PBXGroup;
 			children = (
+				10A0AC2F24D927C500ADD56E /* SalmonStats */,
 				10D2368D24D7DB2900B2E27E /* LoadingView.swift */,
 				10D2368F24D7DB3600B2E27E /* SettingView.swift */,
 				10D2369124D7DB9700B2E27E /* SalmoniaView.swift */,
-				10A0AC0F24D7E04E00ADD56E /* SalmonStatsView.swift */,
 				10A0AC0724D7DD5B00ADD56E /* ResultsCollectionView.swift */,
 				10A0AC1F24D7E8BB00ADD56E /* ShiftStatsView.swift */,
 				10A0AC2124D7E8DE00ADD56E /* FutureShiftView.swift */,
@@ -584,6 +615,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10A0AC1424D7E47300ADD56E /* Extension.swift in Sources */,
+				10A0AC3524D93F2E00ADD56E /* WebView.swift in Sources */,
 				10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */,
 				10A0AC2424D7E99700ADD56E /* StageListView.swift in Sources */,
 				10A0AC0A24D7DDD800ADD56E /* ResultView.swift in Sources */,
@@ -596,11 +628,15 @@
 				10A0AC2624D7EB3700ADD56E /* StageRecordsView.swift in Sources */,
 				10B6364624C662D000A39FD2 /* ContentView.swift in Sources */,
 				10D2369024D7DB3600B2E27E /* SettingView.swift in Sources */,
+				10A0AC2E24D90BC000ADD56E /* SalmonStats.swift in Sources */,
+				10A0AC3324D93EC000ADD56E /* Error.swift in Sources */,
 				10A0AC2A24D8374700ADD56E /* Salmonia.swift in Sources */,
 				10A0AC1024D7E04E00ADD56E /* SalmonStatsView.swift in Sources */,
 				10A0AC0824D7DD5B00ADD56E /* ResultsCollectionView.swift in Sources */,
 				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
+				10A0AC2C24D90BB300ADD56E /* SplatNet2.swift in Sources */,
 				10A0AC2024D7E8BB00ADD56E /* ShiftStatsView.swift in Sources */,
+				10A0AC3124D9281C00ADD56E /* SalmonStatsResultsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

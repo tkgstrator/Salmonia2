@@ -12,12 +12,11 @@ import URLImage
 // プレイヤー名、画像などを表示する
 struct PlayerView: View {
     @ObservedObject var user = UserInfoCore()
-    //    @Binding var geometry: CGFloat
-    
+
     var body: some View {
         HStack {
             NavigationLink(destination: ResultsCollectionView()) {
-                URLImage(URL(string: self.user.imageUri!)!,
+                URLImage(URL(string: self.user.imageUri.value)!,
                          content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                     .frame(width: 80, height: 80)
             }.buttonStyle(PlainButtonStyle())
@@ -26,8 +25,8 @@ struct PlayerView: View {
     }
 }
 
-struct PlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayerView()
-    }
-}
+//struct PlayerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PlayerView()
+//    }
+//}

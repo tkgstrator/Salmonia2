@@ -37,6 +37,7 @@
 	<array>
 		<string>Splatfont2.ttf</string>
 		<string>Splatfont1.ttf</string>
+		<string>RobotoMono-Regular.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

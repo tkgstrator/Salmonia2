@@ -7,9 +7,11 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 // 自分を表示するためのビュー
 struct SalmoniaView: View {
+    
     var body: some View {
         ScrollView {
             PlayerView() // プレイヤーの概要を表示
