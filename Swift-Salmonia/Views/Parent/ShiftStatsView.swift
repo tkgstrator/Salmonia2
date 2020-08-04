@@ -60,7 +60,10 @@ struct ShiftStatsView: View {
                 StatsStackView(title: "RESCUE", value: stats.avg_rescue)
                 StatsStackView(title: "DEAD", value: stats.avg_dead)
             }
-        }.navigationBarTitle("\(start_time)")
+        }
+        .padding(.horizontal, 10)
+        .font(.custom("Splatfont2", size: 18))
+        .navigationBarTitle("\(start_time)")
     }
 }
 

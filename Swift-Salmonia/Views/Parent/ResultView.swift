@@ -34,6 +34,7 @@ struct ResultView: View {
                 }
             }
         }
+        .padding(.horizontal, 10)
         .navigationBarTitle("Detail")
     }
 }
@@ -46,20 +47,23 @@ private struct ResultWaveView: View {
     var body: some View {
         VStack {
             VStack {
-                Text("WAVE").foregroundColor(.black)
-                HStack {
-                    Text(String(wave.golden_ikura_num)).padding(0)
-                    Text("/").padding(0)
-                    Text(String(wave.quota_num)).padding(0)
-                }.foregroundColor(.white)
-                    .frame(height: 36).frame(minWidth: 120)
+                Text("WAVE").foregroundColor(.black).font(.custom("Splatfont2", size: 16))
+                HStack(spacing: 0) {
+                    Text(String(wave.golden_ikura_num))
+                    Text("/")
+                    Text(String(wave.quota_num))
+                }
+                    .frame(height: 36).frame(minWidth: 115)
+                    .foregroundColor(.white)
                     .background(Color.black)
                     .font(.custom("Splatfont2", size: 28))
-                Text(String(wave.ikura_num)).foregroundColor(.red).frame(height: 28).font(.custom("Splatfont2", size: 22))
-                Text(wave.water_level).foregroundColor(.black).frame(height: 28)
-                Text(wave.event_type).foregroundColor(.black).frame(height: 28)
+                Group {
+                    Text(String(wave.ikura_num)).foregroundColor(.red).font(.custom("Splatfont2", size: 20))
+                    Text(wave.water_level)
+                    Text(wave.event_type)
+                }.foregroundColor(.black).frame(height: 28).font(.custom("Splatfont2", size: 16))
             }.background(Color.yellow).clipShape(RoundedRectangle(cornerRadius: 8.0))
-            Text(String(wave.golden_ikura_pop_num)).foregroundColor(.white).frame(height: 28)
+            Text(String(wave.golden_ikura_pop_num)).frame(height: 28).font(.custom("Splatfont2", size: 18))
         }
     }
 }
@@ -77,8 +81,17 @@ private struct ResultPlayerView: View {
         NavigationLink(destination: SalmonStatsView(nsaid: $player.nsaid)) {
             VStack(spacing: 0) {
                 HStack {
-                    Text(player.name)
-                }
+                    Text(player.name).font(.custom("Splatfont2", size: 24))
+                    Spacer()
+                    Text("x\(player.defeat.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 24))
+                    Spacer()
+                    URLImage(URL(string: Special(id: player.special_id))!, content: {$0.image.resizable()})
+                    .frame(width: 30, height: 30)
+                    ForEach(player.weapon, id:\.self) { weapon in
+                        URLImage(URL(string: Weapon(id: weapon))!, content: {$0.image.resizable()})
+                            .frame(width: 30, height: 30)
+                    }
+                    }.frame(height: 30)
                 HStack {
                     URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
                         .frame(width: 20, height: 20)
@@ -92,8 +105,8 @@ private struct ResultPlayerView: View {
                     URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5d447dcfcb3b0c31ffb2efca58a6e799.png")!, content: {$0.image.resizable()})
                         .frame(width: 50, height: 20)
                     Text(String(player.dead_count)).frame(width: 30)
-                }
-            }
+                }.frame(height: 24)
+            }.font(.custom("Splatfont2", size: 18))
         }.buttonStyle(PlainButtonStyle())
     }
 }

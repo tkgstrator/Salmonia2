@@ -30,12 +30,12 @@ struct SalmoniaView: View {
                     Image(systemName: "arrow.clockwise.icloud").resizable().scaledToFit().frame(width: 30, height: 30)
                 }
         )
-    .padding(.horizontal, 10)
+            .padding(.horizontal, 10)
     }
 }
 
-struct SalmoniaView_Previews: PreviewProvider {
-    static var previews: some View {
-        SalmoniaView()
-    }
-}
+//struct SalmoniaView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SalmoniaView()
+//    }
+//}

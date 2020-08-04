@@ -36,13 +36,29 @@ func Stage(id: Int) -> String {
     return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.id == id }).first!.url
 }
 
+// 暫定対応
+func Stage(name: Int) -> String {
+    return stages.filter({ $0.id == name }).first!.name
+}
+
 func Stage(url: String) -> String {
     return stages.filter({ $0.url == url }).first!.name
 }
 
+func Special(id: Int) -> String {
+    return "https://app.splatoon2.nintendo.net/images/special/" + specials.filter({ $0.id == id }).first!.url
+}
 //func Stage(url: String) -> String {
 //    return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.url == url }).first!.name
 //}
+
+private let specials: [(url: String, id: Int)] = [
+// https://app.splatoon2.nintendo.net/images/special/
+("18990f646c551ee77c5b283ec814e371f692a553.png", 2),
+("7af300fdd872feb27b3d8e68a969457fac8b3bb7.png", 7),
+("9871c82952ed0141be0310ace1942c9f5f66d655.png", 8),
+("324d41e9582d84101152849bc8c96d6595c9b0ff.png", 9),
+]
 
 private let stages: [(url: String, name: String, id: Int)] = [
     // https://app.splatoon2.nintendo.net/images/weapon/

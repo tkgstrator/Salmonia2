@@ -40,18 +40,19 @@ private struct ResultStackView: View {
     
     var body: some View {
         HStack {
-            // クリアしたかの情報（色をつけたい所存）
             Group {
                 if job_result_is_clear {
-                    Text("Clear!")
+                    Text("Clear!").foregroundColor(.green).font(.custom("Splatoon1", size: 16))
                 } else {
                     VStack {
-                        Text("Defeat").frame(height: 14)
+                        Text("Defeat").frame(height: 14).font(.custom("Splatoon1", size: 16))
                         HStack {
                             Text("Wave").frame(height: 11)
-                            Text("\(job_result_failure_wave.value)").frame(height: 11)
-                        }.font(.custom("Splatoon1", size: 11))
+                            Text("\(job_result_failure_wave.value)").frame(height: 1)
+                        }
                     }
+                    .foregroundColor(.orange)
+                    .font(.custom("Splatoon1", size: 14))
                 }
                 
             }.frame(width: 60).font(.custom("Splatoon1", size: 14))
