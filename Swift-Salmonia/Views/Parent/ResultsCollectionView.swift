@@ -15,7 +15,7 @@ struct ResultsCollectionView: View {
     var body: some View {
         List {
             ForEach(core.results, id: \.self) { result in
-                NavigationLink(destination: ResultView()) {
+                NavigationLink(destination: ResultView(data: result)) {
                     ResultStackView(data: result)
                 }
             }

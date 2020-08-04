@@ -10,16 +10,18 @@ import SwiftUI
 
 // Salmon Stats利用者のビュー（Salmon StatsのWebViewではない）
 struct SalmonStatsView: View {
+    @Binding var nsaid: String
+    
     var body: some View {
         ScrollView {
             PlayerView()
         }
-        .navigationBarTitle("Salmon Stats")
+        .navigationBarTitle("\(nsaid)")
     }
 }
 
-struct SalmonStatsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SalmonStatsView()
-    }
-}
+//struct SalmonStatsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SalmonStatsView()
+//    }
+//}
