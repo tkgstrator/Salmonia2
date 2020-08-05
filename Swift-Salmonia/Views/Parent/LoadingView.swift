@@ -39,6 +39,7 @@ struct LoadingView: View {
             SplatNet2.getSummaryFromSplatNet2(iksm_session: iksm_session) { response, error in
                 DispatchQueue(label: "Shifts").async {
                     autoreleasepool {
+                        self.messages.append("Getting Shift Result")
                         guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
                         realm.beginWrite()
                         // responseがnilということはエラー発生なのでエラー処理をここに書く
@@ -48,7 +49,6 @@ struct LoadingView: View {
                         card?.updateValue(nsaid, forKey: "nsaid")
                         realm.create(CoopCardRealm.self, value: card as Any, update: .modified)
                         for (_, data) in response["stats"] {
-                            self.messages.append("Getting Coop Card Data")
                             Thread.sleep(forTimeInterval: 1)
                             guard let realm = try? Realm() else { return }
                             var shift = data.dictionaryObject
@@ -63,7 +63,9 @@ struct LoadingView: View {
                         try? Realm().commitWrite()
                     } // autoreleasepool
                 } // DispatchQueue
+                
                 DispatchQueue(label: "Results").async {
+                    // ここでリザルトを順番に取得したいのだが、最新のIDってどうやってとってこればいいかね？
                     for job_id in 2390 ... 2390 {
                         autoreleasepool {
                             SplatNet2.getResultFromSplatNet2(iksm_session: iksm_session, job_id: job_id) { response, error in
@@ -85,7 +87,15 @@ struct LoadingView: View {
                                         wave?.updateValue(response["start_time"].intValue, forKey: "start_time")
                                         waves.append(WaveDetailRealm(value: wave))
                                     }
-                                    for (_, data) in response["other_results"] {
+                                    
+                                    // これをなんとかしたい（切実
+                                    var player_results: [JSON] = []
+                                    player_results.append(response["my_result"])
+                                    for (_, other) in response["other_results"] {
+                                        player_results.append(other)
+                                    }
+                                    
+                                    for data in player_results {
                                         var player = data.dictionaryObject
                                         let boss_kill_counts: [Int] = data["boss_kill_counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1["count"].intValue })
                                         let weapon_list: [Int] = data["weapon_list"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1["id"].intValue })
