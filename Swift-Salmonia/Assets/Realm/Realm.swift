@@ -120,7 +120,7 @@ class PlayerResultsRealm: Object {
     @objc dynamic var name = ""
     @objc dynamic var nsaid = ""
     @objc dynamic var special_id = 0
-    dynamic var defeat = List<Int>()
-    dynamic var weapon = List<Int>()
-    dynamic var special = List<Int>()
+    dynamic var boss_kill_counts = List<Int>()
+    dynamic var weapon_list = List<Int>()
+    dynamic var special_counts = List<Int>()
 }

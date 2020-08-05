@@ -82,7 +82,7 @@ class UserStatsCore: ObservableObject {
             self.max_team_power_eggs = results.max(ofProperty: "power_eggs")
             self.max_my_power_eggs = results.lazy.map({ $0.player[0].ikura_num }).max()
             self.max_my_golden_eggs = results.lazy.map({ $0.player[0].golden_ikura_num }).max()
-            self.max_defeated = results.lazy.map({ $0.player[0].defeat.reduce(0, +) }).max()
+            self.max_defeated = results.lazy.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).max()
             self.avg_clear_wave = Double(Double(results.map({ ($0.job_result_failure_wave.value ?? 4) - 1}).reduce(0, +)) / Double(summary.job_num)).round(digit: 2)
             self.avg_crew_grade = (results.lazy.map({ 20 * $0.danger_rate + Double($0.grade_point_delta) - Double($0.grade_point) - 1600.0}).lazy.reduce(0.0, +) / Double(summary.job_num * 3)).round(digit: 2)
             self.avg_team_golden_eggs = Double(Double(summary.team_golden_ikura_total) / Double(summary.job_num)).round(digit: 2)
@@ -91,7 +91,7 @@ class UserStatsCore: ObservableObject {
             self.avg_my_power_eggs = Double(Double(summary.my_ikura_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_dead = Double(Double(summary.dead_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_rescue = Double(Double(summary.help_total) / Double(summary.job_num)).round(digit: 2)
-            self.avg_defeated = Double((Double(results.map({ $0.player[0].defeat.reduce(0, +) }).reduce(0, +)) / Double(summary.job_num))).round(digit: 2)
+            self.avg_defeated = Double((Double(results.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).reduce(0, +)) / Double(summary.job_num))).round(digit: 2)
         }
     }
 }
