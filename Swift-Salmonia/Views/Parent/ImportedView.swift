@@ -20,11 +20,11 @@ struct ImportedView: View {
             Text("Developed by @tkgling")
             Text("Thanks @Yukinkling, @barley_ural")
             Text("External API @frozenpandaman, @nexusmine")
-//            List {
-//                ForEach(messages.indices, id: \.self) { idx in
-//                    Text(self.messages[idx])
-//                }
-//            }
+            //            List {
+            //                ForEach(messages.indices, id: \.self) { idx in
+            //                    Text(self.messages[idx])
+            //                }
+            //            }
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("Logging Thread").frame(maxWidth: .infinity)
@@ -39,7 +39,7 @@ struct ImportedView: View {
             guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
             guard let is_imported: Bool = realm.objects(UserInfoRealm.self).first?.is_imported else { return }
             guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
-            
+            let results: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
             if is_imported == true { return }
             
             self.messages.append("Importing Results from Salmon Stats")
@@ -48,34 +48,34 @@ struct ImportedView: View {
                 let last = 3
                 #else
                 #endif
-                for page in 1...last {
-                    SalmonStats.importResultsFromSalmonStats(nsaid: nsaid, page: page) { response, error in
-                        DispatchQueue(label: "SalmonStats").async {
-                            autoreleasepool {
-                                guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
-                                guard let response = response else { return }
-                                realm.beginWrite()
-
-                                for (idx, result) in response {
-                                    let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
-                                    
-                                    // インサートできるかをチェックする
-                                    // 他人がアップしたSalmon Statsと自分のリザルトは数秒の差があるのでそこを考慮する
-                                    // 10秒以内に新規リザルトをつくることは不可能なのでその間としてみる
-                                    let is_valid: Bool = realm.objects(CoopResultsRealm.self).filter({ abs($0.play_time - object.play_time) <= 10 }).count == 0
-                                    if is_valid {
-                                        realm.create(CoopResultsRealm.self, value: object, update: .modified)
-                                    }
-                                    self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
-                                    Thread.sleep(forTimeInterval: 0.1)
-//                                    break
-                                }
-                                try? realm.commitWrite()
-                            }
-                        }
-                    }
-                }
-            }
+                DispatchQueue(label: "GetPages").async {
+                    for page in 1...last {
+                        SalmonStats.importResultsFromSalmonStats(nsaid: nsaid, page: page) { response, error in
+                            DispatchQueue(label: "SalmonStats").async {
+                                autoreleasepool {
+                                    guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
+                                    guard let response = response else { return }
+                                    realm.beginWrite()
+                                    for (idx, result) in response {
+                                        let start_time = Unixtime(time: result["start_at"].stringValue)
+                                        // 10秒以内に新規リザルトをつくることは不可能なのでその間としてみる
+                                        let is_valid: Bool = results.filter({ abs($0 - start_time) <= 10 }).count == 0
+                                        if is_valid {
+                                            let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
+                                            realm.create(CoopResultsRealm.self, value: object, update: .modified)
+                                        }
+                                        print("\((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
+                                        self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
+                                        Thread.sleep(forTimeInterval: 0.1)
+                                    } // For
+                                    try? realm.commitWrite()
+                                } // autoreleasepool
+                            } // DispatchQueue in closure
+                            Thread.sleep(forTimeInterval: 20)
+                        } // importResultsFromSalmonStats
+                    } // For
+                } // DispatchQueue
+            } // GetResultsLink
         }
         .padding(.horizontal, 10)
         .font(.custom("Roboto Mono", size: 14))

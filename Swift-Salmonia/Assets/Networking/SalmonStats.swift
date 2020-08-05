@@ -145,7 +145,6 @@ class SalmonStats {
         for player in other_results {
             var dict: [String: Any] = [:]
             let kill_counts = player["boss_eliminations"]["counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1.intValue })
-            print(kill_counts)
             dict.updateValue(player["player_id"].stringValue, forKey: "nsaid")
             dict.updateValue(player["death"].intValue, forKey: "dead_count")
             dict.updateValue(player["rescue"].intValue, forKey: "help_count")
@@ -181,7 +180,6 @@ class SalmonStats {
         dict.updateValue(player_kill_counts, forKey: "boss_kill_counts")
         dict.updateValue(waves, forKey: "wave")
         dict.updateValue(players, forKey: "player")
-        
         return CoopResultsRealm(value: dict)
     }
 }
