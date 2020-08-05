@@ -14,7 +14,6 @@ func TZTime(date: String) -> String {
     return f.string(from: Date(timeIntervalSince1970: TimeInterval(Unixtime(date: date))))
 }
 
-
 func Unixtime(time: String) -> Int {
     let f = DateFormatter()
     f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
@@ -42,6 +41,31 @@ func Weapon(id: Int) -> String {
 
 func Stage(id: Int) -> String {
     return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.id == id }).first!.url
+}
+
+func Reason(id: Int) -> String? {
+    return reasons.filter({ $0.id == id }).first?.key
+}
+
+func Failure(waves: Int) -> Int? {
+    return waves == 3 ? nil : waves + 1
+}
+
+// 評価値からサーモンランのウデマエIDを返す（だいたいたつじんだろうとおもうけれど...
+func GradeID(point: Int?) -> Int? {
+    guard let point = point else { return nil }
+    return min(5, 1 + (point / 100))
+}
+
+func Grade(point: Int?) -> Int? {
+    guard let point = point else { return nil }
+    return point - min(4, (point / 100)) * 100
+}
+
+// 回線落ちは計算困難なので無視する
+func GradeDelta(wave: Int) -> Int {
+    if wave == 3 { return 20 }
+    return (2 - wave) * 10
 }
 
 // 暫定対応
@@ -84,6 +108,12 @@ private let stages: [(url: String, name: String, id: Int)] = [
     ("6d68f5baa75f3a94e5e9bfb89b82e7377e3ecd2c.png", "Lost Outpost", 5002),
     ("e9f7c7b35e6d46778cd3cbc0d89bd7e1bc3be493.png", "Salmonid Smokeyard", 5003),
     ("50064ec6e97aac91e70df5fc2cfecf61ad8615fd.png", "Ruins of Ark Polaris", 5004),
+]
+
+private let reasons: [(id: Int, key: String?)] = [
+    (0, nil),
+    (1, "wipe_out"),
+    (2, "time_limit")
 ]
 
 private let weapons: [(url: String, id: Int)] = [

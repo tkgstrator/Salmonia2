@@ -81,7 +81,7 @@ private struct ResultPlayerView: View {
         NavigationLink(destination: SalmonStatsView(nsaid: $player.nsaid)) {
             VStack(spacing: 0) {
                 HStack {
-                    Text(player.name).font(.custom("Splatfont2", size: 24))
+                    Text(player.name.value).font(.custom("Splatfont2", size: 24))
                     Spacer()
                     Text("x\(player.boss_kill_counts.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 24))
                     Spacer()

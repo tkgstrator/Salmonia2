@@ -59,9 +59,14 @@ struct SettingView: View {
                         Spacer()
                     }
                 }
-//                SettingColumn(title: "iksm_session", value: iksm_session)
-//                SettingColumn(title: "session_token", value: session_token)
-//                SettingColumn(title: "api_token", value: api_token)
+                Button(action: {
+                    SalmoniaCore.syncUserName()
+                }) {
+                    HStack {
+                        Text("Sync Current Name")
+                        Spacer()
+                    }
+                }
             }
         }
         .listStyle(DefaultListStyle())

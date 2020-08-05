@@ -311,9 +311,9 @@ class SplatNet2 {
     class func getPlayerNickname(nsaid: String, complition: @escaping (JSON) -> ()) {
         guard let iksm_session: String = try? Realm().objects(UserInfoRealm.self).first?.iksm_session else { return }
         
-        let url = "https://app.splatoon2.nintendo.net/api/nickname_and_icon?id=" + nsaid
+        let url = "https://app.splatoon2.nintendo.net/api/nickname_and_icon?id=\(nsaid)"
         let header: HTTPHeaders = [
-            "cookie" : "iksm_session=" + iksm_session
+            "cookie" : "iksm_session=\(iksm_session)"
         ]
         
         AF.request(url, method: .get, headers: header).responseJSON { response in
@@ -323,6 +323,28 @@ class SplatNet2 {
                 break
             case .failure(let error):
                 print(error)
+            }
+        }
+    }
+    
+    class func getPlayerNickname(nsaid: [String], complition: @escaping (JSON?, Error?) -> ()) {
+        guard let iksm_session: String = try? Realm().objects(UserInfoRealm.self).first?.iksm_session else { return }
+        
+        let query = nsaid.map({ "id=\($0)&" }).reduce("", +)
+        let url = "https://app.splatoon2.nintendo.net/api/nickname_and_icon?\(query)"
+        let header: HTTPHeaders = [
+            "cookie" : "iksm_session=\(iksm_session)"
+        ]
+        
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200..<300).validate(contentType: ["application/json"])
+            .responseJSON { response in
+            switch response.result {
+            case .success(let value):
+//                print(JSON(value))
+                complition(JSON(value)["nickname_and_icons"], nil)
+            case .failure:
+                complition(nil, nil)
             }
         }
     }

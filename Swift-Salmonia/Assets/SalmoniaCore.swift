@@ -9,11 +9,38 @@
 import SwiftUI
 import Combine
 import RealmSwift
+import SwiftyJSON
+import Alamofire
 
-class SalmoniaCore: ObservableObject {
-    @Published var user = UserInfoCore()
-    @ObservedObject var card = UserCardCore()
-    @ObservedObject var data = UserResultsCore()
+class SalmoniaCore {
+    class func syncUserName() {
+        // 重複を除いたnsaidを取得する
+        let nsaid: [[String]] = PlayerResultsRealm.getids().chunked(by: 100)
+        
+        DispatchQueue(label: "NSAID").async {
+            for list in nsaid {
+                autoreleasepool {
+                    SplatNet2.getPlayerNickname(nsaid: list) { response, error in
+                        guard let response = response else { return }
+                        DispatchQueue(label: "NickName").async {
+                            guard let realm = try? Realm() else { return }
+                            realm.beginWrite()
+                            for (_, value) in response {
+                                let crew = CrewInfoRealm()
+                                crew.nsaid = value["nsa_id"].string
+                                crew.name = value["nickname"].string
+                                crew.image = value["thumbnail_url"].string
+                                realm.create(CrewInfoRealm.self, value: crew, update: .modified)
+                                realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", crew.nsaid as Any).setValue(crew.name, forKey: "name")
+                            }
+                            try? realm.commitWrite()
+                        }
+                    }
+                }
+                Thread.sleep(forTimeInterval: 5)
+            }
+        }
+    }
 }
 
 class UserResultsCore: ObservableObject {
@@ -60,7 +87,7 @@ class UserStatsCore: ObservableObject {
     @Published var avg_defeated: Double?
     @Published var avg_rescue: Double?
     @Published var avg_dead: Double?
-
+    
     init(start_time: Binding<Int>) {
         self._start_time = start_time
         token = try? Realm().objects(CoopResultsRealm.self).observe { _ in
@@ -71,7 +98,7 @@ class UserStatsCore: ObservableObject {
             guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", self.start_time) else { return }
             guard let summary = try? Realm().objects(ShiftResultsRealm.self).filter("start_time=%@", self.start_time).first else { return }
             #endif
-
+            
             self.job_num = summary.job_num
             self.clear_ratio = Double(Double(results.lazy.filter("is_clear=%@", true).count) / Double(summary.job_num)).round(digit: 4)
             self.total_golden_eggs = summary.team_golden_ikura_total
@@ -84,7 +111,7 @@ class UserStatsCore: ObservableObject {
             self.max_my_golden_eggs = results.lazy.map({ $0.player[0].golden_ikura_num }).max()
             self.max_defeated = results.lazy.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).max()
             self.avg_clear_wave = Double(Double(results.map({ ($0.failure_wave.value ?? 4) - 1}).reduce(0, +)) / Double(summary.job_num)).round(digit: 2)
-            self.avg_crew_grade = (results.lazy.map({ 20 * $0.danger_rate + Double($0.grade_point_delta) - Double($0.grade_point) - 1600.0}).lazy.reduce(0.0, +) / Double(summary.job_num * 3)).round(digit: 2)
+            self.avg_crew_grade = (results.lazy.map({ 20 * $0.danger_rate + Double($0.grade_point_delta.value ?? 0) - Double($0.grade_point.value ?? 0) - 1600.0}).lazy.reduce(0.0, +) / Double(summary.job_num * 3)).round(digit: 2)
             self.avg_team_golden_eggs = Double(Double(summary.team_golden_ikura_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_team_power_eggs = Double(Double(summary.team_ikura_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_my_golden_eggs = Double(Double(summary.my_golden_ikura_total) / Double(summary.job_num)).round(digit: 2)
@@ -123,7 +150,7 @@ class UserCardCore: ObservableObject {
 
 class UserInfoCore: ObservableObject {
     private var token: NotificationToken?
-
+    
     // ユーザ情報の情報
     @Published var nsaid: String?
     @Published var nickname: String?
@@ -133,7 +160,7 @@ class UserInfoCore: ObservableObject {
     @Published var iksm_session: String?
     @Published var session_token: String?
     @Published var api_token: String?
-
+    
     init() {
         token = try? Realm().objects(UserInfoRealm.self).observe { _ in
             // 先頭のユーザ情報を使う（サブ垢は考えない）

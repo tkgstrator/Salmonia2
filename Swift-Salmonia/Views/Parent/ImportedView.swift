@@ -44,8 +44,9 @@ struct ImportedView: View {
             
             self.messages.append("Importing Results from Salmon Stats")
             SalmonStats.getResultsLink(nsaid: nsaid) { last, error in
+                guard var last = last else { return }
                 #if DEBUG
-                let last = 3
+//                last = 3
                 #else
                 #endif
                 DispatchQueue(label: "GetPages").async {
@@ -60,10 +61,15 @@ struct ImportedView: View {
                                         let start_time = Unixtime(time: result["start_at"].stringValue)
                                         // 10秒以内に新規リザルトをつくることは不可能なのでその間としてみる
                                         let is_valid: Bool = results.filter({ abs($0 - start_time) <= 10 }).count == 0
+                                        #if DEBUG
+                                        let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
+                                        realm.create(CoopResultsRealm.self, value: object, update: .modified)
+                                        #else
                                         if is_valid {
                                             let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
                                             realm.create(CoopResultsRealm.self, value: object, update: .modified)
                                         }
+                                        #endif
                                         print("\((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
                                         self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
                                         Thread.sleep(forTimeInterval: 0.1)
@@ -71,8 +77,8 @@ struct ImportedView: View {
                                     try? realm.commitWrite()
                                 } // autoreleasepool
                             } // DispatchQueue in closure
-                            Thread.sleep(forTimeInterval: 20)
                         } // importResultsFromSalmonStats
+                        Thread.sleep(forTimeInterval: 20)
                     } // For
                 } // DispatchQueue
             } // GetResultsLink

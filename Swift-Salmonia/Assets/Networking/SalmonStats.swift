@@ -150,7 +150,7 @@ class SalmonStats {
             dict.updateValue(player["rescue"].intValue, forKey: "help_count")
             dict.updateValue(player["golden_eggs"].intValue, forKey: "golden_ikura_num")
             dict.updateValue(player["power_eggs"].intValue, forKey: "ikura_num")
-            dict.updateValue(player["player_id"].stringValue, forKey: "name") // プレイヤー名が入ってないですね
+//            dict.updateValue(player["player_id"].stringValue, forKey: "name") // プレイヤー名が入ってないですね
             dict.updateValue(player["special_id"].intValue, forKey: "special_id")
             dict.updateValue(kill_counts, forKey: "boss_kill_counts")
             dict.updateValue(player["weapons"].map({ $0.1["weapon_id"].intValue }), forKey: "weapon_list")
@@ -160,22 +160,24 @@ class SalmonStats {
         }
 
         // 辞書型配列にガンガン追加していく
+        let grade_point: Int? = my_results["grade_point"].int
+        let clear_wave: Int = response["clear_waves"].intValue
         dict.updateValue(Unixtime(time: response["start_at"].stringValue), forKey: "play_time")
         dict.updateValue(nsaid, forKey: "nsaid")
         dict.updateValue(nil, forKey: "job_id") // これがないのは知っている
         dict.updateValue(response["id"].intValue, forKey: "salmon_id")
         dict.updateValue("", forKey: "stage_name") // ないんだが？？
-        dict.updateValue((my_results["grade_point"].int ?? 800) - 400, forKey: "grade_point") // クソ適当（後で直す
-        dict.updateValue(5, forKey: "grade_id") // たつじんに決め打ちしてみた...（求めることはできる
-        dict.updateValue(response["danger_rate"].doubleValue, forKey: "danger_rate")
-        dict.updateValue(0, forKey: "grade_point_delta") // ここは計算可能
-        dict.updateValue(0, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
+        dict.updateValue(Grade(point: grade_point), forKey: "grade_point") // クソ適当（後で直す
+        dict.updateValue(GradeID(point: grade_point), forKey: "grade_id") // 求めてみた
         dict.updateValue(Unixtime(time: response["schedule_id"].stringValue), forKey: "start_time")
+        dict.updateValue(Failure(waves: clear_wave), forKey: "failure_wave")
+        dict.updateValue(Reason(id: response["fail_reason_id"].intValue), forKey: "failure_reason")
+        dict.updateValue(response["danger_rate"].doubleValue, forKey: "danger_rate")
+        dict.updateValue(GradeDelta(wave: clear_wave), forKey: "grade_point_delta") // ここは計算可能
+        dict.updateValue(0, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
         dict.updateValue(response["golden_egg_delivered"].intValue, forKey: "golden_eggs")
         dict.updateValue(response["power_egg_collected"].intValue, forKey: "power_eggs")
         dict.updateValue(response["fail_reason_id"] == JSON.null, forKey: "is_clear")
-        dict.updateValue(nil, forKey: "failure_wave")
-        dict.updateValue(nil, forKey: "failure_reason")
         dict.updateValue(response["boss_appearances"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1.intValue }), forKey: "boss_counts")
         dict.updateValue(player_kill_counts, forKey: "boss_kill_counts")
         dict.updateValue(waves, forKey: "wave")

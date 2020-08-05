@@ -56,19 +56,6 @@ class ShiftResultsRealm: Object {
     @objc dynamic var my_ikura_total = 0
     dynamic var weapons = List<Int>()
     dynamic var failure_counts = List<Int>()
-
-    init(nsaid: String, start_time: Int) {
-        self.nsaid = nsaid
-        self.sash = (nsaid + String(start_time)).sha256()
-    }
-    
-    required init() {
-    }
-    
-    func configure(nsaid: String, start_time: Int) {
-        self.nsaid = nsaid
-        self.sash = (nsaid + String(start_time)).sha256()
-    }
     
     override static func primaryKey() -> String? {
         return "sash"
@@ -80,10 +67,10 @@ class CoopResultsRealm: Object {
     let job_id = RealmOptional<Int>() // SplatNet2用のID
     let salmon_id = RealmOptional<Int>() // SalmonStats用のID
     @objc dynamic var stage_name = ""
-    @objc dynamic var grade_point = 0
-    @objc dynamic var grade_id = 0
+    let grade_point = RealmOptional<Int>()
+    let grade_id = RealmOptional<Int>()
     @objc dynamic var danger_rate = 0.0
-    @objc dynamic var grade_point_delta = 0
+    let grade_point_delta = RealmOptional<Int>()
     @objc dynamic var play_time = 0
     @objc dynamic var end_time = 0
     @objc dynamic var start_time = 0
@@ -97,6 +84,13 @@ class CoopResultsRealm: Object {
     dynamic var wave = List<WaveDetailRealm>()
     dynamic var player = List<PlayerResultsRealm>()
     
+    // 多分落ちないはず
+    private static var realm = try! Realm()
+    
+    static func gettime() -> [Int] {
+        return Array(Set(realm.objects(CoopResultsRealm.self).map({ $0.start_time })))
+    }
+
     override static func primaryKey() -> String? {
         return "play_time"
     }
@@ -119,10 +113,27 @@ class PlayerResultsRealm: Object {
     @objc dynamic var help_count = 0
     @objc dynamic var golden_ikura_num = 0
     @objc dynamic var ikura_num = 0
-    @objc dynamic var name = ""
+    @objc dynamic var name: String?
     @objc dynamic var nsaid = ""
     @objc dynamic var special_id = 0
     dynamic var boss_kill_counts = List<Int>()
     dynamic var weapon_list = List<Int>()
     dynamic var special_counts = List<Int>()
+    
+    // 多分落ちないはず
+    private static var realm = try! Realm()
+    
+    static func getids() -> [String] {
+        return Array(Set(realm.objects(PlayerResultsRealm.self).map({ $0.nsaid })))
+    }
+}
+
+class CrewInfoRealm: Object {
+    @objc dynamic var name: String? // username from SplatNet2
+    @objc dynamic var image: String? // userimage url from SplatNet2
+    @objc dynamic var nsaid: String?  // data-nsa-id from SplatNet2
+
+    override static func primaryKey() -> String? {
+        return "nsaid"
+    }
 }
