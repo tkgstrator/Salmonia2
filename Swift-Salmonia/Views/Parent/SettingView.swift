@@ -52,11 +52,17 @@ struct SettingView: View {
                     Alert(title: Text(title),message: Text(text))
                 }
             }
-//            Section(header: Text("UserInfo")) {
+            Section(header: Text("Feature")) {
+                NavigationLink(destination: ImportedView()) {
+                    HStack {
+                        Text("Import from SalmonStats")
+                        Spacer()
+                    }
+                }
 //                SettingColumn(title: "iksm_session", value: iksm_session)
 //                SettingColumn(title: "session_token", value: session_token)
 //                SettingColumn(title: "api_token", value: api_token)
-//            }
+            }
         }
         .listStyle(DefaultListStyle())
         .navigationBarTitle(Text("Settings"))

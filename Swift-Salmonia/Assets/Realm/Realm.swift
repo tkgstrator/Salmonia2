@@ -17,6 +17,7 @@ class UserInfoRealm: Object {
     @objc dynamic var api_token: String? = nil // Access token from Salmon Stats
     @objc dynamic var iksm_session: String? = nil // Access token for SplatNet2
     @objc dynamic var session_token: String? = nil // Session token to generate iksm_session
+    @objc dynamic var is_imported: Bool = false // imported flag for Salmon Stats
 
     override static func primaryKey() -> String? {
         return "nsaid"
@@ -76,7 +77,8 @@ class ShiftResultsRealm: Object {
 
 class CoopResultsRealm: Object {
     @objc dynamic var nsaid = ""
-    @objc dynamic var job_id = 0
+    let job_id = RealmOptional<Int>() // SplatNet2用のID
+    let salmon_id = RealmOptional<Int>() // SalmonStats用のID
     @objc dynamic var stage_name = ""
     @objc dynamic var grade_point = 0
     @objc dynamic var grade_id = 0
@@ -87,11 +89,11 @@ class CoopResultsRealm: Object {
     @objc dynamic var start_time = 0
     @objc dynamic var golden_eggs = 0
     @objc dynamic var power_eggs = 0
-    @objc dynamic var job_result_failure_reason: String? = nil
-    @objc dynamic var job_result_is_clear = false
-    dynamic var appear = List<Int>()
-    dynamic var defeat = List<Int>()
-    let job_result_failure_wave = RealmOptional<Int>()
+    @objc dynamic var failure_reason: String?
+    @objc dynamic var is_clear: Bool = false
+    let failure_wave = RealmOptional<Int>()
+    dynamic var boss_counts = List<Int>()
+    dynamic var boss_kill_counts = List<Int>()
     dynamic var wave = List<WaveDetailRealm>()
     dynamic var player = List<PlayerResultsRealm>()
     

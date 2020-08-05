@@ -17,13 +17,13 @@ class SalmonStats {
     static let realm = try! Realm() // 多分存在するやろ
     
     // プレイヤーの戦績一覧を取得
-    class func getPlayerOverView(nsaid: String, complition: @escaping (JSON) -> ()) {
+    class func getPlayerOverView(nsaid: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=" + nsaid
         
         AF.request(url, method: .get).responseJSON { response in
             switch response.result {
             case .success(let value):
-                complition(JSON(value))
+                completion(JSON(value))
             case .failure(let error):
                 print(error)
             }
@@ -31,13 +31,13 @@ class SalmonStats {
     }
     
     // プレイヤーの最新のリザルト10件の概要を取得
-    class func getPlayerOverViewResults(nsaid: String, complition: @escaping (JSON) -> ()) {
+    class func getPlayerOverViewResults(nsaid: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmon-stats-api.yuki.games/api/players/" + nsaid
         
         AF.request(url, method: .get).responseJSON { response in
             switch response.result {
             case .success(let value):
-                complition(JSON(value)["results"])
+                completion(JSON(value)["results"])
             case .failure(let error):
                 print(error)
             }
@@ -45,7 +45,7 @@ class SalmonStats {
     }
     
     // エラーコード1001を返す
-    class func loginSalmonStats(complition: @escaping (Error?) -> ()) {
+    class func loginSalmonStats(completion: @escaping (Error?) -> ()) {
         WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
             cookies in
             for cookie in cookies {
@@ -53,14 +53,14 @@ class SalmonStats {
                     let laravel_session = cookie.value
                     getTokenFromSalmonStats(session_token: laravel_session) { response, error in
                         guard let token = response?["api_token"].stringValue else {
-                            complition(APPError.Response(id: 1001, message: "Login Salmon Statsr"))
+                            completion(APPError.Response(id: 1001, message: "Login Salmon Statsr"))
                             return }
                         guard let user = realm.objects(UserInfoRealm.self).first else { return }
                         // データベース書き込み
                         do {
                             try realm.write { user.setValue(token, forKey: "api_token") }
                         } catch {
-                            complition(APPError.Database(id: 1001, message: "Realm write error"))
+                            completion(APPError.Database(id: 1001, message: "Realm write error"))
                         }
                     }
                 }
@@ -69,22 +69,98 @@ class SalmonStats {
     }
     
     // エラーコード1000を返す
-       class func getTokenFromSalmonStats(session_token: String, completion: @escaping  (JSON?, Error?) -> ()) {
-           let url = "https://salmon-stats-api.yuki.games/api-token"
-           let header: HTTPHeaders = [
-               "Cookie" : "laravel_session=" + session_token
-           ]
-           
-           AF.request(url, method: .get, headers: header)
-               .validate(contentType: ["application/json"])
-               .responseJSON { response in
-                   switch response.result {
-                   case .success(let value):
-                       completion(JSON(value), nil)
-                   case .failure:
-                       // レスポンスがおかしいことを示した上でリターン
-                       completion(nil, APPError.Response(id: 1000, message: "Server Error"))
-                   }
-           }
-       }
+    class func getTokenFromSalmonStats(session_token: String, completion: @escaping  (JSON?, Error?) -> ()) {
+        let url = "https://salmon-stats-api.yuki.games/api-token"
+        let header: HTTPHeaders = [
+            "Cookie" : "laravel_session=" + session_token
+        ]
+        
+        AF.request(url, method: .get, headers: header)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    completion(JSON(value), nil)
+                case .failure:
+                    // レスポンスがおかしいことを示した上でリターン
+                    completion(nil, APPError.Response(id: 1000, message: "Server Error"))
+                }
+        }
+    }
+    
+    class func getResultsLink(nsaid: String, completion: @escaping (Int?, Error?) -> ()) {
+        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200"
+        
+        AF.request(url, method: .get)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let first: Int = JSON(value)["to"].intValue
+                    completion(first, nil)
+                case .failure:
+                    completion(nil, APPError.Response(id: 3000, message: "Server Error"))
+                }
+        }
+    }
+    
+    class func importResultsFromSalmonStats(nsaid: String, page: Int, completion: @escaping (JSON?, Error?) -> ()) {
+        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200&page=\(page)"
+
+        AF.request(url, method: .get)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    completion(JSON(value)["results"], nil)
+                case .failure:
+                    completion(nil, APPError.Response(id: 3000, message: "Server Error"))
+                }
+        }
+    }
+    
+    class func encodeResultToSplatNet2(response: JSON, nsaid: String) -> CoopResultsRealm {
+        var dict: [String: Any] = [:]
+        
+        var waves: [WaveDetailRealm] = []
+        var players: [PlayerResultsRealm] = []
+        
+        // 辞書型配列にガンガン追加していく
+        dict.updateValue(0, forKey: "play_time")
+        dict.updateValue(nsaid, forKey: "nsaid")
+        dict.updateValue(0, forKey: "job_id")
+        dict.updateValue("", forKey: "stage_name")
+        dict.updateValue(0, forKey: "grade_point")
+        dict.updateValue(0, forKey: "grade_id")
+        dict.updateValue(response["danger_rate"].doubleValue, forKey: "danger_rate")
+        dict.updateValue(0, forKey: "grade_point_delta")
+        dict.updateValue(0, forKey: "end_time")
+        dict.updateValue(0, forKey: "start_time")
+        dict.updateValue(response["golden_egg_delivered"].intValue, forKey: "golden_eggs")
+        dict.updateValue(response["power_egg_delivered"].intValue, forKey: "golden_eggs")
+        dict.updateValue(true, forKey: "is_clear")
+        dict.updateValue(JSON.null, forKey: "failure_wave")
+        dict.updateValue(JSON.null, forKey: "failure_reason")
+        dict.updateValue(response["boss_appearances"].map({ $0.1.intValue }), forKey: "boss_counts")
+        
+        for (_, wave) in response["waves"] {
+            var dict: [String: Any] = [:]
+            dict.updateValue(Event(id: wave["event_id"].intValue), forKey: "event_type")
+            dict.updateValue(Tide(id: wave["water_id"].intValue), forKey: "water_level")
+            dict.updateValue(wave["golden_egg_delivered"].intValue, forKey: "golden_ikura_num")
+            dict.updateValue(wave["golden_egg_appearances"].intValue, forKey: "golden_ikura_pop_num")
+            dict.updateValue(wave["golden_egg_quota"].intValue, forKey: "quota_num")
+            dict.updateValue(wave["power_egg_collected"].intValue, forKey: "ikura_num")
+            waves.append(WaveDetailRealm(value: dict))
+        }
+        
+        // 全員分の空の配列を用意
+        var player_results: [JSON] = []
+        
+        for (_, player) in response["player_results"] {
+            
+        }
+        
+        return CoopResultsRealm(value: dict)
+    }
 }

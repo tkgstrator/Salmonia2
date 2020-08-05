@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1021B95924DAA7A800F23494 /* ImportedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1021B95824DAA7A800F23494 /* ImportedView.swift */; };
 		10505E7024CB653800CF4E04 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10505E6F24CB653800CF4E04 /* Realm.swift */; };
 		10505E7324CB655800CF4E04 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7124CB655800CF4E04 /* RealmSwift.framework */; };
 		10505E7524CB655800CF4E04 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7224CB655800CF4E04 /* Realm.framework */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		0E9A55168B8C5AC47A7E71A7 /* Pods-Swift-Salmonia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-Salmonia.debug.xcconfig"; path = "Target Support Files/Pods-Swift-Salmonia/Pods-Swift-Salmonia.debug.xcconfig"; sourceTree = "<group>"; };
+		1021B95824DAA7A800F23494 /* ImportedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedView.swift; sourceTree = "<group>"; };
 		10505E6F24CB653800CF4E04 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10505E7124CB655800CF4E04 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		10505E7224CB655800CF4E04 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			children = (
 				10A0AC2F24D927C500ADD56E /* SalmonStats */,
 				10D2368D24D7DB2900B2E27E /* LoadingView.swift */,
+				1021B95824DAA7A800F23494 /* ImportedView.swift */,
 				10D2368F24D7DB3600B2E27E /* SettingView.swift */,
 				10D2369124D7DB9700B2E27E /* SalmoniaView.swift */,
 				10A0AC1F24D7E8BB00ADD56E /* ShiftStatsView.swift */,
@@ -626,6 +629,7 @@
 				10D2368E24D7DB2900B2E27E /* LoadingView.swift in Sources */,
 				10B6364424C662D000A39FD2 /* SceneDelegate.swift in Sources */,
 				10A0AC2624D7EB3700ADD56E /* StageRecordsView.swift in Sources */,
+				1021B95924DAA7A800F23494 /* ImportedView.swift in Sources */,
 				10B6364624C662D000A39FD2 /* ContentView.swift in Sources */,
 				10D2369024D7DB3600B2E27E /* SettingView.swift in Sources */,
 				10A0AC2E24D90BC000ADD56E /* SalmonStats.swift in Sources */,

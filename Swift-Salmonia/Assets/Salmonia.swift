@@ -48,6 +48,15 @@ func Stage(url: String) -> String {
 func Special(id: Int) -> String {
     return "https://app.splatoon2.nintendo.net/images/special/" + specials.filter({ $0.id == id }).first!.url
 }
+
+func Tide(id: Int) -> String {
+    return tides.filter({ $0.id == id }).first!.key
+}
+
+func Event(id: Int) -> String {
+    return events.filter({ $0.ss == id }).first!.key
+}
+
 //func Stage(url: String) -> String {
 //    return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.url == url }).first!.name
 //}
@@ -127,4 +136,20 @@ private let weapons: [(url: String, id: Int)] = [
     ("2e2b59379b8f14cfed0600f84590be0ecad707b6.png", 70),
     ("df90f6065594378690647c23d42440e2de89c99d.png", 80),
     ("007fb7ed50e76dde495ffb0747421b50dfce8aa3.png", 90),
+]
+
+private let events: [(s2: Int, ss: Int, key: String)] = [
+    (0, 0, "-"),
+    (1, 6, "rush"),
+    (2, 3, "goldie-seeking"),
+    (3, 4, "griller"),
+    (4, 5, "the-mothership"),
+    (5, 2, "fog"),
+    (6, 1, "cohock-charge"),
+]
+
+private let tides: [(id: Int, key: String)] = [
+    (0, "low"),
+    (1, "normal"),
+    (2, "high")
 ]

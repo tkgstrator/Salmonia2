@@ -57,8 +57,8 @@ private struct ResultStackView: View {
     
     init(data: CoopResultsRealm) {
         grade_point = data.grade_point
-        job_result_is_clear = data.job_result_is_clear
-        job_result_failure_wave = data.job_result_failure_wave.value
+        job_result_is_clear = data.is_clear
+        job_result_failure_wave = data.failure_wave.value
         golden_eggs = data.golden_eggs
         power_eggs = data.power_eggs
     }
