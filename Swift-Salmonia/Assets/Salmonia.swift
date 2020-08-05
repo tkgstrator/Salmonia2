@@ -14,6 +14,14 @@ func TZTime(date: String) -> String {
     return f.string(from: Date(timeIntervalSince1970: TimeInterval(Unixtime(date: date))))
 }
 
+
+func Unixtime(time: String) -> Int {
+    let f = DateFormatter()
+    f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+    f.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    return Int((f.date(from: time) ?? Date()).timeIntervalSince1970)
+}
+
 func Unixtime(date: String) -> Int {
     let f = DateFormatter()
     f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
@@ -149,7 +157,7 @@ private let events: [(s2: Int, ss: Int, key: String)] = [
 ]
 
 private let tides: [(id: Int, key: String)] = [
-    (0, "low"),
-    (1, "normal"),
-    (2, "high")
+    (1, "low"),
+    (2, "normal"),
+    (3, "high")
 ]

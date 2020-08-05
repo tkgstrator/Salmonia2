@@ -120,29 +120,15 @@ class SalmonStats {
     }
     
     class func encodeResultToSplatNet2(response: JSON, nsaid: String) -> CoopResultsRealm {
-        var dict: [String: Any] = [:]
-        
+        var dict: [String: Any?] = [:]
         var waves: [WaveDetailRealm] = []
         var players: [PlayerResultsRealm] = []
         
-        // 辞書型配列にガンガン追加していく
-        dict.updateValue(0, forKey: "play_time")
-        dict.updateValue(nsaid, forKey: "nsaid")
-        dict.updateValue(0, forKey: "job_id")
-        dict.updateValue("", forKey: "stage_name")
-        dict.updateValue(0, forKey: "grade_point")
-        dict.updateValue(0, forKey: "grade_id")
-        dict.updateValue(response["danger_rate"].doubleValue, forKey: "danger_rate")
-        dict.updateValue(0, forKey: "grade_point_delta")
-        dict.updateValue(0, forKey: "end_time")
-        dict.updateValue(0, forKey: "start_time")
-        dict.updateValue(response["golden_egg_delivered"].intValue, forKey: "golden_eggs")
-        dict.updateValue(response["power_egg_delivered"].intValue, forKey: "golden_eggs")
-        dict.updateValue(true, forKey: "is_clear")
-        dict.updateValue(JSON.null, forKey: "failure_wave")
-        dict.updateValue(JSON.null, forKey: "failure_reason")
-        dict.updateValue(response["boss_appearances"].map({ $0.1.intValue }), forKey: "boss_counts")
-        
+        // 全員分の空の配列を用意
+        let my_results: JSON = response["player_results"].filter({ $0.1["player_id"].stringValue == nsaid }).first!.1
+        var other_results: [JSON] = response["player_results"].filter({ $0.1["player_id"].stringValue != nsaid }).map({ $0.1 })
+        other_results.insert(my_results, at: 0)
+
         for (_, wave) in response["waves"] {
             var dict: [String: Any] = [:]
             dict.updateValue(Event(id: wave["event_id"].intValue), forKey: "event_type")
@@ -151,15 +137,50 @@ class SalmonStats {
             dict.updateValue(wave["golden_egg_appearances"].intValue, forKey: "golden_ikura_pop_num")
             dict.updateValue(wave["golden_egg_quota"].intValue, forKey: "quota_num")
             dict.updateValue(wave["power_egg_collected"].intValue, forKey: "ikura_num")
+            dict.updateValue(Unixtime(time: response["schedule_id"].stringValue), forKey: "start_time")
             waves.append(WaveDetailRealm(value: dict))
         }
-        
-        // 全員分の空の配列を用意
-        var player_results: [JSON] = []
-        
-        for (_, player) in response["player_results"] {
-            
+
+        var player_kill_counts: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        for player in other_results {
+            var dict: [String: Any] = [:]
+            let kill_counts = player["boss_eliminations"]["counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1.intValue })
+            print(kill_counts)
+            dict.updateValue(player["player_id"].stringValue, forKey: "nsaid")
+            dict.updateValue(player["death"].intValue, forKey: "dead_count")
+            dict.updateValue(player["rescue"].intValue, forKey: "help_count")
+            dict.updateValue(player["golden_eggs"].intValue, forKey: "golden_ikura_num")
+            dict.updateValue(player["power_eggs"].intValue, forKey: "ikura_num")
+            dict.updateValue(player["player_id"].stringValue, forKey: "name") // プレイヤー名が入ってないですね
+            dict.updateValue(player["special_id"].intValue, forKey: "special_id")
+            dict.updateValue(kill_counts, forKey: "boss_kill_counts")
+            dict.updateValue(player["weapons"].map({ $0.1["weapon_id"].intValue }), forKey: "weapon_list")
+            dict.updateValue(player["special_uses"].map({ $0.1["count"].intValue }), forKey: "special_counts")
+            player_kill_counts = Array(zip(player_kill_counts, kill_counts)).map({ $0.0 + $0.1 })
+            players.append(PlayerResultsRealm(value: dict))
         }
+
+        // 辞書型配列にガンガン追加していく
+        dict.updateValue(Unixtime(time: response["start_at"].stringValue), forKey: "play_time")
+        dict.updateValue(nsaid, forKey: "nsaid")
+        dict.updateValue(nil, forKey: "job_id") // これがないのは知っている
+        dict.updateValue(response["id"].intValue, forKey: "salmon_id")
+        dict.updateValue("", forKey: "stage_name") // ないんだが？？
+        dict.updateValue((my_results["grade_point"].int ?? 800) - 400, forKey: "grade_point") // クソ適当（後で直す
+        dict.updateValue(5, forKey: "grade_id") // たつじんに決め打ちしてみた...（求めることはできる
+        dict.updateValue(response["danger_rate"].doubleValue, forKey: "danger_rate")
+        dict.updateValue(0, forKey: "grade_point_delta") // ここは計算可能
+        dict.updateValue(0, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
+        dict.updateValue(Unixtime(time: response["schedule_id"].stringValue), forKey: "start_time")
+        dict.updateValue(response["golden_egg_delivered"].intValue, forKey: "golden_eggs")
+        dict.updateValue(response["power_egg_collected"].intValue, forKey: "power_eggs")
+        dict.updateValue(response["fail_reason_id"] == JSON.null, forKey: "is_clear")
+        dict.updateValue(nil, forKey: "failure_wave")
+        dict.updateValue(nil, forKey: "failure_reason")
+        dict.updateValue(response["boss_appearances"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1.intValue }), forKey: "boss_counts")
+        dict.updateValue(player_kill_counts, forKey: "boss_kill_counts")
+        dict.updateValue(waves, forKey: "wave")
+        dict.updateValue(players, forKey: "player")
         
         return CoopResultsRealm(value: dict)
     }

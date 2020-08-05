@@ -45,7 +45,7 @@ struct ImportedView: View {
             self.messages.append("Importing Results from Salmon Stats")
             SalmonStats.getResultsLink(nsaid: nsaid) { last, error in
                 #if DEBUG
-                let last = 2
+                let last = 3
                 #else
                 #endif
                 for page in 1...last {
@@ -57,63 +57,25 @@ struct ImportedView: View {
                                 realm.beginWrite()
 
                                 for (idx, result) in response {
-                                    self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) \(result["id"].intValue)")
-                                    // ここにパースする処理を書きます...
+                                    let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
                                     
-                                    let result = CoopResultsRealm()
-
-
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    // パース処理ここまで
-                                    
-                                    print(idx)
+                                    // インサートできるかをチェックする
+                                    // 他人がアップしたSalmon Statsと自分のリザルトは数秒の差があるのでそこを考慮する
+                                    // 10秒以内に新規リザルトをつくることは不可能なのでその間としてみる
+                                    let is_valid: Bool = realm.objects(CoopResultsRealm.self).filter({ abs($0.play_time - object.play_time) <= 10 }).count == 0
+                                    if is_valid {
+                                        realm.create(CoopResultsRealm.self, value: object, update: .modified)
+                                    }
+                                    self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
                                     Thread.sleep(forTimeInterval: 0.1)
+//                                    break
                                 }
+                                try? realm.commitWrite()
                             }
                         }
                     }
                 }
             }
-            
-            //                SplatNet2.getResultFromSplatNet2(iksm_session: iksm_session, job_id: job_id) {
-            //
-            //                }
-            
-            //            let time = Int(Date().timeIntervalSince1970)
-            //            DispatchQueue(label: "SplatNet2").async() {
-            //                autoreleasepool {
-            //                    guard let realm = try? Realm() else { return }
-            //                    realm.beginWrite()
-            //                    for idx in 0..<100 {
-            //                        SplatNet2.getSummaryFromSplatNet2(iksm_session: iksm_session, nsaid: nsaid) { response, error in
-            //                            realm.create(CoopCardRealm.self, value: response!["card"].dictionaryObject)
-            //                        }
-            //                        self.messages.append("\(Int(Date().timeIntervalSince1970) - time) LOOP: \(idx)")
-            //                        Thread.sleep(forTimeInterval: 1)
-            //
-            //                    }
-            //                    try? Realm().commitWrite()
-            //                }
-            //            }
         }
         .padding(.horizontal, 10)
         .font(.custom("Roboto Mono", size: 14))
