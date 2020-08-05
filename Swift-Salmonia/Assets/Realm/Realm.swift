@@ -23,21 +23,22 @@ class UserInfoRealm: Object {
     }
 }
 
-class CoopCardRealm: Object {
-    @objc dynamic var nsaid: String = ""
-    @objc dynamic var job_num: Int = 0
-    @objc dynamic var ikura_total: Int = 0
-    @objc dynamic var golden_ikura_total: Int = 0
-    @objc dynamic var kuma_point: Int = 0
-    @objc dynamic var kuma_point_total: Int = 0
-    @objc dynamic var help_total: Int = 0
-
+class CoopCardRealm: Object, Codable {
+    @objc dynamic var nsaid: String?
+    let job_num = RealmOptional<Int>()
+    let ikura_total = RealmOptional<Int>()
+    let golden_ikura_total = RealmOptional<Int>()
+    let kuma_point = RealmOptional<Int>()
+    let kuma_point_total = RealmOptional<Int>()
+    let help_total = RealmOptional<Int>()
+    
     override static func primaryKey() -> String? {
         return "nsaid"
     }
 }
 
 class ShiftResultsRealm: Object {
+    // ここもnilを許容するように変更するか検討しよう...
     @objc dynamic var start_time = 0
     @objc dynamic var nsaid = ""
     @objc dynamic var salmon_rate: Double = 0.0
@@ -53,19 +54,19 @@ class ShiftResultsRealm: Object {
     @objc dynamic var team_ikura_total = 0
     @objc dynamic var my_ikura_total = 0
     dynamic var weapons = List<Int>()
-    dynamic var failure_count = List<Int>()
+    dynamic var failure_counts = List<Int>()
 
-    func configure(nsaid: String, start_time: Int) {
+    init(nsaid: String, start_time: Int) {
         self.nsaid = nsaid
-        self.start_time = start_time
         self.sash = (nsaid + String(start_time)).sha256()
     }
     
-    private static let realm = try! Realm()
+    required init() {
+    }
     
-    static func all() -> Results<ShiftResultsRealm>
-    {
-        realm.objects(ShiftResultsRealm.self)
+    func configure(nsaid: String, start_time: Int) {
+        self.nsaid = nsaid
+        self.sash = (nsaid + String(start_time)).sha256()
     }
     
     override static func primaryKey() -> String? {

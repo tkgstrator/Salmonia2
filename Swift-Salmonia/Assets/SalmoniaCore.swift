@@ -111,12 +111,12 @@ class UserCardCore: ObservableObject {
         token = try? Realm().objects(CoopCardRealm.self).observe { _ in
             // 先頭のカード情報を使う（サブ垢は考えない）
             guard let realm = try? Realm().objects(CoopCardRealm.self).first else { return }
-            self.job_num = realm.job_num
-            self.ikura_total = realm.ikura_total
-            self.golden_ikura_total = realm.golden_ikura_total
-            self.kuma_point = realm.kuma_point
-            self.kuma_point_total = realm.kuma_point_total
-            self.help_total = realm.help_total
+            self.job_num = realm.job_num.value
+            self.ikura_total = realm.ikura_total.value
+            self.golden_ikura_total = realm.golden_ikura_total.value
+            self.kuma_point = realm.kuma_point.value
+            self.kuma_point_total = realm.kuma_point_total.value
+            self.help_total = realm.help_total.value
         }
     }
 }
