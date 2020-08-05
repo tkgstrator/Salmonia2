@@ -36,7 +36,7 @@ struct LoadingView: View {
             
             // 恐怖の完了ハンドラ
             SplatNet2.getSummaryFromSplatNet2(iksm_session: iksm_session) { response, error in
-                DispatchQueue(label: "SplatNet2").async {
+                DispatchQueue(label: "Shifts").async {
                     autoreleasepool {
                         guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
                         realm.beginWrite()
@@ -48,7 +48,7 @@ struct LoadingView: View {
                         realm.create(CoopCardRealm.self, value: card as Any, update: .modified)
                         for (_, data) in response["stats"] {
                             self.messages.append("Getting Coop Card Data")
-                            Thread.sleep(forTimeInterval: 3)
+                            Thread.sleep(forTimeInterval: 1)
                             guard let realm = try? Realm() else { return }
                             var shift = data.dictionaryObject
                             // nsaidとsashを追加
@@ -60,9 +60,24 @@ struct LoadingView: View {
                             realm.create(ShiftResultsRealm.self, value: shift as Any, update: .modified)
                         }
                         try? Realm().commitWrite()
-                    }
-                }
-            }
+                    } // autoreleasepool
+                } // DispatchQueue
+                DispatchQueue(label: "Results").async {
+                    for idx in 0 ... 10 {
+                        autoreleasepool {
+                            SplatNet2.getResultFromSplatNet2(iksm_session: iksm_session, job_id: idx) { response, error in
+                                DispatchQueue(label: "Results").async {
+                                    guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
+                                    realm.beginWrite()
+                                    try? Realm().commitWrite()
+                                }
+                            }
+                        } // autoreleasepool
+                        self.messages.append("Downloading Result \(idx)")
+                        Thread.sleep(forTimeInterval: 1)
+                    } // For
+                } // DispatchQueue
+            } // getSummary
             
             //                SplatNet2.getResultFromSplatNet2(iksm_session: iksm_session, job_id: job_id) {
             //
