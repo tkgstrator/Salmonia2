@@ -184,7 +184,7 @@ class SplatNet2 {
 //    }
     
     class func getResultFromSplatNet2(iksm_session: String, job_id: Int, completion: @escaping (JSON?, Error?) -> ()) {
-        let url = "https://app.splatoon2.nintendo.net/api/coop_results" + String(job_id)
+        let url = "https://app.splatoon2.nintendo.net/api/coop_results/" + String(job_id)
         let header: HTTPHeaders = [
             "cookie" : "iksm_session=" + iksm_session
         ]

@@ -107,7 +107,7 @@ class WaveDetailRealm: Object {
     @objc dynamic var golden_ikura_pop_num = 0
     @objc dynamic var quota_num = 0
     @objc dynamic var ikura_num = 0
-    @objc dynamic var shift_id = 0
+    @objc dynamic var start_time = 0
     
     let id = LinkingObjects(fromType: CoopResultsRealm.self, property: "wave")
 }

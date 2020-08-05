@@ -33,7 +33,8 @@ struct LoadingView: View {
             guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
             guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
             guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
-            
+            let job_num: Int = realm.objects(CoopCardRealm.self).first?.job_num.value ?? 0
+
             // 恐怖の完了ハンドラ
             SplatNet2.getSummaryFromSplatNet2(iksm_session: iksm_session) { response, error in
                 DispatchQueue(label: "Shifts").async {
@@ -63,17 +64,44 @@ struct LoadingView: View {
                     } // autoreleasepool
                 } // DispatchQueue
                 DispatchQueue(label: "Results").async {
-                    for idx in 0 ... 10 {
+                    for job_id in 2390 ... 2390 {
                         autoreleasepool {
-                            SplatNet2.getResultFromSplatNet2(iksm_session: iksm_session, job_id: idx) { response, error in
+                            SplatNet2.getResultFromSplatNet2(iksm_session: iksm_session, job_id: job_id) { response, error in
+                                // エラー処理
+                                guard let response = response else { return }
                                 DispatchQueue(label: "Results").async {
                                     guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
+                                    var result = response.dictionaryObject
+                                    result?.updateValue(nsaid, forKey: "nsaid")
+                                    result?.updateValue(Stage(url: String(response["schedule"]["stage"]["image"].stringValue.suffix(44))), forKey: "stage_name")
+                                    result?.updateValue(response["grade"]["id"].intValue, forKey: "grade_id")
+
+                                    let boss_counts: [Int] = response["boss_counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1["count"].intValue })
+                                    result?.updateValue(boss_counts, forKey: "appear")
+
+                                    var waves: [WaveDetailRealm] = []
+                                    for (_, data) in response["wave_details"] {
+                                        var wave = data.dictionaryObject
+                                        wave?.updateValue(data["event_type"]["key"].stringValue == "water-levels" ? "-" : data["event_type"]["key"].stringValue, forKey: "event_type")
+                                        wave?.updateValue(data["water_level"]["key"].stringValue, forKey: "water_level")
+                                        wave?.updateValue(response["start_time"].intValue, forKey: "start_time")
+                                        waves.append(WaveDetailRealm(value: wave))
+                                    }
+                                    let power_eggs = waves.map({ $0.ikura_num }).reduce(0, +)
+                                    let golden_eggs = waves.map({ $0.golden_ikura_num }).reduce(0, +)
+                                    result?.updateValue(power_eggs, forKey: "power_eggs")
+                                    result?.updateValue(golden_eggs, forKey: "golden_eggs")
+
+                                    result?.updateValue(waves, forKey: "wave")
+                                    result?.updateValue([PlayerResultsRealm()], forKey: "player")
+//                                    let boss_kill_counts = response["my_result"]["boss_kill+"]
                                     realm.beginWrite()
+                                    realm.create(CoopResultsRealm.self, value: result, update: .modified)
                                     try? Realm().commitWrite()
                                 }
                             }
                         } // autoreleasepool
-                        self.messages.append("Downloading Result \(idx)")
+                        self.messages.append("Downloading Result \(job_num)")
                         Thread.sleep(forTimeInterval: 1)
                     } // For
                 } // DispatchQueue
