@@ -7,13 +7,10 @@
 //
 
 import Foundation
+import SwiftyJSON
 
-func TZTime(date: String) -> String {
-    let f = DateFormatter()
-    f.dateFormat = "MM/dd HH:mm"
-    return f.string(from: Date(timeIntervalSince1970: TimeInterval(Unixtime(date: date))))
-}
 
+// Salmon StatsのDate形式をTimestamp変換
 func Unixtime(time: String) -> Int {
     let f = DateFormatter()
     f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
@@ -21,32 +18,21 @@ func Unixtime(time: String) -> Int {
     return Int((f.date(from: time) ?? Date()).timeIntervalSince1970)
 }
 
-func Unixtime(date: String) -> Int {
-    let f = DateFormatter()
-    f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
-    f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-    return Int((f.date(from: date) ?? Date()).timeIntervalSince1970)
-}
-
+// Timestamp型を日付に変換
 func Unixtime(interval: Int) -> String {
     let f = DateFormatter()
     f.dateFormat = "MM/dd HH:mm"
     return f.string(from: Date(timeIntervalSince1970: TimeInterval(interval)))
 }
 
-func Weapon(id: Int) -> String {
-    // 絶対にあるはずなのでクラッシュしたらコーディングがおかしい
-    return "https://app.splatoon2.nintendo.net/images/weapon/" + weapons.filter({ $0.id == id }).first!.url
-}
 
-func Stage(id: Int) -> String {
-    return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.id == id }).first!.url
-}
-
+// 以下、Salmon Statsからのデータを変換するための関数
+// Salmon Statsの失敗原因IDをメッセージに変換
 func Reason(id: Int) -> String? {
     return reasons.filter({ $0.id == id }).first?.key
 }
 
+// Salmon Statsの失敗したWAVE情報をクリアWAVEに変換
 func Failure(waves: Int) -> Int? {
     return waves == 3 ? nil : waves + 1
 }
@@ -57,6 +43,7 @@ func GradeID(point: Int?) -> Int? {
     return min(5, 1 + (point / 100))
 }
 
+// 評価レートを計算する関数
 func Grade(point: Int?) -> Int? {
     guard let point = point else { return nil }
     return point - min(4, (point / 100)) * 100
@@ -65,33 +52,47 @@ func Grade(point: Int?) -> Int? {
 // 回線落ちは計算困難なので無視する
 func GradeDelta(wave: Int) -> Int {
     if wave == 3 { return 20 }
-    return (2 - wave) * 10
+    return (wave - 2) * 10
+}
+
+// ここまで
+
+// ステージのIDからURLを返す関数
+func Stage(id: Int) -> String {
+    return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.id == id }).first!.url
 }
 
 // 暫定対応
 func Stage(name: Int) -> String {
-    return stages.filter({ $0.id == name }).first!.name
+    return stages.filter({ $0.id == name }).first?.name ?? "-"
 }
 
+// SplatNet2からのデータ取得時に使うURLからステージ名を返す関数
 func Stage(url: String) -> String {
     return stages.filter({ $0.url == url }).first!.name
 }
 
+// ブキ画像のURLを返す関数
+func Weapon(id: Int) -> String {
+    // 絶対にあるはずなのでクラッシュしたらコーディングがおかしい
+    return "https://app.splatoon2.nintendo.net/images/weapon/" + weapons.filter({ $0.id == id }).first!.url
+}
+
+// スペシャル画像のURLを返す関数
 func Special(id: Int) -> String {
     return "https://app.splatoon2.nintendo.net/images/special/" + specials.filter({ $0.id == id }).first!.url
 }
 
+// 潮位を文字列で返す関数
 func Tide(id: Int) -> String {
     return tides.filter({ $0.id == id }).first!.key
 }
 
+// イベント名を文字列で返す関数
 func Event(id: Int) -> String {
     return events.filter({ $0.ss == id }).first!.key
 }
 
-//func Stage(url: String) -> String {
-//    return "https://app.splatoon2.nintendo.net/images/coop_stage/" + stages.filter({ $0.url == url }).first!.name
-//}
 
 private let specials: [(url: String, id: Int)] = [
 // https://app.splatoon2.nintendo.net/images/special/

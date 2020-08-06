@@ -25,6 +25,7 @@ struct ResultsCollectionView: View {
 
 private struct ResultStackView: View {
     private var grade_point: Int?
+    private var danger_rate: Double
     private var job_result_is_clear: Bool
     private var job_result_failure_wave: Int?
     private var golden_eggs: Int?
@@ -32,6 +33,7 @@ private struct ResultStackView: View {
     
     init(data: CoopResultsRealm) {
         grade_point = data.grade_point.value
+        danger_rate = data.danger_rate
         job_result_is_clear = data.is_clear
         job_result_failure_wave = data.failure_wave.value
         golden_eggs = data.golden_eggs
@@ -45,19 +47,20 @@ private struct ResultStackView: View {
                     Text("Clear!").foregroundColor(.green).font(.custom("Splatoon1", size: 16))
                 } else {
                     VStack {
-                        Text("Defeat").frame(height: 14).font(.custom("Splatoon1", size: 16))
+                        Text("Defeat").frame(height: 16).font(.custom("Splatoon1", size: 16))
                         HStack {
                             Text("Wave").frame(height: 11)
-                            Text("\(job_result_failure_wave.value)").frame(height: 1)
+                            Text("\(job_result_failure_wave.value)").frame(height: 11)
                         }
                     }
                     .foregroundColor(.orange)
                     .font(.custom("Splatoon1", size: 14))
                 }
                 
-            }.frame(width: 60).font(.custom("Splatoon1", size: 14))
+            }.frame(width: 60).font(.custom("Splatoon1", size: 16))
             // ブキとか？
             // 金イクラ数とかの情報（イカリング2準拠スタイル）
+            Text(String(danger_rate)+"%").font(.custom("Splatoon1", size: 16))
             Spacer()
             VStack(alignment: .leading, spacing: 5) {
                 HStack {

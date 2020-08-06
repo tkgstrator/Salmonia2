@@ -33,7 +33,8 @@ struct LoadingView: View {
             guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
             guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
             guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
-
+            let results: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
+            
             // 恐怖の完了ハンドラ
             SplatNet2.getSummaryFromSplatNet2(iksm_session: iksm_session) { response, error in
                 guard let response = response else { return }
@@ -85,6 +86,14 @@ struct LoadingView: View {
                                         // 予約してすぐ書き込むから意味があるかは謎
                                         realm.beginWrite()
                                         let result: CoopResultsRealm = SplatNet2.encodeResultToSplatNet2(response: response, nsaid: nsaid)
+                                        // バグありそうだけど確実なやつにしてみる
+                                        let is_valid: Bool = results.filter({ abs($0 - result.play_time) < 10 }).count != 0
+                                        if is_valid {
+                                            let play_time: Int = results.filter({ abs($0 - result.play_time) < 10 }).first!
+                                            result.play_time = play_time
+                                        }
+                                        // ここまで（ダサい）
+                                        
                                         realm.create(CoopResultsRealm.self, value: result, update: .modified)
                                         try? Realm().commitWrite()
                                     }

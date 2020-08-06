@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		101494E524DC019400F0028B /* formated_future_shifts.json in Resources */ = {isa = PBXBuildFile; fileRef = 101494E424DC019400F0028B /* formated_future_shifts.json */; };
 		1021B95924DAA7A800F23494 /* ImportedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1021B95824DAA7A800F23494 /* ImportedView.swift */; };
 		10505E7024CB653800CF4E04 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10505E6F24CB653800CF4E04 /* Realm.swift */; };
 		10505E7324CB655800CF4E04 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7124CB655800CF4E04 /* RealmSwift.framework */; };
@@ -14,7 +15,6 @@
 		10505E7D24CBDE2B00CF4E04 /* Splatfont2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */; };
 		10505E7F24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */; };
 		105112A224CEED3000EEC0EF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106B14E524CE1B7F0033011A /* CryptoSwift.framework */; };
-		1061133A24D597C4000771FD /* coop.json in Resources */ = {isa = PBXBuildFile; fileRef = 1061133924D597C4000771FD /* coop.json */; };
 		1098BCD324D2A92B003E95E3 /* Splatfont1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1098BCD224D2A884003E95E3 /* Splatfont1.ttf */; };
 		10A0AC0824D7DD5B00ADD56E /* ResultsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC0724D7DD5B00ADD56E /* ResultsCollectionView.swift */; };
 		10A0AC0A24D7DDD800ADD56E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC0924D7DDD800ADD56E /* ResultView.swift */; };
@@ -69,13 +69,13 @@
 
 /* Begin PBXFileReference section */
 		0E9A55168B8C5AC47A7E71A7 /* Pods-Swift-Salmonia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-Salmonia.debug.xcconfig"; path = "Target Support Files/Pods-Swift-Salmonia/Pods-Swift-Salmonia.debug.xcconfig"; sourceTree = "<group>"; };
+		101494E424DC019400F0028B /* formated_future_shifts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = formated_future_shifts.json; path = ../../../../../formated_future_shifts.json; sourceTree = "<group>"; };
 		1021B95824DAA7A800F23494 /* ImportedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedView.swift; sourceTree = "<group>"; };
 		10505E6F24CB653800CF4E04 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10505E7124CB655800CF4E04 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		10505E7224CB655800CF4E04 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont2.ttf; sourceTree = "<group>"; };
 		10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
-		1061133924D597C4000771FD /* coop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coop.json; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		1098BCD224D2A884003E95E3 /* Splatfont1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont1.ttf; sourceTree = "<group>"; };
 		10A0AC0724D7DD5B00ADD56E /* ResultsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionView.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		1061133824D597C4000771FD /* Coop */ = {
 			isa = PBXGroup;
 			children = (
-				1061133924D597C4000771FD /* coop.json */,
+				101494E424DC019400F0028B /* formated_future_shifts.json */,
 			);
 			path = Coop;
 			sourceTree = "<group>";
@@ -462,8 +462,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B6364E24C662D200A39FD2 /* LaunchScreen.storyboard in Resources */,
-				1061133A24D597C4000771FD /* coop.json in Resources */,
 				10B6364B24C662D200A39FD2 /* Preview Assets.xcassets in Resources */,
+				101494E524DC019400F0028B /* formated_future_shifts.json in Resources */,
 				10B6364824C662D200A39FD2 /* Assets.xcassets in Resources */,
 				10505E7F24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf in Resources */,
 				1098BCD324D2A92B003E95E3 /* Splatfont1.ttf in Resources */,
@@ -808,7 +808,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -838,7 +838,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

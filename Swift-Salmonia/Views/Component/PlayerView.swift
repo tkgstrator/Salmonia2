@@ -23,7 +23,7 @@ struct PlayerView: View {
                         .frame(width: 80, height: 80)
                 }.buttonStyle(PlainButtonStyle())
                 Text(self.user.nickname.value).font(.custom("Splatfont2", size: 26)).frame(maxWidth: .infinity).frame(height: 80)
-            }.frame(height: 55)
+            }.frame(height: 70)
             HStack {
                 VStack(spacing: 0) {
                     Text("Jobs")

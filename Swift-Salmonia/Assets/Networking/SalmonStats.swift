@@ -159,6 +159,15 @@ class SalmonStats {
             players.append(PlayerResultsRealm(value: dict))
         }
 
+        // クソダサだけど多分これで動く（読み込みめんどくね？）
+        let start_time: Int = Unixtime(time: response["schedule_id"].stringValue)
+        // これも結局毎回読み込んでるから重いのでは
+        let phase: JSON = CoopCore().getShiftData(start_time: start_time)
+
+        // ある時期をすぎるとクラッシュするなこれ...
+        let end_time: Int = phase["EndDateTime"].intValue
+        let stage_name: String = Stage(name: phase["StageID"].intValue)
+        
         // 辞書型配列にガンガン追加していく
         let grade_point: Int? = my_results["grade_point"].int
         let clear_wave: Int = response["clear_waves"].intValue
@@ -166,15 +175,15 @@ class SalmonStats {
         dict.updateValue(nsaid, forKey: "nsaid")
         dict.updateValue(nil, forKey: "job_id") // これがないのは知っている
         dict.updateValue(response["id"].intValue, forKey: "salmon_id")
-        dict.updateValue("", forKey: "stage_name") // ないんだが？？
+        dict.updateValue(stage_name, forKey: "stage_name") // ないんだが？？
         dict.updateValue(Grade(point: grade_point), forKey: "grade_point") // クソ適当（後で直す
         dict.updateValue(GradeID(point: grade_point), forKey: "grade_id") // 求めてみた
-        dict.updateValue(Unixtime(time: response["schedule_id"].stringValue), forKey: "start_time")
+        dict.updateValue(start_time, forKey: "start_time")
         dict.updateValue(Failure(waves: clear_wave), forKey: "failure_wave")
         dict.updateValue(Reason(id: response["fail_reason_id"].intValue), forKey: "failure_reason")
         dict.updateValue(response["danger_rate"].doubleValue, forKey: "danger_rate")
         dict.updateValue(GradeDelta(wave: clear_wave), forKey: "grade_point_delta") // ここは計算可能
-        dict.updateValue(0, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
+        dict.updateValue(end_time, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
         dict.updateValue(response["golden_egg_delivered"].intValue, forKey: "golden_eggs")
         dict.updateValue(response["power_egg_collected"].intValue, forKey: "power_eggs")
         dict.updateValue(response["fail_reason_id"] == JSON.null, forKey: "is_clear")

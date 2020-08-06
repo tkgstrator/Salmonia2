@@ -59,3 +59,22 @@ extension Array {
         }
     }
 }
+
+//// それぞれ水没厳選していないWAVEを抽出するコード
+//extension Results<WaveDetailRealm> {
+//    func all() -> Results<WaveDetailRealm> {
+//        return self.filter( {$0.ikura_num != 0})
+//    }
+//}
+extension Results where Iterator.Element == WaveDetailRealm {
+    func all() -> LazyFilterSequence<Results<WaveDetailRealm>> {
+        return self.filter({ $0.ikura_num != 0 })
+    }
+}
+
+// 一応実装できた
+extension Results where Iterator.Element == CoopResultsRealm {
+    func all(id: Int) -> [CoopResultsRealm] {
+        return Array(self.filter({ $0.stage_name == Stage(name: id) && $0.wave.filter({ $0.ikura_num == 0}).count == 0 }))
+    }
+}

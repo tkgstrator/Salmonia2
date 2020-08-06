@@ -10,16 +10,16 @@ import SwiftUI
 import SwiftyJSON
 import URLImage
 
-let response: JSON = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "coop", ofType:"json")!) as Data)
-let lastid = response["Phases"].filter({ Unixtime(date: $0.1["EndDateTime"].stringValue) < Int(Date().timeIntervalSince1970)}).last!.0
+let response: JSON = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data)
+let lastid = response.filter({ $0.1["EndDateTime"].intValue < Int(Date().timeIntervalSince1970)}).last!.0
 
 struct FutureShiftView: View {
     @State var current_time: Int = Int(Date().timeIntervalSince1970)
-    @State var phases: [JSON] = response["Phases"].filter({ Int($0.0)! >= Int(lastid)! }).map({ $0.1 }).prefix(3).map({ $0 })
+    @State var phases: [JSON] = response.filter({ Int($0.0)! >= Int(lastid)! }).map({ $0.1 }).prefix(3).map({ $0 })
     @State var start_time: [Int] = []
     
     init () {
-        let start_time = phases.map({ Unixtime(date: $0["StartDateTime"].stringValue) })
+        let start_time = phases.map({ $0["StartDateTime"].intValue })
         _start_time = State(initialValue: start_time)
     }
     
@@ -46,9 +46,9 @@ private struct ShiftStack: View {
         VStack(spacing: 0) {
             HStack {
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 27, height: 18)})
-                Text(TZTime(date: phase["StartDateTime"].stringValue)).frame(height: 18)
+                Text(Unixtime(interval: phase["StartDateTime"].intValue)).frame(height: 18)
                 Text("-").frame(height: 18)
-                Text(TZTime(date: phase["EndDateTime"].stringValue)).frame(height: 18)
+                Text(Unixtime(interval: phase["EndDateTime"].intValue)).frame(height: 18)
                 Spacer()
             }.frame(height: 26)
             HStack {

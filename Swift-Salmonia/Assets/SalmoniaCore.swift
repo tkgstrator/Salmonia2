@@ -175,6 +175,19 @@ class UserInfoCore: ObservableObject {
     }
 }
 
+class CoopCore {
+    private var phases: JSON = JSON()
+    
+    init() {
+        phases = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data)
+
+    }
+
+    func getShiftData(start_time: Int) -> JSON {
+        return phases.filter( {$0.1["StartDateTime"].intValue == start_time }).first!.1
+    }
+}
+
 //Template
 //class UserCardCore: ObservableObject {
 //    private var token: NotificationToken?
