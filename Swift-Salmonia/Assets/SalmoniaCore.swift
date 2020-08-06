@@ -14,6 +14,24 @@ import Alamofire
 
 class SalmoniaCore {
     class func syncUserName() {
+        // まずはステージ情報を全てアップデートする
+        // 2021年1月までのシフトが入ったデータをローカルから取得
+        let phases = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data)
+        let shifts: [Int] = CoopResultsRealm.gettime()
+        
+        for start_time in shifts {
+            // 該当するレコードをとってくる
+            guard let records: Results<CoopResultsRealm> = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", start_time) else { return }
+            // 必要なデータを取得
+            guard let phase: JSON = phases.filter({ $0.1["StartDateTime"].intValue == start_time }).map({ $0.1 }).first else { return }
+            
+            try? Realm().write {
+                records.setValue(phase["EndDateTime"].intValue, forKey: "end_time")
+                records.setValue(Stage(name: phase["StageID"].intValue), forKey: "stage_name")
+            }
+            print(records.count, start_time)
+        }
+        
         // 重複を除いたnsaidを取得する
         let nsaid: [[String]] = PlayerResultsRealm.getids().chunked(by: 100)
         
@@ -175,18 +193,6 @@ class UserInfoCore: ObservableObject {
     }
 }
 
-class CoopCore {
-    private var phases: JSON = JSON()
-    
-    init() {
-        phases = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data)
-
-    }
-
-    func getShiftData(start_time: Int) -> JSON {
-        return phases.filter( {$0.1["StartDateTime"].intValue == start_time }).first!.1
-    }
-}
 
 //Template
 //class UserCardCore: ObservableObject {

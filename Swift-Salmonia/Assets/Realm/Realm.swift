@@ -36,6 +36,13 @@ class CoopCardRealm: Object, Codable {
     override static func primaryKey() -> String? {
         return "nsaid"
     }
+    
+    private static var realm = try! Realm()
+    
+    // ステージ名が空のstart_timeの配列を返す
+    static func gettime() -> [Int] {
+        return Array(Set(realm.objects(CoopResultsRealm.self).filter({ $0.stage_name == ""}).map({ $0.start_time })))
+    }
 }
 
 class ShiftResultsRealm: Object {

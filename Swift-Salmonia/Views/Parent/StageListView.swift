@@ -70,7 +70,6 @@ private struct StageRecordsView: View {
         my_avg_power_eggs = (Double(results.map({ $0.player[0].ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
         my_avg_golden_eggs = (Double(results.map({ $0.player[0].golden_ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
         no_night_golden_eggs = results.filter({ $0.wave.filter({ $0.event_type == "-" }).count == 3 }).map({ $0.golden_eggs }).max()
-        print(no_night_golden_eggs)
     }
     
     var body: some View {

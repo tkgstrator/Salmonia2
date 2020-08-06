@@ -20,11 +20,6 @@ struct ImportedView: View {
             Text("Developed by @tkgling")
             Text("Thanks @Yukinkling, @barley_ural")
             Text("External API @frozenpandaman, @nexusmine")
-            //            List {
-            //                ForEach(messages.indices, id: \.self) { idx in
-            //                    Text(self.messages[idx])
-            //                }
-            //            }
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("Logging Thread").frame(maxWidth: .infinity)
@@ -46,7 +41,7 @@ struct ImportedView: View {
             SalmonStats.getResultsLink(nsaid: nsaid) { last, error in
                 guard var last = last else { return }
                 #if DEBUG
-                last = 1
+//                last = 1
                 #else
                 #endif
                 DispatchQueue(label: "GetPages").async {

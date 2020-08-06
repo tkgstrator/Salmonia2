@@ -11,15 +11,43 @@ import URLImage
 
 struct ResultsCollectionView: View {
     @ObservedObject var core = UserResultsCore()
+    @State var results: [CoopResultsRealm] = []
+    @State var threshold: Double = 100
+    
+    init() {
+        _threshold = State(initialValue: 100)
+        results = Array(core.results)
+    }
     
     var body: some View {
-        List {
-            ForEach(core.results, id: \.self) { result in
-                NavigationLink(destination: ResultView(data: result)) {
-                    ResultStackView(data: result)
-                }
+        Group {
+            Slider(value: $threshold,
+                in: 150 ... 200,
+                step: 1,
+                onEditingChanged: { _ in
+                    self.results = Array(self.core.results.filter({ $0.golden_eggs >= Int(self.threshold)}))
+                },
+                minimumValueLabel: Text("0").font(.custom("Splatoon1", size: 16)),
+                maximumValueLabel: Text("200").font(.custom("Splatoon1", size: 16)),
+                label: { EmptyView() }
+                )
+            HStack {
+                Text("Value: \(Int(threshold))")
+                Text("Found: \(results.count)")
+                Text("Ratio: " + String(((Double(results.count) / Double(core.results.count))).round(digit: 4)))
             }
-        }.navigationBarTitle("Results")
+            .font(.custom("Splatoon1", size: 16))
+            .frame(height: 10)
+            List {
+                ForEach(results, id: \.self) { result in
+                    NavigationLink(destination: ResultView(data: result)) {
+                        ResultStackView(data: result)
+                    }
+                }
+            }.navigationBarTitle("Results")
+        }.onAppear() {
+            self.results = Array(self.core.results.filter({ $0.golden_eggs >= Int(self.threshold)}))
+        }
     }
 }
 
