@@ -33,6 +33,7 @@ struct LoadingView: View {
             guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
             guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
             guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
+            // 重複しているかどうか調べるリスト（メインスレッドが一つだけもってメモリを節約）
             let results: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
             
             // 恐怖の完了ハンドラ
@@ -40,8 +41,8 @@ struct LoadingView: View {
                 guard let response = response else { return }
                 let job_num_latest: Int = response["card"]["job_num"].intValue
                 let job_num: Int = max(job_num_latest - 49, (realm.objects(CoopCardRealm.self).first?.job_num.value ?? 0))
-                print("JOB", job_num, job_num_latest)
                 #if DEBUG
+                // デバッガモードでは常に一件だけ取得
                 #else
                 if job_num == job_num_latest { return }
                 #endif
@@ -70,11 +71,8 @@ struct LoadingView: View {
                             }
                             try? Realm().commitWrite()
                         } // autoreleasepool
-                        
                     } // DispatchQueue
-                    
                     DispatchQueue(label: "Results").async {
-                        // ここでリザルトを順番に取得したいのだが、最新のIDってどうやってとってこればいいかね？
                         for job_id in job_num ... job_num_latest {
                             autoreleasepool {
                                 SplatNet2.getResultFromSplatNet2(iksm_session: iksm_session, job_id: job_id) { response, error in
@@ -83,50 +81,33 @@ struct LoadingView: View {
                                     // 非同期処理
                                     DispatchQueue(label: "Results").async {
                                         guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
-                                        // 予約してすぐ書き込むから意味があるかは謎
-                                        realm.beginWrite()
-                                        let result: CoopResultsRealm = SplatNet2.encodeResultToSplatNet2(response: response, nsaid: nsaid)
-                                        // バグありそうだけど確実なやつにしてみる
-                                        let is_valid: Bool = results.filter({ abs($0 - result.play_time) < 10 }).count != 0
-                                        if is_valid {
-                                            let play_time: Int = results.filter({ abs($0 - result.play_time) < 10 }).first!
-                                            result.play_time = play_time
-                                        }
-                                        // ここまで（ダサい）
                                         
-                                        realm.create(CoopResultsRealm.self, value: result, update: .modified)
-                                        try? Realm().commitWrite()
+                                        // 書き込むか書き込まないかに関わらず一応データは持っておく
+                                        let result: CoopResultsRealm = SplatNet2.encodeResultToSplatNet2(response: response, nsaid: nsaid)
+                                        // 自分と重複するデータがあるかを探す
+                                        let play_time: Int? = results.filter({ abs($0 - result.play_time) < 10 }).first
+                                        try? realm.write {
+                                            // あるならアップデート、ないなら新規作成
+                                            if play_time != nil {
+                                                // 自身とかぶっているオブジェクト
+                                                let record = realm.objects(CoopResultsRealm.self).filter("play_time=%@", play_time!)
+                                                record.setValue(result.job_id, forKey: "job_id")
+                                                record.setValue(result.grade_point, forKey: "grade_point")
+                                                record.setValue(result.grade_id, forKey: "grade_id")
+                                                record.setValue(result.grade_point_delta, forKey: "grade_point_delta")
+                                            } else {
+                                                realm.create(CoopResultsRealm.self, value: result, update: .modified)
+                                            }
+                                        }
                                     }
                                 }
                             } // autoreleasepool
                             self.messages.append("Downloading Result \(job_id)")
-                            Thread.sleep(forTimeInterval: 1)
+                            Thread.sleep(forTimeInterval: 0.5)
                         } // For
                     } // DispatchQueue
                 } // getSummary
-
                 }
-
-            //                SplatNet2.getResultFromSplatNet2(iksm_session: iksm_session, job_id: job_id) {
-            //
-            //                }
-            
-            //            let time = Int(Date().timeIntervalSince1970)
-            //            DispatchQueue(label: "SplatNet2").async() {
-            //                autoreleasepool {
-            //                    guard let realm = try? Realm() else { return }
-            //                    realm.beginWrite()
-            //                    for idx in 0..<100 {
-            //                        SplatNet2.getSummaryFromSplatNet2(iksm_session: iksm_session, nsaid: nsaid) { response, error in
-            //                            realm.create(CoopCardRealm.self, value: response!["card"].dictionaryObject)
-            //                        }
-            //                        self.messages.append("\(Int(Date().timeIntervalSince1970) - time) LOOP: \(idx)")
-            //                        Thread.sleep(forTimeInterval: 1)
-            //
-            //                    }
-            //                    try? Realm().commitWrite()
-            //                }
-            //            }
         }
         .padding(.horizontal, 10)
         .font(.custom("Roboto Mono", size: 14))

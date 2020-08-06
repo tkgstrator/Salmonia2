@@ -47,11 +47,11 @@ private struct StageRecordsView: View {
     private var team_avg_golden_eggs: Double = 0
     private var my_avg_power_eggs: Double = 0
     private var my_avg_golden_eggs: Double = 0
-    private var my_max_golden_eggs: Int = 0
-    private var my_max_power_eggs: Int = 0
-    private var team_max_power_eggs: Int = 0
-    private var team_max_golden_eggs: Int = 0
-    private var no_night_golden_eggs: Int = 0
+    private var my_max_golden_eggs: Int?
+    private var my_max_power_eggs: Int?
+    private var team_max_power_eggs: Int?
+    private var team_max_golden_eggs: Int?
+    private var no_night_golden_eggs: Int?
     
     // メモリ消費しそうだなこれ...
     private var results: [CoopResultsRealm] = []
@@ -61,15 +61,15 @@ private struct StageRecordsView: View {
         results = records.results.all(id: stage_id)
         job_num = results.count
         win_ratio = (Double(results.filter({ $0.is_clear == true }).count) / Double(job_num)).round(digit: 4)
-        team_max_power_eggs = results.map({ $0.power_eggs }).max()!
-        team_max_golden_eggs = results.map({ $0.golden_eggs }).max()!
+        team_max_power_eggs = results.map({ $0.power_eggs }).max()
+        team_max_golden_eggs = results.map({ $0.golden_eggs }).max()
         team_avg_power_eggs = (Double(results.map({ $0.power_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
         team_avg_golden_eggs = (Double(results.map({ $0.golden_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        my_max_power_eggs = results.map({ $0.player[0].ikura_num }).max()!
-        my_max_golden_eggs = results.map({ $0.player[0].golden_ikura_num }).max()!
+        my_max_power_eggs = results.map({ $0.player[0].ikura_num }).max()
+        my_max_golden_eggs = results.map({ $0.player[0].golden_ikura_num }).max()
         my_avg_power_eggs = (Double(results.map({ $0.player[0].ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
         my_avg_golden_eggs = (Double(results.map({ $0.player[0].golden_ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        no_night_golden_eggs = results.filter({ $0.wave.filter({ $0.event_type == "-" }).count == 3 }).map({ $0.golden_eggs }).max()!
+        no_night_golden_eggs = results.filter({ $0.wave.filter({ $0.event_type == "-" }).count == 3 }).map({ $0.golden_eggs }).max()
         print(no_night_golden_eggs)
     }
     
@@ -117,19 +117,19 @@ private struct StageRecordsView: View {
                     Text("Max")
                     VStack(spacing: 0) {
                         HStack {
-                            Text(String(team_max_golden_eggs)).foregroundColor(.yellow)
+                            Text(String(team_max_golden_eggs.value)).foregroundColor(.yellow)
                             Text("/")
-                            Text(String(team_max_power_eggs)).foregroundColor(.red)
+                            Text(String(team_max_power_eggs.value)).foregroundColor(.red)
                         }
                         HStack {
-                            Text(String(my_max_golden_eggs)).foregroundColor(.yellow)
+                            Text(String(my_max_golden_eggs.value)).foregroundColor(.yellow)
                             Text("/")
-                            Text(String(my_max_power_eggs)).foregroundColor(.red)
+                            Text(String(my_max_power_eggs.value)).foregroundColor(.red)
                         }
                         .font(.custom("Splatoon1", size: 18))
                         .frame(height: 18)
                     }
-                    NavigationLink(destination: SalmoniaView()) {
+                    NavigationLink(destination: GoldenEggRecordsView()) {
                         URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: { $0.image.resizable().aspectRatio(contentMode: .fill) }).frame(width: 72, height: 72)
                     }.buttonStyle(PlainButtonStyle())
                 }

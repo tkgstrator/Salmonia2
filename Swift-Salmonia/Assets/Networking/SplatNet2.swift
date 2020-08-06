@@ -341,7 +341,6 @@ class SplatNet2 {
             .responseJSON { response in
             switch response.result {
             case .success(let value):
-//                print(JSON(value))
                 complition(JSON(value)["nickname_and_icons"], nil)
             case .failure:
                 complition(nil, nil)

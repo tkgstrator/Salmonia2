@@ -109,7 +109,7 @@ class WaveDetailRealm: Object {
     // 多分落ちないはず
     private static var realm = try! Realm()
 
-    let id = LinkingObjects(fromType: CoopResultsRealm.self, property: "wave")
+//    let id = LinkingObjects(fromType: CoopResultsRealm.self, property: "wave")
 }
 
 
