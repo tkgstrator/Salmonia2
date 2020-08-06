@@ -7,25 +7,31 @@
 //
 
 import SwiftUI
+import RealmSwift
 import URLImage
 
 struct ResultsCollectionView: View {
     @ObservedObject var core = UserResultsCore()
-    @State var results: [CoopResultsRealm] = []
+//    @State var results: [CoopResultsRealm] = []
+//    @State var results: Results<CoopResultsRealm>
     @State var threshold: Double = 100
-    
-    init() {
-        _threshold = State(initialValue: 100)
-        results = Array(core.results)
-    }
+
+//    init() {
+//        _threshold = State(initialValue: 100)
+        // イニシャライザで最初に持っておけばちょっとは楽になる？
+//        core.update(0)
+        // リザルト全件を配列にコピーするから件数が多いとアホみたいに時間がかかる
+//    }
     
     var body: some View {
         Group {
             Slider(value: $threshold,
-                in: 150 ... 200,
+                in: 100 ... 200,
                 step: 1,
-                onEditingChanged: { _ in
-                    self.results = Array(self.core.results.filter({ $0.golden_eggs >= Int(self.threshold)}))
+                onEditingChanged: { pressed in
+                    if !pressed { self.core.update(Int(self.threshold)) }
+//                    self.results = Array(self.core.results.filter("golden_eggs>=%@", Int(self.threshold)))
+//                    self.results = self.core.results.filter("golden_eggs>=%@", Int(self.threshold))
                 },
                 minimumValueLabel: Text("0").font(.custom("Splatoon1", size: 16)),
                 maximumValueLabel: Text("200").font(.custom("Splatoon1", size: 16)),
@@ -33,20 +39,19 @@ struct ResultsCollectionView: View {
                 )
             HStack {
                 Text("Value: \(Int(threshold))")
-                Text("Found: \(results.count)")
-                Text("Ratio: " + String(((Double(results.count) / Double(core.results.count))).round(digit: 4)))
+                Text("Found: \(core.results.count)")
+                Text("Ratio: " + String(((Double(core.results.count) / Double(core.results.count))).round(digit: 4)))
             }
             .font(.custom("Splatoon1", size: 16))
             .frame(height: 10)
             List {
-                ForEach(results, id: \.self) { result in
+                ForEach(core.results.prefix(100), id: \.self) { result in
                     NavigationLink(destination: ResultView(data: result)) {
                         ResultStackView(data: result)
                     }
                 }
             }.navigationBarTitle("Results")
         }.onAppear() {
-            self.results = Array(self.core.results.filter({ $0.golden_eggs >= Int(self.threshold)}))
         }
     }
 }
