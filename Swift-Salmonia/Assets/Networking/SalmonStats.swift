@@ -152,15 +152,17 @@ class SalmonStats {
     }
     
     class func getResultsLastLink(nsaid: String) -> Int {
-        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200"
-        
+        let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=\(nsaid)"
+
         var link: Int = 0
         AF.request(url, method: .get)
             .validate(contentType: ["application/json"])
             .responseJSON(queue: queue) { response in
                 switch response.result {
                 case .success(let value):
-                    link = JSON(value)["to"].intValue
+                    let metadata = JSON(value)[0]["results"]
+                    // ちょっと曖昧なので怪しいかもしれない
+                    link = 1 + (metadata["clear"].intValue + metadata["fail"].intValue) / 200
                 case .failure:
                     print("ERROR")
                 }
@@ -169,6 +171,25 @@ class SalmonStats {
         semaphore.wait()
         print("LAST PAGE", link)
         return link
+        
+// 仕様変更で動かなくなったので変更
+//        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200"
+//
+//        var link: Int = 0
+//        AF.request(url, method: .get)
+//            .validate(contentType: ["application/json"])
+//            .responseJSON(queue: queue) { response in
+//                switch response.result {
+//                case .success(let value):
+//                    link = JSON(value)["to"].intValue
+//                case .failure:
+//                    print("ERROR")
+//                }
+//                semaphore.signal()
+//        }
+//        semaphore.wait()
+//        print("LAST PAGE", link)
+//        return link
     }
     
     class func importResultsFromSalmonStats(nsaid: String, page: Int) -> JSON {

@@ -206,7 +206,7 @@ struct ImportedView: View {
                 DispatchQueue(label: "Imported").async {
                     let last: Int = SalmonStats.getResultsLastLink(nsaid: nsaid)
                     DispatchQueue(label: "GetPages").async {
-                        for page in 1...1 {
+                        for page in 1...last {
                             let imported: JSON = SalmonStats.importResultsFromSalmonStats(nsaid: nsaid, page: page)
                             autoreleasepool {
                                 guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
