@@ -45,7 +45,7 @@ struct LoadingView: View {
                 let job_id_last: Int = realm.objects(CoopCardRealm.self).first?.job_num.value ?? 0
                 var results: [JSON] = [] // リザルト保存用の配列（大したサイズでないから大丈夫なはず
                 var salmon_ids: [(Int, Int)] = []
-
+                
                 print("SUMMARY START")
                 DispatchQueue(label: "Summary").async {
                     // 公式の統計情報について処理を行う
@@ -58,17 +58,17 @@ struct LoadingView: View {
                         return
                     }
                     let job_ids: Range<Int> = Range(max(job_id_latest - 49, job_id_last + 1)...job_id_latest)
-
+                    
                     self.messages.append("Getting Shift Result")
                     autoreleasepool {
                         guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
                         realm.beginWrite()
-                            
+                        
                         // バイト全体の統計情報
                         var card: [String: Any]? = response["card"].dictionaryObject
                         card?.updateValue(nsaid, forKey: "nsaid")
                         realm.create(CoopCardRealm.self, value: card as Any, update: .modified)
-                            
+                        
                         // 最新のシフト数件の公式の統計情報
                         for (i, data) in response["stats"] {
                             print(i, data.count)
@@ -89,7 +89,6 @@ struct LoadingView: View {
                     // ここではひたすらダウンロードして貯めるだけ（書き込まないのである程度速くて良い
                     for (i, job_id) in job_ids.enumerated() {
                         self.messages.append("Getting Result \(job_id) \(i + 1)/\(job_ids.count)")
-                        print(job_id)
                         results.append(SplatNet2.getResultFromSplatNet2(iksm_session, job_id))
                     }
                     
@@ -104,12 +103,10 @@ struct LoadingView: View {
                             let ids: [(Int, Int)] = response.map({ ($0.1["job_id"].intValue, $0.1["salmon_id"].intValue) })
                             salmon_ids.append(contentsOf: ids)
                             Thread.sleep(forTimeInterval: 5)
-                            break
                         }
                         semaphore.signal()
                     }
                     semaphore.wait()
-                    //print(salmon_ids)
                     // ダウンロードした履歴をRealmに変換して書き込むところ
                     autoreleasepool {
                         guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
@@ -134,7 +131,6 @@ struct LoadingView: View {
                         try? realm.commitWrite()
                     }
                     self.isLock = false
-                    print("Done")
                 }
         }
         .padding(.horizontal, 10)
@@ -146,7 +142,7 @@ struct LoadingView: View {
 
 struct SyncUserNameView: View {
     @State var messages: [String] = []
-    @State var isLock: Bool = false
+    @State var isLock: Bool = true
     
     private let phases = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data)
     private let shifts: [Int] = CoopResultsRealm.gettime()
@@ -155,32 +151,35 @@ struct SyncUserNameView: View {
         loggingThreadView(log: $messages, lock: $isLock)
             .onAppear() {
                 // 重複を除いたnsaidを取得する
-                let nsaid: [[String]] = PlayerResultsRealm.getids().chunked(by: 200)
-                
-                DispatchQueue(label: "NSAID").async {
-                    for list in nsaid {
-                        print("NSAID")
-                        autoreleasepool {
-                            SplatNet2.getPlayerNickname(nsaid: list) { response, error in
-                                guard let response = response else { return }
-                                DispatchQueue(label: "NickName").async {
-                                    guard let realm = try? Realm() else { return }
-                                    realm.beginWrite()
-                                    for (_, value) in response {
-                                        self.messages.append("\(value["nsa_id"].stringValue) -> \(value["nickname"].stringValue)")
-                                        let crew = CrewInfoRealm()
-                                        crew.nsaid = value["nsa_id"].string
-                                        crew.name = value["nickname"].string
-                                        crew.image = value["thumbnail_url"].string
-                                        realm.create(CrewInfoRealm.self, value: crew, update: .modified)
-                                        realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", crew.nsaid as Any).setValue(crew.name, forKey: "name")
+                DispatchQueue(label: "SplatNet2").async {
+                    let nsaid: [[String]] = PlayerResultsRealm.getids().chunked(by: 200)
+                    DispatchQueue(label: "NSAID").async {
+                        for list in nsaid {
+                            autoreleasepool {
+                                SplatNet2.getPlayerNickname(nsaid: list) { response, error in
+                                    guard let response = response else { return }
+                                    DispatchQueue(label: "NickName").async {
+                                        guard let realm = try? Realm() else { return }
+                                        realm.beginWrite()
+                                        for (_, value) in response {
+                                            self.messages.append("\(value["nsa_id"].stringValue) -> \(value["nickname"].stringValue)")
+                                            let crew = CrewInfoRealm()
+                                            crew.nsaid = value["nsa_id"].string
+                                            crew.name = value["nickname"].string
+                                            crew.image = value["thumbnail_url"].string
+                                            realm.create(CrewInfoRealm.self, value: crew, update: .modified)
+                                            realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", crew.nsaid as Any).setValue(crew.name, forKey: "name")
+                                        }
+                                        try? realm.commitWrite()
                                     }
-                                    try? realm.commitWrite()
                                 }
                             }
+                            Thread.sleep(forTimeInterval: 5)
                         }
-                        Thread.sleep(forTimeInterval: 5)
+                        semaphore.signal()
                     }
+                    semaphore.wait()
+                    self.isLock = false
                 }
         }
     }
@@ -203,43 +202,35 @@ struct ImportedView: View {
                 if is_imported == true { return }
                 
                 self.messages.append("Importing Results from Salmon Stats")
-                
-                SalmonStats.getResultsLink(nsaid: nsaid) { last, error in
-                    guard var last = last else { return }
-                    #if DEBUG
-                    //                    last = 1
-                    #endif
+                self.isLock = true
+                DispatchQueue(label: "Imported").async {
+                    let last: Int = SalmonStats.getResultsLastLink(nsaid: nsaid)
                     DispatchQueue(label: "GetPages").async {
-                        for page in 1...last {
-                            SalmonStats.importResultsFromSalmonStats(nsaid: nsaid, page: page) { response, error in
-                                guard let response = response else { return }
-                                DispatchQueue(label: "SalmonStats").async {
-                                    autoreleasepool {
-                                        guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
-                                        realm.beginWrite()
-                                        for (idx, result) in response {
-                                            let start_time = Unixtime(time: result["start_at"].stringValue)
-                                            //                                            let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
-                                            if results.filter({ abs($0 - start_time) <= 10 }).isEmpty {
-                                                let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
-                                                realm.create(CoopResultsRealm.self, value: object, update: .modified)
-                                            }
-                                            #if DEBUG
-                                            print("\((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue)")
-                                            #endif
-                                            self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue)")
-                                            //                                            Thread.sleep(forTimeInterval: 0.1)
-                                            //                                            break
-                                        } // For
-                                        // 200件に1回データを書き込む（そうでないと書き込み過多になる
-                                        try? realm.commitWrite()
-                                    } // autoreleasepool
-                                } // DispatchQueue in closure
-                            } // importResultsFromSalmonStats
+                        for page in 1...1 {
+                            let imported: JSON = SalmonStats.importResultsFromSalmonStats(nsaid: nsaid, page: page)
+                            autoreleasepool {
+                                guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
+                                realm.beginWrite()
+                                for (idx, result) in imported {
+                                    let start_time = Unixtime(time: result["start_at"].stringValue)
+                                    if results.filter({ abs($0 - start_time) <= 10 }).isEmpty {
+                                        let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(nsaid: nsaid, result)
+                                        realm.create(CoopResultsRealm.self, value: object, update: .modified)
+                                    }
+                                    self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue)")
+                                } // For
+                                // 200件に1回データを書き込む（そうでないと書き込み過多になる
+                                try? realm.commitWrite()
+                            } // autoreleasepool
                             Thread.sleep(forTimeInterval: 10) // Salmon Statsへのアクセス間隔を20秒置きにする
                         } // For
+                        print("SIGNAL")
+                        semaphore.signal()
                     } // DispatchQueue
-                } // GetResultsLink
+                    semaphore.wait()
+                    self.isLock = false
+                    print("WAIT")
+                }
         }
     }
 }

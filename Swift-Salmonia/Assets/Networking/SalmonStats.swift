@@ -116,7 +116,6 @@ class SalmonStats {
         let body = ["results": results]
         
         var salmon_ids: JSON = JSON()
-        
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
             .validate(contentType: ["application/json"])
             .responseJSON(queue: queue) { response in
@@ -152,38 +151,46 @@ class SalmonStats {
         }
     }
     
-    class func getResultsLink(nsaid: String, completion: @escaping (Int?, Error?) -> ()) {
+    class func getResultsLastLink(nsaid: String) -> Int {
         let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200"
         
+        var link: Int = 0
         AF.request(url, method: .get)
             .validate(contentType: ["application/json"])
-            .responseJSON { response in
+            .responseJSON(queue: queue) { response in
                 switch response.result {
                 case .success(let value):
-                    let first: Int = JSON(value)["to"].intValue
-                    completion(first, nil)
+                    link = JSON(value)["to"].intValue
                 case .failure:
-                    completion(nil, APPError.Response(id: 3000, message: "Server Error"))
+                    print("ERROR")
                 }
+                semaphore.signal()
         }
+        semaphore.wait()
+        print("LAST PAGE", link)
+        return link
     }
     
-    class func importResultsFromSalmonStats(nsaid: String, page: Int, completion: @escaping (JSON?, Error?) -> ()) {
+    class func importResultsFromSalmonStats(nsaid: String, page: Int) -> JSON {
         let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200&page=\(page)"
         
+        var results: JSON = JSON()
         AF.request(url, method: .get)
             .validate(contentType: ["application/json"])
-            .responseJSON { response in
+            .responseJSON(queue: queue) { response in
                 switch response.result {
                 case .success(let value):
-                    completion(JSON(value)["results"], nil)
+                    results = JSON(value)["results"]
                 case .failure:
-                    completion(nil, APPError.Response(id: 3000, message: "Server Error"))
+                    print("ERROR")
                 }
+                semaphore.signal()
         }
+        semaphore.wait()
+        return results
     }
     
-    class func encodeResultToSplatNet2(response: JSON, nsaid: String) -> CoopResultsRealm {
+    class func encodeResultToSplatNet2(nsaid: String, _ response: JSON) -> CoopResultsRealm {
         var dict: [String: Any?] = [:]
         var waves: [WaveDetailRealm] = []
         var players: [PlayerResultsRealm] = []
@@ -223,25 +230,19 @@ class SalmonStats {
             players.append(PlayerResultsRealm(value: dict))
         }
         
-        // クソダサだけど多分これで動く（読み込みめんどくね？）
         let start_time: Int = Unixtime(time: response["schedule_id"].stringValue)
-        // これも結局毎回読み込んでるから重いのでは
-        //        let phase: JSON = CoopCore().getShiftData(start_time: start_time)
-        
+
         // ある時期をすぎるとクラッシュするなこれ...
         let phase: JSON? = phases.filter{ $0["StartDateTime"].intValue == start_time}.first
         let end_time: Int? = phase?["EndDateTime"].intValue
         let stage_id: Int? = phase?["StageID"].intValue
-        
-        // print(start_time, end_time, stage_id)
-        
+
         // 辞書型配列にガンガン追加していく
         let grade_point: Int? = my_results["grade_point"].int
         let clear_wave: Int = response["clear_waves"].intValue
         
         dict.updateValue(end_time, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
         dict.updateValue(stage_id, forKey: "stage_id") // ないんだが？？
-
         dict.updateValue(clear_wave == 3 ? nil : clear_wave + 1, forKey: "failure_wave")
         dict.updateValue(reasons[clear_wave]!, forKey: "failure_reason")
         dict.updateValue(getGradePoint(grade_point), forKey: "grade_point") // クソ適当（後で直す
