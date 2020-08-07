@@ -64,6 +64,7 @@ class SalmoniaCore {
 class UserResultsCore: ObservableObject {
     private var token: NotificationToken?
 //    private var realm = try! Realm().objects(CoopResultsRealm.self)
+    private var core = try! Realm().objects(CoopResultsRealm.self)
     private var realm = try! Realm()
 
 //    @Published var results = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
@@ -71,13 +72,12 @@ class UserResultsCore: ObservableObject {
 
     // 金イクラ数でフィルタリング
     func update(_ golden_eggs: Int) {
-//        results = realm.filter("golden_eggs>=%@", golden_eggs)
-        results = realm.objects(CoopResultsRealm.self).filter("golden_eggs>=%@", golden_eggs)
+        results = realm.objects(CoopResultsRealm.self).filter("golden_eggs>=%@", golden_eggs).sorted(byKeyPath: "golden_eggs")
     }
     
     // ちょいダサい？
     init() {
-        token = results.observe { _ in
+        token = core.observe { _ in
             // データベースを再読込して上書きする
 //            self.results = self.realm.sorted(byKeyPath: "play_time", ascending: false)
             self.results = self.realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)

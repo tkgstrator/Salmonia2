@@ -12,44 +12,41 @@ import URLImage
 
 struct ResultsCollectionView: View {
     @ObservedObject var core = UserResultsCore()
-//    @State var results: [CoopResultsRealm] = []
-//    @State var results: Results<CoopResultsRealm>
     @State var threshold: Double = 100
-
-//    init() {
-//        _threshold = State(initialValue: 100)
-        // イニシャライザで最初に持っておけばちょっとは楽になる？
-//        core.update(0)
-        // リザルト全件を配列にコピーするから件数が多いとアホみたいに時間がかかる
-//    }
     
     var body: some View {
         Group {
             Slider(value: $threshold,
-                in: 100 ... 200,
-                step: 1,
-                onEditingChanged: { pressed in
-                    if !pressed { self.core.update(Int(self.threshold)) }
-//                    self.results = Array(self.core.results.filter("golden_eggs>=%@", Int(self.threshold)))
-//                    self.results = self.core.results.filter("golden_eggs>=%@", Int(self.threshold))
-                },
-                minimumValueLabel: Text("0").font(.custom("Splatoon1", size: 16)),
-                maximumValueLabel: Text("200").font(.custom("Splatoon1", size: 16)),
+                   in: 100 ... 200,
+                   step: 1,
+                   onEditingChanged: { pressed in
+                    self.core.update(Int(self.threshold))
+//                    if !pressed { self.core.update(Int(self.threshold)) }
+            },
+                   minimumValueLabel: Text("0").font(.custom("Splatoon1", size: 16)),
+                   maximumValueLabel: Text("200").font(.custom("Splatoon1", size: 16)),
+                   //                maximumValueLabel: { if core.results.count >= 100 { return Text("AAA") } else { return Text("BBB")} }(),
                 label: { EmptyView() }
-                )
+            )
+                .padding(.horizontal, 10)
             HStack {
                 Text("Value: \(Int(threshold))")
                 Text("Found: \(core.results.count)")
-                Text("Ratio: " + String(((Double(core.results.count) / Double(core.results.count))).round(digit: 4)))
+                //                Text("Ratio: " + String(((Double(core.results.count) / Double(core.results.count))).round(digit: 4)))
             }
             .font(.custom("Splatoon1", size: 16))
             .frame(height: 10)
             List {
-                ForEach(core.results.prefix(100), id: \.self) { result in
-                    NavigationLink(destination: ResultView(data: result)) {
-                        ResultStackView(data: result)
+                ForEach(core.results.indices, id:\.self) { idx in
+                    NavigationLink(destination: ResultView(data: self.core.results[idx])) {
+                        ResultStackView(data: self.core.results[idx])
                     }
                 }
+//                ForEach(core.results.lazy.prefix(500), id: \.self) { result in
+//                    NavigationLink(destination: ResultView(data: result)) {
+//                        ResultStackView(data: result)
+//                    }
+//                }
             }.navigationBarTitle("Results")
         }.onAppear() {
         }
@@ -97,13 +94,13 @@ private struct ResultStackView: View {
             Spacer()
             VStack(alignment: .leading, spacing: 5) {
                 HStack {
-                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
-                        .frame(width: 20, height: 20)
+//                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+//                        .frame(width: 20, height: 20)
                     Text("x\(golden_eggs.value)").frame(width: 50, height: 16, alignment: .leading)
                 }
                 HStack {
-                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
-                        .frame(width: 20, height: 20)
+//                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+//                        .frame(width: 20, height: 20)
                     Text("x\(power_eggs.value)").frame(width: 50, height: 16, alignment: .leading)
                 }
             }.frame(width: 80).font(.custom("Splatfont2", size: 16))
