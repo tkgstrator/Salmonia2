@@ -38,6 +38,27 @@ struct FutureShiftView: View {
     }
 }
 
+struct CompleteShiftView: View {
+    @State var current_time: Int = Int(Date().timeIntervalSince1970)
+    @State var phases: [JSON] = response.filter({ Int($0.0)! >= Int(lastid)! }).map({ $0.1 }).map({ $0 })
+    @State var start_time: [Int] = []
+    
+    init () {
+        let start_time = phases.map({ $0["StartDateTime"].intValue })
+        _start_time = State(initialValue: start_time)
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorStyle = .none
+    }
+    
+    var body: some View {
+        List {
+            ForEach(phases.indices) { idx in
+                ShiftStack(phase: self.$phases[idx])
+            }
+        }.navigationBarTitle("Future Rotation")
+    }
+}
+
 // 他のビューから参照したくないのでprivateにする
 private struct ShiftStack: View {
     @Binding var phase: JSON

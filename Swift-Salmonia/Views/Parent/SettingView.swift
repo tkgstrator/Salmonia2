@@ -52,6 +52,13 @@ struct SettingView: View {
                     Alert(title: Text(title),message: Text(text))
                 }
             }
+            Section(header: Text("Unlock")) {
+                Toggle(isOn: $user.is_unlock) {
+                    Text("Display Rare Weapon")
+                }.onTapGesture{
+                    self.user.updateUnlock(!self.user.is_unlock)
+                }
+            }
             Section(header: Text("Feature")) {
                 NavigationLink(destination: ImportedView()) {
                     HStack {
@@ -59,11 +66,9 @@ struct SettingView: View {
                         Spacer()
                     }
                 }
-                Button(action: {
-                    SalmoniaCore.syncUserName()
-                }) {
+                NavigationLink(destination: CompleteShiftView()) {
                     HStack {
-                        Text("Sync Current Name")
+                        Text("Future Rotation")
                         Spacer()
                     }
                 }

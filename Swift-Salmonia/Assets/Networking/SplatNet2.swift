@@ -14,11 +14,25 @@ import RealmSwift
 class SplatNet2 {
     
     // メンバ変数を用意しておくけど、クラスを初期化せずに使えるのか？
-//    static private var nsaid: String?
     static private var nickname: String?
-//    static private var iksm_session: String?
     static private var session_token: String?
     static private var thumbnail_url: String?
+    
+    static private let events: [Int: String] = [
+        0: "-",
+        1: "rush",
+        2: "goldie-seeking",
+        3: "griller",
+        4: "the-mothership",
+        5: "fog",
+        6: "cohock-charge"
+    ]
+    
+    static private let tides: [Int: String] = [
+        0: "low",
+        1: "normal",
+        2: "high"
+    ]
     
     // セッショントークンコードからiksm_sessionを取得する関数
     class func getIksmSession(_ session_token_code: String?, _ session_token_code_verifier: String) throws -> (){

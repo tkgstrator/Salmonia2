@@ -203,6 +203,15 @@ class UserInfoCore: ObservableObject {
             self.is_imported = realm.is_imported
         }
     }
+    
+    func updateUnlock(_ is_unlock: Bool) {
+        guard let realm = try? Realm() else { return }
+        let user = realm.objects(UserInfoRealm.self)
+        
+        try? realm.write {
+            user.setValue(is_unlock, forKey: "is_unlock")
+        }
+    }
 }
 
 
