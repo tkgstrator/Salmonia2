@@ -11,11 +11,13 @@ import Foundation
 class ImageURL {
     // ステージのIDからURLを返す関数
     class func stage(_ stage_id: Int) -> String {
-//        print(stages.filter({ $0.id == stage_id }).first?.url)
         return "https://app.splatoon2.nintendo.net/images/coop_stage/" + (stages.filter({ $0.id == stage_id }).first?.url ?? "65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png")
-        
     }
 
+    class func stageid(_ url: String) -> Int {
+        stages.filter({ $0.url == url}).first?.id ?? 5000
+    }
+    
     // ブキ画像のURLを返す関数
     class func weapon(_ weapon_id: Int) -> String {
         // 絶対にあるはずなのでクラッシュしたらコーディングがおかしい

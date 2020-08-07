@@ -12,13 +12,17 @@ import SwiftyJSON
 import RealmSwift
 import WebKit
 
+private let semaphore = DispatchSemaphore(value: 0)
+private let queue = DispatchQueue.global(qos: .utility)
+
 class SalmonStats {
     static let realm = try! Realm() // 多分存在するやろ
     
     static private let reasons: [Int: String?] = [
         0: nil,
         1: "wipe_out",
-        2: "time_limit"
+        2: "time_limit",
+        3: nil
     ]
     
     static private let events: [Int: String] = [
@@ -32,11 +36,25 @@ class SalmonStats {
     ]
     
     static private let tides: [Int: String] = [
-        0: "low",
-        1: "normal",
-        2: "high"
+        1: "low",
+        2: "normal",
+        3: "high"
     ]
     
+    static private let phases: [JSON] = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data).array!
+    
+    // 評価値からサーモンランのウデマエIDを返す（だいたいたつじんだろうとおもうけれど...
+    private class func getGradeID(_ point: Int?) -> Int? {
+        guard let point = point else { return nil }
+        return min(5, 1 + (point / 100))
+    }
+
+    // 評価レートを計算する関数
+    private class func getGradePoint(_ point: Int?) -> Int? {
+        guard let point = point else { return nil }
+        return point - min(4, (point / 100)) * 100
+    }
+
     // プレイヤーの戦績一覧を取得
     class func getPlayerOverView(nsaid: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=" + nsaid
@@ -87,6 +105,31 @@ class SalmonStats {
                 }
             }
         }
+    }
+    
+    class func uploadSalmonStats(token: String, _ results: [Dictionary<String, Any>]) -> JSON {
+        let url = "https://salmon-stats-api.yuki.games/api/results"
+        let header: HTTPHeaders = [
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + token
+        ]
+        let body = ["results": results]
+        
+        var salmon_ids: JSON = JSON()
+        
+        AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(contentType: ["application/json"])
+            .responseJSON(queue: queue) { response in
+                switch response.result {
+                case .success(let value):
+                    salmon_ids = JSON(value)
+                case .failure(let error):
+                    print(error)
+                }
+                semaphore.signal()
+        }
+        semaphore.wait()
+        return salmon_ids
     }
     
     // エラーコード1000を返す
@@ -152,8 +195,8 @@ class SalmonStats {
         
         for (_, wave) in response["waves"] {
             var dict: [String: Any] = [:]
-            //            dict.updateValue(Event(id: wave["event_id"].intValue), forKey: "event_type")
-            //            dict.updateValue(Tide(id: wave["water_id"].intValue), forKey: "water_level")
+            dict.updateValue(events[wave["event_id"].intValue]!, forKey: "event_type")
+            dict.updateValue(tides[wave["water_id"].intValue]!, forKey: "water_level")
             dict.updateValue(wave["golden_egg_delivered"].intValue, forKey: "golden_ikura_num")
             dict.updateValue(wave["golden_egg_appearances"].intValue, forKey: "golden_ikura_pop_num")
             dict.updateValue(wave["golden_egg_quota"].intValue, forKey: "quota_num")
@@ -186,25 +229,29 @@ class SalmonStats {
         //        let phase: JSON = CoopCore().getShiftData(start_time: start_time)
         
         // ある時期をすぎるとクラッシュするなこれ...
-        //        let end_time: Int = phase["EndDateTime"].intValue
-        //        let stage_name: String = Stage(name: phase["StageID"].intValue)
+        let phase: JSON? = phases.filter{ $0["StartDateTime"].intValue == start_time}.first
+        let end_time: Int? = phase?["EndDateTime"].intValue
+        let stage_id: Int? = phase?["StageID"].intValue
+        
+        // print(start_time, end_time, stage_id)
         
         // 辞書型配列にガンガン追加していく
         let grade_point: Int? = my_results["grade_point"].int
         let clear_wave: Int = response["clear_waves"].intValue
+        
+        dict.updateValue(end_time, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
+        dict.updateValue(stage_id, forKey: "stage_id") // ないんだが？？
+
+        dict.updateValue(clear_wave == 3 ? nil : clear_wave + 1, forKey: "failure_wave")
+        dict.updateValue(reasons[clear_wave]!, forKey: "failure_reason")
+        dict.updateValue(getGradePoint(grade_point), forKey: "grade_point") // クソ適当（後で直す
+        dict.updateValue(getGradeID(grade_point), forKey: "grade_id") // 求めてみた
         dict.updateValue(Unixtime(time: response["start_at"].stringValue), forKey: "play_time")
         dict.updateValue(nsaid, forKey: "nsaid")
         dict.updateValue(nil, forKey: "job_id") // これがないのは知っている
         dict.updateValue(response["id"].intValue, forKey: "salmon_id")
-        //        dict.updateValue("", forKey: "stage_name") // ないんだが？？
-        //        dict.updateValue(Grade(point: grade_point), forKey: "grade_point") // クソ適当（後で直す
-        //        dict.updateValue(GradeID(point: grade_point), forKey: "grade_id") // 求めてみた
         dict.updateValue(start_time, forKey: "start_time")
-        //        dict.updateValue(Failure(waves: clear_wave), forKey: "failure_wave")
-        //        dict.updateValue(Reason(id: response["fail_reason_id"].intValue), forKey: "failure_reason")
         dict.updateValue(response["danger_rate"].doubleValue, forKey: "danger_rate")
-        //        dict.updateValue(GradeDelta(wave: clear_wave), forKey: "grade_point_delta") // ここは計算可能
-        //        dict.updateValue(end_time, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
         dict.updateValue(response["golden_egg_delivered"].intValue, forKey: "golden_eggs")
         dict.updateValue(response["power_egg_collected"].intValue, forKey: "power_eggs")
         dict.updateValue(response["fail_reason_id"] == JSON.null, forKey: "is_clear")

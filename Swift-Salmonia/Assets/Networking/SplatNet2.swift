@@ -11,6 +11,9 @@ import Alamofire
 import SwiftyJSON
 import RealmSwift
 
+private let semaphore = DispatchSemaphore(value: 0)
+private let queue = DispatchQueue.global(qos: .utility)
+
 class SplatNet2 {
     
     // メンバ変数を用意しておくけど、クラスを初期化せずに使えるのか？
@@ -229,48 +232,55 @@ class SplatNet2 {
         }
     }
 
-    class func getResultFromSplatNet2(iksm_session: String, job_id: Int, completion: @escaping (JSON?, Error?) -> ()) {
+    class func getResultFromSplatNet2(_ iksm_session: String, _ job_id: Int) -> JSON {
         let url = "https://app.splatoon2.nintendo.net/api/coop_results/" + String(job_id)
         let header: HTTPHeaders = [
             "cookie" : "iksm_session=" + iksm_session
         ]
         
+        var result: JSON = JSON()
         AF.request(url, method: .get, headers: header)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
-            .responseJSON{ response in
+            .responseJSON(queue: queue ){ response in
                 switch response.result {
                 case .success(let value):
-                    completion(JSON(value), nil)
+                    result = JSON(value)
                 case .failure:
-                    completion(nil, APPError.Response(id: 2000, message: "iksm_session is expired"))
+                    break
                 }
+                semaphore.signal()
         }
-
+        semaphore.wait()
+        return result
     }
     
-    class func getSummaryFromSplatNet2(iksm_session: String, completion: @escaping (JSON?, Error?) -> ()) {
+    class func getSummaryFromSplatNet2(_ iksm_session: String) -> JSON {
         let url = "https://app.splatoon2.nintendo.net/api/coop_results"
         let header: HTTPHeaders = [
             "cookie" : "iksm_session=" + iksm_session
         ]
         
+        var summary: JSON = JSON()
         AF.request(url, method: .get, headers: header)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
-            .responseJSON{ response in
+            .responseJSON(queue: queue){ response in
                 switch response.result {
                 case .success(let value):
-                    completion(JSON(value)["summary"], nil)
+                    summary = JSON(value)["summary"]
                 case .failure:
-                    completion(nil, APPError.Response(id: 2000, message: "SplatNet2 Server Error"))
+                    break
                 }
+                semaphore.signal()
         }
+        semaphore.wait()
+        return summary
     }
     
-    class func encodeResultFromJSON(nsaid: String, _ response: JSON) -> CoopResultsRealm {
+    class func encodeResultFromJSON(nsaid: String, salmon_id: Int?, _ response: JSON) -> CoopResultsRealm {
         // 辞書型に変換
-        var result = response.dictionaryObject
+        var result: [String: Any?] = response.dictionaryObject!
         
         //書き込み用のWaveとPlayerの情報を保持
         var waves: [WaveDetailRealm] = []
@@ -304,20 +314,21 @@ class SplatNet2 {
             players.append(PlayerResultsRealm(value: player as Any))
             player_kill_counts = Array(zip(player_kill_counts, boss_kill_counts)).map({ $0.0 + $0.1 })
         }
-        result?.updateValue(response["job_result"]["failure_wave"].int as Any, forKey: "failure_wave")
-        result?.updateValue(response["job_result"]["failure_reason"].string as Any, forKey: "failure_reason")
-        result?.updateValue(response["job_result"]["is_clear"].bool as Any, forKey: "is_clear")
-        result?.updateValue(waves.map({ $0.ikura_num }).reduce(0, +), forKey: "power_eggs")
-        result?.updateValue(waves.map({ $0.golden_ikura_num }).reduce(0, +), forKey: "golden_eggs")
-        result?.updateValue(nsaid, forKey: "nsaid")
-//        result?.updateValue(Stage(url: String(response["schedule"]["stage"]["image"].stringValue.suffix(44))), forKey: "stage_name")
-        result?.updateValue(response["grade"]["id"].intValue, forKey: "grade_id")
-        result?.updateValue(response["boss_counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1["count"].intValue }), forKey: "boss_counts")
-        result?.updateValue(player_kill_counts, forKey: "boss_kill_counts")
+        result.updateValue(salmon_id as Any, forKey: "salmon_id")
+        result.updateValue(response["job_result"]["failure_wave"].int as Any, forKey: "failure_wave")
+        result.updateValue(response["job_result"]["failure_reason"].string as Any, forKey: "failure_reason")
+        result.updateValue(response["job_result"]["is_clear"].bool as Any, forKey: "is_clear")
+        result.updateValue(waves.map({ $0.ikura_num }).reduce(0, +), forKey: "power_eggs")
+        result.updateValue(waves.map({ $0.golden_ikura_num }).reduce(0, +), forKey: "golden_eggs")
+        result.updateValue(nsaid, forKey: "nsaid")
+        result.updateValue(ImageURL.stageid(String(response["schedule"]["stage"]["image"].stringValue.suffix(44))), forKey: "stage_id")
+        result.updateValue(response["grade"]["id"].intValue, forKey: "grade_id")
+        result.updateValue(response["boss_counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1["count"].intValue }), forKey: "boss_counts")
+        result.updateValue(player_kill_counts, forKey: "boss_kill_counts")
         
         // Wave情報とPlayer情報を追加する
-        result?.updateValue(waves, forKey: "wave")
-        result?.updateValue(players, forKey: "player")
+        result.updateValue(waves, forKey: "wave")
+        result.updateValue(players, forKey: "player")
         return CoopResultsRealm(value: result as Any)
     }
     

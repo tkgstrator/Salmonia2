@@ -31,16 +31,6 @@ struct SettingView: View {
                 }
                 Button(action: {
                     SalmonStats.loginSalmonStats() { response in
-                        // エラー処理をする（何事もなければ単にリターンして終わり
-                        guard let error = response else { return }
-                        switch error {
-                        case let APPError.Response(id, message):
-                            self.title = "Error Code \(id)"
-                            self.text = message
-                            self.isVisible = true
-                        default:
-                            break
-                        }
                     }
                 }) {
                     HStack {
@@ -63,6 +53,12 @@ struct SettingView: View {
                 NavigationLink(destination: ImportedView()) {
                     HStack {
                         Text("Import from SalmonStats")
+                        Spacer()
+                    }
+                }
+                NavigationLink(destination: SyncUserNameView()) {
+                    HStack {
+                        Text("Sync Username from SplatNet2")
                         Spacer()
                     }
                 }
