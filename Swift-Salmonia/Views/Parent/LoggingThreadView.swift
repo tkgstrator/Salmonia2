@@ -217,7 +217,7 @@ struct ImportedView: View {
                                         let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(nsaid: nsaid, result)
                                         realm.create(CoopResultsRealm.self, value: object, update: .modified)
                                     }
-                                    self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue)")
+                                    self.messages.append("Result: \((page - 1) * 200 + Int(idx)! + 1) -> \(result["id"].intValue)")
                                 } // For
                                 // 200件に1回データを書き込む（そうでないと書き込み過多になる
                                 try? realm.commitWrite()

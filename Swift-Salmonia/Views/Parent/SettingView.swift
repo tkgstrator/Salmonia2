@@ -42,6 +42,18 @@ struct SettingView: View {
                     Alert(title: Text(title),message: Text(text))
                 }
             }
+            Section(header: Text("Status")) {
+                HStack {
+                    Text("iksm_session")
+                    Spacer()
+                    Text("\(user.iksm_session != nil ? "Registered" : "Unregistered")")
+                }
+                HStack {
+                    Text("laravel session")
+                    Spacer()
+                    Text("\(user.api_token != nil ? "Registered" : "Unregistered")")
+                }
+            }
             Section(header: Text("Unlock")) {
                 Toggle(isOn: $user.is_unlock) {
                     Text("Display Rare Weapon")

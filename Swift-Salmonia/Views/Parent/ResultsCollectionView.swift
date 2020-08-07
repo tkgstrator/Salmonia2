@@ -21,18 +21,15 @@ struct ResultsCollectionView: View {
                    step: 1,
                    onEditingChanged: { pressed in
                     self.core.update(Int(self.threshold))
-//                    if !pressed { self.core.update(Int(self.threshold)) }
             },
                    minimumValueLabel: Text("0").font(.custom("Splatoon1", size: 16)),
                    maximumValueLabel: Text("200").font(.custom("Splatoon1", size: 16)),
-                   //                maximumValueLabel: { if core.results.count >= 100 { return Text("AAA") } else { return Text("BBB")} }(),
-                label: { EmptyView() }
+                   label: { EmptyView() }
             )
                 .padding(.horizontal, 10)
             HStack {
                 Text("Value: \(Int(threshold))")
                 Text("Found: \(core.results.count)")
-                //                Text("Ratio: " + String(((Double(core.results.count) / Double(core.results.count))).round(digit: 4)))
             }
             .font(.custom("Splatoon1", size: 16))
             .frame(height: 10)
@@ -42,11 +39,6 @@ struct ResultsCollectionView: View {
                         ResultStackView(data: self.core.results[idx])
                     }
                 }
-//                ForEach(core.results.lazy.prefix(500), id: \.self) { result in
-//                    NavigationLink(destination: ResultView(data: result)) {
-//                        ResultStackView(data: result)
-//                    }
-//                }
             }.navigationBarTitle("Results")
         }.onAppear() {
         }

@@ -14,10 +14,16 @@ class ImageURL {
         return "https://app.splatoon2.nintendo.net/images/coop_stage/" + (stages.filter({ $0.id == stage_id }).first?.url ?? "65c68c6f0641cc5654434b78a6f10b0ad32ccdee.png")
     }
 
+    // ステージ画像URLからIDを返す関数
     class func stageid(_ url: String) -> Int {
         stages.filter({ $0.url == url}).first?.id ?? 5000
     }
     
+    // 完全にオマケ機能
+    class func stagename(_ id: Int) -> String {
+        stages.filter({ $0.id == id}).first?.name ?? "Spawning Grounds"
+    }
+
     // ブキ画像のURLを返す関数
     class func weapon(_ weapon_id: Int) -> String {
         // 絶対にあるはずなのでクラッシュしたらコーディングがおかしい

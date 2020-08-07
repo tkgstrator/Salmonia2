@@ -11,7 +11,7 @@ import RealmSwift
 import URLImage
 
 struct StageListView: View {
-    @ObservedObject var records = UserResultsCore()
+//    @ObservedObject var records = UserResultsCore()
     @State var stage_list: [Int] = [5000, 5001, 5002, 5003, 5004]
     
     var body: some View {
@@ -23,13 +23,13 @@ struct StageListView: View {
             ForEach(stage_list.indices, id:\.self) { idx in
                 HStack {
                     NavigationLink(destination: StageRecordsView(id: self.$stage_list[idx])) {
-                        URLImage(URL(string: ImageURL.stage(5000))!, content: {$0.image.resizable()})
+                        URLImage(URL(string: ImageURL.stage(self.stage_list[idx]))!, content: {$0.image.resizable()})
                             .frame(width: 112, height: 63)
                             .clipped()
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
                     }
-                    //                    Spacer()
-                    Text("").frame(maxWidth: .infinity)
+                    Spacer()
+                    Text(ImageURL.stagename(self.stage_list[idx])).frame(maxWidth: .infinity)
                 }.font(.custom("Splatoon1", size: 20))
             }
             .buttonStyle(PlainButtonStyle())
@@ -53,23 +53,20 @@ private struct StageRecordsView: View {
     private var team_max_golden_eggs: Int?
     private var no_night_golden_eggs: Int?
     
-    // メモリ消費しそうだなこれ...
-//    private var results: [CoopResultsRealm] = []
-    
     init(id: Binding<Int>) {
         _stage_id = id
-//        results = records.results.all(id: stage_id)
-//        job_num = results.count
-//        win_ratio = (Double(results.filter({ $0.is_clear == true }).count) / Double(job_num)).round(digit: 4)
-//        team_max_power_eggs = results.map({ $0.power_eggs }).max()
-//        team_max_golden_eggs = results.map({ $0.golden_eggs }).max()
-//        team_avg_power_eggs = (Double(results.map({ $0.power_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-//        team_avg_golden_eggs = (Double(results.map({ $0.golden_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-//        my_max_power_eggs = results.map({ $0.player[0].ikura_num }).max()
-//        my_max_golden_eggs = results.map({ $0.player[0].golden_ikura_num }).max()
-//        my_avg_power_eggs = (Double(results.map({ $0.player[0].ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-//        my_avg_golden_eggs = (Double(results.map({ $0.player[0].golden_ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-//        no_night_golden_eggs = results.filter({ $0.wave.filter({ $0.event_type == "-" }).count == 3 }).map({ $0.golden_eggs }).max()
+        records.filter(stage_id)
+        job_num = records.results.count
+        win_ratio = (Double(records.results.filter({ $0.is_clear == true }).count) / Double(job_num)).round(digit: 4)
+        team_max_power_eggs = records.results.map({ $0.power_eggs }).max()
+        team_max_golden_eggs = records.results.map({ $0.golden_eggs }).max()
+        team_avg_power_eggs = (Double(records.results.map({ $0.power_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
+        team_avg_golden_eggs = (Double(records.results.map({ $0.golden_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
+        my_max_power_eggs = records.results.map({ $0.player[0].ikura_num }).max()
+        my_max_golden_eggs = records.results.map({ $0.player[0].golden_ikura_num }).max()
+        my_avg_power_eggs = (Double(records.results.map({ $0.player[0].ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
+        my_avg_golden_eggs = (Double(records.results.map({ $0.player[0].golden_ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
+//        no_night_golden_eggs = records.results.filter({ $0.wave.filter({ $0.event_type == "-" }).count == 3 }).map({ $0.golden_eggs }).max()
     }
     
     var body: some View {
@@ -111,6 +108,7 @@ private struct StageRecordsView: View {
             ZStack {
                 // 背景のシャケ
                 URLImage(URL(string: "https://www.nintendo.co.jp/switch/aab6a/assets/images/salmonrun_pic.png")!, content: { $0.image.resizable().aspectRatio(contentMode: .fill).opacity(0.5) }).frame(maxWidth: .infinity)
+//                ResultsCollectionView()
                 // 実際のジャンプボタン
                 VStack {
                     Text("Max")
@@ -136,7 +134,7 @@ private struct StageRecordsView: View {
             }
         }
         .font(.custom("Splatoon1", size: 22))
-        .navigationBarTitle("TEST")
+        .navigationBarTitle(ImageURL.stagename(stage_id))
     }
 }
 

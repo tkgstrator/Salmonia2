@@ -13,56 +13,6 @@ import SwiftyJSON
 import Alamofire
 
 // ObserverdObjectクラスを持っているところ
-
-class SalmoniaCore {
-    class func syncUserName() {
-        // まずはステージ情報を全てアップデートする
-        // 2021年1月までのシフトが入ったデータをローカルから取得
-        let phases = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data)
-        let shifts: [Int] = CoopResultsRealm.gettime()
-        
-        for start_time in shifts {
-            // 該当するレコードをとってくる
-            guard let records: Results<CoopResultsRealm> = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", start_time) else { return }
-            // 必要なデータを取得
-            guard let phase: JSON = phases.filter({ $0.1["StartDateTime"].intValue == start_time }).map({ $0.1 }).first else { return }
-            
-            try? Realm().write {
-                records.setValue(phase["EndDateTime"].intValue, forKey: "end_time")
-                records.setValue(phase["StageID"].intValue, forKey: "stage_id")
-            }
-            print(records.count, start_time)
-        }
-        
-        // 重複を除いたnsaidを取得する
-        let nsaid: [[String]] = PlayerResultsRealm.getids().chunked(by: 100)
-        
-        DispatchQueue(label: "NSAID").async {
-            for list in nsaid {
-                autoreleasepool {
-                    SplatNet2.getPlayerNickname(nsaid: list) { response, error in
-                        guard let response = response else { return }
-                        DispatchQueue(label: "NickName").async {
-                            guard let realm = try? Realm() else { return }
-                            realm.beginWrite()
-                            for (_, value) in response {
-                                let crew = CrewInfoRealm()
-                                crew.nsaid = value["nsa_id"].string
-                                crew.name = value["nickname"].string
-                                crew.image = value["thumbnail_url"].string
-                                realm.create(CrewInfoRealm.self, value: crew, update: .modified)
-                                realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", crew.nsaid as Any).setValue(crew.name, forKey: "name")
-                            }
-                            try? realm.commitWrite()
-                        }
-                    }
-                }
-                Thread.sleep(forTimeInterval: 5)
-            }
-        }
-    }
-}
-
 class UserResultsCore: ObservableObject {
     private var token: NotificationToken?
 //    private var realm = try! Realm().objects(CoopResultsRealm.self)
@@ -77,6 +27,10 @@ class UserResultsCore: ObservableObject {
         results = realm.objects(CoopResultsRealm.self).filter("golden_eggs>=%@", golden_eggs).sorted(byKeyPath: "golden_eggs")
     }
     
+    func filter(_ stage_id: Int) {
+        results = realm.objects(CoopResultsRealm.self).filter("stage_id=%@", stage_id).sorted(byKeyPath: "play_time", ascending: false)
+    }
+
     // ちょいダサい？
     init() {
         token = core.observe { _ in
