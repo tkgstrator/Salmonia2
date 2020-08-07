@@ -15,63 +15,28 @@ import CryptoSwift
 struct ImportedView: View {
     @State var messages: [String] = []
     
+    
+    init() {
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorStyle = .none
+    }
+    
     var body: some View {
         Group {
             Text("Developed by @tkgling")
             Text("Thanks @Yukinkling, @barley_ural")
             Text("External API @frozenpandaman, @nexusmine")
-            ScrollView {
-                VStack(alignment: .leading) {
-                    Text("Logging Thread").frame(maxWidth: .infinity)
-                    ForEach(messages.indices, id: \.self) { idx in
-                        Text(self.messages[idx])
-                    }
+            List {
+                ForEach(messages.indices, id: \.self) { idx in
+                    Text(self.messages[idx]).frame(height: 14)
                 }
             }
+            .environment(\.defaultMinListRowHeight, 14)
+            .listStyle(PlainListStyle())
         }
         .onAppear() {
             // 最初にiksm_sessionをとっておきます
-            guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
-            guard let is_imported: Bool = realm.objects(UserInfoRealm.self).first?.is_imported else { return }
-            guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
-            let results: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
-            if is_imported == true { return }
             
-            self.messages.append("Importing Results from Salmon Stats")
-            SalmonStats.getResultsLink(nsaid: nsaid) { last, error in
-                guard var last = last else { return }
-                #if DEBUG
-//                last = 1
-                #else
-                #endif
-                DispatchQueue(label: "GetPages").async {
-                    for page in 1...last {
-                        SalmonStats.importResultsFromSalmonStats(nsaid: nsaid, page: page) { response, error in
-                            DispatchQueue(label: "SalmonStats").async {
-                                autoreleasepool {
-                                    guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
-                                    guard let response = response else { return }
-                                    realm.beginWrite()
-                                    for (idx, result) in response {
-                                        let start_time = Unixtime(time: result["start_at"].stringValue)
-                                        // 10秒以内に新規リザルトをつくることは不可能なのでその間としてみる
-                                        let is_valid: Bool = results.filter({ abs($0 - start_time) <= 10 }).count == 0
-                                        if is_valid {
-                                            let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
-                                            realm.create(CoopResultsRealm.self, value: object, update: .modified)
-                                        }
-                                        print("\((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
-                                        self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
-                                        Thread.sleep(forTimeInterval: 0.1)
-                                    } // For
-                                    try? realm.commitWrite()
-                                } // autoreleasepool
-                            } // DispatchQueue in closure
-                        } // importResultsFromSalmonStats
-                        Thread.sleep(forTimeInterval: 20)
-                    } // For
-                } // DispatchQueue
-            } // GetResultsLink
         }
         .padding(.horizontal, 10)
         .font(.custom("Roboto Mono", size: 14))

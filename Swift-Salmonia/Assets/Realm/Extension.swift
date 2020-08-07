@@ -73,8 +73,8 @@ extension Results where Iterator.Element == WaveDetailRealm {
 }
 
 // 一応実装できた
-extension Results where Iterator.Element == CoopResultsRealm {
-    func all(id: Int) -> [CoopResultsRealm] {
-        return Array(self.filter({ $0.stage_name == Stage(name: id) && $0.wave.filter({ $0.ikura_num == 0}).count == 0 }))
-    }
-}
+//extension Results where Iterator.Element == CoopResultsRealm {
+//    func all(_ stage_id: Int) -> [CoopResultsRealm] {
+//        return Array(self.filter({ $0.stage_id == stage_id && $0.wave.filter({ $0.ikura_num == 0}).count == 0 }))
+//    }
+//}

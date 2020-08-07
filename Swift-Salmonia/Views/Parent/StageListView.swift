@@ -23,13 +23,13 @@ struct StageListView: View {
             ForEach(stage_list.indices, id:\.self) { idx in
                 HStack {
                     NavigationLink(destination: StageRecordsView(id: self.$stage_list[idx])) {
-                        URLImage(URL(string: Stage(id: self.stage_list[idx]))!, content: {$0.image.resizable()})
+                        URLImage(URL(string: ImageURL.stage(5000))!, content: {$0.image.resizable()})
                             .frame(width: 112, height: 63)
                             .clipped()
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
                     }
                     //                    Spacer()
-                    Text(Stage(name: self.stage_list[idx])).frame(maxWidth: .infinity)
+                    Text("").frame(maxWidth: .infinity)
                 }.font(.custom("Splatoon1", size: 20))
             }
             .buttonStyle(PlainButtonStyle())
@@ -54,29 +54,29 @@ private struct StageRecordsView: View {
     private var no_night_golden_eggs: Int?
     
     // メモリ消費しそうだなこれ...
-    private var results: [CoopResultsRealm] = []
+//    private var results: [CoopResultsRealm] = []
     
     init(id: Binding<Int>) {
         _stage_id = id
-        results = records.results.all(id: stage_id)
-        job_num = results.count
-        win_ratio = (Double(results.filter({ $0.is_clear == true }).count) / Double(job_num)).round(digit: 4)
-        team_max_power_eggs = results.map({ $0.power_eggs }).max()
-        team_max_golden_eggs = results.map({ $0.golden_eggs }).max()
-        team_avg_power_eggs = (Double(results.map({ $0.power_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        team_avg_golden_eggs = (Double(results.map({ $0.golden_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        my_max_power_eggs = results.map({ $0.player[0].ikura_num }).max()
-        my_max_golden_eggs = results.map({ $0.player[0].golden_ikura_num }).max()
-        my_avg_power_eggs = (Double(results.map({ $0.player[0].ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        my_avg_golden_eggs = (Double(results.map({ $0.player[0].golden_ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        no_night_golden_eggs = results.filter({ $0.wave.filter({ $0.event_type == "-" }).count == 3 }).map({ $0.golden_eggs }).max()
+//        results = records.results.all(id: stage_id)
+//        job_num = results.count
+//        win_ratio = (Double(results.filter({ $0.is_clear == true }).count) / Double(job_num)).round(digit: 4)
+//        team_max_power_eggs = results.map({ $0.power_eggs }).max()
+//        team_max_golden_eggs = results.map({ $0.golden_eggs }).max()
+//        team_avg_power_eggs = (Double(results.map({ $0.power_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
+//        team_avg_golden_eggs = (Double(results.map({ $0.golden_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
+//        my_max_power_eggs = results.map({ $0.player[0].ikura_num }).max()
+//        my_max_golden_eggs = results.map({ $0.player[0].golden_ikura_num }).max()
+//        my_avg_power_eggs = (Double(results.map({ $0.player[0].ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
+//        my_avg_golden_eggs = (Double(results.map({ $0.player[0].golden_ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
+//        no_night_golden_eggs = results.filter({ $0.wave.filter({ $0.event_type == "-" }).count == 3 }).map({ $0.golden_eggs }).max()
     }
     
     var body: some View {
         ScrollView {
             // 概要表示
             ZStack {
-                URLImage(URL(string: Stage(id: stage_id))!, content: { $0.image.resizable().aspectRatio(contentMode: .fill).opacity(0.5) }).frame(maxWidth: .infinity)
+                URLImage(URL(string: ImageURL.stage(stage_id))!, content: { $0.image.resizable().aspectRatio(contentMode: .fill).opacity(0.5) }).frame(maxWidth: .infinity)
                 HStack(alignment: .top) {
                     VStack {
                         Text("Jobs")
@@ -136,7 +136,7 @@ private struct StageRecordsView: View {
             }
         }
         .font(.custom("Splatoon1", size: 22))
-        .navigationBarTitle(Stage(name: stage_id))
+        .navigationBarTitle("TEST")
     }
 }
 

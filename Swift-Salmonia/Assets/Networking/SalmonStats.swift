@@ -194,6 +194,53 @@ class SalmonStats {
         return CoopResultsRealm(value: dict)
     }
     
+    class func importResultsFromSalmonStats() {
+        guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
+        guard let is_imported: Bool = realm.objects(UserInfoRealm.self).first?.is_imported else { return }
+        guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else { return }
+        
+        // データ重複していないかどうか調べるための配列リスト
+        let results: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
+        // データの取り込みは一度しか許可しない
+        if is_imported == true { return }
+        
+//        self.messages.append("Importing Results from Salmon Stats")
+        SalmonStats.getResultsLink(nsaid: nsaid) { last, error in
+            // エラーが発生した場合、それを返す
+            guard var last = last else { return }
+            #if DEBUG
+            last = 3
+            #else
+            #endif
+            DispatchQueue(label: "GetPages").async {
+                for page in 1...last {
+                    SalmonStats.importResultsFromSalmonStats(nsaid: nsaid, page: page) { response, error in
+                        DispatchQueue(label: "SalmonStats").async {
+                            autoreleasepool {
+                                guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
+                                guard let response = response else { return }
+                                realm.beginWrite()
+                                for (idx, result) in response {
+                                    let start_time = Unixtime(time: result["start_at"].stringValue)
+                                    // 10秒以内に新規リザルトをつくることは不可能なのでその間としてみる
+                                    let is_valid: Bool = results.filter({ abs($0 - start_time) <= 10 }).count == 0
+                                    if is_valid {
+                                        let object: CoopResultsRealm = SalmonStats.encodeResultToSplatNet2(response: result, nsaid: nsaid)
+                                        realm.create(CoopResultsRealm.self, value: object, update: .modified)
+                                    }
+                                    print("\((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
+//                                    self.messages.append("Result: \((page - 1) * 200 + Int(idx)!) -> \(result["id"].intValue) \(is_valid)")
+                                    Thread.sleep(forTimeInterval: 0.1)
+                                } // For
+                                try? realm.commitWrite()
+                            } // autoreleasepool
+                        } // DispatchQueue in closure
+                    } // importResultsFromSalmonStats
+                    Thread.sleep(forTimeInterval: 20)
+                } // For
+            } // DispatchQueue
+        } // GetResultsLink
+    }
 //    class func getShiftData() -> JSON {
 //        let phases = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data)
 //        return phases.filter( {$0.1["StartDateTime"].intValue == start_time }).first!.1

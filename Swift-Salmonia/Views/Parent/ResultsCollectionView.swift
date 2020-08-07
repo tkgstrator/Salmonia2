@@ -94,13 +94,13 @@ private struct ResultStackView: View {
             Spacer()
             VStack(alignment: .leading, spacing: 5) {
                 HStack {
-//                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
-//                        .frame(width: 20, height: 20)
+                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+                        .frame(width: 20, height: 20)
                     Text("x\(golden_eggs.value)").frame(width: 50, height: 16, alignment: .leading)
                 }
                 HStack {
-//                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
-//                        .frame(width: 20, height: 20)
+                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+                        .frame(width: 20, height: 20)
                     Text("x\(power_eggs.value)").frame(width: 50, height: 16, alignment: .leading)
                 }
             }.frame(width: 80).font(.custom("Splatfont2", size: 16))

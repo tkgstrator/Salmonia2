@@ -11,12 +11,12 @@ import RealmSwift
 
 struct GoldenEggRecordsView: View {
     @State var threshold: Double = 100
-    @State var records: [CoopResultsRealm] = []
+//    @State var records: [CoopResultsRealm] = []
     @State var percentage: Double = 0.0
     @State var avg_power_eggs: Double = 0.0
     @State var avg_golden_eggs: Double = 0.0
 
-    @ObservedObject var stage = UserResultsCore()
+//    @ObservedObject var stage = UserResultsCore()
     
     var body: some View {
         Group {
@@ -24,17 +24,17 @@ struct GoldenEggRecordsView: View {
                 Text("Golden Eggs: \(Int(threshold))").foregroundColor(.yellow)
                 Slider(value: $threshold, in: 50...200, step: 1, onEditingChanged: { _ in
                     // オブジェクト自体を更新
-                    self.records = Array(self.stage.results.filter("golden_eggs>=%@", Int(self.threshold)))
-                    self.percentage = (Double(self.records.count) / Double(self.stage.results.count)).round(digit: 2)
-                    self.avg_power_eggs = (Double(self.records.map({ $0.power_eggs }).reduce(0, +)) / Double(self.records.count)).round(digit: 2)
-                    self.avg_golden_eggs = (Double(self.records.map({ $0.golden_eggs }).reduce(0, +)) / Double(self.records.count)).round(digit: 2)
+//                    self.records = Array(self.stage.results.filter("golden_eggs>=%@", Int(self.threshold)))
+//                    self.percentage = (Double(self.records.count) / Double(self.stage.results.count)).round(digit: 2)
+//                    self.avg_power_eggs = (Double(self.records.map({ $0.power_eggs }).reduce(0, +)) / Double(self.records.count)).round(digit: 2)
+//                    self.avg_golden_eggs = (Double(self.records.map({ $0.golden_eggs }).reduce(0, +)) / Double(self.records.count)).round(digit: 2)
                 })
             }
             List {
                 HStack {
                     Text("Records")
                     Spacer()
-                    Text("\(records.count)")
+//                    Text("\(records.count)")
                 }
                 HStack {
                     Text("Percentage")
@@ -54,8 +54,8 @@ struct GoldenEggRecordsView: View {
             }
         }.onAppear(){
             #if DEBUG
-            self.records = Array(self.stage.results.filter("golden_eggs>=%@", Int(self.threshold)))
-            self.percentage = (Double(self.records.count) / Double(self.stage.results.count)).round(digit: 2)
+//            self.records = Array(self.stage.results.filter("golden_eggs>=%@", Int(self.threshold)))
+//            self.percentage = (Double(self.records.count) / Double(self.stage.results.count)).round(digit: 2)
             #endif
         }
         .navigationBarTitle("Stage Stats")

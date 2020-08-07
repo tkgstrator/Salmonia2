@@ -41,7 +41,8 @@ struct FutureShiftView: View {
 // 他のビューから参照したくないのでprivateにする
 private struct ShiftStack: View {
     @Binding var phase: JSON
-    
+    @ObservedObject var user = UserInfoCore()
+
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -52,15 +53,16 @@ private struct ShiftStack: View {
                 Spacer()
             }.frame(height: 26)
             HStack {
-                URLImage(URL(string: Stage(id: phase["StageID"].intValue))!, content: {$0.image.resizable().frame(width: 112, height: 63)
+                URLImage(URL(string: ImageURL.stage(phase["StageID"].intValue))!, content: {$0.image.resizable().frame(width: 112, height: 63)
                 }).clipShape(RoundedRectangle(cornerRadius: 8.0))
                 Spacer()
                 HStack {
-                    ForEach(phase["WeaponSets"].arrayObject as! [Int], id:\.self) { weapon_id in
-                        URLImage(URL(string: Weapon(id: weapon_id))!, content: {$0.image.resizable().frame(width: 36, height: 36)})
+                    ForEach((phase["WeaponSets"].arrayObject as! [Int]).indices, id:\.self) { idx in
+                        URLImage(URL(string: ImageURL.weapon(self.phase["WeaponSets"][idx].intValue))!, content: {$0.image.resizable().frame(width: 40, height: 40)})
                     }
-                    Group {
-                        URLImage(URL(string: Weapon(id: phase["RareWeaponID"].intValue))!, content: {$0.image.resizable().frame(width: 36, height: 36)})
+                    // 緑ランダムの場合は最後にクマブキ表示
+                    if user.is_unlock && phase["WeaponSets"][3].intValue == -1 {
+                        URLImage(URL(string: ImageURL.weapon(self.phase["RareWeaponID"].intValue))!, content: {$0.image.resizable().frame(width: 40, height: 40)})
                     }
                 }.frame(maxWidth: .infinity)
             }.frame(height: 63)
@@ -69,8 +71,8 @@ private struct ShiftStack: View {
     }
 }
 
-//struct FutureShiftView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FutureShiftView()
-//    }
-//}
+struct FutureShiftView_Previews: PreviewProvider {
+    static var previews: some View {
+        FutureShiftView()
+    }
+}

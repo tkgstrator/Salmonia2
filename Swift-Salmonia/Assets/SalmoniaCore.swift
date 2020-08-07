@@ -12,6 +12,8 @@ import RealmSwift
 import SwiftyJSON
 import Alamofire
 
+// ObserverdObjectクラスを持っているところ
+
 class SalmoniaCore {
     class func syncUserName() {
         // まずはステージ情報を全てアップデートする
@@ -27,7 +29,7 @@ class SalmoniaCore {
             
             try? Realm().write {
                 records.setValue(phase["EndDateTime"].intValue, forKey: "end_time")
-                records.setValue(Stage(name: phase["StageID"].intValue), forKey: "stage_name")
+                records.setValue(phase["StageID"].intValue, forKey: "stage_id")
             }
             print(records.count, start_time)
         }
@@ -182,7 +184,10 @@ class UserInfoCore: ObservableObject {
     @Published var iksm_session: String?
     @Published var session_token: String?
     @Published var api_token: String?
-    
+    @Published var is_unlock: Bool = false
+    @Published var is_develop: Bool = false
+    @Published var is_imported: Bool = false
+
     init() {
         token = try? Realm().objects(UserInfoRealm.self).observe { _ in
             // 先頭のユーザ情報を使う（サブ垢は考えない）
@@ -193,6 +198,9 @@ class UserInfoCore: ObservableObject {
             self.iksm_session = realm.iksm_session
             self.session_token = realm.session_token
             self.api_token = realm.api_token
+            self.is_unlock = realm.is_unlock
+            self.is_develop = realm.is_develop
+            self.is_imported = realm.is_imported
         }
     }
 }

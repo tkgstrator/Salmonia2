@@ -18,6 +18,8 @@ class UserInfoRealm: Object {
     @objc dynamic var iksm_session: String? = nil // Access token for SplatNet2
     @objc dynamic var session_token: String? = nil // Session token to generate iksm_session
     @objc dynamic var is_imported: Bool = false // imported flag for Salmon Stats
+    @objc dynamic var is_develop: Bool = false // developed flag for Salmon Stats
+    @objc dynamic var is_unlock: Bool = false // unlock grizzco weapon flag for Salmon Stats
 
     override static func primaryKey() -> String? {
         return "nsaid"
@@ -35,13 +37,6 @@ class CoopCardRealm: Object, Codable {
     
     override static func primaryKey() -> String? {
         return "nsaid"
-    }
-    
-    private static var realm = try! Realm()
-    
-    // ステージ名が空のstart_timeの配列を返す
-    static func gettime() -> [Int] {
-        return Array(Set(realm.objects(CoopResultsRealm.self).filter({ $0.stage_name == ""}).map({ $0.start_time })))
     }
 }
 
@@ -72,12 +67,13 @@ class ShiftResultsRealm: Object {
 class CoopResultsRealm: Object {
     @objc dynamic var nsaid = ""
     let job_id = RealmOptional<Int>() // SplatNet2用のID
+    let stage_id = RealmOptional<Int>()
     let salmon_id = RealmOptional<Int>() // SalmonStats用のID
-    @objc dynamic var stage_name = ""
     let grade_point = RealmOptional<Int>()
     let grade_id = RealmOptional<Int>()
-    @objc dynamic var danger_rate = 0.0
     let grade_point_delta = RealmOptional<Int>()
+    let failure_wave = RealmOptional<Int>()
+    @objc dynamic var danger_rate = 0.0
     @objc dynamic var play_time = 0
     @objc dynamic var end_time = 0
     @objc dynamic var start_time = 0
@@ -85,7 +81,6 @@ class CoopResultsRealm: Object {
     @objc dynamic var power_eggs = 0
     @objc dynamic var failure_reason: String?
     @objc dynamic var is_clear: Bool = false
-    let failure_wave = RealmOptional<Int>()
     dynamic var boss_counts = List<Int>()
     dynamic var boss_kill_counts = List<Int>()
     dynamic var wave = List<WaveDetailRealm>()
@@ -94,8 +89,10 @@ class CoopResultsRealm: Object {
     // 多分落ちないはず
     private static var realm = try! Realm()
     
+    // Salmon Statsから取得したデータを変換するため
+    // ステージIDが設定されてないシフト
     static func gettime() -> [Int] {
-        return Array(Set(realm.objects(CoopResultsRealm.self).map({ $0.start_time })))
+        return Array(Set(realm.objects(CoopResultsRealm.self).filter({ $0.stage_id.value == nil}).map({ $0.start_time })))
     }
 
     override static func primaryKey() -> String? {

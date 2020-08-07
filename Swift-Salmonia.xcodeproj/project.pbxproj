@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		101494E524DC019400F0028B /* formated_future_shifts.json in Resources */ = {isa = PBXBuildFile; fileRef = 101494E424DC019400F0028B /* formated_future_shifts.json */; };
 		1021B95924DAA7A800F23494 /* ImportedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1021B95824DAA7A800F23494 /* ImportedView.swift */; };
+		1047557E24DD799A00AF7180 /* ImageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1047557D24DD799A00AF7180 /* ImageURL.swift */; };
 		10505E7024CB653800CF4E04 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10505E6F24CB653800CF4E04 /* Realm.swift */; };
 		10505E7324CB655800CF4E04 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7124CB655800CF4E04 /* RealmSwift.framework */; };
 		10505E7524CB655800CF4E04 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10505E7224CB655800CF4E04 /* Realm.framework */; };
@@ -71,6 +72,7 @@
 		0E9A55168B8C5AC47A7E71A7 /* Pods-Swift-Salmonia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-Salmonia.debug.xcconfig"; path = "Target Support Files/Pods-Swift-Salmonia/Pods-Swift-Salmonia.debug.xcconfig"; sourceTree = "<group>"; };
 		101494E424DC019400F0028B /* formated_future_shifts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = formated_future_shifts.json; path = ../../../../../formated_future_shifts.json; sourceTree = "<group>"; };
 		1021B95824DAA7A800F23494 /* ImportedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedView.swift; sourceTree = "<group>"; };
+		1047557D24DD799A00AF7180 /* ImageURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURL.swift; sourceTree = "<group>"; };
 		10505E6F24CB653800CF4E04 /* Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10505E7124CB655800CF4E04 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		10505E7224CB655800CF4E04 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		10A0AC3624D9414800ADD56E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				1047557D24DD799A00AF7180 /* ImageURL.swift */,
 				10A0AC2B24D90BB300ADD56E /* SplatNet2.swift */,
 				10A0AC2D24D90BC000ADD56E /* SalmonStats.swift */,
 			);
@@ -622,6 +625,7 @@
 				10B6364224C662D000A39FD2 /* AppDelegate.swift in Sources */,
 				10A0AC2424D7E99700ADD56E /* StageListView.swift in Sources */,
 				10A0AC0A24D7DDD800ADD56E /* ResultView.swift in Sources */,
+				1047557E24DD799A00AF7180 /* ImageURL.swift in Sources */,
 				10A0AC2224D7E8DE00ADD56E /* FutureShiftView.swift in Sources */,
 				10A0AC2824D804D000ADD56E /* SalmoniaCore.swift in Sources */,
 				10D2368C24D7D95500B2E27E /* PlayerView.swift in Sources */,

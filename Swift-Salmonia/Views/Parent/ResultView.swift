@@ -85,10 +85,10 @@ private struct ResultPlayerView: View {
                     Spacer()
                     Text("x\(player.boss_kill_counts.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 24))
                     Spacer()
-                    URLImage(URL(string: Special(id: player.special_id))!, content: {$0.image.resizable()})
+                    URLImage(URL(string: ImageURL.special(player.special_id))!, content: {$0.image.resizable()})
                     .frame(width: 30, height: 30)
                     ForEach(player.weapon_list, id:\.self) { weapon in
-                        URLImage(URL(string: Weapon(id: weapon))!, content: {$0.image.resizable()})
+                        URLImage(URL(string: ImageURL.weapon(weapon))!, content: {$0.image.resizable()})
                             .frame(width: 30, height: 30)
                     }
                     }.frame(height: 30)

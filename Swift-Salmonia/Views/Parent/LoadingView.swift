@@ -15,19 +15,7 @@ struct LoadingView: View {
     @State var messages: [String] = []
     
     var body: some View {
-        Group {
-            Text("Developed by @tkgling")
-            Text("Thanks @Yukinkling, @barley_ural")
-            Text("External API @frozenpandaman, @nexusmine")
-            ScrollView {
-                VStack(alignment: .leading) {
-                    Text("Logging Thread").frame(maxWidth: .infinity)
-                    ForEach(messages.indices, id: \.self) { idx in
-                        Text(self.messages[idx])
-                    }
-                }
-            }
-        }
+        loggingThreadView(log: $messages)
         .onAppear() {
             // 最初にiksm_sessionをとっておきます
             guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
@@ -83,7 +71,7 @@ struct LoadingView: View {
                                         guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
                                         
                                         // 書き込むか書き込まないかに関わらず一応データは持っておく
-                                        let result: CoopResultsRealm = SplatNet2.encodeResultToSplatNet2(response: response, nsaid: nsaid)
+                                        let result: CoopResultsRealm = SplatNet2.encodeResultFromJSON(nsaid: nsaid, response)
                                         // 自分と重複するデータがあるかを探す
                                         let play_time: Int? = results.filter({ abs($0 - result.play_time) < 10 }).first
                                         try? realm.write {
@@ -107,11 +95,46 @@ struct LoadingView: View {
                         } // For
                     } // DispatchQueue
                 } // getSummary
-                }
+            }
         }
         .padding(.horizontal, 10)
         .font(.custom("Roboto Mono", size: 14))
         .navigationBarTitle("Logging Thread")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ログを表示するためのビュー
+// 文字列リストでメッセージを渡せば良い
+private struct loggingThreadView: View {
+    @Binding var log: [String]
+    
+    init(log: Binding<[String]>) {
+        _log = log
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorStyle = .none
+    }
+    
+    var body: some View {
+        List {
+            Text("Developed by @tkgling")
+            Text("Thanks @Yukinkling, @barley_ural")
+            Text("External API @frozenpandaman, @nexusmine")
+            ForEach(log.indices, id:\.self) { idx in
+                Text(self.log[idx])
+            }
+        }.environment(\.defaultMinListRowHeight, 14)
     }
 }
 
