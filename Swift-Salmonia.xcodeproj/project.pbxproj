@@ -15,6 +15,7 @@
 		10505E7D24CBDE2B00CF4E04 /* Splatfont2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */; };
 		10505E7F24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */; };
 		105112A224CEED3000EEC0EF /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106B14E524CE1B7F0033011A /* CryptoSwift.framework */; };
+		1062729524DE32B2005E3520 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1062729424DE32B2005E3520 /* OptionView.swift */; };
 		1098BCD324D2A92B003E95E3 /* Splatfont1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1098BCD224D2A884003E95E3 /* Splatfont1.ttf */; };
 		10A0AC0824D7DD5B00ADD56E /* ResultsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC0724D7DD5B00ADD56E /* ResultsCollectionView.swift */; };
 		10A0AC0A24D7DDD800ADD56E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC0924D7DDD800ADD56E /* ResultView.swift */; };
@@ -76,6 +77,7 @@
 		10505E7224CB655800CF4E04 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		10505E7C24CBDE2B00CF4E04 /* Splatfont2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont2.ttf; sourceTree = "<group>"; };
 		10505E7E24CBDE3C00CF4E04 /* RobotoMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Regular.ttf"; sourceTree = "<group>"; };
+		1062729424DE32B2005E3520 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		106B14E524CE1B7F0033011A /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 		1098BCD224D2A884003E95E3 /* Splatfont1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont1.ttf; sourceTree = "<group>"; };
 		10A0AC0724D7DD5B00ADD56E /* ResultsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionView.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				10A0AC0924D7DDD800ADD56E /* ResultView.swift */,
 				10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */,
 				10A0AC2324D7E99700ADD56E /* StageListView.swift */,
+				1062729424DE32B2005E3520 /* OptionView.swift */,
 			);
 			path = Parent;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				1047557E24DD799A00AF7180 /* ImageURL.swift in Sources */,
 				10A0AC2224D7E8DE00ADD56E /* FutureShiftView.swift in Sources */,
 				10A0AC2824D804D000ADD56E /* SalmoniaCore.swift in Sources */,
+				1062729524DE32B2005E3520 /* OptionView.swift in Sources */,
 				10D2368C24D7D95500B2E27E /* PlayerView.swift in Sources */,
 				10D2369224D7DB9700B2E27E /* SalmoniaView.swift in Sources */,
 				10D2368E24D7DB2900B2E27E /* LoggingThreadView.swift in Sources */,
@@ -822,7 +826,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -852,7 +856,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";

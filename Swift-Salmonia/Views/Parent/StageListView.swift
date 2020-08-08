@@ -38,35 +38,12 @@ struct StageListView: View {
 }
 
 private struct StageRecordsView: View {
-    @ObservedObject var records = UserResultsCore()
+    @ObservedObject var stage = UserResultsCore()
     @Binding var stage_id: Int
-    
-    private var job_num: Int = 0
-    private var win_ratio: Double = 0.0
-    private var team_avg_power_eggs: Double = 0
-    private var team_avg_golden_eggs: Double = 0
-    private var my_avg_power_eggs: Double = 0
-    private var my_avg_golden_eggs: Double = 0
-    private var my_max_golden_eggs: Int?
-    private var my_max_power_eggs: Int?
-    private var team_max_power_eggs: Int?
-    private var team_max_golden_eggs: Int?
-    private var no_night_golden_eggs: Int?
-    
+
     init(id: Binding<Int>) {
         _stage_id = id
-        records.filter(stage_id)
-        job_num = records.results.count
-        win_ratio = (Double(records.results.filter({ $0.is_clear == true }).count) / Double(job_num)).round(digit: 4)
-        team_max_power_eggs = records.results.map({ $0.power_eggs }).max()
-        team_max_golden_eggs = records.results.map({ $0.golden_eggs }).max()
-        team_avg_power_eggs = (Double(records.results.map({ $0.power_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        team_avg_golden_eggs = (Double(records.results.map({ $0.golden_eggs }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        my_max_power_eggs = records.results.map({ $0.player[0].ikura_num }).max()
-        my_max_golden_eggs = records.results.map({ $0.player[0].golden_ikura_num }).max()
-        my_avg_power_eggs = (Double(records.results.map({ $0.player[0].ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-        my_avg_golden_eggs = (Double(records.results.map({ $0.player[0].golden_ikura_num }).reduce(0, +)) / Double(job_num)).round(digit: 2)
-//        no_night_golden_eggs = records.results.filter({ $0.wave.filter({ $0.event_type == "-" }).count == 3 }).map({ $0.golden_eggs }).max()
+        stage.filter(stage_id)
     }
     
     var body: some View {
@@ -77,20 +54,20 @@ private struct StageRecordsView: View {
                 HStack(alignment: .top) {
                     VStack {
                         Text("Jobs")
-                        Text("\(job_num)")
+                        Text("\(stage.job_num.value)")
                     }
                     VStack {
                         Text("Avg")
                         VStack(spacing: 0) {
                             HStack {
-                                Text(String(team_avg_golden_eggs)).foregroundColor(.yellow)
+                                Text(String(stage.team_avg_golden_eggs.value)).foregroundColor(.yellow)
                                 Text("/")
-                                Text(String(team_avg_power_eggs)).foregroundColor(.red)
+                                Text(String(stage.team_avg_power_eggs.value)).foregroundColor(.red)
                             }
                             HStack {
-                                Text(String(my_avg_golden_eggs)).foregroundColor(.yellow)
+                                Text(String(stage.my_avg_golden_eggs.value)).foregroundColor(.yellow)
                                 Text("/")
-                                Text(String(my_avg_power_eggs)).foregroundColor(.red)
+                                Text(String(stage.my_avg_power_eggs.value)).foregroundColor(.red)
                             }
                             .font(.custom("Splatoon1", size: 18))
                             .frame(height: 18)
@@ -98,7 +75,7 @@ private struct StageRecordsView: View {
                     }
                     VStack {
                         Text("Win")
-                        Text(String(win_ratio))
+//                        Text(String(win_ratio))
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -114,14 +91,14 @@ private struct StageRecordsView: View {
                     Text("Max")
                     VStack(spacing: 0) {
                         HStack {
-                            Text(String(team_max_golden_eggs.value)).foregroundColor(.yellow)
+                            Text(String(stage.team_max_golden_eggs.value)).foregroundColor(.yellow)
                             Text("/")
-                            Text(String(team_max_power_eggs.value)).foregroundColor(.red)
+                            Text(String(stage.team_max_power_eggs.value)).foregroundColor(.red)
                         }
                         HStack {
-                            Text(String(my_max_golden_eggs.value)).foregroundColor(.yellow)
+                            Text(String(stage.my_max_golden_eggs.value)).foregroundColor(.yellow)
                             Text("/")
-                            Text(String(my_max_power_eggs.value)).foregroundColor(.red)
+                            Text(String(stage.my_max_power_eggs.value)).foregroundColor(.red)
                         }
                         .font(.custom("Splatoon1", size: 18))
                         .frame(height: 18)

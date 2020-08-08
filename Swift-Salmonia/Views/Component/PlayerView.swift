@@ -22,8 +22,12 @@ struct PlayerView: View {
                              content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                         .frame(width: 80, height: 80)
                 }.buttonStyle(PlainButtonStyle())
-                Text(self.user.nickname.value).font(.custom("Splatfont2", size: 26)).frame(maxWidth: .infinity).frame(height: 80)
-            }.frame(height: 70)
+                Text(self.user.nickname.value).font(.custom("Splatfont2", size: 26)).frame(maxWidth: .infinity)
+            }
+            Text("Overview")
+                .frame(height: 28)
+                .foregroundColor(.orange)
+                .font(.custom("Splatoon1", size: 20))
             HStack {
                 VStack(spacing: 0) {
                     Text("Jobs")
@@ -44,7 +48,7 @@ struct PlayerView: View {
                     Text("\(card.kuma_point_total.value)")
                 }
             }
-            .frame(height: 80)
+//            .frame(height: 80)
             .font(.custom("Splatfont2", size: 18))
         }
     }

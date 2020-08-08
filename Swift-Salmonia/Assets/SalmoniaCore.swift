@@ -15,28 +15,107 @@ import Alamofire
 // ObserverdObjectクラスを持っているところ
 class UserResultsCore: ObservableObject {
     private var token: NotificationToken?
-//    private var realm = try! Realm().objects(CoopResultsRealm.self)
+    
     private var core = try! Realm().objects(CoopResultsRealm.self)
     private var realm = try! Realm()
-
-//    @Published var results = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
+    
+    // 保持しておきたいデータ
+    // しかしこれらは常に持っておきたいわけではないのが難しい...
+    @Published var job_num: Int?
+    @Published var win_ratio: Double?
+    @Published var team_avg_power_eggs: Double?
+    @Published var team_avg_golden_eggs: Double?
+    @Published var my_avg_power_eggs: Double?
+    @Published var my_avg_golden_eggs: Double?
+    @Published var my_max_golden_eggs: Int?
+    @Published var my_max_power_eggs: Int?
+    @Published var team_max_power_eggs: Int?
+    @Published var team_max_golden_eggs: Int?
+    @Published var no_night_golden_eggs: Int?
+    
+    //    @Published var results = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
     @Published var results = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
-
+    
     // 金イクラ数でフィルタリング
     func update(_ golden_eggs: Int) {
         results = realm.objects(CoopResultsRealm.self).filter("golden_eggs>=%@", golden_eggs).sorted(byKeyPath: "golden_eggs")
     }
     
+    // ステージでフィルタ
     func filter(_ stage_id: Int) {
         results = realm.objects(CoopResultsRealm.self).filter("stage_id=%@", stage_id).sorted(byKeyPath: "play_time", ascending: false)
+        
+        job_num = results.count
+        team_avg_power_eggs = (Double(results.sum(ofProperty: "power_eggs") as Int) / Double(job_num!)).round(digit: 2)
+        team_avg_golden_eggs = (Double(results.sum(ofProperty: "golden_eggs") as Int) / Double(job_num!)).round(digit: 2)
+        team_max_power_eggs = results.max(ofProperty: "power_eggs")
+        team_max_golden_eggs = results.max(ofProperty: "golden_eggs")
+        
+        let power_eggs = results.map({ $0.player[0].ikura_num })
+        let golden_eggs = results.map({ $0.player[0].golden_ikura_num })
+        my_max_power_eggs = power_eggs.max()
+        my_max_golden_eggs = golden_eggs.max()
+        // これもうちょっと上手く書けない？
+        my_avg_power_eggs = (Double(power_eggs.reduce(0, +)) / Double(job_num!)).round(digit: 2)
+        my_avg_golden_eggs = Double(Double(golden_eggs.reduce(0, +)) / Double(job_num!)).round(digit: 2)
     }
-
-    // ちょいダサい？
+    
+    // データを再読込する
+    func reload() {
+        self.results = self.realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
+    }
+    
     init() {
         token = core.observe { _ in
             // データベースを再読込して上書きする
-//            self.results = self.realm.sorted(byKeyPath: "play_time", ascending: false)
+            // データベースに変更があったときは常に全データを読み込んで保持してしまう
+            // 変更があったときに計算し直すとしてもそれは意味のないものになる
             self.results = self.realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
+        }
+    }
+}
+
+class CrewInfoCore: ObservableObject {
+    private var token: NotificationToken?
+    
+    @Published var players: Results<CrewInfoRealm> = try! Realm().objects(CrewInfoRealm.self)
+    @Published var matchids: [(nsaid: String?, name: String?, url: String?, match: Int)] = []
+    
+    func match(_ value: Int) {
+        // CrewInfoRealmに保存されているユーザだけで検索
+        guard let realm = try? Realm() else { return }
+        guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid! else { return }
+        
+        // 自分以外のユーザの情報を取得
+        let players: Results<CrewInfoRealm> = realm.objects(CrewInfoRealm.self).filter("nsaid!=%@", nsaid)
+        
+        for player in players {
+            // マッチングしたリザルトを取得
+            let results: Results<PlayerResultsRealm> = realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", player.nsaid!)
+            let match: Int = results.count
+            matchids.append((player.nsaid, player.name, player.image, match))
+        }
+        // マッチング回数順にソート
+        matchids = matchids.sorted { $0.match > $1.match }.prefix(100).map({ $0 })
+    }
+    
+    init() {
+        token = try? Realm().objects(PlayerResultsRealm.self).observe { _ in
+            self.players = try! Realm().objects(CrewInfoRealm.self)
+            guard let realm = try? Realm() else { return }
+            guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid! else { return }
+            
+            // 自分以外のユーザの情報を取得
+            let players: Results<CrewInfoRealm> = realm.objects(CrewInfoRealm.self).filter("nsaid!=%@", nsaid)
+            
+            for player in players {
+                // マッチングしたリザルトを取得
+                let results: Results<PlayerResultsRealm> = realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", player.nsaid!)
+                let match: Int = results.count
+                self.matchids.append((player.nsaid, player.name, player.image, match))
+            }
+            // マッチング回数順にソートして最大上位100人を出力
+            self.matchids = self.matchids.sorted { $0.match > $1.match }.prefix(100).map({ $0 })
         }
     }
 }
@@ -141,7 +220,7 @@ class UserInfoCore: ObservableObject {
     @Published var is_unlock: Bool = false
     @Published var is_develop: Bool = false
     @Published var is_imported: Bool = false
-
+    
     init() {
         token = try? Realm().objects(UserInfoRealm.self).observe { _ in
             // 先頭のユーザ情報を使う（サブ垢は考えない）

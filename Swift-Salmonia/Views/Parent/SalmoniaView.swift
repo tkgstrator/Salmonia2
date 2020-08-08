@@ -17,6 +17,7 @@ struct SalmoniaView: View {
             PlayerView() // プレイヤーの概要を表示
             FutureShiftView() // 将来のシフトを表示
             StageListView() // 記録を表示
+            OptionView()
         }
             // なんかここダサいけど直し方わからん
             .navigationBarTitle(Text("Salmonia"))
