@@ -41,6 +41,8 @@ class SalmonStats {
         3: "high"
     ]
     
+
+    
     static private let phases: [JSON] = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data).array!
     
     // 評価値からサーモンランのウデマエIDを返す（だいたいたつじんだろうとおもうけれど...
@@ -48,13 +50,13 @@ class SalmonStats {
         guard let point = point else { return nil }
         return min(5, 1 + (point / 100))
     }
-
+    
     // 評価レートを計算する関数
     private class func getGradePoint(_ point: Int?) -> Int? {
         guard let point = point else { return nil }
         return point - min(4, (point / 100)) * 100
     }
-
+    
     // プレイヤーの戦績一覧を取得
     class func getPlayerOverView(nsaid: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=" + nsaid
@@ -67,6 +69,35 @@ class SalmonStats {
                 print(error)
             }
         }
+    }
+    
+    // プレイヤーの最新10件のシフトデータを取得
+    class func getPlayerShiftStats(nsaid: String, completion: @escaping (JSON) -> ()) {
+        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/schedules"
+        
+        AF.request(url, method: .get).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+//                print(JSON(value))
+                completion(JSON(value)["data"])
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    class func getPlayerShiftStatsDetail(nsaid: String, start_time: Int, completion: @escaping (JSON) -> ()) {
+        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/schedules/\(start_time)"
+        
+        AF.request(url, method: .get).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                completion(JSON(value))
+            case .failure(let error):
+                print(error)
+            }
+        }
+
     }
     
     // プレイヤーの最新のリザルト10件の概要を取得
@@ -153,7 +184,7 @@ class SalmonStats {
     
     class func getResultsLastLink(nsaid: String) -> Int {
         let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=\(nsaid)"
-
+        
         var link: Int = 0
         AF.request(url, method: .get)
             .validate(contentType: ["application/json"])
@@ -172,24 +203,24 @@ class SalmonStats {
         print("LAST PAGE", link)
         return link
         
-// 仕様変更で動かなくなったので変更
-//        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200"
-//
-//        var link: Int = 0
-//        AF.request(url, method: .get)
-//            .validate(contentType: ["application/json"])
-//            .responseJSON(queue: queue) { response in
-//                switch response.result {
-//                case .success(let value):
-//                    link = JSON(value)["to"].intValue
-//                case .failure:
-//                    print("ERROR")
-//                }
-//                semaphore.signal()
-//        }
-//        semaphore.wait()
-//        print("LAST PAGE", link)
-//        return link
+        // 仕様変更で動かなくなったので変更
+        //        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200"
+        //
+        //        var link: Int = 0
+        //        AF.request(url, method: .get)
+        //            .validate(contentType: ["application/json"])
+        //            .responseJSON(queue: queue) { response in
+        //                switch response.result {
+        //                case .success(let value):
+        //                    link = JSON(value)["to"].intValue
+        //                case .failure:
+        //                    print("ERROR")
+        //                }
+        //                semaphore.signal()
+        //        }
+        //        semaphore.wait()
+        //        print("LAST PAGE", link)
+        //        return link
     }
     
     class func importResultsFromSalmonStats(nsaid: String, page: Int) -> JSON {
@@ -209,6 +240,32 @@ class SalmonStats {
         }
         semaphore.wait()
         return results
+    }
+   
+    class func encodeStats(_ response: JSON) -> SalmonStatsFormat {
+        let summary: JSON = response["summary"]
+        let global: JSON = response["global"]
+        
+        let boss_ids: [Int] = [3, 6, 9, 12, 13, 14, 15, 16, 21]
+        var stats: SalmonStatsFormat = SalmonStatsFormat()
+
+        let clear_games = summary["clear_games"].intValue
+        let games = summary["games"].intValue
+        let clear_ratio: Double = (Double(clear_games) / Double(games)).round(digit: 4)
+
+        stats.games = games
+        stats.clear_ratio = clear_ratio
+
+        for id in boss_ids {
+            let s_appear: Double = Double(summary["boss_appearance_\(id)"].intValue)
+            let s_defeat: Double = Double(summary["player_boss_elimination_\(id)"].intValue)
+            let g_appear: Double = Double(global["boss_appearance_\(id)"].intValue)
+            let g_defeat: Double = Double(global["boss_elimination_\(id)"].intValue)
+            stats.my_defeated.append((s_defeat/s_appear).round(digit: 4))
+            stats.other_defeated.append((g_defeat/g_appear/4.0).round(digit: 4))
+        }
+        
+        return stats
     }
     
     class func encodeResultToSplatNet2(nsaid: String, _ response: JSON) -> CoopResultsRealm {
@@ -252,12 +309,12 @@ class SalmonStats {
         }
         
         let start_time: Int = Unixtime(time: response["schedule_id"].stringValue)
-
+        
         // ある時期をすぎるとクラッシュするなこれ...
         let phase: JSON? = phases.filter{ $0["StartDateTime"].intValue == start_time}.first
         let end_time: Int? = phase?["EndDateTime"].intValue
         let stage_id: Int? = phase?["StageID"].intValue
-
+        
         // 辞書型配列にガンガン追加していく
         let grade_point: Int? = my_results["grade_point"].int
         let clear_wave: Int = response["clear_waves"].intValue
@@ -283,4 +340,13 @@ class SalmonStats {
         dict.updateValue(players, forKey: "player")
         return CoopResultsRealm(value: dict)
     }
+}
+
+struct SalmonStatsFormat {
+    public var games: Int = 0
+    public var clear_ratio: Double = 0
+    public var my_defeated: [Double] = []
+    public var other_defeated: [Double] = []
+    
+    init() { }
 }

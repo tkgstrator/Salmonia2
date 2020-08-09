@@ -107,15 +107,15 @@ class CrewInfoCore: ObservableObject {
             
             // 自分以外のユーザの情報を取得
             let players: Results<CrewInfoRealm> = realm.objects(CrewInfoRealm.self).filter("nsaid!=%@", nsaid)
-            
+            var tmp: [(nsaid: String?, name: String?, url: String?, match: Int)] = []
             for player in players {
                 // マッチングしたリザルトを取得
                 let results: Results<PlayerResultsRealm> = realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", player.nsaid!)
                 let match: Int = results.count
-                self.matchids.append((player.nsaid, player.name, player.image, match))
+                tmp.append((player.nsaid, player.name, player.image, match))
             }
             // マッチング回数順にソートして最大上位100人を出力
-            self.matchids = self.matchids.sorted { $0.match > $1.match }.prefix(100).map({ $0 })
+            self.matchids = tmp.sorted { $0.match > $1.match }.prefix(100).map({ $0 })
         }
     }
 }

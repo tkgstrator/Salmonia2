@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import RealmSwift
+import SwiftyJSON
 
 extension String {
     // 正規表現マッチングを実現する
@@ -60,18 +60,15 @@ extension Array {
     }
 }
 
-//// それぞれ水没厳選していないWAVEを抽出するコード
-//extension Results<WaveDetailRealm> {
-//    func all() -> Results<WaveDetailRealm> {
-//        return self.filter( {$0.ikura_num != 0})
-//    }
-//}
-extension Results where Iterator.Element == WaveDetailRealm {
-    func all() -> LazyFilterSequence<Results<WaveDetailRealm>> {
-        return self.filter({ $0.ikura_num != 0 })
+extension JSON {
+    var intObject: [Int] {
+        let str: String = self.stringValue.replacingOccurrences(of: " ", with: "")
+        let substr: String = String(str[str.index(str.startIndex, offsetBy: 1) ..< str.index(str.endIndex, offsetBy: -1)])
+        let array: [String] = substr.components(separatedBy: ",")
+        let arrayInt: [Int] = array.map({ Int($0)! })
+        return arrayInt
     }
 }
-
 // 一応実装できた
 //extension Results where Iterator.Element == CoopResultsRealm {
 //    func all(_ stage_id: Int) -> [CoopResultsRealm] {

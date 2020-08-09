@@ -22,7 +22,7 @@ struct PlayerView: View {
                              content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                         .frame(width: 80, height: 80)
                 }.buttonStyle(PlainButtonStyle())
-                Text(self.user.nickname.value).font(.custom("Splatfont2", size: 26)).frame(maxWidth: .infinity)
+                Text(self.user.nickname.value).font(.custom("Splatoon1", size: 28)).frame(maxWidth: .infinity)
             }
             Text("Overview")
                 .frame(height: 28)
@@ -37,9 +37,9 @@ struct PlayerView: View {
                 VStack(spacing: 0) {
                     Text("Eggs")
                     HStack {
-                        Text("\(card.ikura_total.value)").foregroundColor(.red)
-                        Text("/")
                         Text("\(card.golden_ikura_total.value)").foregroundColor(.yellow)
+                        Text("/")
+                        Text("\(card.ikura_total.value)").foregroundColor(.red)
                     }
                 }
                 Spacer()
@@ -49,7 +49,7 @@ struct PlayerView: View {
                 }
             }
 //            .frame(height: 80)
-            .font(.custom("Splatfont2", size: 18))
+            .font(.custom("Splatoon1", size: 18))
         }
     }
 }

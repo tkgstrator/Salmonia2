@@ -129,10 +129,8 @@ class PlayerResultsRealm: Object {
     dynamic var weapon_list = List<Int>()
     dynamic var special_counts = List<Int>()
     
-    // 多分落ちないはず
-    private static var realm = try! Realm()
-    
     static func getids() -> [String] {
+        guard let realm = try? Realm() else { return [] }
         return Array(Set(realm.objects(PlayerResultsRealm.self).map({ $0.nsaid })))
 //        return Array(Set(realm.objects(PlayerResultsRealm.self).filter("name=%@", "").map({ $0.nsaid })))
     }

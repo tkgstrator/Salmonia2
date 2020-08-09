@@ -17,19 +17,13 @@ struct SalmonStatsResultsView: View {
     var body: some View {
         List {
             ForEach(results.indices, id: \.self) { idx in
-//                Text("\(idx)")
                 ResultStackView(dict: self.results[idx])
             }
-//            ForEach(results, id:\.self) { result in
-//                Text("\(idx)")
-//                //                NavigationLink(destination: ResultView(data: result)) {
-//                //                    ResultStackView(data: result)
-//                //                }
-//            }
         }.navigationBarTitle("Results")
             .onAppear() {
                 SalmonStats.getPlayerOverViewResults(nsaid: self.nsaid) { response in
                     for (_, res) in response {
+//                        print(response)
                         self.results.append(res)
 //                        self.results.append(res["power_egg_collected"].intValue)
 //                        print(json)
@@ -41,22 +35,27 @@ struct SalmonStatsResultsView: View {
 
 private struct ResultStackView: View {
     private var grade_point: Int?
+    private var danger_rate: Double
     private var job_result_is_clear: Bool
     private var job_result_failure_wave: Int?
     private var golden_eggs: Int?
     private var power_eggs: Int?
     
+    // Salmon Statsから読み込んだときの処理
     init(dict: JSON) {
         grade_point = 0
         // 厳密性に欠けるコードなので注意
+        danger_rate = dict["danger_rate"].doubleValue
         job_result_is_clear = dict["fail_reason_id"].intValue == 0
         job_result_failure_wave = dict["clear_waces"].intValue + 1
         golden_eggs = dict["golden_egg_delivered"].intValue
         power_eggs = dict["power_egg_collected"].intValue
     }
     
+    // SplatNet2から読み込んだときの処理
     init(data: CoopResultsRealm) {
         grade_point = data.grade_point.value
+        danger_rate = data.danger_rate
         job_result_is_clear = data.is_clear
         job_result_failure_wave = data.failure_wave.value
         golden_eggs = data.golden_eggs
@@ -65,23 +64,25 @@ private struct ResultStackView: View {
     
     var body: some View {
         HStack {
-            // クリアしたかの情報（色をつけたい所存）
             Group {
                 if job_result_is_clear {
-                    Text("Clear!")
+                    Text("Clear!").foregroundColor(.green).font(.custom("Splatoon1", size: 16))
                 } else {
                     VStack {
-                        Text("Defeat").frame(height: 14)
+                        Text("Defeat").frame(height: 16).font(.custom("Splatoon1", size: 16))
                         HStack {
                             Text("Wave").frame(height: 11)
                             Text("\(job_result_failure_wave.value)").frame(height: 11)
-                        }.font(.custom("Splatoon1", size: 11))
+                        }
                     }
+                    .foregroundColor(.orange)
+                    .font(.custom("Splatoon1", size: 14))
                 }
                 
-            }.frame(width: 60).font(.custom("Splatoon1", size: 14))
+            }.frame(width: 60).font(.custom("Splatoon1", size: 16))
             // ブキとか？
             // 金イクラ数とかの情報（イカリング2準拠スタイル）
+            Text(String(danger_rate)+"%").font(.custom("Splatoon1", size: 16))
             Spacer()
             VStack(alignment: .leading, spacing: 5) {
                 HStack {
@@ -97,7 +98,7 @@ private struct ResultStackView: View {
             }.frame(width: 80).font(.custom("Splatfont2", size: 16))
         }
     }
-    
+
 }
 
 struct SalmonStatsResultsView_Previews: PreviewProvider {

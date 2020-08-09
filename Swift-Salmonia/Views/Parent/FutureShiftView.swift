@@ -26,7 +26,7 @@ struct FutureShiftView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text("Shift Schedule")
-                .frame(height: 28)
+//                .frame(height: 28)
                 .foregroundColor(.orange)
                 .font(.custom("Splatoon1", size: 20))
             ForEach(phases.indices) { idx in

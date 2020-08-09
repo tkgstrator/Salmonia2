@@ -225,7 +225,7 @@ class SplatNet2 {
             case false: // 再ログイン（アップデート）
                 print("USERINFO UPDATE (LOGIN SPLATNET2)")
                 user.setValue(iksm_session, forKey: "iksm_session")
-                user.setValue(session_token, forKey: "iksm_session")
+                user.setValue(session_token, forKey: "session_token")
                 user.setValue(thumbnail_url, forKey: "image")
                 user.setValue(nickname, forKey: "name")
             }
@@ -373,14 +373,16 @@ class SplatNet2 {
             "cookie" : "iksm_session=\(iksm_session)"
         ]
         
-        AF.request(url, method: .get, headers: header).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                complition(JSON(value))
-                break
-            case .failure(let error):
-                print(error)
-            }
+        AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    complition(JSON(value))
+                case .failure(let error):
+                    print(error)
+                }
         }
     }
     
@@ -394,7 +396,8 @@ class SplatNet2 {
         ]
         
         AF.request(url, method: .get, headers: header)
-            .validate(statusCode: 200..<300).validate(contentType: ["application/json"])
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
             .responseJSON { response in
             switch response.result {
             case .success(let value):

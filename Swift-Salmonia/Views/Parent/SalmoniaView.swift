@@ -8,12 +8,13 @@
 
 import SwiftUI
 import RealmSwift
+import URLImage
 
 // 自分を表示するためのビュー
 struct SalmoniaView: View {
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             PlayerView() // プレイヤーの概要を表示
             FutureShiftView() // 将来のシフトを表示
             StageListView() // 記録を表示
@@ -24,11 +25,15 @@ struct SalmoniaView: View {
             .navigationBarItems(leading:
                 NavigationLink(destination: SettingView())
                 {
-                    Image(systemName: "gear").resizable().scaledToFit().frame(width: 30, height: 30)
+                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/bb035c04e62c044139986540e6c3b8b3.png")!,
+                             content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                        .frame(width: 30, height: 30)
                 }, trailing:
                 NavigationLink(destination: LoadingView())
                 {
-                    Image(systemName: "arrow.clockwise.icloud").resizable().scaledToFit().frame(width: 30, height: 30)
+                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!,
+                             content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                        .frame(width: 30, height: 30)
                 }
         )
             .padding(.horizontal, 10)

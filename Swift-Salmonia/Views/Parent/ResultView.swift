@@ -13,6 +13,7 @@ import URLImage
 struct ResultView: View {
     @State var waves: RealmSwift.List<WaveDetailRealm>
     @State var players: RealmSwift.List<PlayerResultsRealm>
+    @State var isVisible: Bool = true
     
     init(data: CoopResultsRealm) {
         _waves = State(initialValue: data.wave)
@@ -29,13 +30,20 @@ struct ResultView: View {
                 }
                 VStack {
                     ForEach(Range(1...players.count)) { idx in
-                        ResultPlayerView(player: self.$players[idx - 1])
+                        ResultPlayerView(player: self.$players[idx - 1], isVisible: self.$isVisible)
                     }
                 }
             }
         }
         .padding(.horizontal, 10)
         .navigationBarTitle("Detail")
+        .navigationBarItems(trailing:
+                URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/skill/8a3f06a972689b094f762626ff36b3db8ee545b5.png")!,
+                             content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
+                ).frame(width: 30, height: 30).onTapGesture {
+                    self.isVisible.toggle()
+            }
+        )
     }
 }
 
@@ -76,12 +84,13 @@ private struct ResultWaveView: View {
 
 private struct ResultPlayerView: View {
     @Binding var player: PlayerResultsRealm
+    @Binding var isVisible: Bool
     
     var body: some View {
         NavigationLink(destination: SalmonStatsView(nsaid: $player.nsaid)) {
             VStack(spacing: 0) {
                 HStack {
-                    Text(player.name.value).font(.custom("Splatfont2", size: 24))
+                    Text(isVisible ? player.name.value : "-").font(.custom("Splatfont2", size: 22)).frame(width: 120)
                     Spacer()
                     Text("x\(player.boss_kill_counts.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 24))
                     Spacer()

@@ -39,9 +39,17 @@ struct ResultsCollectionView: View {
                         ResultStackView(data: self.core.results[idx])
                     }
                 }
-            }.navigationBarTitle("Results")
-        }.onAppear() {
+            }
         }
+        .navigationBarTitle("Results")
+        .navigationBarItems(trailing:
+                NavigationLink(destination: LoadingView())
+                {
+                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!,
+                             content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                        .frame(width: 30, height: 30)
+                }
+        )
     }
 }
 
