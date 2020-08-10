@@ -33,8 +33,12 @@ class UserResultsCore: ObservableObject {
     @Published var team_max_golden_eggs: Int?
     @Published var no_night_golden_eggs: Int?
     
-    //    @Published var results = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
     @Published var results = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
+    
+    // フィルタリングとソーティングを解除
+    func reset() {
+        results = realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
+    }
     
     // 金イクラ数でフィルタリング
     func update(_ golden_eggs: Int) {
@@ -58,11 +62,6 @@ class UserResultsCore: ObservableObject {
         // これもうちょっと上手く書けない？
         my_avg_power_eggs = (Double(power_eggs.reduce(0, +)) / Double(job_num!)).round(digit: 2)
         my_avg_golden_eggs = Double(Double(golden_eggs.reduce(0, +)) / Double(job_num!)).round(digit: 2)
-    }
-    
-    // データを再読込する
-    func reload() {
-        self.results = self.realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
     }
     
     init() {

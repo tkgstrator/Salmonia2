@@ -64,16 +64,57 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     {
+        // Realmを準備
+        guard let realm = try? Realm() else { return }
         // URLチェックを行う
         guard let url = URLContexts.first?.url else { return }
         guard let session_token_code = url.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { return }
         let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
         
-        do {
-            try SplatNet2.getIksmSession(session_token_code, session_token_code_verifier)
-        } catch {
-            // 黙殺されるからsession_token_codeが空っぽのとき以外ここは発生しない
-            print("ERROR")
+        SplatNet2.getSessionToken(session_token_code, session_token_code_verifier) { response in
+            // 通信エラー対策にゃも
+            guard let session_token = response["session_token"].string else { return }
+            SplatNet2.getAccessToken(session_token) { response in
+                guard let access_token = response["access_token"].string else { return }
+                print("ACCESS TOKEN", access_token)
+                SplatNet2.callFlapgAPI(access_token, "nso") { response in
+                    SplatNet2.getSplatoonToken(response) { response in
+                        guard let splatoon_token = response["splatoon_token"].string else { return }
+                        guard let nickname = response["user"]["name"].string else { return }
+                        guard let thumbnail_url = response["user"]["image"].string else { return }
+                        print("NICKNAME", nickname)
+                        print("SPLATOON TOKEN", splatoon_token)
+                        SplatNet2.callFlapgAPI(splatoon_token, "app") { response in
+                            SplatNet2.getSplatoonAccessToken(response, splatoon_token) { response in
+                                guard let splatton_access_token = response["splatoon_access_token"].string else { return }
+                                print("SPLATOON ACCESS TOKEN", splatton_access_token)
+                                SplatNet2.getIksmSession(splatton_access_token) { response in
+                                    guard let iksm_session = response["iksm_session"].string else { return }
+                                    guard let nsaid = response["nsaid"].string else { return }
+                                    print("IKSM SESSION", iksm_session)
+                                    
+                                    try? Realm().write {
+                                        let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
+                                        switch user.isEmpty {
+                                        case true: // 新規作成
+                                            print("CREATE NEW USER (LOGIN SPLATNET2)")
+                                            let user: [String: String?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token]
+                                            realm.create(UserInfoRealm.self, value: user)
+                                        case false: // 再ログイン（アップデート）
+                                            print("USERINFO UPDATE (LOGIN SPLATNET2)")
+                                            guard let session_token = user.first?.session_token else { return }
+                                            user.setValue(iksm_session, forKey: "iksm_session")
+                                            user.setValue(session_token, forKey: "session_token")
+                                            user.setValue(thumbnail_url, forKey: "image")
+                                            user.setValue(nickname, forKey: "name")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

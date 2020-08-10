@@ -52,90 +52,91 @@ struct LoadingView: View {
                 print("SUMMARY START")
                 DispatchQueue(label: "Summary").async {
                     // 公式の統計情報について処理を行う
-                    let response: JSON = SplatNet2.getSummaryFromSplatNet2(iksm_session)
-                    
-                    // 取得すべきバイトIDの計算を行う
-                    let job_id_latest: Int = response["card"]["job_num"].intValue
-                    if job_id_last == job_id_latest {
-                        self.messages.append("No new result")
-                        self.isLock = false
-                        return
-                    }
-                    print(job_id_last, job_id_latest)
-                    let job_ids: Range<Int> = Range(max(job_id_latest - 49, job_id_last + 1)...job_id_latest)
-                    
-                    self.messages.append("Getting Shift Result")
-                    autoreleasepool {
-                        guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
-                        realm.beginWrite()
+                    SplatNet2.getSummaryFromSplatNet2(iksm_session) { response in
                         
-                        // バイト全体の統計情報
-                        var card: [String: Any]? = response["card"].dictionaryObject
-                        card?.updateValue(nsaid, forKey: "nsaid")
-                        realm.create(CoopCardRealm.self, value: card as Any, update: .modified)
+                        // 取得すべきバイトIDの計算を行う
+                        let job_id_latest: Int = response["card"]["job_num"].intValue
+                        if job_id_last == job_id_latest {
+                            self.messages.append("No new result")
+                            self.isLock = false
+                            return
+                        }
+                        print(job_id_last, job_id_latest)
+                        let job_ids: Range<Int> = Range(max(job_id_latest - 49, job_id_last + 1)...job_id_latest)
                         
-                        // 最新のシフト数件の公式の統計情報
-                        for (i, data) in response["stats"] {
-                            print(i, data.count)
-                            self.messages.append("Getting Shift Result \(i)/\(data.count / 3)")
-                            guard let realm = try? Realm() else { return }
-                            var shift = data.dictionaryObject
-                            // nsaidとsashを追加
-                            shift?.updateValue(nsaid, forKey: "nsaid")
-                            shift?.updateValue((nsaid + String(data["start_time"].intValue)).sha256(), forKey: "sash")
-                            // ブキ情報を追加
-                            let weapons: [Int] = data["schedule"]["weapons"].map({ $0.1["id"].intValue })
-                            shift?.updateValue(weapons, forKey: "weapons")
-                            realm.create(ShiftResultsRealm.self, value: shift as Any, update: .modified)
-                            Thread.sleep(forTimeInterval: 0.5)
-                        }
-                        try? realm.commitWrite()
-                    }
-                    // ここではひたすらダウンロードして貯めるだけ（書き込まないのである程度速くて良い
-                    for (i, job_id) in job_ids.enumerated() {
-                        self.messages.append("Getting Result \(job_id) \(i + 1)/\(job_ids.count)")
-                        results.append(SplatNet2.getResultFromSplatNet2(iksm_session, job_id))
-                    }
-                    
-                    // Salmon Statsアップロード用のデータにする（最大10件アップロード
-                    let data: [[Dictionary<String, Any>]] = results.map({ $0.dictionaryObject! }).chunked(by: 10)
-                    
-                    // 5秒おきにSalmon Statsへアップロードする機能
-                    DispatchQueue(label: "SalmonStats").async {
-                        for result in data {
-                            let response: JSON = SalmonStats.uploadSalmonStats(token: token, result)
-                            // 一方しか持っていないので不測の事態でバグるかも...
-                            let ids: [(Int, Int)] = response.map({ ($0.1["job_id"].intValue, $0.1["salmon_id"].intValue) })
-                            salmon_ids.append(contentsOf: ids)
-                            Thread.sleep(forTimeInterval: 5)
-                        }
-                        semaphore.signal()
-                    }
-                    semaphore.wait()
-                    // ダウンロードした履歴をRealmに変換して書き込むところ
-                    autoreleasepool {
-                        guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
-                        realm.beginWrite()
-                        for result in results {
-                            let job_id: Int = result["job_id"].intValue
-                            let salmon_id: Int? = salmon_ids.filter({ $0.0 == job_id }).first.map({ $0.1 })
-                            let result: CoopResultsRealm = SplatNet2.encodeResultFromJSON(nsaid: nsaid, salmon_id: salmon_id, result)
-                            let time: [Int] = times.filter({ abs($0 - result.play_time) < 10 })
-                            // 重複するデータがないので書き込む
-                            switch time.isEmpty {
-                            case true:
-                                realm.create(CoopResultsRealm.self, value: result, update: .modified)
-                            case false:
-                                let record = realm.objects(CoopResultsRealm.self).filter("play_time=%@", time.first!)
-                                record.setValue(result.job_id, forKey: "job_id")
-                                record.setValue(result.grade_point, forKey: "grade_point")
-                                record.setValue(result.grade_id, forKey: "grade_id")
-                                record.setValue(result.grade_point_delta, forKey: "grade_point_delta")
+                        self.messages.append("Getting Shift Result")
+                        autoreleasepool {
+                            guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
+                            realm.beginWrite()
+                            
+                            // バイト全体の統計情報
+                            var card: [String: Any]? = response["card"].dictionaryObject
+                            card?.updateValue(nsaid, forKey: "nsaid")
+                            realm.create(CoopCardRealm.self, value: card as Any, update: .modified)
+                            
+                            // 最新のシフト数件の公式の統計情報
+                            for (i, data) in response["stats"] {
+                                print(i, data.count)
+                                self.messages.append("Getting Shift Result \(i)/\(data.count / 3)")
+                                guard let realm = try? Realm() else { return }
+                                var shift = data.dictionaryObject
+                                // nsaidとsashを追加
+                                shift?.updateValue(nsaid, forKey: "nsaid")
+                                shift?.updateValue((nsaid + String(data["start_time"].intValue)).sha256(), forKey: "sash")
+                                // ブキ情報を追加
+                                let weapons: [Int] = data["schedule"]["weapons"].map({ $0.1["id"].intValue })
+                                shift?.updateValue(weapons, forKey: "weapons")
+                                realm.create(ShiftResultsRealm.self, value: shift as Any, update: .modified)
+                                Thread.sleep(forTimeInterval: 0.5)
                             }
+                            try? realm.commitWrite()
                         }
-                        try? realm.commitWrite()
+                        // ここではひたすらダウンロードして貯めるだけ（書き込まないのである程度速くて良い
+                        for (i, job_id) in job_ids.enumerated() {
+                            self.messages.append("Getting Result \(job_id) \(i + 1)/\(job_ids.count)")
+                            results.append(SplatNet2.getResultFromSplatNet2(iksm_session, job_id))
+                        }
+                        
+                        // Salmon Statsアップロード用のデータにする（最大10件アップロード
+                        let data: [[Dictionary<String, Any>]] = results.map({ $0.dictionaryObject! }).chunked(by: 10)
+                        
+                        // 5秒おきにSalmon Statsへアップロードする機能
+                        DispatchQueue(label: "SalmonStats").async {
+                            for result in data {
+                                let response: JSON = SalmonStats.uploadSalmonStats(token: token, result)
+                                // 一方しか持っていないので不測の事態でバグるかも...
+                                let ids: [(Int, Int)] = response.map({ ($0.1["job_id"].intValue, $0.1["salmon_id"].intValue) })
+                                salmon_ids.append(contentsOf: ids)
+                                Thread.sleep(forTimeInterval: 5)
+                            }
+                            semaphore.signal()
+                        }
+                        semaphore.wait()
+                        // ダウンロードした履歴をRealmに変換して書き込むところ
+                        autoreleasepool {
+                            guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
+                            realm.beginWrite()
+                            for result in results {
+                                let job_id: Int = result["job_id"].intValue
+                                let salmon_id: Int? = salmon_ids.filter({ $0.0 == job_id }).first.map({ $0.1 })
+                                let result: CoopResultsRealm = SplatNet2.encodeResultFromJSON(nsaid: nsaid, salmon_id: salmon_id, result)
+                                let time: [Int] = times.filter({ abs($0 - result.play_time) < 10 })
+                                // 重複するデータがないので書き込む
+                                switch time.isEmpty {
+                                case true:
+                                    realm.create(CoopResultsRealm.self, value: result, update: .modified)
+                                case false:
+                                    let record = realm.objects(CoopResultsRealm.self).filter("play_time=%@", time.first!)
+                                    record.setValue(result.job_id, forKey: "job_id")
+                                    record.setValue(result.grade_point, forKey: "grade_point")
+                                    record.setValue(result.grade_id, forKey: "grade_id")
+                                    record.setValue(result.grade_point_delta, forKey: "grade_point_delta")
+                                }
+                            }
+                            try? realm.commitWrite()
+                        }
+                        self.isLock = false
                     }
-                    self.isLock = false
                 }
         }
         .padding(.horizontal, 10)

@@ -12,12 +12,12 @@ import URLImage
 
 struct ResultsCollectionView: View {
     @ObservedObject var core = UserResultsCore()
-    @State var threshold: Double = 100
+    @State var threshold: Double = 0
     
     var body: some View {
         Group {
             Slider(value: $threshold,
-                   in: 100 ... 200,
+                   in: 0 ... 200,
                    step: 1,
                    onEditingChanged: { pressed in
                     self.core.update(Int(self.threshold))
