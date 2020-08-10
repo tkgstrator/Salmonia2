@@ -40,6 +40,9 @@ struct LoadingView: View {
                     return
                 }
                 
+                // iksm_sessionが有効かどうかを調べ、有効でない場合はsession_tokenから再取得するコード
+                
+                
                 // 重複しているかどうか調べるリスト（メインスレッドが一つだけもってメモリを節約）
                 let times: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
                 let job_id_last: Int = realm.objects(CoopCardRealm.self).first?.job_num.value ?? 0
@@ -50,6 +53,7 @@ struct LoadingView: View {
                 DispatchQueue(label: "Summary").async {
                     // 公式の統計情報について処理を行う
                     let response: JSON = SplatNet2.getSummaryFromSplatNet2(iksm_session)
+                    
                     // 取得すべきバイトIDの計算を行う
                     let job_id_latest: Int = response["card"]["job_num"].intValue
                     if job_id_last == job_id_latest {
@@ -57,6 +61,7 @@ struct LoadingView: View {
                         self.isLock = false
                         return
                     }
+                    print(job_id_last, job_id_latest)
                     let job_ids: Range<Int> = Range(max(job_id_latest - 49, job_id_last + 1)...job_id_latest)
                     
                     self.messages.append("Getting Shift Result")

@@ -132,7 +132,6 @@ class PlayerResultsRealm: Object {
     static func getids() -> [String] {
         guard let realm = try? Realm() else { return [] }
         return Array(Set(realm.objects(PlayerResultsRealm.self).map({ $0.nsaid })))
-//        return Array(Set(realm.objects(PlayerResultsRealm.self).filter("name=%@", "").map({ $0.nsaid })))
     }
 }
 

@@ -224,12 +224,15 @@ class SplatNet2 {
                 realm.create(UserInfoRealm.self, value: user)
             case false: // 再ログイン（アップデート）
                 print("USERINFO UPDATE (LOGIN SPLATNET2)")
+                guard let session_token = user.first?.session_token else { return }
                 user.setValue(iksm_session, forKey: "iksm_session")
                 user.setValue(session_token, forKey: "session_token")
                 user.setValue(thumbnail_url, forKey: "image")
                 user.setValue(nickname, forKey: "name")
+                semaphore.signal()
             }
         }
+        return
     }
 
     class func getResultFromSplatNet2(_ iksm_session: String, _ job_id: Int) -> JSON {
@@ -270,7 +273,8 @@ class SplatNet2 {
                 case .success(let value):
                     summary = JSON(value)["summary"]
                 case .failure:
-                    break
+                    guard let session_token = try? Realm().objects(UserInfoRealm.self).first?.session_token else { return }
+                    try? getIksmSession(session_token)
                 }
                 semaphore.signal()
         }
