@@ -26,6 +26,13 @@ func SSTime(time: String) -> Int {
     return Int(f.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp))))!
 }
 
+func SSTime(time: Int) -> Int {
+    let f = DateFormatter()
+    f.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+    f.dateFormat = "yyyyMMddHH"
+    return Int(f.string(from: Date(timeIntervalSince1970: TimeInterval(time))))!
+}
+
 // Timestamp型を日付に変換
 func Unixtime(interval: Int) -> String {
     let f = DateFormatter()

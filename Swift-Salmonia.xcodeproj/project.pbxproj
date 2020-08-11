@@ -21,7 +21,6 @@
 		10A0AC0A24D7DDD800ADD56E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC0924D7DDD800ADD56E /* ResultView.swift */; };
 		10A0AC1024D7E04E00ADD56E /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC0F24D7E04E00ADD56E /* SalmonStatsView.swift */; };
 		10A0AC1424D7E47300ADD56E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC1324D7E47300ADD56E /* Extension.swift */; };
-		10A0AC2024D7E8BB00ADD56E /* ShiftStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC1F24D7E8BB00ADD56E /* ShiftStatsView.swift */; };
 		10A0AC2224D7E8DE00ADD56E /* FutureShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2124D7E8DE00ADD56E /* FutureShiftView.swift */; };
 		10A0AC2424D7E99700ADD56E /* StageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2324D7E99700ADD56E /* StageListView.swift */; };
 		10A0AC2624D7EB3700ADD56E /* StageRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */; };
@@ -84,7 +83,6 @@
 		10A0AC0924D7DDD800ADD56E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		10A0AC0F24D7E04E00ADD56E /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10A0AC1324D7E47300ADD56E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		10A0AC1F24D7E8BB00ADD56E /* ShiftStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftStatsView.swift; sourceTree = "<group>"; };
 		10A0AC2124D7E8DE00ADD56E /* FutureShiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureShiftView.swift; sourceTree = "<group>"; };
 		10A0AC2324D7E99700ADD56E /* StageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageListView.swift; sourceTree = "<group>"; };
 		10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordsView.swift; sourceTree = "<group>"; };
@@ -185,6 +183,35 @@
 				1061133124D54C20000771FD /* Model */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		10520EE624E1C5F100BC6DFA /* Salmonia */ = {
+			isa = PBXGroup;
+			children = (
+				10520EE824E1CA0A00BC6DFA /* ShiftStats */,
+				10D2369124D7DB9700B2E27E /* SalmoniaView.swift */,
+				10D2368F24D7DB3600B2E27E /* SettingView.swift */,
+				10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */,
+				10A0AC2324D7E99700ADD56E /* StageListView.swift */,
+			);
+			path = Salmonia;
+			sourceTree = "<group>";
+		};
+		10520EE724E1C62900BC6DFA /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				10A0AC0724D7DD5B00ADD56E /* ResultsCollectionView.swift */,
+				10A0AC0924D7DDD800ADD56E /* ResultView.swift */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
+		10520EE824E1CA0A00BC6DFA /* ShiftStats */ = {
+			isa = PBXGroup;
+			children = (
+				10A0AC2124D7E8DE00ADD56E /* FutureShiftView.swift */,
+			);
+			path = ShiftStats;
 			sourceTree = "<group>";
 		};
 		1061133124D54C20000771FD /* Model */ = {
@@ -318,16 +345,10 @@
 		10D2368A24D7D93500B2E27E /* Parent */ = {
 			isa = PBXGroup;
 			children = (
+				10520EE724E1C62900BC6DFA /* Results */,
+				10520EE624E1C5F100BC6DFA /* Salmonia */,
 				10A0AC2F24D927C500ADD56E /* SalmonStats */,
 				10D2368D24D7DB2900B2E27E /* LoggingThreadView.swift */,
-				10D2368F24D7DB3600B2E27E /* SettingView.swift */,
-				10D2369124D7DB9700B2E27E /* SalmoniaView.swift */,
-				10A0AC1F24D7E8BB00ADD56E /* ShiftStatsView.swift */,
-				10A0AC2124D7E8DE00ADD56E /* FutureShiftView.swift */,
-				10A0AC0724D7DD5B00ADD56E /* ResultsCollectionView.swift */,
-				10A0AC0924D7DDD800ADD56E /* ResultView.swift */,
-				10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */,
-				10A0AC2324D7E99700ADD56E /* StageListView.swift */,
 				1062729424DE32B2005E3520 /* OptionView.swift */,
 			);
 			path = Parent;
@@ -643,7 +664,6 @@
 				10A0AC0824D7DD5B00ADD56E /* ResultsCollectionView.swift in Sources */,
 				10505E7024CB653800CF4E04 /* Realm.swift in Sources */,
 				10A0AC2C24D90BB300ADD56E /* SplatNet2.swift in Sources */,
-				10A0AC2024D7E8BB00ADD56E /* ShiftStatsView.swift in Sources */,
 				10A0AC3124D9281C00ADD56E /* SalmonStatsResultsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,7 +832,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -826,7 +846,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -842,7 +862,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Swift-Salmonia/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -856,7 +876,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -41,8 +41,6 @@ class SalmonStats {
         3: "high"
     ]
     
-
-    
     static private let phases: [JSON] = try! JSON(data: NSData(contentsOfFile: Bundle.main.path(forResource: "formated_future_shifts", ofType:"json")!) as Data).array!
     
     // 評価値からサーモンランのウデマエIDを返す（だいたいたつじんだろうとおもうけれど...
@@ -57,11 +55,15 @@ class SalmonStats {
         return point - min(4, (point / 100)) * 100
     }
     
+
     // プレイヤーの戦績一覧を取得
     class func getPlayerOverView(nsaid: String, completion: @escaping (JSON) -> ()) {
-        let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=" + nsaid
+        let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=\(nsaid)"
         
-        AF.request(url, method: .get).responseJSON { response in
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
             switch response.result {
             case .success(let value):
                 completion(JSON(value))
@@ -70,12 +72,15 @@ class SalmonStats {
             }
         }
     }
-    
+
     // プレイヤーの最新10件のシフトデータを取得
     class func getPlayerShiftStats(nsaid: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/schedules"
         
-        AF.request(url, method: .get).responseJSON { response in
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
             switch response.result {
             case .success(let value):
 //                print(JSON(value))
@@ -89,7 +94,10 @@ class SalmonStats {
     class func getPlayerShiftStatsDetail(nsaid: String, start_time: Int, completion: @escaping (JSON) -> ()) {
         let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/schedules/\(start_time)"
         
-        AF.request(url, method: .get).responseJSON { response in
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
             switch response.result {
             case .success(let value):
                 completion(JSON(value))
@@ -102,9 +110,12 @@ class SalmonStats {
     
     // プレイヤーの最新のリザルト10件の概要を取得
     class func getPlayerOverViewResults(nsaid: String, completion: @escaping (JSON) -> ()) {
-        let url = "https://salmon-stats-api.yuki.games/api/players/" + nsaid
+        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)"
         
-        AF.request(url, method: .get).responseJSON { response in
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
             switch response.result {
             case .success(let value):
                 completion(JSON(value)["results"])
@@ -148,6 +159,7 @@ class SalmonStats {
         
         var salmon_ids: JSON = JSON()
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON(queue: queue) { response in
                 switch response.result {
@@ -170,6 +182,7 @@ class SalmonStats {
         ]
         
         AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON { response in
                 switch response.result {
@@ -187,6 +200,7 @@ class SalmonStats {
         
         var link: Int = 0
         AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON(queue: queue) { response in
                 switch response.result {
@@ -228,6 +242,7 @@ class SalmonStats {
         
         var results: JSON = JSON()
         AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON(queue: queue) { response in
                 switch response.result {
@@ -340,7 +355,26 @@ class SalmonStats {
         dict.updateValue(players, forKey: "player")
         return CoopResultsRealm(value: dict)
     }
+    
+    class func getShiftRecord(start_time: Int, completion: @escaping (SalmonStatsRecordFormat) -> ()) {
+        let shift_id: Int = SSTime(time: start_time)
+        let url = "https://salmon-stats-api.yuki.games/api/schedules/\(shift_id)"
+        
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    completion(SalmonStatsRecordFormat(JSON(value)["records"]["wave_records"]["golden_eggs"], start_time))
+                case .failure:
+                    return
+                }
+        }
+    }
+
 }
+
 
 struct SalmonStatsFormat {
     public var games: Int = 0
@@ -349,4 +383,58 @@ struct SalmonStatsFormat {
     public var other_defeated: [Double] = []
     
     init() { }
+}
+
+struct SalmonStatsRecordFormat {
+    // ここでSpaltNet2のレコードも登録しておいたほうがいいのでは？
+    private let realm = try? Realm()
+    public var records: [[(id: Int, cr: Int, pr: Int?, players: [String])]] = [[], [], []]
+
+    init () { }
+    
+    init(_ response : JSON, _ start_time: Int) {
+        guard let waves = realm?.objects(WaveDetailRealm.self).filter("start_time=%@", start_time) else { return }
+        
+        for (_, record) in response {
+            let tide: Int = record["water_id"].intValue - 1
+            let water_level = SplatNet2.getWaterName(tide)
+            let event: Int = convertEventID(record["event_id"].intValue)
+            let event_type: String = SplatNet2.getEventName(event)
+            let other_record: Int = record["golden_eggs"].intValue
+            // let salmon_id: Int = record["id"].intValue
+            let wave: WaveDetailRealm? = waves.filter("event_type=%@ and water_level=%@", event_type, water_level).sorted(byKeyPath: "golden_ikura_num", ascending: false).first
+            
+            // WAVE記録があれば自身の記録を代入、なければ適当な値を入れる
+            // 強制アンラップ使いまくってるから落ちるかもしれんなあ
+            if wave != nil {
+                let players: [String] = Array(wave!.result.first!.player.map({ $0.name! }))
+                let my_record: Int? = waves.filter("event_type=%@ and water_level=%@", event_type, water_level).max(ofProperty: "golden_ikura_num")
+                records[tide].append((event, other_record, my_record, players))
+            } else {
+                records[tide].append((event, other_record, nil, ["-", "-", "-", "-"]))
+            }
+        }
+    }
+    
+    // イベントIDをSplatNet2用に変換
+    func convertEventID(_ event_id: Int) -> Int {
+        switch(event_id) {
+        case 0:
+            return 0
+        case 1:
+            return 6
+        case 2:
+            return 5
+        case 3:
+            return 2
+        case 4:
+            return 3
+        case 5:
+            return 4
+        case 6:
+            return 1
+        default:
+            return 0
+        }
+    }
 }

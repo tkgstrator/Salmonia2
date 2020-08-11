@@ -108,12 +108,8 @@ class WaveDetailRealm: Object {
     @objc dynamic var quota_num = 0
     @objc dynamic var ikura_num = 0
     @objc dynamic var start_time = 0
-    
-    // 計算はこちらだけあればいいのでは
-    // 多分落ちないはず
-    private static var realm = try! Realm()
 
-//    let id = LinkingObjects(fromType: CoopResultsRealm.self, property: "wave")
+    let result = LinkingObjects(fromType: CoopResultsRealm.self, property: "wave")
 }
 
 
@@ -128,6 +124,8 @@ class PlayerResultsRealm: Object {
     dynamic var boss_kill_counts = List<Int>()
     dynamic var weapon_list = List<Int>()
     dynamic var special_counts = List<Int>()
+    
+    let result = LinkingObjects(fromType: CoopResultsRealm.self, property: "player")
     
     static func getids() -> [String] {
         guard let realm = try? Realm() else { return [] }

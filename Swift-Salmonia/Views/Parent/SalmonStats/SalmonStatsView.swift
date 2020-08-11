@@ -108,7 +108,7 @@ private struct SalmonStatsShiftView: View {
                 //            .frame(height: 28)
                 .foregroundColor(.orange)
                 .font(.custom("Splatoon1", size: 20))
-            ForEach(shiftstats.indices, id:\.self) { idx in
+            ForEach(start_time.indices, id:\.self) { idx in
                 NavigationLink(destination: SalmonStatShiftStatsView(nsaid: self.$nsaid, start_time: self.$start_time[idx])) {
                     ShiftStack(phase: self.$shiftstats[idx])
                 }.buttonStyle(PlainButtonStyle())
@@ -116,7 +116,7 @@ private struct SalmonStatsShiftView: View {
         }.onAppear() {
             SalmonStats.getPlayerShiftStats(nsaid: self.nsaid) { response in
                 self.shiftstats = response.arrayValue
-                self.start_time = self.shiftstats.map({ SSTime(time: $0["schedule_id"].stringValue) })
+                self.start_time = self.shiftstats.map({ SSTime(time: $0["schedule_id"].stringValue) }).prefix(5).map({ $0 })
             }
         }
     }
@@ -132,7 +132,7 @@ private struct SalmonStatShiftStatsView: View {
         _nsaid = nsaid
         _start_time = start_time
     }
-
+    
     var body: some View {
         List {
             Section(header: HStack {
@@ -178,7 +178,7 @@ private struct SalmonStatShiftStatsView: View {
 
 private struct ShiftStatsStack: View {
     @Binding var stack: JSON
-
+    
     var body: some View {
         HStack {
             Text("")

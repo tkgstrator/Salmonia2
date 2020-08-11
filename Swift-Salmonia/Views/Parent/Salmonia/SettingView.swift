@@ -16,6 +16,7 @@ struct SettingView: View {
     @State private var isVisible: Bool = false
     @State private var title: String = ""
     @State private var text: String = ""
+    private let version: String = "\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!))(\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)))"
     
     var body: some View {
         List {
@@ -44,7 +45,7 @@ struct SettingView: View {
             }
             Section(header: Text("Status")) {
                 HStack {
-                    Text("iksm_session")
+                    Text("iksm session")
                     Spacer()
                     Text("\(user.iksm_session != nil ? "Registered" : "Unregistered")")
                 }
@@ -79,6 +80,13 @@ struct SettingView: View {
                         Text("Future Rotation")
                         Spacer()
                     }
+                }
+            }
+            Section(header: Text("Application")) {
+                HStack {
+                    Text("Version")
+                    Spacer()
+                    Text("\(version)")
                 }
             }
         }

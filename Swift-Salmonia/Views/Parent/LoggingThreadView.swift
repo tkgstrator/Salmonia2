@@ -45,7 +45,7 @@ struct LoadingView: View {
                 
                 // 重複しているかどうか調べるリスト（メインスレッドが一つだけもってメモリを節約）
                 let times: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
-                let job_id_last: Int = realm.objects(CoopCardRealm.self).first?.job_num.value ?? 0
+                let job_id_last: Int = realm.objects(CoopResultsRealm.self).max(ofProperty: "job_id") ?? 0
                 var results: [JSON] = [] // リザルト保存用の配列（大したサイズでないから大丈夫なはず
                 var salmon_ids: [(Int, Int)] = []
                 

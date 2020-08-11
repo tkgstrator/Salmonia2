@@ -44,9 +44,10 @@ private struct CrewView: View {
                 .font(.custom("Splatoon1", size: 22))
             }
         }
-    .navigationBarTitle("Friendly Crew")
         .onAppear() {
+//            self.players.match(0)
         }
+        .navigationBarTitle("Friendly Crew")
     }
 }
 

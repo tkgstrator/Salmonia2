@@ -37,6 +37,14 @@ class SplatNet2 {
         2: "high"
     ]
     
+    class func getEventName(_ event_id: Int) -> String {
+        return events[event_id]!
+    }
+    
+    class func getWaterName(_ water_id: Int) -> String {
+        return tides[water_id]!
+    }
+    
     class func getSessionToken(_ session_token_code: String, _ session_token_code_verifier: String, complition: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/session_token"
         let header: HTTPHeaders = [
@@ -47,6 +55,7 @@ class SplatNet2 {
             "session_token_code_verifier": session_token_code_verifier
         ]
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
@@ -68,6 +77,7 @@ class SplatNet2 {
         ]
         
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
@@ -90,6 +100,7 @@ class SplatNet2 {
         ]
         
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
@@ -115,6 +126,7 @@ class SplatNet2 {
         ]
         
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
@@ -144,6 +156,7 @@ class SplatNet2 {
             ] as [String : Any]
         
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
@@ -166,6 +179,7 @@ class SplatNet2 {
         ]
         
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
@@ -192,6 +206,7 @@ class SplatNet2 {
         ]
         
         AF.request(url, method: .get, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON{ response in
                 switch response.result {
@@ -214,6 +229,7 @@ class SplatNet2 {
         let body = ["results": [result.dictionaryObject]]
         
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
+            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON { response in
                 switch response.result {
@@ -241,13 +257,13 @@ class SplatNet2 {
                 switch response.result {
                 case .success(let value):
                     print("GET SUCCESS")
-                    print(JSON(value))
+                    //                    print(JSON(value))
                     completion(JSON(value))
-                case .failure(let error):
+                case .failure:
                     print("REGENERATE")
-                    print(error)
+                    //                    print(error)
                     SplatNet2.genIksmSession() { response in
-                        print(response)
+                        //                        print(response)
                         completion(response)
                     }
                 }
@@ -272,21 +288,23 @@ class SplatNet2 {
                                 let nsaid = response["nsaid"].stringValue
                                 
                                 print("IKSM SESSION", iksm_session)
-                                guard let realm = try? Realm() else { return }
-                                try? realm.write {
-                                    let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
-                                    switch user.isEmpty {
-                                    case true: // 新規作成
-                                        print("CREATE NEW USER (LOGIN SPLATNET2)")
-                                        let user: [String: String?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token]
-                                        realm.create(UserInfoRealm.self, value: user)
-                                    case false: // 再ログイン（アップデート）
-                                        print("USERINFO UPDATE (LOGIN SPLATNET2)")
-                                        guard let session_token = user.first?.session_token else { return }
-                                        user.setValue(iksm_session, forKey: "iksm_session")
-                                        user.setValue(session_token, forKey: "session_token")
-                                        user.setValue(thumbnail_url, forKey: "image")
-                                        user.setValue(nickname, forKey: "name")
+                                autoreleasepool {
+                                    guard let realm = try? Realm() else { return }
+                                    try? realm.write {
+                                        let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
+                                        switch user.isEmpty {
+                                        case true: // 新規作成
+                                            print("CREATE NEW USER (LOGIN SPLATNET2)")
+                                            let user: [String: String?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token]
+                                            realm.create(UserInfoRealm.self, value: user)
+                                        case false: // 再ログイン（アップデート）
+                                            print("USERINFO UPDATE (LOGIN SPLATNET2)")
+                                            guard let session_token = user.first?.session_token else { return }
+                                            user.setValue(iksm_session, forKey: "iksm_session")
+                                            user.setValue(session_token, forKey: "session_token")
+                                            user.setValue(thumbnail_url, forKey: "image")
+                                            user.setValue(nickname, forKey: "name")
+                                        }
                                     }
                                 }
                                 SplatNet2.getSummaryFromSplatNet2() { response in

@@ -41,8 +41,13 @@ class UserResultsCore: ObservableObject {
     }
     
     // 金イクラ数でフィルタリング
-    func update(_ golden_eggs: Int) {
-        results = realm.objects(CoopResultsRealm.self).filter("golden_eggs>=%@", golden_eggs).sorted(byKeyPath: "golden_eggs")
+    func update(_ golden_eggs: Int, _ stage: [Int]) {
+        // 金イクラ数指定が0のときはplay_timeでソーティングする
+        if golden_eggs == 0 {
+            results = realm.objects(CoopResultsRealm.self).filter("stage_id IN %@", stage).sorted(byKeyPath: "play_time", ascending: false)
+        } else {
+            results = realm.objects(CoopResultsRealm.self).filter("golden_eggs>=%@ and stage_id IN %@", golden_eggs, stage).sorted(byKeyPath: "golden_eggs")
+        }
     }
     
     // ステージでフィルタ
@@ -80,30 +85,29 @@ class CrewInfoCore: ObservableObject {
     @Published var players: Results<CrewInfoRealm> = try! Realm().objects(CrewInfoRealm.self)
     @Published var matchids: [(nsaid: String?, name: String?, url: String?, match: Int)] = []
     
-    func match(_ value: Int) {
-        // CrewInfoRealmに保存されているユーザだけで検索
-        guard let realm = try? Realm() else { return }
-        guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid! else { return }
-        
-        // 自分以外のユーザの情報を取得
-        let players: Results<CrewInfoRealm> = realm.objects(CrewInfoRealm.self).filter("nsaid!=%@", nsaid)
-        
-        for player in players {
-            // マッチングしたリザルトを取得
-            let results: Results<PlayerResultsRealm> = realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", player.nsaid!)
-            let match: Int = results.count
-            matchids.append((player.nsaid, player.name, player.image, match))
-        }
-        // マッチング回数順にソート
-        matchids = matchids.sorted { $0.match > $1.match }.prefix(100).map({ $0 })
-    }
+//    func match(_ value: Int) {
+//        guard let realm = try? Realm() else { return }
+//        guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid! else { return }
+//
+//        // 自分以外のユーザの情報を取得
+//        let players: Results<CrewInfoRealm> = realm.objects(CrewInfoRealm.self).filter("nsaid!=%@", nsaid)
+//        var tmp: [(nsaid: String?, name: String?, url: String?, match: Int)] = []
+//        for player in players {
+//            // マッチングしたリザルトを取得
+//            let results: Results<PlayerResultsRealm> = realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", player.nsaid!)
+//            let match: Int = results.count
+//            tmp.append((player.nsaid, player.name, player.image, match))
+//        }
+//        // マッチング回数順にソートして最大上位100人を出力
+//        self.matchids = tmp.sorted { $0.match > $1.match }.prefix(100).map({ $0 })
+//    }
     
     init() {
         token = try? Realm().objects(PlayerResultsRealm.self).observe { _ in
             self.players = try! Realm().objects(CrewInfoRealm.self)
             guard let realm = try? Realm() else { return }
             guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid! else { return }
-            
+
             // 自分以外のユーザの情報を取得
             let players: Results<CrewInfoRealm> = realm.objects(CrewInfoRealm.self).filter("nsaid!=%@", nsaid)
             var tmp: [(nsaid: String?, name: String?, url: String?, match: Int)] = []
@@ -148,8 +152,10 @@ class UserStatsCore: ObservableObject {
         self._start_time = start_time
         token = try? Realm().objects(CoopResultsRealm.self).observe { _ in
             #if DEBUG
-            guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", 1596153600) else { return }
-            guard let summary = try? Realm().objects(ShiftResultsRealm.self).filter("start_time=%@", 1596153600).first else { return }
+            guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", self.start_time) else { return }
+            guard let summary = try? Realm().objects(ShiftResultsRealm.self).filter("start_time=%@", self.start_time).first else { return }
+//            guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", 1596153600) else { return }
+//            guard let summary = try? Realm().objects(ShiftResultsRealm.self).filter("start_time=%@", 1596153600).first else { return }
             #else
             guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", self.start_time) else { return }
             guard let summary = try? Realm().objects(ShiftResultsRealm.self).filter("start_time=%@", self.start_time).first else { return }
