@@ -21,7 +21,7 @@ struct ResultsCollectionView: View {
             HStack {
                 Text("Found: \(core.results.count)")
             }
-            .font(.custom("Splatoon1", size: 16))
+            .font(.custom("Splatfont", size: 16))
             .frame(height: 10)
             List {
                 ForEach(core.results.indices, id:\.self) { idx in
@@ -70,21 +70,21 @@ private struct ResultsFilterView: View {
     var body: some View {
         VStack {
             VStack(spacing: 2) {
-                Text("Golden Eggs").font(.custom("Splatoon1", size: 24)).foregroundColor(.yellow).frame(height: 24)
+                Text("Golden Eggs").font(.custom("Splatfont", size: 24)).foregroundColor(.yellow).frame(height: 24)
                 Slider(value: $sliderValue,
                        in: 0 ... 200,
                        step: 1,
                        onEditingChanged: { pressed in
                         self.update()
                 },
-                       minimumValueLabel: Text("0").font(.custom("Splatoon1", size: 16)),
-                       maximumValueLabel: Text("200").font(.custom("Splatoon1", size: 16)),
+                       minimumValueLabel: Text("0").font(.custom("Splatfont", size: 16)),
+                       maximumValueLabel: Text("200").font(.custom("Splatfont", size: 16)),
                        label: { EmptyView() }
                 ).accentColor(.yellow)
                 Text("\(Int(sliderValue))")
             }.padding(.horizontal, 10)
             VStack(spacing: 2) {
-                Text("Stage").font(.custom("Splatoon1", size: 24)).foregroundColor(.orange)
+                Text("Stage").font(.custom("Splatfont", size: 24)).foregroundColor(.orange)
                 VStack {
                     HStack {
                         Spacer()
@@ -130,7 +130,7 @@ private struct ResultsFilterView: View {
                     }
                 }
             }
-        }.font(.custom("Splatoon1", size: 20))
+        }.font(.custom("Splatfont", size: 20))
     }
 }
 
@@ -156,23 +156,23 @@ private struct ResultStackView: View {
         HStack {
             Group {
                 if job_result_is_clear {
-                    Text("Clear!").foregroundColor(.green).font(.custom("Splatoon1", size: 16))
+                    Text("Clear!").foregroundColor(.green).font(.custom("Splatfont", size: 16))
                 } else {
                     VStack {
-                        Text("Defeat").frame(height: 16).font(.custom("Splatoon1", size: 16))
+                        Text("Defeat").frame(height: 16).font(.custom("Splatfont", size: 16))
                         HStack {
                             Text("Wave").frame(height: 11)
                             Text("\(job_result_failure_wave.value)").frame(height: 11)
                         }
                     }
                     .foregroundColor(.orange)
-                    .font(.custom("Splatoon1", size: 14))
+                    .font(.custom("Splatfont", size: 14))
                 }
                 
-            }.frame(width: 60).font(.custom("Splatoon1", size: 16))
+            }.frame(width: 60).font(.custom("Splatfont", size: 16))
             // ブキとか？
             // 金イクラ数とかの情報（イカリング2準拠スタイル）
-            Text(String(danger_rate)+"%").font(.custom("Splatoon1", size: 16))
+            Text(String(danger_rate)+"%").font(.custom("Splatfont", size: 16))
             Spacer()
             VStack(alignment: .leading, spacing: 5) {
                 HStack {

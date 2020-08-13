@@ -66,23 +66,23 @@ private struct ResultStackView: View {
         HStack {
             Group {
                 if job_result_is_clear {
-                    Text("Clear!").foregroundColor(.green).font(.custom("Splatoon1", size: 16))
+                    Text("Clear!").foregroundColor(.green).font(.custom("Splatfont", size: 16))
                 } else {
                     VStack {
-                        Text("Defeat").frame(height: 16).font(.custom("Splatoon1", size: 16))
+                        Text("Defeat").frame(height: 16).font(.custom("Splatfont", size: 16))
                         HStack {
                             Text("Wave").frame(height: 11)
                             Text("\(job_result_failure_wave.value)").frame(height: 11)
                         }
                     }
                     .foregroundColor(.orange)
-                    .font(.custom("Splatoon1", size: 14))
+                    .font(.custom("Splatfont", size: 14))
                 }
                 
-            }.frame(width: 60).font(.custom("Splatoon1", size: 16))
+            }.frame(width: 60).font(.custom("Splatfont", size: 16))
             // ブキとか？
             // 金イクラ数とかの情報（イカリング2準拠スタイル）
-            Text(String(danger_rate)+"%").font(.custom("Splatoon1", size: 16))
+            Text(String(danger_rate)+"%").font(.custom("Splatfont", size: 16))
             Spacer()
             VStack(alignment: .leading, spacing: 5) {
                 HStack {

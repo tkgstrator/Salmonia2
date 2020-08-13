@@ -20,7 +20,7 @@ struct SettingView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Login")) {
+            Section(header: Text("Login").font(.custom("Splatfont", size: 18))) {
                 Button(action: {
                     UIApplication.shared.open(URL(string: self.url)!)
                 }) {
@@ -43,29 +43,29 @@ struct SettingView: View {
                     Alert(title: Text(title),message: Text(text))
                 }
             }
-            Section(header: Text("Status")) {
+            Section(header: Text("Status").font(.custom("Splatfont", size: 18))) {
                 HStack {
                     Text("iksm session")
                     Spacer()
-                    Text("\(user.iksm_session != nil ? "Registered" : "Unregistered")")
+                    Text("\((user.iksm_session != nil ? "Registered" : "Unregistered").localized)")
                 }
                 HStack {
                     Text("laravel session")
                     Spacer()
-                    Text("\(user.api_token != nil ? "Registered" : "Unregistered")")
+                    Text("\((user.api_token != nil ? "Registered" : "Unregistered").localized)")
                 }
             }
-            Section(header: Text("Unlock")) {
+            Section(header: Text("Unlock").font(.custom("Splatfont", size: 18))) {
                 Toggle(isOn: $user.is_unlock) {
                     Text("Display Rare Weapon")
                 }.onTapGesture{
                     self.user.updateUnlock(!self.user.is_unlock)
                 }
             }
-            Section(header: Text("Feature")) {
+            Section(header: Text("Feature").font(.custom("Splatfont", size: 18))) {
                 NavigationLink(destination: ImportedView()) {
                     HStack {
-                        Text("Import from SalmonStats")
+                        Text("Import from Salmon Stats")
                         Spacer()
                     }
                 }
@@ -82,7 +82,7 @@ struct SettingView: View {
                     }
                 }
             }
-            Section(header: Text("Application")) {
+            Section(header: Text("Application").font(.custom("Splatfont", size: 18))) {
                 HStack {
                     Text("Version")
                     Spacer()
@@ -90,6 +90,7 @@ struct SettingView: View {
                 }
             }
         }
+        .font(.custom("Splatfont", size: 18))
         .listStyle(DefaultListStyle())
         .navigationBarTitle(Text("Settings"))
         .tag("Settings")

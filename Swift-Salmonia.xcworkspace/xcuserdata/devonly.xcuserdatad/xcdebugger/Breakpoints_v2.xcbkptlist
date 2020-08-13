@@ -14,8 +14,8 @@
             filePath = "Swift-Salmonia/Assets/SalmoniaCore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "init(start_time:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "Swift-Salmonia/Assets/Networking/SplatNet2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "encodeResultFromJSON(nsaid:salmon_id:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "Swift-Salmonia/Assets/Networking/SplatNet2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
+            startingLineNumber = "466"
+            endingLineNumber = "466"
             landmarkName = "encodeResultFromJSON(nsaid:salmon_id:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -184,15 +184,15 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "504B7F11-EA57-48BD-A047-DFCCF042A27E"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swift-Salmonia/Assets/Networking/SplatNet2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
-            landmarkName = "genIksmSession(complition:)"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "genIksmSession(completion:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -238,9 +238,9 @@
             filePath = "Swift-Salmonia/Assets/Networking/SplatNet2.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
-            landmarkName = "genIksmSession(complition:)"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
+            landmarkName = "genIksmSession(completion:)"
             landmarkType = "7">
             <Locations>
                <Location

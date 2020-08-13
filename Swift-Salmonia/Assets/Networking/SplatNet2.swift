@@ -45,7 +45,7 @@ class SplatNet2 {
         return tides[water_id]!
     }
     
-    class func getSessionToken(_ session_token_code: String, _ session_token_code_verifier: String, complition: @escaping (JSON) -> ()) {
+    class func getSessionToken(_ session_token_code: String, _ session_token_code_verifier: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/session_token"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -60,14 +60,14 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value))
+                    completion(JSON(value))
                 case .failure:
                     break
                 }
         }
     }
     
-    class func getAccessToken(_ session_token: String, complition: @escaping (JSON) -> ()) {
+    class func getAccessToken(_ session_token: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/access_token"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -82,14 +82,16 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value))
+                    completion(JSON(value))
                 case .failure:
                     break
                 }
         }
     }
     
-    class func callFlapgAPI(_ access_token: String, _ type: String, complition: @escaping (JSON) -> ()) {
+    class func callFlapgAPI(_ access_token: String, _ type: String, completion: @escaping (JSON) -> ()) {
+        #if DEBUG
+        print("DEBUG MODE")
         let url = "https://salmonia.mydns.jp/api/login"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -105,14 +107,77 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value))
+                    completion(JSON(value))
                 case .failure:
                     break
                 }
         }
+        
+        #else
+        print("RELEASE MODE")
+        // 固定値として使う
+        let timestamp: Int = Int(NSDate().timeIntervalSince1970)
+
+        callS2SAPI(access_token, timestamp) { response in
+            print("GENERATE HASH")
+            guard let hash: String = response["hash"].string else { return }
+            print(hash)
+            
+            let url = "https://flapg.com/ika2/api/login?public"
+            let header: HTTPHeaders = [
+                "x-token" :     access_token,
+                "x-time" :      String(timestamp),
+                "x-guid" :      "037239ef-1914-43dc-815d-178aae7d8934",
+                "x-hash" :      hash,
+                "x-ver" :       "3",
+                "x-iid" :       type,
+                "User-Agent" :  "Salmonia iOS"
+            ]
+            
+            AF.request(url, method: .get, headers: header)
+                .validate(statusCode: 200..<300)
+                .validate(contentType: ["application/json"])
+                .responseJSON{ response in
+                    switch response.result {
+                    case .success(let value):
+                        completion(JSON(value)["result"])
+                    case .failure:
+                        return
+                    }
+            }
+        }
+        #endif
     }
     
-    class func getSplatoonToken(_ result: JSON, complition: @escaping (JSON) -> ()) {
+    class func callS2SAPI(_ access_token: String, _ timestamp: Int, completion: @escaping (JSON) -> ())  {
+        let version: String = String(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String)
+        let url = "https://elifessler.com/s2s/api/gen2"
+        
+        let header: HTTPHeaders = [
+            "User-Agent" : "Salmonia iOS/\(version)"
+        ]
+        
+        let body = [
+            "naIdToken" : access_token,
+            "timestamp" : String(timestamp)
+        ]
+        
+        AF.request(url, method: .post, parameters: body, headers: header)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON{ response in
+                switch response.result {
+                case .success(let value):
+                    print(JSON(value))
+                    completion(JSON(value))
+                case .failure(let error):
+                    print(error)
+                    return
+                }
+        }
+    }
+    
+    class func getSplatoonToken(_ result: JSON, completion: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/splatoon_token"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -131,15 +196,15 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value))
+                    completion(JSON(value))
                 case .failure(let error):
                     debugPrint(error)
-                    break
+                    return
                 }
         }
     }
     
-    class func getSplatoonAccessToken(_ result: JSON, _ splatoon_token: String, complition: @escaping (JSON) -> ()) {
+    class func getSplatoonAccessToken(_ result: JSON, _ splatoon_token: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/splatoon_access_token"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -161,15 +226,14 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value))
-                case .failure(let error):
-                    debugPrint(error)
-                    break
+                    completion(JSON(value))
+                case .failure:
+                    return
                 }
         }
     }
     
-    class func getIksmSession(_ splatoon_access_token: String, complition: @escaping (JSON) -> ()) {
+    class func getIksmSession(_ splatoon_access_token: String, completion: @escaping (JSON) -> ()) {
         let url = "https://salmonia.mydns.jp/api/iksm_session"
         let header: HTTPHeaders = [
             "User-Agent": "Salmonia iOS"
@@ -184,19 +248,18 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value))
+                    completion(JSON(value))
                     //                    iksm_session = JSON(value)["iksm_session"].stringValue
                     //                    nsaid = JSON(value)["nsaid"].stringValue
                     //                    SplatNet2.setUserInfoFromSplatNet2()
                 //                    debugPrint("IKSM SESSION", iksm_session)
-                case .failure(let error):
-                    debugPrint(error)
-                    break
+                case .failure:
+                    return
                 }
         }
     }
     
-    class func getResultFromSplatNet2(job_id: Int, complition: @escaping (JSON) -> ()) {
+    class func getResultFromSplatNet2(job_id: Int, completion: @escaping (JSON) -> ()) {
         guard let iksm_session: String = try? Realm().objects(UserInfoRealm.self).first?.iksm_session else { return }
         //        guard let api_token: String = realm.objects(UserInfoRealm.self).first?.api_token else { return }
         
@@ -211,11 +274,11 @@ class SplatNet2 {
             .responseJSON{ response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value))
+                    completion(JSON(value))
                     //                    uploadResultToSalmonStats(result: JSON(value), token: api_token)
                     break
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    return
                 }
         }
     }
@@ -235,8 +298,8 @@ class SplatNet2 {
                 switch response.result {
                 case .success(let value):
                     print(value)
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    return
                 }
         }
     }
@@ -270,7 +333,7 @@ class SplatNet2 {
         }
     }
     
-    class func genIksmSession(complition: @escaping (JSON) -> ()) {
+    class func genIksmSession(completion: @escaping (JSON) -> ()) {
         guard let session_token: String = try? Realm().objects(UserInfoRealm.self).first?.session_token else { return }
         
         SplatNet2.getAccessToken(session_token) { response in
@@ -308,7 +371,7 @@ class SplatNet2 {
                                     }
                                 }
                                 SplatNet2.getSummaryFromSplatNet2() { response in
-                                    complition(response)
+                                    completion(response)
                                 }
                             }
                         }
@@ -333,7 +396,7 @@ class SplatNet2 {
                 case .success(let value):
                     result = JSON(value)
                 case .failure:
-                    break
+                    return
                 }
                 semaphore.signal()
         }
@@ -418,7 +481,7 @@ class SplatNet2 {
         return CoopResultsRealm(value: result as Any)
     }
     
-    //    class func genIksmSession(complition: @escaping (JSON) -> ()) {
+    //    class func genIksmSession(completion: @escaping (JSON) -> ()) {
     //        guard let realm = try? Realm() else { return }
     //        guard let session_token: String = realm.objects(UserInfoRealm.self).first?.session_token else { return }
     //        guard let user = realm.objects(UserInfoRealm.self).first else { return }
@@ -441,7 +504,7 @@ class SplatNet2 {
     //                                    user.setValue(imageUri, forKey: "image")
     //                                }
     //                                SplatNet2.getSummaryFromSplatNet2() { response in
-    //                                    complition(response)
+    //                                    completion(response)
     //                                }
     //                            }
     //                        }
@@ -451,7 +514,7 @@ class SplatNet2 {
     //        }
     //    }
     
-    class func getPlayerNickname(nsaid: String, complition: @escaping (JSON) -> ()) {
+    class func getPlayerNickname(nsaid: String, completion: @escaping (JSON) -> ()) {
         guard let iksm_session: String = try? Realm().objects(UserInfoRealm.self).first?.iksm_session else { return }
         
         let url = "https://app.splatoon2.nintendo.net/api/nickname_and_icon?id=\(nsaid)"
@@ -465,14 +528,14 @@ class SplatNet2 {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value))
+                    completion(JSON(value))
                 case .failure(let error):
                     print(error)
                 }
         }
     }
     
-    class func getPlayerNickname(nsaid: [String], complition: @escaping (JSON?, Error?) -> ()) {
+    class func getPlayerNickname(nsaid: [String], completion: @escaping (JSON?, Error?) -> ()) {
         guard let iksm_session: String = try? Realm().objects(UserInfoRealm.self).first?.iksm_session else { return }
         
         let query = nsaid.map({ "id=\($0)&" }).reduce("", +)
@@ -487,9 +550,9 @@ class SplatNet2 {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    complition(JSON(value)["nickname_and_icons"], nil)
+                    completion(JSON(value)["nickname_and_icons"], nil)
                 case .failure:
-                    complition(nil, nil)
+                    completion(nil, nil)
                 }
         }
     }

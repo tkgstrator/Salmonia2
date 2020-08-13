@@ -38,7 +38,7 @@ private struct SalmonStatsPlayerView: View {
                          content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                     .frame(width: 80, height: 80)
             }.buttonStyle(PlainButtonStyle())
-            Text(nickname.value).font(.custom("Splatoon1", size: 28)).frame(maxWidth: .infinity)
+            Text(nickname.value).font(.custom("Splatfont", size: 28)).frame(maxWidth: .infinity)
         }.onAppear(){
             SplatNet2.getPlayerNickname(nsaid: self.nsaid){ response in
                 self.nickname = response["nickname_and_icons"][0]["nickname"].stringValue
@@ -62,7 +62,7 @@ private struct SalmonStatsOverview: View {
             Text("Overview")
                 .frame(height: 28)
                 .foregroundColor(.orange)
-                .font(.custom("Splatoon1", size: 20))
+                .font(.custom("Splatfont", size: 20))
             HStack {
                 VStack(spacing: 0) {
                     Text("Jobs")
@@ -82,7 +82,7 @@ private struct SalmonStatsOverview: View {
                     Text("Defeated")
                     Text("\(self.defeated.value)")
                 }
-            }.font(.custom("Splatoon1", size: 18))
+            }.font(.custom("Splatfont", size: 18))
         }.onAppear() {
             SalmonStats.getPlayerOverView(nsaid: self.nsaid) { response in
                 self.job_count = response[0]["results"]["clear"].intValue + response[0]["results"]["fail"].intValue
@@ -107,7 +107,7 @@ private struct SalmonStatsShiftView: View {
             Text("Shift Stats")
                 //            .frame(height: 28)
                 .foregroundColor(.orange)
-                .font(.custom("Splatoon1", size: 20))
+                .font(.custom("Splatfont", size: 20))
             ForEach(start_time.indices, id:\.self) { idx in
                 NavigationLink(destination: SalmonStatShiftStatsView(nsaid: self.$nsaid, start_time: self.$start_time[idx])) {
                     ShiftStack(phase: self.$shiftstats[idx])
@@ -137,7 +137,7 @@ private struct SalmonStatShiftStatsView: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("Overview").font(.custom("Splatoon1", size: 18))
+                Text("Overview").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 HStack {
@@ -153,20 +153,19 @@ private struct SalmonStatShiftStatsView: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("Boss Samonids").font(.custom("Splatoon1", size: 18))
+                Text("Boss Samonids").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 ForEach(stats.my_defeated.indices, id:\.self) { idx in
                     HStack {
                         Text(self.boss[idx])
                         Spacer()
-                        Text(String(self.stats.my_defeated[idx])).foregroundColor(.blue)
-                        Text("(\(String(self.stats.other_defeated[idx])))")
+                        ProgressView(value: [self.stats.my_defeated[idx], self.stats.other_defeated[idx]])
                     }
                 }
             }
         }
-        .font(.custom("Splatoon1", size: 16))
+        .font(.custom("Splatfont", size: 16))
         .navigationBarTitle("Player Stats")
         .onAppear() {
             SalmonStats.getPlayerShiftStatsDetail(nsaid: self.nsaid, start_time: self.start_time) { response in
@@ -197,7 +196,7 @@ private struct ShiftStack: View {
             HStack {
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 27, height: 18)})
                 Text(Unixtime(interval: Unixtime(time: phase["schedule_id"].stringValue))).frame(height: 18)
-                Text("-").frame(height: 18)
+                Text(verbatim: "-").frame(height: 18)
                 Text(Unixtime(interval: Unixtime(time: phase["end_at"].stringValue))).frame(height: 18)
                 Spacer()
             }.frame(height: 26)

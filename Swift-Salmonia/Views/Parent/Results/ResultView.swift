@@ -36,7 +36,7 @@ struct ResultView: View {
             }
         }
         .padding(.horizontal, 10)
-        .navigationBarTitle("Detail")
+        .navigationBarTitle(Text("Detail"))
         .navigationBarItems(trailing:
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/skill/8a3f06a972689b094f762626ff36b3db8ee545b5.png")!,
                              content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
@@ -67,8 +67,8 @@ private struct ResultWaveView: View {
                     .font(.custom("Splatfont2", size: 28))
                 Group {
                     Text(String(wave.ikura_num)).foregroundColor(.red).font(.custom("Splatfont2", size: 20))
-                    Text(wave.water_level)
-                    Text(wave.event_type)
+                    Text(wave.water_level.localized)
+                    Text(wave.event_type.localized)
                 }.foregroundColor(.black).frame(height: 28).font(.custom("Splatfont2", size: 16))
             }.background(Color.yellow).clipShape(RoundedRectangle(cornerRadius: 8.0))
             Text(String(wave.golden_ikura_pop_num)).frame(height: 28).font(.custom("Splatfont2", size: 18))

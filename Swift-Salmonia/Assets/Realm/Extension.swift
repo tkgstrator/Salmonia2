@@ -27,6 +27,11 @@ extension String {
             return (self as NSString).substring(with: matched.range(at: group))
         }
     }
+    
+    // 多言語対応
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
 }
 
 

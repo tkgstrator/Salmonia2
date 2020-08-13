@@ -22,20 +22,20 @@ struct PlayerView: View {
                              content: {$0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                         .frame(width: 80, height: 80)
                 }.buttonStyle(PlainButtonStyle())
-                Text(self.user.nickname.value).font(.custom("Splatoon1", size: 28)).frame(maxWidth: .infinity)
+                Text(self.user.nickname.value).font(.custom("Splatfont", size: 28)).frame(maxWidth: .infinity)
             }
-            Text("Overview")
+            Text("Overview".localized)
                 .frame(height: 28)
                 .foregroundColor(.orange)
-                .font(.custom("Splatoon1", size: 20))
+                .font(.custom("Splatfont", size: 20))
             HStack {
                 VStack(spacing: 0) {
-                    Text("Jobs")
+                    Text("Jobs".localized)
                     Text("\(card.job_num.value)")
                 }
                 Spacer()
                 VStack(spacing: 0) {
-                    Text("Eggs")
+                    Text("Eggs".localized)
                     HStack {
                         Text("\(card.golden_ikura_total.value)").foregroundColor(.yellow)
                         Text("/")
@@ -44,12 +44,12 @@ struct PlayerView: View {
                 }
                 Spacer()
                 VStack(spacing: 0) {
-                    Text("Points")
+                    Text("Points".localized)
                     Text("\(card.kuma_point_total.value)")
                 }
             }
 //            .frame(height: 80)
-            .font(.custom("Splatoon1", size: 18))
+            .font(.custom("Splatfont", size: 18))
         }
     }
 }

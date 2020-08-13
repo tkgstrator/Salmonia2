@@ -16,14 +16,14 @@ struct OptionView: View {
             Text("Options")
             .frame(height: 28)
             .foregroundColor(.orange)
-            .font(.custom("Splatoon1", size: 20))
+            .font(.custom("Splatfont", size: 20))
             HStack {
                 NavigationLink(destination: CrewView()) {
                     Text("Crew Memers")
                         .frame(height: 28)
                 }
             }
-            .font(.custom("Splatoon1", size: 20))
+            .font(.custom("Splatfont", size: 20))
         }
     }
 }
@@ -41,7 +41,7 @@ private struct CrewView: View {
                     Spacer()
                     Text("\(self.players.matchids[idx].match)")
                 }
-                .font(.custom("Splatoon1", size: 22))
+                .font(.custom("Splatfont", size: 22))
             }
         }
         .onAppear() {

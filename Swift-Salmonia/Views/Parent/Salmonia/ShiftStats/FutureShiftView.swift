@@ -28,7 +28,7 @@ struct FutureShiftView: View {
         VStack(spacing: 0) {
             Text("Shift Schedule")
                 .foregroundColor(.orange)
-                .font(.custom("Splatoon1", size: 20))
+                .font(.custom("Splatfont", size: 20))
             ForEach(phases.indices) { idx in
                 NavigationLink(destination: SalmoniaShiftView(start_time: self.$start_time[idx])) {
                     ShiftStack(phase: self.$phases[idx])
@@ -48,7 +48,7 @@ private struct ShiftStack: View {
             HStack {
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 27, height: 18)})
                 Text(Unixtime(interval: phase["StartDateTime"].intValue)).frame(height: 18)
-                Text("-").frame(height: 18)
+                Text(verbatim: "-").frame(height: 18)
                 Text(Unixtime(interval: phase["EndDateTime"].intValue)).frame(height: 18)
                 Spacer()
             }.frame(height: 26)
@@ -102,7 +102,7 @@ private struct SalmoniaShiftRecord: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("High Tide").font(.custom("Splatoon1", size: 18))
+                Text("High Tide").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 ForEach(global.records[2].indices, id:\.self) { idx in
@@ -111,7 +111,7 @@ private struct SalmoniaShiftRecord: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("Normal Tide").font(.custom("Splatoon1", size: 18))
+                Text("Normal Tide").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 ForEach(global.records[1].indices, id:\.self) { idx in
@@ -120,7 +120,7 @@ private struct SalmoniaShiftRecord: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("Low Tide").font(.custom("Splatoon1", size: 18))
+                Text("Low Tide").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 ForEach(global.records[0].indices, id:\.self) { idx in
@@ -139,7 +139,9 @@ private struct SalmoniaShiftRecord: View {
 private struct SalmoniaShiftStats: View {
     @Binding var start_time: Int
     @ObservedObject var stats: UserStatsCore
-    
+    @State var salmonstats: SalmonStatsFormat = SalmonStatsFormat()
+    private let boss: [String] = ["Goldie", "Steelhead", "Flyfish", "Scrapper", "Steel Eel", "Stinger", "Maws", "Griller", "Drizzler"]
+
     init(start_time: Binding<Int>) {
         _start_time = start_time
         _stats = ObservedObject(initialValue: UserStatsCore(start_time: start_time))
@@ -149,7 +151,7 @@ private struct SalmoniaShiftStats: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("OVERVIEW").font(.custom("Splatoon1", size: 18))
+                Text("OVERVIEW").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 StatsStackView(title: "JOB NUM", value: stats.job_num)
@@ -162,7 +164,7 @@ private struct SalmoniaShiftStats: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("MAX").font(.custom("Splatoon1", size: 18))
+                Text("MAX").font(.custom("Splatfont", size: 18))
                 Spacer()
             }){
                 StatsStackView(title: "GRADE POINT", value: stats.max_grade_point)
@@ -174,7 +176,7 @@ private struct SalmoniaShiftStats: View {
             }
             Section(header:HStack {
                 Spacer()
-                Text("AVERAGE").font(.custom("Splatoon1", size: 18))
+                Text("AVERAGE").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 StatsStackView(title: "CLEAR WAVE", value: stats.avg_clear_wave)
@@ -186,6 +188,25 @@ private struct SalmoniaShiftStats: View {
                 StatsStackView(title: "DEFEATED", value: stats.avg_defeated)
                 StatsStackView(title: "RESCUE", value: stats.avg_rescue)
                 StatsStackView(title: "DEAD", value: stats.avg_dead)
+            }
+            Section(header:HStack {
+                Spacer()
+                Text("BOSS").font(.custom("Splatfont", size: 18))
+                Spacer()
+            }) {
+                ForEach(salmonstats.other_defeated.indices, id:\.self) { idx in
+                    HStack {
+                        Text("\(self.boss[idx])")
+                        Spacer()
+                        ProgressView(value: [self.stats.boss_defeated[idx]!, self.salmonstats.other_defeated[idx]])
+                    }
+                }
+            }
+        }.onAppear() {
+            SalmonStats.getPlayerShiftStatsDetail(nsaid: "3f89c3791c43ea57", start_time: SSTime(time: self.start_time)) { response in
+                print(response)
+                self.salmonstats = SalmonStats.encodeStats(response)
+                print(self.salmonstats.other_defeated)
             }
         }
 //        .padding(.horizontal, 10)
@@ -200,7 +221,7 @@ private struct SalmoniaShiftRecordStack: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("\(SplatNet2.getEventName(record.id))").font(.custom("Splatoon1", size: 20)).frame(width: 180)
+                Text("\((SplatNet2.getEventName(record.id)).localized)").font(.custom("Splatfont", size: 20)).frame(width: 180)
                 Spacer()
                 URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: { $0.image.resizable().aspectRatio(contentMode: .fill) }).frame(width: 24, height: 24)
                 Text("x\(record.pr.value)").frame(width: 40).foregroundColor(.yellow)
@@ -212,8 +233,8 @@ private struct SalmoniaShiftRecordStack: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .font(.custom("Splatoon1", size: 16))
-        }.font(.custom("Splatoon1", size: 18))
+            .font(.custom("Splatfont", size: 16))
+        }.font(.custom("Splatfont", size: 18))
     }
 }
 
@@ -230,7 +251,7 @@ private struct StatsStackView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(title.localized)
             Spacer()
             Text(value)
         }

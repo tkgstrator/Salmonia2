@@ -19,7 +19,7 @@ struct StageListView: View {
             Text("Stage Records")
                 .frame(height: 28)
                 .foregroundColor(.orange)
-                .font(.custom("Splatoon1", size: 20))
+                .font(.custom("Splatfont", size: 20))
             ForEach(stage_list.indices, id:\.self) { idx in
                 HStack {
                     NavigationLink(destination: StageRecordsView(id: self.$stage_list[idx])) {
@@ -29,8 +29,8 @@ struct StageListView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
                     }
                     Spacer()
-                    Text(ImageURL.stagename(self.stage_list[idx])).frame(maxWidth: .infinity)
-                }.font(.custom("Splatoon1", size: 20))
+                    Text(ImageURL.stagename(self.stage_list[idx]).localized).frame(maxWidth: .infinity)
+                }.font(.custom("Splatfont", size: 20))
             }
             .buttonStyle(PlainButtonStyle())
         }
@@ -69,7 +69,7 @@ private struct StageRecordsView: View {
                                 Text("/")
                                 Text(String(stage.my_avg_power_eggs.value)).foregroundColor(.red)
                             }
-                            .font(.custom("Splatoon1", size: 18))
+                            .font(.custom("Splatfont", size: 18))
                             .frame(height: 18)
                         }
                     }
@@ -100,7 +100,7 @@ private struct StageRecordsView: View {
                             Text("/")
                             Text(String(stage.my_max_power_eggs.value)).foregroundColor(.red)
                         }
-                        .font(.custom("Splatoon1", size: 18))
+                        .font(.custom("Splatfont", size: 18))
                         .frame(height: 18)
                     }
                     NavigationLink(destination: GoldenEggRecordsView()) {
@@ -110,7 +110,7 @@ private struct StageRecordsView: View {
                 // 実際のジャンプボタン
             }
         }
-        .font(.custom("Splatoon1", size: 22))
+        .font(.custom("Splatfont", size: 22))
         .navigationBarTitle(ImageURL.stagename(stage_id))
     }
 }

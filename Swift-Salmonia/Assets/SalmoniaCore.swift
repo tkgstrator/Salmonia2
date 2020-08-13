@@ -108,6 +108,7 @@ class CrewInfoCore: ObservableObject {
             guard let realm = try? Realm() else { return }
             guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid! else { return }
 
+            // ここの処理が重いのでなんとかしたい所存
             // 自分以外のユーザの情報を取得
             let players: Results<CrewInfoRealm> = realm.objects(CrewInfoRealm.self).filter("nsaid!=%@", nsaid)
             var tmp: [(nsaid: String?, name: String?, url: String?, match: Int)] = []
@@ -147,20 +148,14 @@ class UserStatsCore: ObservableObject {
     @Published var avg_defeated: Double?
     @Published var avg_rescue: Double?
     @Published var avg_dead: Double?
+    @Published var boss_defeated: [Double?] = []
     
     init(start_time: Binding<Int>) {
         self._start_time = start_time
         token = try? Realm().objects(CoopResultsRealm.self).observe { _ in
-            #if DEBUG
             guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", self.start_time) else { return }
             guard let summary = try? Realm().objects(ShiftResultsRealm.self).filter("start_time=%@", self.start_time).first else { return }
-//            guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", 1596153600) else { return }
-//            guard let summary = try? Realm().objects(ShiftResultsRealm.self).filter("start_time=%@", 1596153600).first else { return }
-            #else
-            guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", self.start_time) else { return }
-            guard let summary = try? Realm().objects(ShiftResultsRealm.self).filter("start_time=%@", self.start_time).first else { return }
-            #endif
-            
+
             self.job_num = summary.job_num
             self.clear_ratio = Double(Double(results.lazy.filter("is_clear=%@", true).count) / Double(summary.job_num)).round(digit: 4)
             self.total_golden_eggs = summary.team_golden_ikura_total
@@ -181,6 +176,22 @@ class UserStatsCore: ObservableObject {
             self.avg_dead = Double(Double(summary.dead_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_rescue = Double(Double(summary.help_total) / Double(summary.job_num)).round(digit: 2)
             self.avg_defeated = Double((Double(results.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).reduce(0, +)) / Double(summary.job_num))).round(digit: 2)
+            
+            // Boss Defeated
+            let kill_counts = results.lazy.map({ $0.player[0].boss_kill_counts })
+            let appear_counts = results.lazy.map({ $0.boss_counts })
+            var sum_kill_counts = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            var sum_appear_counts = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            
+            for kill_count in kill_counts {
+                sum_kill_counts = Array(zip(sum_kill_counts, kill_count)).map({ $0.0 + $0.1 })
+            }
+            
+            for appear_count in appear_counts {
+                sum_appear_counts = Array(zip(sum_appear_counts, appear_count)).map({ $0.0 + $0.1 })
+            }
+            
+            self.boss_defeated = Array(zip(sum_kill_counts, sum_appear_counts)).map({ (Double($0.0) / Double($0.1)).round(digit: 4) })
         }
     }
 }
