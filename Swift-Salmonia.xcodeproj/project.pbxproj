@@ -87,7 +87,7 @@
 		10A0AC0724D7DD5B00ADD56E /* ResultsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionView.swift; sourceTree = "<group>"; };
 		10A0AC0924D7DDD800ADD56E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		10A0AC0F24D7E04E00ADD56E /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
-		10A0AC1324D7E47300ADD56E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		10A0AC1324D7E47300ADD56E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = Realm/Extension.swift; sourceTree = "<group>"; };
 		10A0AC2124D7E8DE00ADD56E /* FutureShiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureShiftView.swift; sourceTree = "<group>"; };
 		10A0AC2324D7E99700ADD56E /* StageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageListView.swift; sourceTree = "<group>"; };
 		10A0AC2524D7EB3700ADD56E /* StageRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordsView.swift; sourceTree = "<group>"; };
@@ -175,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				10505E6F24CB653800CF4E04 /* Realm.swift */,
-				10A0AC1324D7E47300ADD56E /* Extension.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -271,6 +270,7 @@
 				10A0AC2724D804D000ADD56E /* SalmoniaCore.swift */,
 				10A0AC2924D8374700ADD56E /* Salmonia.swift */,
 				10A0AC3224D93EC000ADD56E /* Error.swift */,
+				10A0AC1324D7E47300ADD56E /* Extension.swift */,
 				10A0AC3424D93F2E00ADD56E /* WebView.swift */,
 			);
 			path = Assets;
@@ -875,7 +875,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -905,7 +905,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "work.tkgstrator.Swift-Salmonia";
 				PRODUCT_NAME = Salmonia2;
 				PROVISIONING_PROFILE_SPECIFIER = "";

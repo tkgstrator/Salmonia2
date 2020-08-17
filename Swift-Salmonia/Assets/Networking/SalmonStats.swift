@@ -276,8 +276,16 @@ class SalmonStats {
             let s_defeat: Double = Double(summary["player_boss_elimination_\(id)"].intValue)
             let g_appear: Double = Double(global["boss_appearance_\(id)"].intValue)
             let g_defeat: Double = Double(global["boss_elimination_\(id)"].intValue)
-            stats.my_defeated.append((s_defeat/s_appear).round(digit: 4))
-            stats.other_defeated.append((g_defeat/g_appear/4.0).round(digit: 4))
+            if s_appear == 0 {
+                stats.my_defeated.append(0.0)
+            } else {
+                stats.my_defeated.append((s_defeat/s_appear).round(digit: 4))
+            }
+            if g_appear == 0 {
+                stats.my_defeated.append(0.0)
+            } else {
+                stats.other_defeated.append((g_defeat/g_appear/4.0).round(digit: 4))
+            }
         }
         
         return stats
@@ -374,7 +382,6 @@ class SalmonStats {
     }
 
 }
-
 
 struct SalmonStatsFormat {
     public var games: Int = 0

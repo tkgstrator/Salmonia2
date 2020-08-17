@@ -198,15 +198,15 @@ private struct SalmoniaShiftStats: View {
                     HStack {
                         Text("\(self.boss[idx])")
                         Spacer()
-                        ProgressView(value: [self.stats.boss_defeated[idx]!, self.salmonstats.other_defeated[idx]])
+                        ProgressView(value: [self.stats.boss_defeated[idx] ?? 0, self.salmonstats.other_defeated[idx]])
                     }
                 }
             }
         }.onAppear() {
             SalmonStats.getPlayerShiftStatsDetail(nsaid: "3f89c3791c43ea57", start_time: SSTime(time: self.start_time)) { response in
-                print(response)
+//                print(response)
                 self.salmonstats = SalmonStats.encodeStats(response)
-                print(self.salmonstats.other_defeated)
+//                print(self.salmonstats.other_defeated)
             }
         }
 //        .padding(.horizontal, 10)

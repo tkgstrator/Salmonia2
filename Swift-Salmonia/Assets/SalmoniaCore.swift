@@ -148,7 +148,7 @@ class UserStatsCore: ObservableObject {
     @Published var avg_defeated: Double?
     @Published var avg_rescue: Double?
     @Published var avg_dead: Double?
-    @Published var boss_defeated: [Double?] = []
+    @Published var boss_defeated: [Double?] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     
     init(start_time: Binding<Int>) {
         self._start_time = start_time

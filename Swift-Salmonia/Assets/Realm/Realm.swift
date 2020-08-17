@@ -94,9 +94,36 @@ class CoopResultsRealm: Object {
     static func gettime() -> [Int] {
         return Array(Set(realm.objects(CoopResultsRealm.self).filter({ $0.stage_id.value == nil}).map({ $0.start_time })))
     }
+    
+    func getSP() -> [[Int]] {
+        var usage: [[Int]] = []
+        for (wave, _) in self.wave.enumerated() {
+            var tmp: [Int] = []
+            for player in self.player {
+                let special_id: Int = player.special_id
+                let count: Int = player.special_counts[wave]
+                
+                switch count {
+                case 1:
+                    tmp.append(special_id)
+                case 2:
+                    tmp.append(special_id)
+                    tmp.append(special_id)
+                default:
+                    break
+                }
+            }
+            usage.append(tmp)
+        }
+        return usage
+    }
 
     override static func primaryKey() -> String? {
         return "play_time"
+    }
+    
+    override static func indexedProperties() -> [String] {
+        return ["start_time"]
     }
 }
 
@@ -140,5 +167,9 @@ class CrewInfoRealm: Object {
 
     override static func primaryKey() -> String? {
         return "nsaid"
+    }
+    
+    override static func indexedProperties() -> [String] {
+        return ["nsaid"]
     }
 }

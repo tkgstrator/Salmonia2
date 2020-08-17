@@ -8,6 +8,82 @@
 
 import Foundation
 import SwiftyJSON
+import SwiftUI
+
+extension ResultView {
+    func asImage() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        
+        // locate far out of screen
+        controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
+        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
+        
+        let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
+        controller.view.bounds = CGRect(origin: .zero, size: size)
+        controller.view.sizeToFit()
+        controller.view.backgroundColor = .clear
+        let image = controller.view.asImage()
+        controller.view.removeFromSuperview()
+        return image
+    }
+    
+    func takeScreenShot(origin: CGPoint, size: CGSize) -> UIImage {
+        let screen = ResultView(data: self.result)
+        let window = UIWindow(frame: CGRect(origin: origin, size: size))
+        let hosting = UIHostingController(rootView: screen)
+        hosting.view.frame = window.frame
+        window.addSubview(hosting.view)
+        window.makeKeyAndVisible()
+        return hosting.view.asImage()
+    }
+}
+
+
+
+extension UIView {
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+}
+
+extension UIColor {
+    public convenience init(_ hex: String) {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        var r: CGFloat = 0.0
+        var g: CGFloat = 0.0
+        var b: CGFloat = 0.0
+        var a: CGFloat = 1.0
+        
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+        
+        if ((cString.count) == 8) {
+            r = CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0
+            g =  CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0
+            b = CGFloat((rgbValue & 0x0000FF)) / 255.0
+            a = CGFloat((rgbValue & 0xFF000000)  >> 24) / 255.0
+            
+        }else if ((cString.count) == 6){
+            r = CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0
+            g =  CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0
+            b = CGFloat((rgbValue & 0x0000FF)) / 255.0
+            a =  CGFloat(1.0)
+        }
+        
+        
+        self.init(  red: r,
+                    green: g,
+                    blue: b,
+                    alpha: a
+        )
+    } }
 
 extension String {
     // 正規表現マッチングを実現する
@@ -48,7 +124,11 @@ extension Optional {
         case is Int:
             return String(self as! Int)
         case is Double:
-            return String(self as! Double)
+            if (self as! Double).isNaN {
+                return String(0.0)
+            } else {
+                return String(self as! Double)
+            }
         case is String:
             return self as! String
         default:

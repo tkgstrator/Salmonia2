@@ -169,7 +169,9 @@ private struct SalmonStatShiftStatsView: View {
         .navigationBarTitle("Player Stats")
         .onAppear() {
             SalmonStats.getPlayerShiftStatsDetail(nsaid: self.nsaid, start_time: self.start_time) { response in
+//                print(response)
                 self.stats = SalmonStats.encodeStats(response)
+//                print(self.stats)
             }
         }
     }

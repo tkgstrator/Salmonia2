@@ -25,24 +25,21 @@ struct LoadingView: View {
                 // 最初にiksm_sessionをとっておきます
                 guard let realm = try? Realm() else { return } // Realmオブジェクトを作成
                 guard let iksm_session: String = realm.objects(UserInfoRealm.self).first?.iksm_session else {
-                    self.messages.append("Login SplatNet2")
+//                    self.messages.append("Login SplatNet2")
                     self.isLock = false
                     return
                 }
                 guard let token: String = realm.objects(UserInfoRealm.self).first?.api_token else {
-                    self.messages.append("Login Salmon Stats")
+//                    self.messages.append("Login Salmon Stats")
                     self.isLock = false
                     return
                 }
                 guard let nsaid: String = realm.objects(UserInfoRealm.self).first?.nsaid else {
-                    self.messages.append("Can't get player id")
+//                    self.messages.append("Can't get player id")
                     self.isLock = false
                     return
                 }
-                
                 // iksm_sessionが有効かどうかを調べ、有効でない場合はsession_tokenから再取得するコード
-                
-                
                 // 重複しているかどうか調べるリスト（メインスレッドが一つだけもってメモリを節約）
                 let times: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
                 let job_id_last: Int = realm.objects(CoopResultsRealm.self).max(ofProperty: "job_id") ?? 0
@@ -87,7 +84,7 @@ struct LoadingView: View {
                                 let weapons: [Int] = data["schedule"]["weapons"].map({ $0.1["id"].intValue })
                                 shift?.updateValue(weapons, forKey: "weapons")
                                 realm.create(ShiftResultsRealm.self, value: shift as Any, update: .modified)
-                                Thread.sleep(forTimeInterval: 0.5)
+//                                Thread.sleep(forTimeInterval: 0.5)
                             }
                             try? realm.commitWrite()
                         }
