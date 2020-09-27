@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A025209C7C001B41B0 /* AppDelegate.swift */; };
+		1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A225209C7C001B41B0 /* SceneDelegate.swift */; };
+		1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A425209C7C001B41B0 /* ContentView.swift */; };
+		1037E3A725209C7D001B41B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1037E3A625209C7D001B41B0 /* Assets.xcassets */; };
+		1037E3AA25209C7D001B41B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1037E3A925209C7D001B41B0 /* Preview Assets.xcassets */; };
+		1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1037E3AB25209C7D001B41B0 /* LaunchScreen.storyboard */; };
+		1037E3B825209C7E001B41B0 /* Salmonia2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3B725209C7E001B41B0 /* Salmonia2Tests.swift */; };
+		1037E3C325209C7E001B41B0 /* Salmonia2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1037E3B425209C7E001B41B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1037E39525209C7C001B41B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1037E39C25209C7C001B41B0;
+			remoteInfo = Salmonia2;
+		};
+		1037E3BF25209C7E001B41B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1037E39525209C7C001B41B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1037E39C25209C7C001B41B0;
+			remoteInfo = Salmonia2;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1037E39D25209C7C001B41B0 /* Salmonia2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1037E3A025209C7C001B41B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1037E3A225209C7C001B41B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		1037E3A425209C7C001B41B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1037E3A625209C7D001B41B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1037E3A925209C7D001B41B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1037E3AC25209C7D001B41B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1037E3AE25209C7D001B41B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1037E3B325209C7E001B41B0 /* Salmonia2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Salmonia2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1037E3B725209C7E001B41B0 /* Salmonia2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salmonia2Tests.swift; sourceTree = "<group>"; };
+		1037E3B925209C7E001B41B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1037E3BE25209C7E001B41B0 /* Salmonia2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Salmonia2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salmonia2UITests.swift; sourceTree = "<group>"; };
+		1037E3C425209C7E001B41B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1037E39A25209C7C001B41B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1037E3B025209C7E001B41B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1037E3BB25209C7E001B41B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1037E39425209C7C001B41B0 = {
+			isa = PBXGroup;
+			children = (
+				1037E39F25209C7C001B41B0 /* Salmonia2 */,
+				1037E3B625209C7E001B41B0 /* Salmonia2Tests */,
+				1037E3C125209C7E001B41B0 /* Salmonia2UITests */,
+				1037E39E25209C7C001B41B0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1037E39E25209C7C001B41B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1037E39D25209C7C001B41B0 /* Salmonia2.app */,
+				1037E3B325209C7E001B41B0 /* Salmonia2Tests.xctest */,
+				1037E3BE25209C7E001B41B0 /* Salmonia2UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1037E39F25209C7C001B41B0 /* Salmonia2 */ = {
+			isa = PBXGroup;
+			children = (
+				1037E3A025209C7C001B41B0 /* AppDelegate.swift */,
+				1037E3A225209C7C001B41B0 /* SceneDelegate.swift */,
+				1037E3A425209C7C001B41B0 /* ContentView.swift */,
+				1037E3A625209C7D001B41B0 /* Assets.xcassets */,
+				1037E3AB25209C7D001B41B0 /* LaunchScreen.storyboard */,
+				1037E3AE25209C7D001B41B0 /* Info.plist */,
+				1037E3A825209C7D001B41B0 /* Preview Content */,
+			);
+			path = Salmonia2;
+			sourceTree = "<group>";
+		};
+		1037E3A825209C7D001B41B0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1037E3A925209C7D001B41B0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1037E3B625209C7E001B41B0 /* Salmonia2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1037E3B725209C7E001B41B0 /* Salmonia2Tests.swift */,
+				1037E3B925209C7E001B41B0 /* Info.plist */,
+			);
+			path = Salmonia2Tests;
+			sourceTree = "<group>";
+		};
+		1037E3C125209C7E001B41B0 /* Salmonia2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */,
+				1037E3C425209C7E001B41B0 /* Info.plist */,
+			);
+			path = Salmonia2UITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1037E39C25209C7C001B41B0 /* Salmonia2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1037E3C725209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2" */;
+			buildPhases = (
+				1037E39925209C7C001B41B0 /* Sources */,
+				1037E39A25209C7C001B41B0 /* Frameworks */,
+				1037E39B25209C7C001B41B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Salmonia2;
+			productName = Salmonia2;
+			productReference = 1037E39D25209C7C001B41B0 /* Salmonia2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1037E3B225209C7E001B41B0 /* Salmonia2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1037E3CA25209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2Tests" */;
+			buildPhases = (
+				1037E3AF25209C7E001B41B0 /* Sources */,
+				1037E3B025209C7E001B41B0 /* Frameworks */,
+				1037E3B125209C7E001B41B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1037E3B525209C7E001B41B0 /* PBXTargetDependency */,
+			);
+			name = Salmonia2Tests;
+			productName = Salmonia2Tests;
+			productReference = 1037E3B325209C7E001B41B0 /* Salmonia2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1037E3BD25209C7E001B41B0 /* Salmonia2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1037E3CD25209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2UITests" */;
+			buildPhases = (
+				1037E3BA25209C7E001B41B0 /* Sources */,
+				1037E3BB25209C7E001B41B0 /* Frameworks */,
+				1037E3BC25209C7E001B41B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1037E3C025209C7E001B41B0 /* PBXTargetDependency */,
+			);
+			name = Salmonia2UITests;
+			productName = Salmonia2UITests;
+			productReference = 1037E3BE25209C7E001B41B0 /* Salmonia2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1037E39525209C7C001B41B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					1037E39C25209C7C001B41B0 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					1037E3B225209C7E001B41B0 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 1037E39C25209C7C001B41B0;
+					};
+					1037E3BD25209C7E001B41B0 = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = 1037E39C25209C7C001B41B0;
+					};
+				};
+			};
+			buildConfigurationList = 1037E39825209C7C001B41B0 /* Build configuration list for PBXProject "Salmonia2" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1037E39425209C7C001B41B0;
+			productRefGroup = 1037E39E25209C7C001B41B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1037E39C25209C7C001B41B0 /* Salmonia2 */,
+				1037E3B225209C7E001B41B0 /* Salmonia2Tests */,
+				1037E3BD25209C7E001B41B0 /* Salmonia2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1037E39B25209C7C001B41B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */,
+				1037E3AA25209C7D001B41B0 /* Preview Assets.xcassets in Resources */,
+				1037E3A725209C7D001B41B0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1037E3B125209C7E001B41B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1037E3BC25209C7E001B41B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1037E39925209C7C001B41B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */,
+				1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */,
+				1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1037E3AF25209C7E001B41B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1037E3B825209C7E001B41B0 /* Salmonia2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1037E3BA25209C7E001B41B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1037E3C325209C7E001B41B0 /* Salmonia2UITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1037E3B525209C7E001B41B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1037E39C25209C7C001B41B0 /* Salmonia2 */;
+			targetProxy = 1037E3B425209C7E001B41B0 /* PBXContainerItemProxy */;
+		};
+		1037E3C025209C7E001B41B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1037E39C25209C7C001B41B0 /* Salmonia2 */;
+			targetProxy = 1037E3BF25209C7E001B41B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1037E3AB25209C7D001B41B0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1037E3AC25209C7D001B41B0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1037E3C525209C7E001B41B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1037E3C625209C7E001B41B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1037E3C825209C7E001B41B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Salmonia2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1037E3C925209C7E001B41B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Salmonia2/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1037E3CB25209C7E001B41B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				INFOPLIST_FILE = Salmonia2Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Salmonia2.app/Salmonia2";
+			};
+			name = Debug;
+		};
+		1037E3CC25209C7E001B41B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				INFOPLIST_FILE = Salmonia2Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Salmonia2.app/Salmonia2";
+			};
+			name = Release;
+		};
+		1037E3CE25209C7E001B41B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				INFOPLIST_FILE = Salmonia2UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Salmonia2;
+			};
+			name = Debug;
+		};
+		1037E3CF25209C7E001B41B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D9HU6JZF2Q;
+				INFOPLIST_FILE = Salmonia2UITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Salmonia2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1037E39825209C7C001B41B0 /* Build configuration list for PBXProject "Salmonia2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1037E3C525209C7E001B41B0 /* Debug */,
+				1037E3C625209C7E001B41B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1037E3C725209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1037E3C825209C7E001B41B0 /* Debug */,
+				1037E3C925209C7E001B41B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1037E3CA25209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1037E3CB25209C7E001B41B0 /* Debug */,
+				1037E3CC25209C7E001B41B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1037E3CD25209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1037E3CE25209C7E001B41B0 /* Debug */,
+				1037E3CF25209C7E001B41B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1037E39525209C7C001B41B0 /* Project object */;
+}
