@@ -20,13 +20,15 @@ struct LoadingView: View {
         LoggingThread(log: $messages, lock: $isLock)
             .onAppear() {
                 do {
-                    guard let realm = try? Realm() else { throw APIError.Response("2000", "Realm DB Error")}
+                    guard let realm = try? Realm() else { throw APIError.Response("2000", "Realm DB Error") }
+                    guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+                    guard let api_token = user.api_token else { throw APIError.Response("2001", "Empty API Token") }
+
                     let accounts = realm.objects(UserInfoRealm.self).filter("isActive = %@", true)
                     if accounts.count == 0  { throw APIError.Response("2001", "No Active Accounts") }
                     // アクティブなアカウント全てでループ
                     for account in accounts {
                         guard let iksm_session = account.iksm_session else { throw APIError.Response("2001", "Empty Iksm Session") }
-                        guard let api_token = account.api_token else { throw APIError.Response("2001", "Empty API Token") }
                         guard let session_token = account.session_token else { throw APIError.Response("2001", "Empty Session Token") }
                         let nsaid = account.nsaid
                         

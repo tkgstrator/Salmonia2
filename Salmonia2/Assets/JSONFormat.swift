@@ -10,10 +10,10 @@ import SwiftyJSON
 
 class JF {
     
-    class func FromFutureShift(_ response: JSON) -> FutureShiftRealm {
+    class func FromFutureShift(_ response: JSON) -> CoopShiftRealm {
         
         let result: [String: Any?] = response.dictionaryObject!
-        return FutureShiftRealm(value: result as Any)
+        return CoopShiftRealm(value: result as Any)
         
     }
     
@@ -60,7 +60,7 @@ class JF {
         result.updateValue(waves.map({ $0.ikura_num }).reduce(0, +), forKey: "power_eggs")
         result.updateValue(waves.map({ $0.golden_ikura_num }).reduce(0, +), forKey: "golden_eggs")
         result.updateValue(nsaid, forKey: "nsaid")
-        result.updateValue(SP2Map.getStageId(String(response["schedule"]["stage"]["image"].stringValue.suffix(44))), forKey: "stage_id")
+        result.updateValue(FImage.getStageId(String(response["schedule"]["stage"]["image"].stringValue.suffix(44))), forKey: "stage_id")
         result.updateValue(response["grade"]["id"].intValue, forKey: "grade_id")
         result.updateValue(response["boss_counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1["count"].intValue }), forKey: "boss_counts")
         result.updateValue(player_kill_counts, forKey: "boss_kill_counts")

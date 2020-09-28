@@ -3,15 +3,15 @@
     {
       "displayPrice" : "3.99",
       "familyShareable" : false,
-      "internalID" : "634A4468",
+      "internalID" : "EE59DF22",
       "localizations" : [
         {
-          "description" : "Give Dr.Pepper to the Developers",
-          "displayName" : "Dr.Pepepr",
+          "description" : "Give Dr.Pepper to developer.",
+          "displayName" : "Dr. Pepper",
           "locale" : "en_US"
         },
         {
-          "description" : "開発者にドクペを送ります",
+          "description" : "開発者にドクペを送ります。ドクペを飲むと開発が捗ります。",
           "displayName" : "ドクペ支援",
           "locale" : "ja"
         }
@@ -19,6 +19,26 @@
       "productID" : "work.tkgstrator.Salmonia2.Asphalt",
       "referenceName" : "Dr.Pepper",
       "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "C63A1E48",
+      "localizations" : [
+        {
+          "description" : "Enable to get results of multiple accounts",
+          "displayName" : "Multiple Accounts",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "同時に複数のアカウントのデータ取得を可能にします",
+          "displayName" : "複数アカウント有効化",
+          "locale" : "ja"
+        }
+      ],
+      "productID" : "work.tkgstrator.Salmonia2.isActive",
+      "referenceName" : "isActive",
+      "type" : "NonConsumable"
     }
   ],
   "settings" : {
@@ -26,7 +46,7 @@
   },
   "subscriptionGroups" : [
     {
-      "id" : "7732E8F0",
+      "id" : "00CFC627",
       "localizations" : [
 
       ],
@@ -36,22 +56,22 @@
           "adHocOffers" : [
 
           ],
-          "displayPrice" : "0.99",
+          "displayPrice" : "3.99",
           "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "EC7B05E8",
+          "internalID" : "55294509",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "",
-              "displayName" : "",
+              "description" : "Give Dr.Pepper to developer",
+              "displayName" : "Dr.Pepper",
               "locale" : "en_US"
             }
           ],
           "productID" : "work.tkgstrator.Salmonia2.DrPepper",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Dr.Pepper",
-          "subscriptionGroupID" : "7732E8F0",
+          "subscriptionGroupID" : "00CFC627",
           "type" : "RecurringSubscription"
         }
       ]

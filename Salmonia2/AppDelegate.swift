@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // パスを表示
         print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
+        
+        // 課金システムを搭載
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
@@ -37,6 +39,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         do {
             let realm = try Realm()
+            
+            // Salmoniaユーザがいなければ作成
+            let users = realm.objects(SalmoniaUserRealm.self)
+            
+            if users.isEmpty {
+                try? realm.write {
+                    realm.create(SalmoniaUserRealm.self)
+                } 
+            }
+
+            // データを取得
             let url = "https://gist.githubusercontent.com/tkgstrator/adcea132ae2fea4bd646a6d062279056/raw/11f588d1f0be667ee9296c6d3ebe201710f2df05/FutureShift.json"
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)
@@ -47,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         realm.beginWrite()
                         for (_, shift) in JSON(value) {
                             let value = shift.dictionaryObject
-                            realm.create(FutureShiftRealm.self, value: value as Any, update: .all)
+                            realm.create(CoopShiftRealm.self, value: value as Any, update: .all)
                         }
                         try? realm.commitWrite()
                     case .failure:

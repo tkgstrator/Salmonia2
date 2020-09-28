@@ -10,6 +10,8 @@ import URLImage
 
 struct UserListView: View {
     @EnvironmentObject var users: UserInfoCore
+    @EnvironmentObject var user: SalmoniaUserCore
+
     @State var isVisible: Bool = false
     @State var log: (code: String, message: String) = ("", "")
     
@@ -23,7 +25,9 @@ struct UserListView: View {
                     Text(users.account[idx].name).frame(maxWidth: .infinity)
                     Toggle(isOn: $users.isActiveArray[idx]) {
 //                        Text("Display Rare Weapon")
-                    }.onTapGesture{
+                    }
+                    .disabled(!user.isPurchase)
+                    .onTapGesture{
                         do {
                             let isActive: Bool = users.account[idx].isActive
                             let nsaid: String = users.account[idx].nsaid

@@ -20,29 +20,19 @@ class UserInfoCore: ObservableObject {
     @Published var iksm_session: String?
     @Published var session_token: String?
     @Published var api_token: String?
-    @Published var isUnlock: Bool = false
-    @Published var isActive: Bool = false
-    @Published var isDevelop: Bool = false
-    @Published var isImported: Bool = false
     @Published var isActiveArray: [Bool] = []
     
     init() {
         token = try? Realm().objects(UserInfoRealm.self).observe { _ in
             guard let users = try? Realm().objects(UserInfoRealm.self) else { return }
             self.account = users
-//            guard let realm = users.filter("isActive=%@", true).first else { return }
             guard let realm = users.first else { return }
             self.nsaid = realm.nsaid
             self.nickname = realm.name
             self.imageUri = realm.image
             self.iksm_session = realm.iksm_session
             self.session_token = realm.session_token
-            self.api_token = realm.api_token
-            self.isUnlock = realm.isUnlock
             self.isActiveArray = users.map({ $0.isActive })
-            self.isActive = realm.isActive
-            self.isDevelop = realm.isDevelop
-            self.isImported = realm.isImported
         }
     }
 }

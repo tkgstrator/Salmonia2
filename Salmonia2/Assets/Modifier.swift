@@ -25,7 +25,10 @@ struct SalmoniaHeader: ViewModifier {
     func body(content: Content) -> some View {
         content
             .navigationBarItems(leading:
-                                    NavigationLink(destination: SettingView().environmentObject(UserInfoCore()))
+                                    NavigationLink(destination: SettingView()
+                                                    .environmentObject(UserInfoCore())
+                                                    .environmentObject(SalmoniaUserCore())
+                                    )
                                     {
                                         URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/bb035c04e62c044139986540e6c3b8b3.png")!,
                                                  content: {$0.image.renderingMode(.template).resizable()})

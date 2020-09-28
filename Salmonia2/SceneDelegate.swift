@@ -87,20 +87,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 guard let nsaid = response["nsaid"].string else { throw APIError.Response("1004", "Nsa ID Error") }
                 guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
                 try? realm.write {
-                    let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
-                    switch user.isEmpty {
+                    let account = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
+                    switch account.isEmpty {
                     case true: // 新規作成
-                        let user: [String: String?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token]
-                        realm.create(UserInfoRealm.self, value: user)
+                        // 一つ目のアカウントかどうか調べる（最初だけは常にActiveにするため）
+                        let users = realm.objects(UserInfoRealm.self)
+                        let account: [String: Any?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token, "isActive": users.isEmpty]
+                        realm.create(UserInfoRealm.self, value: account)
                     case false: // 再ログイン（アップデート）
-                        guard let session_token = user.first?.session_token else { return }
-                        user.setValue(iksm_session, forKey: "iksm_session")
-                        user.setValue(session_token, forKey: "session_token")
-                        user.setValue(thumbnail_url, forKey: "image")
-                        user.setValue(nickname, forKey: "name")
+                        guard let session_token = account.first?.session_token else { return }
+                        account.setValue(iksm_session, forKey: "iksm_session")
+                        account.setValue(session_token, forKey: "session_token")
+                        account.setValue(thumbnail_url, forKey: "image")
+                        account.setValue(nickname, forKey: "name")
                     }
                 }
-                print(session_token, iksm_session)
             } catch (let error) {
                 print(error)
             }

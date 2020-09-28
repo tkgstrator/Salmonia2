@@ -74,7 +74,7 @@ private struct SpecialUseView: View {
             ForEach(usage.indices, id:\.self) { column in
                 HStack(spacing: 0) {
                     ForEach(usage[column].indices, id:\.self) { idx in
-                        URLImage(SP2Map.getURL(usage[column][idx], 2), content: {$0.image.resizable()})
+                        URLImage(FImage.getURL(usage[column][idx], 2), content: {$0.image.resizable()})
                             .frame(width: 28.75, height: 28.75)
                     }
                 }.frame(minWidth: 115, alignment: .leading)
@@ -89,7 +89,7 @@ private struct ResultOverview: View {
     
     var body: some View {
         ZStack {
-            URLImage(SP2Map.getURL(result.stage_id, 0),
+            URLImage(FImage.getURL(result.stage_id, 0),
                      content: {$0.image.resizable().aspectRatio(contentMode: .fill).clipShape(RoundedRectangle(cornerRadius: 8.0))}
             )
             .frame(height: 160)
@@ -176,10 +176,10 @@ private struct ResultPlayerView: View {
                     Spacer()
                     Text("x\(player.boss_kill_counts.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 24))
                     Spacer()
-                    URLImage(SP2Map.getURL(player.special_id, 2), content: {$0.image.resizable()})
+                    URLImage(FImage.getURL(player.special_id, 2), content: {$0.image.resizable()})
                         .frame(width: 30, height: 30)
                     ForEach(player.weapon_list, id:\.self) { weapon in
-                        URLImage(SP2Map.getURL(weapon, 1), content: {$0.image.resizable()})
+                        URLImage(FImage.getURL(weapon, 1), content: {$0.image.resizable()})
                             .frame(width: 30, height: 30)
                     }
                 }.frame(height: 30)

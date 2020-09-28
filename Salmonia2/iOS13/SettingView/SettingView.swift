@@ -11,7 +11,9 @@ import RealmSwift
 import WebKit
 
 struct SettingView: View {
-    @EnvironmentObject var user: UserInfoCore
+    @EnvironmentObject var users: UserInfoCore
+    @EnvironmentObject var user: SalmoniaUserCore
+    
     @State var isVisible: Bool = false
     @State var code: String = ""
     @State var message: String = ""
@@ -22,7 +24,10 @@ struct SettingView: View {
     var body: some View {
         List {
             Section(header: Text("Accounts").font(.custom("Splatfont", size: 18))) {
-                NavigationLink(destination: UserListView().environmentObject(UserInfoCore())) {
+                NavigationLink(destination: UserListView()
+                                .environmentObject(UserInfoCore())
+                                .environmentObject(SalmoniaUserCore())
+                ) {
                     Text("List")
                 }
             }
@@ -45,7 +50,7 @@ struct SettingView: View {
                                 do {
                                     let api_token = try SalmonStats.getAPIToken(laravel_session)
                                     guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
-                                    let user = realm.objects(UserInfoRealm.self)
+                                    let user = realm.objects(SalmoniaUserRealm.self)
                                     try? realm.write { user.setValue(api_token, forKey: "api_token")}
                                     return
                                 } catch APIError.Response(let error, let description) {
@@ -78,7 +83,7 @@ struct SettingView: View {
                 HStack {
                     Text("iksm session")
                     Spacer()
-                    Text("\((user.iksm_session != nil ? "Registered" : "Unregistered").localized)")
+                    Text("\((users.iksm_session != nil ? "Registered" : "Unregistered").localized)")
                 }
                 HStack {
                     Text("laravel session")

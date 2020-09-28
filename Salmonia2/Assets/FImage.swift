@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SP2Map {
+class FImage {
     
     class func getURL(_ id: Int, _ type: Int) -> URL{
         
