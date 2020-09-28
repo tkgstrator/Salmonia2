@@ -15,6 +15,34 @@
 		1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1037E3AB25209C7D001B41B0 /* LaunchScreen.storyboard */; };
 		1037E3B825209C7E001B41B0 /* Salmonia2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3B725209C7E001B41B0 /* Salmonia2Tests.swift */; };
 		1037E3C325209C7E001B41B0 /* Salmonia2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */; };
+		10BB349A252174F60046CBCA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348A252174F60046CBCA /* Realm.swift */; };
+		10BB349B252174F60046CBCA /* UnixTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348C252174F60046CBCA /* UnixTime.swift */; };
+		10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348D252174F60046CBCA /* JSONFormat.swift */; };
+		10BB349D252174F60046CBCA /* UserResultCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348E252174F60046CBCA /* UserResultCore.swift */; };
+		10BB349E252174F60046CBCA /* FImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348F252174F60046CBCA /* FImage.swift */; };
+		10BB349F252174F60046CBCA /* UserCardCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3490252174F60046CBCA /* UserCardCore.swift */; };
+		10BB34A0252174F60046CBCA /* UserInfoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3491252174F60046CBCA /* UserInfoCore.swift */; };
+		10BB34A1252174F60046CBCA /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3492252174F60046CBCA /* Extension.swift */; };
+		10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3493252174F60046CBCA /* SalmonStats.swift */; };
+		10BB34A3252174F60046CBCA /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3494252174F60046CBCA /* Modifier.swift */; };
+		10BB34A4252174F60046CBCA /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BB3496252174F60046CBCA /* RobotoMono.ttf */; };
+		10BB34A5252174F60046CBCA /* Splatfont1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BB3497252174F60046CBCA /* Splatfont1.ttf */; };
+		10BB34A6252174F60046CBCA /* Splatfont2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BB3498252174F60046CBCA /* Splatfont2.ttf */; };
+		10BB34A7252174F60046CBCA /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3499252174F60046CBCA /* Enum.swift */; };
+		10BB34AC252175030046CBCA /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 10BB34AB252175030046CBCA /* Configuration.storekit */; };
+		10BB34BD252175170046CBCA /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B2252175170046CBCA /* UserListView.swift */; };
+		10BB34BE252175170046CBCA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B3252175170046CBCA /* SettingView.swift */; };
+		10BB34BF252175170046CBCA /* UnlockFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B4252175170046CBCA /* UnlockFeatureView.swift */; };
+		10BB34C0252175170046CBCA /* SalmoniaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B5252175170046CBCA /* SalmoniaView.swift */; };
+		10BB34C1252175170046CBCA /* ResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B7252175170046CBCA /* ResultCollectionView.swift */; };
+		10BB34C2252175170046CBCA /* LoggingThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B8252175170046CBCA /* LoggingThread.swift */; };
+		10BB34C3252175170046CBCA /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B9252175170046CBCA /* ResultView.swift */; };
+		10BB34C4252175170046CBCA /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BA252175170046CBCA /* PlayerView.swift */; };
+		10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BB252175170046CBCA /* CoopShiftView.swift */; };
+		10BB34C6252175170046CBCA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BC252175170046CBCA /* LoadingView.swift */; };
+		8CDD8D28A0975FFEB1ABE568 /* libPods-Salmonia2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57C2E748E84ECB80FBE52EFE /* libPods-Salmonia2.a */; };
+		953EE49B811F50D32323BAB3 /* libPods-Salmonia2Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BFD845E793B777CBC27351 /* libPods-Salmonia2Tests.a */; };
+		D0BF5D06C9EFEF90CEA3640C /* libPods-Salmonia2-Salmonia2UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DC0529E8A3BEA0287105A69 /* libPods-Salmonia2-Salmonia2UITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +77,40 @@
 		1037E3BE25209C7E001B41B0 /* Salmonia2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Salmonia2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salmonia2UITests.swift; sourceTree = "<group>"; };
 		1037E3C425209C7E001B41B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10BB348A252174F60046CBCA /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
+		10BB348C252174F60046CBCA /* UnixTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnixTime.swift; sourceTree = "<group>"; };
+		10BB348D252174F60046CBCA /* JSONFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFormat.swift; sourceTree = "<group>"; };
+		10BB348E252174F60046CBCA /* UserResultCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResultCore.swift; sourceTree = "<group>"; };
+		10BB348F252174F60046CBCA /* FImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FImage.swift; sourceTree = "<group>"; };
+		10BB3490252174F60046CBCA /* UserCardCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCardCore.swift; sourceTree = "<group>"; };
+		10BB3491252174F60046CBCA /* UserInfoCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoCore.swift; sourceTree = "<group>"; };
+		10BB3492252174F60046CBCA /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		10BB3493252174F60046CBCA /* SalmonStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalmonStats.swift; sourceTree = "<group>"; };
+		10BB3494252174F60046CBCA /* Modifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
+		10BB3496252174F60046CBCA /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
+		10BB3497252174F60046CBCA /* Splatfont1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont1.ttf; sourceTree = "<group>"; };
+		10BB3498252174F60046CBCA /* Splatfont2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont2.ttf; sourceTree = "<group>"; };
+		10BB3499252174F60046CBCA /* Enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		10BB34AB252175030046CBCA /* Configuration.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		10BB34B2252175170046CBCA /* UserListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
+		10BB34B3252175170046CBCA /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		10BB34B4252175170046CBCA /* UnlockFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlockFeatureView.swift; sourceTree = "<group>"; };
+		10BB34B5252175170046CBCA /* SalmoniaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalmoniaView.swift; sourceTree = "<group>"; };
+		10BB34B7252175170046CBCA /* ResultCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultCollectionView.swift; sourceTree = "<group>"; };
+		10BB34B8252175170046CBCA /* LoggingThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingThread.swift; sourceTree = "<group>"; };
+		10BB34B9252175170046CBCA /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		10BB34BA252175170046CBCA /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		10BB34BB252175170046CBCA /* CoopShiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoopShiftView.swift; sourceTree = "<group>"; };
+		10BB34BC252175170046CBCA /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		3F733C6753CAD69E26B70072 /* Pods-Salmonia2-Salmonia2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2-Salmonia2UITests.release.xcconfig"; path = "Target Support Files/Pods-Salmonia2-Salmonia2UITests/Pods-Salmonia2-Salmonia2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		57C2E748E84ECB80FBE52EFE /* libPods-Salmonia2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Salmonia2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DC0529E8A3BEA0287105A69 /* libPods-Salmonia2-Salmonia2UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Salmonia2-Salmonia2UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8731C77D5369506384DA5922 /* Pods-Salmonia2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2Tests.release.xcconfig"; path = "Target Support Files/Pods-Salmonia2Tests/Pods-Salmonia2Tests.release.xcconfig"; sourceTree = "<group>"; };
+		88B1DD2F475B42E3C478AF38 /* Pods-Salmonia2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2.release.xcconfig"; path = "Target Support Files/Pods-Salmonia2/Pods-Salmonia2.release.xcconfig"; sourceTree = "<group>"; };
+		B3BFD845E793B777CBC27351 /* libPods-Salmonia2Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Salmonia2Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D901D7818624B2B062190A22 /* Pods-Salmonia2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2Tests.debug.xcconfig"; path = "Target Support Files/Pods-Salmonia2Tests/Pods-Salmonia2Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		DAC41E0402EB6A68D2DAA819 /* Pods-Salmonia2-Salmonia2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2-Salmonia2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Salmonia2-Salmonia2UITests/Pods-Salmonia2-Salmonia2UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F0964FB9BBD577B486239A5E /* Pods-Salmonia2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2.debug.xcconfig"; path = "Target Support Files/Pods-Salmonia2/Pods-Salmonia2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CDD8D28A0975FFEB1ABE568 /* libPods-Salmonia2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953EE49B811F50D32323BAB3 /* libPods-Salmonia2Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0BF5D06C9EFEF90CEA3640C /* libPods-Salmonia2-Salmonia2UITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +148,8 @@
 				1037E3B625209C7E001B41B0 /* Salmonia2Tests */,
 				1037E3C125209C7E001B41B0 /* Salmonia2UITests */,
 				1037E39E25209C7C001B41B0 /* Products */,
+				EB857A173AFD8C5B2DD8C488 /* Pods */,
+				12C17511674C0BC2989472F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,12 +166,15 @@
 		1037E39F25209C7C001B41B0 /* Salmonia2 */ = {
 			isa = PBXGroup;
 			children = (
+				10BB34B0252175170046CBCA /* iOS13 */,
+				10BB3489252174F60046CBCA /* Assets */,
 				1037E3A025209C7C001B41B0 /* AppDelegate.swift */,
 				1037E3A225209C7C001B41B0 /* SceneDelegate.swift */,
 				1037E3A425209C7C001B41B0 /* ContentView.swift */,
 				1037E3A625209C7D001B41B0 /* Assets.xcassets */,
 				1037E3AB25209C7D001B41B0 /* LaunchScreen.storyboard */,
 				1037E3AE25209C7D001B41B0 /* Info.plist */,
+				10BB34AB252175030046CBCA /* Configuration.storekit */,
 				1037E3A825209C7D001B41B0 /* Preview Content */,
 			);
 			path = Salmonia2;
@@ -136,6 +206,100 @@
 			path = Salmonia2UITests;
 			sourceTree = "<group>";
 		};
+		10BB3489252174F60046CBCA /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				10BB348A252174F60046CBCA /* Realm.swift */,
+				10BB348B252174F60046CBCA /* Core */,
+				10BB3492252174F60046CBCA /* Extension.swift */,
+				10BB3493252174F60046CBCA /* SalmonStats.swift */,
+				10BB3494252174F60046CBCA /* Modifier.swift */,
+				10BB3495252174F60046CBCA /* Fonts */,
+				10BB3499252174F60046CBCA /* Enum.swift */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		10BB348B252174F60046CBCA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				10BB348C252174F60046CBCA /* UnixTime.swift */,
+				10BB348D252174F60046CBCA /* JSONFormat.swift */,
+				10BB348E252174F60046CBCA /* UserResultCore.swift */,
+				10BB348F252174F60046CBCA /* FImage.swift */,
+				10BB3490252174F60046CBCA /* UserCardCore.swift */,
+				10BB3491252174F60046CBCA /* UserInfoCore.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		10BB3495252174F60046CBCA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				10BB3496252174F60046CBCA /* RobotoMono.ttf */,
+				10BB3497252174F60046CBCA /* Splatfont1.ttf */,
+				10BB3498252174F60046CBCA /* Splatfont2.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		10BB34B0252175170046CBCA /* iOS13 */ = {
+			isa = PBXGroup;
+			children = (
+				10BB34B1252175170046CBCA /* SettingView */,
+				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
+				10BB34B6252175170046CBCA /* Components */,
+			);
+			name = iOS13;
+			path = Salmonia2/iOS13;
+			sourceTree = SOURCE_ROOT;
+		};
+		10BB34B1252175170046CBCA /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				10BB34B2252175170046CBCA /* UserListView.swift */,
+				10BB34B3252175170046CBCA /* SettingView.swift */,
+				10BB34B4252175170046CBCA /* UnlockFeatureView.swift */,
+			);
+			path = SettingView;
+			sourceTree = "<group>";
+		};
+		10BB34B6252175170046CBCA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
+				10BB34B8252175170046CBCA /* LoggingThread.swift */,
+				10BB34B9252175170046CBCA /* ResultView.swift */,
+				10BB34BA252175170046CBCA /* PlayerView.swift */,
+				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
+				10BB34BC252175170046CBCA /* LoadingView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		12C17511674C0BC2989472F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57C2E748E84ECB80FBE52EFE /* libPods-Salmonia2.a */,
+				7DC0529E8A3BEA0287105A69 /* libPods-Salmonia2-Salmonia2UITests.a */,
+				B3BFD845E793B777CBC27351 /* libPods-Salmonia2Tests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB857A173AFD8C5B2DD8C488 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F0964FB9BBD577B486239A5E /* Pods-Salmonia2.debug.xcconfig */,
+				88B1DD2F475B42E3C478AF38 /* Pods-Salmonia2.release.xcconfig */,
+				DAC41E0402EB6A68D2DAA819 /* Pods-Salmonia2-Salmonia2UITests.debug.xcconfig */,
+				3F733C6753CAD69E26B70072 /* Pods-Salmonia2-Salmonia2UITests.release.xcconfig */,
+				D901D7818624B2B062190A22 /* Pods-Salmonia2Tests.debug.xcconfig */,
+				8731C77D5369506384DA5922 /* Pods-Salmonia2Tests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +307,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1037E3C725209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2" */;
 			buildPhases = (
+				CA794C1FCCD585A411C63B8C /* [CP] Check Pods Manifest.lock */,
 				1037E39925209C7C001B41B0 /* Sources */,
 				1037E39A25209C7C001B41B0 /* Frameworks */,
 				1037E39B25209C7C001B41B0 /* Resources */,
@@ -160,6 +325,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1037E3CA25209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2Tests" */;
 			buildPhases = (
+				63FB9DF90329E694F3F756B4 /* [CP] Check Pods Manifest.lock */,
 				1037E3AF25209C7E001B41B0 /* Sources */,
 				1037E3B025209C7E001B41B0 /* Frameworks */,
 				1037E3B125209C7E001B41B0 /* Resources */,
@@ -178,6 +344,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1037E3CD25209C7E001B41B0 /* Build configuration list for PBXNativeTarget "Salmonia2UITests" */;
 			buildPhases = (
+				7334190CABCDFB7504632AA1 /* [CP] Check Pods Manifest.lock */,
 				1037E3BA25209C7E001B41B0 /* Sources */,
 				1037E3BB25209C7E001B41B0 /* Frameworks */,
 				1037E3BC25209C7E001B41B0 /* Resources */,
@@ -239,6 +406,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10BB34AC252175030046CBCA /* Configuration.storekit in Resources */,
+				10BB34A4252174F60046CBCA /* RobotoMono.ttf in Resources */,
+				10BB34A6252174F60046CBCA /* Splatfont2.ttf in Resources */,
+				10BB34A5252174F60046CBCA /* Splatfont1.ttf in Resources */,
 				1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */,
 				1037E3AA25209C7D001B41B0 /* Preview Assets.xcassets in Resources */,
 				1037E3A725209C7D001B41B0 /* Assets.xcassets in Resources */,
@@ -261,14 +432,104 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		63FB9DF90329E694F3F756B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Salmonia2Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7334190CABCDFB7504632AA1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Salmonia2-Salmonia2UITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA794C1FCCD585A411C63B8C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Salmonia2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1037E39925209C7C001B41B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10BB349E252174F60046CBCA /* FImage.swift in Sources */,
+				10BB34BD252175170046CBCA /* UserListView.swift in Sources */,
+				10BB34C0252175170046CBCA /* SalmoniaView.swift in Sources */,
+				10BB34C4252175170046CBCA /* PlayerView.swift in Sources */,
 				1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */,
+				10BB34C6252175170046CBCA /* LoadingView.swift in Sources */,
 				1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */,
+				10BB34C3252175170046CBCA /* ResultView.swift in Sources */,
+				10BB34BF252175170046CBCA /* UnlockFeatureView.swift in Sources */,
+				10BB349F252174F60046CBCA /* UserCardCore.swift in Sources */,
+				10BB34BE252175170046CBCA /* SettingView.swift in Sources */,
+				10BB34A7252174F60046CBCA /* Enum.swift in Sources */,
+				10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */,
+				10BB34A1252174F60046CBCA /* Extension.swift in Sources */,
+				10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */,
+				10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */,
+				10BB34C1252175170046CBCA /* ResultCollectionView.swift in Sources */,
+				10BB349B252174F60046CBCA /* UnixTime.swift in Sources */,
+				10BB34A3252174F60046CBCA /* Modifier.swift in Sources */,
+				10BB349D252174F60046CBCA /* UserResultCore.swift in Sources */,
+				10BB34A0252174F60046CBCA /* UserInfoCore.swift in Sources */,
+				10BB34C2252175170046CBCA /* LoggingThread.swift in Sources */,
 				1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */,
+				10BB349A252174F60046CBCA /* Realm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +694,7 @@
 		};
 		1037E3C825209C7E001B41B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0964FB9BBD577B486239A5E /* Pods-Salmonia2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -445,6 +707,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -454,6 +717,7 @@
 		};
 		1037E3C925209C7E001B41B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88B1DD2F475B42E3C478AF38 /* Pods-Salmonia2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -466,6 +730,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -475,6 +740,7 @@
 		};
 		1037E3CB25209C7E001B41B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D901D7818624B2B062190A22 /* Pods-Salmonia2Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -497,6 +763,7 @@
 		};
 		1037E3CC25209C7E001B41B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8731C77D5369506384DA5922 /* Pods-Salmonia2Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -519,6 +786,7 @@
 		};
 		1037E3CE25209C7E001B41B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAC41E0402EB6A68D2DAA819 /* Pods-Salmonia2-Salmonia2UITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -539,6 +807,7 @@
 		};
 		1037E3CF25209C7E001B41B0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F733C6753CAD69E26B70072 /* Pods-Salmonia2-Salmonia2UITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

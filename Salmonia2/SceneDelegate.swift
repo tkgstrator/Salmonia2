@@ -7,6 +7,9 @@
 
 import UIKit
 import SwiftUI
+import RealmSwift
+import SplatNet2
+import SwiftyJSON
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -57,6 +60,54 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
+    {
+        guard let url = URLContexts.first?.url else { return }
+        guard let session_token_code = url.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { return }
+        let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
+        
+        DispatchQueue(label: "Login").async {
+            do {
+                var response: JSON = JSON()
+                response = try SplatNet2.getSessionToken(session_token_code, session_token_code_verifier)
+                guard let session_token = response["session_token"].string else { throw APIError.Response("1000", "Session Token Error") }
+                response = try SplatNet2.getAccessToken(session_token)
+                guard let access_token = response["access_token"].string else { throw APIError.Response("1001", "Access Token Error") }
+                let flapg_nso = try SplatNet2.callFlapgAPI(access_token, "nso")
+                response = try SplatNet2.getSplatoonToken(flapg_nso)
+                guard let splatoon_token = response["splatoon_token"].string else { throw APIError.Response("1002", "Splatoon Token Error") }
+                guard let nickname = response["user"]["name"].string else { throw APIError.Response("1002", "Nickname Error") }
+                guard let thumbnail_url = response["user"]["image"].string else { throw APIError.Response("1002", "Thumbnail URL Error") }
+                let flapg_app = try SplatNet2.callFlapgAPI(splatoon_token, "app")
+                response = try SplatNet2.getSplatoonAccessToken(flapg_app, splatoon_token)
+                guard let splatoon_access_token = response["splatoon_access_token"].string else { throw APIError.Response("1003", "Splatoon Access Token Error") }
+                response = try SplatNet2.getIksmSession(splatoon_access_token)
+                guard let iksm_session = response["iksm_session"].string else { throw APIError.Response("1004", "Iksm Session Error") }
+                guard let nsaid = response["nsaid"].string else { throw APIError.Response("1004", "Nsa ID Error") }
+                guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
+                try? realm.write {
+                    let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
+                    switch user.isEmpty {
+                    case true: // 新規作成
+                        let user: [String: String?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token]
+                        realm.create(UserInfoRealm.self, value: user)
+                    case false: // 再ログイン（アップデート）
+                        guard let session_token = user.first?.session_token else { return }
+                        user.setValue(iksm_session, forKey: "iksm_session")
+                        user.setValue(session_token, forKey: "session_token")
+                        user.setValue(thumbnail_url, forKey: "image")
+                        user.setValue(nickname, forKey: "name")
+                    }
+                }
+                print(session_token, iksm_session)
+            } catch (let error) {
+                print(error)
+            }
+        }
+    }
+    
+    
 
 
 }

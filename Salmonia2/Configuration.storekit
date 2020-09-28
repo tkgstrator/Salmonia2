@@ -1,0 +1,64 @@
+{
+  "products" : [
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "634A4468",
+      "localizations" : [
+        {
+          "description" : "Give Dr.Pepper to the Developers",
+          "displayName" : "Dr.Pepepr",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "開発者にドクペを送ります",
+          "displayName" : "ドクペ支援",
+          "locale" : "ja"
+        }
+      ],
+      "productID" : "work.tkgstrator.Salmonia2.Asphalt",
+      "referenceName" : "Dr.Pepper",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "7732E8F0",
+      "localizations" : [
+
+      ],
+      "name" : "Salmonia2",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "0.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "EC7B05E8",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "work.tkgstrator.Salmonia2.DrPepper",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Dr.Pepper",
+          "subscriptionGroupID" : "7732E8F0",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 0
+  }
+}
