@@ -15,16 +15,17 @@ struct CoopShiftView: View {
     init() {
         guard let realm = try? Realm() else { return }
         let current_time: Int = Int(Date().timeIntervalSince1970)
-        guard let start_time: Int = realm.objects(CoopShiftRealm.self).filter("end_time<=%@", current_time).last?.start_time else { return }
-        guard let end_time: Int = realm.objects(CoopShiftRealm.self).filter("start_time>=%@", current_time).first?.start_time else { return }
-        let phases = realm.objects(CoopShiftRealm.self).filter("start_time BETWEEN {%@, %@}", start_time, end_time)
-        print(phases.count, start_time, end_time)
+//        guard let start_time: Int = realm.objects(CoopShiftRealm.self).filter("end_time<=%@", current_time).last?.start_time else { return }
+        guard let end_time: Int = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", current_time).last?.start_time else { return }
+        let phases = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", end_time).sorted(byKeyPath: "start_time", ascending: false).prefix(3)
         _phases = State(initialValue: Array(phases))
     }
     
     var body: some View {
         ForEach(phases.indices, id:\.self) { idx in
-            CoopShiftStack(phase: $phases[idx])
+            NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phases[idx].start_time))) {
+                CoopShiftStack(phase: $phases[idx])
+            }.buttonStyle(PlainButtonStyle())
         }
     }
 }

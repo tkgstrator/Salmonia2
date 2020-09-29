@@ -22,30 +22,30 @@ class UserCardCore: ObservableObject {
     @Published var help_total: Int = 0
     
     init() {
-        token = try? Realm().objects(CoopCardRealm.self).observe { _ in
+        token = try? Realm().objects(CoopCardRealm.self).observe { [self] _ in
             guard let users = try? Realm().objects(UserInfoRealm.self) else { return }
             guard let nsaid = users.first?.nsaid else { return }
 //            guard let nsaid = users.filter("isActive=%@", true).first?.nsaid else { return }
             guard let realm = try? Realm().objects(CoopCardRealm.self).filter("nsaid=%@", nsaid).first else { return }
-            self.job_num = realm.job_num.value ?? 0
-            self.ikura_total = realm.ikura_total.value ?? 0
-            self.golden_ikura_total = realm.golden_ikura_total.value ?? 0
-            self.kuma_point = realm.kuma_point.value ?? 0
-            self.kuma_point_total = realm.kuma_point_total.value ?? 0
-            self.help_total = realm.help_total.value ?? 0
+            job_num = realm.job_num.value ?? 0
+            ikura_total = realm.ikura_total.value ?? 0
+            golden_ikura_total = realm.golden_ikura_total.value ?? 0
+            kuma_point = realm.kuma_point.value ?? 0
+            kuma_point_total = realm.kuma_point_total.value ?? 0
+            help_total = realm.help_total.value ?? 0
         }
         
-        token = try? Realm().objects(UserInfoRealm.self).observe { _ in
+        token = try? Realm().objects(UserInfoRealm.self).observe { [self] _ in
             guard let users = try? Realm().objects(UserInfoRealm.self) else { return }
             guard let nsaid = users.first?.nsaid else { return }
 //            guard let nsaid = users.filter("isActive=%@", true).first?.nsaid else { return }
             guard let realm = try? Realm().objects(CoopCardRealm.self).filter("nsaid=%@", nsaid).first else { return }
-            self.job_num = realm.job_num.value ?? 0
-            self.ikura_total = realm.ikura_total.value ?? 0
-            self.golden_ikura_total = realm.golden_ikura_total.value ?? 0
-            self.kuma_point = realm.kuma_point.value ?? 0
-            self.kuma_point_total = realm.kuma_point_total.value ?? 0
-            self.help_total = realm.help_total.value ?? 0
+            job_num = realm.job_num.value ?? 0
+            ikura_total = realm.ikura_total.value ?? 0
+            golden_ikura_total = realm.golden_ikura_total.value ?? 0
+            kuma_point = realm.kuma_point.value ?? 0
+            kuma_point_total = realm.kuma_point_total.value ?? 0
+            help_total = realm.help_total.value ?? 0
         }
 
     }

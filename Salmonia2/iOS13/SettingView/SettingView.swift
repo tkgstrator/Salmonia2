@@ -9,6 +9,7 @@ import SwiftUI
 import SplatNet2
 import RealmSwift
 import WebKit
+import MobileCoreServices
 
 struct SettingView: View {
     @EnvironmentObject var users: UserInfoCore
@@ -77,18 +78,33 @@ struct SettingView: View {
                     
                 }
             }.alert(isPresented: $isVisible) {
-                Alert(title: Text("Error \(code)"), message: Text(message))
+                Alert(title: Text("\(code)"), message: Text(message))
             }
             Section(header: Text("Status").font(.custom("Splatfont", size: 18))) {
-                HStack {
-                    Text("iksm session")
-                    Spacer()
-                    Text("\((users.iksm_session != nil ? "Registered" : "Unregistered").localized)")
-                }
+                    HStack {
+                        Text("iksm session")
+                        Spacer()
+                        Text("\((users.iksm_session != nil ? "Registered" : "Unregistered").localized)")
+                        Image(systemName: "paperclip").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)
+                            .onLongPressGesture {
+                                UIPasteboard.general.setValue(users.iksm_session, forPasteboardType: kUTTypePlainText as String)
+                                isVisible = true
+                                code = "Done"
+                                message = users.iksm_session ?? ""
+                            }
+                    }
+               
                 HStack {
                     Text("laravel session")
                     Spacer()
                     Text("\((user.api_token != nil ? "Registered" : "Unregistered").localized)")
+                    Image(systemName: "paperclip").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)
+                        .onLongPressGesture {
+                            UIPasteboard.general.setValue(users.iksm_session, forPasteboardType: kUTTypePlainText as String)
+                            isVisible = true
+                            code = "Done"
+                            message = users.iksm_session ?? ""
+                        }
                 }
             }
             Section(header: Text("Application").font(.custom("Splatfont", size: 18))) {
@@ -109,5 +125,11 @@ struct SettingView: View {
         .navigationBarTitle("Settings")
         .modifier(Splatfont(size: 20))
         .modifier(SettingsHeader())
+    }
+}
+
+struct SettingView_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

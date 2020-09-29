@@ -90,10 +90,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     let account = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
                     switch account.isEmpty {
                     case true: // 新規作成
-                        // 一つ目のアカウントかどうか調べる（最初だけは常にActiveにするため）
-                        let users = realm.objects(UserInfoRealm.self)
-                        let account: [String: Any?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token, "isActive": users.isEmpty]
-                        realm.create(UserInfoRealm.self, value: account)
+                        guard let _user: SalmoniaUserRealm = realm.objects(SalmoniaUserRealm.self).first else { return }
+                        let _account: [String: Any?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token, "isActive": _user.account.isEmpty]
+                        let account: UserInfoRealm = UserInfoRealm(value: _account)
+                        realm.add(account, update: .modified)
+                        _user.account.append(account)
                     case false: // 再ログイン（アップデート）
                         guard let session_token = account.first?.session_token else { return }
                         account.setValue(iksm_session, forKey: "iksm_session")

@@ -44,11 +44,57 @@ extension Array {
 }
 
 extension UserInfoRealm {
-    func update(_ value: [String: Any]) throws -> Void {
+    func update(_ value: [String: Any]) -> Void {
         guard let realm = try? Realm() else { return }
         
-        try realm.write {
-            realm.create(UserInfoRealm.self, value: value, update: .modified)
+        do {
+            try realm.write {
+                realm.create(UserInfoRealm.self, value: value, update: .all)
+            }
+        } catch (let error) {
+            print(error)
+        }
+    }
+}
+
+//extension Results where Element: UserInfoRealm {
+//    func move(_ from: Int, _ to: Int) {
+//        let _tmp = self[from].index
+//        try? Realm().write() {
+//            self[from].index = self[to].index
+//            self[to].index = _tmp
+//        }
+//    }
+//}
+
+extension Double {
+    // Swiftは桁丸めに対応していなので丸めるやつ
+    func round(digit: Int) -> Double {
+        return floor((pow(10.0, digit) as NSDecimalNumber).doubleValue * self) / (pow(10.0, digit) as NSDecimalNumber).doubleValue
+    }
+}
+
+extension Collection {
+  func enumeratedArray() -> Array<(offset: Int, element: Self.Element)> {
+    return Array(self.enumerated())
+  }
+}
+
+extension Optional {
+    var value: String {
+        switch self {
+        case is Int:
+            return String(self as! Int)
+        case is Double:
+            if (self as! Double).isNaN {
+                return String(0.0)
+            } else {
+                return String(self as! Double)
+            }
+        case is String:
+            return self as! String
+        default:
+            return "-"
         }
     }
 }

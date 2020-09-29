@@ -10,3 +10,13 @@ import Foundation
 enum APIError: Error {
     case Response(String, String)
 }
+
+enum StageType: String, CaseIterable {
+    
+    case shakeup = "Spawning Grounds"
+    case shakeship = "Marooner's Bay"
+    case shakehouse = "Lost Outpost"
+    case shakelift = "Salmonid Smokeyard"
+    case shakeride = "Ruins of Ark Polaris"
+    
+}

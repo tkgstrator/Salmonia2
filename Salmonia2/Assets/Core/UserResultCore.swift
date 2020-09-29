@@ -12,14 +12,24 @@ import RealmSwift
 
 class UserResultCore: ObservableObject {
     private var token: NotificationToken?
-    
-    @Published var results: RealmSwift.Results<CoopResultsRealm> = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
+    private var realm = try! Realm()
 
+    @Published var results = try! Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
+    
+    func update(_ golden_eggs: Int, _ stage: [Int]) {
+        // 金イクラ数指定が0のときはplay_timeでソーティングする
+        if golden_eggs == 0 {
+            results = realm.objects(CoopResultsRealm.self).filter("stage_id IN %@", stage).sorted(byKeyPath: "play_time", ascending: false)
+        } else {
+            results = realm.objects(CoopResultsRealm.self).filter("golden_eggs>=%@ AND stage_id IN %@", golden_eggs, stage).sorted(byKeyPath: "golden_eggs")
+        }
+        print("UPDATE", results.count)
+    }
+    
     init() {
         // 変更があるたびに再読込するだけ
-        token = try? Realm().objects(CoopResultsRealm.self) .observe { _ in
-            guard let results = try? Realm().objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false) else { return }
-            self.results = results
+        token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
+            results = realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
         }
     }
 }

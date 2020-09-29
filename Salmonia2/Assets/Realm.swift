@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import Combine
 
 class SalmoniaUserRealm: Object {
     
@@ -15,6 +16,7 @@ class SalmoniaUserRealm: Object {
     @objc dynamic var isPurchase: Bool = false
     @objc dynamic var isDevelop: Bool = false
     @objc dynamic var isUnlock: Bool = false
+    dynamic var account = List<UserInfoRealm>()
 
 }
 
