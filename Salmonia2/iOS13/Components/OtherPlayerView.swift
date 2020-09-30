@@ -12,16 +12,14 @@ import Combine
 
 struct OtherPlayerView: View {
     @EnvironmentObject var player: CrewInfoCore
-    @State var isFav: Bool = false
     
     var body: some View {
         ScrollView {
             HStack {
-                //                NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) {
-                //                    URLImage(URL(string: player.imageUri)!,
-                //                             content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
-                //                        .frame(width: 80, height: 80)
-                //                }.buttonStyle(PlainButtonStyle())
+                //                                NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) { //                    URLImage(URL(string: player.imageUri)!,
+                //                                             content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                //                                        .frame(width: 80, height: 80)
+                //                                }.buttonStyle(PlainButtonStyle())
                 Text(player.nickname).modifier(Splatfont(size: 28)).frame(maxWidth: .infinity)
             }
             Text("Overview").foregroundColor(.orange).modifier(Splatfont(size: 20))
@@ -43,14 +41,13 @@ struct OtherPlayerView: View {
                 Spacer()
             }.modifier(Splatfont(size: 18))
         }
-//        .onAppear() { isFav = player.isFav }
+        //        .onAppear() { isFav = player.isFav }
         .navigationBarTitle(player.nsaid)
         .navigationBarItems(trailing: favButton)
     }
     
     private var favButton: some View {
-        print(isFav)
-        switch isFav {
+        switch player.isFav {
         case true:
             return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "star.fill") })
         case false:
@@ -59,10 +56,21 @@ struct OtherPlayerView: View {
     }
     
     private func onToggleFav() {
-        isFav.toggle()
         guard let realm = try? Realm() else { return }
+        guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+        guard let player = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", player.nsaid).first else { return }
+        // あるなら追加、無いなら
+        let _favuser = user.favuser.filter("nsaid=%@", player.nsaid)
+        
         try! realm.write {
-            player.user.isFav = isFav
+            switch _favuser.isEmpty {
+            case true:
+                user.favuser.append(player)
+            case false:
+                guard let index = user.favuser.index(of: player) else { return }
+                user.favuser.remove(at: index)
+            break
+            }
         }
     }
 }

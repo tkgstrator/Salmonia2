@@ -35,6 +35,7 @@ class SalmonStats {
     
     class func getPlayerOverView(nsaid: String) {
         guard let realm = try? Realm() else { return }
+        let _user = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", nsaid)
         let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=\(nsaid)"
         
         AF.request(url, method: .get)
@@ -46,16 +47,20 @@ class SalmonStats {
                     let json = JSON(value)
                     let result = json[0]["results"]
                     let total = json[0]["total"]
-                    
-                    let player = CrewInfoRealm()
-                    player.nsaid = nsaid
-                    player.job_num = result["clear"].intValue + result["fail"].intValue
-                    player.ikura_total = total["power_eggs"].intValue
-                    player.golden_ikura_total = total["golden_eggs"].intValue
-                    
-                    try! realm.write {
-                        realm.create(CrewInfoRealm.self, value: player, update: .modified)
+                   
+                    realm.beginWrite()
+                    switch _user.isEmpty {
+                        case true: // 新規ユーザ
+                            let job_num: Int = result["clear"].intValue + result["fail"].intValue
+                            let value: [String: Any] = ["nsaid": nsaid, "job_num": job_num, "power_eggs": total["power_eggs"].intValue, "golden_eggs": total["golden_eggs"].intValue]
+                            realm.create(CrewInfoRealm.self, value: value)
+                        case false: // アップデート
+                            let job_num: Int = result["clear"].intValue + result["fail"].intValue
+                            _user.first?.job_num = job_num
+                            _user.first?.ikura_total = total["power_eggs"].intValue
+                            _user.first?.ikura_total = total["golden_eggs"].intValue
                     }
+                    try? realm.commitWrite()
                 case .failure:
                     break
                 }

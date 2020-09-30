@@ -61,7 +61,7 @@ struct SettingView: View {
                 Text("NSO Accounts")
             }
             NavigationLink(destination: CrewListView()
-                            .environmentObject(CrewInfoCore())
+                            .environmentObject(SalmoniaUserCore())
             ) {
                 Text("Fav Crews")
             }

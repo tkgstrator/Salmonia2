@@ -24,7 +24,7 @@ class SalmoniaUserRealm: Object {
 class UserInfoRealm: Object {
     
     @objc dynamic var name: String = "" // username from SplatNet2
-    @objc dynamic var image: String = "" // userimage url from SplatNet2
+    @objc dynamic var image: String = "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/56a95fe848fd7f41" // userimage url from SplatNet2
     @objc dynamic var nsaid: String = "" // data-nsa-id from SplatNet2
     @objc dynamic var iksm_session: String? = nil // Access token for SplatNet2
     @objc dynamic var session_token: String? = nil // Session token to generate iksm_session
@@ -40,10 +40,9 @@ class UserInfoRealm: Object {
 
 class CrewInfoRealm: Object {
     
-    @objc dynamic var name: String = "" // username from SplatNet2
+    @objc dynamic var name: String = "-" // username from SplatNet2
     @objc dynamic var image: String = "" // userimage url from SplatNet2
     @objc dynamic var nsaid: String = "" // data-nsa-id from SplatNet2
-    @objc dynamic var isFav: Bool = false
     @objc dynamic var job_num: Int = 0
     @objc dynamic var ikura_total: Int = 0
     @objc dynamic var golden_ikura_total: Int = 0

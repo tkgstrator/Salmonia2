@@ -11,38 +11,37 @@ import RealmSwift
 
 struct CrewListView: View {
     
-    @EnvironmentObject var user: CrewInfoCore
+    @EnvironmentObject var user: SalmoniaUserCore
     @State private var editMode = EditMode.inactive
 //    @State var isVisible: Bool = false
     
     var body: some View {
         List {
-            ForEach(user.crews.indices, id:\.self) { idx in
+            ForEach(user.favuser.indices, id:\.self) { idx in
                 HStack {
-//                    URLImage(URL(string: user.account[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
-//                        .frame(width: 60, height: 60)
-                    Text(user.crews[idx].nsaid).frame(maxWidth: .infinity)
+                    URLImage(URL(string: user.favuser[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                        .frame(width: 60, height: 60)
+                    Text(user.favuser[idx].name).frame(maxWidth: .infinity)
                 }
             }
+            .onMove(perform: onMove)
+            .onDelete(perform: onDelete)
         }
         .navigationBarTitle("Fav Crews")
         .modifier(Splatfont(size: 20))
-        .navigationBarItems(leading: addButton, trailing: EditButton())
+        .navigationBarItems(trailing: EditButton())
         .environment(\.editMode, $editMode)
     }
     
     private func onDelete(offsets: IndexSet) {
         try? Realm().write {
-//            user.account.remove(atOffsets: offsets)
+            user.favuser.remove(atOffsets: offsets)
         }
     }
     
-    private var addButton: some View {
-        switch editMode {
-        case .active:
-            return AnyView(Button(action: { }) { Image(systemName: "plus") })
-        default:
-            return AnyView(EmptyView().frame(width: 0))
+    private func onMove(source: IndexSet, destination: Int) {
+        try? Realm().write {
+            user.favuser.move(fromOffsets: source, toOffset: destination)
         }
     }
 }

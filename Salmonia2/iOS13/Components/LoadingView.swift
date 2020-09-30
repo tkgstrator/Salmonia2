@@ -103,10 +103,12 @@ struct LoadingView: View {
                                         record.setValue(result.grade_point_delta, forKey: "grade_point_delta")
                                     }
                                 }
-                                print(nsaids)
-                                let response: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session) // マッチングした仲間のデータを取得
-                                print(response)
-                                
+                                let crews: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session) // マッチングした仲間のデータを取得
+                                for (_, crew) in crews["nickname_and_icons"] {
+                                    let value: [String: Any] = ["nsaid": crew["nsa_id"].stringValue, "name": crew["nickname"].stringValue, "image": crew["thumbnail_url"].stringValue]
+                                    realm.create(CrewInfoRealm.self, value: value, update: .all)
+                                }
+
                                 realm.create(UserInfoRealm.self, value: card as Any, update: .modified)
                                 try realm.commitWrite()
                             } catch {
