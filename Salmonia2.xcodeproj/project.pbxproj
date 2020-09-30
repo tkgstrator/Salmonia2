@@ -15,12 +15,16 @@
 		1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1037E3AB25209C7D001B41B0 /* LaunchScreen.storyboard */; };
 		1037E3B825209C7E001B41B0 /* Salmonia2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3B725209C7E001B41B0 /* Salmonia2Tests.swift */; };
 		1037E3C325209C7E001B41B0 /* Salmonia2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */; };
+		1053967D2524206200132668 /* StageRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053967C2524206200132668 /* StageRecordView.swift */; };
+		1053968525242A7000132668 /* StageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053968425242A7000132668 /* StageType.swift */; };
+		1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053968A25242EE500132668 /* OtherPlayerView.swift */; };
+		1053969325242F5000132668 /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053969225242F5000132668 /* PlayerInfo.swift */; };
 		10BB349A252174F60046CBCA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348A252174F60046CBCA /* Realm.swift */; };
 		10BB349B252174F60046CBCA /* UnixTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348C252174F60046CBCA /* UnixTime.swift */; };
 		10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348D252174F60046CBCA /* JSONFormat.swift */; };
 		10BB349D252174F60046CBCA /* UserResultCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348E252174F60046CBCA /* UserResultCore.swift */; };
 		10BB349E252174F60046CBCA /* FImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348F252174F60046CBCA /* FImage.swift */; };
-		10BB349F252174F60046CBCA /* UserCardCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3490252174F60046CBCA /* UserCardCore.swift */; };
+		10BB349F252174F60046CBCA /* CrewInfoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3490252174F60046CBCA /* CrewInfoCore.swift */; };
 		10BB34A0252174F60046CBCA /* UserInfoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3491252174F60046CBCA /* UserInfoCore.swift */; };
 		10BB34A1252174F60046CBCA /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3492252174F60046CBCA /* Extension.swift */; };
 		10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3493252174F60046CBCA /* SalmonStats.swift */; };
@@ -44,6 +48,9 @@
 		10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA355252191340027209D /* SalmoniaUserCore.swift */; };
 		10EFA35E2521DCD00027209D /* ShiftStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */; };
 		10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3682521DE6E0027209D /* UserStatsCore.swift */; };
+		10EFA39E252398820027209D /* CrewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA39D252398810027209D /* CrewListView.swift */; };
+		10EFA3A325239E0A0027209D /* ImportResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3A225239E0A0027209D /* ImportResultView.swift */; };
+		10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3A72523A0DB0027209D /* Alamofire.swift */; };
 		8CDD8D28A0975FFEB1ABE568 /* libPods-Salmonia2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57C2E748E84ECB80FBE52EFE /* libPods-Salmonia2.a */; };
 		953EE49B811F50D32323BAB3 /* libPods-Salmonia2Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3BFD845E793B777CBC27351 /* libPods-Salmonia2Tests.a */; };
 		D0BF5D06C9EFEF90CEA3640C /* libPods-Salmonia2-Salmonia2UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DC0529E8A3BEA0287105A69 /* libPods-Salmonia2-Salmonia2UITests.a */; };
@@ -81,12 +88,16 @@
 		1037E3BE25209C7E001B41B0 /* Salmonia2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Salmonia2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salmonia2UITests.swift; sourceTree = "<group>"; };
 		1037E3C425209C7E001B41B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1053967C2524206200132668 /* StageRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordView.swift; sourceTree = "<group>"; };
+		1053968425242A7000132668 /* StageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageType.swift; sourceTree = "<group>"; };
+		1053968A25242EE500132668 /* OtherPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPlayerView.swift; sourceTree = "<group>"; };
+		1053969225242F5000132668 /* PlayerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
 		10BB348A252174F60046CBCA /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10BB348C252174F60046CBCA /* UnixTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnixTime.swift; sourceTree = "<group>"; };
 		10BB348D252174F60046CBCA /* JSONFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFormat.swift; sourceTree = "<group>"; };
 		10BB348E252174F60046CBCA /* UserResultCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResultCore.swift; sourceTree = "<group>"; };
 		10BB348F252174F60046CBCA /* FImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FImage.swift; sourceTree = "<group>"; };
-		10BB3490252174F60046CBCA /* UserCardCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCardCore.swift; sourceTree = "<group>"; };
+		10BB3490252174F60046CBCA /* CrewInfoCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrewInfoCore.swift; sourceTree = "<group>"; };
 		10BB3491252174F60046CBCA /* UserInfoCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoCore.swift; sourceTree = "<group>"; };
 		10BB3492252174F60046CBCA /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		10BB3493252174F60046CBCA /* SalmonStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalmonStats.swift; sourceTree = "<group>"; };
@@ -111,6 +122,9 @@
 		10EFA355252191340027209D /* SalmoniaUserCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaUserCore.swift; sourceTree = "<group>"; };
 		10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShiftStatsView.swift; path = ../ShiftStatsView.swift; sourceTree = "<group>"; };
 		10EFA3682521DE6E0027209D /* UserStatsCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCore.swift; sourceTree = "<group>"; };
+		10EFA39D252398810027209D /* CrewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewListView.swift; sourceTree = "<group>"; };
+		10EFA3A225239E0A0027209D /* ImportResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportResultView.swift; sourceTree = "<group>"; };
+		10EFA3A72523A0DB0027209D /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		3F733C6753CAD69E26B70072 /* Pods-Salmonia2-Salmonia2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2-Salmonia2UITests.release.xcconfig"; path = "Target Support Files/Pods-Salmonia2-Salmonia2UITests/Pods-Salmonia2-Salmonia2UITests.release.xcconfig"; sourceTree = "<group>"; };
 		57C2E748E84ECB80FBE52EFE /* libPods-Salmonia2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Salmonia2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DC0529E8A3BEA0287105A69 /* libPods-Salmonia2-Salmonia2UITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Salmonia2-Salmonia2UITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,6 +230,16 @@
 			path = Salmonia2UITests;
 			sourceTree = "<group>";
 		};
+		1053968925242DC600132668 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				10BB3499252174F60046CBCA /* Enum.swift */,
+				1053968425242A7000132668 /* StageType.swift */,
+				1053969225242F5000132668 /* PlayerInfo.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		10BB3489252174F60046CBCA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,12 +247,12 @@
 				10BB348D252174F60046CBCA /* JSONFormat.swift */,
 				10BB348F252174F60046CBCA /* FImage.swift */,
 				10BB348C252174F60046CBCA /* UnixTime.swift */,
-				10BB348B252174F60046CBCA /* Core */,
-				10BB3492252174F60046CBCA /* Extension.swift */,
+				10EFA3A72523A0DB0027209D /* Alamofire.swift */,
 				10BB3493252174F60046CBCA /* SalmonStats.swift */,
+				10BB3492252174F60046CBCA /* Extension.swift */,
+				1053968925242DC600132668 /* Enum */,
 				10BB3494252174F60046CBCA /* Modifier.swift */,
 				10BB3495252174F60046CBCA /* Fonts */,
-				10BB3499252174F60046CBCA /* Enum.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -236,8 +260,8 @@
 		10BB348B252174F60046CBCA /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				10BB3490252174F60046CBCA /* CrewInfoCore.swift */,
 				10BB348E252174F60046CBCA /* UserResultCore.swift */,
-				10BB3490252174F60046CBCA /* UserCardCore.swift */,
 				10BB3491252174F60046CBCA /* UserInfoCore.swift */,
 				10EFA3682521DE6E0027209D /* UserStatsCore.swift */,
 				10BB350025217EFF0046CBCA /* CoopShiftCore.swift */,
@@ -259,8 +283,9 @@
 		10BB34B0252175170046CBCA /* iOS13 */ = {
 			isa = PBXGroup;
 			children = (
-				10BB34B1252175170046CBCA /* SettingView */,
 				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
+				10BB34B1252175170046CBCA /* SettingView */,
+				10BB348B252174F60046CBCA /* Core */,
 				10BB34B6252175170046CBCA /* Components */,
 			);
 			name = iOS13;
@@ -273,6 +298,7 @@
 				10BB34B2252175170046CBCA /* UserListView.swift */,
 				10BB34B3252175170046CBCA /* SettingView.swift */,
 				10BB34B4252175170046CBCA /* UnlockFeatureView.swift */,
+				10EFA39D252398810027209D /* CrewListView.swift */,
 			);
 			path = SettingView;
 			sourceTree = "<group>";
@@ -281,12 +307,15 @@
 			isa = PBXGroup;
 			children = (
 				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
-				10BB34B8252175170046CBCA /* LoggingThread.swift */,
 				10BB34B9252175170046CBCA /* ResultView.swift */,
-				10BB34BA252175170046CBCA /* PlayerView.swift */,
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
 				10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */,
+				10BB34B8252175170046CBCA /* LoggingThread.swift */,
 				10BB34BC252175170046CBCA /* LoadingView.swift */,
+				10EFA3A225239E0A0027209D /* ImportResultView.swift */,
+				1053967C2524206200132668 /* StageRecordView.swift */,
+				10BB34BA252175170046CBCA /* PlayerView.swift */,
+				1053968A25242EE500132668 /* OtherPlayerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -531,13 +560,16 @@
 				1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */,
 				10BB34C3252175170046CBCA /* ResultView.swift in Sources */,
 				10BB34BF252175170046CBCA /* UnlockFeatureView.swift in Sources */,
-				10BB349F252174F60046CBCA /* UserCardCore.swift in Sources */,
+				10BB349F252174F60046CBCA /* CrewInfoCore.swift in Sources */,
+				10EFA3A325239E0A0027209D /* ImportResultView.swift in Sources */,
 				10BB34BE252175170046CBCA /* SettingView.swift in Sources */,
 				10BB34A7252174F60046CBCA /* Enum.swift in Sources */,
 				10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */,
 				10BB34A1252174F60046CBCA /* Extension.swift in Sources */,
 				10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */,
+				1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */,
 				10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */,
+				1053969325242F5000132668 /* PlayerInfo.swift in Sources */,
 				10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */,
 				10BB34C1252175170046CBCA /* ResultCollectionView.swift in Sources */,
 				10BB349B252174F60046CBCA /* UnixTime.swift in Sources */,
@@ -545,9 +577,13 @@
 				10BB349D252174F60046CBCA /* UserResultCore.swift in Sources */,
 				10BB34A0252174F60046CBCA /* UserInfoCore.swift in Sources */,
 				10BB34C2252175170046CBCA /* LoggingThread.swift in Sources */,
+				10EFA39E252398820027209D /* CrewListView.swift in Sources */,
 				1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */,
 				10BB349A252174F60046CBCA /* Realm.swift in Sources */,
 				10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */,
+				1053967D2524206200132668 /* StageRecordView.swift in Sources */,
+				10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */,
+				1053968525242A7000132668 /* StageType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

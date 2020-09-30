@@ -10,7 +10,7 @@ import URLImage
 
 struct PlayerView: View {
     @EnvironmentObject var user: UserInfoCore
-    @EnvironmentObject var card: UserCardCore
+//    @EnvironmentObject var card: UserCardCore
 
     var body: some View {
         VStack {
@@ -24,24 +24,25 @@ struct PlayerView: View {
             }
             Text("Overview").foregroundColor(.orange).modifier(Splatfont(size: 20))
             HStack {
+                Spacer()
                 VStack(spacing: 0) {
                     Text("Jobs")
-                    Text("\(card.job_num)")
+                    Text("\(user.job_num)")
                 }
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Eggs")
                     HStack {
-                        Text("\(card.golden_ikura_total)").foregroundColor(.yellow)
+                        Text("\(user.golden_ikura_total)").foregroundColor(.yellow)
                         Text("/")
-                        Text("\(card.ikura_total)").foregroundColor(.red)
+                        Text("\(user.ikura_total)").foregroundColor(.red)
                     }
                 }
                 Spacer()
-                VStack(spacing: 0) {
-                    Text("Points")
-                    Text("\(card.kuma_point_total)")
-                }
+                //                VStack(spacing: 0) {
+//                    Text("Points")
+//                    Text("\(card.kuma_point_total)")
+//                }
             }.modifier(Splatfont(size: 18))
         }
     }

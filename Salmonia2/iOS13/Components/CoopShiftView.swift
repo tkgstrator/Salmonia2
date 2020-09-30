@@ -18,7 +18,7 @@ struct CoopShiftView: View {
 //        guard let start_time: Int = realm.objects(CoopShiftRealm.self).filter("end_time<=%@", current_time).last?.start_time else { return }
         guard let end_time: Int = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", current_time).last?.start_time else { return }
         let phases = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", end_time).sorted(byKeyPath: "start_time", ascending: false).prefix(3)
-        _phases = State(initialValue: Array(phases))
+        _phases = State(initialValue: Array(phases).reversed())
     }
     
     var body: some View {

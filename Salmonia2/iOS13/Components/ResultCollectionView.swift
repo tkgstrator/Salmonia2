@@ -101,7 +101,7 @@ private struct ResultStack: View {
 }
 
 private struct ResultFilterView: View {
-//    @EnvironmentObject var core: UserResultCore
+    
     @ObservedObject var core: UserResultCore
     @Binding var sliderValue: Double
     @Binding var isEnable: [Bool]
@@ -142,7 +142,7 @@ private struct ResultFilterView: View {
             }) {
                 ForEach(Range(0 ... 4)) { idx in
                     Toggle(isOn: $isEnable[idx]) {
-                        Text(StageType.allCases[idx].rawValue).modifier(Splatfont(size: 20))
+                        Text(StageType.allCases[idx].stage_name!).modifier(Splatfont(size: 20))
                     }
                 }
             }

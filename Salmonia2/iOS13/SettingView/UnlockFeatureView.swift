@@ -11,6 +11,48 @@ import SwiftyStoreKit
 
 struct UnlockFeatureView: View {
     
+    var body: some View {
+        List {
+            HStack {
+                Text("Unlock Feature Rotaion")
+                Spacer()
+                Text("$0.00")
+            }.onTapGesture {
+//                callStoreKit("work.tkgstrator.Salmonia2.isActive")
+            }
+            HStack {
+                Text("Display Gizzco Weapons")
+                Spacer()
+                Text("$0.00")
+            }.onTapGesture {
+//                callStoreKit("work.tkgstrator.Salmonia2.isActive")
+            }
+            HStack {
+                Text("Multiple Accounts")
+                Spacer()
+                Text("$3.99")
+            }.onTapGesture {
+                callStoreKit("work.tkgstrator.Salmonia2.isActive")
+            }
+            HStack {
+                Text("Consumable")
+                Spacer()
+                Text("$3.99")
+            }.onTapGesture {
+                callStoreKit("work.tkgstrator.Salmonia2.Asphalt")
+            }
+            HStack {
+                Text("Monthly Pass")
+                Spacer()
+                Text("$3.99")
+            }.onTapGesture {
+                callStoreKit("work.tkgstrator.Salmonia2.DrPepper")
+            }
+        }
+        .modifier(Splatfont(size: 18))
+        .navigationBarTitle("Feature")
+    }
+    
     func callStoreKit(_ product: String) {
         SwiftyStoreKit.purchaseProduct(product, quantity: 1, atomically: true) { result in
             switch result {
@@ -41,35 +83,6 @@ struct UnlockFeatureView: View {
             }
         }
     }
-    
-    var body: some View {
-        List {
-            HStack {
-                Text("Enable multiple account")
-                Spacer()
-                Text("$3.99")
-            }.onTapGesture {
-                callStoreKit("work.tkgstrator.Salmonia2.isActive")
-            }
-            HStack {
-                Text("Give Dr.Pepper")
-                Spacer()
-                Text("$3.99")
-            }.onTapGesture {
-                callStoreKit("work.tkgstrator.Salmonia2.Asphalt")
-            }
-            HStack {
-                Text("Give Dr.Pepper(Monthly)")
-                Spacer()
-                Text("$3.99")
-            }.onTapGesture {
-                callStoreKit("work.tkgstrator.Salmonia2.DrPepper")
-            }
-        }
-        .modifier(Splatfont(size: 18))
-        .navigationBarTitle("Feature")
-    }
-    
 }
 
 struct UnlockFeatureView_Previews: PreviewProvider {

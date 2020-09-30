@@ -17,6 +17,7 @@ class SalmoniaUserRealm: Object {
     @objc dynamic var isDevelop: Bool = false
     @objc dynamic var isUnlock: Bool = false
     dynamic var account = List<UserInfoRealm>()
+    dynamic var favuser = List<CrewInfoRealm>()
 
 }
 
@@ -27,11 +28,30 @@ class UserInfoRealm: Object {
     @objc dynamic var nsaid: String = "" // data-nsa-id from SplatNet2
     @objc dynamic var iksm_session: String? = nil // Access token for SplatNet2
     @objc dynamic var session_token: String? = nil // Session token to generate iksm_session
-    @objc dynamic var isActive: Bool = true
+    @objc dynamic var job_num: Int = 0
+    @objc dynamic var ikura_total: Int = 0
+    @objc dynamic var golden_ikura_total: Int = 0
+    @objc dynamic var isActive: Bool = false
 
     override static func primaryKey() -> String? {
         return "nsaid"
     }
+}
+
+class CrewInfoRealm: Object {
+    
+    @objc dynamic var name: String = "" // username from SplatNet2
+    @objc dynamic var image: String = "" // userimage url from SplatNet2
+    @objc dynamic var nsaid: String = "" // data-nsa-id from SplatNet2
+    @objc dynamic var isFav: Bool = false
+    @objc dynamic var job_num: Int = 0
+    @objc dynamic var ikura_total: Int = 0
+    @objc dynamic var golden_ikura_total: Int = 0
+    
+    override static func primaryKey() -> String? {
+        return "nsaid"
+    }
+
 }
 
 class CoopResultsRealm: Object {
@@ -128,20 +148,20 @@ class PlayerResultsRealm: Object {
     }
 }
 
-class CoopCardRealm: Object, Codable {
-    
-    @objc dynamic var nsaid: String?
-    var job_num = RealmOptional<Int>()
-    var ikura_total = RealmOptional<Int>()
-    var golden_ikura_total = RealmOptional<Int>()
-    var kuma_point = RealmOptional<Int>()
-    var kuma_point_total = RealmOptional<Int>()
-    var help_total = RealmOptional<Int>()
-    
-    override static func primaryKey() -> String? {
-        return "nsaid"
-    }
-}
+//class CoopCardRealm: Object, Codable {
+//    
+//    @objc dynamic var nsaid: String?
+//    var job_num = RealmOptional<Int>()
+//    var ikura_total = RealmOptional<Int>()
+//    var golden_ikura_total = RealmOptional<Int>()
+//    var kuma_point = RealmOptional<Int>()
+//    var kuma_point_total = RealmOptional<Int>()
+//    var help_total = RealmOptional<Int>()
+//    
+//    override static func primaryKey() -> String? {
+//        return "nsaid"
+//    }
+//}
 
 class CoopShiftRealm: Object, Codable {
     

@@ -84,7 +84,10 @@ struct LoadingView: View {
                                 }
                                 
                                 // データの作成を行う
+                                var nsaids: [String] = [] // 必要なIDたち
                                 for result in results {
+                                    let others: JSON = result["other_results"]
+                                    nsaids.append(contentsOf: others.map({ $0.1["pid"].stringValue }))
                                     let job_id: Int = result["job_id"].intValue
                                     let salmon_id: Int? = salmon_ids.filter({ $0.0 == job_id }).first.map({ $0.1 })
                                     let result: CoopResultsRealm = JF.FromSplatNet2(nsaid: nsaid, salmon_id: salmon_id, result)
@@ -100,7 +103,11 @@ struct LoadingView: View {
                                         record.setValue(result.grade_point_delta, forKey: "grade_point_delta")
                                     }
                                 }
-                                realm.create(CoopCardRealm.self, value: card as Any, update: .modified)
+                                print(nsaids)
+                                let response: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session) // マッチングした仲間のデータを取得
+                                print(response)
+                                
+                                realm.create(UserInfoRealm.self, value: card as Any, update: .modified)
                                 try realm.commitWrite()
                             } catch {
                                 print("ACCOUNT \(nsaid) CREATE CARD FAILURE")

@@ -20,6 +20,10 @@ class UserInfoCore: ObservableObject {
     @Published var iksm_session: String?
     @Published var session_token: String?
     @Published var api_token: String?
+    @Published var job_num: Int = 0
+    @Published var ikura_total: Int = 0
+    @Published var golden_ikura_total: Int = 0
+    
 
     init() {
         token = try? Realm().objects(UserInfoRealm.self).observe { [self] _ in
@@ -31,6 +35,9 @@ class UserInfoCore: ObservableObject {
             imageUri = _account.image
             iksm_session = _account.iksm_session
             session_token = _account.session_token
+            job_num = _account.job_num
+            ikura_total = _account.ikura_total
+            golden_ikura_total = _account.golden_ikura_total
         }
         
         token = try? Realm().objects(SalmoniaUserRealm.self).observe { [self] _ in
@@ -42,6 +49,9 @@ class UserInfoCore: ObservableObject {
             imageUri = _account.image
             iksm_session = _account.iksm_session
             session_token = _account.session_token
+            job_num = _account.job_num
+            ikura_total = _account.ikura_total
+            golden_ikura_total = _account.golden_ikura_total
         }
 
     }

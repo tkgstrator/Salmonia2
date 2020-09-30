@@ -23,7 +23,6 @@ class UserResultCore: ObservableObject {
         } else {
             results = realm.objects(CoopResultsRealm.self).filter("golden_eggs>=%@ AND stage_id IN %@", golden_eggs, stage).sorted(byKeyPath: "golden_eggs")
         }
-        print("UPDATE", results.count)
     }
     
     init() {

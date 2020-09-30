@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import URLImage
+import RealmSwift
 import WebKit
 
 struct Splatfont: ViewModifier {
@@ -60,6 +61,31 @@ private struct WebKitView: View {
     var body: some View {
         WebView(request: URLRequest(url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter")!))
             .navigationBarTitle("SalmonStats")
+            .navigationBarItems(trailing: login)
+    }
+    
+    private var login: some View {
+        Button(action: {
+            WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
+                cookies in
+                for cookie in cookies {
+                    if cookie.name == "laravel_session" {
+                        let laravel_session = cookie.value
+                        do {
+                            let api_token = try SalmonStats.getAPIToken(laravel_session)
+                            guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
+                            let user = realm.objects(SalmoniaUserRealm.self)
+                            try? realm.write { user.setValue(api_token, forKey: "api_token")}
+                            return
+                        } catch  {
+                            
+                        }
+                    }
+                }
+            }
+        }) {
+            Image(systemName: "snow").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)
+        }
     }
 }
 

@@ -9,9 +9,9 @@ target 'Salmonia2' do
   pod 'URLImage', '~>0.9'
   pod 'SwiftyJSON', '~> 5.0.0'
   pod 'Alamofire', '~> 5.2.2'
-  pod 'Realm', '~> 5.4.4', modular_headers: true
-  pod 'RealmSwift', '~> 5.4.4'
-  pod 'CryptoSwift', '~> 1.3'
+  pod 'Realm', '~> 5.4.5', modular_headers: true
+  pod 'RealmSwift', '~> 5.4.5'
+  # pod 'CryptoSwift', '~> 1.3'
   pod 'SplatNet2'
   pod 'SwiftyStoreKit'
   target 'Salmonia2Tests' do

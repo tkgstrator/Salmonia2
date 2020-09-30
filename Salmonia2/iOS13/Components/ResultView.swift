@@ -169,10 +169,10 @@ private struct ResultPlayerView: View {
     @Binding var isVisible: Bool
     
     var body: some View {
-//        NavigationLink(destination: SalmonStatsView(nsaid: $player.nsaid)) {
+        NavigationLink(destination: OtherPlayerView().environmentObject(CrewInfoCore(player.nsaid!))) {
             VStack(spacing: 0) {
                 HStack {
-                    Text(isVisible ? player.name! : "-").font(.custom("Splatfont2", size: 22)).frame(width: 120)
+                    Text(isVisible ? player.name.value : "-").font(.custom("Splatfont2", size: 22)).frame(width: 120)
                     Spacer()
                     Text("x\(player.boss_kill_counts.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 24))
                     Spacer()
@@ -198,7 +198,11 @@ private struct ResultPlayerView: View {
                     Text(String(player.dead_count)).frame(width: 30)
                 }.frame(height: 24)
             }.font(.custom("Splatfont2", size: 18))
-//        }.buttonStyle(PlainButtonStyle())
+        }
+        .buttonStyle(PlainButtonStyle())
+        .onAppear() {
+            SalmonStats.getPlayerOverView(nsaid: player.nsaid!)
+        }
     }
 }
 

@@ -11,11 +11,12 @@ struct SalmoniaView: View { var body: some View {
             ScrollView {
                 PlayerView()
                 CoopShiftView()
+                StageRecordView()
             }
             .padding(.horizontal, 10)
             .modifier(SalmoniaHeader())
             .environmentObject(UserInfoCore())
-            .environmentObject(UserCardCore())
+//            .environmentObject(UserCardCore())
             .navigationBarTitle("Salmonia")
     }
 }

@@ -15,6 +15,12 @@ public class UnixTime {
         return f.string(from: Date(timeIntervalSince1970: TimeInterval(interval)))
     }
     
+    public class func timestampFromDate(date: String) -> Int {
+        let f = DateFormatter()
+        f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+        f.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return Int((f.date(from: date) ?? Date()).timeIntervalSince1970)
+    }
 //    public class func timestampFromSalmonStats(_ interval: Int) ->
 }
 
@@ -53,7 +59,7 @@ func SRPower(_ results: Results<CoopResultsRealm>) -> [Double] {
             ilorate[1] = max(ilorate[0] + delta, ilorate[1]).round(digit: 2)
             ilorate[0] = (ilorate[0] + delta).round(digit: 2)
         }
-        print(baserate, bias, salmonrate, ilorate)
+//        print(baserate, bias, salmonrate, ilorate)
     }
     return ilorate
 }
