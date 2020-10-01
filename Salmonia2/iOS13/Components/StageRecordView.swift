@@ -17,17 +17,97 @@ struct StageRecordView: View {
                 .font(.custom("Splatfont", size: 20))
             ForEach(StageType.allCases, id:\.self) { stage in
                 HStack {
-//                    NavigationLink(destination: StageRecordsView(record: self.stages.records[idx])) {
+                    NavigationLink(destination: StageRecordsView().environmentObject(StageRecordCore(stage.stage_id ?? 5000))) {
                     URLImage(URL(string: stage.image_url!)!, content: {$0.image.resizable()})
                             .frame(width: 112, height: 63)
                             .clipped()
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
-//                    }
+                    }
                     Spacer()
                     Text(stage.stage_name!).frame(maxWidth: .infinity)
                 }.font(.custom("Splatfont", size: 20))
             }
             .buttonStyle(PlainButtonStyle())
+        }
+    }
+}
+
+private struct StageRecordsView: View {
+    @EnvironmentObject var record: StageRecordCore
+
+    var body: some View {
+        List {
+            Section(header: HStack {
+                Spacer()
+                Text("Overview").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Spacer()
+            }) {
+                HStack {
+                    Text("JOB NUM")
+                    Spacer()
+                    Text("\(record.job_num.value)")
+                }
+                HStack {
+                    Text("CLEAR RATIO")
+                    Spacer()
+                    Text(String(record.clear_ratio.value) + "%")
+                }
+                HStack {
+                    Text("MAX GRADE")
+                    Spacer()
+                    Text("\(record.grade_point.value)")
+                }
+                HStack {
+                    Text("Salmon Rate")
+                    Spacer()
+                    Text(String(record.srpower[0].value))
+                }
+                HStack {
+                    Text("Max Salmon Rate")
+                    Spacer()
+                    Text(String(record.srpower[1].value))
+                }
+            }
+            Section(header: HStack {
+                Spacer()
+                Text("Record").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Spacer()
+            }) {
+                HStack {
+                    Text("All")
+                    Spacer()
+                    Text("\(record.team_golden_eggs[0].value)")
+                }
+                HStack {
+                    Text("No Event")
+                    Spacer()
+                    Text("\(record.team_golden_eggs[1].value)")
+                }
+                ForEach(Range(0 ... 2)) { tide in
+                    Section(header: HStack {
+                        Spacer()
+                        Text("\((WaveType.init(water_level: tide)?.water_name)!)").font(.custom("Splatfont", size: 20)).foregroundColor(.orange)
+                        Spacer()
+                    }) {
+                        ForEach(Range(0 ... 6)) { event in
+                            Group {
+                                if (self.record.golden_eggs[tide][event] != nil) {
+                                    HStack {
+                                        Text("\((EventType.init(event_id: event)?.event_name)!)")
+                                        Spacer()
+                                        Text("\(self.record.golden_eggs[tide][event].value)")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .font(.custom("Splatfont2", size: 20))
+        .navigationBarTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!)
+        .onAppear() {
+            print(record.stage_id, record.job_num)
         }
     }
 }

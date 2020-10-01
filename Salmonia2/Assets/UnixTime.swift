@@ -24,9 +24,9 @@ public class UnixTime {
 //    public class func timestampFromSalmonStats(_ interval: Int) ->
 }
 
-func SRPower(_ results: Results<CoopResultsRealm>) -> [Double] {
+func SRPower(_ results: Results<CoopResultsRealm>) -> [Double?] {
     let bossrate: [Int] = [1783, 1609, 2649, 1587, 1534, 1563, 1500, 1783, 2042]
-    var ilorate: [Double] = [0.0, 0.0]
+    var ilorate: [Double?] = [nil, nil]
     var tmprate: Double = 0.0
     
     let win_count: Int = results.prefix(10).filter({$0.is_clear == true}).count
@@ -55,9 +55,9 @@ func SRPower(_ results: Results<CoopResultsRealm>) -> [Double] {
                 }
             }
         default:
-            let delta: Double = result.is_clear ? min((32 / (pow(10, (ilorate[0] - salmonrate) / 400) + 1)), 32.0) : max(-1 * 32 / (pow(10, (salmonrate - ilorate[0]) / 400) + 1), -32.0)
-            ilorate[1] = max(ilorate[0] + delta, ilorate[1]).round(digit: 2)
-            ilorate[0] = (ilorate[0] + delta).round(digit: 2)
+            let delta: Double = result.is_clear ? min((32 / (pow(10, ((ilorate[0] ?? 0.0) - salmonrate) / 400) + 1)), 32.0) : max(-1 * 32 / (pow(10, (salmonrate - (ilorate[0] ?? 0.0)) / 400) + 1), -32.0)
+            ilorate[1] = max((ilorate[0] ?? 0.0) + delta, (ilorate[1] ?? 0)).round(digit: 2)
+            ilorate[0] = ((ilorate[0] ?? 0.0) + delta).round(digit: 2)
         }
 //        print(baserate, bias, salmonrate, ilorate)
     }

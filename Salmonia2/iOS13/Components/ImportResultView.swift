@@ -9,29 +9,45 @@ import SwiftUI
 import RealmSwift
 import Alamofire
 import SwiftyJSON
+import SplatNet2
 
 struct ImportResultView: View {
     
     @State var messages: [String] = []
     @State var isLock: Bool = true
-
+    
     var body: some View {
         LoggingThread(log: $messages, lock: $isLock)
             .onAppear() {
                 guard let realm = try? Realm() else { return }
                 guard let accounts = realm.objects(SalmoniaUserRealm.self).first?.account else { return }
+                guard let _iksm_session: String = accounts.first?.iksm_session else { return }
+                guard let session_token: String = accounts.first?.session_token else { return }
+                if !SplatNet2.isValid(iksm_session: _iksm_session) {
+                    do {
+                        let response = try SplatNet2.genIksmSession(session_token)
+                        let iksm_session = response["iksm_session"].stringValue
+                        try? realm.write {
+                            accounts.first?.iksm_session = iksm_session
+                        }
+                    } catch {
+                        messages.append("Unknown Error")
+                    }
+                }
+                guard let iksm_session: String = accounts.first?.iksm_session else { return }
                 let time: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
                 
                 // ループを抜けるための処理
-                let semaphore = DispatchSemaphore(value: 0)
+                //                let semaphore = DispatchSemaphore(value: 0)
                 
                 // 全ユーザに対してリザルト取得（重いぞ）
                 for account in accounts {
                     let nsaid: String = account.nsaid
+                    var nsaids: [String] = []
                     DispatchQueue(label: "Import").async {
                         guard let lastlink: Int = try? getLastLink(nsaid: nsaid) else { return }
                         DispatchQueue(label: "Pages").async {
-                            for page in Range(1 ... 3) {
+                            for page in Range(1 ... 1) {
                                 guard let results: JSON = try? getResults(nsaid: nsaid, page: page) else { return }
                                 autoreleasepool {
                                     guard let realm = try? Realm() else { return }
@@ -45,15 +61,32 @@ struct ImportResultView: View {
                                         } else {
                                             messages.append("Result: \((page - 1) * 200 + idx + 1) -> \(result["id"].intValue) NG")
                                         }
+                                        nsaids.append(contentsOf: result["members"].map({ $0.1.stringValue }))
                                     }
+                                    do {
+                                        let crews: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session)
+                                        for (_, crew) in crews["nickname_and_icons"] {
+                                            let value: [String: Any] = ["nsaid": crew["nsa_id"].stringValue, "name": crew["nickname"].stringValue, "image": crew["thumbnail_url"].stringValue]
+                                            realm.create(CrewInfoRealm.self, value: value, update: .all)
+                                        }
+                                    } catch {}
                                     try? realm.commitWrite()
                                 } // autoreleasepool
-                                Thread.sleep(forTimeInterval: 5)
+                                Thread.sleep(forTimeInterval: 10)
                             } // Pages
+                            guard let realm = try? Realm() else { return }
+                            realm.beginWrite()
+                            // PlayerResultRealmの名前をアップデートする
+                            let crews: [String] = Array(Set(realm.objects(PlayerResultsRealm.self).map({ $0.nsaid! }))) // nsaidが空のやつはおらんやろ
+                            for crew in crews {
+                                guard let name = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", crew).first?.name else { return }
+                                let user = realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", crew)
+                                user.setValue(name, forKey: "name")
+                            }
+                            try? realm.commitWrite()
                         } // DispatchQueue ASync
                     } // DispatchQueue ASync
                     //                    semaphore.signal()
-                    print("DONE")
                 }
                 isLock = false
             }

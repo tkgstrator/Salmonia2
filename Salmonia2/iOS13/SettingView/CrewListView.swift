@@ -22,7 +22,7 @@ struct CrewListView: View {
                     URLImage(URL(string: user.favuser[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                         .frame(width: 60, height: 60)
                     Text(user.favuser[idx].name).frame(maxWidth: .infinity)
-                    Text(String(user.favuser[idx].evalValue))
+                    Text(String(user.favuser[idx].evalValue)).frame(minWidth: 60)
                 }
             }
             .onMove(perform: onMove)

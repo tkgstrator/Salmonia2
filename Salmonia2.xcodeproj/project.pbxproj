@@ -19,6 +19,8 @@
 		1053968525242A7000132668 /* StageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053968425242A7000132668 /* StageType.swift */; };
 		1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053968A25242EE500132668 /* OtherPlayerView.swift */; };
 		1053969325242F5000132668 /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053969225242F5000132668 /* PlayerInfo.swift */; };
+		105396D825260CEB00132668 /* StageRecordCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396D725260CEA00132668 /* StageRecordCore.swift */; };
+		105396DD25260D5000132668 /* WaveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396DC25260D5000132668 /* WaveType.swift */; };
 		10BB349A252174F60046CBCA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348A252174F60046CBCA /* Realm.swift */; };
 		10BB349B252174F60046CBCA /* UnixTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348C252174F60046CBCA /* UnixTime.swift */; };
 		10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348D252174F60046CBCA /* JSONFormat.swift */; };
@@ -92,6 +94,8 @@
 		1053968425242A7000132668 /* StageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageType.swift; sourceTree = "<group>"; };
 		1053968A25242EE500132668 /* OtherPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPlayerView.swift; sourceTree = "<group>"; };
 		1053969225242F5000132668 /* PlayerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
+		105396D725260CEA00132668 /* StageRecordCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordCore.swift; sourceTree = "<group>"; };
+		105396DC25260D5000132668 /* WaveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveType.swift; sourceTree = "<group>"; };
 		10BB348A252174F60046CBCA /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10BB348C252174F60046CBCA /* UnixTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnixTime.swift; sourceTree = "<group>"; };
 		10BB348D252174F60046CBCA /* JSONFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFormat.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 				10BB3499252174F60046CBCA /* Enum.swift */,
 				1053968425242A7000132668 /* StageType.swift */,
 				1053969225242F5000132668 /* PlayerInfo.swift */,
+				105396DC25260D5000132668 /* WaveType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -266,6 +271,7 @@
 				10EFA3682521DE6E0027209D /* UserStatsCore.swift */,
 				10BB350025217EFF0046CBCA /* CoopShiftCore.swift */,
 				10EFA355252191340027209D /* SalmoniaUserCore.swift */,
+				105396D725260CEA00132668 /* StageRecordCore.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -581,6 +587,8 @@
 				1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */,
 				10BB349A252174F60046CBCA /* Realm.swift in Sources */,
 				10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */,
+				105396D825260CEB00132668 /* StageRecordCore.swift in Sources */,
+				105396DD25260D5000132668 /* WaveType.swift in Sources */,
 				1053967D2524206200132668 /* StageRecordView.swift in Sources */,
 				10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */,
 				1053968525242A7000132668 /* StageType.swift in Sources */,

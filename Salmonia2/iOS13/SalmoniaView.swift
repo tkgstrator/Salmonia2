@@ -16,7 +16,7 @@ struct SalmoniaView: View { var body: some View {
             .padding(.horizontal, 10)
             .modifier(SalmoniaHeader())
             .environmentObject(UserInfoCore())
-//            .environmentObject(UserCardCore())
+//            .environmentObject(StageRecordsCore())
             .navigationBarTitle("Salmonia")
     }
 }
