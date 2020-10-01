@@ -16,33 +16,42 @@ class CrewInfoCore: ObservableObject {
     @Published var nsaid: String = ""
     @Published var nickname: String = ""
     @Published var imageUri: String = ""
-    @Published var job_num: Int = 0
-    @Published var ikura_total: Int = 0
-    @Published var golden_ikura_total: Int = 0
     @Published var isFav: Bool = false
+    @Published var value: Double = 0.0
 
+    enum SortType {
+        case golden, power, defeat, help, dead
+    }
+
+    
+    func getValue(_ type: SortType ) {
+        switch type {
+        case .golden:
+            break
+        case .power:
+            break
+        case .defeat:
+            break
+        case .help:
+            break
+        case .dead:
+            break
+        }
+    }
+    
     init(_ pid: String) {
         token = try? Realm().objects(CrewInfoRealm.self).observe { [self] _ in
             guard let crew = try? Realm().objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
             guard let favuser = try? Realm().objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
             nsaid = pid
-            job_num = crew.job_num
-            ikura_total = crew.ikura_total
-            golden_ikura_total = crew.golden_ikura_total
-            
             isFav = !favuser.isEmpty
-            print("ISFAV", !favuser.isEmpty)
         }
         
         token = try? Realm().objects(SalmoniaUserRealm.self).observe { [self] _ in
             guard let crew = try? Realm().objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
             guard let favuser = try? Realm().objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
             nsaid = pid
-            job_num = crew.job_num
-            ikura_total = crew.ikura_total
-            golden_ikura_total = crew.golden_ikura_total
             isFav = !favuser.isEmpty
-            print("ID", pid, nsaid, "ISFAV", !favuser.isEmpty)
         }
     }
 }

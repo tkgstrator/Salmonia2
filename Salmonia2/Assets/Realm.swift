@@ -46,6 +46,10 @@ class CrewInfoRealm: Object {
     @objc dynamic var job_num: Int = 0
     @objc dynamic var ikura_total: Int = 0
     @objc dynamic var golden_ikura_total: Int = 0
+    @objc dynamic var boss_defeated: Int = 0
+    @objc dynamic var dead_count: Int = 0
+    @objc dynamic var help_count: Int = 0
+    @objc dynamic var evalValue: Double = 0.0
     
     override static func primaryKey() -> String? {
         return "nsaid"

@@ -52,13 +52,16 @@ class SalmonStats {
                     switch _user.isEmpty {
                         case true: // 新規ユーザ
                             let job_num: Int = result["clear"].intValue + result["fail"].intValue
-                            let value: [String: Any] = ["nsaid": nsaid, "job_num": job_num, "power_eggs": total["power_eggs"].intValue, "golden_eggs": total["golden_eggs"].intValue]
+                            let value: [String: Any] = ["nsaid": nsaid, "job_num": job_num, "power_eggs": total["power_eggs"].intValue, "golden_eggs": total["golden_eggs"].intValue, "help_count": total["rescue"].intValue, "dead_count": total["death"].intValue, "boss_defeated": total["boss_elimination_count"].intValue]
                             realm.create(CrewInfoRealm.self, value: value)
                         case false: // アップデート
                             let job_num: Int = result["clear"].intValue + result["fail"].intValue
                             _user.first?.job_num = job_num
                             _user.first?.ikura_total = total["power_eggs"].intValue
-                            _user.first?.ikura_total = total["golden_eggs"].intValue
+                            _user.first?.help_count = total["rescue"].intValue
+                            _user.first?.dead_count = total["death"].intValue
+                            _user.first?.boss_defeated = total["boss_elimination_count"].intValue
+                            _user.first?.golden_ikura_total = total["golden_eggs"].intValue
                     }
                     try? realm.commitWrite()
                 case .failure:

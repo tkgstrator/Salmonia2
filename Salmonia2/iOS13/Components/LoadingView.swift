@@ -103,6 +103,7 @@ struct LoadingView: View {
                                         record.setValue(result.grade_point_delta, forKey: "grade_point_delta")
                                     }
                                 }
+                                nsaids.append(nsaid) // 自身のIDも追加
                                 let crews: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session) // マッチングした仲間のデータを取得
                                 for (_, crew) in crews["nickname_and_icons"] {
                                     let value: [String: Any] = ["nsaid": crew["nsa_id"].stringValue, "name": crew["nickname"].stringValue, "image": crew["thumbnail_url"].stringValue]

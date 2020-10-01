@@ -110,8 +110,8 @@
             filePath = "Salmonia2/iOS13/Components/LoadingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "Salmonia2/iOS13/Components/LoadingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "Salmonia2/iOS13/Components/LoadingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -496,6 +496,22 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "38E9DA85-C630-4E17-923B-022728CA6E1D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia2/iOS13/SettingView/CrewListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

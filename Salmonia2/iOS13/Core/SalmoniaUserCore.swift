@@ -45,17 +45,18 @@ class SalmoniaUserCore: ObservableObject {
             account = user.account
             favuser = user.favuser
             isActiveArray = user.account.map({ $0.isActive })
-//            guard let realm = try? Realm() else { return }
-//            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
-//            let favusers = realm.objects(CrewInfoRealm.self).filter("isFav=%@", true)
-//            realm.beginWrite()
-//             ユーザを全削除（追加は楽だが、削除が意外と難しい）
-//            user.favuser.removeAll()
-//            for favuser in favusers {
-//                user.favuser.append(favuser)
-//            }
-//            try? realm.commitWrite()
-//            favuser = user.favuser
+        }
+
+        token = try? Realm().objects(CrewInfoRealm.self).observe { [self] _ in
+            guard let user = try? Realm().objects(SalmoniaUserRealm.self).first else { return }
+            api_token = user.api_token
+            isImported = user.isImported
+            isUnlock = user.isUnlock
+            isDevelop = user.isDevelop
+            isPurchase = user.isPurchase
+            account = user.account
+            favuser = user.favuser
+            isActiveArray = user.account.map({ $0.isActive })
         }
 
     }

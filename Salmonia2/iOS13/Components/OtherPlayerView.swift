@@ -27,15 +27,15 @@ struct OtherPlayerView: View {
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Jobs")
-                    Text("\(player.job_num)")
+//                    Text("\(player.job_num)")
                 }
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Eggs")
                     HStack {
-                        Text("\(player.golden_ikura_total)").foregroundColor(.yellow)
+//                        Text("\(player.golden_ikura_total)").foregroundColor(.yellow)
                         Text("/")
-                        Text("\(player.ikura_total)").foregroundColor(.red)
+//                        Text("\(player.ikura_total)").foregroundColor(.red)
                     }
                 }
                 Spacer()
