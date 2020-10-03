@@ -43,17 +43,17 @@ private struct StageRecordsView: View {
                 Spacer()
             }) {
                 HStack {
-                    Text("JOB NUM")
+                    Text("Job num")
                     Spacer()
                     Text("\(record.job_num.value)")
                 }
                 HStack {
-                    Text("CLEAR RATIO")
+                    Text("Clear ratio")
                     Spacer()
                     Text(String(record.clear_ratio.value) + "%")
                 }
                 HStack {
-                    Text("MAX GRADE")
+                    Text("Max Grade")
                     Spacer()
                     Text("\(record.grade_point.value)")
                 }
@@ -106,9 +106,6 @@ private struct StageRecordsView: View {
         }
         .font(.custom("Splatfont2", size: 20))
         .navigationBarTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!)
-        .onAppear() {
-            print(record.stage_id, record.job_num)
-        }
     }
 }
 

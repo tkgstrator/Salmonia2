@@ -72,18 +72,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 var response: JSON = JSON()
                 response = try SplatNet2.getSessionToken(session_token_code, session_token_code_verifier)
                 guard let session_token = response["session_token"].string else { throw APIError.Response("1000", "Session Token Error") }
+                print("SESSION TOKEN", session_token)
                 response = try SplatNet2.getAccessToken(session_token)
                 guard let access_token = response["access_token"].string else { throw APIError.Response("1001", "Access Token Error") }
+                print("ACCESS TOKEN", access_token)
                 let flapg_nso = try SplatNet2.callFlapgAPI(access_token, "nso")
                 response = try SplatNet2.getSplatoonToken(flapg_nso)
                 guard let splatoon_token = response["splatoon_token"].string else { throw APIError.Response("1002", "Splatoon Token Error") }
+                print("SPLATOON TOKEN",splatoon_token)
                 guard let nickname = response["user"]["name"].string else { throw APIError.Response("1002", "Nickname Error") }
                 guard let thumbnail_url = response["user"]["image"].string else { throw APIError.Response("1002", "Thumbnail URL Error") }
                 let flapg_app = try SplatNet2.callFlapgAPI(splatoon_token, "app")
                 response = try SplatNet2.getSplatoonAccessToken(flapg_app, splatoon_token)
                 guard let splatoon_access_token = response["splatoon_access_token"].string else { throw APIError.Response("1003", "Splatoon Access Token Error") }
+                print("SPLATOON ACCESS TOKEN", splatoon_access_token)
                 response = try SplatNet2.getIksmSession(splatoon_access_token)
                 guard let iksm_session = response["iksm_session"].string else { throw APIError.Response("1004", "Iksm Session Error") }
+                print("IKSM SESSION", iksm_session)
                 guard let nsaid = response["nsaid"].string else { throw APIError.Response("1004", "Nsa ID Error") }
                 guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
                 try? realm.write {

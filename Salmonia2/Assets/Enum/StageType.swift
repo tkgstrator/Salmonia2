@@ -1,10 +1,3 @@
-//
-//  StageType.swift
-//  Salmonia2
-//
-//  Created by devonly on 2020-09-29.
-//
-
 import Foundation
 
 @dynamicMemberLookup
@@ -18,7 +11,6 @@ public enum StageTypeName: String, CaseIterable {
     case shakehouse = "Lost Outpost"
     case shakelift = "Salmonid Smokeyard"
     case shakeride = "Ruins of Ark Polaris"
-    
 }
 
 public enum StageTypeURL: String, CaseIterable {

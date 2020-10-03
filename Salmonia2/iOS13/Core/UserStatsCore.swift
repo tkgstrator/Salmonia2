@@ -35,7 +35,9 @@ class UserStatsCore: ObservableObject {
     @Published var avg_rescue: Double?
     @Published var avg_dead: Double?
     @Published var boss_defeated: [Double?] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
+    @Published var max_results: [CoopResultsRealm] = []
+    @Published var special: [Double?] = [nil, nil, nil, nil]
+    
     init(start_time: Int) {
         token = try? Realm().objects(CoopResultsRealm.self).observe { [self] _ in
             guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", start_time) else { return }
@@ -45,7 +47,7 @@ class UserStatsCore: ObservableObject {
             let total_dead_count = Double(results.lazy.map({ $0.player[0].dead_count }).reduce(0, +))
             let total_help_count = Double(results.lazy.map({ $0.player[0].help_count }).reduce(0, +))
             let total_defeated = Double(results.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).reduce(0, +))
-                                    
+            
             job_num = results.count
             total_golden_eggs = results.sum(ofProperty: "golden_eggs")
             total_power_eggs = results.sum(ofProperty: "power_eggs")
@@ -64,6 +66,21 @@ class UserStatsCore: ObservableObject {
             avg_dead = Double(total_dead_count / Double(job_num ?? 0)).round(digit: 2)
             avg_rescue = Double(total_help_count / Double(job_num ?? 0)).round(digit: 2)
             avg_defeated = Double(total_defeated / Double(job_num ?? 0)).round(digit: 2)
+            
+            for (idx, sp) in [2, 7, 8, 9].enumerated() {
+//                print(idx, special)
+                special[idx] = Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)
+            }
+            print(special)
+            
+            if job_num != 0 {
+                max_results.append(results.filter("power_eggs=%@",  max_team_power_eggs).first!)
+                max_results.append(results.filter("golden_eggs=%@", max_team_golden_eggs).first!)
+
+                // max_results[2] = (results.filter("golden_ikura_num=%@", max_my_golden_eggs).first!)
+                // max_results[3] = (results.filter("ikura_eggs=%@", max_my_golden_eggs).first!)
+                // max_results[4] = (results.filter("golden_eggs=%@", max_defeated).first!)
+            }
             srpower = SRPower(results)
         }
     }

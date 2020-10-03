@@ -16,10 +16,11 @@ struct OtherPlayerView: View {
     var body: some View {
         ScrollView {
             HStack {
-                //                                NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) { //                    URLImage(URL(string: player.imageUri)!,
-                //                                             content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
-                //                                        .frame(width: 80, height: 80)
-                //                                }.buttonStyle(PlainButtonStyle())
+//                NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) {
+                    URLImage(URL(string: player.imageUri)!,
+                    content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                    .frame(width: 80, height: 80)
+//                }.buttonStyle(PlainButtonStyle())
                 Text(player.nickname).modifier(Splatfont(size: 28)).frame(maxWidth: .infinity)
             }
             Text("Overview").foregroundColor(.orange).modifier(Splatfont(size: 20))
@@ -27,22 +28,22 @@ struct OtherPlayerView: View {
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Jobs")
-//                    Text("\(player.job_num)")
+                    Text("\(player.job_num)")
                 }
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Eggs")
                     HStack {
-//                        Text("\(player.golden_ikura_total)").foregroundColor(.yellow)
+                        Text("\(player.golden_ikura_total)").foregroundColor(.yellow)
                         Text("/")
-//                        Text("\(player.ikura_total)").foregroundColor(.red)
+                        Text("\(player.ikura_total)").foregroundColor(.red)
                     }
                 }
                 Spacer()
             }.modifier(Splatfont(size: 18))
         }
         //        .onAppear() { isFav = player.isFav }
-        .navigationBarTitle(player.nsaid)
+        .navigationBarTitle(player.nickname)
         .navigationBarItems(trailing: favButton)
     }
     

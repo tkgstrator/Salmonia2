@@ -169,7 +169,7 @@ private struct ResultPlayerView: View {
     @Binding var isVisible: Bool
     
     var body: some View {
-        NavigationLink(destination: OtherPlayerView().environmentObject(CrewInfoCore(player.nsaid!))) {
+        NavigationLink(destination: SalmonStatsView().environmentObject(CrewInfoCore(player.nsaid!))) {
             VStack(spacing: 0) {
                 HStack {
                     Text(isVisible ? player.name.value : "-").font(.custom("Splatfont2", size: 22)).frame(width: 120)

@@ -23,6 +23,7 @@ class SalmoniaUserCore: ObservableObject {
     @Published var isActiveArray: [Bool] = []
 
     init() {
+        // API TOKENが変更されたときにチェックする
         token = try? Realm().objects(SalmoniaUserRealm.self).observe { [self] _ in
             guard let user = try? Realm().objects(SalmoniaUserRealm.self).first else { return }
             api_token = user.api_token
@@ -34,30 +35,5 @@ class SalmoniaUserCore: ObservableObject {
             favuser = user.favuser
             isActiveArray = user.account.map({ $0.isActive })
         }
-        
-        token = try? Realm().objects(UserInfoRealm.self).observe { [self] _ in
-            guard let user = try? Realm().objects(SalmoniaUserRealm.self).first else { return }
-            api_token = user.api_token
-            isImported = user.isImported
-            isUnlock = user.isUnlock
-            isDevelop = user.isDevelop
-            isPurchase = user.isPurchase
-            account = user.account
-            favuser = user.favuser
-            isActiveArray = user.account.map({ $0.isActive })
-        }
-
-        token = try? Realm().objects(CrewInfoRealm.self).observe { [self] _ in
-            guard let user = try? Realm().objects(SalmoniaUserRealm.self).first else { return }
-            api_token = user.api_token
-            isImported = user.isImported
-            isUnlock = user.isUnlock
-            isDevelop = user.isDevelop
-            isPurchase = user.isPurchase
-            account = user.account
-            favuser = user.favuser
-            isActiveArray = user.account.map({ $0.isActive })
-        }
-
     }
 }

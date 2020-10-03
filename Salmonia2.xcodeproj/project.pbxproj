@@ -21,6 +21,8 @@
 		1053969325242F5000132668 /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053969225242F5000132668 /* PlayerInfo.swift */; };
 		105396D825260CEB00132668 /* StageRecordCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396D725260CEA00132668 /* StageRecordCore.swift */; };
 		105396DD25260D5000132668 /* WaveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396DC25260D5000132668 /* WaveType.swift */; };
+		105396F425264C2000132668 /* WeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396F325264C2000132668 /* WeaponType.swift */; };
+		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
 		10BB349A252174F60046CBCA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348A252174F60046CBCA /* Realm.swift */; };
 		10BB349B252174F60046CBCA /* UnixTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348C252174F60046CBCA /* UnixTime.swift */; };
 		10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348D252174F60046CBCA /* JSONFormat.swift */; };
@@ -96,6 +98,8 @@
 		1053969225242F5000132668 /* PlayerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
 		105396D725260CEA00132668 /* StageRecordCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordCore.swift; sourceTree = "<group>"; };
 		105396DC25260D5000132668 /* WaveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveType.swift; sourceTree = "<group>"; };
+		105396F325264C2000132668 /* WeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponType.swift; sourceTree = "<group>"; };
+		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10BB348A252174F60046CBCA /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10BB348C252174F60046CBCA /* UnixTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnixTime.swift; sourceTree = "<group>"; };
 		10BB348D252174F60046CBCA /* JSONFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFormat.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 			children = (
 				10BB3499252174F60046CBCA /* Enum.swift */,
 				1053968425242A7000132668 /* StageType.swift */,
+				105396F325264C2000132668 /* WeaponType.swift */,
 				1053969225242F5000132668 /* PlayerInfo.swift */,
 				105396DC25260D5000132668 /* WaveType.swift */,
 			);
@@ -290,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
+				10B10C3E252859180025057F /* SalmonStatsView.swift */,
 				10BB34B1252175170046CBCA /* SettingView */,
 				10BB348B252174F60046CBCA /* Core */,
 				10BB34B6252175170046CBCA /* Components */,
@@ -558,6 +564,7 @@
 				10BB349E252174F60046CBCA /* FImage.swift in Sources */,
 				10BB34BD252175170046CBCA /* UserListView.swift in Sources */,
 				10BB34C0252175170046CBCA /* SalmoniaView.swift in Sources */,
+				105396F425264C2000132668 /* WeaponType.swift in Sources */,
 				10BB34C4252175170046CBCA /* PlayerView.swift in Sources */,
 				1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */,
 				10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */,
@@ -589,6 +596,7 @@
 				10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */,
 				105396D825260CEB00132668 /* StageRecordCore.swift in Sources */,
 				105396DD25260D5000132668 /* WaveType.swift in Sources */,
+				10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */,
 				1053967D2524206200132668 /* StageRecordView.swift in Sources */,
 				10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */,
 				1053968525242A7000132668 /* StageType.swift in Sources */,
@@ -761,6 +769,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -769,7 +778,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -784,6 +793,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -792,7 +802,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -7,17 +7,18 @@
 
 import SwiftUI
 
-struct SalmoniaView: View { var body: some View {
-            ScrollView {
-                PlayerView()
-                CoopShiftView()
-                StageRecordView()
-            }
-            .padding(.horizontal, 10)
-            .modifier(SalmoniaHeader())
-            .environmentObject(UserInfoCore())
-//            .environmentObject(StageRecordsCore())
-            .navigationBarTitle("Salmonia")
+struct SalmoniaView: View {
+    var body: some View {
+        ScrollView {
+            PlayerView()
+            CoopShiftView()
+            StageRecordView()
+        }
+        .padding(.horizontal, 10)
+        .modifier(SalmoniaHeader())
+        .environmentObject(UserInfoCore())
+        .environmentObject(CoopShiftCore())
+        .navigationBarTitle("Salmonia")
     }
 }
 

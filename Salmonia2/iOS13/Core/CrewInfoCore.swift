@@ -15,6 +15,9 @@ class CrewInfoCore: ObservableObject {
     
     @Published var nsaid: String = ""
     @Published var nickname: String = ""
+    @Published var job_num: Int = 0
+    @Published var ikura_total: Int = 0
+    @Published var golden_ikura_total: Int = 0
     @Published var imageUri: String = ""
     @Published var isFav: Bool = false
     @Published var value: Double = 0.0
@@ -44,6 +47,11 @@ class CrewInfoCore: ObservableObject {
             guard let crew = try? Realm().objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
             guard let favuser = try? Realm().objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
             nsaid = pid
+            imageUri = crew.image
+            nickname = crew.name
+            job_num = crew.job_num
+            ikura_total = crew.ikura_total
+            golden_ikura_total = crew.golden_ikura_total
             isFav = !favuser.isEmpty
         }
         
@@ -51,6 +59,11 @@ class CrewInfoCore: ObservableObject {
             guard let crew = try? Realm().objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
             guard let favuser = try? Realm().objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
             nsaid = pid
+            imageUri = crew.image
+            nickname = crew.name
+            job_num = crew.job_num
+            ikura_total = crew.ikura_total
+            golden_ikura_total = crew.golden_ikura_total
             isFav = !favuser.isEmpty
         }
     }
