@@ -41,7 +41,10 @@ class UserStatsCore: ObservableObject {
     init(start_time: Int) {
         token = try? Realm().objects(CoopResultsRealm.self).observe { [self] _ in
             guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", start_time) else { return }
-            clear_ratio = Double(Double(results.filter("is_clear=%@", true).count) / Double(results.count)).round(digit: 4)
+            guard let players = try? Realm().objects(PlayerResultsRealm.self).filter("ANY result.start_time=%@", start_time) else { return }
+            guard let _nsaids = try? Realm().objects(UserInfoRealm.self) else { return }
+            let nsaids: [String] = Array(_nsaids.map({ $0.nsaid }))
+            
             let total_my_golden_eggs = Double(results.lazy.map({ $0.player[0].golden_ikura_num }).reduce(0, +))
             let total_my_power_eggs = Double(results.lazy.map({ $0.player[0].ikura_num }).reduce(0, +))
             let total_dead_count = Double(results.lazy.map({ $0.player[0].dead_count }).reduce(0, +))
@@ -49,37 +52,37 @@ class UserStatsCore: ObservableObject {
             let total_defeated = Double(results.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).reduce(0, +))
             
             job_num = results.count
-            total_golden_eggs = results.sum(ofProperty: "golden_eggs")
-            total_power_eggs = results.sum(ofProperty: "power_eggs")
-            max_grade_point = results.max(ofProperty: "grade_point")
-            max_team_golden_eggs = results.max(ofProperty: "golden_eggs")
-            max_team_power_eggs = results.max(ofProperty: "power_eggs")
-            max_my_power_eggs = results.lazy.map({ $0.player[0].ikura_num }).max()
-            max_my_golden_eggs = results.lazy.map({ $0.player[0].golden_ikura_num }).max()
-            max_defeated = results.lazy.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).max()
-            avg_clear_wave = Double(Double(results.map({ ($0.failure_wave.value ?? 4) - 1}).reduce(0, +)) / Double(results.count)).round(digit: 2)
-            avg_crew_grade = (results.map({ 20 * $0.danger_rate + Double($0.grade_point_delta.value ?? 0) - Double($0.grade_point.value ?? 0) - 1600.0}).lazy.reduce(0.0, +) / Double((job_num ?? 0) * 3)).round(digit: 2)
-            avg_team_golden_eggs = Double(Double(total_golden_eggs ?? 0) / Double(job_num ?? 0)).round(digit: 2)
-            avg_team_power_eggs = Double(Double(total_power_eggs ?? 0) / Double(job_num ?? 0)).round(digit: 2)
-            avg_my_power_eggs = (total_my_golden_eggs / Double(job_num ?? 0)).round(digit: 2)
-            avg_my_golden_eggs = (total_my_power_eggs / Double(job_num ?? 0)).round(digit: 2)
-            avg_dead = Double(total_dead_count / Double(job_num ?? 0)).round(digit: 2)
-            avg_rescue = Double(total_help_count / Double(job_num ?? 0)).round(digit: 2)
-            avg_defeated = Double(total_defeated / Double(job_num ?? 0)).round(digit: 2)
-            
-            for (idx, sp) in [2, 7, 8, 9].enumerated() {
-//                print(idx, special)
-                special[idx] = Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)
-            }
-            print(special)
-            
+
             if job_num != 0 {
+                clear_ratio = Double(Double(results.filter("is_clear=%@", true).count) / Double(job_num ?? 0)).round(digit: 4)
+                total_golden_eggs = results.sum(ofProperty: "golden_eggs")
+                total_power_eggs = results.sum(ofProperty: "power_eggs")
+                max_grade_point = results.max(ofProperty: "grade_point")
+                max_team_golden_eggs = results.max(ofProperty: "golden_eggs")
+                max_team_power_eggs = results.max(ofProperty: "power_eggs")
+                max_my_power_eggs = results.lazy.map({ $0.player[0].ikura_num }).max()
+                max_my_golden_eggs = results.lazy.map({ $0.player[0].golden_ikura_num }).max()
+                max_defeated = results.lazy.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).max()
+                avg_clear_wave = Double(Double(results.map({ ($0.failure_wave.value ?? 4) - 1}).reduce(0, +)) / Double(results.count)).round(digit: 2)
+                avg_crew_grade = (results.map({ 20 * $0.danger_rate + Double($0.grade_point_delta.value ?? 0) - Double($0.grade_point.value ?? 0) - 1600.0}).lazy.reduce(0.0, +) / Double((job_num ?? 0) * 3)).round(digit: 2)
+                avg_team_golden_eggs = Double(Double(total_golden_eggs ?? 0) / Double(job_num ?? 0)).round(digit: 2)
+                avg_team_power_eggs = Double(Double(total_power_eggs ?? 0) / Double(job_num ?? 0)).round(digit: 2)
+                avg_my_power_eggs = (total_my_golden_eggs / Double(job_num ?? 0)).round(digit: 2)
+                avg_my_golden_eggs = (total_my_power_eggs / Double(job_num ?? 0)).round(digit: 2)
+                avg_dead = Double(total_dead_count / Double(job_num ?? 0)).round(digit: 2)
+                avg_rescue = Double(total_help_count / Double(job_num ?? 0)).round(digit: 2)
+                avg_defeated = Double(total_defeated / Double(job_num ?? 0)).round(digit: 2)
+
+                for (idx, sp) in [2, 7, 8, 9].enumerated() {
+                    special[idx] = Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)
+                }
+
+                max_results = []
                 max_results.append(results.filter("power_eggs=%@",  max_team_power_eggs).first!)
                 max_results.append(results.filter("golden_eggs=%@", max_team_golden_eggs).first!)
-
-                // max_results[2] = (results.filter("golden_ikura_num=%@", max_my_golden_eggs).first!)
-                // max_results[3] = (results.filter("ikura_eggs=%@", max_my_golden_eggs).first!)
-                // max_results[4] = (results.filter("golden_eggs=%@", max_defeated).first!)
+                max_results.append(players.filter("ikura_num=%@ AND nsaid IN %@", max_my_power_eggs, nsaids).first!.result.first!)
+                max_results.append(players.filter("golden_ikura_num=%@ AND nsaid IN %@", max_my_golden_eggs, nsaids).first!.result.first!)
+                max_results.append(players.filter("nsaid IN %@", nsaids).filter({ $0.boss_kill_counts.reduce(0, +) == max_defeated }).first!.result.first!)
             }
             srpower = SRPower(results)
         }
