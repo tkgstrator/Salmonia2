@@ -13,7 +13,6 @@ public let phase: [(start_time: Int, end_time: Int, stage_id: Int)] = Array(try!
 
 public class JF {
     
-
     class func FromFutureShift(_ response: JSON) -> CoopShiftRealm {
         
         let result: [String: Any?] = response.dictionaryObject!

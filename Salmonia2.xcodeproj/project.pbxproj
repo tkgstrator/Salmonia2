@@ -23,6 +23,8 @@
 		105396DD25260D5000132668 /* WaveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396DC25260D5000132668 /* WaveType.swift */; };
 		105396F425264C2000132668 /* WeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396F325264C2000132668 /* WeaponType.swift */; };
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
+		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
+		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
 		10BB349A252174F60046CBCA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348A252174F60046CBCA /* Realm.swift */; };
 		10BB349B252174F60046CBCA /* UnixTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348C252174F60046CBCA /* UnixTime.swift */; };
 		10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348D252174F60046CBCA /* JSONFormat.swift */; };
@@ -100,6 +102,8 @@
 		105396DC25260D5000132668 /* WaveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveType.swift; sourceTree = "<group>"; };
 		105396F325264C2000132668 /* WeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponType.swift; sourceTree = "<group>"; };
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
+		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
+		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
 		10BB348A252174F60046CBCA /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10BB348C252174F60046CBCA /* UnixTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnixTime.swift; sourceTree = "<group>"; };
 		10BB348D252174F60046CBCA /* JSONFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFormat.swift; sourceTree = "<group>"; };
@@ -243,9 +247,11 @@
 			children = (
 				10BB3499252174F60046CBCA /* Enum.swift */,
 				1053968425242A7000132668 /* StageType.swift */,
+				10B10C492528EC480025057F /* BossType.swift */,
 				105396F325264C2000132668 /* WeaponType.swift */,
 				1053969225242F5000132668 /* PlayerInfo.swift */,
 				105396DC25260D5000132668 /* WaveType.swift */,
+				10B10C4E252913220025057F /* RankType.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -579,10 +585,12 @@
 				10BB34A7252174F60046CBCA /* Enum.swift in Sources */,
 				10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */,
 				10BB34A1252174F60046CBCA /* Extension.swift in Sources */,
+				10B10C4A2528EC480025057F /* BossType.swift in Sources */,
 				10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */,
 				1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */,
 				10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */,
 				1053969325242F5000132668 /* PlayerInfo.swift in Sources */,
+				10B10C4F252913220025057F /* RankType.swift in Sources */,
 				10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */,
 				10BB34C1252175170046CBCA /* ResultCollectionView.swift in Sources */,
 				10BB349B252174F60046CBCA /* UnixTime.swift in Sources */,

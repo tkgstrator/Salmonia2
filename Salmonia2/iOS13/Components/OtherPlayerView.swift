@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Alamofire
+import SwiftyJSON
 import RealmSwift
 import URLImage
 import Combine
@@ -32,21 +34,126 @@ struct OtherPlayerView: View {
                 }
                 Spacer()
                 VStack(spacing: 0) {
-                    Text("Eggs")
+                    Text("Avg Eggs")
                     HStack {
-                        Text("\(player.golden_ikura_total)").foregroundColor(.yellow)
+                        Text(String((Double(player.golden_ikura_total) / Double(player.job_num)).round(digit: 2))).foregroundColor(.yellow)
                         Text("/")
-                        Text("\(player.ikura_total)").foregroundColor(.red)
+                        Text(String((Double(player.ikura_total) / Double(player.job_num)).round(digit: 2))).foregroundColor(.red)
+                    }
+                }
+                Spacer()
+                VStack(spacing: 0) {
+                    Text("Rank")
+                    HStack {
+                        Text(RankType(value: player.srpower).rank).foregroundColor(.yellow)
                     }
                 }
                 Spacer()
             }.modifier(Splatfont(size: 18))
         }
-        //        .onAppear() { isFav = player.isFav }
+        .onAppear() {
+            guard let realm = try? Realm() else { return }
+            guard let user = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", player.nsaid).first else { return }
+            let current_time: Int = Int(Date().timeIntervalSince1970)
+            if current_time >= user.lastUpdated + 3600 * 24 && player.job_num >= 30 {
+                // 先にタイムスタンプを書き込んでおけば再読み込みのリロードを防げる
+                realm.beginWrite()
+                user.lastUpdated = current_time
+                try? realm.commitWrite()
+                getPlayerSRPower(nsaid: player.nsaid) { srpower in
+                    realm.beginWrite()
+                    user.srpower.value = srpower
+                    user.lastUpdated = current_time
+                    try? realm.commitWrite()
+                }
+            }
+        }
+        .padding(.horizontal, 10)
         .navigationBarTitle(player.nickname)
         .navigationBarItems(trailing: favButton)
     }
     
+    private func getPlayerSRPower(nsaid: String, completion: @escaping (Double?) -> ()) {
+        let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=30&page=1"
+        
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let results: [JSON] = JSON(value)["results"].reversed().map({ $0.1 })
+                    let salmon_ids: [Int] = results.map({ $0["id"].intValue })
+                    print(salmon_ids)
+                    completion(SRPower(results))
+                case .failure:
+                    break
+                }
+            }
+            
+        }
+    
+    private func SRPower(_ results: [JSON]) -> Double? {
+        if results.count < 30 { return nil }
+        
+        let bossrate: [Int] = [1783, 1609, 2649, 1587, 1534, 1563, 1500, 1783, 2042]
+        var ilorate: Double? = nil
+        var tmprate: Double = 0.0
+        
+        let win_count: Int = results.prefix(10).filter({$0["clear_waves"].intValue == 3}).count
+
+        for (idx, result) in results.enumerated() {
+            let isClear = result["clear_waves"].intValue == 3
+            let _player = result["player_results"].filter({ $0.1["player_id"].stringValue == player.nsaid }).map({ $0.1 }).first!
+            let bias = CalcBias(result)
+            let baserate: Int = (Array(zip(bossrate, _player["boss_eliminations"]["counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1.intValue }))).map({$0 * $1}).reduce(0, +)) / max(1, _player["boss_elimination_count"].intValue)
+            let salmonrate: Double = min(bias * Double(baserate), 3074.5).round(digit: 2)
+
+            switch idx {
+            case (0...9):
+                tmprate += salmonrate
+                if idx == 9 {
+                    tmprate = (tmprate / 10).round(digit: 2)
+                    switch win_count {
+                    case 0:
+                        ilorate = tmprate - 400
+                    case 10:
+                        ilorate = tmprate + 400
+                    default:
+                        ilorate = (tmprate + 400 * log10(Double(win_count)/Double(10 - win_count))).round(digit: 2)
+                    }
+                }
+            default:
+                let delta: Double = isClear ? min((32 / (pow(10, ((ilorate ?? 0.0) - salmonrate) / 400) + 1)), 32.0) : max(-1 * 32 / (pow(10, (salmonrate - (ilorate ?? 0.0)) / 400) + 1), -32.0)
+                ilorate = ((ilorate ?? 0.0) + delta).round(digit: 2)
+            }
+        }
+        print(ilorate)
+        return ilorate
+    }
+
+    private func CalcBias(_ result: JSON) -> Double {
+        let danger_rate: Double = result["danger_rate"].doubleValue
+        let rate: Double = (Double(min(danger_rate * 3, 600)) / 5.0 + 80) / 160.0
+        let max_bias: Double = danger_rate == 200 ? 1.5 : 1.25
+        var bias: (defeated: Double, golden: Double) = (0.0, 0.0)
+        
+        let _player = result["player_results"].filter({ $0.1["player_id"].stringValue == player.nsaid }).map({ $0.1 }).first!
+        let quota_num = result["waves"].map({ $0.1["golden_egg_quota"].intValue }).reduce(0, +)
+        let defeated_num = _player["boss_elimination_count"].intValue
+        let appear_num = result["boss_appearance_count"].intValue
+        
+        let golden_ikura_num = _player["golden_eggs"].intValue
+        if (golden_ikura_num * 4 >= quota_num && defeated_num * 4 >= appear_num && defeated_num > 0) {
+            bias.defeated = min(Double(defeated_num * 99) / Double(17 * defeated_num), max_bias)
+        }
+
+        if (golden_ikura_num * 3 >= quota_num && defeated_num * 5 >= appear_num) {
+            bias.golden = min(rate + Double(10 * (golden_ikura_num * 3 - quota_num)) / (9.0 * 160.0), max_bias)
+        }
+        return max(bias.defeated, bias.golden, rate)
+    }
+
     private var favButton: some View {
         switch player.isFav {
         case true:

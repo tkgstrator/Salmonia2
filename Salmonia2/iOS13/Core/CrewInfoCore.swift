@@ -19,6 +19,7 @@ class CrewInfoCore: ObservableObject {
     @Published var ikura_total: Int = 0
     @Published var golden_ikura_total: Int = 0
     @Published var imageUri: String = ""
+    @Published var srpower: Double?
     @Published var isFav: Bool = false
     @Published var value: Double = 0.0
 
@@ -52,6 +53,7 @@ class CrewInfoCore: ObservableObject {
             job_num = crew.job_num
             ikura_total = crew.ikura_total
             golden_ikura_total = crew.golden_ikura_total
+            srpower = crew.srpower.value
             isFav = !favuser.isEmpty
         }
         
@@ -64,6 +66,7 @@ class CrewInfoCore: ObservableObject {
             job_num = crew.job_num
             ikura_total = crew.ikura_total
             golden_ikura_total = crew.golden_ikura_total
+            srpower = crew.srpower.value
             isFav = !favuser.isEmpty
         }
     }

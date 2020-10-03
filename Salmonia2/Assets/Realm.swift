@@ -49,7 +49,9 @@ class CrewInfoRealm: Object {
     @objc dynamic var boss_defeated: Int = 0
     @objc dynamic var dead_count: Int = 0
     @objc dynamic var help_count: Int = 0
-    @objc dynamic var evalValue: Double = 0.0
+    let evalValue = RealmOptional<Double>()
+    let srpower = RealmOptional<Double>()
+    @objc dynamic var lastUpdated: Int = 0
     
     override static func primaryKey() -> String? {
         return "nsaid"

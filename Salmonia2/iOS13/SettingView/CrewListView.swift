@@ -18,11 +18,13 @@ struct CrewListView: View {
     var body: some View {
         List {
             ForEach(user.favuser.indices, id:\.self) { idx in
-                HStack {
-                    URLImage(URL(string: user.favuser[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
-                        .frame(width: 60, height: 60)
-                    Text(user.favuser[idx].name).frame(maxWidth: .infinity)
-                    Text(String(user.favuser[idx].evalValue)).frame(minWidth: 60)
+                NavigationLink(destination: OtherPlayerView().environmentObject(CrewInfoCore(user.favuser[idx].nsaid))) {
+                    HStack {
+                        URLImage(URL(string: user.favuser[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                            .frame(width: 60, height: 60)
+                        Text(user.favuser[idx].name).frame(maxWidth: .infinity)
+                        Text(user.favuser[idx].evalValue.value.value).frame(minWidth: 60)
+                    }
                 }
             }
             .onMove(perform: onMove)
@@ -44,7 +46,7 @@ struct CrewListView: View {
         
         realm.beginWrite()
         for user in user.favuser {
-            user.evalValue = (Double(user.boss_defeated) / Double(user.job_num)).round(digit: 2)
+            user.evalValue.value = (Double(user.boss_defeated) / Double(user.job_num)).round(digit: 2)
         }
         // ディープコピーしないとデータが消えてしまう
         let order = Array(account.favuser.sorted(byKeyPath: "evalValue", ascending: false))

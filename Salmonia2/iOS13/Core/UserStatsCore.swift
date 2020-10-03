@@ -14,6 +14,7 @@ class UserStatsCore: ObservableObject {
     private var token: NotificationToken?
     
     @Published var job_num: Int?
+    @Published var schedule: Int?
     @Published var clear_ratio: Double?
     @Published var total_power_eggs: Int?
     @Published var total_golden_eggs: Int?
@@ -40,16 +41,34 @@ class UserStatsCore: ObservableObject {
     
     init(start_time: Int) {
         token = try? Realm().objects(CoopResultsRealm.self).observe { [self] _ in
-            guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", start_time) else { return }
-            guard let players = try? Realm().objects(PlayerResultsRealm.self).filter("ANY result.start_time=%@", start_time) else { return }
+            schedule = start_time
             guard let _nsaids = try? Realm().objects(UserInfoRealm.self) else { return }
             let nsaids: [String] = Array(_nsaids.map({ $0.nsaid }))
-            
+            guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", start_time) else { return }
+            guard let players = try? Realm().objects(PlayerResultsRealm.self).filter("ANY result.start_time=%@ AND nsaid IN %@", start_time, nsaids) else { return }
+
             let total_my_golden_eggs = Double(results.lazy.map({ $0.player[0].golden_ikura_num }).reduce(0, +))
             let total_my_power_eggs = Double(results.lazy.map({ $0.player[0].ikura_num }).reduce(0, +))
             let total_dead_count = Double(results.lazy.map({ $0.player[0].dead_count }).reduce(0, +))
             let total_help_count = Double(results.lazy.map({ $0.player[0].help_count }).reduce(0, +))
             let total_defeated = Double(results.map({ $0.player[0].boss_kill_counts.reduce(0, +) }).reduce(0, +))
+            
+            let _boss_counts = results.map({ $0.boss_counts })
+            let _boss_kill_counts = players.map({ $0.boss_kill_counts })
+            
+            var boss_counts: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            var boss_kill_counts: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            for _count in _boss_counts {
+                boss_counts = Array(zip(boss_counts, _count)).map({ $0.0 + $0.1 })
+            }
+            for _count in _boss_kill_counts {
+                boss_kill_counts = Array(zip(boss_kill_counts, _count)).map({ $0.0 + $0.1 })
+            }
+            for idx in Range(0 ... 8) {
+                boss_defeated[idx] = (Double(boss_kill_counts[idx]) / Double(boss_counts[idx])).round(digit: 4)
+            }
+
+//            print(_boss_kill_counts)
             
             job_num = results.count
 
@@ -74,15 +93,15 @@ class UserStatsCore: ObservableObject {
                 avg_defeated = Double(total_defeated / Double(job_num ?? 0)).round(digit: 2)
 
                 for (idx, sp) in [2, 7, 8, 9].enumerated() {
-                    special[idx] = Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)
+                    special[idx] = (Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)).round(digit: 4)
                 }
 
                 max_results = []
                 max_results.append(results.filter("power_eggs=%@",  max_team_power_eggs).first!)
                 max_results.append(results.filter("golden_eggs=%@", max_team_golden_eggs).first!)
-                max_results.append(players.filter("ikura_num=%@ AND nsaid IN %@", max_my_power_eggs, nsaids).first!.result.first!)
-                max_results.append(players.filter("golden_ikura_num=%@ AND nsaid IN %@", max_my_golden_eggs, nsaids).first!.result.first!)
-                max_results.append(players.filter("nsaid IN %@", nsaids).filter({ $0.boss_kill_counts.reduce(0, +) == max_defeated }).first!.result.first!)
+                max_results.append(players.filter("ikura_num=%@", max_my_power_eggs).first!.result.first!)
+                max_results.append(players.filter("golden_ikura_num=%@", max_my_golden_eggs).first!.result.first!)
+                max_results.append(players.filter({ $0.boss_kill_counts.reduce(0, +) == max_defeated }).first!.result.first!)
             }
             srpower = SRPower(results)
         }

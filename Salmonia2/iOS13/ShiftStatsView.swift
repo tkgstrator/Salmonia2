@@ -10,11 +10,6 @@ import SwiftUI
 struct ShiftStatsView: View {
     
     @EnvironmentObject var stats: UserStatsCore
-    //    @Binding var start_time: Int
-    
-    //    init(start_time: Binding<Int>) {
-    //        _start_time = start_time
-    //    }
     
     var body: some View {
         List {
@@ -73,7 +68,16 @@ struct ShiftStatsView: View {
                 ShiftStatsStack(title: "Rescue", value: stats.avg_rescue)
                 ShiftStatsStack(title: "Dead", value: stats.avg_dead)
             }
-        }.navigationBarTitle("\(stats.max_my_golden_eggs ?? 0)")
+            Section(header:HStack {
+                Spacer()
+                Text("DEFEATED").font(.custom("Splatfont", size: 18))
+                Spacer()
+            }) {
+                ForEach(BossType.allCases.indices, id:\.self) { idx in
+                    ShiftStatsStack(title: (BossType.allCases[idx].boss_name!), value: stats.boss_defeated[idx].value)
+                }
+            }
+        }.navigationBarTitle(UnixTime.dateFromTimestamp(stats.schedule!))
     }
 }
 
