@@ -21,6 +21,7 @@ class SalmoniaUserCore: ObservableObject {
     @Published var account = RealmSwift.List<UserInfoRealm>()
     @Published var favuser = RealmSwift.List<CrewInfoRealm>()
     @Published var isActiveArray: [Bool] = []
+    @Published var isVersion: String = "0.0.0"
 
     init() {
         // API TOKENが変更されたときにチェックする
@@ -34,6 +35,7 @@ class SalmoniaUserCore: ObservableObject {
             account = user.account
             favuser = user.favuser
             isActiveArray = user.account.map({ $0.isActive })
+            isVersion = user.isVersion
         }
     }
 }

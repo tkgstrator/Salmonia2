@@ -68,8 +68,6 @@ class UserStatsCore: ObservableObject {
                 boss_defeated[idx] = (Double(boss_kill_counts[idx]) / Double(boss_counts[idx])).round(digit: 4)
             }
 
-//            print(_boss_kill_counts)
-            
             job_num = results.count
 
             if job_num != 0 {

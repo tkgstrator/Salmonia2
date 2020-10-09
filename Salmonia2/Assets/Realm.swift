@@ -16,6 +16,7 @@ class SalmoniaUserRealm: Object {
     @objc dynamic var isPurchase: Bool = false
     @objc dynamic var isDevelop: Bool = false
     @objc dynamic var isUnlock: Bool = false
+    @objc dynamic var isVersion: String = "1.9.0"
     dynamic var account = List<UserInfoRealm>()
     dynamic var favuser = List<CrewInfoRealm>()
 

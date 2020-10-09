@@ -10,11 +10,14 @@ import SplatNet2
 import RealmSwift
 import WebKit
 import MobileCoreServices
+import UserNotifications
 
 struct SettingView: View {
     @EnvironmentObject var user: SalmoniaUserCore
+    @EnvironmentObject var core: UserResultCore
+    
     @State var isVisible: Bool = false
-
+    
     let version: String = "\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!))(\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)))"
     
     var body: some View {
@@ -25,8 +28,11 @@ struct SettingView: View {
         }
         .navigationBarTitle("Settings")
         .environmentObject(SalmoniaUserCore())
+        .environmentObject(UserResultCore())
         .modifier(Splatfont(size: 20))
         .modifier(SettingsHeader())
+        .onAppear() {
+        }
     }
     
     private var Application: some View {
@@ -38,13 +44,11 @@ struct SettingView: View {
                     Text("Feature")
                 }
             }
-            NavigationLink(destination: ImportResultView()) {
-                            HStack {
-                                Text("Import Results")
-                                Spacer()
-//                                Text("Feature")
-                            }
-                        }
+            HStack {
+                Text("X-Product Version")
+                Spacer()
+                Text("\(user.isVersion)")
+            }
             HStack {
                 Text("Version")
                 Spacer()
@@ -74,6 +78,19 @@ struct SettingView: View {
                 Text("laravel session")
                 Spacer()
                 Text("\((user.api_token != nil ? "Registered" : "Unregistered").localized)")
+            }
+            HStack {
+                Text("Local Results")
+                Spacer()
+                Text("\(core.results.count)")
+            }
+            if !user.isImported {
+                NavigationLink(destination: ImportResultView()) {
+                    HStack {
+                        Text("Import Results")
+                        Spacer()
+                    }
+                }
             }
         }
     }

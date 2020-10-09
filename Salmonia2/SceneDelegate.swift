@@ -63,33 +63,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     {
+        func notification(title: String, body: String) {
+            
+            let content = UNMutableNotificationContent()
+            content.title = title
+            content.body = body
+            content.sound = UNNotificationSound.default
+
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+            UNUserNotificationCenter.current().add(request)
+        }
+        
         guard let url = URLContexts.first?.url else { return }
         guard let session_token_code = url.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { return }
         let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
         
+        guard let version = try? Realm().objects(SalmoniaUserRealm.self).first?.isVersion else { return }
+
         DispatchQueue(label: "Login").async {
             do {
                 var response: JSON = JSON()
                 response = try SplatNet2.getSessionToken(session_token_code, session_token_code_verifier)
-                guard let session_token = response["session_token"].string else { throw APIError.Response("1000", "Session Token Error") }
-                print("SESSION TOKEN", session_token)
-                response = try SplatNet2.getAccessToken(session_token)
-                guard let access_token = response["access_token"].string else { throw APIError.Response("1001", "Access Token Error") }
-                print("ACCESS TOKEN", access_token)
-                let flapg_nso = try SplatNet2.callFlapgAPI(access_token, "nso")
-                response = try SplatNet2.getSplatoonToken(flapg_nso)
-                guard let splatoon_token = response["splatoon_token"].string else { throw APIError.Response("1002", "Splatoon Token Error") }
-                print("SPLATOON TOKEN",splatoon_token)
-                guard let nickname = response["user"]["name"].string else { throw APIError.Response("1002", "Nickname Error") }
-                guard let thumbnail_url = response["user"]["image"].string else { throw APIError.Response("1002", "Thumbnail URL Error") }
-                let flapg_app = try SplatNet2.callFlapgAPI(splatoon_token, "app")
-                response = try SplatNet2.getSplatoonAccessToken(flapg_app, splatoon_token)
-                guard let splatoon_access_token = response["splatoon_access_token"].string else { throw APIError.Response("1003", "Splatoon Access Token Error") }
-                print("SPLATOON ACCESS TOKEN", splatoon_access_token)
-                response = try SplatNet2.getIksmSession(splatoon_access_token)
+                let session_token = response["session_token"].stringValue
+                response = try SplatNet2.genIksmSession(session_token, version: version)
+                guard let thumbnail_url = response["user"]["thumbnail_url"].string else { throw APIError.Response("1004", "Iksm Session Error") }
+                guard let nickname = response["user"]["nickname"].string else { throw APIError.Response("1004", "Iksm Session Error") }
                 guard let iksm_session = response["iksm_session"].string else { throw APIError.Response("1004", "Iksm Session Error") }
-                print("IKSM SESSION", iksm_session)
-                guard let nsaid = response["nsaid"].string else { throw APIError.Response("1004", "Nsa ID Error") }
+                guard let nsaid = response["nsaid"].string else { throw APIError.Response("1004", "Iksm Session Error") }
                 guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
                 try? realm.write {
                     let account = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
@@ -100,22 +100,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         let account: UserInfoRealm = UserInfoRealm(value: _account)
                         realm.add(account, update: .modified)
                         _user.account.append(account)
+                        notification(title: "New Login", body: "Success to add new NSO account.")
                     case false: // 再ログイン（アップデート）
                         guard let session_token = account.first?.session_token else { return }
                         account.setValue(iksm_session, forKey: "iksm_session")
                         account.setValue(session_token, forKey: "session_token")
                         account.setValue(thumbnail_url, forKey: "image")
                         account.setValue(nickname, forKey: "name")
+                        notification(title: "User Info Update", body: "Success to update.")
                     }
                 }
-            } catch (let error) {
-                print(error)
+            } catch APIError.Response(let title, let message) {
+                notification(title: title, body: message)
+            } catch (let error){
+                notification(title: "9999", body: error.localizedDescription)
             }
         }
     }
-    
-    
-
-
 }
 

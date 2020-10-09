@@ -101,6 +101,7 @@
 		105396D725260CEA00132668 /* StageRecordCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordCore.swift; sourceTree = "<group>"; };
 		105396DC25260D5000132668 /* WaveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveType.swift; sourceTree = "<group>"; };
 		105396F325264C2000132668 /* WeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponType.swift; sourceTree = "<group>"; };
+		105F690E252F33F2003306C8 /* Salmonia2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Salmonia2.entitlements; sourceTree = "<group>"; };
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
@@ -202,6 +203,7 @@
 		1037E39F25209C7C001B41B0 /* Salmonia2 */ = {
 			isa = PBXGroup;
 			children = (
+				105F690E252F33F2003306C8 /* Salmonia2.entitlements */,
 				10BB34B0252175170046CBCA /* iOS13 */,
 				10BB3489252174F60046CBCA /* Assets */,
 				1037E3A025209C7C001B41B0 /* AppDelegate.swift */,
@@ -776,8 +778,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -800,8 +803,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

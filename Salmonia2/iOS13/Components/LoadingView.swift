@@ -23,6 +23,7 @@ struct LoadingView: View {
                     guard let realm = try? Realm() else { throw APIError.Response("2000", "Realm DB Error") }
                     guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
                     guard let api_token = user.api_token else { throw APIError.Response("2001", "Empty API Token") }
+                    let version = user.isVersion // X-Product Versionの読み込み
 
                     let accounts = realm.objects(UserInfoRealm.self).filter("isActive = %@", true)
                     if accounts.count == 0  { throw APIError.Response("2001", "No Active Accounts") }
@@ -38,7 +39,7 @@ struct LoadingView: View {
                             if !isValid { // 有効期限が切れていた場合は再生成する
                                 do {
                                     guard let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid).first else { throw APIError.Response("2003", "No Such Account") }
-                                    let response: JSON =  try SplatNet2.genIksmSession(session_token)
+                                    let response: JSON =  try SplatNet2.genIksmSession(session_token, version: version)
                                     guard let iksm_session = response["iksm_session"].string else { throw APIError.Response("1004", "Iksm Session Error")}
                                     try realm.write { user.setValue(iksm_session, forKey: "iksm_session")}
                                 } catch {

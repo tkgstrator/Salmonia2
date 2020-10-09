@@ -18,6 +18,7 @@ struct SalmoniaView: View {
         .modifier(SalmoniaHeader())
         .environmentObject(UserInfoCore())
         .environmentObject(CoopShiftCore())
+        .environmentObject(UserResultCore())
         .navigationBarTitle("Salmonia")
     }
 }

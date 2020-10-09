@@ -10,15 +10,70 @@ import RealmSwift
 import Alamofire
 import SwiftyJSON
 import SwiftyStoreKit
+import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    
+    func registerForPushNotifications() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.delegate = self
+        
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+                print("Permission granted: \(granted)")
+                guard granted else { return }
+                self.getNotificationSettings()
+            }
+    }
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            print("Notification settings: \(settings)")
+            guard settings.authorizationStatus == .authorized else { return }
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
+    func application(_ application: UIApplication,didReceiveRemoteNotification userInfo: [AnyHashable: Any],fetchCompletionHandler completionHandler:@escaping (UIBackgroundFetchResult) -> Void) {
+        
+        let state : UIApplication.State = application.applicationState
+        if (state == .inactive || state == .background) {
+            // go to screen relevant to Notification content
+            print("background")
+        } else {
+            // App is in UIApplicationStateActive (running in foreground)
+            print("foreground")
+            // showLocalNotification()
+        }
+    }
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         // パスを表示
         print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
+        
+        
+        // データベースのマイグレーション
+        var config = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                if (oldSchemaVersion < 1) {
+                    // Database Migration
+                }
+            })
+        Realm.Configuration.defaultConfiguration = config
+        config = Realm.Configuration()
+        config.deleteRealmIfMigrationNeeded = true
+        
+        
         
         // 課金システムを搭載
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
@@ -37,23 +92,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        // サーバからデータを取ってきてX-Product Versionとシフト情報を更新
         do {
             let realm = try Realm()
-            
             // Salmoniaユーザがいなければ作成
             let users = realm.objects(SalmoniaUserRealm.self)
-            
             if users.isEmpty {
-                try? realm.write {
-                    realm.create(SalmoniaUserRealm.self)
-                } 
+                realm.beginWrite()
+                realm.create(SalmoniaUserRealm.self)
+                try? realm.commitWrite()
             }
-
-            // データを取得
-            let url = "https://gist.githubusercontent.com/tkgstrator/adcea132ae2fea4bd646a6d062279056/raw/11f588d1f0be667ee9296c6d3ebe201710f2df05/FutureShift.json"
+            
+            let url = "https://script.google.com/macros/s/AKfycbyzVfi2BXni9V439fFtRAqQSjXzNxiUSKFFNEjQ7VNNQlCfcCXt/exec"
+            // シフト情報を取得する
             AF.request(url, method: .get)
                 .validate(statusCode: 200..<300)
-                .validate(contentType: ["text/plain"])
+                .validate(contentType: ["application/json"])
                 .responseJSON() { response in
                     switch response.result {
                     case .success(let value):
@@ -67,9 +121,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         break
                     }
                 }
+            // X-Product Versionを取得する
+            AF.request(url, method: .post)
+                .validate(statusCode: 200..<300)
+                .validate(contentType: ["application/json"])
+                .responseJSON() { response in
+                    switch response.result {
+                    case .success(let value):
+                        let json = JSON(value)
+                        realm.beginWrite()
+                        realm.objects(SalmoniaUserRealm.self).first?.isVersion = json["version"].stringValue
+                        try? realm.commitWrite()
+                    case .failure:
+                        break
+                    }
+                }
         } catch {
             return false
         }
+        
+        registerForPushNotifications()
         return true
     }
     
@@ -87,6 +158,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+    }
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Failed to register: \(error)")
+    }
 }
 
+//extension AppDelegate: UNUserNotificationCenterDelegate {
+//    func userNotificationCenter(
+//        _ center: UNUserNotificationCenter,
+//        willPresent notification: UNNotification,
+//        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+//    {
+//        // アプリ起動時も通知を行う
+//        completionHandler([ .badge, .sound, .alert ])
+//    }
+//}

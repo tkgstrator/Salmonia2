@@ -12,6 +12,7 @@ import SwiftyJSON
 import SplatNet2
 
 struct ImportResultView: View {
+    @EnvironmentObject var user: SalmoniaUserCore
     
     @State var messages: [String] = []
     @State var isLock: Bool = true
@@ -20,12 +21,22 @@ struct ImportResultView: View {
         LoggingThread(log: $messages, lock: $isLock)
             .onAppear() {
                 guard let realm = try? Realm() else { return }
-                guard let accounts = realm.objects(SalmoniaUserRealm.self).first?.account else { return }
+                guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+                let accounts = user.account
+                let verson = user.isVersion
+                
+                // ユーザ名とか取得するためにセッションキーが必要
                 guard let _iksm_session: String = accounts.first?.iksm_session else { return }
                 guard let session_token: String = accounts.first?.session_token else { return }
+                
+                // 二回目以降のインポートを無効化する
+                try? realm.write {
+                    realm.objects(SalmoniaUserRealm.self).first?.isImported = true
+                }
+                
                 if !SplatNet2.isValid(iksm_session: _iksm_session) {
                     do {
-                        let response = try SplatNet2.genIksmSession(session_token)
+                        let response = try SplatNet2.genIksmSession(session_token, version: verson)
                         let iksm_session = response["iksm_session"].stringValue
                         try? realm.write {
                             accounts.first?.iksm_session = iksm_session
@@ -36,9 +47,6 @@ struct ImportResultView: View {
                 }
                 guard let iksm_session: String = accounts.first?.iksm_session else { return }
                 let time: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
-                
-                // ループを抜けるための処理
-                //                let semaphore = DispatchSemaphore(value: 0)
                 
                 // 全ユーザに対してリザルト取得（重いぞ）
                 for account in accounts {
@@ -86,7 +94,6 @@ struct ImportResultView: View {
                             try? realm.commitWrite()
                         } // DispatchQueue ASync
                     } // DispatchQueue ASync
-                    //                    semaphore.signal()
                 }
                 isLock = false
             }
