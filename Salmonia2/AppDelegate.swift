@@ -11,6 +11,8 @@ import Alamofire
 import SwiftyJSON
 import SwiftyStoreKit
 import UserNotifications
+import Firebase
+import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -140,6 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             return false
         }
         
+        FirebaseApp.configure()
         registerForPushNotifications()
         return true
     }

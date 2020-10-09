@@ -64,6 +64,17 @@ private struct WebKitView: View {
             .navigationBarItems(trailing: login)
     }
     
+    private func notification(title: String, body: String) {
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = UNNotificationSound.default
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request)
+    }
+    
     private var login: some View {
         Button(action: {
             WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
@@ -76,12 +87,13 @@ private struct WebKitView: View {
                             guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
                             let user = realm.objects(SalmoniaUserRealm.self)
                             try? realm.write { user.setValue(api_token, forKey: "api_token")}
+                            notification(title: "Complete!", body: "Set laravel session")
                             return
                         } catch  {
-                            
                         }
                     }
                 }
+                notification(title: "9999", body: "Couldn't get laravel session")
             }
         }) {
             Image(systemName: "snow").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)

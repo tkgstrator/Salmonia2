@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>714781283454-0dtdm82imesladvke7uj5qrn8dnpmtf1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.714781283454-0dtdm82imesladvke7uj5qrn8dnpmtf1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB6gBK6ADX5Fr5bpI9ByyNsfr_QqTFQLjA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>714781283454</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>work.tkgstrator.Salmonia2</string>
+	<key>PROJECT_ID</key>
+	<string>salmonia2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>salmonia2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:714781283454:ios:41fc3f475ef0cc5e37f42f</string>
+	<key>DATABASE_URL</key>
+	<string>https://salmonia2.firebaseio.com</string>
+</dict>
+</plist>
