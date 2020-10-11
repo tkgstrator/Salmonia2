@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ShiftStatsView: View {
-    
+    @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var stats: UserStatsCore
     
     var body: some View {
@@ -55,7 +55,11 @@ struct ShiftStatsView: View {
             }
             Section(header:HStack {
                 Spacer()
-                Text("Avg").font(.custom("Splatfont", size: 18))
+                if !user.isUnlock[2] {
+                    Text("Avg").font(.custom("Splatfont", size: 18))
+                } else {
+                    Text("Shinzo").font(.custom("Splatfont", size: 18))
+                }
                 Spacer()
             }) {
                 ShiftStatsStack(title: "Clear Wave", value: stats.avg_clear_wave)
@@ -70,7 +74,7 @@ struct ShiftStatsView: View {
             }
             Section(header:HStack {
                 Spacer()
-                Text("Boss Ddfeated").font(.custom("Splatfont", size: 18))
+                Text("Boss Defeated").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 ForEach(BossType.allCases.indices, id:\.self) { idx in

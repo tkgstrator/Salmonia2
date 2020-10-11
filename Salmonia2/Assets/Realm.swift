@@ -15,11 +15,10 @@ class SalmoniaUserRealm: Object {
     @objc dynamic var isImported: Bool = false
     @objc dynamic var isPurchase: Bool = false
     @objc dynamic var isDevelop: Bool = false
-    @objc dynamic var isUnlock: Bool = false
     @objc dynamic var isVersion: String = "1.9.0"
+    dynamic var isUnlock = List<Bool>()
     dynamic var account = List<UserInfoRealm>()
     dynamic var favuser = List<CrewInfoRealm>()
-
 }
 
 class UserInfoRealm: Object {
@@ -153,21 +152,6 @@ class PlayerResultsRealm: Object {
         return ["nsaid"]
     }
 }
-
-//class CoopCardRealm: Object, Codable {
-//    
-//    @objc dynamic var nsaid: String?
-//    var job_num = RealmOptional<Int>()
-//    var ikura_total = RealmOptional<Int>()
-//    var golden_ikura_total = RealmOptional<Int>()
-//    var kuma_point = RealmOptional<Int>()
-//    var kuma_point_total = RealmOptional<Int>()
-//    var help_total = RealmOptional<Int>()
-//    
-//    override static func primaryKey() -> String? {
-//        return "nsaid"
-//    }
-//}
 
 class CoopShiftRealm: Object, Codable {
     

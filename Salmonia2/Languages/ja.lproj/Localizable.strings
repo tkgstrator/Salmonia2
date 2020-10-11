@@ -30,6 +30,7 @@
 // In Fearure View
 "Future Rotation" = "未来のシフト表示";
 "Grizzco Weapons" = "クマサンブキ表示";
+"Hidden Feature" = "隠し機能";
 "Multiple Accounts" = "複数アカウント有効化";
 "Consumable(Donate)" = "";
 "Monthly Pass(Donate)" = "";
@@ -43,6 +44,7 @@
 "iksm session" = "セッショントークン";
 "laravel session" = "認証トークン";
 "Local Results" = "保存リザルト数";
+"Sync User Name" = "プレイヤー名同期";
 "Import Results" = "リザルト取り込み";
 "Application" = "アプリについて";
 "Unlock" = "アンロック";
@@ -68,7 +70,7 @@
 "griller" = "グリル発進";
 "the-mothership" = "ハコビヤ襲来";
 "fog" = "霧";
-"cohock charge" = "ドスコイ大量発生";
+"cohock-charge" = "ドスコイ大量発生";
 // Tide
 "low" = "干潮";
 "normal" = "通常";
@@ -78,6 +80,7 @@
 "Overview" = "概要";
 "Max" = "最高";
 "Avg" = "平均";
+"Shinzo" = "安倍晋三";
 "Defeated" = "討伐";
 "Bomb Launcher" = "ボムピッチャー";
 "Sting Ray" = "ハイパープレッサー";
@@ -119,6 +122,22 @@
 
 // In Coop Shift Rotation
 "Supplied Weapons" = "支給ブキ";
+"Grizzco Rotation" = "黄金編成";
+"All Random Rotation" = "全緑編成";
+"One Random Rotation" = "ランダム編成";
+"Normal Rotation" = "通常編成";
+"Only played" = "プレイしたシフトのみ";
+"Rotation" = "編成";
+"Options" = "オプション";
+"" = "";
+
+// In User Notifications
+"Success" = "成功";
+"Failure" = "失敗";
+"Add new NSO account" = "NSOアカウントを新規追加しました";
+"Update NSO account" = "NSOアカウントを更新しました";
+"Login Salmon Stats" = "Salmon Statsへのログイン";
+"Try again/Login Salmon Stats" = "再度試すか、Salmon Statsにログインしてください";
 "" = "";
 "" = "";
 "" = "";

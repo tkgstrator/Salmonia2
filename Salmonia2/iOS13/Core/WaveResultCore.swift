@@ -10,8 +10,8 @@ import RealmSwift
 
 class WaveResultCore: ObservableObject {
     private var token: NotificationToken?
-    private var realm = try! Realm()
-    private var core = try! Realm().objects(WaveDetailRealm.self)
+//    private var realm = try! Realm()
+//    private var core = try! Realm().objects(WaveDetailRealm.self)
     
     @Published var waves = try! Realm().objects(WaveDetailRealm.self).sorted(byKeyPath: "golden_ikura_num", ascending: false)
     
@@ -31,8 +31,8 @@ class WaveResultCore: ObservableObject {
     }
     
     init() {
-        token = core.observe { _ in
-            self.waves = self.realm.objects(WaveDetailRealm.self).sorted(byKeyPath: "golden_ikura_num", ascending: false)
+        token = realm.objects(WaveDetailRealm.self).observe { [self] _ in
+            waves = realm.objects(WaveDetailRealm.self).sorted(byKeyPath: "golden_ikura_num", ascending: false)
         }
     }
     

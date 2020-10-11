@@ -18,7 +18,6 @@ struct SettingView: View {
     @EnvironmentObject var core: UserResultCore
     @State var isVisible: Bool = false
 
-//    private let realm = try? Realm()
     let version: String = "\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!))(\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)))"
     
     var body: some View {
@@ -27,8 +26,7 @@ struct SettingView: View {
             UserStatus
             Application
         }
-        .environmentObject(SalmoniaUserCore())
-        .environmentObject(UserResultCore())
+//        .environmentObject(SalmoniaUserCore())
         .modifier(Splatfont(size: 20))
         .modifier(SettingsHeader())
         .navigationBarTitle("Settings")
@@ -36,7 +34,7 @@ struct SettingView: View {
     
     private var Application: some View {
         Section(header: Text("Application").font(.custom("Splatfont", size: 18))) {
-            NavigationLink(destination: UnlockFeatureView()) {
+            NavigationLink(destination: UnlockFeatureView().environmentObject(SalmoniaUserCore())) {
                 HStack {
                     Text("Unlock")
                     Spacer()
@@ -46,6 +44,15 @@ struct SettingView: View {
                 Text("X-Product Version")
                 Spacer()
                 Text("\(user.isVersion)")
+            }.onLongPressGesture {
+                user.isUnlock[2].toggle()
+                user.updateUnlock(user.isUnlock)
+                switch user.isUnlock[2] {
+                case true:
+                    notification(title: .success, message: .unlock)
+                case false:
+                    notification(title: .success, message: .lock)
+                }
             }
             HStack {
                 Text("Version")
@@ -56,22 +63,23 @@ struct SettingView: View {
     }
     
     private func isImported() {
+        user.isImported.toggle() // 反転させる
         guard let realm = try? Realm() else { return }
-        guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+        guard let salmonia = realm.objects(SalmoniaUserRealm.self).first else { return }
         realm.beginWrite()
-        user.isImported = false
+        salmonia.isImported = user.isImported
         try? realm.commitWrite()
     }
     
     private var UserSection: some View {
         Section(header: Text("User").font(.custom("Splatfont", size: 18))) {
             NavigationLink(destination: UserListView()
-                            .environmentObject(SalmoniaUserCore())
+//                            .environmentObject(SalmoniaUserCore())
             ) {
                 Text("NSO Accounts")
             }
             NavigationLink(destination: CrewListView()
-                            .environmentObject(SalmoniaUserCore())
+//                            .environmentObject(SalmoniaUserCore())
             ) {
                 Text("Fav Crews")
             }
@@ -85,13 +93,13 @@ struct SettingView: View {
                 Spacer()
                 Text("\((user.api_token != nil ? "Registered" : "Unregistered").localized)")
             }
+//            HStack {
+//                Text("Local Results")
+//                Spacer()
+//                Text("\(core.results.count)")
+//            }
             HStack {
-                Text("Local Results")
-                Spacer()
-                Text("\(core.results.count)")
-            }
-            HStack {
-                Text("Sync UserName")
+                Text("Sync User Name")
                 Spacer()
             }.onTapGesture { updateUserName() }
             if !user.isImported {
@@ -105,6 +113,19 @@ struct SettingView: View {
         }
     }
     
+    // 通知を出す
+    func notification(title: Title, message: Message) {
+        
+        let content = UNMutableNotificationContent()
+        content.title = title.rawValue.localized
+        content.body = message.rawValue.localized
+        content.sound = UNNotificationSound.default
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request)
+    }
+    
+    // ユーザ名を同期する
     private func updateUserName() {
         guard let realm = try? Realm() else { return }
         autoreleasepool {
@@ -129,10 +150,13 @@ struct SettingView: View {
                     for (_, user) in response {
                         print(user["nickname"].stringValue)
                     }
-                } catch (let error) { print(error) }
+                } catch (let error) {
+                    print(error)
+                }
             }
 
             try? realm.commitWrite()
+            notification(title: .success, message: .update)
         }
     }
 

@@ -26,11 +26,7 @@ struct SalmoniaHeader: ViewModifier {
     func body(content: Content) -> some View {
         content
             .navigationBarItems(leading:
-                                    NavigationLink(destination: SettingView()
-                                                    .environmentObject(UserInfoCore())
-                                                    .environmentObject(SalmoniaUserCore())
-                                                    .environmentObject(UserResultCore())
-                                    )
+                                    NavigationLink(destination: SettingView().environmentObject(SalmoniaUserCore()))
                                     {
                                         URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/bb035c04e62c044139986540e6c3b8b3.png")!,
                                                  content: {$0.image.renderingMode(.template).resizable()})
@@ -65,17 +61,18 @@ private struct WebKitView: View {
             .navigationBarItems(trailing: login)
     }
     
-    private func notification(title: String, body: String) {
+    // 通知を出す
+    func notification(title: Title, message: Message) {
         
         let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
+        content.title = title.rawValue.localized
+        content.body = message.rawValue.localized
         content.sound = UNNotificationSound.default
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
     }
-    
+
     private var login: some View {
         Button(action: {
             WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
@@ -88,13 +85,13 @@ private struct WebKitView: View {
                             guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
                             let user = realm.objects(SalmoniaUserRealm.self)
                             try? realm.write { user.setValue(api_token, forKey: "api_token")}
-                            notification(title: "Complete!", body: "Set laravel session")
+                            notification(title: .success, message: .laravel)
                             return
                         } catch  {
                         }
                     }
                 }
-                notification(title: "9999", body: "Couldn't get laravel session")
+                notification(title: .failure, message: .laravel)
             }
         }) {
             Image(systemName: "snow").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)

@@ -10,9 +10,11 @@ import SwiftUI
 import Combine
 import RealmSwift
 
+let realm = try! Realm()
+
 class CrewInfoCore: ObservableObject {
     private var token: NotificationToken?
-    
+
     @Published var nsaid: String = ""
     @Published var nickname: String = ""
     @Published var job_num: Int = 0
@@ -44,9 +46,9 @@ class CrewInfoCore: ObservableObject {
     }
     
     init(_ pid: String) {
-        token = try? Realm().objects(CrewInfoRealm.self).observe { [self] _ in
-            guard let crew = try? Realm().objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
-            guard let favuser = try? Realm().objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
+        token = realm.objects(CrewInfoRealm.self).observe { [self] _ in
+            guard let crew = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
+            guard let favuser = realm.objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
             nsaid = pid
             imageUri = crew.image
             nickname = crew.name
@@ -57,9 +59,9 @@ class CrewInfoCore: ObservableObject {
             isFav = !favuser.isEmpty
         }
         
-        token = try? Realm().objects(SalmoniaUserRealm.self).observe { [self] _ in
-            guard let crew = try? Realm().objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
-            guard let favuser = try? Realm().objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
+        token = realm.objects(SalmoniaUserRealm.self).observe { [self] _ in
+            guard let crew = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
+            guard let favuser = realm.objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
             nsaid = pid
             imageUri = crew.image
             nickname = crew.name

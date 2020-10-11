@@ -31,9 +31,9 @@ func SRPower(_ results: Results<CoopResultsRealm>) -> [Double?] {
     
     let win_count: Int = results.prefix(10).filter({$0.is_clear == true}).count
 
-    for (idx, result) in results.enumerated() {
-        let player = result.player[0]
-        let bias = CalcBias(result)
+    for idx in 0 ..< results.count {
+        let player = results[idx].player[0]
+        let bias = CalcBias(results[idx])
         let baserate: Int = (Array(zip(bossrate, Array(player.boss_kill_counts))).map({$0 * $1}).reduce(0, +)) / max(1, player.boss_kill_counts.sum())
         let salmonrate: Double = min(bias * Double(baserate), 3074.5).round(digit: 2)
         
@@ -55,7 +55,7 @@ func SRPower(_ results: Results<CoopResultsRealm>) -> [Double?] {
                 }
             }
         default:
-            let delta: Double = result.is_clear ? min((32 / (pow(10, ((ilorate[0] ?? 0.0) - salmonrate) / 400) + 1)), 32.0) : max(-1 * 32 / (pow(10, (salmonrate - (ilorate[0] ?? 0.0)) / 400) + 1), -32.0)
+            let delta: Double = results[idx].is_clear ? min((32 / (pow(10, ((ilorate[0] ?? 0.0) - salmonrate) / 400) + 1)), 32.0) : max(-1 * 32 / (pow(10, (salmonrate - (ilorate[0] ?? 0.0)) / 400) + 1), -32.0)
             ilorate[1] = max((ilorate[0] ?? 0.0) + delta, (ilorate[1] ?? 0)).round(digit: 2)
             ilorate[0] = ((ilorate[0] ?? 0.0) + delta).round(digit: 2)
         }

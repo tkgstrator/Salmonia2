@@ -63,11 +63,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     {
-        func notification(title: String, body: String) {
+        // 通知を出す
+        func notification(title: Title, message: String) {
             
             let content = UNMutableNotificationContent()
-            content.title = title
-            content.body = body
+            content.title = title.rawValue.localized
+            content.body = message.localized
             content.sound = UNNotificationSound.default
 
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
@@ -100,20 +101,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         let account: UserInfoRealm = UserInfoRealm(value: _account)
                         realm.add(account, update: .modified)
                         _user.account.append(account)
-                        notification(title: "New Login", body: "Success to add new NSO account.")
+                        notification(title: .success, message: Message.login.rawValue)
                     case false: // 再ログイン（アップデート）
                         guard let session_token = account.first?.session_token else { return }
                         account.setValue(iksm_session, forKey: "iksm_session")
                         account.setValue(session_token, forKey: "session_token")
                         account.setValue(thumbnail_url, forKey: "image")
                         account.setValue(nickname, forKey: "name")
-                        notification(title: "User Info Update", body: "Success to update.")
+                        notification(title: .success, message: Message.login.rawValue)
                     }
                 }
-            } catch APIError.Response(let title, let message) {
-                notification(title: title, body: message)
+            } catch APIError.Response( _, let message) {
+                notification(title: .failure, message: message)
             } catch (let error){
-                notification(title: "9999", body: error.localizedDescription)
+                notification(title: .failure, message: error.localizedDescription)
             }
         }
     }

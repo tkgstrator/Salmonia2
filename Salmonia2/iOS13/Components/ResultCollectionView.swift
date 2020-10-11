@@ -10,13 +10,11 @@ import URLImage
 import RealmSwift
 
 struct ResultCollectionView: View {
-    
     @ObservedObject var core =  UserResultCore()
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
     @State var isEnable: [Bool] = [true, true, true, true, true]
-//    @State var results: RealmSwift.Results<CoopResultsRealm> = try! Realm().objects(CoopResultsRealm.self)
-    
+
     var body: some View {
         List {
             ForEach(core.results.indices, id:\.self) { idx in

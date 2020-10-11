@@ -1,4 +1,3 @@
-//
 //  UnlockFeatureView.swift
 //  Salmonia2
 //
@@ -10,23 +9,19 @@ import RealmSwift
 import SwiftyStoreKit
 
 struct UnlockFeatureView: View {
-    
+    @EnvironmentObject var user: SalmoniaUserCore
+
     var body: some View {
         List {
-            HStack {
+            Toggle(isOn: $user.isUnlock[0]) {
                 Text("Future Rotation")
-                Spacer()
-                Text("$0.00")
-            }.onTapGesture {
-//                callStoreKit("work.tkgstrator.Salmonia2.isActive")
             }
-            HStack {
+            Toggle(isOn: $user.isUnlock[1]) {
                 Text("Grizzco Weapons")
-                Spacer()
-                Text("$0.00")
-            }.onTapGesture {
-//                callStoreKit("work.tkgstrator.Salmonia2.isActive")
             }
+            Toggle(isOn: $user.isUnlock[2]) {
+                Text("Hidden Feature")
+            }.disabled(true)
             HStack {
                 Text("Multiple Accounts")
                 Spacer()
@@ -51,7 +46,12 @@ struct UnlockFeatureView: View {
         }
         .modifier(Splatfont(size: 18))
         .navigationBarTitle("Feature")
+        .onDisappear() {
+            print(user.isUnlock)
+            user.updateUnlock(user.isUnlock)
+        }
     }
+    
     
     func callStoreKit(_ product: String) {
         SwiftyStoreKit.purchaseProduct(product, quantity: 1, atomically: true) { result in

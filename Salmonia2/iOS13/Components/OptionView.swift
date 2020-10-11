@@ -11,17 +11,16 @@ import URLImage
 import RealmSwift
 
 struct OptionView: View {
-    @EnvironmentObject var phases: CoopShiftCore
     
     var body: some View {
         VStack(spacing: 10) {
-            Text("Option").foregroundColor(.cOrange).modifier(Splatfont(size: 20))
-            CoopShiftStack
+            Text("Options").foregroundColor(.cOrange).modifier(Splatfont(size: 20))
+            WaveSearchView
             CoopShiftView
         }
     }
     
-    private var CoopShiftStack: some View {
+    private var WaveSearchView: some View {
         NavigationLink(destination: WaveCollectionView().environmentObject(WaveResultCore())) {
             HStack {
                 ZStack {
@@ -58,13 +57,15 @@ struct OptionView: View {
 
 private struct PastCoopShiftView: View {
     @EnvironmentObject var phase: CoopShiftCore
+
     @State var isVisible: Bool = false
     @State var isEnable: [Bool] = [true, true, true, true]
     @State var isPlayed: Bool = false
-    private var types: [String] = ["Grizzco", "All Random", "One Random", "Normal"]
-    
-    
+    private var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
+
     init() {
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorStyle = .none
     }
     
     var body: some View {
@@ -130,7 +131,7 @@ private struct PastCoopShiftView: View {
             }) {
                 ForEach(Range(0...3)) { idx in
                     Toggle(isOn: $isEnable[idx]) {
-                        Text("\(types[idx]) Rotation")
+                        Text((types[idx]).localized)
                     }
                 }
             }
@@ -146,23 +147,24 @@ private struct PastCoopShiftView: View {
         }
         .modifier(Splatfont(size: 18))
         .onDisappear() {
-            print(isEnable)
             phase.update(isEnable: isEnable, isPlayed: isPlayed)
         }
     }
     
     private struct CoopShiftStack: View {
+        @EnvironmentObject var phases: CoopShiftCore
         @EnvironmentObject var phase: CoopShiftRealm
         
         var body: some View {
             VStack(spacing: 10) {
                 HStack {
-                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 33, height: 22)})
-                    Text(UnixTime.dateFromTimestamp(phase.start_time)).frame(height: 16)
-                    Text(verbatim: "-").frame(height: 16)
-                    Text(UnixTime.dateFromTimestamp(phase.end_time)).frame(height: 16)
+                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 27, height: 18)})
+                    Text(phase.start_time.year).frame(height: 14)
+                    Text(phase.start_time.time).frame(height: 14)
+                    Text(verbatim: "-").frame(height: 14)
+                    Text(phase.end_time.time).frame(height: 16)
                     Spacer()
-                }.frame(height: 24)
+                }.frame(height: 20).font(.custom("Splatfont2", size: 16.5))
                 Line().stroke(style: StrokeStyle(lineWidth: 3, dash: [8], dashPhase: 5)).frame(height: 2).foregroundColor(.cLightGray)
                 HStack {
                     VStack(spacing: 5) {
@@ -174,14 +176,21 @@ private struct PastCoopShiftView: View {
                         Text("Supplied Weapons").font(.custom("Splatfont2", size: 16)).frame(height: 14)
                         HStack {
                             ForEach(phase.weapon_list, id:\.self) { weapon in
-                                URLImage(WeaponType(weapon_id: weapon)!.image_url, content: {$0.image.resizable().frame(width: 40, height: 40)})
+                                URLImage(WeaponType(weapon_id: weapon)!.image_url, content: {$0.image.resizable().frame(width: 35, height: 35)})
                             }
-                        }.frame(maxWidth: .infinity)
+                            Group {
+                                if phases.isUnlock && phase.weapon_list[3] == -1 {
+                                    URLImage(WeaponType(weapon_id: phase.rare_weapon)!.image_url, content: {$0.image.resizable().frame(width: 35, height: 35)})
+                                }
+                            }
+                        }
+                        .padding(.bottom, 15)
+                        .frame(maxWidth: .infinity)
                     }.frame(height: 50)
                 }.frame(height: 81)
             }
             .frame(height: 120)
-            .padding(.all, 12)
+            .padding(.all, 8)
             .background(
                 ZStack {
                     Color.black.opacity(0.8)
@@ -202,8 +211,22 @@ private struct PastCoopShiftView: View {
             }
         }
     }
+    
 }
 
+private extension Int {
+    var time: String {
+        let f = DateFormatter()
+        f.dateFormat = "MM/dd HH:mm"
+        return f.string(from: Date(timeIntervalSince1970: TimeInterval(self)))
+    }
+
+    var year: String {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy"
+        return f.string(from: Date(timeIntervalSince1970: TimeInterval(self)))
+    }
+}
 
 struct OptionView_Previews: PreviewProvider {
     static var previews: some View {

@@ -57,7 +57,7 @@ struct ImportResultView: View {
                         DispatchQueue(label: "Import").async {
                             guard let lastlink: Int = try? getLastLink(nsaid: nsaid) else { return }
                             DispatchQueue(label: "Pages").async {
-                                for page in Range(1 ... 1) {
+                                for page in Range(5 ... lastlink) {
                                     var nsaids: [String] = []
                                     guard let results: JSON = try? getResults(nsaid: nsaid, page: page) else { return }
                                     autoreleasepool {

@@ -254,8 +254,8 @@
             filePath = "Salmonia2/SceneDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "scene(_:openURLContexts:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,8 +270,8 @@
             filePath = "Salmonia2/SceneDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "scene(_:openURLContexts:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -360,14 +360,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "82312F4D-D297-4E3B-A8C4-4D24325161C7"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Salmonia2/iOS13/SettingView/SettingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "updateUserName()"
             landmarkType = "7">
          </BreakpointContent>
@@ -376,14 +376,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7E77BF50-E5E1-440C-91C3-6EB50B48533A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Salmonia2/iOS13/SettingView/SettingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "updateUserName()"
             landmarkType = "7">
          </BreakpointContent>
@@ -392,19 +392,19 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "087DEB4F-C901-48A6-9735-DCCE48731584"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Salmonia2/iOS13/SettingView/SettingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "updateUserName()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "087DEB4F-C901-48A6-9735-DCCE48731584 - fd5a24a0564e65e"
+                  uuid = "087DEB4F-C901-48A6-9735-DCCE48731584 - fd5a24a0564e67f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -414,12 +414,12 @@
                   urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/SettingView/SettingView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
                   offsetFromSymbolStart = "2244">
                </Location>
                <Location
-                  uuid = "087DEB4F-C901-48A6-9735-DCCE48731584 - fd5a24a0564e65e"
+                  uuid = "087DEB4F-C901-48A6-9735-DCCE48731584 - fd5a24a0564e67f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -429,12 +429,12 @@
                   urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/SettingView/SettingView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
                   offsetFromSymbolStart = "2592">
                </Location>
                <Location
-                  uuid = "087DEB4F-C901-48A6-9735-DCCE48731584 - fd5a24a0564e65e"
+                  uuid = "087DEB4F-C901-48A6-9735-DCCE48731584 - fd5a24a0564e67f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -444,11 +444,211 @@
                   urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/SettingView/SettingView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "132"
-                  endingLineNumber = "132"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
                   offsetFromSymbolStart = "3260">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "419BD64E-30E4-486E-B331-98F113F3BA60"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia2/iOS13/Core/UserResultCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "UserResultCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia2/iOS13/Core/UserResultCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "UserResultCore"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - 9b0d671206061ce7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of Salmonia2.UserResultCore.results : RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt;"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - b47b34baa240b85d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.results.getter : RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt;"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - 687867e7a1b72049"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.results.setter : RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt;"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - 6fd687774325ccaf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.results.modify : RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt;"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - fbabca7a691b0a92"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.results.modify : RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - ce8c0e0383498c4e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.$results.getter : Combine.Published&lt;RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt;&gt;.Publisher"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - ce8c0e0383498c4e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.$results.setter : Combine.Published&lt;RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt;&gt;.Publisher"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "284">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - 734cf363fa09e3ce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.$results.modify : Combine.Published&lt;RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt;&gt;.Publisher"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - 68375608af2f300d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.$results.modify : Combine.Published&lt;RealmSwift.Results&lt;Salmonia2.CoopResultsRealm&gt;&gt;.Publisher with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "557D01EF-B0B7-4C66-B7E0-8EB99E912714 - 352b6f12b451ad74"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Salmonia2.UserResultCore.init() -&gt; Salmonia2.UserResultCore"
+                  moduleName = "Salmonia2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/devonly/Salmonia2/Salmonia2/iOS13/Core/UserResultCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "304">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0EDD5085-398D-4329-B4D9-7B4974878F3B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Salmonia2/iOS13/Core/WaveResultCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "init()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

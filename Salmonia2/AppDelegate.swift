@@ -60,11 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
-        
         realmMigration()
         initSwiftyStoreKit()
         try? getXProduceVersion()
-        
         FirebaseApp.configure()
         registerForPushNotifications()
         return true
@@ -97,10 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func realmMigration() {
         // データベースのマイグレーション
         var config = Realm.Configuration(
-            schemaVersion: 1,
+            schemaVersion: 5,
             migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) {
-                    // Database Migration
+                if (oldSchemaVersion < 5) {
+                    migration.enumerateObjects(ofType: SalmoniaUserRealm.className()) { _, newObject in
+                        newObject!["isUnlock"] = [false, false, false]
+                    }
                 }
             })
         Realm.Configuration.defaultConfiguration = config

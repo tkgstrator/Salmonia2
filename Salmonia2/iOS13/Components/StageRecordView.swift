@@ -57,16 +57,16 @@ private struct StageRecordsView: View {
                     Spacer()
                     Text("\(record.grade_point.value)")
                 }
-                HStack {
-                    Text("Salmon Rate")
-                    Spacer()
-                    Text(String(record.srpower[0].value))
-                }
-                HStack {
-                    Text("Max Salmon Rate")
-                    Spacer()
-                    Text(String(record.srpower[1].value))
-                }
+//                HStack {
+//                    Text("Salmon Rate")
+//                    Spacer()
+//                    Text(String(record.srpower[0].value))
+//                }
+//                HStack {
+//                    Text("Max Salmon Rate")
+//                    Spacer()
+//                    Text(String(record.srpower[1].value))
+//                }
             }
             Section(header: HStack {
                 Spacer()

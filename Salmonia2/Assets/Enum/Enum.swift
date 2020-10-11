@@ -12,6 +12,20 @@ enum APIError: Error {
     case Response(String, String)
 }
 
+enum Title: String {
+    case success = "Success"
+    case failure = "Failure"
+}
+
+enum Message: String {
+    case login = "Add new NSO account"
+    case update = "Update NSO account"
+    case laravel = "Login Salmon Stats"
+    case unlock = "Unlock Feature"
+    case lock = "Lock Feature"
+}
+
+
 extension Color {
     static let cGreen = Color("cGreen")
     static let cRed = Color("cRed")

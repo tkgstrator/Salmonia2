@@ -24,10 +24,9 @@ class UserInfoCore: ObservableObject {
     @Published var ikura_total: Int = 0
     @Published var golden_ikura_total: Int = 0
     
-
     init() {
-        token = try? Realm().objects(UserInfoRealm.self).observe { [self] _ in
-            guard let user = try? Realm().objects(SalmoniaUserRealm.self).first else { return }
+        token = realm.objects(UserInfoRealm.self).observe { [self] _ in
+            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
             account = user.account
             guard let _account = user.account.first else { return }
             nsaid = _account.nsaid
@@ -40,8 +39,8 @@ class UserInfoCore: ObservableObject {
             golden_ikura_total = _account.golden_ikura_total
         }
         
-        token = try? Realm().objects(SalmoniaUserRealm.self).observe { [self] _ in
-            guard let user = try? Realm().objects(SalmoniaUserRealm.self).first else { return }
+        token = realm.objects(SalmoniaUserRealm.self).observe { [self] _ in
+            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
             account = user.account
             guard let _account = user.account.first else { return }
             nsaid = _account.nsaid

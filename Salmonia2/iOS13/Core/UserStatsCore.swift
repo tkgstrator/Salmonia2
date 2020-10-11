@@ -40,12 +40,12 @@ class UserStatsCore: ObservableObject {
     @Published var special: [Double?] = [nil, nil, nil, nil]
     
     init(start_time: Int) {
-        token = try? Realm().objects(CoopResultsRealm.self).observe { [self] _ in
+        token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
             schedule = start_time
-            guard let _nsaids = try? Realm().objects(UserInfoRealm.self) else { return }
+            let _nsaids = realm.objects(UserInfoRealm.self)
             let nsaids: [String] = Array(_nsaids.map({ $0.nsaid }))
-            guard let results = try? Realm().objects(CoopResultsRealm.self).filter("start_time=%@", start_time) else { return }
-            guard let players = try? Realm().objects(PlayerResultsRealm.self).filter("ANY result.start_time=%@ AND nsaid IN %@", start_time, nsaids) else { return }
+            let results = realm.objects(CoopResultsRealm.self).filter("start_time=%@", start_time)
+            let players = realm.objects(PlayerResultsRealm.self).filter("ANY result.start_time=%@ AND nsaid IN %@", start_time, nsaids)
 
             let total_my_golden_eggs = Double(results.lazy.map({ $0.player[0].golden_ikura_num }).reduce(0, +))
             let total_my_power_eggs = Double(results.lazy.map({ $0.player[0].ikura_num }).reduce(0, +))
@@ -84,8 +84,8 @@ class UserStatsCore: ObservableObject {
                 avg_crew_grade = (results.map({ 20 * $0.danger_rate + Double($0.grade_point_delta.value ?? 0) - Double($0.grade_point.value ?? 0) - 1600.0}).lazy.reduce(0.0, +) / Double((job_num ?? 0) * 3)).round(digit: 2)
                 avg_team_golden_eggs = Double(Double(total_golden_eggs ?? 0) / Double(job_num ?? 0)).round(digit: 2)
                 avg_team_power_eggs = Double(Double(total_power_eggs ?? 0) / Double(job_num ?? 0)).round(digit: 2)
-                avg_my_power_eggs = (total_my_golden_eggs / Double(job_num ?? 0)).round(digit: 2)
-                avg_my_golden_eggs = (total_my_power_eggs / Double(job_num ?? 0)).round(digit: 2)
+                avg_my_power_eggs = (total_my_power_eggs / Double(job_num ?? 0)).round(digit: 2)
+                avg_my_golden_eggs = (total_my_golden_eggs / Double(job_num ?? 0)).round(digit: 2)
                 avg_dead = Double(total_dead_count / Double(job_num ?? 0)).round(digit: 2)
                 avg_rescue = Double(total_help_count / Double(job_num ?? 0)).round(digit: 2)
                 avg_defeated = Double(total_defeated / Double(job_num ?? 0)).round(digit: 2)
