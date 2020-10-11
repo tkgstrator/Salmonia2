@@ -27,6 +27,11 @@
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
 		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
+		10BB00822530F63D0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00842530F63D0081C6EB /* Localizable.strings */; };
+		10BB00882530F6620081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB008A2530F6620081C6EB /* Localizable.strings */; };
+		10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00902530F66A0081C6EB /* Localizable.strings */; };
+		10BB00A125310C1C0081C6EB /* WaveCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */; };
+		10BB00A625313AE90081C6EB /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB00A525313AE90081C6EB /* OptionView.swift */; };
 		10BB349A252174F60046CBCA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348A252174F60046CBCA /* Realm.swift */; };
 		10BB349B252174F60046CBCA /* UnixTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348C252174F60046CBCA /* UnixTime.swift */; };
 		10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348D252174F60046CBCA /* JSONFormat.swift */; };
@@ -60,6 +65,7 @@
 		10EFA3A325239E0A0027209D /* ImportResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3A225239E0A0027209D /* ImportResultView.swift */; };
 		10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3A72523A0DB0027209D /* Alamofire.swift */; };
 		10F2812725308C9E00D7B2BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10F2812625308C9E00D7B2BE /* GoogleService-Info.plist */; };
+		10F2825C2530B58700D7B2BE /* WaveResultCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F2825B2530B58700D7B2BE /* WaveResultCore.swift */; };
 		66B4006F8430DE91DBA03535 /* Pods_Salmonia2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA959943E9C03E7AC88D2537 /* Pods_Salmonia2Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +113,13 @@
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
+		10BB00532530C3B00081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		10BB00792530F5FB0081C6EB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		10BB00832530F63D0081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		10BB00892530F6620081C6EB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		10BB008F2530F66A0081C6EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveCollectionView.swift; sourceTree = "<group>"; };
+		10BB00A525313AE90081C6EB /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		10BB348A252174F60046CBCA /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10BB348C252174F60046CBCA /* UnixTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnixTime.swift; sourceTree = "<group>"; };
 		10BB348D252174F60046CBCA /* JSONFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFormat.swift; sourceTree = "<group>"; };
@@ -141,6 +154,7 @@
 		10EFA3A225239E0A0027209D /* ImportResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportResultView.swift; sourceTree = "<group>"; };
 		10EFA3A72523A0DB0027209D /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		10F2812625308C9E00D7B2BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		10F2825B2530B58700D7B2BE /* WaveResultCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveResultCore.swift; sourceTree = "<group>"; };
 		3F733C6753CAD69E26B70072 /* Pods-Salmonia2-Salmonia2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2-Salmonia2UITests.release.xcconfig"; path = "Target Support Files/Pods-Salmonia2-Salmonia2UITests/Pods-Salmonia2-Salmonia2UITests.release.xcconfig"; sourceTree = "<group>"; };
 		8731C77D5369506384DA5922 /* Pods-Salmonia2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2Tests.release.xcconfig"; path = "Target Support Files/Pods-Salmonia2Tests/Pods-Salmonia2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		88B1DD2F475B42E3C478AF38 /* Pods-Salmonia2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Salmonia2.release.xcconfig"; path = "Target Support Files/Pods-Salmonia2/Pods-Salmonia2.release.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +222,7 @@
 				105F690E252F33F2003306C8 /* Salmonia2.entitlements */,
 				10BB34B0252175170046CBCA /* iOS13 */,
 				10BB3489252174F60046CBCA /* Assets */,
+				10BB00632530C4350081C6EB /* Languages */,
 				1037E3A025209C7C001B41B0 /* AppDelegate.swift */,
 				1037E3A225209C7C001B41B0 /* SceneDelegate.swift */,
 				10BB3508252181300046CBCA /* Configuration.storekit */,
@@ -261,6 +276,16 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		10BB00632530C4350081C6EB /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				10BB00842530F63D0081C6EB /* Localizable.strings */,
+				10BB008A2530F6620081C6EB /* Localizable.strings */,
+				10BB00902530F66A0081C6EB /* Localizable.strings */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
 		10BB3489252174F60046CBCA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +308,7 @@
 			children = (
 				10BB3490252174F60046CBCA /* CrewInfoCore.swift */,
 				10BB348E252174F60046CBCA /* UserResultCore.swift */,
+				10F2825B2530B58700D7B2BE /* WaveResultCore.swift */,
 				10BB3491252174F60046CBCA /* UserInfoCore.swift */,
 				10EFA3682521DE6E0027209D /* UserStatsCore.swift */,
 				10BB350025217EFF0046CBCA /* CoopShiftCore.swift */,
@@ -330,6 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
+				10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */,
 				10BB34B9252175170046CBCA /* ResultView.swift */,
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
 				10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */,
@@ -339,6 +366,7 @@
 				1053967C2524206200132668 /* StageRecordView.swift */,
 				10BB34BA252175170046CBCA /* PlayerView.swift */,
 				1053968A25242EE500132668 /* OtherPlayerView.swift */,
+				10BB00A525313AE90081C6EB /* OptionView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -457,6 +485,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				"zh-Hans",
 			);
 			mainGroup = 1037E39425209C7C001B41B0;
 			productRefGroup = 1037E39E25209C7C001B41B0 /* Products */;
@@ -479,6 +509,9 @@
 				10BB34A6252174F60046CBCA /* Splatfont2.ttf in Resources */,
 				10BB34A5252174F60046CBCA /* Splatfont1.ttf in Resources */,
 				1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */,
+				10BB00822530F63D0081C6EB /* Localizable.strings in Resources */,
+				10BB00882530F6620081C6EB /* Localizable.strings in Resources */,
+				10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */,
 				1037E3AA25209C7D001B41B0 /* Preview Assets.xcassets in Resources */,
 				1037E3A725209C7D001B41B0 /* Assets.xcassets in Resources */,
 				10F2812725308C9E00D7B2BE /* GoogleService-Info.plist in Resources */,
@@ -619,6 +652,7 @@
 				10BB34C6252175170046CBCA /* LoadingView.swift in Sources */,
 				10EFA35E2521DCD00027209D /* ShiftStatsView.swift in Sources */,
 				1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */,
+				10F2825C2530B58700D7B2BE /* WaveResultCore.swift in Sources */,
 				10BB34C3252175170046CBCA /* ResultView.swift in Sources */,
 				10BB34BF252175170046CBCA /* UnlockFeatureView.swift in Sources */,
 				10BB349F252174F60046CBCA /* CrewInfoCore.swift in Sources */,
@@ -649,7 +683,9 @@
 				10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */,
 				1053967D2524206200132668 /* StageRecordView.swift in Sources */,
 				10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */,
+				10BB00A125310C1C0081C6EB /* WaveCollectionView.swift in Sources */,
 				1053968525242A7000132668 /* StageType.swift in Sources */,
+				10BB00A625313AE90081C6EB /* OptionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,8 +725,34 @@
 			isa = PBXVariantGroup;
 			children = (
 				1037E3AC25209C7D001B41B0 /* Base */,
+				10BB00532530C3B00081C6EB /* ja */,
+				10BB00792530F5FB0081C6EB /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		10BB00842530F63D0081C6EB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10BB00832530F63D0081C6EB /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		10BB008A2530F6620081C6EB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10BB00892530F6620081C6EB /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		10BB00902530F66A0081C6EB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				10BB008F2530F66A0081C6EB /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -700,6 +762,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -761,6 +824,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -819,9 +883,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -833,7 +897,7 @@
 				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Salmonia2 PushTest";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -846,9 +910,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -860,7 +924,7 @@
 				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Salmonia2 PushTest";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

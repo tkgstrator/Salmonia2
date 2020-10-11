@@ -15,10 +15,10 @@ struct ShiftStatsView: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("OVERVIEW").font(.custom("Splatfont", size: 18))
+                Text("Overview").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
-                ShiftStatsStack(title: "Job num", value: stats.job_num)
+                ShiftStatsStack(title: "Job Num", value: stats.job_num)
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.value)
                 ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)
@@ -30,7 +30,7 @@ struct ShiftStatsView: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("MAX").font(.custom("Splatfont", size: 18))
+                Text("Max").font(.custom("Splatfont", size: 18))
                 Spacer()
             }){
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
@@ -55,22 +55,22 @@ struct ShiftStatsView: View {
             }
             Section(header:HStack {
                 Spacer()
-                Text("AVERAGE").font(.custom("Splatfont", size: 18))
+                Text("Avg").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 ShiftStatsStack(title: "Clear Wave", value: stats.avg_clear_wave)
                 ShiftStatsStack(title: "Crew Grade", value: stats.avg_crew_grade)
                 ShiftStatsStack(title: "Team Power Eggs", value: stats.avg_team_power_eggs)
                 ShiftStatsStack(title: "Team Golden Eggs", value: stats.avg_team_golden_eggs)
-                ShiftStatsStack(title: "Ppwer Eggs", value: stats.avg_my_power_eggs)
+                ShiftStatsStack(title: "Power Eggs", value: stats.avg_my_power_eggs)
                 ShiftStatsStack(title: "Golden Eggs", value: stats.avg_my_golden_eggs)
                 ShiftStatsStack(title: "Boss Defeated", value: stats.avg_defeated)
-                ShiftStatsStack(title: "Rescue", value: stats.avg_rescue)
-                ShiftStatsStack(title: "Dead", value: stats.avg_dead)
+                ShiftStatsStack(title: "Rescue Count", value: stats.avg_rescue)
+                ShiftStatsStack(title: "Help Count", value: stats.avg_dead)
             }
             Section(header:HStack {
                 Spacer()
-                Text("DEFEATED").font(.custom("Splatfont", size: 18))
+                Text("Boss Ddfeated").font(.custom("Splatfont", size: 18))
                 Spacer()
             }) {
                 ForEach(BossType.allCases.indices, id:\.self) { idx in

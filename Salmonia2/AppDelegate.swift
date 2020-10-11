@@ -59,88 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        // パスを表示
         print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
         
-        
-        // データベースのマイグレーション
-        var config = Realm.Configuration(
-            schemaVersion: 1,
-            migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) {
-                    // Database Migration
-                }
-            })
-        Realm.Configuration.defaultConfiguration = config
-        config = Realm.Configuration()
-        config.deleteRealmIfMigrationNeeded = true
-        
-        
-        
-        // 課金システムを搭載
-        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
-            for purchase in purchases {
-                switch purchase.transaction.transactionState {
-                case .purchased, .restored:
-                    if purchase.needsFinishTransaction {
-                        SwiftyStoreKit.finishTransaction(purchase.transaction)
-                    }
-                // Unlock content
-                case .failed, .purchasing, .deferred:
-                    break // do nothing
-                @unknown default:
-                    print("ERROR")
-                }
-            }
-        }
-        
-        // サーバからデータを取ってきてX-Product Versionとシフト情報を更新
-        do {
-            let realm = try Realm()
-            // Salmoniaユーザがいなければ作成
-            let users = realm.objects(SalmoniaUserRealm.self)
-            if users.isEmpty {
-                realm.beginWrite()
-                realm.create(SalmoniaUserRealm.self)
-                try? realm.commitWrite()
-            }
-            
-            let url = "https://script.google.com/macros/s/AKfycbyzVfi2BXni9V439fFtRAqQSjXzNxiUSKFFNEjQ7VNNQlCfcCXt/exec"
-            // シフト情報を取得する
-            AF.request(url, method: .get)
-                .validate(statusCode: 200..<300)
-                .validate(contentType: ["application/json"])
-                .responseJSON() { response in
-                    switch response.result {
-                    case .success(let value):
-                        realm.beginWrite()
-                        for (_, shift) in JSON(value) {
-                            let value = shift.dictionaryObject
-                            realm.create(CoopShiftRealm.self, value: value as Any, update: .all)
-                        }
-                        try? realm.commitWrite()
-                    case .failure:
-                        break
-                    }
-                }
-            // X-Product Versionを取得する
-            AF.request(url, method: .post)
-                .validate(statusCode: 200..<300)
-                .validate(contentType: ["application/json"])
-                .responseJSON() { response in
-                    switch response.result {
-                    case .success(let value):
-                        let json = JSON(value)
-                        realm.beginWrite()
-                        realm.objects(SalmoniaUserRealm.self).first?.isVersion = json["version"].stringValue
-                        try? realm.commitWrite()
-                    case .failure:
-                        break
-                    }
-                }
-        } catch {
-            return false
-        }
+        realmMigration()
+        initSwiftyStoreKit()
+        try? getXProduceVersion()
         
         FirebaseApp.configure()
         registerForPushNotifications()
@@ -169,6 +92,84 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Failed to register: \(error)")
+    }
+    
+    func realmMigration() {
+        // データベースのマイグレーション
+        var config = Realm.Configuration(
+            schemaVersion: 1,
+            migrationBlock: { migration, oldSchemaVersion in
+                if (oldSchemaVersion < 1) {
+                    // Database Migration
+                }
+            })
+        Realm.Configuration.defaultConfiguration = config
+        config = Realm.Configuration()
+        config.deleteRealmIfMigrationNeeded = true
+    }
+    
+    func initSwiftyStoreKit() {
+        // 課金システムを搭載
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                // Unlock content
+                case .failed, .purchasing, .deferred:
+                    break // do nothing
+                @unknown default:
+                    print("ERROR")
+                }
+            }
+        }
+    }
+    
+    func getXProduceVersion() throws -> () {
+        let realm = try Realm()
+        // Salmoniaユーザがいなければ作成
+        let users = realm.objects(SalmoniaUserRealm.self)
+        if users.isEmpty {
+            realm.beginWrite()
+            realm.create(SalmoniaUserRealm.self)
+            try? realm.commitWrite()
+        }
+        
+        let url = "https://script.google.com/macros/s/AKfycbyzVfi2BXni9V439fFtRAqQSjXzNxiUSKFFNEjQ7VNNQlCfcCXt/exec"
+        // シフト情報を取得する
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON() { response in
+                switch response.result {
+                case .success(let value):
+                    realm.beginWrite()
+                    for (_, shift) in JSON(value) {
+                        let value = shift.dictionaryObject
+                        realm.create(CoopShiftRealm.self, value: value as Any, update: .all)
+                    }
+                    try? realm.commitWrite()
+                case .failure:
+                    break
+                }
+            }
+        // X-Product Versionを取得する
+        AF.request(url, method: .post)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON() { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    realm.beginWrite()
+                    realm.objects(SalmoniaUserRealm.self).first?.isVersion = json["version"].stringValue
+                    try? realm.commitWrite()
+                case .failure:
+                    break
+                }
+            }
     }
 }
 

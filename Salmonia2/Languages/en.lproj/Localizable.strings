@@ -1,0 +1,11 @@
+"-" = "No Event";
+"rush" = "Rush";
+"goldie-seeking" = "Goldie Seeking";
+"griller" = "Griller";
+"the-mothership" = "The Mothership";
+"fog" = "Fog";
+"cohock charge" = "Cohock Charge";
+// Tide
+"low" = "Low tide";
+"normal" = "Normal";
+"high" = "High tide";

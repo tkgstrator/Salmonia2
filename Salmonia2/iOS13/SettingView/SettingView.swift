@@ -9,15 +9,16 @@ import SwiftUI
 import SplatNet2
 import RealmSwift
 import WebKit
+import SwiftyJSON
 import MobileCoreServices
 import UserNotifications
 
 struct SettingView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var core: UserResultCore
-    
     @State var isVisible: Bool = false
-    
+
+//    private let realm = try? Realm()
     let version: String = "\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!))(\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)))"
     
     var body: some View {
@@ -26,13 +27,11 @@ struct SettingView: View {
             UserStatus
             Application
         }
-        .navigationBarTitle("Settings")
         .environmentObject(SalmoniaUserCore())
         .environmentObject(UserResultCore())
         .modifier(Splatfont(size: 20))
         .modifier(SettingsHeader())
-        .onAppear() {
-        }
+        .navigationBarTitle("Settings")
     }
     
     private var Application: some View {
@@ -41,7 +40,6 @@ struct SettingView: View {
                 HStack {
                     Text("Unlock")
                     Spacer()
-                    Text("Feature")
                 }
             }
             HStack {
@@ -53,8 +51,16 @@ struct SettingView: View {
                 Text("Version")
                 Spacer()
                 Text("\(version)")
-            }
+            }.onLongPressGesture { isImported() }
         }
+    }
+    
+    private func isImported() {
+        guard let realm = try? Realm() else { return }
+        guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+        realm.beginWrite()
+        user.isImported = false
+        try? realm.commitWrite()
     }
     
     private var UserSection: some View {
@@ -84,6 +90,10 @@ struct SettingView: View {
                 Spacer()
                 Text("\(core.results.count)")
             }
+            HStack {
+                Text("Sync UserName")
+                Spacer()
+            }.onTapGesture { updateUserName() }
             if !user.isImported {
                 NavigationLink(destination: ImportResultView()) {
                     HStack {
@@ -94,6 +104,38 @@ struct SettingView: View {
             }
         }
     }
+    
+    private func updateUserName() {
+        guard let realm = try? Realm() else { return }
+        autoreleasepool {
+            // PlayerResultRealmの名前をアップデートする
+            let nsaids: [String] = Array(Set(realm.objects(PlayerResultsRealm.self).map({ $0.nsaid! }))).sorted() // nsaidが空のやつはおらんやろ
+            var errids: [String] = []
+            realm.beginWrite()
+            for nsaid in nsaids {
+                let crew = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", nsaid)
+                switch crew.isEmpty {
+                case true:
+                    errids.append(nsaid)
+                case false:
+                    let user = realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", nsaid)
+                    user.setValue(crew.first?.name, forKey: "name")
+                }
+            }
+            if !errids.isEmpty {
+                guard let iksm_session = realm.objects(UserInfoRealm.self).first?.iksm_session else { return }
+                do {
+                    let response: JSON = try SplatNet2.getPlayerNickName(errids, iksm_session: iksm_session)
+                    for (_, user) in response {
+                        print(user["nickname"].stringValue)
+                    }
+                } catch (let error) { print(error) }
+            }
+
+            try? realm.commitWrite()
+        }
+    }
+
 }
 
 

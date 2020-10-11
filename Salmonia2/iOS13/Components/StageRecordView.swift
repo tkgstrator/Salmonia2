@@ -24,7 +24,7 @@ struct StageRecordView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
                     }
                     Spacer()
-                    Text(stage.stage_name!).frame(maxWidth: .infinity)
+                    Text(stage.stage_name!.localized).frame(maxWidth: .infinity)
                 }.font(.custom("Splatfont", size: 20))
             }
             .buttonStyle(PlainButtonStyle())
@@ -43,12 +43,12 @@ private struct StageRecordsView: View {
                 Spacer()
             }) {
                 HStack {
-                    Text("Job num")
+                    Text("Job Num")
                     Spacer()
                     Text("\(record.job_num.value)")
                 }
                 HStack {
-                    Text("Clear ratio")
+                    Text("Clear Ratio")
                     Spacer()
                     Text(String(record.clear_ratio.value) + "%")
                 }
@@ -79,21 +79,21 @@ private struct StageRecordsView: View {
                     Text("\(record.team_golden_eggs[0].value)")
                 }
                 HStack {
-                    Text("No Event")
+                    Text("No Night Event")
                     Spacer()
                     Text("\(record.team_golden_eggs[1].value)")
                 }
                 ForEach(Range(0 ... 2)) { tide in
                     Section(header: HStack {
                         Spacer()
-                        Text("\((WaveType.init(water_level: tide)?.water_name)!)").font(.custom("Splatfont", size: 20)).foregroundColor(.orange)
+                        Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").font(.custom("Splatfont", size: 20)).foregroundColor(.orange)
                         Spacer()
                     }) {
                         ForEach(Range(0 ... 6)) { event in
                             Group {
                                 if (self.record.golden_eggs[tide][event] != nil) {
                                     HStack {
-                                        Text("\((EventType.init(event_id: event)?.event_name)!)")
+                                        Text("\((EventType.init(event_id: event)?.event_name)!.localized)")
                                         Spacer()
                                         Text("\(self.record.golden_eggs[tide][event].value)")
                                     }
@@ -105,7 +105,7 @@ private struct StageRecordsView: View {
             }
         }
         .font(.custom("Splatfont2", size: 20))
-        .navigationBarTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!)
+        .navigationBarTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!.localized)
     }
 }
 

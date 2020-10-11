@@ -29,6 +29,7 @@ struct SalmoniaHeader: ViewModifier {
                                     NavigationLink(destination: SettingView()
                                                     .environmentObject(UserInfoCore())
                                                     .environmentObject(SalmoniaUserCore())
+                                                    .environmentObject(UserResultCore())
                                     )
                                     {
                                         URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/bb035c04e62c044139986540e6c3b8b3.png")!,

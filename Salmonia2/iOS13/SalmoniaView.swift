@@ -13,6 +13,7 @@ struct SalmoniaView: View {
             PlayerView()
             CoopShiftView()
             StageRecordView()
+            OptionView()
         }
         .padding(.horizontal, 10)
         .modifier(SalmoniaHeader())

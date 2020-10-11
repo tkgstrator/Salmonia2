@@ -25,14 +25,24 @@ struct LoggingThread: View {
                 Text("Thanks @Yukinkling, @barley_ural")
                 Text("External API @frozenpandaman, @nexusmine")
             }
+            //            if #available(iOS 14.0, *) {
+            //                ScrollView {
+            //                    LazyVStack(alignment: .leading) {
+            //                        ForEach(log.indices, id:\.self) { idx in
+            //                            Text(self.log[idx]).frame(height: 22)
+            //                        }
+            //                    }
+            //                }.padding(.horizontal, 14)
+            //            } else {
             if #available(iOS 14.0, *) {
-                ScrollView {
-                    LazyVStack(alignment: .leading) {
+                ScrollViewReader { proxy in
+                    List() {
                         ForEach(log.indices, id:\.self) { idx in
-                            Text(self.log[idx]).frame(height: 22)
+                            Text(self.log[idx]).frame(height: 10).id(idx)
                         }
                     }
-                }.padding(.horizontal, 14)
+                    .environment(\.defaultMinListRowHeight, 0)
+                }
             } else {
                 List() {
                     ForEach(log.indices, id:\.self) { idx in

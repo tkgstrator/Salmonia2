@@ -14,14 +14,14 @@ struct UnlockFeatureView: View {
     var body: some View {
         List {
             HStack {
-                Text("Unlock Feature Rotaion")
+                Text("Future Rotation")
                 Spacer()
                 Text("$0.00")
             }.onTapGesture {
 //                callStoreKit("work.tkgstrator.Salmonia2.isActive")
             }
             HStack {
-                Text("Display Gizzco Weapons")
+                Text("Grizzco Weapons")
                 Spacer()
                 Text("$0.00")
             }.onTapGesture {
