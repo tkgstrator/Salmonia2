@@ -12,22 +12,25 @@ import RealmSwift
 
 class CoopShiftCore: ObservableObject {
     private var token: NotificationToken?
-    
-    @Published var isUnlock: Bool = false
+    private let current_time: Int = Int(Date().timeIntervalSince1970) // 現在時刻を取得
+
+    @Published var isUnlockWeapon: Bool = false
+    @Published var isUnlockRotation: Bool = false
     @Published var data: [CoopShiftRealm] = []
     @Published var all: Results<CoopShiftRealm>  = try! Realm().objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time")
+
 
     init() {
         // 変更があるたびに再読込するだけ
         token = realm.objects(CoopShiftRealm.self) .observe { [self] _ in
             guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
-            let current_time: Int = Int(Date().timeIntervalSince1970) // 現在時刻を取得
             guard let end_time: Int = realm.objects(CoopShiftRealm.self).filter("end_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: true).last?.start_time else { return }
             
-            isUnlock = user.isUnlock[1] // クマブキアンロック情報を取得
+            isUnlockRotation = user.isUnlock[0] // 将来のシフトアンロク情報
+            isUnlockWeapon = user.isUnlock[1] // クマブキアンロック情報を取得
             data = Array(realm.objects(CoopShiftRealm.self).filter("start_time>=%@", end_time).sorted(byKeyPath: "start_time", ascending: true).prefix(3))
             
-            if !(user.isUnlock[0]) {
+            if !isUnlockRotation {
                 all = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: true)
             }
         }
@@ -55,6 +58,10 @@ class CoopShiftCore: ObservableObject {
         }
         _start_time = _start_time.sorted() // ソートします
 
-        all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@", _start_time)
+        if !isUnlockRotation {
+            all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@ AND start_time<=%@", _start_time, current_time)
+        } else {
+            all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@", _start_time)
+        }
     }
 }

@@ -57,12 +57,12 @@ struct OptionView: View {
 
 private struct PastCoopShiftView: View {
     @EnvironmentObject var phase: CoopShiftCore
-
+    
     @State var isVisible: Bool = false
     @State var isEnable: [Bool] = [true, true, true, true]
     @State var isPlayed: Bool = false
     private var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
-
+    
     init() {
         UITableView.appearance().tableFooterView = UIView()
         UITableView.appearance().separatorStyle = .none
@@ -156,7 +156,29 @@ private struct PastCoopShiftView: View {
         @EnvironmentObject var phase: CoopShiftRealm
         
         var body: some View {
-            VStack(spacing: 10) {
+            GeometryReader { geometry in
+                VStack(spacing: 10) {
+                    ShiftInfoOverview
+                    ShiftStageWeapon
+                }
+            }
+            .frame(height: 120)
+            .padding(.all, 8)
+            .background(BackgroundMask)
+            .mask(RoundedRectangle(cornerRadius: 12.0))
+            .font(.custom("Splatfont2", size: 18))
+        }
+        
+        private var BackgroundMask: some View {
+            ZStack {
+                Color.black.opacity(0.8)
+                Image("CoopMask").resizable(resizingMode: .tile).renderingMode(.template).foregroundColor(.white).opacity(0.8)
+                
+            }
+        }
+        
+        private var ShiftInfoOverview: some View {
+            Group {
                 HStack {
                     URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 27, height: 18)})
                     Text(phase.start_time.year).frame(height: 14)
@@ -166,40 +188,32 @@ private struct PastCoopShiftView: View {
                     Spacer()
                 }.frame(height: 20).font(.custom("Splatfont2", size: 16.5))
                 Line().stroke(style: StrokeStyle(lineWidth: 3, dash: [8], dashPhase: 5)).frame(height: 2).foregroundColor(.cLightGray)
-                HStack {
-                    VStack(spacing: 5) {
-                        URLImage(URL(string: (StageType(stage_id: phase.stage_id)?.image_url)!)!, content: {$0.image.resizable().frame(width: 112, height: 63)
-                        }).clipShape(RoundedRectangle(cornerRadius: 8.0))
-                        Text((StageType.init(stage_id: phase.stage_id)?.stage_name!)!.localized).font(.custom("Splatfont2", size: 14)).frame(height: 14)
-                    }
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text("Supplied Weapons").font(.custom("Splatfont2", size: 16)).frame(height: 14)
-                        HStack {
-                            ForEach(phase.weapon_list, id:\.self) { weapon in
-                                URLImage(WeaponType(weapon_id: weapon)!.image_url, content: {$0.image.resizable().frame(width: 35, height: 35)})
-                            }
-                            Group {
-                                if phases.isUnlock && phase.weapon_list[3] == -1 {
-                                    URLImage(WeaponType(weapon_id: phase.rare_weapon)!.image_url, content: {$0.image.resizable().frame(width: 35, height: 35)})
-                                }
+            }
+        }
+        
+        private var ShiftStageWeapon: some View {
+            HStack {
+                VStack(spacing: 5) {
+                    URLImage(URL(string: (StageType(stage_id: phase.stage_id)?.image_url)!)!, content: {$0.image.resizable().frame(width: 112, height: 63)
+                    }).clipShape(RoundedRectangle(cornerRadius: 8.0))
+                    Text((StageType.init(stage_id: phase.stage_id)?.stage_name!)!.localized).font(.custom("Splatfont2", size: 14)).frame(height: 14)
+                }
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Supplied Weapons").font(.custom("Splatfont2", size: 16)).frame(height: 14)
+                    HStack {
+                        ForEach(phase.weapon_list, id:\.self) { weapon in
+                            URLImage(WeaponType(weapon_id: weapon)!.image_url, content: {$0.image.resizable().frame(width: 35, height: 35)})
+                        }
+                        Group {
+                            if phases.isUnlockWeapon && phase.weapon_list[3] == -1 {
+                                URLImage(WeaponType(weapon_id: phase.rare_weapon)!.image_url, content: {$0.image.resizable().frame(width: 35, height: 35)})
                             }
                         }
-                        .padding(.bottom, 15)
-                        .frame(maxWidth: .infinity)
-                    }.frame(height: 50)
-                }.frame(height: 81)
-            }
-            .frame(height: 120)
-            .padding(.all, 8)
-            .background(
-                ZStack {
-                    Color.black.opacity(0.8)
-                    Image("CoopMask").resizable(resizingMode: .tile).renderingMode(.template).foregroundColor(.white).opacity(0.8)
-                    
-                }
-            )
-            .mask(RoundedRectangle(cornerRadius: 12.0))
-            .font(.custom("Splatfont2", size: 18))
+                    }
+                    .padding(.bottom, 15)
+                    .frame(maxWidth: .infinity)
+                }.frame(height: 50)
+            }.frame(height: 81)
         }
         
         struct Line: Shape {
@@ -220,7 +234,7 @@ private extension Int {
         f.dateFormat = "MM/dd HH:mm"
         return f.string(from: Date(timeIntervalSince1970: TimeInterval(self)))
     }
-
+    
     var year: String {
         let f = DateFormatter()
         f.dateFormat = "yyyy"

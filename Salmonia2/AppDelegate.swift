@@ -97,7 +97,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         var config = Realm.Configuration(
             schemaVersion: 5,
             migrationBlock: { migration, oldSchemaVersion in
+                print(oldSchemaVersion, migration)
                 if (oldSchemaVersion < 5) {
+                    migration.enumerateObjects(ofType: SalmoniaUserRealm.className()) { _, newObject in
+                        newObject!["isUnlock"] = [false, false, false]
+                    }
+                }
+                if (oldSchemaVersion == 5) {
                     migration.enumerateObjects(ofType: SalmoniaUserRealm.className()) { _, newObject in
                         newObject!["isUnlock"] = [false, false, false]
                     }
@@ -133,7 +139,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let users = realm.objects(SalmoniaUserRealm.self)
         if users.isEmpty {
             realm.beginWrite()
-            realm.create(SalmoniaUserRealm.self)
+            let user = SalmoniaUserRealm(isUnlock: [false, false, false])
+            realm.add(user)
             try? realm.commitWrite()
         }
         

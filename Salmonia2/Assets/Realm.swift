@@ -19,6 +19,17 @@ class SalmoniaUserRealm: Object {
     dynamic var isUnlock = List<Bool>()
     dynamic var account = List<UserInfoRealm>()
     dynamic var favuser = List<CrewInfoRealm>()
+    
+    let placeholder: [Bool] = [false, false, false]
+    
+    convenience required init(isUnlock: [Bool]) {
+        self.init()
+        self.isUnlock.append(objectsIn: isUnlock)
+    }
+    
+    override static func primaryKey() -> String? {
+        return "api_token"
+    }
 }
 
 class UserInfoRealm: Object {
