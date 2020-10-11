@@ -131,6 +131,10 @@
 "Options" = "オプション";
 "" = "";
 
+// In Wave Collection View
+"Tide" = "潮位";
+"Event" = "イベント";
+
 // In User Notifications
 "Success" = "成功";
 "Failure" = "失敗";

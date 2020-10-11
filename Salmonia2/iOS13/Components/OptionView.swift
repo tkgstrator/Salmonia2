@@ -81,7 +81,7 @@ private struct PastCoopShiftView: View {
                     }
                     .frame(maxWidth: .infinity)
                     ForEach(phase.all.indices, id:\.self) { idx in
-                        NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time))) {
+                        NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)).environmentObject(SalmoniaUserCore())) {
                             CoopShiftStack().environmentObject(phase.all[idx])
                         }.buttonStyle(PlainButtonStyle())
                     }
@@ -103,7 +103,7 @@ private struct PastCoopShiftView: View {
                 .frame(maxWidth: .infinity)
                 .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
                 ForEach(phase.all.indices, id:\.self) { idx in
-                    NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time))) {
+                    NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)).environmentObject(SalmoniaUserCore())) {
                         CoopShiftStack().environmentObject(phase.all[idx])
                     }.buttonStyle(PlainButtonStyle())
                 }

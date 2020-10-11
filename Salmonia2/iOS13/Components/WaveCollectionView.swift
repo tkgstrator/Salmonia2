@@ -19,7 +19,7 @@ struct WaveCollectionView: View {
     @State var isTide: [Bool] = [true, true, true]
     @State var isEvent: [Bool] = [true, true, true, true, true, true, true]
     @State var isStage: [Bool] = [true, true, true, true, true]
-
+    
     var body: some View {
         Group {
             HStack {
@@ -36,26 +36,20 @@ struct WaveCollectionView: View {
             }
         }
         .navigationBarTitle("Waves")
-        .navigationBarItems(
-            trailing:
-            HStack {
-                Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
-                    isVisible.toggle()
-                }.sheet(isPresented: $isVisible) {
-                    WaveFilterView(isTide: $isTide, isEvent: $isEvent, isStage: $isStage)
-                }
-            }
-        )
+        .navigationBarItems( trailing: filterButton)
     }
-}
 
-private struct WaveFilterView: View {
-    @EnvironmentObject var core: WaveResultCore
-    @Binding var isTide: [Bool]
-    @Binding var isEvent: [Bool]
-    @Binding var isStage: [Bool]
+    var filterButton: some View {
+        HStack {
+            Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
+                isVisible.toggle()
+            }.sheet(isPresented: $isVisible) {
+                WaveFilterView
+            }
+        }
+    }
     
-    var body: some View {
+    var WaveFilterView: some View {
         List {
             Section(header: HStack {
                 Spacer()
@@ -107,12 +101,11 @@ private struct WaveFilterView: View {
             for (idx, stage) in self.isStage.enumerated() {
                 if stage { stage_id.append(idx + 5000) }
             }
-            self.core.update(event_type, water_level, stage_id)
+            core.update(event_type, water_level, stage_id)
         }
-        
     }
-    
 }
+
 
 private struct WaveStack: View {
     private var stage_name: String?
@@ -140,7 +133,7 @@ private struct WaveStack: View {
                     Text(String(collected_ratio) + "%")
                     Text(stage_name.value.localized)
                 }
-                    .font(.custom("Splatfont", size: 14)).foregroundColor(.yellow)
+                .font(.custom("Splatfont", size: 14)).foregroundColor(.yellow)
                 HStack {
                     Text(water_level.value.localized)
                     Text(event_type.value.localized)

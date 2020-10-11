@@ -23,7 +23,7 @@ struct ImportResultView: View {
                 do {
                     guard let realm = try? Realm() else { return }
                     guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APIError.Response("1000", "No activate accounts") }
-                    let accounts = user.account
+                    let accounts = user.account.filter("isActive=%@", true)
                     let verson = user.isVersion
                     
                     // ユーザ名とか取得するためにセッションキーが必要
@@ -57,7 +57,7 @@ struct ImportResultView: View {
                         DispatchQueue(label: "Import").async {
                             guard let lastlink: Int = try? getLastLink(nsaid: nsaid) else { return }
                             DispatchQueue(label: "Pages").async {
-                                for page in Range(5 ... lastlink) {
+                                for page in Range(1 ... lastlink) {
                                     var nsaids: [String] = []
                                     guard let results: JSON = try? getResults(nsaid: nsaid, page: page) else { return }
                                     autoreleasepool {

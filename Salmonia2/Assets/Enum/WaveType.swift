@@ -16,7 +16,7 @@ public enum EventTypeName: String, CaseIterable {
     case none = "-"
     case rush = "rush"
     case seeking = "goldie-seeking"
-    case griller = "the-grilelr"
+    case griller = "griller"
     case mothership = "the-mothership"
     case fog = "fog"
     case cohock = "cohock-charge"

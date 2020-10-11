@@ -108,7 +108,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         account.setValue(session_token, forKey: "session_token")
                         account.setValue(thumbnail_url, forKey: "image")
                         account.setValue(nickname, forKey: "name")
-                        notification(title: .success, message: Message.login.rawValue)
+                        notification(title: .success, message: Message.update.rawValue)
                     }
                 }
             } catch APIError.Response( _, let message) {
