@@ -74,13 +74,11 @@ struct SettingView: View {
     private var UserSection: some View {
         Section(header: Text("User").font(.custom("Splatfont", size: 18))) {
             NavigationLink(destination: UserListView()
-//                            .environmentObject(SalmoniaUserCore())
+                           //                            .environmentObject(SalmoniaUserCore())
             ) {
                 Text("NSO Accounts")
             }
-            NavigationLink(destination: CrewListView()
-//                            .environmentObject(SalmoniaUserCore())
-            ) {
+            NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) {
                 Text("Fav Crews")
             }
         }

@@ -22,7 +22,7 @@ struct PlayerView: View {
                 }.buttonStyle(PlainButtonStyle())
                 Text(user.nickname).modifier(Splatfont(size: 28)).frame(maxWidth: .infinity)
             }
-            Text("Overview".localized).foregroundColor(.orange).modifier(Splatfont(size: 20))
+            Text("Overview".localized).foregroundColor(.cOrange).modifier(Splatfont(size: 20)).minimumScaleFactor(0.8).lineLimit(1)
             HStack {
                 Spacer()
                 VStack(spacing: 0) {

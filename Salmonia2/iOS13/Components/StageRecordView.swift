@@ -13,28 +13,30 @@ struct StageRecordView: View {
         VStack(spacing: 10) {
             Text("Stage Records")
                 .frame(height: 28)
-                .foregroundColor(.orange)
+                .foregroundColor(.cOrange)
                 .font(.custom("Splatfont", size: 20))
             ForEach(StageType.allCases, id:\.self) { stage in
-                HStack {
-                    NavigationLink(destination: StageRecordsView().environmentObject(StageRecordCore(stage.stage_id ?? 5000))) {
-                    URLImage(URL(string: stage.image_url!)!, content: {$0.image.resizable()})
+                NavigationLink(destination: StageRecordsView().environmentObject(StageRecordCore(stage.stage_id!))) {
+                    HStack {
+                        URLImage(URL(string: stage.image_url!)!, content: {$0.image.resizable()})
                             .frame(width: 112, height: 63)
                             .clipped()
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
+                        //Spacer()
+                        Group {
+                            Text(stage.stage_name!.localized).font(.custom("Splatfont", size: 20)).minimumScaleFactor(0.7).lineLimit(1)
+                        }.frame(maxWidth: .infinity)
                     }
-                    Spacer()
-                    Text(stage.stage_name!.localized).frame(maxWidth: .infinity)
-                }.font(.custom("Splatfont", size: 20))
+                }
+                .buttonStyle(PlainButtonStyle())
             }
-            .buttonStyle(PlainButtonStyle())
         }
     }
 }
 
 private struct StageRecordsView: View {
     @EnvironmentObject var record: StageRecordCore
-
+    
     var body: some View {
         List {
             Section(header: HStack {
@@ -57,16 +59,16 @@ private struct StageRecordsView: View {
                     Spacer()
                     Text("\(record.grade_point.value)")
                 }
-//                HStack {
-//                    Text("Salmon Rate")
-//                    Spacer()
-//                    Text(String(record.srpower[0].value))
-//                }
-//                HStack {
-//                    Text("Max Salmon Rate")
-//                    Spacer()
-//                    Text(String(record.srpower[1].value))
-//                }
+                //                HStack {
+                //                    Text("Salmon Rate")
+                //                    Spacer()
+                //                    Text(String(record.srpower[0].value))
+                //                }
+                //                HStack {
+                //                    Text("Max Salmon Rate")
+                //                    Spacer()
+                //                    Text(String(record.srpower[1].value))
+                //                }
             }
             Section(header: HStack {
                 Spacer()

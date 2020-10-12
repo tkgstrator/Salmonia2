@@ -81,9 +81,12 @@ private struct PastCoopShiftView: View {
                     }
                     .frame(maxWidth: .infinity)
                     ForEach(phase.all.indices, id:\.self) { idx in
-                        NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)).environmentObject(SalmoniaUserCore())) {
+                        ZStack {
                             CoopShiftStack().environmentObject(phase.all[idx])
-                        }.buttonStyle(PlainButtonStyle())
+                            NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)).environmentObject(SalmoniaUserCore())) {
+                                EmptyView()
+                            }.buttonStyle(PlainButtonStyle())
+                        }
                     }
                 }.onAppear() {
                     proxy.scrollTo((phase.all.count - 1), anchor: .center)
@@ -103,9 +106,12 @@ private struct PastCoopShiftView: View {
                 .frame(maxWidth: .infinity)
                 .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
                 ForEach(phase.all.indices, id:\.self) { idx in
-                    NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)).environmentObject(SalmoniaUserCore())) {
+                    ZStack {
                         CoopShiftStack().environmentObject(phase.all[idx])
-                    }.buttonStyle(PlainButtonStyle())
+                        NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)).environmentObject(SalmoniaUserCore())) {
+                            EmptyView()
+                        }.buttonStyle(PlainButtonStyle())
+                    }
                 }
                 .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
             }
@@ -178,42 +184,39 @@ private struct PastCoopShiftView: View {
         }
         
         private var ShiftInfoOverview: some View {
-            Group {
+            VStack(alignment: .leading, spacing: 5) {
                 HStack {
-                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 27, height: 18)})
-                    Text(phase.start_time.year).frame(height: 14)
-                    Text(phase.start_time.time).frame(height: 14)
-                    Text(verbatim: "-").frame(height: 14)
-                    Text(phase.end_time.time).frame(height: 16)
-                    Spacer()
-                }.frame(height: 20).font(.custom("Splatfont2", size: 16.5))
+                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!, content: {$0.image.resizable().frame(width: 33, height: 22)})
+                    Text(phase.start_time.year + " " + phase.start_time.time + " - " + phase.end_time.time).font(.custom("Splatfont2", size: 18)).minimumScaleFactor(0.7).lineLimit(1)
+                }.frame(height: 22)
                 Line().stroke(style: StrokeStyle(lineWidth: 3, dash: [8], dashPhase: 5)).frame(height: 2).foregroundColor(.cLightGray)
-            }
+            }.frame(maxHeight: 25)
         }
         
         private var ShiftStageWeapon: some View {
             HStack {
                 VStack(spacing: 5) {
-                    URLImage(URL(string: (StageType(stage_id: phase.stage_id)?.image_url)!)!, content: {$0.image.resizable().frame(width: 112, height: 63)
-                    }).clipShape(RoundedRectangle(cornerRadius: 8.0))
-                    Text((StageType.init(stage_id: phase.stage_id)?.stage_name!)!.localized).font(.custom("Splatfont2", size: 14)).frame(height: 14)
-                }
+                    URLImage(URL(string: (StageType(stage_id: phase.stage_id)?.image_url)!)!, content: {$0.image.resizable().frame(width: 112, height: 63)}).clipShape(RoundedRectangle(cornerRadius: 8.0))
+                    Text((StageType.init(stage_id: phase.stage_id)?.stage_name!)!.localized).font(.custom("Splatfont2", size: 14))
+                }.padding(.top, 10)
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Supplied Weapons").font(.custom("Splatfont2", size: 16)).frame(height: 14)
                     HStack {
                         ForEach(phase.weapon_list, id:\.self) { weapon in
-                            URLImage(WeaponType(weapon_id: weapon)!.image_url, content: {$0.image.resizable().frame(width: 35, height: 35)})
+                            URLImage(WeaponType(weapon_id: weapon)!.image_url, content: {$0.image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: 45)})
                         }
                         Group {
                             if phases.isUnlockWeapon && phase.weapon_list[3] == -1 {
-                                URLImage(WeaponType(weapon_id: phase.rare_weapon)!.image_url, content: {$0.image.resizable().frame(width: 35, height: 35)})
+                                URLImage(WeaponType(weapon_id: phase.rare_weapon)!.image_url, content: {$0.image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: 45)})
                             }
                         }
                     }
                     .padding(.bottom, 15)
                     .frame(maxWidth: .infinity)
-                }.frame(height: 50)
-            }.frame(height: 81)
+                }
+//                .frame(maxHeight: 81)
+            }
+            .frame(maxHeight: 81)
         }
         
         struct Line: Shape {
