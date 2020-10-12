@@ -26,10 +26,6 @@ class SalmoniaUserRealm: Object {
         self.init()
         self.isUnlock.append(objectsIn: isUnlock)
     }
-    
-    override static func primaryKey() -> String? {
-        return "api_token"
-    }
 }
 
 class UserInfoRealm: Object {
@@ -64,10 +60,16 @@ class CrewInfoRealm: Object {
     let srpower = RealmOptional<Double>()
     @objc dynamic var lastUpdated: Int = 0
     
+    convenience required init(name: String, image: String, nsaid: String) {
+        self.init()
+        self.name = name
+        self.image = image
+        self.nsaid = nsaid
+    }
+
     override static func primaryKey() -> String? {
         return "nsaid"
     }
-
 }
 
 class CoopResultsRealm: Object {

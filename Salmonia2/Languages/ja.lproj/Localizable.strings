@@ -6,6 +6,7 @@
 "Feature" = "機能";
 "User List" = "ユーザリスト";
 "Wave Search" = "WAVE検索";
+"Crew Search" = "プレイヤー検索";
 "Coop Shift Rotation" = "バイトシフト一覧";
 
 
@@ -107,8 +108,8 @@
 "Drizzler" = "コウモリ";
 
 // In Result Collection View
-"Clear" = "クリア";
-"Defeat" = "シッパイ";
+"Clear" = "Clear!!";
+"Defeat" = "Failure";
 
 // In Result View
 "Hazard Level Max!!" = "キケン度MAX!!";
@@ -142,7 +143,9 @@
 "Update NSO account" = "NSOアカウントを更新しました";
 "Login Salmon Stats" = "Salmon Statsへのログイン";
 "Try again/Login Salmon Stats" = "再度試すか、Salmon Statsにログインしてください";
-"" = "";
+
+
+"Enter user name" = "プレイヤー名を入力してください";
 "" = "";
 "" = "";
 "" = "";

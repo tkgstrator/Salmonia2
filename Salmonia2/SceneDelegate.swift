@@ -103,18 +103,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         _user.account.append(account)
                         notification(title: .success, message: Message.login.rawValue)
                     case false: // 再ログイン（アップデート）
+                        guard let _user: SalmoniaUserRealm = realm.objects(SalmoniaUserRealm.self).first else { return }
                         guard let session_token = account.first?.session_token else { return }
                         account.setValue(iksm_session, forKey: "iksm_session")
                         account.setValue(session_token, forKey: "session_token")
                         account.setValue(thumbnail_url, forKey: "image")
                         account.setValue(nickname, forKey: "name")
+                        if _user.account.filter("nsaid=%@", nsaid).count == 0 {
+                            _user.account.append(account.first!)
+                        }
                         notification(title: .success, message: Message.update.rawValue)
                     }
                 }
-            } catch APIError.Response( _, let message) {
-                notification(title: .failure, message: message)
-            } catch (let error){
-                notification(title: .failure, message: error.localizedDescription)
+            } catch (let error) {
+                notification(title: .failure, message: error)
+                return
             }
         }
     }

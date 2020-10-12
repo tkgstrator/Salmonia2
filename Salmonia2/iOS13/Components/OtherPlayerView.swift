@@ -19,13 +19,13 @@ struct OtherPlayerView: View {
         ScrollView {
             HStack {
 //                NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) {
-                    URLImage(URL(string: player.imageUri)!,
+                URLImage(URL(string: player.imageUri ?? "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/c9714d21f0dce5c6")!,
                     content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                     .frame(width: 80, height: 80)
 //                }.buttonStyle(PlainButtonStyle())
                 Text(player.nickname).modifier(Splatfont(size: 28)).frame(maxWidth: .infinity)
             }
-            Text("Overview").foregroundColor(.orange).modifier(Splatfont(size: 20))
+            Text("Overview").foregroundColor(.cOrange).modifier(Splatfont(size: 20))
             HStack {
                 Spacer()
                 VStack(spacing: 0) {
@@ -43,9 +43,9 @@ struct OtherPlayerView: View {
                 }
                 Spacer()
                 VStack(spacing: 0) {
-                    Text("Rank")
+                    Text("Defeated")
                     HStack {
-                        Text(RankType(value: player.srpower).rank).foregroundColor(.yellow)
+                        Text(String((Double(player.defeated) / Double(player.job_num)).round(digit: 2)))
                     }
                 }
                 Spacer()

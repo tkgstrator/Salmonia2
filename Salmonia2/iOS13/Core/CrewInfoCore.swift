@@ -19,8 +19,9 @@ class CrewInfoCore: ObservableObject {
     @Published var nickname: String = ""
     @Published var job_num: Int = 0
     @Published var ikura_total: Int = 0
+    @Published var defeated: Int = 0
     @Published var golden_ikura_total: Int = 0
-    @Published var imageUri: String = ""
+    @Published var imageUri: String?
     @Published var srpower: Double?
     @Published var isFav: Bool = false
     @Published var value: Double = 0.0
@@ -46,7 +47,7 @@ class CrewInfoCore: ObservableObject {
     }
     
     init(_ pid: String) {
-        token = realm.objects(CrewInfoRealm.self).observe { [self] _ in
+        token = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).observe { [self] _ in
             guard let crew = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
             guard let favuser = realm.objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
             nsaid = pid
@@ -54,22 +55,23 @@ class CrewInfoCore: ObservableObject {
             nickname = crew.name
             job_num = crew.job_num
             ikura_total = crew.ikura_total
+            defeated = crew.boss_defeated
             golden_ikura_total = crew.golden_ikura_total
             srpower = crew.srpower.value
             isFav = !favuser.isEmpty
         }
         
-        token = realm.objects(SalmoniaUserRealm.self).observe { [self] _ in
-            guard let crew = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
-            guard let favuser = realm.objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
-            nsaid = pid
-            imageUri = crew.image
-            nickname = crew.name
-            job_num = crew.job_num
-            ikura_total = crew.ikura_total
-            golden_ikura_total = crew.golden_ikura_total
-            srpower = crew.srpower.value
-            isFav = !favuser.isEmpty
-        }
+//        token = realm.objects(SalmoniaUserRealm.self).observe { [self] _ in
+//            guard let crew = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
+//            guard let favuser = realm.objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
+//            nsaid = pid
+//            imageUri = crew.image
+//            nickname = crew.name
+//            job_num = crew.job_num
+//            ikura_total = crew.ikura_total
+//            golden_ikura_total = crew.golden_ikura_total
+//            srpower = crew.srpower.value
+//            isFav = !favuser.isEmpty
+//        }
     }
 }

@@ -302,8 +302,8 @@
             filePath = "Salmonia2/iOS13/SettingView/SettingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "updateUserName()"
             landmarkType = "7">
          </BreakpointContent>
@@ -318,8 +318,8 @@
             filePath = "Salmonia2/iOS13/SettingView/SettingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "updateUserName()"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,8 +334,8 @@
             filePath = "Salmonia2/iOS13/SettingView/SettingView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "updateUserName()"
             landmarkType = "7">
             <Locations>
@@ -647,7 +647,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "5447">
+                  offsetFromSymbolStart = "5508">
                </Location>
                <Location
                   uuid = "09344D97-B003-4CC5-B859-F282BF8C948B - b44d46ec85478d6b"

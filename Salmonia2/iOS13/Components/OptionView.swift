@@ -15,12 +15,13 @@ struct OptionView: View {
     var body: some View {
         VStack(spacing: 10) {
             Text("Options").foregroundColor(.cOrange).modifier(Splatfont(size: 20))
-            WaveSearchView
-            CoopShiftView
+            WaveSearch
+            CrewSearch
+            CoopShift
         }
     }
     
-    private var WaveSearchView: some View {
+    private var WaveSearch: some View {
         NavigationLink(destination: WaveCollectionView().environmentObject(WaveResultCore())) {
             HStack {
                 ZStack {
@@ -37,7 +38,7 @@ struct OptionView: View {
         .buttonStyle(PlainButtonStyle())
     }
     
-    private var CoopShiftView: some View {
+    private var CoopShift: some View {
         NavigationLink(destination: PastCoopShiftView().environmentObject(CoopShiftCore())) {
             HStack {
                 ZStack {
@@ -53,6 +54,25 @@ struct OptionView: View {
         }
         .buttonStyle(PlainButtonStyle())
     }
+
+    private var CrewSearch: some View {
+        NavigationLink(destination: CrewSearchView().environmentObject(SalmoniaUserCore())) {
+            HStack {
+                ZStack {
+                    Image("CoopBar")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.cGray)
+                    Text("Crew Search").font(.custom("Splatfont2", size: 22))
+                }
+            }
+            .frame(maxWidth: 300)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+
+    
 }
 
 private struct PastCoopShiftView: View {

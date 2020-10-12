@@ -34,4 +34,5 @@ extension Color {
     static let cOrange = Color("cOrange")
     static let cGray = Color("cGray")
     static let cLightGray = Color("cLightGray")
+    static let cBlue = Color("cBlue")
 }

@@ -24,6 +24,7 @@
 		105396D825260CEB00132668 /* StageRecordCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396D725260CEA00132668 /* StageRecordCore.swift */; };
 		105396DD25260D5000132668 /* WaveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396DC25260D5000132668 /* WaveType.swift */; };
 		105396F425264C2000132668 /* WeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396F325264C2000132668 /* WeaponType.swift */; };
+		1056CF402533E9430078E3B4 /* CrewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */; };
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
 		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
@@ -109,6 +110,7 @@
 		105396D725260CEA00132668 /* StageRecordCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordCore.swift; sourceTree = "<group>"; };
 		105396DC25260D5000132668 /* WaveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveType.swift; sourceTree = "<group>"; };
 		105396F325264C2000132668 /* WeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponType.swift; sourceTree = "<group>"; };
+		1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewSearchView.swift; sourceTree = "<group>"; };
 		105F690E252F33F2003306C8 /* Salmonia2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Salmonia2.entitlements; sourceTree = "<group>"; };
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				10BB34BA252175170046CBCA /* PlayerView.swift */,
 				1053968A25242EE500132668 /* OtherPlayerView.swift */,
 				10BB00A525313AE90081C6EB /* OptionView.swift */,
+				1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				10BB34A7252174F60046CBCA /* Enum.swift in Sources */,
 				10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */,
 				10BB34A1252174F60046CBCA /* Extension.swift in Sources */,
+				1056CF402533E9430078E3B4 /* CrewSearchView.swift in Sources */,
 				10B10C4A2528EC480025057F /* BossType.swift in Sources */,
 				10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */,
 				1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */,
@@ -885,7 +889,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -894,7 +898,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -912,7 +916,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -921,7 +925,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
