@@ -20,31 +20,31 @@ struct LoadingView: View {
         LoggingThread(log: $messages, lock: $isLock)
             .onAppear() {
                 do {
-                    guard let realm = try? Realm() else { throw APIError.Response("2000", "Realm DB Error") }
-                    guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
-                    guard let api_token = user.api_token else { throw APIError.Response("2001", "Empty API Token") }
+                    guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APPError.user }
+                    guard let api_token = user.api_token else { throw APPError.apitoken }
                     let version = user.isVersion // X-Product Versionの読み込み
-
-                    let accounts = realm.objects(UserInfoRealm.self).filter("isActive = %@", true)
-                    if accounts.count == 0  { throw APIError.Response("2001", "No Active Accounts") }
+                    let accounts = realm.objects(UserInfoRealm.self).filter("isActive=%@", true)
+                    if accounts.count == 0  { throw APPError.active }
+                    
                     // アクティブなアカウント全てでループ
                     for account in accounts {
-                        guard let iksm_session = account.iksm_session else { throw APIError.Response("2001", "Empty Iksm Session") }
-                        guard let session_token = account.session_token else { throw APIError.Response("2001", "Empty Session Token") }
+                        guard let iksm_session = account.iksm_session else { throw APPError.iksm }
+                        guard let session_token = account.session_token else { throw APPError.session }
                         let nsaid = account.nsaid
                         
                         DispatchQueue(label: "Summary").async {
                             guard let realm = try? Realm() else { return } // 本体のRealmオブジェクト
+
                             let isValid: Bool = SplatNet2.isValid(iksm_session: iksm_session)
                             if !isValid { // 有効期限が切れていた場合は再生成する
                                 do {
-                                    guard let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid).first else { throw APIError.Response("2003", "No Such Account") }
+                                    guard let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid).first else { throw APPError.active }
                                     let response: JSON =  try SplatNet2.genIksmSession(session_token, version: version)
-                                    guard let iksm_session = response["iksm_session"].string else { throw APIError.Response("1004", "Iksm Session Error")}
+                                    guard let iksm_session = response["iksm_session"].string else { throw APPError.iksm }
                                     try realm.write { user.setValue(iksm_session, forKey: "iksm_session")}
                                 } catch {
-                                    // セッションが再生成できなかったときの処理（APIの変更など
-                                    print("ACCOUNT \(nsaid) FAILURE")
+                                    messages.append("Couldn't regenerate iksm_session")
+                                    isLock = false
                                 }
                             }
                             // シフトデータを読み込んで書き込む
@@ -114,19 +114,13 @@ struct LoadingView: View {
                                 realm.create(UserInfoRealm.self, value: card as Any, update: .modified)
                                 try realm.commitWrite()
                             } catch {
-                                print("ACCOUNT \(nsaid) CREATE CARD FAILURE")
+                                messages.append("\(error.localizedDescription)")
                                 isLock = false
                             }
                         }
                     }
-                    // そもそもデータが保持されていなかったときのエラー処理
-                } catch APIError.Response(let code, let message){
-                    messages.append("Error: \(code)")
-                    messages.append(message)
-                    messages.append("Please active/login NSO account")
-                    isLock = false
                 } catch {
-                    messages.append("Fatal Error Occurs")
+                    messages.append("\(error.localizedDescription)")
                     isLock = false
                 }
                 isLock = false

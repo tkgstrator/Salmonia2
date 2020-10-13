@@ -64,4 +64,8 @@ class CoopShiftCore: ObservableObject {
             all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@", _start_time)
         }
     }
+    
+    deinit {
+        token?.invalidate()
+    }
 }

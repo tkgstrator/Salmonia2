@@ -104,4 +104,8 @@ class UserStatsCore: ObservableObject {
             srpower = SRPower(results)
         }
     }
+    
+    deinit {
+        token?.invalidate()
+    }
 }

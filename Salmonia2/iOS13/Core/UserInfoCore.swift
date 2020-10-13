@@ -52,6 +52,9 @@ class UserInfoCore: ObservableObject {
             ikura_total = _account.ikura_total
             golden_ikura_total = _account.golden_ikura_total
         }
-
+    }
+    
+    deinit {
+        token?.invalidate()
     }
 }

@@ -14,10 +14,10 @@ struct UserListView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @State private var editMode = EditMode.inactive
     @State var isVisible: Bool = false
-    
+
     var body: some View {
         List {
-            ForEach(user.account.indices, id: \.self) { idx in
+            ForEach(user.account.indices, id:\.self) { idx in
                 HStack {
                     URLImage(URL(string: user.account[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                         .frame(width: 60, height: 60)
@@ -28,7 +28,7 @@ struct UserListView: View {
                 }
             }
             .onMove(perform: onMove)
-            .onDelete(perform: onDelete)
+//            .onDelete(perform: onDelete)
         }
         .navigationBarTitle("User List")
         .modifier(Splatfont(size: 20))

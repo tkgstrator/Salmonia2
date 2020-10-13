@@ -71,11 +71,11 @@ struct CrewSearchView: View {
     
     private func searchPlayer(keyword: String) {
         do {
-            guard let iksm_session = user.account.first?.iksm_session else { throw APIError.Response("", "") }
+            guard let iksm_session = user.account.first?.iksm_session else { throw APPError.iksm }
             DispatchQueue(label: "Search").async {
                 do {
                     isDisabled.toggle()
-                    if keyword.isEmpty { throw APIError.Response("", "") }
+                    if keyword.isEmpty { throw APPError.noempty }
                     players.removeAll()
 
                     let url = "https://salmon-stats-api.yuki.games/api/players/search?name=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"

@@ -31,4 +31,8 @@ class UserResultCore: ObservableObject {
             results = realm.objects(CoopResultsRealm.self).sorted(byKeyPath: "play_time", ascending: false)
         }
     }
+    
+    deinit {
+        token?.invalidate()
+    }
 }

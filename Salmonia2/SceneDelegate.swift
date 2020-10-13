@@ -64,11 +64,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
     {
         // 通知を出す
-        func notification(title: Title, message: String) {
-            
+        func notification(title: Notification, message: Notification) {
             let content = UNMutableNotificationContent()
-            content.title = title.rawValue.localized
-            content.body = message.localized
+            content.title = title.localizedDescription.localized
+            content.body = message.localizedDescription.localized
+            content.sound = UNNotificationSound.default
+
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+            UNUserNotificationCenter.current().add(request)
+        }
+        
+        func notification(title: Notification, error: Error) {
+            let content = UNMutableNotificationContent()
+            content.title = title.localizedDescription.localized
+            content.body = error.localizedDescription.localized
             content.sound = UNNotificationSound.default
 
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
@@ -87,11 +96,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 response = try SplatNet2.getSessionToken(session_token_code, session_token_code_verifier)
                 let session_token = response["session_token"].stringValue
                 response = try SplatNet2.genIksmSession(session_token, version: version)
-                guard let thumbnail_url = response["user"]["thumbnail_url"].string else { throw APIError.Response("1004", "Iksm Session Error") }
-                guard let nickname = response["user"]["nickname"].string else { throw APIError.Response("1004", "Iksm Session Error") }
-                guard let iksm_session = response["iksm_session"].string else { throw APIError.Response("1004", "Iksm Session Error") }
-                guard let nsaid = response["nsaid"].string else { throw APIError.Response("1004", "Iksm Session Error") }
-                guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
+                guard let thumbnail_url = response["user"]["thumbnail_url"].string else { throw APPError.iksm }
+                guard let nickname = response["user"]["nickname"].string else { throw APPError.iksm }
+                guard let iksm_session = response["iksm_session"].string else { throw APPError.iksm }
+                guard let nsaid = response["nsaid"].string else { throw APPError.iksm }
+                guard let realm = try? Realm() else { throw APPError.realm }
                 try? realm.write {
                     let account = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
                     switch account.isEmpty {
@@ -101,7 +110,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         let account: UserInfoRealm = UserInfoRealm(value: _account)
                         realm.add(account, update: .modified)
                         _user.account.append(account)
-                        notification(title: .success, message: Message.login.rawValue)
+                        notification(title: .success, message: .login)
                     case false: // 再ログイン（アップデート）
                         guard let _user: SalmoniaUserRealm = realm.objects(SalmoniaUserRealm.self).first else { return }
                         guard let session_token = account.first?.session_token else { return }
@@ -112,12 +121,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         if _user.account.filter("nsaid=%@", nsaid).count == 0 {
                             _user.account.append(account.first!)
                         }
-                        notification(title: .success, message: Message.update.rawValue)
+                        notification(title: .success, message: .update)
                     }
                 }
-            } catch (let error) {
-                notification(title: .failure, message: error)
-                return
+            } catch  {
+                notification(title: .failure, error: error)
             }
         }
     }

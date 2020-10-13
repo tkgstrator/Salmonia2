@@ -43,5 +43,9 @@ class StageRecordCore: ObservableObject {
             team_golden_eggs[1] = results.filter("SUBQUERY(wave, $wave, $wave.event_type=%@).@count==3", "-").max(ofProperty: "golden_eggs")
         }
     }
+    
+    deinit {
+        token?.invalidate()
+    }
 }
 

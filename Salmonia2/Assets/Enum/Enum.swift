@@ -8,21 +8,108 @@
 import Foundation
 import SwiftUI
 
-enum APIError: Error {
-    case Response(String, String)
+
+enum APPError: Error {
+    case unknown
+    case expired
+    case realm
+    case user
+    case coop
+    case active
+    case apitoken
+    case iksm
+    case session
+    case noempty
+    case unavailable
 }
 
-enum Title: String {
-    case success = "Success"
-    case failure = "Failure"
+extension APPError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .unknown:
+            return "Unknown Error"
+        case .expired:
+            return "Iksm Session is Unauthorized/Expired"
+        case .realm:
+            return "Realm Database Broken"
+        case .user:
+            return ""
+        case .coop:
+            return "Realm Database Broken"
+        case .active:
+            return "No Active NSO Account"
+        case .apitoken:
+            return "Login Salmon Stats"
+        case .iksm:
+            return "No iksm session"
+        case .session:
+            return "No session token"
+        case .noempty:
+            return "Input Emtpy"
+        case .unavailable:
+            return "Server is Unavailable"
+        }
+    }
 }
 
-enum Message: String {
-    case login = "Add new NSO account"
-    case update = "Update NSO account"
-    case laravel = "Login Salmon Stats"
-    case unlock = "Unlock Feature"
-    case lock = "Lock Feature"
+extension APPError: CustomNSError {
+    var errorCode: Int {
+        switch self {
+        case .unknown:
+            return 9999
+        case .expired:
+            return 1001
+        case .realm:
+            return 1000
+        case .user:
+            return 1000
+        case .coop:
+            return 1000
+        case .active:
+            return 1001
+        case .apitoken:
+            return 1001
+        case .iksm:
+            return 1001
+        case .session:
+            return 1001
+        case .noempty:
+            return 1001
+        case .unavailable:
+            return 9503
+        }
+    }
+}
+
+enum Notification {
+    case login
+    case update
+    case laravel
+    case unlock
+    case lock
+    case success
+    case failure
+}
+
+extension Notification {
+    var localizedDescription: String {
+        switch self {
+        case .login:
+            return "Add New NSO Account"
+        case .update:
+            return "Update NSO account"
+        case .laravel:
+            return "Login Salmon Stats"
+        case .unlock:
+            return "Unlock Feature"
+        case .lock:
+            return "Lock Feature"
+        case .success:
+            return "Success"
+        case .failure:
+            return "Failure"
+        }
+    }
 }
 
 

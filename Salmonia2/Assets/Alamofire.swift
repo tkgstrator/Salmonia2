@@ -16,12 +16,14 @@ public class SAF {
         let queue = DispatchQueue.global(qos: .utility)
         
         var json: JSON? = nil
+        var statusCode: Int? = 200
         AF.request(url, method: .get)
-            .validate(statusCode: 200..<300)
+//            .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
             .responseJSON(queue: queue) { response in
                 switch response.result {
                 case .success(let value):
+                    statusCode = response.response?.statusCode
                     json = JSON(value)
                 case .failure(let error):
                     print(error)
@@ -30,7 +32,10 @@ public class SAF {
             }
         semaphore.wait()
         
-        guard let response = json else { throw APIError.Response("9999", "Salmon Stats Error") }
+        guard let code = statusCode else { throw APPError.unknown }
+        guard let response = json else { throw APPError.unknown }
+        if code == 403 { throw APPError.expired }
+
         return response
     }
 }

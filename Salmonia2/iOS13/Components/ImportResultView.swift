@@ -22,13 +22,13 @@ struct ImportResultView: View {
             .onAppear() {
                 do {
                     guard let realm = try? Realm() else { return }
-                    guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APIError.Response("1000", "No activate accounts") }
+                    guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APPError.active }
                     let accounts = user.account.filter("isActive=%@", true)
                     let verson = user.isVersion
                     
                     // ユーザ名とか取得するためにセッションキーが必要
-                    guard let _iksm_session: String = accounts.first?.iksm_session else { throw APIError.Response("1000", "No activate accounts") }
-                    guard let session_token: String = accounts.first?.session_token else { throw APIError.Response("1000", "No activate accounts") }
+                    guard let _iksm_session: String = accounts.first?.iksm_session else { throw APPError.active }
+                    guard let session_token: String = accounts.first?.session_token else { throw APPError.active }
                     
                     // 二回目以降のインポートを無効化する
                     try? realm.write {
@@ -92,12 +92,7 @@ struct ImportResultView: View {
                         } // DispatchQueue ASync
                     }
                     isLock = false
-                } catch APIError.Response(let code, let message) {
-                    messages.append("Error: \(code)")
-                    messages.append(message)
-                    isLock = false
-                } catch (let error){
-                    messages.append("Error: 9999")
+                } catch {
                     messages.append(error.localizedDescription)
                     isLock = false
                 }

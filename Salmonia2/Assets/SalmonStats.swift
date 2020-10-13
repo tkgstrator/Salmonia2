@@ -137,7 +137,7 @@ class SalmonStats {
             }
         semaphore.wait()
         
-        guard let response = json else { throw APIError.Response("9404", "Server Error") }
+        guard let response = json else { throw APPError.unavailable }
         return response
     }
     

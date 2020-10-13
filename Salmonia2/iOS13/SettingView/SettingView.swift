@@ -64,7 +64,7 @@ struct SettingView: View {
     
     private func isImported() {
         user.isImported.toggle() // 反転させる
-        guard let realm = try? Realm() else { return }
+//        guard let realm = try? Realm() else { return }
         guard let salmonia = realm.objects(SalmoniaUserRealm.self).first else { return }
         realm.beginWrite()
         salmonia.isImported = user.isImported
@@ -106,11 +106,11 @@ struct SettingView: View {
     }
     
     // 通知を出す
-    func notification(title: Title, message: Message) {
+    func notification(title: Notification, message: Notification) {
         
         let content = UNMutableNotificationContent()
-        content.title = title.rawValue.localized
-        content.body = message.rawValue.localized
+        content.title = title.localizedDescription.localized
+        content.body = message.localizedDescription.localized
         content.sound = UNNotificationSound.default
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)

@@ -62,17 +62,29 @@ private struct WebKitView: View {
     }
     
     // 通知を出す
-    func notification(title: Title, message: Message) {
+    func notification(title: Notification, message: Notification) {
         
         let content = UNMutableNotificationContent()
-        content.title = title.rawValue.localized
-        content.body = message.rawValue.localized
+        content.title = title.localizedDescription.localized
+        content.body = message.localizedDescription.localized
         content.sound = UNNotificationSound.default
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
     }
 
+    func notification(title: Notification, error: Error) {
+        
+        let content = UNMutableNotificationContent()
+        content.title = title.localizedDescription.localized
+        content.body = error.localizedDescription.localized
+        content.sound = UNNotificationSound.default
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(request)
+    }
+
+    
     private var login: some View {
         Button(action: {
             WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
@@ -82,12 +94,13 @@ private struct WebKitView: View {
                         let laravel_session = cookie.value
                         do {
                             let api_token = try SalmonStats.getAPIToken(laravel_session)
-                            guard let realm = try? Realm() else { throw APIError.Response("0001", "Realm DB Error")}
+//                            guard let realm = try? Realm() else { throw APPError.realm }
                             let user = realm.objects(SalmoniaUserRealm.self)
                             try? realm.write { user.setValue(api_token, forKey: "api_token")}
                             notification(title: .success, message: .laravel)
                             return
                         } catch  {
+                            notification(title: .failure, error: error)
                         }
                     }
                 }

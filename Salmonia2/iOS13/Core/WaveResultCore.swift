@@ -36,4 +36,7 @@ class WaveResultCore: ObservableObject {
         }
     }
     
+    deinit {
+        token?.invalidate()
+    }
 }

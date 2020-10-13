@@ -45,4 +45,8 @@ class SalmoniaUserCore: ObservableObject {
             user.setValue(unlock, forKey: "isUnlock")
         }
     }
+    
+    deinit {
+        token?.invalidate()
+    }
 }
