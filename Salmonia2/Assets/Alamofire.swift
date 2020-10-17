@@ -32,10 +32,10 @@ public class SAF {
             }
         semaphore.wait()
         
-        guard let code = statusCode else { throw APPError.unknown }
-        guard let response = json else { throw APPError.unknown }
+        guard let code: Int = statusCode else { throw APPError.unknown }
+        guard let response: JSON = json else { throw APPError.unknown }
+        
         if code == 403 { throw APPError.expired }
-
         return response
     }
 }

@@ -30,7 +30,7 @@ struct WaveCollectionView: View {
             List {
                 ForEach(core.waves.indices, id:\.self) { idx in
                     NavigationLink(destination: ResultView(data: core.waves[idx].result.first!)) {
-                        WaveStack(data: core.waves[idx])
+                        WaveStack().environmentObject(core.waves[idx])
                     }
                 }
             }
@@ -38,7 +38,7 @@ struct WaveCollectionView: View {
         .navigationBarTitle("Waves")
         .navigationBarItems( trailing: filterButton)
     }
-
+    
     var filterButton: some View {
         HStack {
             Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
@@ -104,58 +104,41 @@ struct WaveCollectionView: View {
             core.update(event_type, water_level, stage_id)
         }
     }
-}
-
-
-private struct WaveStack: View {
-    private var stage_name: String?
-    private var event_type: String?
-    private var water_level: String?
-    private var ikura_num: Int
-    private var golden_ikura_num: Int
-    private var golden_ikura_pop_num: Int
-    private var collected_ratio: Double
     
-    init(data: WaveDetailRealm) {
-        stage_name = StageType.init(stage_id: data.result.first!.stage_id)!.stage_name
-        event_type = data.event_type.value
-        water_level = data.water_level.value
-        ikura_num = data.ikura_num
-        golden_ikura_num = data.golden_ikura_num
-        golden_ikura_pop_num = data.golden_ikura_pop_num
-        collected_ratio = (Double(golden_ikura_num) / Double(golden_ikura_pop_num) * 100).round(digit: 2)
-    }
-    
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    Text(String(collected_ratio) + "%")
-                    Text(stage_name.value.localized)
+    struct WaveStack: View {
+        @EnvironmentObject var data: WaveDetailRealm
+
+        var body: some View {
+            HStack {
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+//                        Text(String(collected_ratio) + "%")
+                        Text((StageType.init(stage_id: data.result.first!.stage_id)?.stage_name!.localized)!)
+                    }
+                    .font(.custom("Splatfont", size: 14)).foregroundColor(.yellow)
+                    HStack {
+                        Text(data.water_level!.localized)
+                        Text(data.event_type!.localized)
+                    }
                 }
-                .font(.custom("Splatfont", size: 14)).foregroundColor(.yellow)
-                HStack {
-                    Text(water_level.value.localized)
-                    Text(event_type.value.localized)
-                }
+                .font(.custom("Splatfont", size: 16))
+                // ブキとか？
+                // 金イクラ数とかの情報（イカリング2準拠スタイル）
+                Spacer()
+                VStack(alignment: .leading, spacing: 5) {
+                    HStack {
+                        URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+                            .frame(width: 20, height: 20)
+                        Text("x\(data.golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
+                    }
+                    HStack {
+                        URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+                            .frame(width: 20, height: 20)
+                        Text("x\(data.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
+                    }
+                }.frame(width: 80).font(.custom("Splatfont2", size: 16))
             }
-            .font(.custom("Splatfont", size: 16))
-            // ブキとか？
-            // 金イクラ数とかの情報（イカリング2準拠スタイル）
-            Spacer()
-            VStack(alignment: .leading, spacing: 5) {
-                HStack {
-                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
-                        .frame(width: 20, height: 20)
-                    Text("x\(golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
-                }
-                HStack {
-                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
-                        .frame(width: 20, height: 20)
-                    Text("x\(ikura_num)").frame(width: 50, height: 16, alignment: .leading)
-                }
-            }.frame(width: 80).font(.custom("Splatfont2", size: 16))
+            
         }
     }
 }
-

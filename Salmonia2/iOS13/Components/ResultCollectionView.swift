@@ -77,7 +77,7 @@ private struct ResultStack: View {
                     .font(.custom("Splatfont", size: 14))
                 }
                 
-            }.frame(width: 60).font(.custom("Splatfont", size: 16))
+            }.frame(maxWidth: 80).font(.custom("Splatfont", size: 16))
             // ブキとか？
             // 金イクラ数とかの情報（イカリング2準拠スタイル）
             Text(String(danger_rate)+"%").font(.custom("Splatfont", size: 16))
