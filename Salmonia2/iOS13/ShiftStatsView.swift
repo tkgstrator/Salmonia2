@@ -36,19 +36,19 @@ struct ShiftStatsView: View {
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
                 ShiftStatsStack(title: "Grade Point", value: stats.max_grade_point)
                 if (stats.job_num != 0) {
-                    NavigationLink(destination: ResultView(data: stats.max_results[0])) {
+                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[0])) {
                         ShiftStatsStack(title: "Team Power Eggs", value: stats.max_team_power_eggs)
                     }
-                    NavigationLink(destination: ResultView(data: stats.max_results[1])) {
+                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[1])) {
                         ShiftStatsStack(title: "Team Golden Eggs", value: stats.max_team_golden_eggs)
                     }
-                    NavigationLink(destination: ResultView(data: stats.max_results[2])) {
+                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[2])) {
                         ShiftStatsStack(title: "Power Eggs", value: stats.max_my_power_eggs)
                     }
-                    NavigationLink(destination: ResultView(data: stats.max_results[3])) {
+                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[3])) {
                         ShiftStatsStack(title: "Golden Eggs", value: stats.max_my_golden_eggs)
                     }
-                    NavigationLink(destination: ResultView(data: stats.max_results[4])) {
+                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[4])) {
                     ShiftStatsStack(title: "Boss Defeated", value: stats.max_defeated)
                     }
                 }

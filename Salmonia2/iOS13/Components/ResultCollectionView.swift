@@ -18,7 +18,7 @@ struct ResultCollectionView: View {
     var body: some View {
         List {
             ForEach(core.results.indices, id:\.self) { idx in
-                NavigationLink(destination: ResultView(data: core.results[idx])) {
+                NavigationLink(destination: ResultView().environmentObject(core.results[idx])) {
                     ResultStack().environmentObject(core.results[idx])
                 }
             }

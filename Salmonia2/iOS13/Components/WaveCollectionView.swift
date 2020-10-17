@@ -29,7 +29,7 @@ struct WaveCollectionView: View {
             .frame(height: 10)
             List {
                 ForEach(core.waves.indices, id:\.self) { idx in
-                    NavigationLink(destination: ResultView(data: core.waves[idx].result.first!)) {
+                    NavigationLink(destination: ResultView().environmentObject(core.waves[idx])) {
                         WaveStack().environmentObject(core.waves[idx])
                     }
                 }
