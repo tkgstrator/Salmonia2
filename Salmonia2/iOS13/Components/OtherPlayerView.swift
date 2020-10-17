@@ -83,8 +83,6 @@ struct OtherPlayerView: View {
                 switch response.result {
                 case .success(let value):
                     let results: [JSON] = JSON(value)["results"].reversed().map({ $0.1 })
-                    let salmon_ids: [Int] = results.map({ $0["id"].intValue })
-                    print(salmon_ids)
                     completion(SRPower(results))
                 case .failure:
                     break
@@ -157,9 +155,9 @@ struct OtherPlayerView: View {
     private var favButton: some View {
         switch player.isFav {
         case true:
-            return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "star.fill") })
+            return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "bookmark.fill").resizable().aspectRatio(contentMode: .fit).frame(height: 20) })
         case false:
-            return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "star.fill").foregroundColor(.gray) })
+            return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "bookmark.fill").resizable().aspectRatio(contentMode: .fit).frame(height: 20).foregroundColor(.gray) })
         }
     }
     
@@ -177,7 +175,6 @@ struct OtherPlayerView: View {
             case false:
                 guard let index = user.favuser.index(of: player) else { return }
                 user.favuser.remove(at: index)
-            break
             }
         }
     }

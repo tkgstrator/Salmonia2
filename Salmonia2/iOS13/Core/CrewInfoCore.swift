@@ -29,7 +29,6 @@ class CrewInfoCore: ObservableObject {
     init(_ pid: String) {
         token = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).observe { [self] _ in
             guard let crew = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
-            guard let favuser = realm.objects(SalmoniaUserRealm.self).first?.favuser.filter("nsaid=%@", pid) else { return }
             nsaid = pid
             imageUri = crew.image
             nickname = crew.name
@@ -38,7 +37,6 @@ class CrewInfoCore: ObservableObject {
             defeated = crew.boss_defeated
             golden_ikura_total = crew.golden_ikura_total
             srpower = crew.srpower.value
-            isFav = !favuser.isEmpty
         }
     }
     

@@ -49,7 +49,7 @@ struct ResultView: View {
             Image(systemName: "info.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
                 isEnable.toggle()
             }.sheet(isPresented: $isEnable) {
-                
+                ResultDetailView().environmentObject(result.player)
             }
         }
     }
@@ -185,6 +185,103 @@ struct ResultView: View {
             .onAppear() {
                 SalmonStats.getPlayerOverView(nsaid: player.nsaid!)
             }
+        }
+    }
+    
+    private struct ResultDetailView: View {
+        @EnvironmentObject var players: RealmSwift.List<PlayerResultsRealm>
+
+        init() {
+            
+        }
+        
+        var body: some View {
+            List {
+                ForEach(players, id:\.self) { player in
+                    HStack {
+                        VStack(spacing: 0) {
+                            URLImage(URL(string: player.imageUri)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                                .frame(width: 60, height: 60)
+                            Text(player.name!).minimumScaleFactor(0.8).lineLimit(1)
+                        }.frame(width: 100)
+                        VStack(spacing: 0) {
+                            HStack {
+                                Geggs
+                                Text("\(player.golden_ikura_num)")
+                                Peggs
+                                Text("\(player.ikura_num)")
+                            }
+                            HStack {
+                                Boss3
+                                Text("\(player.boss_kill_counts[0])")
+                                Boss6
+                                Text("\(player.boss_kill_counts[1])")
+                                Boss9
+                                Text("\(player.boss_kill_counts[2])")
+                                Boss12
+                                Text("\(player.boss_kill_counts[3])")
+                            }
+                            HStack {
+                                Boss13
+                                Text("\(player.boss_kill_counts[4])")
+                                Boss14
+                                Text("\(player.boss_kill_counts[5])")
+                                Boss15
+                                Text("\(player.boss_kill_counts[6])")
+                                Boss16
+                                Text("\(player.boss_kill_counts[7])")
+                                Boss21
+                                Text("\(player.boss_kill_counts[8])")
+                            }
+                        }.frame(maxWidth: .infinity)
+                    }
+                }
+            }.modifier(Splatfont(size: 16))
+        }
+        
+        private var Geggs: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+                .frame(width: 25, height: 25)
+        }
+        private var Peggs: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+                .frame(width: 25, height: 25)
+        }
+        private var Boss3: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/9b2673de42f00d4fd836bd4684741505.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
+        }
+        private var Boss6: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/337dde2c83705a75263aefdc15740f1c.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
+        }
+        private var Boss9: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/631ea65c8cc2d9fd04f6c7458914d030.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
+        }
+        private var Boss12: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/79d75f769115befab060b27401538402.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
+        }
+        private var Boss13: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2466752cf11ef6326e2add430101bff6.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
+        }
+        private var Boss14: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/862656b37d071e75ad31750c9e18ed15.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
+        }
+        private var Boss15: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/367e6e1c33ab3ae2a1c857f4c75f017e.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
+        }
+        private var Boss16: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/7f8e44737240e3caa52d6c4f457164d9.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
+        }
+        private var Boss21: some View {
+            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/7ecdec1e23a3d0089b38038b0217827c.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                .frame(width: 30, height: 30)
         }
     }
 }

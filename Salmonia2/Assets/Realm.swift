@@ -166,6 +166,12 @@ class PlayerResultsRealm: Object {
     }
 }
 
+extension PlayerResultsRealm {
+    var imageUri: String {
+        return realm?.objects(CrewInfoRealm.self).filter("nsaid=%@", self.nsaid!).first?.image ?? "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/56a95fe848fd7f41"
+    }
+}
+
 class CoopShiftRealm: Object, Codable {
     
     @objc dynamic var start_time: Int = 0
