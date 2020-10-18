@@ -22,14 +22,13 @@ struct WaveCollectionView: View {
     
     var body: some View {
         Group {
-            HStack {
-                Text("Found: \(core.waves.count)")
-            }
+            Text("Found: \(core.waves.count)").frame(maxWidth: .infinity)
             .font(.custom("Splatfont", size: 16))
             .frame(height: 10)
+            Divider()
             List {
                 ForEach(core.waves.indices, id:\.self) { idx in
-                    NavigationLink(destination: ResultView().environmentObject(core.waves[idx])) {
+                    NavigationLink(destination: ResultView().environmentObject(core.waves[idx].result.first!)) {
                         WaveStack().environmentObject(core.waves[idx])
                     }
                 }

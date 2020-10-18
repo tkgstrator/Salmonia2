@@ -162,14 +162,13 @@ struct OtherPlayerView: View {
     }
     
     private func onToggleFav() {
-        guard let realm = try? Realm() else { return }
         guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
         guard let player = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", player.nsaid).first else { return }
-        // あるなら追加、無いなら
-        let _favuser = user.favuser.filter("nsaid=%@", player.nsaid)
+        let favuser = user.favuser.filter("nsaid=%@", player.nsaid)
         
         try! realm.write {
-            switch _favuser.isEmpty {
+            player.isFav.toggle()
+            switch favuser.isEmpty {
             case true:
                 user.favuser.append(player)
             case false:

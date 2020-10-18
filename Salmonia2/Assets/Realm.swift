@@ -58,6 +58,7 @@ class CrewInfoRealm: Object {
     @objc dynamic var help_count: Int = 0
     let evalValue = RealmOptional<Double>()
     let srpower = RealmOptional<Double>()
+    @objc dynamic var isFav: Bool = false
     @objc dynamic var lastUpdated: Int = 0
     
     convenience required init(name: String, image: String, nsaid: String) {

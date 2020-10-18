@@ -37,6 +37,7 @@ class CrewInfoCore: ObservableObject {
             defeated = crew.boss_defeated
             golden_ikura_total = crew.golden_ikura_total
             srpower = crew.srpower.value
+            isFav = crew.isFav
         }
     }
     

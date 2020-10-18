@@ -95,10 +95,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func realmMigration() {
         // データベースのマイグレーション
         var config = Realm.Configuration(
-            schemaVersion: 7,
+            schemaVersion: 8,
             migrationBlock: { migration, oldSchemaVersion in
                 print(oldSchemaVersion, migration)
-                if (oldSchemaVersion < 7) {
+                if (oldSchemaVersion < 8) {
                     migration.enumerateObjects(ofType: SalmoniaUserRealm.className()) { _, newObject in
                         newObject!["isUnlock"] = [false, false, false]
                     }

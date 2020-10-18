@@ -43,8 +43,17 @@ struct ResultView: View {
     
     private var Button: some View {
         HStack {
-            Image(systemName: "person.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
-                isVisible.toggle()
+            if isVisible {
+                Image(systemName: "person.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30)
+                    .onTapGesture() {
+                    isVisible.toggle()
+                }
+            } else {
+                Image(systemName: "person.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30)
+                    .foregroundColor(.gray)
+                    .onTapGesture() {
+                    isVisible.toggle()
+                }
             }
             Image(systemName: "info.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
                 isEnable.toggle()
@@ -154,9 +163,9 @@ struct ResultView: View {
             NavigationLink(destination: SalmonStatsView().environmentObject(CrewInfoCore(player.nsaid!))) {
                 VStack(spacing: 0) {
                     HStack {
-                        Text(isVisible ? player.name.value : "-").font(.custom("Splatfont2", size: 22)).frame(width: 120)
+                        Text(isVisible ? player.name.value : "-").font(.custom("Splatfont2", size: 20)).frame(width: 140)
                         Spacer()
-                        Text("x\(player.boss_kill_counts.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 24))
+                        Text("x\(player.boss_kill_counts.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 20))
                         Spacer()
                         URLImage(FImage.getURL(player.special_id, 2), content: {$0.image.resizable()})
                             .frame(width: 30, height: 30)
@@ -190,10 +199,6 @@ struct ResultView: View {
     
     private struct ResultDetailView: View {
         @EnvironmentObject var players: RealmSwift.List<PlayerResultsRealm>
-
-        init() {
-            
-        }
         
         var body: some View {
             List {
@@ -203,7 +208,7 @@ struct ResultView: View {
                             URLImage(URL(string: player.imageUri)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                                 .frame(width: 60, height: 60)
                             Text(player.name!).minimumScaleFactor(0.8).lineLimit(1)
-                        }.frame(width: 100)
+                        }.frame(width: 90)
                         VStack(spacing: 0) {
                             HStack {
                                 Geggs
@@ -211,7 +216,7 @@ struct ResultView: View {
                                 Peggs
                                 Text("\(player.ikura_num)")
                             }
-                            HStack {
+                            HStack(spacing: 5) {
                                 Boss3
                                 Text("\(player.boss_kill_counts[0])")
                                 Boss6
@@ -221,7 +226,7 @@ struct ResultView: View {
                                 Boss12
                                 Text("\(player.boss_kill_counts[3])")
                             }
-                            HStack {
+                            HStack(spacing: 5) {
                                 Boss13
                                 Text("\(player.boss_kill_counts[4])")
                                 Boss14
@@ -236,16 +241,16 @@ struct ResultView: View {
                         }.frame(maxWidth: .infinity)
                     }
                 }
-            }.modifier(Splatfont(size: 16))
+            }.modifier(Splatfont(size: 15))
         }
         
         private var Geggs: some View {
             URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
-                .frame(width: 25, height: 25)
+                .frame(width: 20, height: 20)
         }
         private var Peggs: some View {
             URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
-                .frame(width: 25, height: 25)
+                .frame(width: 20, height: 20)
         }
         private var Boss3: some View {
             URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/9b2673de42f00d4fd836bd4684741505.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})

@@ -16,6 +16,7 @@ struct CrewSearchView: View {
     @State var players: [Player] = []
     @State var nickname: String = ""
     @State var isDisabled: Bool = false
+    @State var isEditing: Bool = false
     
     struct Player: Hashable {
         let id: Int?
@@ -36,9 +37,12 @@ struct CrewSearchView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("Enter user name", text: $nickname).multilineTextAlignment(.center)
-                searchButton
-                Spacer()
+                TextField("Enter user name", text: $nickname, onEditingChanged: { onEditing in
+                    isEditing = onEditing
+                }, onCommit: {
+                    searchPlayer(keyword: nickname)
+                })
+                .textFieldStyle(RoundedBorderTextFieldStyle())
             }.font(.custom("Roboto Mono", size: 22))
             Divider()
             List {

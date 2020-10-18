@@ -583,7 +583,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "5115">
+                  offsetFromSymbolStart = "3984">
                </Location>
                <Location
                   uuid = "09344D97-B003-4CC5-B859-F282BF8C948B - b44d46ec85478d6b"
@@ -598,7 +598,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "58"
                   endingLineNumber = "58"
-                  offsetFromSymbolStart = "397">
+                  offsetFromSymbolStart = "516">
                </Location>
             </Locations>
          </BreakpointContent>
