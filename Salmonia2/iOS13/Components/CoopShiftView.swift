@@ -14,10 +14,10 @@ struct CoopShiftView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("Shift Schedule").foregroundColor(.cOrange).modifier(Splatfont(size: 20))
+            Text("Shift Schedule").foregroundColor(.cOrange).modifier(Splatfont(size: 20)).frame(maxWidth: .infinity).background(Color.cDarkGray).padding(.bottom, 8)
             ForEach(phases.data.indices, id:\.self) { idx in
                 NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phases.data[idx].start_time)).environmentObject(SalmoniaUserCore())) {
-                    CoopShiftStack(phase: $phases.data[idx])
+                    CoopShiftStack(phase: $phases.data[idx]).padding(.horizontal, 10)
                 }.buttonStyle(PlainButtonStyle())
             }
         }

@@ -120,6 +120,7 @@ extension Color {
     static let cDarkRed = Color("cDarkRed")
     static let cOrange = Color("cOrange")
     static let cGray = Color("cGray")
+    static let cDarkGray = Color("cDarkGray")
     static let cLightGray = Color("cLightGray")
     static let cBlue = Color("cBlue")
 }

@@ -14,7 +14,7 @@ struct OptionView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Text("Options").foregroundColor(.cOrange).modifier(Splatfont(size: 20))
+            Text("Options").foregroundColor(.cOrange).modifier(Splatfont(size: 20)).frame(maxWidth: .infinity).background(Color.cDarkGray)
             WaveSearch
             CrewSearch
             CoopShift

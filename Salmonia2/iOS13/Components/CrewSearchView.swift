@@ -15,7 +15,6 @@ struct CrewSearchView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @State var players: [Player] = []
     @State var nickname: String = ""
-    @State var isDisabled: Bool = false
     @State var isEditing: Bool = false
     
     struct Player: Hashable {
@@ -69,16 +68,11 @@ struct CrewSearchView: View {
         .padding(.horizontal, 10)
     }
     
-    private var searchButton: some View {
-        Button(action: { searchPlayer(keyword: nickname) }) { Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).disabled(isDisabled) }
-    }
-    
     private func searchPlayer(keyword: String) {
         do {
             guard let iksm_session = user.account.first?.iksm_session else { throw APPError.iksm }
             DispatchQueue(label: "Search").async {
                 do {
-                    isDisabled.toggle()
                     if keyword.isEmpty { throw APPError.noempty }
                     players.removeAll()
 
@@ -87,7 +81,7 @@ struct CrewSearchView: View {
                     var response = try SAF.request(url)
                     var _users = response["users"].map({$0.1})
                     _users.append(contentsOf: response["names"].map({$0.1}))
-                    let nsaids: [String] = Array(_users.map({ $0["player_id"].stringValue }).prefix(5))
+                    let nsaids: [String] = Array(Set(_users.map({ $0["player_id"].stringValue })).prefix(5))
                     
                     // 任天堂公式APIからデータを取得
                     response = try SplatNet2.getPlayerNickName(nsaids, iksm_session: iksm_session)
@@ -103,13 +97,10 @@ struct CrewSearchView: View {
                         players.append(Player(player: json))
                     }
                     try realm.commitWrite()
-                    isDisabled.toggle()
                 } catch {
-                    isDisabled.toggle()
                 }
             }
         } catch {
-            isDisabled.toggle()
         }
     }
 }

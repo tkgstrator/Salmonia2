@@ -10,8 +10,7 @@ import URLImage
 
 struct PlayerView: View {
     @EnvironmentObject var user: UserInfoCore
-//    @EnvironmentObject var card: UserCardCore
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -19,10 +18,11 @@ struct PlayerView: View {
                     URLImage(URL(string: user.imageUri)!,
                              content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                         .frame(width: 80, height: 80)
-                }.buttonStyle(PlainButtonStyle())
+                }
+                //                .buttonStyle(PlainButtonStyle())
                 Text(user.nickname).modifier(Splatfont(size: 28)).frame(maxWidth: .infinity)
-            }
-            Text("Overview".localized).foregroundColor(.cOrange).modifier(Splatfont(size: 20)).minimumScaleFactor(0.8).lineLimit(1)
+            }.padding(.horizontal, 10)
+            Text("Overview".localized).foregroundColor(.cOrange).font(.custom("Splatfont", size: 21)).frame(maxWidth: .infinity).background(Color.cDarkGray).padding(.bottom, 5)
             HStack {
                 Spacer()
                 VStack(spacing: 0) {
@@ -39,11 +39,9 @@ struct PlayerView: View {
                     }
                 }
                 Spacer()
-                //                VStack(spacing: 0) {
-//                    Text("Points")
-//                    Text("\(card.kuma_point_total)")
-//                }
-            }.modifier(Splatfont(size: 18))
+            }.padding(.bottom, 5)
+            .modifier(Splatfont(size: 18))
+            .padding(.horizontal, 10)
         }
     }
 }

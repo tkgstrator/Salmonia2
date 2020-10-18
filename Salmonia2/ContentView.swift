@@ -12,6 +12,7 @@ struct ContentView: View {
         NavigationView {
             SalmoniaView()
         }
+        .environmentObject(UserInfoCore())
     }
 }
 

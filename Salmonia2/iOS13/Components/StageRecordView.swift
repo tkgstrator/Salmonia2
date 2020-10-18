@@ -12,9 +12,11 @@ struct StageRecordView: View {
     var body: some View {
         VStack(spacing: 10) {
             Text("Stage Records")
-                .frame(height: 28)
                 .foregroundColor(.cOrange)
                 .font(.custom("Splatfont", size: 20))
+                .frame(maxWidth: .infinity)
+                .background(Color.cDarkGray)
+                .padding(.bottom, 5)
             ForEach(StageType.allCases, id:\.self) { stage in
                 NavigationLink(destination: StageRecordsView().environmentObject(StageRecordCore(stage.stage_id!))) {
                     HStack {
@@ -24,12 +26,12 @@ struct StageRecordView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
                         //Spacer()
                         Group {
-                            Text(stage.stage_name!.localized).font(.custom("Splatfont", size: 20)).minimumScaleFactor(0.7).lineLimit(1)
+                            Text(stage.stage_name!.localized).font(.custom("Splatfont", size: 18.5)).minimumScaleFactor(0.7).lineLimit(1)
                         }.frame(maxWidth: .infinity)
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
-            }
+            }.padding(.horizontal, 10)
         }
     }
 }
