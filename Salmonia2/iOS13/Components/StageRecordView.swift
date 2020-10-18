@@ -92,12 +92,12 @@ private struct StageRecordsView: View {
                         Spacer()
                     }) {
                         ForEach(Range(0 ... 6)) { event in
-                            Group {
-                                if (self.record.golden_eggs[tide][event] != nil) {
+                            if record.golden_eggs[tide][event] != nil {
+                                NavigationLink(destination: ResultView().environmentObject(record.salmon_id[tide][event]!)) {
                                     HStack {
                                         Text("\((EventType.init(event_id: event)?.event_name)!.localized)")
                                         Spacer()
-                                        Text("\(self.record.golden_eggs[tide][event].value)")
+                                        Text("\(record.golden_eggs[tide][event].value)")
                                     }
                                 }
                             }

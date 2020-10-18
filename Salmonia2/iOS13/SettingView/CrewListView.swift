@@ -51,9 +51,9 @@ struct CrewListView: View {
     private var CrewFilterView: some View {
         List {
             Section(header: HStack {
-                Text("Sorting Fav Crew Memver").frame(maxWidth: .infinity).font(.custom("Splatfont", size: 22))
+                Text("Sorting Fav Crew Member").frame(maxWidth: .infinity).font(.custom("Splatfont", size: 22))
             }) {
-                Picker("SR Power", selection: $selection) {
+                Picker("", selection: $selection) {
                     Text("Job Nums").tag(0)
                     Text("SR Power").tag(1)
                     Text("Avg Power Eggs").tag(2)
