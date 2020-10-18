@@ -17,12 +17,11 @@ struct PlayerView: View {
                 NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) {
                     URLImage(URL(string: user.imageUri)!,
                              content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
-                        .frame(width: 80, height: 80)
-                }
-                //                .buttonStyle(PlainButtonStyle())
-                Text(user.nickname).modifier(Splatfont(size: 28)).frame(maxWidth: .infinity)
+                        .frame(width: 85, height: 85)
+                }.buttonStyle(PlainButtonStyle())
+                Text(user.nickname).modifier(Splatfont(size: 29)).frame(maxWidth: .infinity)
             }.padding(.horizontal, 10)
-            Text("Overview".localized).foregroundColor(.cOrange).font(.custom("Splatfont", size: 21)).frame(maxWidth: .infinity).background(Color.cDarkGray).padding(.bottom, 5)
+            Text("Overview".localized).foregroundColor(.cOrange).font(.custom("Splatfont", size: 21)).frame(maxWidth: .infinity).frame(height: 32).background(Color.cDarkGray).padding(.bottom, 5)
             HStack {
                 Spacer()
                 VStack(spacing: 0) {

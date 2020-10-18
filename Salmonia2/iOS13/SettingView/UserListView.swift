@@ -30,11 +30,24 @@ struct UserListView: View {
             .onMove(perform: onMove)
 //            .onDelete(perform: onDelete)
         }
-        .navigationBarTitle("User List")
+        .navigationBarTitle("My Account")
         .modifier(Splatfont(size: 20))
 //        .navigationBarItems(leading: addButton, trailing: EditButton())
-        .navigationBarItems(leading: addButton, trailing: EditButton().font(.system(size: 18)))
+        .navigationBarItems(trailing: Login)
         .environment(\.editMode, $editMode)
+    }
+    
+    private var Login: some View {
+        HStack(spacing: 10) {
+            switch editMode {
+            case .active:
+                EmptyView().frame(width: 0)
+            default:
+                Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Text("Add") }
+//                Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Image(systemName: "plus") }
+            }
+            EditButton()
+        }.font(.system(size: 18))
     }
     
     private func onActive(idx: Int) {
@@ -53,15 +66,6 @@ struct UserListView: View {
     private func onMove(source: IndexSet, destination: Int) {
         try? Realm().write {
             user.account.move(fromOffsets: source, toOffset: destination)
-        }
-    }
-    
-    private var addButton: some View {
-        switch editMode {
-        case .active:
-            return AnyView(Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Image(systemName: "plus") })
-        default:
-            return AnyView(EmptyView().frame(width: 0))
         }
     }
     

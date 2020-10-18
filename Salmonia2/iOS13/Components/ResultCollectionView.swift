@@ -16,14 +16,20 @@ struct ResultCollectionView: View {
     @State var isEnable: [Bool] = [true, true, true, true, true]
     
     var body: some View {
-        List {
-            ForEach(core.results.indices, id:\.self) { idx in
-                NavigationLink(destination: ResultView().environmentObject(core.results[idx])) {
-                    ResultStack().environmentObject(core.results[idx])
+        Group {
+            Text("Found: \(core.results.count)").frame(maxWidth: .infinity)
+            .font(.custom("Splatfont", size: 16))
+            .frame(height: 10)
+            Divider()
+            List {
+                ForEach(core.results.indices, id:\.self) { idx in
+                    NavigationLink(destination: ResultView().environmentObject(core.results[idx])) {
+                        ResultStack().environmentObject(core.results[idx])
+                    }
                 }
             }
         }
-        .navigationBarTitle("Results")
+        .navigationBarTitle("Results", displayMode: .large)
         .navigationBarItems(
             trailing:
                 HStack {

@@ -97,6 +97,7 @@ struct ImportResultView: View {
                     isLock = false
                 }
             }
+            .navigationBarTitle("Logging Thread", displayMode: .large)
     }
     
 

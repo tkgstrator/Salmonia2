@@ -126,7 +126,6 @@ struct OtherPlayerView: View {
                 ilorate = ((ilorate ?? 0.0) + delta).round(digit: 2)
             }
         }
-        print(ilorate)
         return ilorate
     }
 

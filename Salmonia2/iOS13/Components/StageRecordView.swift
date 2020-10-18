@@ -15,6 +15,7 @@ struct StageRecordView: View {
                 .foregroundColor(.cOrange)
                 .font(.custom("Splatfont", size: 20))
                 .frame(maxWidth: .infinity)
+                .frame(height: 32)
                 .background(Color.cDarkGray)
                 .padding(.bottom, 5)
             ForEach(StageType.allCases, id:\.self) { stage in

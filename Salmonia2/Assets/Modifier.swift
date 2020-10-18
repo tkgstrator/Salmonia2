@@ -22,19 +22,7 @@ struct Splatfont: ViewModifier {
 }
 
 
-
-struct SettingsHeader: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .navigationBarItems(trailing:
-                                    NavigationLink(destination: WebKitView())
-                                    {
-                                        Image(systemName: "snow").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)
-                                    })
-    }
-}
-
-private struct WebKitView: View {
+struct WebKitView: View {
     var body: some View {
         WebView(request: URLRequest(url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter")!))
             .navigationBarTitle("SalmonStats")
@@ -48,22 +36,22 @@ private struct WebKitView: View {
         content.title = title.localizedDescription.localized
         content.body = message.localizedDescription.localized
         content.sound = UNNotificationSound.default
-
+        
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
     }
-
+    
     func notification(title: Notification, error: Error) {
         
         let content = UNMutableNotificationContent()
         content.title = title.localizedDescription.localized
         content.body = error.localizedDescription.localized
         content.sound = UNNotificationSound.default
-
+        
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
     }
-
+    
     
     private var login: some View {
         Button(action: {
@@ -74,7 +62,7 @@ private struct WebKitView: View {
                         let laravel_session = cookie.value
                         do {
                             let api_token = try SalmonStats.getAPIToken(laravel_session)
-//                            guard let realm = try? Realm() else { throw APPError.realm }
+                            //                            guard let realm = try? Realm() else { throw APPError.realm }
                             let user = realm.objects(SalmoniaUserRealm.self)
                             try? realm.write { user.setValue(api_token, forKey: "api_token")}
                             notification(title: .success, message: .laravel)

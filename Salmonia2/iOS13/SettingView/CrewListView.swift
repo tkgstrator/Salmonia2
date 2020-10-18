@@ -14,32 +14,42 @@ struct CrewListView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @State private var editMode = EditMode.inactive
     @State var isVisible: Bool = false
+    @State var isFinding: Bool = false
     @State var selection: Int = 0
-//    @State var isVisible: Bool = false
+    //    @State var isVisible: Bool = false
     
     var body: some View {
-        VStack {
-            SortButton
-            Divider()
-            List {
-                ForEach(user.favuser.indices, id:\.self) { idx in
-                    NavigationLink(destination: OtherPlayerView().environmentObject(CrewInfoCore(user.favuser[idx].nsaid))) {
-                        HStack {
-                            URLImage(URL(string: user.favuser[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
-                                .frame(width: 60, height: 60)
-                            Text(user.favuser[idx].name).frame(maxWidth: .infinity)
-                            Text(user.favuser[idx].evalValue.value.value).frame(minWidth: 60)
-                        }
+        //        VStack {
+        //            SortButton
+        //            Divider()
+        List {
+            ForEach(user.favuser.indices, id:\.self) { idx in
+                NavigationLink(destination: OtherPlayerView().environmentObject(CrewInfoCore(user.favuser[idx].nsaid))) {
+                    HStack {
+                        URLImage(URL(string: user.favuser[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                            .frame(width: 60, height: 60)
+                        Text(user.favuser[idx].name).frame(maxWidth: .infinity)
+                        Text(user.favuser[idx].evalValue.value.value).frame(minWidth: 60)
                     }
                 }
-                .onMove(perform: onMove)
-                .onDelete(perform: onDelete)
             }
+            .onMove(perform: onMove)
+            .onDelete(perform: onDelete)
         }
-        .navigationBarTitle("Fav Crews")
-        .modifier(Splatfont(size: 20))
-        .navigationBarItems(trailing: EditButton().font(.system(size: 18)))
+        //        }
+        .navigationBarItems(trailing: AddButton)
         .environment(\.editMode, $editMode)
+        .navigationBarTitle("Fav Crews", displayMode: .large)
+        .modifier(Splatfont(size: 20))
+    }
+    
+    private var AddButton: some View {
+        HStack {
+            NavigationLink(destination: CrewSearchView().environmentObject(SalmoniaUserCore())) {
+                Text("Add")
+            }
+            EditButton()
+        }.font(.system(size: 18))
     }
     
     private var SortButton: some View {

@@ -10,9 +10,6 @@ import RealmSwift
 
 class WaveResultCore: ObservableObject {
     private var token: NotificationToken?
-//    private var realm = try! Realm()
-//    private var core = try! Realm().objects(WaveDetailRealm.self)
-    
     @Published var waves = try! Realm().objects(WaveDetailRealm.self).sorted(byKeyPath: "golden_ikura_num", ascending: false)
     
     // フィルタリングとソーティングを解除

@@ -64,7 +64,7 @@ struct CrewSearchView: View {
                 }.modifier(Splatfont(size: 18))
             }
         }
-        .navigationBarTitle("Crew Search")
+        .navigationBarTitle("Crew Search", displayMode: .large)
         .padding(.horizontal, 10)
     }
     

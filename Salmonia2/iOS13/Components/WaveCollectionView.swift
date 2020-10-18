@@ -34,7 +34,7 @@ struct WaveCollectionView: View {
                 }
             }
         }
-        .navigationBarTitle("Waves")
+        .navigationBarTitle("Waves", displayMode: .large)
         .navigationBarItems( trailing: filterButton)
     }
     

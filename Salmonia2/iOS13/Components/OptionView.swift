@@ -14,10 +14,10 @@ struct OptionView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Text("Options").foregroundColor(.cOrange).modifier(Splatfont(size: 20)).frame(maxWidth: .infinity).background(Color.cDarkGray)
-            WaveSearch
+            Text("Options").foregroundColor(.cOrange).modifier(Splatfont(size: 20)).frame(maxWidth: .infinity).frame(height: 32).background(Color.cDarkGray)
+//            WaveSearch
             CrewSearch
-            CoopShift
+//            CoopShift
         }
     }
     
@@ -38,7 +38,7 @@ struct OptionView: View {
         .buttonStyle(PlainButtonStyle())
     }
     
-    private var CoopShift: some View {
+    var CoopShift: some View {
         NavigationLink(destination: PastCoopShiftView().environmentObject(CoopShiftCore())) {
             HStack {
                 ZStack {
@@ -54,28 +54,27 @@ struct OptionView: View {
         }
         .buttonStyle(PlainButtonStyle())
     }
-
+    
     private var CrewSearch: some View {
-        NavigationLink(destination: CrewSearchView().environmentObject(SalmoniaUserCore())) {
+        NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) {
             HStack {
                 ZStack {
                     Image("CoopBar")
                         .renderingMode(.template)
                         .resizable()
                         .scaledToFit()
-                        .foregroundColor(.cGray)
-                    Text("Crew Search").font(.custom("Splatfont2", size: 22))
+                        .foregroundColor(.cDarkGray)
+                    Text("Favorite Crew").font(.custom("Splatfont2", size: 22))
                 }
             }
             .frame(maxWidth: 300)
         }
         .buttonStyle(PlainButtonStyle())
     }
-
     
 }
 
-private struct PastCoopShiftView: View {
+struct PastCoopShiftView: View {
     @EnvironmentObject var phase: CoopShiftCore
     
     @State var isVisible: Bool = false
@@ -112,7 +111,7 @@ private struct PastCoopShiftView: View {
                     proxy.scrollTo((phase.all.count - 1), anchor: .center)
                 }
             }
-            .navigationBarTitle("Coop Shift Rotation")
+            .navigationBarTitle("Coop Shift Rotation", displayMode: .large)
             .navigationBarItems(trailing: filterButton)
         } else {
             List {
@@ -234,7 +233,7 @@ private struct PastCoopShiftView: View {
                     .padding(.bottom, 15)
                     .frame(maxWidth: .infinity)
                 }
-//                .frame(maxHeight: 81)
+                //                .frame(maxHeight: 81)
             }
             .frame(maxHeight: 81)
         }

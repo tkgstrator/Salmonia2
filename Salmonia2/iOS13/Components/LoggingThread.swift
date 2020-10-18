@@ -53,8 +53,8 @@ struct LoggingThread: View {
             }
         }
         .font(.custom("Roboto Mono", size: 14))
-        .navigationBarTitle("Logging Thread")
-        .navigationBarBackButtonHidden(lock)
+        .navigationBarTitle("Logging Thread", displayMode: .large)
+//        .navigationBarBackButtonHidden(lock)
     }
 }
 
