@@ -26,9 +26,9 @@ class StageRecordCore: ObservableObject {
             let results = realm.objects(CoopResultsRealm.self).filter("stage_id=%@", id).sorted(byKeyPath: "play_time")
             let waves = realm.objects(WaveDetailRealm.self).filter("ANY result.stage_id=%@", id)
             
-            job_num = results.count
+            job_num = results.count == 0 ? nil : results.count
             // 各記録を計算する
-            clear_ratio = (job_num != 0) ? (Double(results.filter("is_clear=%@", true).count * 100) / Double(job_num!)).round(digit: 4) : nil
+            clear_ratio = (job_num != nil) ? (Double(results.filter("is_clear=%@", true).count * 100) / Double(job_num!)).round(digit: 4) : nil
             grade_point = results.max(ofProperty: "grade_point") // 最高評価
 //            srpower = SRPower(results)
             

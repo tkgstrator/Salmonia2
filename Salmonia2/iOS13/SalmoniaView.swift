@@ -23,7 +23,7 @@ struct SalmoniaView: View {
                 PlayerView().padding(.top, 15)
                 CoopShiftView()
                 StageRecordView()
-                OptionView()
+//                OptionView()
             }
             Update().padding(.trailing, 20).padding(.bottom, 20)
         }
@@ -31,11 +31,10 @@ struct SalmoniaView: View {
         .environmentObject(CoopShiftCore())
         .environmentObject(UserResultCore())
 //        .navigationBarHidden(true)
-        .navigationBarTitle("", displayMode: .inline)
-        .navigationBarItems(leading: Title, trailing: HStack(spacing: 15) {
+        .navigationBarTitle("Salmonia")
+        .navigationBarItems(leading: Setting, trailing: HStack(spacing: 15) {
             Search
             SalmonStats
-            Setting
         })
     }
     
@@ -45,7 +44,7 @@ struct SalmoniaView: View {
     
     private var User: some View {
         HStack {
-            URLImage(URL(string: user.imageUri)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: user.imageUri)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
                 .frame(width: 35, height: 35)
             Spacer()
             Text(user.nickname).modifier(Splatfont(size: 24)).frame(maxWidth: .infinity)

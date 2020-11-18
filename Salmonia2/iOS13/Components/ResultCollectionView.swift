@@ -29,24 +29,27 @@ struct ResultCollectionView: View {
                 }
             }
         }
-        .navigationBarTitle("Results", displayMode: .large)
-        .navigationBarItems(
-            trailing:
-                HStack {
-                    NavigationLink(destination: LoadingView())
-                    {
-                        URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!,
-                                 content: {$0.image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
-                            .frame(width: 30, height: 30)
-                    }
-                    Spacer()
-                    Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
-                        self.isVisible.toggle()
-                    }.sheet(isPresented: $isVisible) {
-                        ResultFilterView(core: core, sliderValue: $sliderValue, isEnable: $isEnable)
-                    }
-                }
-        )
+        .navigationBarTitle("Results")
+//        .navigationBarTitle(Text("Results " + String(core.results.count)), displayMode: .large)
+        .navigationBarItems(trailing: AddButton)
+
+    }
+    
+    private var AddButton: some View {
+        HStack(spacing: 15) {
+            NavigationLink(destination: LoadingView())
+            {
+                URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!,
+                         content: {$0.image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                    .frame(width: 30, height: 30)
+            }
+            Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
+                self.isVisible.toggle()
+            }.sheet(isPresented: $isVisible) {
+                ResultFilterView(core: core, sliderValue: $sliderValue, isEnable: $isEnable)
+            }
+        }
+        
     }
     
     private struct ResultStack: View {

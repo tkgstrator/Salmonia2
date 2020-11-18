@@ -7,8 +7,22 @@
 "User List" = "ユーザリスト";
 "Wave Search" = "WAVE検索";
 "Crew Search" = "プレイヤー検索";
+"My Accounts" = "マイアカウント";
+"Sign in" = "サインイン";
 "Coop Shift Rotation" = "バイトシフト一覧";
+"Add" = "追加";
 
+// Unlock Feature
+"Free" = "無料";
+"Paid" = "有料";
+"Donation" = "寄付";
+"Multiple Accounts" = "複数アカウント";
+"Monthly Pass" = "月額登録";
+"$3.99" = "¥500";
+
+"PU01" = "複数アカウントを有効化します";
+"PU02" = "開発者を応援します";
+"PU03" = "開発者を応援します";
 
 // General Sentence
 "Registered" = "トウロク";
@@ -27,6 +41,7 @@
 "Eggs" = "集めたイクラ";
 "Shift Schedule" = "シフトスケジュール";
 "Stage Records" = "ステージキロク";
+"Favorite Crew" = "お気に入りユーザ";
 
 // In Fearure View
 "Future Rotation" = "未来のシフト表示";

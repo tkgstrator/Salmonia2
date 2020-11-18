@@ -1,43 +1,43 @@
 {
   "products" : [
     {
-      "displayPrice" : "3.99",
+      "displayPrice" : "0.00",
       "familyShareable" : false,
       "internalID" : "EE59DF22",
       "localizations" : [
         {
-          "description" : "Give Dr.Pepper to developer.",
-          "displayName" : "Dr. Pepper",
+          "description" : "Willing to add new features.",
+          "displayName" : "Donation",
           "locale" : "en_US"
         },
         {
-          "description" : "開発者にドクペを送ります。ドクペを飲むと開発が捗ります。",
-          "displayName" : "ドクペ支援",
+          "description" : "新しい機能の追加に意欲的になります。",
+          "displayName" : "作者を応援します",
           "locale" : "ja"
         }
       ],
-      "productID" : "work.tkgstrator.Salmonia2.Asphalt",
-      "referenceName" : "Dr.Pepper",
+      "productID" : "work.tkgstrator.Salmonia2.Consumable.Donation",
+      "referenceName" : "Donation",
       "type" : "Consumable"
     },
     {
-      "displayPrice" : "3.99",
+      "displayPrice" : "0.00",
       "familyShareable" : false,
       "internalID" : "C63A1E48",
       "localizations" : [
         {
-          "description" : "Enable to get results of multiple accounts",
+          "description" : "Enable multiple accounts",
           "displayName" : "Multiple Accounts",
           "locale" : "en_US"
         },
         {
-          "description" : "同時に複数のアカウントのデータ取得を可能にします",
+          "description" : "複数アカウントの同時リザルト取得ができるようになります",
           "displayName" : "複数アカウント有効化",
           "locale" : "ja"
         }
       ],
-      "productID" : "work.tkgstrator.Salmonia2.isActive",
-      "referenceName" : "isActive",
+      "productID" : "work.tkgstrator.Salmonia2.MultipleAccounts",
+      "referenceName" : "Multiple Accounts",
       "type" : "NonConsumable"
     }
   ],
@@ -56,21 +56,26 @@
           "adHocOffers" : [
 
           ],
-          "displayPrice" : "3.99",
+          "displayPrice" : "0",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "55294509",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "Give Dr.Pepper to developer",
-              "displayName" : "Dr.Pepper",
+              "description" : "No description",
+              "displayName" : "No title",
               "locale" : "en_US"
+            },
+            {
+              "description" : "作者を応援します",
+              "displayName" : "継続型支援",
+              "locale" : "ja"
             }
           ],
-          "productID" : "work.tkgstrator.Salmonia2.DrPepper",
+          "productID" : "work.tkgstrator.Salmonia2.MonthlyPass",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Dr.Pepper",
+          "referenceName" : "Monthly Pass",
           "subscriptionGroupID" : "00CFC627",
           "type" : "RecurringSubscription"
         }

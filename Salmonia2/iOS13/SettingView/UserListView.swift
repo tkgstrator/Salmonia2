@@ -19,7 +19,7 @@ struct UserListView: View {
         List {
             ForEach(user.account.indices, id:\.self) { idx in
                 HStack {
-                    URLImage(URL(string: user.account[idx].image)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                    URLImage(url: URL(string: user.account[idx].image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                         .frame(width: 60, height: 60)
                     Text(user.account[idx].name).frame(maxWidth: .infinity)
                     Toggle(isOn: $user.isActiveArray[idx]) { }
@@ -30,7 +30,7 @@ struct UserListView: View {
             .onMove(perform: onMove)
 //            .onDelete(perform: onDelete)
         }
-        .navigationBarTitle("My Account")
+        .navigationBarTitle("My Accounts")
         .modifier(Splatfont(size: 20))
 //        .navigationBarItems(leading: addButton, trailing: EditButton())
         .navigationBarItems(trailing: Login)

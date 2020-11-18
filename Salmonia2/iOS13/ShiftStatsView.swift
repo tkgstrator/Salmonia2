@@ -35,7 +35,7 @@ struct ShiftStatsView: View {
             }){
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
                 ShiftStatsStack(title: "Grade Point", value: stats.max_grade_point)
-                if (stats.job_num != 0) {
+                if (stats.job_num != nil) {
                     NavigationLink(destination: ResultView().environmentObject(stats.max_results[0])) {
                         ShiftStatsStack(title: "Team Power Eggs", value: stats.max_team_power_eggs)
                     }

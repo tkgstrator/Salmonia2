@@ -12,7 +12,7 @@ struct PlayerView: View {
     @EnvironmentObject var user: UserInfoCore
     
     var body: some View {
-        VStack {
+        VStack(alignment: .trailing) {
             HStack {
                 NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) {
                     URLImage(URL(string: user.imageUri)!,
@@ -38,10 +38,29 @@ struct PlayerView: View {
                     }
                 }
                 Spacer()
-            }.padding(.bottom, 5)
+            }
+            .padding(.bottom, 5)
             .modifier(Splatfont(size: 18))
             .padding(.horizontal, 10)
+            CrewSearch
         }
+    }
+    
+    private var CrewSearch: some View {
+        NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) {
+            HStack {
+                ZStack {
+                    Image("CoopBar")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.cDarkGray)
+                    Text("Favorite Crew").font(.custom("Splatfont2", size: 20))
+                }
+            }
+            .frame(maxWidth: 240)
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 

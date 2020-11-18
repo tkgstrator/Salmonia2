@@ -41,8 +41,10 @@ struct CrewSearchView: View {
                 }, onCommit: {
                     searchPlayer(keyword: nickname)
                 })
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            }.font(.custom("Roboto Mono", size: 22))
+                .padding(.horizontal, 20)
+//                .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+            .font(.custom("Roboto Mono", size: 20))
             Divider()
             List {
                 ForEach(players, id:\.self) { player in
@@ -65,7 +67,7 @@ struct CrewSearchView: View {
             }
         }
         .navigationBarTitle("Crew Search", displayMode: .large)
-        .padding(.horizontal, 10)
+//        .padding(.horizontal, 10)
     }
     
     private func searchPlayer(keyword: String) {

@@ -5,7 +5,7 @@ target 'Salmonia2' do
   # Comment the next line if you don't want to use dynamic frameworks
 
   # Pods for Swift-Salmonia
-  pod 'URLImage', '~>0.9'
+  pod 'URLImage', '~>2.0'
   pod 'SwiftyJSON', '~> 5.0.0'
   pod 'Alamofire', '~> 5.2.2'
   pod 'Realm', '~> 5.4.5', modular_headers: true

@@ -9,3 +9,7 @@
 "low" = "Low tide";
 "normal" = "Normal";
 "high" = "High tide";
+
+"PU01" = "Enable mutiple accounts";
+"PU02" = "Donate to the developer";
+"PU03" = "Donate to the developer";

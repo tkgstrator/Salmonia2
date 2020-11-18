@@ -35,7 +35,7 @@ class UserStatsCore: ObservableObject {
     @Published var avg_defeated: Double?
     @Published var avg_rescue: Double?
     @Published var avg_dead: Double?
-    @Published var boss_defeated: [Double?] = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    @Published var boss_defeated: [Double?] = [nil, nil, nil, nil, nil, nil, nil, nil, nil]
     @Published var max_results: [CoopResultsRealm] = []
     @Published var special: [Double?] = [nil, nil, nil, nil]
     
@@ -64,13 +64,16 @@ class UserStatsCore: ObservableObject {
             for _count in _boss_kill_counts {
                 boss_kill_counts = Array(zip(boss_kill_counts, _count)).map({ $0.0 + $0.1 })
             }
+            
             for idx in Range(0 ... 8) {
-                boss_defeated[idx] = (Double(boss_kill_counts[idx]) / Double(boss_counts[idx])).round(digit: 4)
+                if (boss_counts[idx] != 0) {
+                    boss_defeated[idx] = (Double(boss_kill_counts[idx]) / Double(boss_counts[idx])).round(digit: 4)
+                }
             }
 
-            job_num = results.count
+            job_num = results.count == 0 ? nil : results.count
 
-            if job_num != 0 {
+            if job_num != nil {
                 clear_ratio = Double(Double(results.filter("is_clear=%@", true).count) / Double(job_num ?? 0)).round(digit: 4)
                 total_golden_eggs = results.sum(ofProperty: "golden_eggs")
                 total_power_eggs = results.sum(ofProperty: "power_eggs")
@@ -91,7 +94,9 @@ class UserStatsCore: ObservableObject {
                 avg_defeated = Double(total_defeated / Double(job_num ?? 0)).round(digit: 2)
 
                 for (idx, sp) in [2, 7, 8, 9].enumerated() {
-                    special[idx] = (Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)).round(digit: 4)
+                    if job_num != nil {
+                        special[idx] = (Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)).round(digit: 4)
+                    }
                 }
 
                 max_results = []

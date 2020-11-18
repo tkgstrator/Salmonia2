@@ -33,7 +33,7 @@ struct OptionView: View {
                     Text("Wave Search").font(.custom("Splatfont2", size: 22))
                 }
             }
-            .frame(maxWidth: 300)
+            .frame(maxWidth: 220)
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -50,7 +50,7 @@ struct OptionView: View {
                     Text("Coop Shift Rotation").font(.custom("Splatfont2", size: 22))
                 }
             }
-            .frame(maxWidth: 300)
+            .frame(maxWidth: 220)
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -67,7 +67,7 @@ struct OptionView: View {
                     Text("Favorite Crew").font(.custom("Splatfont2", size: 22))
                 }
             }
-            .frame(maxWidth: 300)
+            .frame(maxWidth: 240)
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -111,7 +111,7 @@ struct PastCoopShiftView: View {
                     proxy.scrollTo((phase.all.count - 1), anchor: .center)
                 }
             }
-            .navigationBarTitle("Coop Shift Rotation", displayMode: .large)
+            .navigationBarTitle("Shift Rotation")
             .navigationBarItems(trailing: filterButton)
         } else {
             List {
