@@ -14,7 +14,7 @@ struct ResultView: View {
     @EnvironmentObject var result: CoopResultsRealm
     @State var isVisible: Bool = true
     @State var isEnable: Bool = false
-
+    
     var body: some View {
         GeometryReader { geometry in
             ScrollView(showsIndicators: false) {
@@ -46,19 +46,19 @@ struct ResultView: View {
             if isVisible {
                 Image(systemName: "person.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30)
                     .onTapGesture() {
-                    isVisible.toggle()
-                }
+                        isVisible.toggle()
+                    }
             } else {
                 Image(systemName: "person.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30)
                     .foregroundColor(.gray)
                     .onTapGesture() {
-                    isVisible.toggle()
-                }
+                        isVisible.toggle()
+                    }
             }
             Image(systemName: "info.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
                 isEnable.toggle()
             }.sheet(isPresented: $isEnable) {
-                ResultDetailView(isVisible: $isVisible).environmentObject(result.player)
+                ResultDetailView(isVisible: $isVisible).environmentObject(result)
             }
         }
     }
@@ -66,7 +66,7 @@ struct ResultView: View {
     private var ResultOverview: some View {
         ZStack {
             URLImage(url: URL(string: (StageType.init(stage_id: result.stage_id)?.image_url)!)!) { image in image.resizable().aspectRatio(contentMode: .fill).clipShape(RoundedRectangle(cornerRadius: 8.0)) }
-            .frame(height: 160)
+                .frame(height: 160)
                 .mask(URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/94aaee8dac73aa5f7cb0a31dfd21958d.png")!) { image in image.resizable() })
             VStack(alignment: .leading, spacing: 0) {
                 ZStack {
@@ -127,7 +127,7 @@ struct ResultView: View {
                     }.foregroundColor(.black).frame(height: 28).font(.custom("Splatfont2", size: 16))
                 }
                 .background(Color.yellow).clipShape(RoundedRectangle(cornerRadius: 3.0))
-    //            .mask(Image("board").resizable())
+                //            .mask(Image("board").resizable())
                 Text(String(wave.golden_ikura_pop_num)).frame(height: 28).font(.custom("Splatfont2", size: 18))
             }
         }
@@ -198,103 +198,132 @@ struct ResultView: View {
     }
     
     private struct ResultDetailView: View {
-        @EnvironmentObject var players: RealmSwift.List<PlayerResultsRealm>
+        //        @EnvironmentObject var players: RealmSwift.List<PlayerResultsRealm>
+        @EnvironmentObject var result: CoopResultsRealm
+        
         @Binding var isVisible: Bool
+        @State var ILORATE: [Double?] = [nil, nil, nil, nil]
+        @State var BIAS: [Double?] = [nil, nil, nil, nil]
+        
         private let DEFAULT_IMAGE = "https://raw.githubusercontent.com/tkgstrator/Salmonia2/master/Salmonia2/Assets.xcassets/Default.imageset/default-1.png"
-
+        private let BOSS = [
+            "https://app.splatoon2.nintendo.net/images/bundled/9b2673de42f00d4fd836bd4684741505.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/337dde2c83705a75263aefdc15740f1c.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/631ea65c8cc2d9fd04f6c7458914d030.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/79d75f769115befab060b27401538402.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/2466752cf11ef6326e2add430101bff6.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/862656b37d071e75ad31750c9e18ed15.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/367e6e1c33ab3ae2a1c857f4c75f017e.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/7f8e44737240e3caa52d6c4f457164d9.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/7ecdec1e23a3d0089b38038b0217827c.png"
+        ]
+        
         var body: some View {
             List {
-                ForEach(players, id:\.self) { player in
-                    HStack {
+                HStack {
+                    Text("").frame(width: 50)
+                    ForEach(result.player, id:\.self) { player in
                         VStack(spacing: 0) {
                             if isVisible == true {
                                 URLImage(url: URL(string: player.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                                    .frame(width: 60, height: 60)
+                                    .frame(width: 50, height: 50)
                                 Text(player.name!).minimumScaleFactor(0.8).lineLimit(1)
                             } else {
                                 URLImage(url: URL(string:  DEFAULT_IMAGE)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                                    .frame(width: 60, height: 60)
+                                    .frame(width: 50, height: 50)
                                 Text(verbatim: "-").minimumScaleFactor(0.8).lineLimit(1)
                             }
-                        }.frame(width: 90)
-                        VStack(spacing: 0) {
                             HStack {
                                 Geggs
                                 Text("\(player.golden_ikura_num)")
+                            }.frame(height: 16)
+                            HStack {
                                 Peggs
                                 Text("\(player.ikura_num)")
-                            }
-                            HStack(spacing: 5) {
-                                Boss3
-                                Text("\(player.boss_kill_counts[0])")
-                                Boss6
-                                Text("\(player.boss_kill_counts[1])")
-                                Boss9
-                                Text("\(player.boss_kill_counts[2])")
-                                Boss12
-                                Text("\(player.boss_kill_counts[3])")
-                            }
-                            HStack(spacing: 5) {
-                                Boss13
-                                Text("\(player.boss_kill_counts[4])")
-                                Boss14
-                                Text("\(player.boss_kill_counts[5])")
-                                Boss15
-                                Text("\(player.boss_kill_counts[6])")
-                                Boss16
-                                Text("\(player.boss_kill_counts[7])")
-                                Boss21
-                                Text("\(player.boss_kill_counts[8])")
-                            }
-                        }.frame(maxWidth: .infinity)
+                            }.frame(height: 16)
+                        }
+                        .modifier(Splatfont(size: 12))
+                        .frame(maxWidth: .infinity)
                     }
                 }
-            }.modifier(Splatfont(size: 15))
+                ForEach(Range(0 ... 8), id:\.self) { id in
+                    if result.boss_counts[id] != 0 {
+                        HStack {
+                            VStack(spacing: 0) {
+                                URLImage(url: URL(string: BOSS[id])!) { image in image.resizable().aspectRatio(1, contentMode: .fit) }
+                                    .frame(width: 35)
+                                if result.boss_kill_counts[id] == result.boss_counts[id] {
+                                    Text("\(result.boss_kill_counts[id])/\(result.boss_counts[id])").frame(height: 12).modifier(Splatfont(size: 12)).foregroundColor(.yellow)
+                                } else {
+                                    Text("\(result.boss_kill_counts[id])/\(result.boss_counts[id])").frame(height: 12).modifier(Splatfont(size: 12))
+                                }
+                            }
+                            .frame(width: 50)
+                            ForEach(result.player, id:\.self) { player in
+                                VStack(spacing: 0) {
+                                    Text("\(player.boss_kill_counts[id])").minimumScaleFactor(0.8).lineLimit(1)
+                                    
+                                }
+                                .modifier(Splatfont(size: 16))
+                                .frame(maxWidth: .infinity)
+                            }
+                        }
+                        
+                    }
+                }
+                HStack {
+                    Text("Score").frame(width: 50).modifier(Splatfont(size: 16))
+                    ForEach(result.player, id:\.self) { player in
+                        Text(String(player.srpower)).modifier(Splatfont(size: 14))
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .modifier(Splatfont(size: 12))
+            }
         }
+
         
         private var Geggs: some View {
             URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
-                .frame(width: 20, height: 20)
+                .frame(width: 15, height: 15)
         }
         private var Peggs: some View {
             URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
-                .frame(width: 20, height: 20)
+                .frame(width: 15, height: 15)
         }
-        private var Boss3: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/9b2673de42f00d4fd836bd4684741505.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
-        private var Boss6: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/337dde2c83705a75263aefdc15740f1c.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
-        private var Boss9: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/631ea65c8cc2d9fd04f6c7458914d030.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
-        private var Boss12: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/79d75f769115befab060b27401538402.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
-        private var Boss13: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2466752cf11ef6326e2add430101bff6.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
-        private var Boss14: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/862656b37d071e75ad31750c9e18ed15.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
-        private var Boss15: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/367e6e1c33ab3ae2a1c857f4c75f017e.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
-        private var Boss16: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/7f8e44737240e3caa52d6c4f457164d9.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
-        private var Boss21: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/7ecdec1e23a3d0089b38038b0217827c.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                .frame(width: 30, height: 30)
-        }
+    }
+}
+
+func CalcBias(_ result: CoopResultsRealm, _ nsaid: String) -> Double {
+    let player: PlayerResultsRealm = result.player.filter("nsaid=%@", nsaid).first!
+    let danger_rate: Double = result.danger_rate
+    let rate: Double = (Double(min(danger_rate * 3, 600)) / 5.0 + 80) / 160.0
+    let max_bias: Double = danger_rate == 200 ? 1.5 : 1.25
+    
+    var bias: (defeated: Double, golden: Double) = (0.0, 0.0)
+    
+    let quota_num = result.wave.map({ $0.quota_num }).reduce(0, +)
+    let defeated_num = player.boss_kill_counts.sum()
+    let appear_num = result.boss_counts.sum()
+    
+    let golden_ikura_num = player.golden_ikura_num
+    if (golden_ikura_num * 4 >= quota_num && defeated_num * 4 >= appear_num && defeated_num > 0) {
+        bias.defeated = min(Double(defeated_num * 99) / Double(17 * defeated_num), max_bias)
+    }
+    
+    if (golden_ikura_num * 3 >= quota_num && defeated_num * 5 >= appear_num) {
+        bias.golden = min(rate + Double(10 * (golden_ikura_num * 3 - quota_num)) / (9.0 * 160.0), max_bias)
+    }
+    
+    return max(bias.defeated, bias.golden, rate)
+}
+
+extension PlayerResultsRealm {
+    var srpower: Double {
+        let bossrate: [Int] = [1783, 1609, 2649, 1587, 1534, 1563, 1500, 1783, 2042]
+        let bias: Double = CalcBias(self.result.first!, self.nsaid!)
+        let baserate: Int = Array(zip(self.boss_kill_counts, bossrate)).map{ $0 * $1 }.reduce(0, +) / max(1, self.boss_kill_counts.sum())
+        
+        return Double(Double(baserate) * bias).round(digit: 2)
     }
 }
