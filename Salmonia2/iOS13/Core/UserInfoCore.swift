@@ -16,7 +16,7 @@ class UserInfoCore: ObservableObject {
     @Published var account = RealmSwift.List<UserInfoRealm>()
     @Published var nsaid: String?
     @Published var nickname: String = "Salmonia2"
-    @Published var imageUri: String = "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/1e2bdb741756efcf"
+    @Published var imageUri: String = "https://github.com/tkgstrator/Salmonia2/blob/master/Salmonia2/Assets.xcassets/Default.imageset/default-1.png"
     @Published var iksm_session: String?
     @Published var session_token: String?
     @Published var api_token: String?

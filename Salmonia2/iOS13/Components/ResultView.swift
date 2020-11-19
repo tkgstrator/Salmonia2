@@ -200,17 +200,20 @@ struct ResultView: View {
     private struct ResultDetailView: View {
         @EnvironmentObject var players: RealmSwift.List<PlayerResultsRealm>
         @Binding var isVisible: Bool
-        
+        private let DEFAULT_IMAGE = "https://raw.githubusercontent.com/tkgstrator/Salmonia2/master/Salmonia2/Assets.xcassets/Default.imageset/default-1.png"
+
         var body: some View {
             List {
                 ForEach(players, id:\.self) { player in
                     HStack {
                         VStack(spacing: 0) {
-                            URLImage(url: URL(string: player.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                                .frame(width: 60, height: 60)
                             if isVisible == true {
+                                URLImage(url: URL(string: player.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
+                                    .frame(width: 60, height: 60)
                                 Text(player.name!).minimumScaleFactor(0.8).lineLimit(1)
                             } else {
+                                URLImage(url: URL(string:  DEFAULT_IMAGE)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
+                                    .frame(width: 60, height: 60)
                                 Text(verbatim: "-").minimumScaleFactor(0.8).lineLimit(1)
                             }
                         }.frame(width: 90)
