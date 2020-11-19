@@ -34,6 +34,7 @@ class CoopShiftCore: ObservableObject {
                 all = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: true)
             }
         }
+        print(all.count)
     }
     
     func update(isEnable: [Bool], isPlayed: Bool) {

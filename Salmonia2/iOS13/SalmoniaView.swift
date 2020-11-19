@@ -12,10 +12,10 @@ struct SalmoniaView: View {
     
     @EnvironmentObject var user: UserInfoCore
     
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "Splatfont", size: 36)!]
-        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "Splatfont", size: 20)!]
-    }
+//    init() {
+//        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "Splatfont", size: 36)!]
+//        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "Splatfont", size: 20)!]
+//    }
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -44,8 +44,7 @@ struct SalmoniaView: View {
     
     private var User: some View {
         HStack {
-            URLImage(url: URL(string: user.imageUri)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
-                .frame(width: 35, height: 35)
+            URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }.frame(width: 35, height: 35)
             Spacer()
             Text(user.nickname).modifier(Splatfont(size: 24)).frame(maxWidth: .infinity)
         }
@@ -67,8 +66,7 @@ struct SalmoniaView: View {
 
     private var Setting: some View {
         NavigationLink(destination: SettingView().environmentObject(SalmoniaUserCore())){
-            URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/bb035c04e62c044139986540e6c3b8b3.png")!,
-                     content: {$0.image.renderingMode(.template).resizable()})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/bb035c04e62c044139986540e6c3b8b3.png")!) { image in image.renderingMode(.template).resizable() }
                 .frame(width: 30, height: 30).foregroundColor(.white)
         }
     }
@@ -92,8 +90,7 @@ struct SalmoniaView: View {
             NavigationLink(destination: LoadingView()){
                 ZStack {
                     Circle().frame(width: 60, height: 60).foregroundColor(.cDarkGray)
-                    URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!,
-                             content: {$0.image.renderingMode(.original).resizable()})
+                    URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!) { image in image.renderingMode(.original).resizable() }
                         .frame(width: 30, height: 30)
                 }
             }

@@ -55,7 +55,11 @@ struct ImportResultView: View {
                     for account in accounts {
                         let nsaid: String = account.nsaid
                         DispatchQueue(label: "Import").async {
+                            #if DEBUG
+                            let lastlink: Int = 1
+                            #else
                             guard let lastlink: Int = try? getLastLink(nsaid: nsaid) else { return }
+                            #endif
                             DispatchQueue(label: "Pages").async {
                                 for page in Range(1 ... lastlink) {
                                     var nsaids: [String] = []

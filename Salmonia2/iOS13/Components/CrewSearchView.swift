@@ -50,7 +50,7 @@ struct CrewSearchView: View {
                 ForEach(players, id:\.self) { player in
                     NavigationLink(destination: SalmonStatsView().environmentObject(CrewInfoCore(player.nsaid))) {
                         HStack {
-                            URLImage(URL(string: player.thumbnail_url)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                            URLImage(url: URL(string: player.thumbnail_url)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                                 .frame(width: 50, height: 50)
                             Text(player.nickname).frame(maxWidth: .infinity)
                             if player.registered {

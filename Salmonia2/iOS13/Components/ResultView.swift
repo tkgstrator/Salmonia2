@@ -58,21 +58,21 @@ struct ResultView: View {
             Image(systemName: "info.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
                 isEnable.toggle()
             }.sheet(isPresented: $isEnable) {
-                ResultDetailView().environmentObject(result.player)
+                ResultDetailView(isVisible: $isVisible).environmentObject(result.player)
             }
         }
     }
     
     private var ResultOverview: some View {
         ZStack {
-            URLImage(URL(string: (StageType.init(stage_id: result.stage_id)?.image_url)!)!, content: {$0.image.resizable().aspectRatio(contentMode: .fill).clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: (StageType.init(stage_id: result.stage_id)?.image_url)!)!) { image in image.resizable().aspectRatio(contentMode: .fill).clipShape(RoundedRectangle(cornerRadius: 8.0)) }
             .frame(height: 160)
-                .mask(URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/94aaee8dac73aa5f7cb0a31dfd21958d.png")!, content: {$0.image.resizable()}))
+                .mask(URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/94aaee8dac73aa5f7cb0a31dfd21958d.png")!) { image in image.resizable() })
             VStack(alignment: .leading, spacing: 0) {
                 ZStack {
                     HStack {
                         ZStack(alignment: .leading) {
-                            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/e0ef914978d3318fa3ec2afbfa64c794.png")!, content: {$0.image.renderingMode(.template).resizable().aspectRatio(contentMode: .fill)})
+                            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/e0ef914978d3318fa3ec2afbfa64c794.png")!) { image in image.renderingMode(.template).resizable().aspectRatio(contentMode: .fill) }
                                 .frame(width: 180, height: 30, alignment: .trailing).clipped().foregroundColor(.green)
                             Text(UnixTime.dateFromTimestamp(result.play_time)).modifier(Splatfont(size: 20)).padding(.horizontal, 10)
                         }
@@ -90,10 +90,10 @@ struct ResultView: View {
                     }
                 }
                 HStack {
-                    URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+                    URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable() }
                         .frame(width: 24, height: 24)
                     Text("x\(result.golden_eggs)")
-                    URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+                    URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable() }
                         .frame(width: 24, height: 24)
                     Text("x\(result.power_eggs)")
                 }.frame(maxWidth: .infinity)
@@ -145,7 +145,7 @@ struct ResultView: View {
                 ForEach(usage.indices, id:\.self) { column in
                     HStack(spacing: 0) {
                         ForEach(usage[column].indices, id:\.self) { idx in
-                            URLImage(url: FImage.getURL(usage[column][idx], 2), content: {$0.image.resizable()})
+                            URLImage(url: FImage.getURL(usage[column][idx], 2)) { image in image.resizable() }
                                 .frame(width: 28.75, height: 28.75)
                         }
                     }.frame(minWidth: 115, alignment: .leading)
@@ -167,24 +167,24 @@ struct ResultView: View {
                         Spacer()
                         Text("x\(player.boss_kill_counts.reduce(0, +))").foregroundColor(.blue).font(.custom("Splatfont2", size: 20))
                         Spacer()
-                        URLImage(url: FImage.getURL(player.special_id, 2), content: {$0.image.resizable()})
+                        URLImage(url: FImage.getURL(player.special_id, 2)) { image in image.resizable() }
                             .frame(width: 30, height: 30)
                         ForEach(player.weapon_list, id:\.self) { weapon in
-                            URLImage(url: FImage.getURL(weapon, 1), content: {$0.image.resizable()})
+                            URLImage(url: FImage.getURL(weapon, 1)) { image in image.resizable() }
                                 .frame(width: 30, height: 30)
                         }
                     }.frame(height: 30)
                     HStack {
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
                         Text(String(player.golden_ikura_num)).frame(width: 30)
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
                         Text(String(player.ikura_num)).frame(width: 48)
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/c003ffe0a5580e4c8b1bc9df1e0a30d2.png")!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/c003ffe0a5580e4c8b1bc9df1e0a30d2.png")!) { image in image.resizable()}
                             .frame(width: 50, height: 20)
                         Text(String(player.help_count)).frame(width: 30)
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5d447dcfcb3b0c31ffb2efca58a6e799.png")!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5d447dcfcb3b0c31ffb2efca58a6e799.png")!) { image in image.resizable()}
                             .frame(width: 50, height: 20)
                         Text(String(player.dead_count)).frame(width: 30)
                     }.frame(height: 24)
@@ -199,15 +199,20 @@ struct ResultView: View {
     
     private struct ResultDetailView: View {
         @EnvironmentObject var players: RealmSwift.List<PlayerResultsRealm>
+        @Binding var isVisible: Bool
         
         var body: some View {
             List {
                 ForEach(players, id:\.self) { player in
                     HStack {
                         VStack(spacing: 0) {
-                            URLImage(url: URL(string: player.imageUri)!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                            URLImage(url: URL(string: player.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                                 .frame(width: 60, height: 60)
-                            Text(player.name!).minimumScaleFactor(0.8).lineLimit(1)
+                            if isVisible == true {
+                                Text(player.name!).minimumScaleFactor(0.8).lineLimit(1)
+                            } else {
+                                Text(verbatim: "-").minimumScaleFactor(0.8).lineLimit(1)
+                            }
                         }.frame(width: 90)
                         VStack(spacing: 0) {
                             HStack {
@@ -245,47 +250,47 @@ struct ResultView: View {
         }
         
         private var Geggs: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
                 .frame(width: 20, height: 20)
         }
         private var Peggs: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
                 .frame(width: 20, height: 20)
         }
         private var Boss3: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/9b2673de42f00d4fd836bd4684741505.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/9b2673de42f00d4fd836bd4684741505.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
         private var Boss6: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/337dde2c83705a75263aefdc15740f1c.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/337dde2c83705a75263aefdc15740f1c.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
         private var Boss9: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/631ea65c8cc2d9fd04f6c7458914d030.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/631ea65c8cc2d9fd04f6c7458914d030.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
         private var Boss12: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/79d75f769115befab060b27401538402.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/79d75f769115befab060b27401538402.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
         private var Boss13: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2466752cf11ef6326e2add430101bff6.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2466752cf11ef6326e2add430101bff6.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
         private var Boss14: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/862656b37d071e75ad31750c9e18ed15.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/862656b37d071e75ad31750c9e18ed15.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
         private var Boss15: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/367e6e1c33ab3ae2a1c857f4c75f017e.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/367e6e1c33ab3ae2a1c857f4c75f017e.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
         private var Boss16: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/7f8e44737240e3caa52d6c4f457164d9.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/7f8e44737240e3caa52d6c4f457164d9.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
         private var Boss21: some View {
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/7ecdec1e23a3d0089b38038b0217827c.png")!, content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/7ecdec1e23a3d0089b38038b0217827c.png")!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                 .frame(width: 30, height: 30)
         }
     }

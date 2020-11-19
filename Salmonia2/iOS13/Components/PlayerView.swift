@@ -15,8 +15,7 @@ struct PlayerView: View {
         VStack(alignment: .trailing) {
             HStack {
                 NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) {
-                    URLImage(URL(string: user.imageUri)!,
-                             content: { $0.image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                    URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
                         .frame(width: 85, height: 85)
                 }.buttonStyle(PlainButtonStyle())
                 Text(user.nickname).modifier(Splatfont(size: 29)).frame(maxWidth: .infinity)

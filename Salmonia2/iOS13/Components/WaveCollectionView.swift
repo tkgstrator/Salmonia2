@@ -126,12 +126,12 @@ struct WaveCollectionView: View {
                 Spacer()
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
-                        URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
                         Text("x\(data.golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
                     }
                     HStack {
-                        URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
                         Text("x\(data.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
                     }

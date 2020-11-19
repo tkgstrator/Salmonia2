@@ -7,9 +7,9 @@ target 'Salmonia2' do
   # Pods for Swift-Salmonia
   pod 'URLImage', '~>2.0'
   pod 'SwiftyJSON', '~> 5.0.0'
-  pod 'Alamofire', '~> 5.2.2'
-  pod 'Realm', '~> 5.4.5', modular_headers: true
-  pod 'RealmSwift', '~> 5.4.5'
+  pod 'Alamofire', '~> 5.4.0'
+  pod 'Realm', '~> 10.1.4', modular_headers: true
+  pod 'RealmSwift', '~> 10.1.4'
   pod 'Firebase/Analytics'
   pod 'Firebase/Core'
   # pod 'CryptoSwift', '~> 1.3'

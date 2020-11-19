@@ -39,8 +39,7 @@ struct ResultCollectionView: View {
         HStack(spacing: 15) {
             NavigationLink(destination: LoadingView())
             {
-                URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!,
-                         content: {$0.image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))})
+                URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!) { image in image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
                     .frame(width: 30, height: 30)
             }
             Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
@@ -78,12 +77,12 @@ struct ResultCollectionView: View {
                 Spacer()
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
-                        URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
                         Text("x\(result.golden_eggs)").frame(width: 50, height: 16, alignment: .leading)
                     }
                     HStack {
-                        URLImage(URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
                         Text("x\(result.power_eggs)").frame(width: 50, height: 16, alignment: .leading)
                     }

@@ -21,7 +21,7 @@ struct StageRecordView: View {
             ForEach(StageType.allCases, id:\.self) { stage in
                 NavigationLink(destination: StageRecordsView().environmentObject(StageRecordCore(stage.stage_id!))) {
                     HStack {
-                        URLImage(URL(string: stage.image_url!)!, content: {$0.image.resizable()})
+                        URLImage(url: URL(string: stage.image_url!)!) { image in image.resizable()}
                             .frame(width: 112, height: 63)
                             .clipped()
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
