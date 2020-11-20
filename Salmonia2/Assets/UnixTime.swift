@@ -9,10 +9,11 @@ import Foundation
 import RealmSwift
 
 public class UnixTime {
-    public class func dateFromTimestamp(_ interval: Int) -> String {
+    
+    public class func dateFromTimestamp(_ timestamp: Int) -> String {
         let f = DateFormatter()
         f.dateFormat = "MM/dd HH:mm"
-        return f.string(from: Date(timeIntervalSince1970: TimeInterval(interval)))
+        return f.string(from: Date(timeIntervalSince1970: TimeInterval(timestamp)))
     }
     
     public class func timestampFromDate(date: String) -> Int {
@@ -21,10 +22,18 @@ public class UnixTime {
         f.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return Int((f.date(from: date) ?? Date()).timeIntervalSince1970)
     }
-//    public class func timestampFromSalmonStats(_ interval: Int) ->
+    
+    public class func dateToStartTime(_ start_time: Int) -> String {
+        let f = DateFormatter()
+        f.timeZone = NSTimeZone(name: "GMT") as TimeZone?
+        f.dateFormat = "yyyyMMddHH"
+        return f.string(from: Date(timeIntervalSince1970: Double(start_time)))
+    }
+
 }
 
 func SRPower(_ results: Results<CoopResultsRealm>) -> [Double?] {
+    
     let bossrate: [Int] = [1783, 1609, 2649, 1587, 1534, 1563, 1500, 1783, 2042]
     var ilorate: [Double?] = [nil, nil]
     var tmprate: Double = 0.0

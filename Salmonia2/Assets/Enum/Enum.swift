@@ -95,7 +95,7 @@ extension Notification {
     var localizedDescription: String {
         switch self {
         case .login:
-            return "Add New NSO Account"
+            return "Add new NSO account"
         case .update:
             return "Update NSO account"
         case .laravel:

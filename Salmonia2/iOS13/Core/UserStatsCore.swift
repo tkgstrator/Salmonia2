@@ -114,3 +114,29 @@ class UserStatsCore: ObservableObject {
         token?.invalidate()
     }
 }
+
+// 毎回計算させる必要がないデータはここで計算する
+extension UserStatsCore {
+    var stats_golden_eggs: [Double] {
+        var golden_eggs: [Double] = []
+        let start_times = Array(Set(realm.objects(CoopResultsRealm.self).map({ $0.start_time }))).sorted()
+        
+        for start_time in start_times {
+            let avg: Double? = realm.objects(CoopResultsRealm.self).filter("start_time=%@", start_time).average(ofProperty: "golden_eggs")
+            golden_eggs.append(avg!)
+        }
+        print(golden_eggs)
+        return golden_eggs
+    }
+    
+    var stats_power_eggs: [Double] {
+        var power_eggs: [Double] = []
+        let start_times = Array(Set(realm.objects(CoopResultsRealm.self).map({ $0.start_time }))).sorted()
+        
+        for start_time in start_times {
+            let avg: Double? = realm.objects(CoopResultsRealm.self).filter("start_time=%@", start_time).average(ofProperty: "power_eggs")
+            power_eggs.append(avg!)
+        }
+        return power_eggs
+    }
+}

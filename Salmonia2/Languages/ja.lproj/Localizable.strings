@@ -156,6 +156,7 @@
 "Failure" = "失敗";
 "Add new NSO account" = "NSOアカウントを新規追加しました";
 "Update NSO account" = "NSOアカウントを更新しました";
+"Wrong request" = "不正なリクエストです";
 "Login Salmon Stats" = "Salmon Statsへのログイン";
 "Try again/Login Salmon Stats" = "再度試すか、Salmon Statsにログインしてください";
 

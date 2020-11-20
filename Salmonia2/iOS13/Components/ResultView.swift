@@ -268,7 +268,6 @@ struct ResultView: View {
                                 .frame(maxWidth: .infinity)
                             }
                         }
-                        
                     }
                 }
                 HStack {
@@ -282,7 +281,6 @@ struct ResultView: View {
             }
         }
 
-        
         private var Geggs: some View {
             URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
                 .frame(width: 15, height: 15)

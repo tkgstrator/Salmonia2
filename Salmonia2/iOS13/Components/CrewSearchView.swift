@@ -42,7 +42,6 @@ struct CrewSearchView: View {
                     searchPlayer(keyword: nickname)
                 })
                 .padding(.horizontal, 20)
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             .font(.custom("Roboto Mono", size: 20))
             Divider()
@@ -67,7 +66,6 @@ struct CrewSearchView: View {
             }
         }
         .navigationBarTitle("Crew Search", displayMode: .large)
-//        .padding(.horizontal, 10)
     }
     
     private func searchPlayer(keyword: String) {

@@ -51,23 +51,23 @@ struct OtherPlayerView: View {
                 Spacer()
             }.modifier(Splatfont(size: 18))
         }
-        .onAppear() {
-            guard let realm = try? Realm() else { return }
-            guard let user = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", player.nsaid).first else { return }
-            let current_time: Int = Int(Date().timeIntervalSince1970)
-            if current_time >= user.lastUpdated + 3600 * 24 && player.job_num >= 30 {
-                // 先にタイムスタンプを書き込んでおけば再読み込みのリロードを防げる
-                realm.beginWrite()
-                user.lastUpdated = current_time
-                try? realm.commitWrite()
-                getPlayerSRPower(nsaid: player.nsaid) { srpower in
-                    realm.beginWrite()
-                    user.srpower.value = srpower
-                    user.lastUpdated = current_time
-                    try? realm.commitWrite()
-                }
-            }
-        }
+//        .onAppear() {
+//            guard let realm = try? Realm() else { return }
+//            guard let user = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", player.nsaid).first else { return }
+//            let current_time: Int = Int(Date().timeIntervalSince1970)
+//            if current_time >= user.lastUpdated + 3600 * 24 && player.job_num >= 30 {
+//                // 先にタイムスタンプを書き込んでおけば再読み込みのリロードを防げる
+//                realm.beginWrite()
+//                user.lastUpdated = current_time
+//                try? realm.commitWrite()
+//                getPlayerSRPower(nsaid: player.nsaid) { srpower in
+//                    realm.beginWrite()
+//                    user.srpower.value = srpower
+//                    user.lastUpdated = current_time
+//                    try? realm.commitWrite()
+//                }
+//            }
+//        }
         .padding(.horizontal, 10)
         .navigationBarTitle(player.nickname)
         .navigationBarItems(trailing: favButton)

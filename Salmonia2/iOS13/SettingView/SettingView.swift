@@ -11,6 +11,7 @@ import RealmSwift
 import WebKit
 import SwiftyJSON
 import MobileCoreServices
+import Alamofire
 import UserNotifications
 
 struct SettingView: View {
@@ -86,6 +87,10 @@ struct SettingView: View {
                 Text("Sync User Name")
                 Spacer()
             }.onTapGesture { updateUserName() }
+//            HStack {
+//                Text("Update SalmonRun Records")
+//                Spacer()
+//            }.onTapGesture { updateSalmonRunRecords() }
             if !user.isImported {
                 NavigationLink(destination: ImportResultView()) {
                     HStack {
@@ -107,6 +112,21 @@ struct SettingView: View {
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
         UNUserNotificationCenter.current().add(request)
+    }
+    
+    // Salmon Run Recordsからデータをとってくる（重い）
+    func updateSalmonRunRecords() {
+        AF.request("https://script.google.com/macros/s/AKfycbyD9cZfl81ZaaSnDcT4oc3APSfQ8L6CgwMqsRtvbqT3KF7Irpk/exec", method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch (response.result) {
+                case .success(let value):
+                    print(JSON(value)) // 全体のリザルトであることに注意
+                case .failure:
+                    break
+                }
+        }
     }
     
     // ユーザ名を同期する

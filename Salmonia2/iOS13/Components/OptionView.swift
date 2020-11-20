@@ -101,10 +101,12 @@ struct PastCoopShiftView: View {
                     .frame(maxWidth: .infinity)
                     ForEach(phase.all.indices, id:\.self) { idx in
                         ZStack {
-                            CoopShiftStack(phase: phase.all[idx])
                             NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)).environmentObject(SalmoniaUserCore())) {
                                 EmptyView()
-                            }.buttonStyle(PlainButtonStyle())
+                            }
+                            .opacity(0.0)
+                            .buttonStyle(PlainButtonStyle())
+                            CoopShiftStack(phase: phase.all[idx])
                         }
                     }
                 }.onAppear() {

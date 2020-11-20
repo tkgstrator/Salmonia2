@@ -18,7 +18,8 @@ struct CoopShiftView: View {
             ForEach(phases.data.indices, id:\.self) { idx in
                 NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phases.data[idx].start_time)).environmentObject(SalmoniaUserCore())) {
                     CoopShiftStack(phase: $phases.data[idx]).padding(.horizontal, 10)
-                }.buttonStyle(PlainButtonStyle())
+                }
+                .buttonStyle(PlainButtonStyle())
             }
             CoopShift
         }

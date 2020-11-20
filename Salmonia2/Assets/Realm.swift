@@ -8,6 +8,7 @@
 import Foundation
 import RealmSwift
 import Combine
+import CryptoSwift
 
 class SalmoniaUserRealm: Object {
     
@@ -173,15 +174,60 @@ extension PlayerResultsRealm {
     }
 }
 
-class CoopShiftRealm: Object, Codable {
+class CoopShiftRealm: Object {
     
     @objc dynamic var start_time: Int = 0
     @objc dynamic var end_time: Int = 0
     @objc dynamic var stage_id: Int = 0
     @objc dynamic var rare_weapon: Int = 0
     dynamic var weapon_list = List<Int>()
+    dynamic var records = List<WaveRecordsRealm>()
     
     override static func primaryKey() -> String? {
         return "start_time"
+    }
+}
+
+class WaveRecordsRealm: Object {
+    @objc dynamic var job_id = 0
+    @objc dynamic var water_level = 0
+    @objc dynamic var event_type = 0
+    @objc dynamic var golden_ikura_num = 0
+    @objc dynamic var ikura_num = 0
+    @objc dynamic var ukey = Int()
+    @objc dynamic var sash: String? = nil
+    
+    
+    func configure(tide: Int, event: Int, start_time: Int) {
+        self.water_level = tide
+        self.event_type = event
+        self.ukey = self.water_level * 10 + self.event_type
+        self.sash = String(start_time + ukey).sha256()
+    }
+    
+    override static func primaryKey() -> String? {
+        return "sash"
+    }
+
+}
+
+class SalmonRecordsRealm: Object {
+    @objc dynamic var stage_id = 0
+    @objc dynamic var water_level = 0
+    @objc dynamic var event_type = 0
+    @objc dynamic var golden_ikura_num = 0
+    @objc dynamic var ukey = Int()
+    @objc dynamic var sash: String? = nil
+    
+    
+    func configure(tide: Int, event: Int, start_time: Int) {
+        self.water_level = tide
+        self.event_type = event
+        self.ukey = self.water_level * 10 + self.event_type
+        self.sash = String(stage_id + ukey).sha256()
+    }
+    
+    override static func primaryKey() -> String? {
+        return "sash"
     }
 }

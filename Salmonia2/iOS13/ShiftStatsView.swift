@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Alamofire
+import SwiftyJSON
 
 struct ShiftStatsView: View {
     @EnvironmentObject var user: SalmoniaUserCore
@@ -15,7 +17,9 @@ struct ShiftStatsView: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("Overview").font(.custom("Splatfont", size: 18))
+                NavigationLink(destination: StatsChartView(start_time: stats.schedule!)) {
+                    Text("Overview").font(.custom("Splatfont", size: 18))
+                }
                 Spacer()
             }) {
                 ShiftStatsStack(title: "Job Num", value: stats.job_num)
@@ -82,6 +86,44 @@ struct ShiftStatsView: View {
                 }
             }
         }.navigationBarTitle(UnixTime.dateFromTimestamp(stats.schedule!))
+    }
+}
+
+struct StatsChartView: View {
+    @EnvironmentObject var stats: UserStatsCore
+//    @Binding var start_time: Int
+    @State var isMode: Int = 0
+        
+    init(start_time: Int) {
+        
+
+    }
+    
+    var body: some View {
+        Text("Under Construction")
+            .onAppear() {
+            }
+    }
+    
+    func getShiftRecords(start_time: Int){
+        let shift_id: String = UnixTime.dateToStartTime(start_time)
+        AF.request("https://salmon-stats-api.yuki.games/api/schedules/\(shift_id)", method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON { response in
+                switch (response.result) {
+                case .success(let value):
+                    // データベースに書き込む
+                    let phase: CoopShiftRealm = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first!
+                    let json = JSON(value) // 全体のリザルトであることに注意
+                    
+//                    let
+                    print(JSON(value)["records"])
+                case .failure:
+                    break
+                }
+            }
+    
     }
 }
 

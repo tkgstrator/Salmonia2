@@ -12,7 +12,7 @@ target 'Salmonia2' do
   pod 'RealmSwift', '~> 10.1.4'
   pod 'Firebase/Analytics'
   pod 'Firebase/Core'
-  # pod 'CryptoSwift', '~> 1.3'
+  pod 'CryptoSwift', '~> 1.3'
   pod 'SplatNet2'
   pod 'SwiftyStoreKit'
   use_frameworks!
