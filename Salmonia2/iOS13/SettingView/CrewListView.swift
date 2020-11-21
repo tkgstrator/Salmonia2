@@ -42,7 +42,7 @@ struct CrewListView: View {
     }
     
     private var AddButton: some View {
-        NavigationLink(destination: CrewSearchView().environmentObject(SalmoniaUserCore())){
+        NavigationLink(destination: CrewSearchView()){
             ZStack {
                 Circle().frame(width: 60, height: 60).foregroundColor(.blue)
                 Image(systemName: "plus").resizable().aspectRatio(contentMode: .fit).frame(width: 30)

@@ -14,7 +14,7 @@ struct PlayerView: View {
     var body: some View {
         VStack(alignment: .trailing) {
             HStack {
-                NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) {
+                NavigationLink(destination: ResultCollectionView()) {
                     URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
                         .frame(width: 85, height: 85)
                 }.buttonStyle(PlainButtonStyle())
@@ -46,7 +46,7 @@ struct PlayerView: View {
     }
     
     private var CrewSearch: some View {
-        NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) {
+        NavigationLink(destination: CrewListView()) {
             HStack {
                 ZStack {
                     Image("CoopBar")

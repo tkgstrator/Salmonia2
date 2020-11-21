@@ -65,7 +65,7 @@ struct SettingView: View {
     
     private var UserSection: some View {
         Section(header: Text("My Accounts").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange)) {
-            NavigationLink(destination: UserListView().environmentObject(SalmoniaUserCore())) { Text("Sign in") }
+            NavigationLink(destination: UserListView()) { Text("Sign in") }
             //            NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) { Text("Fav Crews") }
             HStack {
                 Text("laravel session")
@@ -99,7 +99,7 @@ struct SettingView: View {
                     }
                 }
             }
-            NavigationLink(destination: UnlockFeatureView().environmentObject(SalmoniaUserCore())) {
+            NavigationLink(destination: UnlockFeatureView()) {
                 HStack {
                     Text("Unlock")
                     Spacer()

@@ -16,7 +16,7 @@ struct CoopShiftView: View {
         VStack(alignment: .trailing, spacing: 0) {
             Text("Shift Schedule").foregroundColor(.cOrange).modifier(Splatfont(size: 20)).frame(maxWidth: .infinity).frame(height: 32).background(Color.cDarkGray).padding(.bottom, 8)
             ForEach(phases.data.indices, id:\.self) { idx in
-                NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phases.data[idx].start_time)).environmentObject(SalmoniaUserCore())) {
+                NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phases.data[idx].start_time))) {
                     CoopShiftStack(phase: $phases.data[idx]).padding(.horizontal, 10)
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -26,7 +26,7 @@ struct CoopShiftView: View {
     }
     
     var CoopShift: some View {
-        NavigationLink(destination: PastCoopShiftView().environmentObject(CoopShiftCore())) {
+        NavigationLink(destination: PastCoopShiftView()) {
             HStack {
                 ZStack {
                     Image("CoopBar")

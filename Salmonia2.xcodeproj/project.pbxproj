@@ -367,8 +367,8 @@
 		10BB34B6252175170046CBCA /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
 				1048631525697630001FDFBD /* CoopShiftCollectionView.swift */,
+				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
 				10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */,
 				10BB34B9252175170046CBCA /* ResultView.swift */,
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
@@ -909,7 +909,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -936,7 +936,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

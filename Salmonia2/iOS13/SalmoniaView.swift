@@ -26,9 +26,6 @@ struct SalmoniaView: View {
             }
             Update().padding(.trailing, 20).padding(.bottom, 20)
         }
-        .environmentObject(UserInfoCore())
-        .environmentObject(CoopShiftCore())
-        .environmentObject(UserResultCore())
 //        .navigationBarHidden(true)
         .navigationBarTitle("Salmonia")
         .navigationBarItems(leading: Setting, trailing: HStack(spacing: 15) {
@@ -50,7 +47,7 @@ struct SalmoniaView: View {
     }
     
     private var Search: some View {
-        NavigationLink(destination: WaveCollectionView().environmentObject(WaveResultCore())) {
+        NavigationLink(destination: WaveCollectionView()) {
             Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30)
         }
         .buttonStyle(PlainButtonStyle())
@@ -64,7 +61,7 @@ struct SalmoniaView: View {
     }
 
     private var Setting: some View {
-        NavigationLink(destination: SettingView().environmentObject(SalmoniaUserCore())){
+        NavigationLink(destination: SettingView()){
             URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/bb035c04e62c044139986540e6c3b8b3.png")!) { image in image.renderingMode(.template).resizable() }
                 .frame(width: 30, height: 30).foregroundColor(.white)
         }

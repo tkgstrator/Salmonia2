@@ -22,7 +22,7 @@ struct OptionView: View {
     }
     
     private var WaveSearch: some View {
-        NavigationLink(destination: WaveCollectionView().environmentObject(WaveResultCore())) {
+        NavigationLink(destination: WaveCollectionView()) {
             HStack {
                 ZStack {
                     Image("CoopBar")
@@ -39,7 +39,7 @@ struct OptionView: View {
     }
     
     var CoopShift: some View {
-        NavigationLink(destination: PastCoopShiftView().environmentObject(CoopShiftCore())) {
+        NavigationLink(destination: PastCoopShiftView()) {
             HStack {
                 ZStack {
                     Image("CoopBar")
@@ -56,7 +56,7 @@ struct OptionView: View {
     }
     
     private var CrewSearch: some View {
-        NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) {
+        NavigationLink(destination: CrewListView()) {
             HStack {
                 ZStack {
                     Image("CoopBar")
