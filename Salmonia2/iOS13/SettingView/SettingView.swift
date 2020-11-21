@@ -33,12 +33,6 @@ struct SettingView: View {
     
     private var Application: some View {
         Section(header: Text("Application").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange)) {
-            NavigationLink(destination: UnlockFeatureView().environmentObject(SalmoniaUserCore())) {
-                HStack {
-                    Text("Unlock")
-                    Spacer()
-                }
-            }
             HStack {
                 Text("X-Product Version")
                 Spacer()
@@ -84,19 +78,31 @@ struct SettingView: View {
     private var UserStatus: some View {
         Section(header: Text("Feature").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange)) {
             HStack {
-                Text("Sync User Name")
+                Text("Update Username")
                 Spacer()
-            }.onTapGesture { updateUserName() }
-//            HStack {
-//                Text("Update SalmonRun Records")
-//                Spacer()
-//            }.onTapGesture { updateSalmonRunRecords() }
+                Text("Update")
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 2)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.white, lineWidth: 3)
+                    )
+                    .onTapGesture {
+                        updateUserName()
+                    }
+            }
             if !user.isImported {
                 NavigationLink(destination: ImportResultView()) {
                     HStack {
                         Text("Import Results")
                         Spacer()
                     }
+                }
+            }
+            NavigationLink(destination: UnlockFeatureView().environmentObject(SalmoniaUserCore())) {
+                HStack {
+                    Text("Unlock")
+                    Spacer()
                 }
             }
         }

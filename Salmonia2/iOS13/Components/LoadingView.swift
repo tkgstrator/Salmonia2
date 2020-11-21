@@ -13,11 +13,10 @@ import SwiftyJSON
 
 struct LoadingView: View {
     
-    @State var messages: [String] = []
-    @State var isLock: Bool = true
+    @State var log = Log()
     
     var body: some View {
-        LoggingThread(log: $messages, lock: $isLock)
+        LoggingThread(log: $log)
             .onAppear() {
                 do {
                     guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APPError.user }
@@ -43,12 +42,13 @@ struct LoadingView: View {
                                     guard let iksm_session = response["iksm_session"].string else { throw APPError.iksm }
                                     try realm.write { user.setValue(iksm_session, forKey: "iksm_session")}
                                 } catch {
-                                    messages.append("Couldn't regenerate iksm_session")
-                                    isLock = false
+                                    log.isValid = false
+                                    log.errorDescription = "Couldn't regenerate iksm_session"
                                 }
                             }
                             // シフトデータを読み込んで書き込む
                             do {
+                                log.status = "Connecting"
                                 realm.beginWrite()
                                 guard let iksm_session: String = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid).first?.iksm_session else { return }
                                 let summary: JSON = try SplatNet2.getSummary(iksm_session: iksm_session)
@@ -57,7 +57,7 @@ struct LoadingView: View {
                                 
                                 guard let job_num: Int = summary["summary"]["card"]["job_num"].int else { return }
                                 #if DEBUG
-                                let tmp: Int = job_num - 5
+                                let tmp: Int = job_num - 10
                                 print("JOB IDS", job_num, tmp)
                                 #else
                                 let tmp: Int = realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
@@ -69,9 +69,11 @@ struct LoadingView: View {
                                 var results: [JSON] = [] // リザルトを格納する配列
                                 var salmon_ids: [(Int, Int)] = [] // Salmon StatsのIDとの整合性をとる
                                 let times: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time }) // リザルトの重複チェックのための配列
-                                
+                                log.status = "Downloading"
+
                                 for (idx, job_num) in job_ids.enumerated() {
-                                    messages.append("Downloading Result \(idx + 1) -> \(job_num)")
+                                    // ログのデータを更新
+                                    log.progress = (job_num, idx + 1, job_ids.count)
                                     let result: JSON = try SplatNet2.getResult(job_id: job_num, iksm_session: iksm_session)
                                     results.append(result)
                                 }
@@ -114,16 +116,16 @@ struct LoadingView: View {
                                 realm.create(UserInfoRealm.self, value: card as Any, update: .modified)
                                 try realm.commitWrite()
                             } catch {
-                                messages.append("\(error.localizedDescription)")
-                                isLock = false
+                                log.isValid = false
+                                log.errorDescription = error.localizedDescription
                             }
                         }
                     }
                 } catch {
-                    messages.append("\(error.localizedDescription)")
-                    isLock = false
+                    log.errorDescription = error.localizedDescription
+//                    log.isLock = false
                 }
-                isLock = false
+//                log.isLock = false
             }
     }
 }

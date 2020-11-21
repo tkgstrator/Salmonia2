@@ -36,7 +36,7 @@ struct CrewSearchView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("Enter user name", text: $nickname, onEditingChanged: { onEditing in
+                TextField("Enter username", text: $nickname, onEditingChanged: { onEditing in
                     isEditing = onEditing
                 }, onCommit: {
                     searchPlayer(keyword: nickname)

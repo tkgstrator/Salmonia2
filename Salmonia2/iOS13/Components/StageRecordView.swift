@@ -48,7 +48,7 @@ private struct StageRecordsView: View {
                 Spacer()
             }) {
                 HStack {
-                    Text("Job Num")
+                    Text("Jobs")
                     Spacer()
                     Text("\(record.job_num.value)")
                 }

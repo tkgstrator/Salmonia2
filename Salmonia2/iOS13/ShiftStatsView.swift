@@ -17,9 +17,9 @@ struct ShiftStatsView: View {
         List {
             Section(header: HStack {
                 Spacer()
-                NavigationLink(destination: StatsChartView(start_time: stats.schedule!)) {
+//                NavigationLink(destination: StatsChartView(start_time: stats.schedule!)) {
                     Text("Overview").font(.custom("Splatfont", size: 18))
-                }
+//                }
                 Spacer()
             }) {
                 ShiftStatsStack(title: "Job Num", value: stats.job_num)

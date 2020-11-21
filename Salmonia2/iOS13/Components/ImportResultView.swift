@@ -13,12 +13,10 @@ import SplatNet2
 
 struct ImportResultView: View {
     @EnvironmentObject var user: SalmoniaUserCore
-    
-    @State var messages: [String] = []
-    @State var isLock: Bool = true
-    
+    @State var log = Log()
+
     var body: some View {
-        LoggingThread(log: $messages, lock: $isLock)
+        LoggingThread(log: $log)
             .onAppear() {
                 do {
                     guard let realm = try? Realm() else { return }
@@ -44,7 +42,7 @@ struct ImportResultView: View {
                                 accounts.first?.iksm_session = iksm_session
                             }
                         } catch {
-                            messages.append("Unknown Error")
+                            log.errorDescription = "Unknown error"
                         }
                     }
                     
@@ -55,15 +53,19 @@ struct ImportResultView: View {
                     for account in accounts {
                         let nsaid: String = account.nsaid
                         DispatchQueue(label: "Import").async {
+                            log.status = "Connecting"
                             #if DEBUG
-                            let lastlink: Int = 1
+                            let metadata: (link: Int, job_num: Int) = (1, 200)
                             #else
-                            guard let lastlink: Int = try? getLastLink(nsaid: nsaid) else { return }
+                            guard let metadata = try? getLastLink(nsaid: nsaid) else { return }
                             #endif
+                            log.progress = (nil, 0, metadata.job_num)
                             DispatchQueue(label: "Pages").async {
-                                for page in Range(1 ... lastlink) {
+                                for page in Range(1 ... metadata.link) {
                                     var nsaids: [String] = []
+                                    log.status = "Downloading"
                                     guard let results: JSON = try? getResults(nsaid: nsaid, page: page) else { return }
+                                    log.status = "Importing"
                                     autoreleasepool {
                                         guard let realm = try? Realm() else { return }
                                         realm.beginWrite()
@@ -71,10 +73,10 @@ struct ImportResultView: View {
                                             // 重複チェックを行う
                                             let start_time: Int = UnixTime.timestampFromDate(date: result["start_at"].stringValue)
                                             if time.filter({ abs($0 - start_time) <= 10 }).isEmpty {
-                                                messages.append("Result: \((page - 1) * 200 + idx + 1) -> \(result["id"].intValue) OK")
+                                                log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
                                                 realm.create(CoopResultsRealm.self, value: JF.FromSalmonStats(nsaid: nsaid, result), update: .modified)
                                             } else {
-                                                messages.append("Result: \((page - 1) * 200 + idx + 1) -> \(result["id"].intValue) NG")
+                                                log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
                                             }
                                             nsaids.append(contentsOf: result["members"].map({ $0.1.stringValue }))
                                             Thread.sleep(forTimeInterval: 0.045)
@@ -86,7 +88,8 @@ struct ImportResultView: View {
                                                 realm.create(CrewInfoRealm.self, value: value, update: .all)
                                             }
                                         } catch(let error) {
-                                            messages.append(error.localizedDescription)
+                                            log.isValid = false
+                                            log.errorDescription = error.localizedDescription
                                         }
                                         try? realm.commitWrite()
                                     } // autoreleasepool
@@ -95,10 +98,9 @@ struct ImportResultView: View {
                             } // DispatchQueue ASync
                         } // DispatchQueue ASync
                     }
-                    isLock = false
                 } catch {
-                    messages.append(error.localizedDescription)
-                    isLock = false
+                    log.isValid = false
+                    log.errorDescription = error.localizedDescription
                 }
             }
             .navigationBarTitle("Logging Thread", displayMode: .large)
@@ -112,13 +114,14 @@ struct ImportResultView: View {
         return json["results"]
     }
     
-    private func getLastLink(nsaid: String) throws -> Int{
+    private func getLastLink(nsaid: String) throws -> (link: Int, job_num: Int){
         let url = "https://salmon-stats-api.yuki.games/api/players/metadata/?ids=\(nsaid)"
         let json = try SAF.request(url)
         
         let metadata = json[0]["results"]
+        let job_num: Int = metadata["clear"].intValue + metadata["fail"].intValue
         let lastlink = ((metadata["clear"].intValue + metadata["fail"].intValue) / 200) + 1
-        return lastlink
+        return (lastlink, job_num)
     }
     
 }

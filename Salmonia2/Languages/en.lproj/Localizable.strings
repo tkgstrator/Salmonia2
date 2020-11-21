@@ -1,15 +1,138 @@
-"-" = "No Event";
+// TitleBar
+"Settings" = "Settings";
+"Log" = "Log";
+"Results" = "Results";
+"Detail" = "Result detail";
+"Feature" = "Feature";
+"User List" = "User List";
+"Wave Search" = "Wave Search";
+"Crew Search" = "Crew Search";
+"My Accounts" = "My Accounts";
+"Sign in" = "Sign in";
+"Coop Shift Rotation" = "Shift Schdule";
+
+// Settings
+"NSO Accounts" = "NSO Accounts";
+"Fav Crews" = "Fav Crews";
+"Registered" = "Registered";
+"Unregistered" = "Unregistered";
+"User" = "User";
+"Status" = "Status";
+"iksm session" = "iksm session";
+"laravel session" = "laravel session";
+"Sync Username" = "Update Usename";
+"Import Results" = "Import Results";
+"Application" = "Application";
+"Update" = "Update";
+"Unlock" = "Unlock";
+"X-Product Version" = "X-Product Version";
+"Version" = "Version";
+"Add" = "Add";
+
+// Settings->Features
+"Free" = "Free";
+"Paid" = "Paid";
+"Donation" = "Donation";
+"Multiple Accounts" = "Multiple Accounts";
+"Monthly Pass" = "Monthly Pass";
+"Future Rotation" = "Future Rotation";
+"Grizzco Weapons" = "Grizzco Weapons";
+"Hidden Feature" = "Hidden Feature";
+"$3.99" = "$3.99";
+
+// Settings->Feature's description
+"Enable multiple accounts" = "Enable multiple accounts";
+"Donate to the developer" = "Donate to the developer";
+
+// Global->Stage Names
+"Spawning Grounds" = "Spawning Grounds";
+"Marooner's Bay" = "Marooner's Bay";
+"Lost Outpost" = "Lost Outpost";
+"Salmonid Smokeyard" = "Salmonid Smokeyard";
+"Ruins of Ark Polaris" = "Ruins of Ark Polaris";
+
+// Top
+"Overview" = "Overview";
+"Jobs" = "Jobs";
+"Eggs" = "Eggs";
+"Shift Schedule" = "Shift Schedule";
+"Stage Records" = "Stage Records";
+"Favorite Crew" = "Favorite Crew";
+"Enter username" = "Enter username";
+
+// In Stage Records View
+"Clear Ratio" = "Crear Ratio";
+"Total Power Eggs" = "Total Power Eggs";
+"Total Golden Eggs" = "total Golden Eggs";
+"Max Grade" = "max Grade"; // The grade of profressional(i.e 999)
+"All" = "All"; // Include night event
+"No Night Event" = "No Night Event"; // Without night event
+"Record" = "Record"; // The records of collecting golden eggs
+
+// Event & Tide
+"Tide" = "Tide";
+"Event" = "Event";
+"-" = "No Event"; // No Event
 "rush" = "Rush";
 "goldie-seeking" = "Goldie Seeking";
-"griller" = "Griller";
+"griller" = "The Griller";
 "the-mothership" = "The Mothership";
 "fog" = "Fog";
 "cohock-charge" = "Cohock Charge";
-// Tide
 "low" = "Low tide";
 "normal" = "Normal";
 "high" = "High tide";
 
-"PU01" = "Enable mutiple accounts";
-"PU02" = "Donate to the developer";
-"PU03" = "Donate to the developer";
+// Stats
+"Max" = "Max";
+"Avg" = "Avg";
+"Defeated" = "Defeated"; // Boss defeated
+"Bomb Launcher" = "Bomb Launcher";
+"Sting Ray" = "Sting Ray";
+"Inkjet" = "Inkjet";
+"Splashdown" = "Splashdown";
+"Grade Point" = "Grade Point"; // The grade of profressional
+"Clear Wave" = "Crew Wave";
+"Crew Grade" = "Crew Grade"; // The average grade of crew you played with
+"Team Power Eggs" = "Total Power Eggs";
+"Team Golden Eggs" = "Total Golden Eggs";
+"Power Eggs" = "Power Eggs";
+"Golden Eggs" = "Golden Eggs";
+"Boss Defeated" = "Boss Defeated";
+"Rescue Count" = "Rescue Count";
+"Help Count" = "Help Count";
+"Goldie" = "Goldie";
+"Steelhead" = "Steelhead";
+"Flyfish" = "Flyfish";
+"Scrapper" = "Scrapper";
+"Steel Eel" = "Steel Eel";
+"Stinger" = "Stinger";
+"Maws" = "Maws";
+"Griller" = "Griller";
+"Drizzler" = "Drizzler";
+
+// Clear/Failure in SplatNet2
+"Clear!" = "Clear!";
+"Defeat" = "Defeat";
+"Hazard Level Max!!" = "Hazard Level Max!!";
+"Stage" = "Stage";
+"Avg Eggs" = "Avg Eggs";
+
+// In Coop Shift Rotation
+"Supplied Weapons" = "Supplied Weapons";
+"Grizzco Rotation" = "Grizzco Rotaion";
+"All Random Rotation" = "All Random Rotation";
+"One Random Rotation" = "One Random Rotation";
+"Normal Rotation" = "Normal Rotation";
+"Only played" = "Only played"; // The roatations you played
+"Rotation" = "Rotation";
+"Options" = "Options";
+
+// Notification's description
+"Success" = "Success";
+"Failure" = "Failure";
+"Add new NSO account" = "Add new NSO account";
+"Update NSO account" = "Update NSO account";
+"Wrong request" = "Wrong request";
+"Login Salmon Stats" = "Login Salmon Stats";
+"Try again" = "Try again";

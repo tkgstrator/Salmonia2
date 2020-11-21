@@ -28,7 +28,7 @@ struct UnlockFeatureView: View {
                 HStack {
                     VStack(alignment: .leading ){
                         Text("Multiple Accounts")
-                        Text("PU01").modifier(Splatfont(size: 14))
+                        Text("Enable multiple accounts").modifier(Splatfont(size: 14))
                     }
                     Spacer()
                     if user.isPurchase == false {
@@ -44,7 +44,7 @@ struct UnlockFeatureView: View {
                 HStack {
                     VStack(alignment: .leading ){
                         Text("Donation")
-                        Text("PU02").modifier(Splatfont(size: 14))
+                        Text("Donate to the developer").modifier(Splatfont(size: 14))
                     }
                     Spacer()
                     Text("$3.99")
@@ -61,7 +61,7 @@ struct UnlockFeatureView: View {
                 HStack {
                     VStack(alignment: .leading ){
                         Text("Monthly Pass")
-                        Text("PU03").modifier(Splatfont(size: 14))
+                        Text("Donate to the developer").modifier(Splatfont(size: 14))
                     }
                     Spacer()
                     Text("$3.99")

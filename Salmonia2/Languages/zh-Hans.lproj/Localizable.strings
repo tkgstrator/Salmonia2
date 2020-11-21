@@ -1,118 +1,146 @@
-// Menu Title
+// TitleBar
 "Settings" = "";
-"Logging Thread" = "";
+"Log" = "";
 "Results" = "";
-"Result Detail" = "详细";
+"Detail" = "";
 "Feature" = "";
+"User List" = "";
+"Wave Search" = "";
+"Crew Search" = "";
+"My Accounts" = "";
+"Sign in" = "";
+"Coop Shift Rotation" = "";
 
-// General Sentence
-"Registered" = "未登录";
-"Unregistered" = "登録済";
+// Settings
+"NSO Accounts" = "";
+"Fav Crews" = "";
+"Registered" = "";
+"Unregistered" = "";
+"User" = "";
+"Status" = "";
+"iksm session" = "";
+"laravel session" = "";
+"Local Results" = "";
+"Sync User Name" = "";
+"Import Results" = "";
+"Application" = "";
+"Run" = "";
+"Unlock" = "";
+"X-Product Version" = "";
+"Version" = "";
+"Add" = "";
 
-// Stage Names
-"Spawning Grounds" = "回游水库";
-"Marooner's Bay" = "潜藏的落难船";
-"Lost Outpost" = "海上部落前哨站";
-"Salmonid Smokeyard" = "烟熏时鲑工房";
-"Ruins of Ark Polaris" = "荒废方舟北极星";
-
-// In Top Menu
-"Overview" = "";
-"Jobs" = "";
-"Eggs" = "";
-"Shift schedule" = "";
-"Stage records" = "";
-
-// In Fearure View
+// Settings->Features
+"Free" = "";
+"Paid" = "";
+"Donation" = "";
+"Multiple Accounts" = "";
+"Monthly Pass" = "";
 "Future Rotation" = "";
 "Grizzco Weapons" = "";
+"Hidden Feature" = "";
 "Multiple Accounts" = "";
 "Consumable(Donate)" = "";
 "Monthly Pass(Donate)" = "";
+"$3.99" = "¥500";
 
-// In Settings View
-"NSO Accouts" = "";
-"Fav Crews" = "";
+// Settings->Feature's description
+"Enable multiple accounts" = "";
+"Donate to the developer" = "";
 
-"Status" = "用户信息";
-"iksm session" = "对话键";
-"laravel session" = "认证标记";
-"Local Results" = "保存資料數";
-"Import Results" = "";
-"Application" = "";
-"Unlock Feature" = "";
-"X-Poeduct Version" = "";
-"Version" = "";
+// Global->Stage Names
+"Spawning Grounds" = "";
+"Marooner's Bay" = "";
+"Lost Outpost" = "";
+"Salmonid Smokeyard" = "";
+"Ruins of Ark Polaris" = "";
+
+// Top
+"Overview" = "";
+"Jobs" = "";
+"Eggs" = "";
+"Shift Schedule" = "";
+"Stage Records" = "";
+"Favorite Crew" = "";
+"Enter user name" = "";
 
 // In Stage Records View
 "Job Num" = "";
-"Clear Ratio" = "成功率";
-"Max Grade" = "";
-"Salmon Rate" = "";
-"Max Salmon Rate" = "";
-"All" = "夜晚";
-"No Night Event" = "全白天";
-// Event
-"-" = "白天";
-"rush" = "暴走";
-"goldie-seeking" = "寻找金鲑鱼";
-"griller" = "烤炉出击";
-"the-mothership" = "母舰袭来";
-"fog" = "雾";
-"cohock charge" = "肥肥大量袭来";
-// Tide
-"low" = "干潮";
-"normal" = "通常";
-"high" = "满潮";
+"Clear Ratio" = "";
+"Total Power Eggs" = "";
+"Total Golden Eggs" = "";
+"Max Grade" = ""; // The grade of profressional(i.e 999)
+"All" = ""; // Include night event
+"No Night Event" = ""; // Without night event
+"Record" = ""; // The records of collecting golden eggs
 
-// In Shift Stats View
-"Overview" = "概要";
-"Max" = "最高纪录";
-"Avg" = "平均纪录";
-"Defeated" = "击杀数";
-"Bomb Launcher" = "连续炸弹";
-"Sting Ray" = "高压水枪";
-"Inkjet" = "喷射背包";
-"Splashdown" = "超级落地";
-"Grade Point" = "评价";
-"Clear Wave" = "成功回";
-"Clew Grade" = "队友评价";
-"Team Power Eggs" = "队伍红鲑鱼卵数";
-"Team Golden Eggs" = "队伍金鲑鱼卵数";
-"Power Eggs" = "红鲑鱼卵数";
-"Golden Eggs" = "金鲑鱼卵数";
-"Boss Defeated" = "头目击杀数";
-"Rescue Count" = "救助数";
-"Help Count" = "被救助数";
-"Goldie" = "金鲑鱼";
-"Steelhead" = "爆弹";
-"Flyfish" = "垫肩";
-"Scrapper" = "铁板";
-"Steel Eel" = "蛇";
-"Tower" = "塔";
-"Maws" = "地鼠";
-"Griller" = "烤炉";
-"Drizzler" = "蝙蝠";
+// Event & Tide
+"Tide" = "";
+"Event" = "";
+"-" = ""; // No Event
+"rush" = "";
+"goldie-seeking" = "";
+"griller" = "";
+"the-mothership" = "";
+"fog" = "";
+"cohock-charge" = "";
+"low" = "";
+"normal" = "";
+"high" = "";
 
-// In Result Collection View
-"Clear" = "";
-"Defeat" = "";
+// Stats
+"Overview" = "";
+"Max" = "";
+"Avg" = "";
+"Defeated" = ""; // Boss defeated
+"Bomb Launcher" = "";
+"Sting Ray" = "";
+"Inkjet" = "";
+"Splashdown" = "";
+"Grade Point" = ""; // The grade of profressional
+"Clear Wave" = "";
+"Crew Grade" = ""; // The average grade of crew you played with
+"Team Power Eggs" = "";
+"Team Golden Eggs" = "";
+"Power Eggs" = "";
+"Golden Eggs" = "";
+"Boss Defeated" = "";
+"Rescue Count" = "";
+"Help Count" = "";
+"Goldie" = "";
+"Steelhead" = "";
+"Flyfish" = "";
+"Scrapper" = "";
+"Steel Eel" = "";
+"Stinger" = "";
+"Maws" = "";
+"Griller" = "";
+"Drizzler" = "";
 
-// In Result View
+// Clear/Failure in SplatNet2
+"Clear!" = "Clear!!";
+"Defeat" = "Failure";
 "Hazard Level Max!!" = "";
-
-// In Result Filter View
 "Stage" = "";
-
-// In Salmon Stats Player View
 "Avg Eggs" = "";
-"Rank" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
+
+// In Coop Shift Rotation
+"Supplied Weapons" = "";
+"Grizzco Rotation" = "";
+"All Random Rotation" = "";
+"One Random Rotation" = "";
+"Normal Rotation" = "";
+"Only played" = ""; // The roatations you played
+"Rotation" = "";
+"Options" = "";
+
+
+// Notification's description
+"Success" = "";
+"Failure" = "";
+"Add new NSO account" = "";
+"Update NSO account" = "";
+"Wrong request" = "";
+"Login Salmon Stats" = "";
+"Try again/Login Salmon Stats" = "";
+

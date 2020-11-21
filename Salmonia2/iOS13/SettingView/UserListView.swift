@@ -31,7 +31,7 @@ struct UserListView: View {
 //            .onDelete(perform: onDelete)
         }
         .navigationBarTitle("My Accounts")
-        .modifier(Splatfont(size: 20))
+        .modifier(Splatfont(size: 18))
 //        .navigationBarItems(leading: addButton, trailing: EditButton())
         .navigationBarItems(trailing: Login)
         .environment(\.editMode, $editMode)

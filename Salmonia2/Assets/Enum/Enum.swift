@@ -58,23 +58,23 @@ extension APPError: CustomNSError {
         case .unknown:
             return 9999
         case .expired:
-            return 1001
+            return 9403
         case .realm:
-            return 1000
+            return 9000
         case .user:
-            return 1000
+            return 9999
         case .coop:
-            return 1000
+            return 9001
         case .active:
-            return 1001
+            return 9002
         case .apitoken:
-            return 1001
+            return 1003
         case .iksm:
-            return 1001
+            return 1000
         case .session:
             return 1001
         case .noempty:
-            return 1001
+            return 1002
         case .unavailable:
             return 9503
         }
@@ -87,6 +87,7 @@ enum Notification {
     case laravel
     case unlock
     case lock
+    case error
     case success
     case failure
 }
@@ -101,9 +102,11 @@ extension Notification {
         case .laravel:
             return "Login Salmon Stats"
         case .unlock:
-            return "Unlock Feature"
+            return "Unlock feature"
         case .lock:
-            return "Lock Feature"
+            return "Lock feature"
+        case .error:
+            return "Unkonwn error"
         case .success:
             return "Success"
         case .failure:

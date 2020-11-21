@@ -8,53 +8,47 @@
 import SwiftUI
 
 struct LoggingThread: View {
-    @Binding var log: [String]
-    @Binding var lock: Bool
+    @Binding var log: Log
+    @State var elapsedTime: Double = 0.0
+    @State var isLock = true
     
-    init(log: Binding<[String]>, lock: Binding<Bool>) {
-        _log = log
-        _lock = lock
-        UITableView.appearance().tableFooterView = UIView()
-        UITableView.appearance().separatorStyle = .none
-    }
-    
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+
     var body: some View {
         Group {
             VStack {
                 Text("Developed by @tkgling")
                 Text("Thanks @Yukinkling, @barley_ural")
-                Text("External API @frozenpandaman, @nexusmine")
+                Text("API @frozenpandaman, @nexusmine")
             }
-            //            if #available(iOS 14.0, *) {
-            //                ScrollView {
-            //                    LazyVStack(alignment: .leading) {
-            //                        ForEach(log.indices, id:\.self) { idx in
-            //                            Text(self.log[idx]).frame(height: 22)
-            //                        }
-            //                    }
-            //                }.padding(.horizontal, 14)
-            //            } else {
-            if #available(iOS 14.0, *) {
-                ScrollViewReader { proxy in
-                    List() {
-                        ForEach(log.indices, id:\.self) { idx in
-                            Text(self.log[idx]).frame(height: 10).id(idx)
+            .font(.custom("Roboto Mono", size: 18))
+            Divider()
+            VStack {
+                HStack {
+                    Text("Status:")
+                    Spacer()
+                    if log.progress.min != nil {
+                        if log.progress.min.value == log.progress.max.value {
+                            Text("Done")
+                        } else {
+                            Text(log.status.value)
                         }
-                    }
-                    .environment(\.defaultMinListRowHeight, 0)
-                }
-            } else {
-                List() {
-                    ForEach(log.indices, id:\.self) { idx in
-                        Text(self.log[idx]).frame(height: 10)
+                    } else {
+                        Text("Preparing")
                     }
                 }
-                .environment(\.defaultMinListRowHeight, 0)
+                HStack {
+                    Text("Results:")
+                    Spacer()
+                    Text("\(log.progress.id.value)(\(log.progress.min.value)/\(log.progress.max.value))")
+                }
             }
+            .font(.custom("Roboto Mono", size: 22))
+            .padding(.horizontal, 20)
         }
-        .font(.custom("Roboto Mono", size: 14))
+        Spacer()
         .navigationBarTitle("Logging Thread", displayMode: .large)
-//        .navigationBarBackButtonHidden(lock)
+            .navigationBarBackButtonHidden(log.progress.min.value != log.progress.max.value)
     }
 }
 

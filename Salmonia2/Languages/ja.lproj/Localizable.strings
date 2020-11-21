@@ -1,115 +1,106 @@
-// Menu Title
+// TitleBar
 "Settings" = "設定";
-"Logging Thread" = "ログ";
+"Log" = "ログ";
 "Results" = "リザルト";
 "Detail" = "詳細";
 "Feature" = "機能";
 "User List" = "ユーザリスト";
 "Wave Search" = "WAVE検索";
-"Crew Search" = "プレイヤー検索";
+"Crew Search" = "ナカマ検索";
 "My Accounts" = "マイアカウント";
 "Sign in" = "サインイン";
-"Coop Shift Rotation" = "バイトシフト一覧";
+"Coop Shift Rotation" = "シフトスケジュール";
+
+// Settings
+"NSO Accounts" = "NSOアカウント";
+"Fav Crews" = "お気に入りユーザ";
+"Registered" = "トウロク";
+"Unregistered" = "ミトウロク";
+"User" = "ユーザ";
+"Status" = "ステータス";
+"iksm session" = "セッションキー";
+"laravel session" = "認証トークン";
+"Update Username" = "ユーザ名同期";
+"Import Results" = "リザルト取り込み";
+"Application" = "アプリケーション";
+"Update" = "更新";
+"Unlock" = "アンロック";
+"X-Product Version" = "X-Product Version";
+"Version" = "バージョン";
 "Add" = "追加";
 
-// Unlock Feature
+// Settings->Features
 "Free" = "無料";
 "Paid" = "有料";
 "Donation" = "寄付";
 "Multiple Accounts" = "複数アカウント";
 "Monthly Pass" = "月額登録";
+"Future Rotation" = "将来のシフト";
+"Grizzco Weapons" = "クマサン印ブキ";
+"Hidden Feature" = "隠し機能";
 "$3.99" = "¥500";
 
-"PU01" = "複数アカウントを有効化します";
-"PU02" = "開発者を応援します";
-"PU03" = "開発者を応援します";
+// Settings->Feature's description
+"Enable multiple accounts" = "複数アカウントを有効化";
+"Donate to the developer" = "開発者を支援";
 
-// General Sentence
-"Registered" = "トウロク";
-"Unregistered" = "ミトウロク";
-
-// Stage Names
+// Global->Stage Names
 "Spawning Grounds" = "シェケナダム";
 "Marooner's Bay" = "難破船ドン・ブラコ";
 "Lost Outpost" = "海上集落シャケト場";
 "Salmonid Smokeyard" = "トキシラズいぶし工房";
 "Ruins of Ark Polaris" = "朽ちた箱舟 ポラリス";
 
-// In Top Menu
-"Overview" = "プレイヤーデータ";
+// Top
+"Overview" = "概要";
 "Jobs" = "バイト回数";
-"Eggs" = "集めたイクラ";
+"Eggs" = "イクラ数";
 "Shift Schedule" = "シフトスケジュール";
 "Stage Records" = "ステージキロク";
 "Favorite Crew" = "お気に入りユーザ";
-
-// In Fearure View
-"Future Rotation" = "未来のシフト表示";
-"Grizzco Weapons" = "クマサンブキ表示";
-"Hidden Feature" = "隠し機能";
-"Multiple Accounts" = "複数アカウント有効化";
-"Consumable(Donate)" = "";
-"Monthly Pass(Donate)" = "";
-
-// In Settings View
-"NSO Accounts" = "ニンテンドーアカウント";
-"Fav Crews" = "お気に入りユーザ";
-
-"User" = "ユーザ";
-"Status" = "ステータス";
-"iksm session" = "セッショントークン";
-"laravel session" = "認証トークン";
-"Local Results" = "保存リザルト数";
-"Sync User Name" = "プレイヤー名同期";
-"Import Results" = "リザルト取り込み";
-"Application" = "アプリについて";
-"Unlock" = "アンロック";
-"X-Product Version" = "X-Product Version";
-"Version" = "バージョン";
+"Enter user name" = "ユーザ名を入力";
 
 // In Stage Records View
-"Job Num" = "バイト回数"; // Jobsにすべき？
+"Job Num" = "バイト回数";
 "Clear Ratio" = "クリア率";
 "Total Power Eggs" = "総赤イクラ数";
 "Total Golden Eggs" = "総金イクラ数";
-"Max Grade" = "最高評価";
-"Salmon Rate" = "シャケレート";
-"Max Salmon Rate" = "最高シャケレート";
-"All" = "夜あり";
-"No Night Event" = "昼のみ";
-"Record" = "納品キロク";
+"Max Grade" = "最高評価"; // The grade of profressional(i.e 999)
+"All" = "夜あり"; // Include night event
+"No Night Event" = "昼のみ"; // Without night event
+"Record" = "キロク"; // The records of collecting golden eggs
 
-// Event
-"-" = "イベントなし";
+// Event & Tide
+"Tide" = "潮位";
+"Event" = "イベント";
+"-" = "イベントなし"; // No Event
 "rush" = "ラッシュ";
 "goldie-seeking" = "キンシャケ探し";
-"griller" = "グリル発進";
+"griller" = "グリル発信";
 "the-mothership" = "ハコビヤ襲来";
 "fog" = "霧";
 "cohock-charge" = "ドスコイ大量発生";
-// Tide
 "low" = "干潮";
 "normal" = "通常";
 "high" = "満潮";
 
-// In Shift Stats View
-"Overview" = "概要";
+// Stats
 "Max" = "最高";
 "Avg" = "平均";
-"Shinzo" = "安倍晋三";
-"Defeated" = "討伐";
+"Salmon Rate" = "シャケレート";
+"Defeated" = "討伐"; // Boss defeated
 "Bomb Launcher" = "ボムピッチャー";
 "Sting Ray" = "ハイパープレッサー";
 "Inkjet" = "ジェットパック";
 "Splashdown" = "スーパーチャクチ";
-"Grade Point" = "評価";
+"Grade Point" = "評価"; // The grade of profressional
 "Clear Wave" = "クリアWAVE";
-"Crew Grade" = "ナカマ評価";
+"Crew Grade" = "ナカマ評価"; // The average grade of crew you played with
 "Team Power Eggs" = "チーム赤イクラ数";
 "Team Golden Eggs" = "チーム金イクラ数";
 "Power Eggs" = "赤イクラ数";
 "Golden Eggs" = "金イクラ数";
-"Boss Defeated" = "オオモノ討伐";
+"Boss Defeated" = "ボス討伐数";
 "Rescue Count" = "救助数";
 "Help Count" = "被救助数";
 "Goldie" = "キンシャケ";
@@ -122,50 +113,29 @@
 "Griller" = "グリル";
 "Drizzler" = "コウモリ";
 
-// In Result Collection View
+// Clear/Failure in SplatNet2
 "Clear!" = "Clear!!";
 "Defeat" = "Failure";
-
-// In Result View
 "Hazard Level Max!!" = "キケン度MAX!!";
-
-// In Result Filter View
 "Stage" = "ステージ";
-
-// In Salmon Stats Player View
 "Avg Eggs" = "平均イクラ数";
-"Rank" = "ウデマエ";
 
 // In Coop Shift Rotation
 "Supplied Weapons" = "支給ブキ";
 "Grizzco Rotation" = "黄金編成";
 "All Random Rotation" = "全緑編成";
-"One Random Rotation" = "ランダム編成";
+"One Random Rotation" = "一緑編成";
 "Normal Rotation" = "通常編成";
-"Only played" = "プレイしたシフトのみ";
+"Only played" = "プレイしたシフトのみ"; // The roatations you played
 "Rotation" = "編成";
 "Options" = "オプション";
-"" = "";
 
-// In Wave Collection View
-"Tide" = "潮位";
-"Event" = "イベント";
 
-// In User Notifications
+// Notification's description
 "Success" = "成功";
 "Failure" = "失敗";
-"Add new NSO account" = "NSOアカウントを新規追加しました";
-"Update NSO account" = "NSOアカウントを更新しました";
-"Wrong request" = "不正なリクエストです";
-"Login Salmon Stats" = "Salmon Statsへのログイン";
-"Try again/Login Salmon Stats" = "再度試すか、Salmon Statsにログインしてください";
-
-
-"Enter user name" = "プレイヤー名を入力してください";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
-"" = "";
+"Add new NSO account" = "新規アカウントを追加しました";
+"Update NSO account" = "アカウント情報を更新しました";
+"Wrong request" = "誤ったリクエストです";
+"Login Salmon Stats" = "Salmon Statsにログインしてください";
+"Try again" = "再度試してください";

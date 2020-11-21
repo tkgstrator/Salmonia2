@@ -60,6 +60,7 @@
 		10BB34C6252175170046CBCA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BC252175170046CBCA /* LoadingView.swift */; };
 		10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB350025217EFF0046CBCA /* CoopShiftCore.swift */; };
 		10BB350D252182220046CBCA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BB350C252182220046CBCA /* StoreKit.framework */; };
+		10E414B825679DE4006E28D7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E414B725679DE4006E28D7 /* Log.swift */; };
 		10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA355252191340027209D /* SalmoniaUserCore.swift */; };
 		10EFA35E2521DCD00027209D /* ShiftStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */; };
 		10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3682521DE6E0027209D /* UserStatsCore.swift */; };
@@ -150,6 +151,7 @@
 		10BB350025217EFF0046CBCA /* CoopShiftCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopShiftCore.swift; sourceTree = "<group>"; };
 		10BB3508252181300046CBCA /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		10BB350C252182220046CBCA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		10E414B725679DE4006E28D7 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		10EFA355252191340027209D /* SalmoniaUserCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaUserCore.swift; sourceTree = "<group>"; };
 		10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShiftStatsView.swift; path = ../ShiftStatsView.swift; sourceTree = "<group>"; };
 		10EFA3682521DE6E0027209D /* UserStatsCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCore.swift; sourceTree = "<group>"; };
@@ -283,9 +285,9 @@
 		10BB00632530C4350081C6EB /* Languages */ = {
 			isa = PBXGroup;
 			children = (
+				10BB00902530F66A0081C6EB /* Localizable.strings */,
 				10BB00842530F63D0081C6EB /* Localizable.strings */,
 				10BB008A2530F6620081C6EB /* Localizable.strings */,
-				10BB00902530F66A0081C6EB /* Localizable.strings */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -293,6 +295,7 @@
 		10BB3489252174F60046CBCA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				10E414B725679DE4006E28D7 /* Log.swift */,
 				10BB348A252174F60046CBCA /* Realm.swift */,
 				10BB348D252174F60046CBCA /* JSONFormat.swift */,
 				10BB348F252174F60046CBCA /* FImage.swift */,
@@ -677,6 +680,7 @@
 				10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */,
 				1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */,
 				10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */,
+				10E414B825679DE4006E28D7 /* Log.swift in Sources */,
 				1053969325242F5000132668 /* PlayerInfo.swift in Sources */,
 				10B10C4F252913220025057F /* RankType.swift in Sources */,
 				10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */,
@@ -897,7 +901,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -906,7 +910,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -924,7 +928,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -934,7 +938,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
