@@ -22,7 +22,6 @@ class StageRecordCore: ObservableObject {
     init(_ id: Int) {
         token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
             stage_id = id
-//            guard let realm = try? Realm() else { return }
             let results = realm.objects(CoopResultsRealm.self).filter("stage_id=%@", id).sorted(byKeyPath: "play_time")
             let waves = realm.objects(WaveDetailRealm.self).filter("ANY result.stage_id=%@", id)
             
@@ -30,8 +29,7 @@ class StageRecordCore: ObservableObject {
             // 各記録を計算する
             clear_ratio = (job_num != nil) ? (Double(results.filter("is_clear=%@", true).count * 100) / Double(job_num!)).round(digit: 4) : nil
             grade_point = results.max(ofProperty: "grade_point") // 最高評価
-//            srpower = SRPower(results)
-            
+
             for tide in Range(0 ... 2) {
                 for event in Range(0 ... 6) {
                     guard let event_type = EventType.init(event_id: event)?.event_name else { return }

@@ -18,6 +18,8 @@
 		1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1037E3AB25209C7D001B41B0 /* LaunchScreen.storyboard */; };
 		1037E3B825209C7E001B41B0 /* Salmonia2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3B725209C7E001B41B0 /* Salmonia2Tests.swift */; };
 		1037E3C325209C7E001B41B0 /* Salmonia2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */; };
+		104863112568D0C2001FDFBD /* ShiftRecordCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104863102568D0C2001FDFBD /* ShiftRecordCore.swift */; };
+		1048631625697630001FDFBD /* CoopShiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048631525697630001FDFBD /* CoopShiftCollectionView.swift */; };
 		1053967D2524206200132668 /* StageRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053967C2524206200132668 /* StageRecordView.swift */; };
 		1053968525242A7000132668 /* StageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053968425242A7000132668 /* StageType.swift */; };
 		1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053968A25242EE500132668 /* OtherPlayerView.swift */; };
@@ -105,6 +107,8 @@
 		1037E3BE25209C7E001B41B0 /* Salmonia2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Salmonia2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salmonia2UITests.swift; sourceTree = "<group>"; };
 		1037E3C425209C7E001B41B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		104863102568D0C2001FDFBD /* ShiftRecordCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftRecordCore.swift; sourceTree = "<group>"; };
+		1048631525697630001FDFBD /* CoopShiftCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopShiftCollectionView.swift; sourceTree = "<group>"; };
 		1053967C2524206200132668 /* StageRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordView.swift; sourceTree = "<group>"; };
 		1053968425242A7000132668 /* StageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageType.swift; sourceTree = "<group>"; };
 		1053968A25242EE500132668 /* OtherPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPlayerView.swift; sourceTree = "<group>"; };
@@ -319,6 +323,7 @@
 				10BB3491252174F60046CBCA /* UserInfoCore.swift */,
 				10EFA3682521DE6E0027209D /* UserStatsCore.swift */,
 				10BB350025217EFF0046CBCA /* CoopShiftCore.swift */,
+				104863102568D0C2001FDFBD /* ShiftRecordCore.swift */,
 				10EFA355252191340027209D /* SalmoniaUserCore.swift */,
 				105396D725260CEA00132668 /* StageRecordCore.swift */,
 			);
@@ -363,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
+				1048631525697630001FDFBD /* CoopShiftCollectionView.swift */,
 				10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */,
 				10BB34B9252175170046CBCA /* ResultView.swift */,
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
@@ -671,6 +677,7 @@
 				10BB34BF252175170046CBCA /* UnlockFeatureView.swift in Sources */,
 				10BB349F252174F60046CBCA /* CrewInfoCore.swift in Sources */,
 				10EFA3A325239E0A0027209D /* ImportResultView.swift in Sources */,
+				1048631625697630001FDFBD /* CoopShiftCollectionView.swift in Sources */,
 				10BB34BE252175170046CBCA /* SettingView.swift in Sources */,
 				10BB34A7252174F60046CBCA /* Enum.swift in Sources */,
 				10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */,
@@ -685,6 +692,7 @@
 				10B10C4F252913220025057F /* RankType.swift in Sources */,
 				10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */,
 				10BB34C1252175170046CBCA /* ResultCollectionView.swift in Sources */,
+				104863112568D0C2001FDFBD /* ShiftRecordCore.swift in Sources */,
 				10BB349B252174F60046CBCA /* UnixTime.swift in Sources */,
 				10BB34A3252174F60046CBCA /* Modifier.swift in Sources */,
 				10BB349D252174F60046CBCA /* UserResultCore.swift in Sources */,

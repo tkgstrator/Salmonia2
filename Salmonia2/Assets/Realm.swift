@@ -192,13 +192,15 @@ class WaveRecordsRealm: Object {
     @objc dynamic var job_id = 0
     @objc dynamic var water_level = 0
     @objc dynamic var event_type = 0
+    @objc dynamic var start_time = 0
     @objc dynamic var golden_ikura_num = 0
     @objc dynamic var ikura_num = 0
     @objc dynamic var ukey = Int()
     @objc dynamic var sash: String? = nil
-    
+    let shift = LinkingObjects(fromType: CoopShiftRealm.self, property: "records")
     
     func configure(tide: Int, event: Int, start_time: Int) {
+        self.start_time = start_time
         self.water_level = tide
         self.event_type = event
         self.ukey = self.water_level * 10 + self.event_type
@@ -213,16 +215,17 @@ class WaveRecordsRealm: Object {
 
 class SalmonRecordsRealm: Object {
     @objc dynamic var stage_id = 0
+    @objc dynamic var start_time = 0
     @objc dynamic var water_level = 0
     @objc dynamic var event_type = 0
     @objc dynamic var golden_ikura_num = 0
     @objc dynamic var ukey = Int()
     @objc dynamic var sash: String? = nil
     
-    
     func configure(tide: Int, event: Int, start_time: Int) {
         self.water_level = tide
         self.event_type = event
+        self.start_time = start_time
         self.ukey = self.water_level * 10 + self.event_type
         self.sash = String(stage_id + ukey).sha256()
     }

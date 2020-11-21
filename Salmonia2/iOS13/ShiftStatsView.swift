@@ -8,6 +8,7 @@
 import SwiftUI
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 struct ShiftStatsView: View {
     @EnvironmentObject var user: SalmoniaUserCore
@@ -17,9 +18,9 @@ struct ShiftStatsView: View {
         List {
             Section(header: HStack {
                 Spacer()
-//                NavigationLink(destination: StatsChartView(start_time: stats.schedule!)) {
+                NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
                     Text("Overview").font(.custom("Splatfont", size: 18))
-//                }
+                }
                 Spacer()
             }) {
                 ShiftStatsStack(title: "Job Num", value: stats.job_num)
@@ -53,7 +54,7 @@ struct ShiftStatsView: View {
                         ShiftStatsStack(title: "Golden Eggs", value: stats.max_my_golden_eggs)
                     }
                     NavigationLink(destination: ResultView().environmentObject(stats.max_results[4])) {
-                    ShiftStatsStack(title: "Boss Defeated", value: stats.max_defeated)
+                        ShiftStatsStack(title: "Boss Defeated", value: stats.max_defeated)
                     }
                 }
             }
@@ -90,22 +91,80 @@ struct ShiftStatsView: View {
 }
 
 struct StatsChartView: View {
-    @EnvironmentObject var stats: UserStatsCore
-//    @Binding var start_time: Int
-    @State var isMode: Int = 0
-        
-    init(start_time: Int) {
-        
+    @EnvironmentObject var record: ShiftRecordCore
 
+    init(_ start_time: Int) {
+        getShiftRecords(start_time: start_time)
     }
     
     var body: some View {
-        Text("Under Construction")
-            .onAppear() {
+        List {
+            Section(header: HStack {
+                Spacer()
+                Text("Total").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Spacer()
+            }) {
+                HStack {
+                    Text("All")
+                    Spacer()
+                    HStack {
+                        Text("\(record.total[1].value)").frame(width: 40)
+                        Text("(\(record.total[0].value))").frame(width: 50)
+                    }
+                }
+                HStack {
+                    Text("No Night Event")
+                    Spacer()
+                    HStack {
+                        Text("\(record.no_night_total[1].value)").frame(width: 40)
+                        Text("(\(record.no_night_total[0].value))").frame(width: 50)
+                    }
+                }
             }
+            ForEach(Range(0 ... 2)) { tide in
+                Section(header: HStack {
+                    Spacer()
+                    Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").font(.custom("Splatfont", size: 22)).foregroundColor(.orange)
+                    Spacer()
+                }) {
+                    ForEach(Range(0 ... 6)) { event in
+                        if record.global[tide][event] != nil {
+                            //                                NavigationLink(destination: ResultView().environmentObject(record.salmon_id[tide][event]!)) {
+                            HStack {
+                                Text("\((EventType.init(event_id: event)?.event_name)!.localized)")
+                                Spacer()
+                                HStack {
+                                    Text("\(record.personal[tide][event].value)").frame(width: 40)
+                                    Text("(\(record.global[tide][event].value))").frame(width: 50)
+                                }
+                            }
+                            //                                }
+                        }
+                    }
+                }
+            }
+        }
+        .font(.custom("Splatfont2", size: 20))
+        .navigationBarTitle("Global Records")
     }
     
-    func getShiftRecords(start_time: Int){
+    func getShiftRecords(start_time: Int) {
+        let events: [Int: Int] = [
+            0: 0,
+            1: 6,
+            2: 5,
+            3: 2,
+            4: 3,
+            5: 4,
+            6: 1
+        ]
+        
+        let tides: [Int: Int] = [
+            1: 0,
+            2: 1,
+            3: 2
+        ]
+        
         let shift_id: String = UnixTime.dateToStartTime(start_time)
         AF.request("https://salmon-stats-api.yuki.games/api/schedules/\(shift_id)", method: .get)
             .validate(statusCode: 200..<300)
@@ -114,16 +173,57 @@ struct StatsChartView: View {
                 switch (response.result) {
                 case .success(let value):
                     // データベースに書き込む
-                    let phase: CoopShiftRealm = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first!
-                    let json = JSON(value) // 全体のリザルトであることに注意
+                    let records: RealmSwift.List<WaveRecordsRealm> = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first!.records
+                    let json = JSON(value)["records"] // 全体のリザルトであることに注意
                     
-//                    let
-                    print(JSON(value)["records"])
+                    var waves: [JSON] = []
+                    waves.append(json["totals"]["golden_eggs"])
+                    waves.append(json["no_night_totals"]["golden_eggs"])
+                    for (_, wave) in json["wave_records"]["golden_eggs"] {
+                        waves.append(wave)
+                    }
+                    
+                    autoreleasepool {
+                        realm.beginWrite()
+                        //                        records.removeAll() // 一旦リストを全削除
+                        
+                        // 既に書き込まれているかチェック
+                        switch realm.objects(WaveRecordsRealm.self).filter("start_time=%@", start_time).isEmpty {
+                        case true:
+                            //空っぽの場合
+                            for (idx, wave) in waves.enumerated() {
+                                let job_id = wave["id"].intValue
+                                let golden_ikura_num: Int = wave["golden_eggs"].intValue
+                                
+                                let water_level: Int = wave["water_id"].int != nil ? tides[wave["water_id"].intValue]! : idx == 0 ? -1 : -2
+                                let event_type: Int = wave["event_id"].int != nil ? events[wave["event_id"].intValue]! : idx == 0 ? -1 : -2
+                                
+                                let record = WaveRecordsRealm()
+                                record.golden_ikura_num = golden_ikura_num
+                                record.job_id = job_id
+                                record.configure(tide: water_level, event: event_type, start_time: start_time)
+                                records.append(record)
+                            }
+                        case false:
+                            // アップデート
+                            for (idx, wave) in waves.enumerated() {
+                                let job_id = wave["id"].intValue
+                                let golden_ikura_num: Int = wave["golden_eggs"].intValue
+                                
+                                let water_level: Int = wave["water_id"].int != nil ? tides[wave["water_id"].intValue]! : idx == 0 ? -1 : -2
+                                let event_type: Int = wave["event_id"].int != nil ? events[wave["event_id"].intValue]! : idx == 0 ? -1 : -2
+                                
+                                guard let record = records.filter("water_level=%@ and event_type=%@", water_level, event_type).first else { return }
+                                record.golden_ikura_num = golden_ikura_num
+                                record.job_id = job_id
+                            }
+                        }
+                        try? realm.commitWrite()
+                    }
                 case .failure:
                     break
                 }
             }
-    
     }
 }
 

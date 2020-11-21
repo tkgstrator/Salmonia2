@@ -19,10 +19,9 @@ class CoopShiftCore: ObservableObject {
     @Published var data: [CoopShiftRealm] = []
     @Published var all: Results<CoopShiftRealm>  = try! Realm().objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time")
 
-
     init() {
         // 変更があるたびに再読込するだけ
-        token = realm.objects(CoopShiftRealm.self) .observe { [self] _ in
+        token = realm.objects(CoopShiftRealm.self).observe { [self] _ in
             guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
             guard let end_time: Int = realm.objects(CoopShiftRealm.self).filter("end_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: true).last?.start_time else { return }
             
@@ -37,8 +36,7 @@ class CoopShiftCore: ObservableObject {
     }
     
     func update(isEnable: [Bool], isPlayed: Bool) {
-        guard let realm = try? Realm() else { return }
-        
+
         // 該当するシフトのstart_timeを持つ、Intなのでオブジェクト全てを持つよりは相当軽いはず
         var _start_time: [Int] = []
         let played: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.start_time })

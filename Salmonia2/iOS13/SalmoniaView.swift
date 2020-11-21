@@ -23,7 +23,6 @@ struct SalmoniaView: View {
                 PlayerView().padding(.top, 15)
                 CoopShiftView()
                 StageRecordView()
-//                OptionView()
             }
             Update().padding(.trailing, 20).padding(.bottom, 20)
         }

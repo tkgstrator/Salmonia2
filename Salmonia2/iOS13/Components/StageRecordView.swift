@@ -17,7 +17,7 @@ struct StageRecordView: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 32)
                 .background(Color.cDarkGray)
-                .padding(.bottom, 5)
+                .padding(.bottom, 10)
             ForEach(StageType.allCases, id:\.self) { stage in
                 NavigationLink(destination: StageRecordsView().environmentObject(StageRecordCore(stage.stage_id!))) {
                     HStack {
