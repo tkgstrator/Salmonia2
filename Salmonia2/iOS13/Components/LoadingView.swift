@@ -14,12 +14,13 @@ import SwiftyJSON
 struct LoadingView: View {
     
     @State var log = Log()
-    
+
     var body: some View {
         LoggingThread(log: $log)
             .onAppear() {
                 do {
                     guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APPError.user }
+                    if user.account.isEmpty { throw APPError.user }
                     guard let api_token = user.api_token else { throw APPError.apitoken }
                     let version = user.isVersion // X-Product Versionの読み込み
                     let accounts = realm.objects(UserInfoRealm.self).filter("isActive=%@", true)
@@ -37,13 +38,14 @@ struct LoadingView: View {
                             let isValid: Bool = SplatNet2.isValid(iksm_session: iksm_session)
                             if !isValid { // 有効期限が切れていた場合は再生成する
                                 do {
+                                    log.status = "Regenarating"
                                     guard let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid).first else { throw APPError.active }
                                     let response: JSON =  try SplatNet2.genIksmSession(session_token, version: version)
                                     guard let iksm_session = response["iksm_session"].string else { throw APPError.iksm }
                                     try realm.write { user.setValue(iksm_session, forKey: "iksm_session")}
                                 } catch {
                                     log.isValid = false
-                                    log.errorDescription = "Couldn't regenerate iksm_session"
+                                    log.errorDescription = "Error"
                                 }
                             }
                             // シフトデータを読み込んで書き込む
@@ -57,12 +59,17 @@ struct LoadingView: View {
                                 
                                 guard let job_num: Int = summary["summary"]["card"]["job_num"].int else { return }
                                 #if DEBUG
-                                let tmp: Int = job_num - 10
-                                print("JOB IDS", job_num, tmp)
+                                let tmp: Int = realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
+//                                let tmp: Int = job_num - 10 print("JOB IDS", job_num, tmp)
                                 #else
                                 let tmp: Int = realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
                                 #endif
-                                if job_num == tmp { return }
+                                if job_num == tmp {
+                                    log.status = "No new results"
+                                    log.isValid = true
+                                    log.isLock = false
+                                    return
+                                }
                                 let job_ids: Range<Int> = Range(max(job_num - 49, tmp + 1)...job_num)
                                 
                                 // SplatNet2からのリザルト取得に必要なパラメータ
@@ -116,16 +123,17 @@ struct LoadingView: View {
                                 realm.create(UserInfoRealm.self, value: card as Any, update: .modified)
                                 try realm.commitWrite()
                             } catch {
+                                log.isLock = false
                                 log.isValid = false
                                 log.errorDescription = error.localizedDescription
                             }
                         }
                     }
                 } catch {
+                    log.isValid = false
+                    log.isLock = false
                     log.errorDescription = error.localizedDescription
-//                    log.isLock = false
                 }
-//                log.isLock = false
             }
     }
 }

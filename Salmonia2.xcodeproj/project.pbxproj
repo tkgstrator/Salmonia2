@@ -28,11 +28,12 @@
 		105396DD25260D5000132668 /* WaveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396DC25260D5000132668 /* WaveType.swift */; };
 		105396F425264C2000132668 /* WeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396F325264C2000132668 /* WeaponType.swift */; };
 		1056CF402533E9430078E3B4 /* CrewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */; };
+		1058AC9C256DF764008A34F7 /* fangzheng.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */; };
+		1058ACAC256DFAAC008A34F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1058ACAE256DFAAC008A34F7 /* Localizable.strings */; };
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
 		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
 		10BB00822530F63D0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00842530F63D0081C6EB /* Localizable.strings */; };
-		10BB00882530F6620081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB008A2530F6620081C6EB /* Localizable.strings */; };
 		10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00902530F66A0081C6EB /* Localizable.strings */; };
 		10BB00A125310C1C0081C6EB /* WaveCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */; };
 		10BB00A625313AE90081C6EB /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB00A525313AE90081C6EB /* OptionView.swift */; };
@@ -117,14 +118,15 @@
 		105396DC25260D5000132668 /* WaveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveType.swift; sourceTree = "<group>"; };
 		105396F325264C2000132668 /* WeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponType.swift; sourceTree = "<group>"; };
 		1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewSearchView.swift; sourceTree = "<group>"; };
+		1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fangzheng.ttf; sourceTree = "<group>"; };
+		1058ACA3256DFA60008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		1058ACAD256DFAAC008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		105F690E252F33F2003306C8 /* Salmonia2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Salmonia2.entitlements; sourceTree = "<group>"; };
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
 		10BB00532530C3B00081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		10BB00792530F5FB0081C6EB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		10BB00832530F63D0081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		10BB00892530F6620081C6EB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		10BB008F2530F66A0081C6EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveCollectionView.swift; sourceTree = "<group>"; };
 		10BB00A525313AE90081C6EB /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
@@ -291,7 +293,7 @@
 			children = (
 				10BB00902530F66A0081C6EB /* Localizable.strings */,
 				10BB00842530F63D0081C6EB /* Localizable.strings */,
-				10BB008A2530F6620081C6EB /* Localizable.strings */,
+				1058ACAE256DFAAC008A34F7 /* Localizable.strings */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -336,6 +338,7 @@
 				10BB3496252174F60046CBCA /* RobotoMono.ttf */,
 				10BB3497252174F60046CBCA /* Splatfont1.ttf */,
 				10BB3498252174F60046CBCA /* Splatfont2.ttf */,
+				1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -503,7 +506,7 @@
 				en,
 				Base,
 				ja,
-				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 1037E39425209C7C001B41B0;
 			packageReferences = (
@@ -525,12 +528,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1058AC9C256DF764008A34F7 /* fangzheng.ttf in Resources */,
 				10BB34A4252174F60046CBCA /* RobotoMono.ttf in Resources */,
+				1058ACAC256DFAAC008A34F7 /* Localizable.strings in Resources */,
 				10BB34A6252174F60046CBCA /* Splatfont2.ttf in Resources */,
 				10BB34A5252174F60046CBCA /* Splatfont1.ttf in Resources */,
 				1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */,
 				10BB00822530F63D0081C6EB /* Localizable.strings in Resources */,
-				10BB00882530F6620081C6EB /* Localizable.strings in Resources */,
 				10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */,
 				1037E3AA25209C7D001B41B0 /* Preview Assets.xcassets in Resources */,
 				1037E3A725209C7D001B41B0 /* Assets.xcassets in Resources */,
@@ -750,23 +754,23 @@
 			children = (
 				1037E3AC25209C7D001B41B0 /* Base */,
 				10BB00532530C3B00081C6EB /* ja */,
-				10BB00792530F5FB0081C6EB /* zh-Hans */,
+				1058ACA3256DFA60008A34F7 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		1058ACAE256DFAAC008A34F7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1058ACAD256DFAAC008A34F7 /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		10BB00842530F63D0081C6EB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				10BB00832530F63D0081C6EB /* ja */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		10BB008A2530F6620081C6EB /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10BB00892530F6620081C6EB /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -909,7 +913,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -918,7 +922,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.2;
+				MARKETING_VERSION = 0.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -936,7 +940,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -946,7 +950,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.2;
+				MARKETING_VERSION = 0.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

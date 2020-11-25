@@ -1,146 +1,144 @@
 // TitleBar
-"Settings" = "";
-"Log" = "";
-"Results" = "";
-"Detail" = "";
-"Feature" = "";
-"User List" = "";
-"Wave Search" = "";
-"Crew Search" = "";
-"My Accounts" = "";
-"Sign in" = "";
-"Coop Shift Rotation" = "";
+"Settings" = "设定";
+"Log" = "纪录";
+"Results" = "成绩";
+"Detail" = "详细";
+"Feature" = "功能";
+"User List" = "使用者清单";
+"Wave Search" = "WAVE搜索";
+"Crew Search" = "同伴搜索";
+"My Accounts" = "我的帐号";
+"Sign in" = "登录";
+"Coop Shift Rotation" = "出船时刻表";
 
 // Settings
-"NSO Accounts" = "";
-"Fav Crews" = "";
-"Registered" = "";
-"Unregistered" = "";
-"User" = "";
-"Status" = "";
-"iksm session" = "";
-"laravel session" = "";
-"Local Results" = "";
-"Sync User Name" = "";
-"Import Results" = "";
-"Application" = "";
-"Run" = "";
-"Unlock" = "";
-"X-Product Version" = "";
-"Version" = "";
-"Add" = "";
+"NSO Accounts" = "NSO帐号";
+"Fav Crews" = "喜爱使用者名单";
+"Registered" = "註册";
+"Unregistered" = "撤销";
+"User" = "使用者";
+"Status" = "能力值";
+"iksm session" = "ID认證";
+"laravel session" = "註册认證";
+"Update Username" = "使用者名称同步";
+"Import Results" = "读取纪录中";
+"Application" = "版本纪录";
+"Update" = "更新";
+"Unlock" = "解除";
+"X-Product Version" = "X-Produce Version";
+"Version" = "版本";
+"Add" = "追加";
 
 // Settings->Features
-"Free" = "";
-"Paid" = "";
-"Donation" = "";
-"Multiple Accounts" = "";
-"Monthly Pass" = "";
-"Future Rotation" = "";
-"Grizzco Weapons" = "";
-"Hidden Feature" = "";
-"Multiple Accounts" = "";
-"Consumable(Donate)" = "";
-"Monthly Pass(Donate)" = "";
-"$3.99" = "¥500";
+"Free" = "免费";
+"Paid" = "付费";
+"Donation" = "捐赠";
+"Multiple Accounts" = "複数帐号";
+"Monthly Pass" = "月费登录";
+"Future Rotation" = "未来船表";
+"Grizzco Weapons" = "熊印专武";
+"Hidden Feature" = "隐藏功能";
+"$3.99" = "$120";
 
 // Settings->Feature's description
-"Enable multiple accounts" = "";
-"Donate to the developer" = "";
+"Enable multiple accounts" = "开启複数帐号功能";
+"Donate to the developer" = "支援开发者";
 
 // Global->Stage Names
-"Spawning Grounds" = "";
-"Marooner's Bay" = "";
-"Lost Outpost" = "";
-"Salmonid Smokeyard" = "";
-"Ruins of Ark Polaris" = "";
+"Spawning Grounds" = "迴遊水库";
+"Marooner's Bay" = "隐藏的落难船";
+"Lost Outpost" = "海上部落前哨站";
+"Salmonid Smokeyard" = "烟燻时鮭工房";
+"Ruins of Ark Polaris" = "荒废方舟北极星";
 
 // Top
-"Overview" = "";
-"Jobs" = "";
-"Eggs" = "";
-"Shift Schedule" = "";
-"Stage Records" = "";
-"Favorite Crew" = "";
-"Enter user name" = "";
+"Overview" = "概要";
+"Jobs" = "打工次数";
+"Eggs" = "鮭鱼卵数";
+"Shift Schedule" = "出船时刻表";
+"Stage Records" = "场地纪录";
+"Favorite Crew" = "喜爱使用者名单";
+"Enter user name" = "输入使用者名称";
 
 // In Stage Records View
-"Job Num" = "";
-"Clear Ratio" = "";
-"Total Power Eggs" = "";
-"Total Golden Eggs" = "";
-"Max Grade" = ""; // The grade of profressional(i.e 999)
-"All" = ""; // Include night event
-"No Night Event" = ""; // Without night event
-"Record" = ""; // The records of collecting golden eggs
+"Job Num" = "打工次数";
+"Clear Ratio" = "成功率";
+"Total Power Eggs" = "总和赤鮭鱼卵数";
+"Total Golden Eggs" = "总和金鮭鱼卵数";
+"Max Grade" = "最高评价"; // The grade of profressional(i.e 999)
+"All" = "夜晚"; // Include night event
+"No Night Event" = "全白天"; // Without night event
+"Record" = "金卵数"; // The records of collecting golden eggs
 
 // Event & Tide
-"Tide" = "";
-"Event" = "";
-"-" = ""; // No Event
-"rush" = "";
-"goldie-seeking" = "";
-"griller" = "";
-"the-mothership" = "";
-"fog" = "";
-"cohock-charge" = "";
-"low" = "";
-"normal" = "";
-"high" = "";
+"Tide" = "潮位";
+"Event" = "事件";
+"-" = "白天"; // No Event
+"rush" = "暴走";
+"goldie-seeking" = "寻找金鮭鱼";
+"griller" = "烤炉出击";
+"the-mothership" = "母舰袭来";
+"fog" = "浓雾";
+"cohock-charge" = "肥肥大量袭来";
+"low" = "乾潮";
+"normal" = "通常";
+"high" = "满潮";
 
 // Stats
-"Overview" = "";
-"Max" = "";
-"Avg" = "";
-"Defeated" = ""; // Boss defeated
-"Bomb Launcher" = "";
-"Sting Ray" = "";
-"Inkjet" = "";
-"Splashdown" = "";
-"Grade Point" = ""; // The grade of profressional
-"Clear Wave" = "";
-"Crew Grade" = ""; // The average grade of crew you played with
-"Team Power Eggs" = "";
-"Team Golden Eggs" = "";
-"Power Eggs" = "";
-"Golden Eggs" = "";
-"Boss Defeated" = "";
-"Rescue Count" = "";
-"Help Count" = "";
-"Goldie" = "";
-"Steelhead" = "";
-"Flyfish" = "";
-"Scrapper" = "";
-"Steel Eel" = "";
-"Stinger" = "";
-"Maws" = "";
-"Griller" = "";
-"Drizzler" = "";
+// "Overview" = "";
+"Max" = "最高";
+"Avg" = "平均";
+"Salmon Rate" = "打工贡献";
+"Defeated" = "讨伐"; // Boss defeated
+"Bomb Launcher" = "连续炸弹";
+"Sting Ray" = "高压水枪";
+"Inkjet" = "喷射背包";
+"Splashdown" = "超级落地";
+"Grade Point" = "评价"; // The grade of profressional
+"Clear Wave" = "成功WAVE";
+"Crew Grade" = "夥伴评价"; // The average grade of crew you played with
+"Team Power Eggs" = "队伍红鮭鱼卵数";
+"Team Golden Eggs" = "队伍金鮭鱼卵数";
+"Power Eggs" = "红鮭鱼卵数";
+"Golden Eggs" = "金鮭鱼卵数";
+"Boss Defeated" = "讨伐数";
+"Rescue Count" = "救助数";
+"Help Count" = "被救助数";
+"Goldie" = "金鮭鱼";
+"Steelhead" = "炸弹";
+"Flyfish" = "垫肩飞弹";
+"Scrapper" = "铁板";
+"Steel Eel" = "蛇";
+"Stinger" = "塔";
+"Maws" = "地鼠";
+"Griller" = "烤炉";
+"Drizzler" = "蝙蝠";
 
 // Clear/Failure in SplatNet2
-"Clear!" = "Clear!!";
-"Defeat" = "Failure";
-"Hazard Level Max!!" = "";
-"Stage" = "";
-"Avg Eggs" = "";
+"Clear!" = "成功!!";
+"Defeat" = "失败";
+"Hazard Level Max!!" = "危险度MAX";
+"Stage" = "场地";
+"Avg Eggs" = "平均鮭鱼卵数";
 
 // In Coop Shift Rotation
-"Supplied Weapons" = "";
-"Grizzco Rotation" = "";
-"All Random Rotation" = "";
-"One Random Rotation" = "";
-"Normal Rotation" = "";
-"Only played" = ""; // The roatations you played
-"Rotation" = "";
-"Options" = "";
+"Supplied Weapons" = "配给武器";
+"Grizzco Rotation" = "黄金编成";
+"All Random Rotation" = "随机编成";
+"One Random Rotation" = "单绿编成";
+"Normal Rotation" = "一般编成";
+"Only played" = "参与过的船次"; // The roatations you played
+"Rotation" = "编成";
+"Options" = "设定";
 
 
 // Notification's description
-"Success" = "";
-"Failure" = "";
-"Add new NSO account" = "";
-"Update NSO account" = "";
-"Wrong request" = "";
-"Login Salmon Stats" = "";
-"Try again/Login Salmon Stats" = "";
+"Success" = "成功";
+"Failure" = "失败";
+"Add new NSO account" = "增加新帐号完成";
+"Update NSO account" = "帐号的资料更新完成";
+"Wrong request" = "回应错误";
+"Login Salmon Stats" = "请登录Salmon Stats";
+"Try again/Login Salmon Stats" = "请稍後再重试";
+
 

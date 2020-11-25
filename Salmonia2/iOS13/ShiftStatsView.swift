@@ -19,23 +19,23 @@ struct ShiftStatsView: View {
             Section(header: HStack {
                 Spacer()
                 NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
-                    Text("Overview").font(.custom("Splatfont", size: 18))
+                    Text("Overview").modifier(Splatfont(size: 18))
                 }
                 Spacer()
             }) {
                 ShiftStatsStack(title: "Job Num", value: stats.job_num)
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
-                ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.value)
+                ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
                 ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)
                 ShiftStatsStack(title: "Total Golden Eggs", value: stats.total_golden_eggs)
-                ShiftStatsStack(title: "Bomb Launcher", value: stats.special[0].value)
-                ShiftStatsStack(title: "Sting Ray", value: stats.special[1].value)
-                ShiftStatsStack(title: "Inkjet", value: stats.special[2].value)
-                ShiftStatsStack(title: "Splashdown", value: stats.special[3].value)
+                ShiftStatsStack(title: "Bomb Launcher", value: stats.special[0].per)
+                ShiftStatsStack(title: "Sting Ray", value: stats.special[1].per)
+                ShiftStatsStack(title: "Inkjet", value: stats.special[2].per)
+                ShiftStatsStack(title: "Splashdown", value: stats.special[3].per)
             }
             Section(header: HStack {
                 Spacer()
-                Text("Max").font(.custom("Splatfont", size: 18))
+                Text("Max").modifier(Splatfont(size: 18))
                 Spacer()
             }){
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
@@ -61,9 +61,9 @@ struct ShiftStatsView: View {
             Section(header:HStack {
                 Spacer()
                 if !user.isUnlock[2] {
-                    Text("Avg").font(.custom("Splatfont", size: 18))
+                    Text("Avg").modifier(Splatfont(size: 18))
                 } else {
-                    Text("Shinzo").font(.custom("Splatfont", size: 18))
+                    Text("Shinzo").modifier(Splatfont(size: 18))
                 }
                 Spacer()
             }) {
@@ -79,11 +79,11 @@ struct ShiftStatsView: View {
             }
             Section(header:HStack {
                 Spacer()
-                Text("Boss Defeated").font(.custom("Splatfont", size: 18))
+                Text("Boss Defeated").modifier(Splatfont(size: 18))
                 Spacer()
             }) {
                 ForEach(BossType.allCases.indices, id:\.self) { idx in
-                    ShiftStatsStack(title: (BossType.allCases[idx].boss_name!), value: stats.boss_defeated[idx].value)
+                    ShiftStatsStack(title: (BossType.allCases[idx].boss_name!), value: stats.boss_defeated[idx].per)
                 }
             }
         }.navigationBarTitle(UnixTime.dateFromTimestamp(stats.schedule!))
@@ -101,30 +101,36 @@ struct StatsChartView: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("Total").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Text("Total")
+                    .modifier(Splatfont(size: 22))
+                    .foregroundColor(.yellow)
                 Spacer()
             }) {
                 HStack {
                     Text("All")
                     Spacer()
                     HStack {
-                        Text("\(record.total[1].value)").frame(width: 40)
-                        Text("(\(record.total[0].value))").frame(width: 50)
+                        Text("\(record.total[1].value)").frame(width: 55)
+                        Text("(\(record.total[0].value))").frame(width: 55)
                     }
+                    .font(.custom("Splatfont2", size: 20))
                 }
                 HStack {
                     Text("No Night Event")
                     Spacer()
                     HStack {
-                        Text("\(record.no_night_total[1].value)").frame(width: 40)
-                        Text("(\(record.no_night_total[0].value))").frame(width: 50)
+                        Text("\(record.no_night_total[1].value)").frame(width: 55)
+                        Text("(\(record.no_night_total[0].value))").frame(width: 55)
                     }
+                    .font(.custom("Splatfont2", size: 20))
                 }
             }
             ForEach(Range(0 ... 2)) { tide in
                 Section(header: HStack {
                     Spacer()
-                    Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").font(.custom("Splatfont", size: 22)).foregroundColor(.orange)
+                    Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)")
+                        .modifier(Splatfont(size: 22))
+                        .foregroundColor(.orange)
                     Spacer()
                 }) {
                     ForEach(Range(0 ... 6)) { event in
@@ -134,9 +140,10 @@ struct StatsChartView: View {
                                 Text("\((EventType.init(event_id: event)?.event_name)!.localized)")
                                 Spacer()
                                 HStack {
-                                    Text("\(record.personal[tide][event].value)").frame(width: 40)
-                                    Text("(\(record.global[tide][event].value))").frame(width: 50)
+                                    Text("\(record.personal[tide][event].value)").frame(width: 55)
+                                    Text("(\(record.global[tide][event].value))").frame(width: 55)
                                 }
+                                .font(.custom("Splatfont2", size: 20))
                             }
                             //                                }
                         }
@@ -144,7 +151,7 @@ struct StatsChartView: View {
                 }
             }
         }
-        .font(.custom("Splatfont2", size: 20))
+        .modifier(Splatfont2(size: 20))
         .navigationBarTitle("Global Records")
     }
     
@@ -173,7 +180,7 @@ struct StatsChartView: View {
                 switch (response.result) {
                 case .success(let value):
                     // データベースに書き込む
-                    let records: RealmSwift.List<WaveRecordsRealm> = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first!.records
+//                    let records: RealmSwift.List<WaveRecordsRealm> = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first!.records
                     let json = JSON(value)["records"] // 全体のリザルトであることに注意
                     
                     var waves: [JSON] = []
@@ -185,38 +192,14 @@ struct StatsChartView: View {
                     
                     autoreleasepool {
                         realm.beginWrite()
-                        //                        records.removeAll() // 一旦リストを全削除
-                        
-                        // 既に書き込まれているかチェック
-                        switch realm.objects(WaveRecordsRealm.self).filter("start_time=%@", start_time).isEmpty {
-                        case true:
-                            //空っぽの場合
-                            for (idx, wave) in waves.enumerated() {
-                                let job_id = wave["id"].intValue
-                                let golden_ikura_num: Int = wave["golden_eggs"].intValue
-                                
-                                let water_level: Int = wave["water_id"].int != nil ? tides[wave["water_id"].intValue]! : idx == 0 ? -1 : -2
-                                let event_type: Int = wave["event_id"].int != nil ? events[wave["event_id"].intValue]! : idx == 0 ? -1 : -2
-                                
-                                let record = WaveRecordsRealm()
-                                record.golden_ikura_num = golden_ikura_num
-                                record.job_id = job_id
-                                record.configure(tide: water_level, event: event_type, start_time: start_time)
-                                records.append(record)
-                            }
-                        case false:
-                            // アップデート
-                            for (idx, wave) in waves.enumerated() {
-                                let job_id = wave["id"].intValue
-                                let golden_ikura_num: Int = wave["golden_eggs"].intValue
-                                
-                                let water_level: Int = wave["water_id"].int != nil ? tides[wave["water_id"].intValue]! : idx == 0 ? -1 : -2
-                                let event_type: Int = wave["event_id"].int != nil ? events[wave["event_id"].intValue]! : idx == 0 ? -1 : -2
-                                
-                                guard let record = records.filter("water_level=%@ and event_type=%@", water_level, event_type).first else { return }
-                                record.golden_ikura_num = golden_ikura_num
-                                record.job_id = job_id
-                            }
+                        for (idx, wave) in waves.enumerated() {
+                            let job_id = wave["id"].intValue
+                            let golden_ikura_num: Int = wave["golden_eggs"].intValue
+                            
+                            let water_level: Int = wave["water_id"].int != nil ? tides[wave["water_id"].intValue]! : idx == 0 ? -1 : -2
+                            let event_type: Int = wave["event_id"].int != nil ? events[wave["event_id"].intValue]! : idx == 0 ? -1 : -2
+                            
+                            realm.create(WaveRecordsRealm.self, value: WaveRecordsRealm(job_id, start_time, water_level, event_type, golden_ikura_num), update: .all)
                         }
                         try? realm.commitWrite()
                     }
@@ -239,10 +222,11 @@ private struct ShiftStatsStack: View {
     var body: some View {
         HStack {
             Text(title.localized)
+                .modifier(Splatfont2(size: 20))
             Spacer()
             Text(value)
+                .font(.custom("Splatfont2", size: 20))
         }
-        .font(.custom("Splatfont2", size: 20))
     }
 }
 

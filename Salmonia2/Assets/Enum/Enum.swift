@@ -33,7 +33,7 @@ extension APPError: LocalizedError {
         case .realm:
             return "Realm Database Broken"
         case .user:
-            return ""
+            return "Login SplatNet2"
         case .coop:
             return "Realm Database Broken"
         case .active:

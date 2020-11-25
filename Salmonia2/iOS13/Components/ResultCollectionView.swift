@@ -18,7 +18,7 @@ struct ResultCollectionView: View {
     var body: some View {
         Group {
             Text("Found: \(core.results.count)").frame(maxWidth: .infinity)
-            .font(.custom("Splatfont", size: 16))
+            .modifier(Splatfont(size: 16))
             .frame(height: 10)
             Divider()
             List {
@@ -58,22 +58,28 @@ struct ResultCollectionView: View {
             HStack {
                 Group {
                     if result.is_clear {
-                        Text("Clear!").foregroundColor(.green).font(.custom("Splatfont", size: 16))
+                        Text("Clear!")
+                            .foregroundColor(.green)
                     } else {
                         VStack {
-                            Text("Defeat").frame(height: 16).font(.custom("Splatfont", size: 16))
+                            Text("Defeat")
+                                .frame(height: 16)
                             HStack {
-                                Text("Wave").frame(height: 11)
-                                Text("\(result.failure_wave.value!)").frame(height: 11)
+                                Text("Wave")
+                                    .frame(height: 11)
+                                Text("\(result.failure_wave.value!)")
+                                    .frame(height: 11)
                             }
                         }
                         .foregroundColor(.orange)
-                        .font(.custom("Splatfont", size: 14))
                     }
-                }.frame(minWidth: 80).font(.custom("Splatfont", size: 16))
+                }
+                .modifier(Splatfont(size: 16))
+                .frame(minWidth: 80)
                 // ブキとか？
                 // 金イクラ数とかの情報（イカリング2準拠スタイル）
-                Text(String(result.danger_rate)+"%").font(.custom("Splatfont", size: 16))
+                Text(String(result.danger_rate)+"%")
+                    .font(.custom("Splatfont", size: 16))
                 Spacer()
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
@@ -86,7 +92,9 @@ struct ResultCollectionView: View {
                             .frame(width: 20, height: 20)
                         Text("x\(result.power_eggs)").frame(width: 50, height: 16, alignment: .leading)
                     }
-                }.frame(width: 80).font(.custom("Splatfont2", size: 16))
+                }
+                .frame(width: 80)
+                .font(.custom("Splatfont2", size: 16))
             }
         }
     }
@@ -108,7 +116,9 @@ struct ResultCollectionView: View {
             List {
                 Section(header: HStack {
                     Spacer()
-                    Text("Golden Eggs").modifier(Splatfont(size: 22)).foregroundColor(.yellow)
+                    Text("Golden Eggs")
+                        .modifier(Splatfont(size: 22))
+                        .foregroundColor(.yellow)
                     Spacer()
                 }) {
                     VStack(spacing: 5) {

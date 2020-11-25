@@ -35,14 +35,17 @@ struct SalmoniaView: View {
     }
     
     private var Title: some View {
-        Text("Salmonia").font(.custom("Splatfont", size: 24))
+        Text("Salmonia")
+            .modifier(Splatfont(size: 24))
     }
     
     private var User: some View {
         HStack {
             URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }.frame(width: 35, height: 35)
             Spacer()
-            Text(user.nickname).modifier(Splatfont(size: 24)).frame(maxWidth: .infinity)
+            Text(user.nickname)
+                .modifier(Splatfont(size: 24))
+                .frame(maxWidth: .infinity)
         }
     }
     

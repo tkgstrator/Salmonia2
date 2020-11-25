@@ -30,26 +30,32 @@ struct OtherPlayerView: View {
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Jobs")
+                        .modifier(Splatfont(size: 18))
                     Text("\(player.job_num)")
+                        .font(.custom("Splatfont", size: 18))
                 }
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Avg Eggs")
+                        .modifier(Splatfont(size: 18))
                     HStack {
                         Text(String((Double(player.golden_ikura_total) / Double(player.job_num)).round(digit: 2))).foregroundColor(.yellow)
                         Text("/")
                         Text(String((Double(player.ikura_total) / Double(player.job_num)).round(digit: 2))).foregroundColor(.red)
                     }
+                    .font(.custom("Splatfont", size: 18))
                 }
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Defeated")
+                        .modifier(Splatfont(size: 18))
                     HStack {
                         Text(String((Double(player.defeated) / Double(player.job_num)).round(digit: 2)))
                     }
+                    .font(.custom("Splatfont", size: 18))
                 }
                 Spacer()
-            }.modifier(Splatfont(size: 18))
+            }
         }
 //        .onAppear() {
 //            guard let realm = try? Realm() else { return }

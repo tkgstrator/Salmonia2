@@ -32,7 +32,9 @@ struct SettingView: View {
     }
     
     private var Application: some View {
-        Section(header: Text("Application").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange)) {
+        Section(header: Text("Application")
+                    .modifier(Splatfont(size: 18))
+                    .foregroundColor(.cOrange)) {
             HStack {
                 Text("X-Product Version")
                 Spacer()
@@ -64,7 +66,9 @@ struct SettingView: View {
     }
     
     private var UserSection: some View {
-        Section(header: Text("My Accounts").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange)) {
+        Section(header: Text("My Accounts")
+                    .modifier(Splatfont(size: 18))
+                    .foregroundColor(.cOrange)) {
             NavigationLink(destination: UserListView()) { Text("Sign in") }
             //            NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) { Text("Fav Crews") }
             HStack {
@@ -76,7 +80,9 @@ struct SettingView: View {
     }
     
     private var UserStatus: some View {
-        Section(header: Text("Feature").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange)) {
+        Section(header: Text("Feature")
+                    .modifier(Splatfont(size: 18))
+                    .foregroundColor(.cOrange)) {
             HStack {
                 Text("Update Username")
                 Spacer()

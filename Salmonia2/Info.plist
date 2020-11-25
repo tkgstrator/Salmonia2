@@ -40,6 +40,7 @@
 		<string>Splatfont1.ttf</string>
 		<string>Splatfont2.ttf</string>
 		<string>RobotoMono.ttf</string>
+		<string>fangzheng.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

@@ -10,14 +10,13 @@ import SwiftUI
 struct LoggingThread: View {
     @Binding var log: Log
     @State var elapsedTime: Double = 0.0
-    @State var isLock = true
-    
+
     let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         Group {
             VStack {
-                Text("Developed by @tkgling")
+                Text("Developed by @Herlingum")
                 Text("Thanks @Yukinkling, @barley_ural")
                 Text("API @frozenpandaman, @nexusmine")
             }
@@ -27,28 +26,34 @@ struct LoggingThread: View {
                 HStack {
                     Text("Status:")
                     Spacer()
-                    if log.progress.min != nil {
-                        if log.progress.min.value == log.progress.max.value {
-                            Text("Done")
+                    if log.isValid == true {
+                        if log.progress.min != nil && log.progress.min == log.progress.max {
+                            Text("Done").onAppear() {
+                                log.isLock = false
+                            }
                         } else {
-                            Text(log.status.value)
+                            Text("\(log.status.value)")
                         }
                     } else {
-                        Text("Preparing")
+                        Text("\(log.errorDescription.value)")
                     }
                 }
                 HStack {
                     Text("Results:")
                     Spacer()
-                    Text("\(log.progress.id.value)(\(log.progress.min.value)/\(log.progress.max.value))")
+                    if log.isValid == true {
+                        Text("\(log.progress.id.value)(\(log.progress.min.value)/\(log.progress.max.value))")
+                    } else {
+                        Text("-(-/-)")
+                    }
                 }
             }
             .font(.custom("Roboto Mono", size: 22))
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 16)
+            Spacer()
         }
-        Spacer()
         .navigationBarTitle("Logging Thread", displayMode: .large)
-            .navigationBarBackButtonHidden(log.progress.min.value != log.progress.max.value)
+        .navigationBarBackButtonHidden(log.isLock)
     }
 }
 

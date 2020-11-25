@@ -20,16 +20,24 @@ struct PlayerView: View {
                 }.buttonStyle(PlainButtonStyle())
                 Text(user.nickname).modifier(Splatfont(size: 29)).frame(maxWidth: .infinity)
             }.padding(.horizontal, 10)
-            Text("Overview".localized).foregroundColor(.cOrange).font(.custom("Splatfont", size: 21)).frame(maxWidth: .infinity).frame(height: 32).background(Color.cDarkGray).padding(.bottom, 5)
+            Text("Overview".localized)
+                .foregroundColor(.cOrange)
+                .modifier(Splatfont(size: 21))
+                .frame(maxWidth: .infinity)
+                .frame(height: 32)
+                .background(Color.cDarkGray)
+                .padding(.bottom, 5)
             HStack {
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Jobs")
+                        .modifier(Splatfont(size: 18))
                     Text("\(user.job_num)")
                 }
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Eggs")
+                        .modifier(Splatfont(size: 18))
                     HStack {
                         Text("\(user.golden_ikura_total)").foregroundColor(.yellow)
                         Text("/")
@@ -39,7 +47,8 @@ struct PlayerView: View {
                 Spacer()
             }
             .padding(.bottom, 5)
-            .modifier(Splatfont(size: 18))
+            .font(.custom("Splatfont", size: 18))
+//            .modifier(Splatfont(size: 18))
             .padding(.horizontal, 10)
             CrewSearch
         }
@@ -54,7 +63,8 @@ struct PlayerView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(.cDarkGray)
-                    Text("Favorite Crew").font(.custom("Splatfont2", size: 20))
+                    Text("Favorite Crew")
+                        .modifier(Splatfont2(size: 20))
                 }
             }
             .frame(maxWidth: 240)

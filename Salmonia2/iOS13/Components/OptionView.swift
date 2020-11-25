@@ -30,7 +30,8 @@ struct OptionView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(.cGray)
-                    Text("Wave Search").font(.custom("Splatfont2", size: 22))
+                    Text("Wave Search")
+                        .modifier(Splatfont2(size: 18))
                 }
             }
             .frame(maxWidth: 300)
@@ -47,7 +48,8 @@ struct OptionView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(.cGray)
-                    Text("Coop Shift Rotation").font(.custom("Splatfont2", size: 22))
+                    Text("Coop Shift Rotation")
+                        .modifier(Splatfont2(size: 22))
                 }
             }
             .frame(maxWidth: 300)
@@ -64,7 +66,8 @@ struct OptionView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(.cDarkGray)
-                    Text("Favorite Crew").font(.custom("Splatfont2", size: 22))
+                    Text("Favorite Crew")
+                        .font(.custom("Splatfont2", size: 22))
                 }
             }
             .frame(maxWidth: 300)

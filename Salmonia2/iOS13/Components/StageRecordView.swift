@@ -13,7 +13,7 @@ struct StageRecordView: View {
         VStack(spacing: 10) {
             Text("Stage Records")
                 .foregroundColor(.cOrange)
-                .font(.custom("Splatfont", size: 20))
+                .modifier(Splatfont(size: 20))
                 .frame(maxWidth: .infinity)
                 .frame(height: 32)
                 .background(Color.cDarkGray)
@@ -27,7 +27,8 @@ struct StageRecordView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8.0))
                         //Spacer()
                         Group {
-                            Text(stage.stage_name!.localized).font(.custom("Splatfont", size: 18.5)).minimumScaleFactor(0.7).lineLimit(1)
+                            Text(stage.stage_name!.localized)
+                                .modifier(Splatfont(size: 18))
                         }.frame(maxWidth: .infinity)
                     }
                 }
@@ -44,7 +45,7 @@ private struct StageRecordsView: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("Overview").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Text("Overview").modifier(Splatfont(size: 22)).foregroundColor(.yellow)
                 Spacer()
             }) {
                 HStack {
@@ -75,7 +76,7 @@ private struct StageRecordsView: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("Record").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Text("Record").modifier(Splatfont(size: 22)).foregroundColor(.yellow)
                 Spacer()
             }) {
                 HStack {
@@ -91,7 +92,7 @@ private struct StageRecordsView: View {
                 ForEach(Range(0 ... 2)) { tide in
                     Section(header: HStack {
                         Spacer()
-                        Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").font(.custom("Splatfont", size: 20)).foregroundColor(.orange)
+                        Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").modifier(Splatfont(size: 20)).foregroundColor(.orange)
                         Spacer()
                     }) {
                         ForEach(Range(0 ... 6)) { event in
@@ -109,7 +110,7 @@ private struct StageRecordsView: View {
                 }
             }
         }
-        .font(.custom("Splatfont2", size: 20))
+        .modifier(Splatfont2(size: 20))
         .navigationBarTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!.localized)
     }
 }

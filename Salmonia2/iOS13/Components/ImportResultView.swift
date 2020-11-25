@@ -79,7 +79,7 @@ struct ImportResultView: View {
                                                 log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
                                             }
                                             nsaids.append(contentsOf: result["members"].map({ $0.1.stringValue }))
-                                            Thread.sleep(forTimeInterval: 0.045)
+                                            Thread.sleep(forTimeInterval: 0.025)
                                         }
                                         do {
                                             let crews: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session)
@@ -93,7 +93,7 @@ struct ImportResultView: View {
                                         }
                                         try? realm.commitWrite()
                                     } // autoreleasepool
-                                    Thread.sleep(forTimeInterval: 10)
+                                    Thread.sleep(forTimeInterval: 5)
                                 } // Pages
                             } // DispatchQueue ASync
                         } // DispatchQueue ASync

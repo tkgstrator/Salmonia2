@@ -16,10 +16,10 @@ struct PastCoopShiftView: View {
     @State var isPlayed: Bool = false
     // private var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
     
-//    init() {
-//        UITableView.appearance().tableFooterView = UIView()
-//        UITableView.appearance().separatorStyle = .none
-//    }
+    init() {
+        UITableView.appearance().tableFooterView = UIView()
+        UITableView.appearance().separatorStyle = .none
+    }
     
     var body: some View {
         if #available(iOS 14.0, *) {
@@ -99,7 +99,9 @@ struct PastCoopShiftView: View {
 //                Text("Construction")
                 Section(header: HStack {
                     Spacer()
-                    Text("Rotation").font(.custom("Splatfont", size: 22)).foregroundColor(.cOrange)
+                    Text("Rotation")
+                        .modifier(Splatfont(size: 22))
+                        .foregroundColor(.cOrange)
                     Spacer()
                 }) {
                     ForEach(Range(0...3)) { idx in
@@ -110,7 +112,9 @@ struct PastCoopShiftView: View {
                 }
                 Section(header: HStack {
                     Spacer()
-                    Text("Options").font(.custom("Splatfont", size: 22)).foregroundColor(.cOrange)
+                    Text("Options")
+                        .modifier(Splatfont(size: 22))
+                        .foregroundColor(.cOrange)
                     Spacer()
                 }) {
                     Toggle(isOn: $isPlayed) {
@@ -141,7 +145,7 @@ struct PastCoopShiftView: View {
             .padding(.all, 8)
             .background(BackgroundMask)
             .mask(RoundedRectangle(cornerRadius: 12.0))
-            .font(.custom("Splatfont2", size: 18))
+            .modifier(Splatfont2(size: 18))
         }
         
         private var BackgroundMask: some View {
@@ -156,7 +160,8 @@ struct PastCoopShiftView: View {
             VStack(alignment: .leading, spacing: 5) {
                 HStack {
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!) { image in image.resizable().frame(width: 33, height: 22)}
-                    Text(phase.start_time.year + " " + phase.start_time.time + " - " + phase.end_time.time).font(.custom("Splatfont2", size: 18)).minimumScaleFactor(0.7).lineLimit(1)
+                    Text(phase.start_time.year + " " + phase.start_time.time + " - " + phase.end_time.time)
+                        .font(.custom("Splatfont2", size: 18))
                 }.frame(height: 22)
                 Line().stroke(style: StrokeStyle(lineWidth: 3, dash: [8], dashPhase: 5)).frame(height: 2).foregroundColor(.cLightGray)
             }.frame(maxHeight: 25)
@@ -166,10 +171,13 @@ struct PastCoopShiftView: View {
             HStack {
                 VStack(spacing: 5) {
                     URLImage(url: URL(string: (StageType(stage_id: phase.stage_id)?.image_url)!)!) { image in image.resizable().frame(width: 112, height: 63) }.clipShape(RoundedRectangle(cornerRadius: 8.0))
-                    Text((StageType.init(stage_id: phase.stage_id)?.stage_name!)!.localized).font(.custom("Splatfont2", size: 14))
+                    Text((StageType.init(stage_id: phase.stage_id)?.stage_name!)!.localized)
+                        .modifier(Splatfont2(size: 14))
                 }.padding(.top, 10)
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Supplied Weapons").font(.custom("Splatfont2", size: 16)).frame(height: 14)
+                    Text("Supplied Weapons")
+                        .modifier(Splatfont2(size: 16))
+                        .frame(height: 14)
                     HStack {
                         ForEach(phase.weapon_list, id:\.self) { weapon in
                             URLImage(url: WeaponType(weapon_id: weapon)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: 45)}

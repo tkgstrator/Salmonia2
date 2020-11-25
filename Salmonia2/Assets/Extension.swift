@@ -97,6 +97,15 @@ extension Optional {
             return "-"
         }
     }
+    
+    var per: String {
+        switch self {
+        case is Double:
+            return (self as! Double).isNaN ? String(0.0) : String((self as! Double * 100).round(digit: 2)) + "%"
+        default:
+            return "-"
+        }
+    }
 }
 
 extension UIColor {

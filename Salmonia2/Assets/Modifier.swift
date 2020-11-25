@@ -15,12 +15,43 @@ struct Splatfont: ViewModifier {
     let size: CGFloat
     
     func body(content: Content) -> some View {
-        content
-            .font(.custom("Splatfont", size: size))
+        if NSLocale.preferredLanguages[0].prefix(2) == "zh" {
+            return
+                content
+                .font(.custom("FZYHFW--GB1-0", size: size + 4))
+                .minimumScaleFactor(0.7)
+                .lineLimit(1)
+        } else {
+            return
+                content
+                .font(.custom("Splatfont", size: size))
+                .minimumScaleFactor(0.7)
+                .lineLimit(1)
+        }
         //            .frame(height: size)
     }
 }
 
+struct Splatfont2: ViewModifier {
+    let size: CGFloat
+    
+    func body(content: Content) -> some View {
+        if NSLocale.preferredLanguages[0].prefix(2) == "zh" {
+            return
+                content
+                .font(.custom("FZYHFW--GB1-0", size: size))
+                .minimumScaleFactor(0.7)
+                .lineLimit(1)
+        } else {
+            return
+                content
+                .font(.custom("Splatfont2", size: size))
+                .minimumScaleFactor(0.7)
+                .lineLimit(1)
+        }
+        //            .frame(height: size)
+    }
+}
 
 struct WebKitView: View {
     var body: some View {

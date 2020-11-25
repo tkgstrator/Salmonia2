@@ -22,9 +22,10 @@ struct WaveCollectionView: View {
     
     var body: some View {
         Group {
-            Text("Found: \(core.waves.count)").frame(maxWidth: .infinity)
-            .font(.custom("Splatfont", size: 16))
-            .frame(height: 10)
+            Text("Found: \(core.waves.count)")
+                .frame(maxWidth: .infinity)
+                .modifier(Splatfont(size: 16))
+                .frame(height: 10)
             Divider()
             List {
                 ForEach(core.waves.indices, id:\.self) { idx in
@@ -52,7 +53,9 @@ struct WaveCollectionView: View {
         List {
             Section(header: HStack {
                 Spacer()
-                Text("Stage").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Text("Stage")
+                    .modifier(Splatfont(size: 22))
+                    .foregroundColor(.yellow)
                 Spacer()
             }) {
                 ForEach(StageType.allCases.indices, id:\.self) { idx in
@@ -63,7 +66,9 @@ struct WaveCollectionView: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("Tide").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Text("Tide")
+                    .modifier(Splatfont(size: 22))
+                    .foregroundColor(.yellow)
                 Spacer()
             }) {
                 ForEach(Range(0 ... 2)) { idx in
@@ -74,7 +79,9 @@ struct WaveCollectionView: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("Event").font(.custom("Splatfont", size: 22)).foregroundColor(.yellow)
+                Text("Event")
+                    .modifier(Splatfont(size: 22))
+                    .foregroundColor(.yellow)
                 Spacer()
             }) {
                 ForEach(Range(0 ... 6)) { idx in
@@ -84,7 +91,7 @@ struct WaveCollectionView: View {
                 }
             }
         }
-        .font(.custom("Splatfont", size: 18))
+        .modifier(Splatfont(size: 18))
         .onDisappear() {
             // 画面を閉じるときにアップデートしてみよう
             var water_level: [Int] = []
@@ -114,13 +121,14 @@ struct WaveCollectionView: View {
 //                        Text(String(collected_ratio) + "%")
                         Text((StageType.init(stage_id: data.result.first!.stage_id)?.stage_name!.localized)!)
                     }
-                    .font(.custom("Splatfont", size: 14)).foregroundColor(.yellow)
+                    .modifier(Splatfont(size: 14))
+                    .foregroundColor(.yellow)
                     HStack {
                         Text(data.water_level!.localized)
                         Text(data.event_type!.localized)
                     }
                 }
-                .font(.custom("Splatfont", size: 16))
+                .modifier(Splatfont(size: 16))
                 // ブキとか？
                 // 金イクラ数とかの情報（イカリング2準拠スタイル）
                 Spacer()
@@ -135,7 +143,10 @@ struct WaveCollectionView: View {
                             .frame(width: 20, height: 20)
                         Text("x\(data.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
                     }
-                }.frame(width: 80).font(.custom("Splatfont2", size: 16))
+                }
+                .frame(width: 80)
+                .modifier(Splatfont2(size: 16))
+                .modifier(Splatfont2(size: 18)).font(.custom("Splatfont2", size: 16))
             }
             
         }

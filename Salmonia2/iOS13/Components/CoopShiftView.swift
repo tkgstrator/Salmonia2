@@ -34,7 +34,8 @@ struct CoopShiftView: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundColor(.cDarkGray)
-                    Text("Coop Shift Rotation").font(.custom("Splatfont2", size: 20))
+                    Text("Coop Shift Rotation")
+                        .modifier(Splatfont2(size: 20))
                 }
             }
             .frame(maxWidth: 240)
@@ -67,9 +68,12 @@ private struct CoopShiftStack: View {
                     //                    if user.is_unlock && phase["WeaponSets"][3].intValue == -1 {
                     //                        URLImage(URL(string: ImageURL.weapon(self.phase["RareWeaponID"].intValue))!, content: {$0.image.resizable().frame(width: 40, height: 40)})
                     //                    }
-                }.frame(maxWidth: .infinity)
-            }.frame(height: 63)
-        }.frame(height: 100)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .frame(height: 63)
+        }
+        .frame(height: 100)
         .font(.custom("Splatfont2", size: 18))
     }
 }

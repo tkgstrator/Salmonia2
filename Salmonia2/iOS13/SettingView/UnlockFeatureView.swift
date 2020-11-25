@@ -13,7 +13,9 @@ struct UnlockFeatureView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Free").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange)) {
+            Section(header: Text("Free")
+                        .modifier(Splatfont(size: 18))
+                        .foregroundColor(.cOrange)) {
                 Toggle(isOn: $user.isUnlock[0]) {
                     Text("Future Rotation")
                 }
@@ -24,7 +26,9 @@ struct UnlockFeatureView: View {
                     Text("Hidden Feature")
                 }.disabled(true)
             }
-            Section(header: Text("Paid").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange)) {
+            Section(header: Text("Paid")
+                        .modifier(Splatfont(size: 18))
+                        .foregroundColor(.cOrange)) {
                 HStack {
                     VStack(alignment: .leading ){
                         Text("Multiple Accounts")
