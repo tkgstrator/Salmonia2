@@ -84,6 +84,7 @@
 "high" = "High tide";
 
 // Stats
+"Total" = "Total";
 "Max" = "Max";
 "Avg" = "Avg";
 "Defeated" = "Defeated"; // Boss defeated

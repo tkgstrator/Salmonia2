@@ -30,6 +30,7 @@
 		1056CF402533E9430078E3B4 /* CrewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */; };
 		1058AC9C256DF764008A34F7 /* fangzheng.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */; };
 		1058ACAC256DFAAC008A34F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1058ACAE256DFAAC008A34F7 /* Localizable.strings */; };
+		108F2C67257766BB00287900 /* SyncUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108F2C66257766BB00287900 /* SyncUserData.swift */; };
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
 		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
@@ -122,6 +123,7 @@
 		1058ACA3256DFA60008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1058ACAD256DFAAC008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		105F690E252F33F2003306C8 /* Salmonia2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Salmonia2.entitlements; sourceTree = "<group>"; };
+		108F2C66257766BB00287900 /* SyncUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncUserData.swift; sourceTree = "<group>"; };
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
@@ -288,6 +290,17 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		108F2C6B257766C600287900 /* LoggingThread */ = {
+			isa = PBXGroup;
+			children = (
+				10BB34B8252175170046CBCA /* LoggingThread.swift */,
+				10BB34BC252175170046CBCA /* LoadingView.swift */,
+				108F2C66257766BB00287900 /* SyncUserData.swift */,
+				10EFA3A225239E0A0027209D /* ImportResultView.swift */,
+			);
+			path = LoggingThread;
+			sourceTree = "<group>";
+		};
 		10BB00632530C4350081C6EB /* Languages */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,15 +383,13 @@
 		10BB34B6252175170046CBCA /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				108F2C6B257766C600287900 /* LoggingThread */,
 				1048631525697630001FDFBD /* CoopShiftCollectionView.swift */,
 				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
 				10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */,
 				10BB34B9252175170046CBCA /* ResultView.swift */,
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
 				10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */,
-				10BB34B8252175170046CBCA /* LoggingThread.swift */,
-				10BB34BC252175170046CBCA /* LoadingView.swift */,
-				10EFA3A225239E0A0027209D /* ImportResultView.swift */,
 				1053967C2524206200132668 /* StageRecordView.swift */,
 				10BB34BA252175170046CBCA /* PlayerView.swift */,
 				1053968A25242EE500132668 /* OtherPlayerView.swift */,
@@ -677,6 +688,7 @@
 				10EFA35E2521DCD00027209D /* ShiftStatsView.swift in Sources */,
 				1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */,
 				10F2825C2530B58700D7B2BE /* WaveResultCore.swift in Sources */,
+				108F2C67257766BB00287900 /* SyncUserData.swift in Sources */,
 				10BB34C3252175170046CBCA /* ResultView.swift in Sources */,
 				10BB34BF252175170046CBCA /* UnlockFeatureView.swift in Sources */,
 				10BB349F252174F60046CBCA /* CrewInfoCore.swift in Sources */,
@@ -922,7 +934,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.3;
+				MARKETING_VERSION = 0.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -950,7 +962,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.3;
+				MARKETING_VERSION = 0.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

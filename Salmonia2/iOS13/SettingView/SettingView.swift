@@ -13,6 +13,7 @@ import SwiftyJSON
 import MobileCoreServices
 import Alamofire
 import UserNotifications
+import AVKit
 
 struct SettingView: View {
     @EnvironmentObject var user: SalmoniaUserCore
@@ -84,18 +85,12 @@ struct SettingView: View {
                     .modifier(Splatfont(size: 18))
                     .foregroundColor(.cOrange)) {
             HStack {
-                Text("Update Username")
-                Spacer()
-                Text("Update")
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 2)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white, lineWidth: 3)
-                    )
-                    .onTapGesture {
-                        updateUserName()
+                NavigationLink(destination: SyncUserData()) {
+                    HStack {
+                        Text("Update Username")
+                        Spacer()
                     }
+                }
             }
             if !user.isImported {
                 NavigationLink(destination: ImportResultView()) {

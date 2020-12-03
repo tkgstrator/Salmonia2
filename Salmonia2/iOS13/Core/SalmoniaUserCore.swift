@@ -17,7 +17,7 @@ class SalmoniaUserCore: ObservableObject {
     @Published var isImported: Bool = false
     @Published var isPurchase: Bool = false
     @Published var isDevelop: Bool = false
-    @Published var isUnlock: [Bool] = [false, false, false]
+    @Published var isUnlock: [Bool] = [false, false, false, false]
     @Published var account = RealmSwift.List<UserInfoRealm>()
     @Published var favuser = RealmSwift.List<CrewInfoRealm>()
     @Published var isActiveArray: [Bool] = []

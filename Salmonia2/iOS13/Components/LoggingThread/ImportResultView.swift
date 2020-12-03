@@ -22,7 +22,7 @@ struct ImportResultView: View {
                     guard let realm = try? Realm() else { return }
                     guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APPError.active }
                     let accounts = user.account.filter("isActive=%@", true)
-                    let verson = user.isVersion
+                    let version = user.isVersion
                     
                     // ユーザ名とか取得するためにセッションキーが必要
                     guard let _iksm_session: String = accounts.first?.iksm_session else { throw APPError.active }
@@ -36,7 +36,7 @@ struct ImportResultView: View {
                     // ニックネームとか取得に必要なので
                     if !SplatNet2.isValid(iksm_session: _iksm_session) {
                         do {
-                            let response = try SplatNet2.genIksmSession(session_token, version: verson)
+                            let response = try SplatNet2.genIksmSession(session_token, version: version)
                             let iksm_session = response["iksm_session"].stringValue
                             try? realm.write {
                                 accounts.first?.iksm_session = iksm_session
@@ -55,7 +55,7 @@ struct ImportResultView: View {
                         DispatchQueue(label: "Import").async {
                             log.status = "Connecting"
                             #if DEBUG
-                            let metadata: (link: Int, job_num: Int) = (1, 200)
+                            let metadata: (link: Int, job_num: Int) = (5, 1000)
                             #else
                             guard let metadata = try? getLastLink(nsaid: nsaid) else { return }
                             #endif
@@ -79,21 +79,21 @@ struct ImportResultView: View {
                                                 log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
                                             }
                                             nsaids.append(contentsOf: result["members"].map({ $0.1.stringValue }))
-                                            Thread.sleep(forTimeInterval: 0.025)
+                                            Thread.sleep(forTimeInterval: 0.005)
                                         }
-                                        do {
-                                            let crews: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session)
-                                            for (_, crew) in crews["nickname_and_icons"] {
-                                                let value: [String: Any] = ["nsaid": crew["nsa_id"].stringValue, "name": crew["nickname"].stringValue, "image": crew["thumbnail_url"].stringValue]
-                                                realm.create(CrewInfoRealm.self, value: value, update: .all)
-                                            }
-                                        } catch(let error) {
-                                            log.isValid = false
-                                            log.errorDescription = error.localizedDescription
-                                        }
+//                                        do {
+//                                            let crews: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session)
+//                                            for (_, crew) in crews["nickname_and_icons"] {
+//                                                let value: [String: Any] = ["nsaid": crew["nsa_id"].stringValue, "name": crew["nickname"].stringValue, "image": crew["thumbnail_url"].stringValue]
+//                                                realm.create(CrewInfoRealm.self, value: value, update: .all)
+//                                            }
+//                                        } catch(let error) {
+//                                            log.isValid = false
+//                                            log.errorDescription = error.localizedDescription
+//                                        }
                                         try? realm.commitWrite()
                                     } // autoreleasepool
-                                    Thread.sleep(forTimeInterval: 5)
+//                                    Thread.sleep(forTimeInterval: 5)
                                 } // Pages
                             } // DispatchQueue ASync
                         } // DispatchQueue ASync

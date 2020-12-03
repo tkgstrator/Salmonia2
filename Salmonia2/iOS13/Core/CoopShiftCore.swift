@@ -17,7 +17,8 @@ class CoopShiftCore: ObservableObject {
     @Published var isUnlockWeapon: Bool = false
     @Published var isUnlockRotation: Bool = false
     @Published var data: [CoopShiftRealm] = []
-    @Published var all: Results<CoopShiftRealm>  = try! Realm().objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time")
+    @Published var now: Results<CoopShiftRealm> = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", Int(Date().timeIntervalSince1970))
+    @Published var all: Results<CoopShiftRealm>  = realm.objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time", ascending: false)
 
     init() {
         // 変更があるたびに再読込するだけ
@@ -27,16 +28,20 @@ class CoopShiftCore: ObservableObject {
             
             isUnlockRotation = user.isUnlock[0] // 将来のシフトアンロク情報
             isUnlockWeapon = user.isUnlock[1] // クマブキアンロック情報を取得
+            
             data = Array(realm.objects(CoopShiftRealm.self).filter("start_time>=%@", end_time).sorted(byKeyPath: "start_time", ascending: true).prefix(3))
             
+            // 
+            
+            
+            // アンロックしていないとき
             if !isUnlockRotation {
-                all = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: true)
+                all = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: false)
             }
         }
     }
     
-    func update(isEnable: [Bool], isPlayed: Bool) {
-
+    func update(isEnable: [Bool], isPlayed: Bool, isTime: [Bool]) {
         // 該当するシフトのstart_timeを持つ、Intなのでオブジェクト全てを持つよりは相当軽いはず
         var _start_time: [Int] = []
         let played: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.start_time })
@@ -57,9 +62,9 @@ class CoopShiftCore: ObservableObject {
         _start_time = _start_time.sorted() // ソートします
 
         if !isUnlockRotation {
-            all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@ AND start_time<=%@", _start_time, current_time)
+            all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@ AND start_time<=%@", _start_time, current_time).sorted(byKeyPath: "start_time", ascending: false)
         } else {
-            all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@", _start_time)
+            all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@", _start_time).sorted(byKeyPath: "start_time", ascending: false)
         }
     }
     

@@ -19,7 +19,7 @@ struct ShiftStatsView: View {
             Section(header: HStack {
                 Spacer()
                 NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
-                    Text("Overview").modifier(Splatfont(size: 18))
+                    Text("Overview").modifier(Splatfont(size: 22))
                 }
                 Spacer()
             }) {
@@ -35,7 +35,7 @@ struct ShiftStatsView: View {
             }
             Section(header: HStack {
                 Spacer()
-                Text("Max").modifier(Splatfont(size: 18))
+                Text("Max").modifier(Splatfont(size: 22))
                 Spacer()
             }){
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
@@ -60,10 +60,10 @@ struct ShiftStatsView: View {
             }
             Section(header:HStack {
                 Spacer()
-                if !user.isUnlock[2] {
-                    Text("Avg").modifier(Splatfont(size: 18))
+                if !user.isUnlock[3] {
+                    Text("Avg").modifier(Splatfont(size: 22))
                 } else {
-                    Text("Shinzo").modifier(Splatfont(size: 18))
+                    Text("Shinzo").modifier(Splatfont(size: 22))
                 }
                 Spacer()
             }) {
@@ -79,7 +79,7 @@ struct ShiftStatsView: View {
             }
             Section(header:HStack {
                 Spacer()
-                Text("Boss Defeated").modifier(Splatfont(size: 18))
+                Text("Boss Defeated").modifier(Splatfont(size: 22))
                 Spacer()
             }) {
                 ForEach(BossType.allCases.indices, id:\.self) { idx in

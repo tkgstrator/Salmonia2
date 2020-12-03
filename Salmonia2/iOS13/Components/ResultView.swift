@@ -23,7 +23,7 @@ struct ResultView: View {
                     HStack(alignment: .top, spacing: 5) {
                         ForEach(Range(1 ... result.wave.count)) { idx in
                             VStack(spacing: 0) {
-                                ResultWaveView().environmentObject(result.wave[idx - 1])
+                                ResultWaveView.environmentObject(result.wave[idx - 1])
                                 SpecialUseView(special: result.getSP()[idx - 1])
                             }
                         }
@@ -244,7 +244,7 @@ struct ResultView: View {
                             if isVisible == true {
                                 URLImage(url: URL(string: player.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                                     .frame(width: 50, height: 50)
-                                Text(player.name!)
+                                Text(player.name.value)
                                     .lineLimit(1)
                             } else {
                                 URLImage(url: URL(string:  DEFAULT_IMAGE)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
@@ -333,15 +333,14 @@ func CalcBias(_ result: CoopResultsRealm, _ nsaid: String) -> Double {
     let appear_num = result.boss_counts.sum()
     
     let golden_ikura_num = player.golden_ikura_num
-    if (golden_ikura_num * 4 >= quota_num && defeated_num * 4 >= appear_num && defeated_num > 0) {
-        bias.defeated = min(Double(defeated_num * 99) / Double(17 * defeated_num), max_bias)
-    }
     
-    if (golden_ikura_num * 3 >= quota_num && defeated_num * 5 >= appear_num) {
-        bias.golden = min(rate + Double(10 * (golden_ikura_num * 3 - quota_num)) / (9.0 * 160.0), max_bias)
-    }
-    
-    return max(bias.defeated, bias.golden) >= rate ? max(bias.defeated, bias.golden) : min(bias.defeated, bias.golden)
+    bias.defeated = min(Double(defeated_num * 99) / Double(17 * appear_num), max_bias)
+    bias.golden = min(rate + Double(10 * (golden_ikura_num * 3 - quota_num)) / (9.0 * 160.0), max_bias)
+
+    bias.defeated = bias.golden == max_bias ? max_bias : bias.defeated
+    bias.golden = bias.defeated == max_bias ? max_bias : bias.golden
+
+    return min(bias.defeated, bias.golden) >= rate ? max(bias.defeated, bias.golden) : max(bias.defeated, bias.golden) >= rate ? rate : min(bias.defeated, bias.golden)
 }
 
 extension PlayerResultsRealm {

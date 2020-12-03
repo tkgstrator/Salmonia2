@@ -12,7 +12,8 @@ import RealmSwift
 struct PastCoopShiftView: View {
     @ObservedObject var phase = CoopShiftCore()
     @State var isVisible: Bool = false
-    @State var isEnable: [Bool] = [true, true, true, true]
+    @State var isTime: [Bool] = [true, true, true]
+    @State var isEnable: [Bool] = [true, true, true, true, true, true, true, true]
     @State var isPlayed: Bool = false
     // private var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
     
@@ -44,9 +45,9 @@ struct PastCoopShiftView: View {
                         }
                     }
                 }
-//                  .onAppear() {
-//                    proxy.scrollTo((phase.all.count - 1), anchor: .center)
-//                }
+                .onAppear() {
+                    proxy.scrollTo((phase.all.count - phase.now.count - 1), anchor: .center)
+                }
             }
             .navigationBarTitle("Coop Shift Rotation", displayMode: .large)
             .navigationBarItems(trailing: FilterButton)
@@ -83,7 +84,7 @@ struct PastCoopShiftView: View {
             Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
                 isVisible.toggle()
             }.sheet(isPresented: $isVisible) {
-                CoopFilterView(phase: phase, isEnable: $isEnable, isPlayed: $isPlayed)
+                CoopFilterView(phase: phase, isEnable: $isEnable, isPlayed: $isPlayed, isTime: $isTime)
             }
         }
     }
@@ -92,11 +93,11 @@ struct PastCoopShiftView: View {
         @ObservedObject var phase: CoopShiftCore
         @Binding var isEnable: [Bool]
         @Binding var isPlayed: Bool
+        @Binding var isTime: [Bool]
         var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
         
         var body: some View {
             List {
-//                Text("Construction")
                 Section(header: HStack {
                     Spacer()
                     Text("Rotation")
@@ -110,6 +111,19 @@ struct PastCoopShiftView: View {
                         }
                     }
                 }
+//                Section(header: HStack {
+//                    Spacer()
+//                    Text("Years")
+//                        .modifier(Splatfont(size: 22))
+//                        .foregroundColor(.cOrange)
+//                    Spacer()
+//                }) {
+//                    ForEach(Range(0...2)) { idx in
+//                        Toggle(isOn: $isTime[idx]) {
+//                            Text(String(idx + 2019))
+//                        }
+//                    }
+//                }
                 Section(header: HStack {
                     Spacer()
                     Text("Options")
@@ -124,8 +138,7 @@ struct PastCoopShiftView: View {
             }
             .modifier(Splatfont(size: 18))
             .onDisappear() {
-                print("DISAPPEAR")
-                phase.update(isEnable: isEnable, isPlayed: isPlayed)
+                phase.update(isEnable: isEnable, isPlayed: isPlayed, isTime: isTime)
             }
         }
     }

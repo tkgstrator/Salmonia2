@@ -14,7 +14,7 @@ struct UnlockFeatureView: View {
     var body: some View {
         List {
             Section(header: Text("Free")
-                        .modifier(Splatfont(size: 18))
+                        .font(.custom("Splatfont", size: 18))
                         .foregroundColor(.cOrange)) {
                 Toggle(isOn: $user.isUnlock[0]) {
                     Text("Future Rotation")
@@ -23,6 +23,9 @@ struct UnlockFeatureView: View {
                     Text("Grizzco Weapons")
                 }
                 Toggle(isOn: $user.isUnlock[2]) {
+                    Text("Force Update")
+                }
+                Toggle(isOn: $user.isUnlock[3]) {
                     Text("Hidden Feature")
                 }.disabled(true)
             }
