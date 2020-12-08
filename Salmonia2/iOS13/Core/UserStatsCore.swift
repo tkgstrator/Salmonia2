@@ -20,6 +20,8 @@ class UserStatsCore: ObservableObject {
     @Published var total_golden_eggs: Int?
     @Published var total_grizzco_points: Int?
     @Published var srpower: [Double?] = [0.0, 0.0]
+    @Published var rate_power_eggs: Double?
+    @Published var rate_golden_eggs: Double?
     @Published var max_grade_point: Int?
     @Published var max_team_power_eggs: Int?
     @Published var max_team_golden_eggs: Int?
@@ -93,6 +95,8 @@ class UserStatsCore: ObservableObject {
                 avg_rescue = Double(total_help_count / Double(job_num ?? 0)).round(digit: 2)
                 avg_defeated = Double(total_defeated / Double(job_num ?? 0)).round(digit: 2)
 
+                rate_power_eggs = (Double(total_my_power_eggs) / Double(total_power_eggs!)).round(digit: 2)
+                rate_golden_eggs = (Double(total_my_golden_eggs) / Double(total_golden_eggs!)).round(digit: 2)
                 for (idx, sp) in [2, 7, 8, 9].enumerated() {
                     if job_num != nil {
                         special[idx] = (Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)).round(digit: 4)

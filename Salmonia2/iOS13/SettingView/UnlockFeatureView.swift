@@ -30,7 +30,7 @@ struct UnlockFeatureView: View {
                 }.disabled(true)
             }
             Section(header: Text("Paid")
-                        .modifier(Splatfont(size: 18))
+                        .font(.custom("Splatfont", size: 18))
                         .foregroundColor(.cOrange)) {
                 HStack {
                     VStack(alignment: .leading ){

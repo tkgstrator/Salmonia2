@@ -19,14 +19,14 @@ struct Splatfont: ViewModifier {
             return
                 content
                 .font(.custom("FZYHFW--GB1-0", size: size + 4))
-                .minimumScaleFactor(0.7)
-                .lineLimit(1)
+//                .minimumScaleFactor(0.7)
+//                .lineLimit(1)
         } else {
             return
                 content
                 .font(.custom("Splatfont", size: size))
-                .minimumScaleFactor(0.7)
-                .lineLimit(1)
+//                .minimumScaleFactor(0.7)
+//                .lineLimit(1)
         }
         //            .frame(height: size)
     }
@@ -93,7 +93,6 @@ struct WebKitView: View {
                         let laravel_session = cookie.value
                         do {
                             let api_token = try SalmonStats.getAPIToken(laravel_session)
-                            //                            guard let realm = try? Realm() else { throw APPError.realm }
                             let user = realm.objects(SalmoniaUserRealm.self)
                             try? realm.write { user.setValue(api_token, forKey: "api_token")}
                             notification(title: .success, message: .laravel)
@@ -103,7 +102,7 @@ struct WebKitView: View {
                         }
                     }
                 }
-                notification(title: .failure, message: .laravel)
+//                notification(title: .failure, message: .laravel)
             }
         }) {
             Image(systemName: "snow").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)

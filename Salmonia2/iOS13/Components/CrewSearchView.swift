@@ -35,16 +35,9 @@ struct CrewSearchView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                TextField("Enter username", text: $nickname, onEditingChanged: { onEditing in
-                    isEditing = onEditing
-                }, onCommit: {
-                    searchPlayer(keyword: nickname)
-                })
-                .padding(.horizontal, 20)
+            SearchBar(text: $nickname, placeholder: "") { text in
+                searchPlayer(keyword: nickname)
             }
-            .font(.custom("Roboto Mono", size: 20))
-            Divider()
             List {
                 ForEach(players, id:\.self) { player in
                     NavigationLink(destination: SalmonStatsView().environmentObject(CrewInfoCore(player.nsaid))) {
@@ -62,7 +55,8 @@ struct CrewSearchView: View {
                     .onAppear() {
                         SalmonStats.getPlayerOverView(nsaid: player.nsaid)
                     }
-                }.modifier(Splatfont(size: 18))
+                }
+                .modifier(Splatfont(size: 18))
             }
         }
         .navigationBarTitle("Crew Search", displayMode: .large)

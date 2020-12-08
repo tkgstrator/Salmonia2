@@ -14,6 +14,7 @@ import MobileCoreServices
 import Alamofire
 import UserNotifications
 import AVKit
+import SafariServices
 
 struct SettingView: View {
     @EnvironmentObject var user: SalmoniaUserCore
@@ -29,6 +30,7 @@ struct SettingView: View {
             Application
         }
         .modifier(Splatfont(size: 20))
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Settings", displayMode: .large)
     }
     
@@ -37,13 +39,19 @@ struct SettingView: View {
                     .modifier(Splatfont(size: 18))
                     .foregroundColor(.cOrange)) {
             HStack {
+                Text("How to use")
+                Spacer()
+            }.onTapGesture {
+                UIApplication.shared.open(URL(string: "https://tkgstrator.work/?p=28236")!)
+            }
+            HStack {
                 Text("X-Product Version")
                 Spacer()
                 Text("\(user.isVersion)")
             }.onLongPressGesture {
-                user.isUnlock[2].toggle()
+                user.isUnlock[3].toggle()
                 user.updateUnlock(user.isUnlock)
-                switch user.isUnlock[2] {
+                switch user.isUnlock[3] {
                 case true:
                     notification(title: .success, message: .unlock)
                 case false:

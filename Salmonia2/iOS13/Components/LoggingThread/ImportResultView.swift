@@ -47,7 +47,7 @@ struct ImportResultView: View {
                     }
                     
                     guard let iksm_session: String = accounts.first?.iksm_session else { return }
-                    let time: [Int] = realm.objects(CoopResultsRealm.self).map({ $0.play_time })
+                    let time: [Int] = Array(Set(realm.objects(CoopResultsRealm.self).map({ $0.play_time })))
                     
                     // 全ユーザに対してリザルト取得（重いぞ）
                     for account in accounts {
@@ -79,7 +79,7 @@ struct ImportResultView: View {
                                                 log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
                                             }
                                             nsaids.append(contentsOf: result["members"].map({ $0.1.stringValue }))
-                                            Thread.sleep(forTimeInterval: 0.005)
+                                             Thread.sleep(forTimeInterval: 0.01)
                                         }
 //                                        do {
 //                                            let crews: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session)
@@ -109,7 +109,7 @@ struct ImportResultView: View {
 
     private func getResults(nsaid: String, page: Int) throws -> JSON {
         let url = "https://salmon-stats-api.yuki.games/api/players/\(nsaid)/results?raw=0&count=200&page=\(page)"
-        
+        print(url)
         let json = try SAF.request(url)
         return json["results"]
     }

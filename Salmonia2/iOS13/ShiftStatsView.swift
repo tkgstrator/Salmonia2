@@ -9,6 +9,7 @@ import SwiftUI
 import Alamofire
 import SwiftyJSON
 import RealmSwift
+import URLImage
 
 struct ShiftStatsView: View {
     @EnvironmentObject var user: SalmoniaUserCore
@@ -17,21 +18,25 @@ struct ShiftStatsView: View {
     var body: some View {
         List {
             Section(header: HStack {
-                Spacer()
-                NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
+                HStack {
+                    Spacer()
                     Text("Overview").modifier(Splatfont(size: 22))
+                    Spacer()
                 }
-                Spacer()
             }) {
                 ShiftStatsStack(title: "Job Num", value: stats.job_num)
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
                 ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)
                 ShiftStatsStack(title: "Total Golden Eggs", value: stats.total_golden_eggs)
-                ShiftStatsStack(title: "Bomb Launcher", value: stats.special[0].per)
-                ShiftStatsStack(title: "Sting Ray", value: stats.special[1].per)
-                ShiftStatsStack(title: "Inkjet", value: stats.special[2].per)
-                ShiftStatsStack(title: "Splashdown", value: stats.special[3].per)
+                ShiftStatsStack(title: "Power Eggs Ratio", value: stats.rate_power_eggs.per)
+                ShiftStatsStack(title: "Golden Eggs Ratio", value: stats.rate_golden_eggs.per)
+                Group {
+                    ShiftStatsStack(title: "Bomb Launcher", value: stats.special[0].per)
+                    ShiftStatsStack(title: "Sting Ray", value: stats.special[1].per)
+                    ShiftStatsStack(title: "Inkjet", value: stats.special[2].per)
+                    ShiftStatsStack(title: "Splashdown", value: stats.special[3].per)
+                }
             }
             Section(header: HStack {
                 Spacer()
@@ -86,7 +91,28 @@ struct ShiftStatsView: View {
                     ShiftStatsStack(title: (BossType.allCases[idx].boss_name!), value: stats.boss_defeated[idx].per)
                 }
             }
-        }.navigationBarTitle(UnixTime.dateFromTimestamp(stats.schedule!))
+            Section(header:HStack {
+                Spacer()
+                Text("Global Records").modifier(Splatfont(size: 22))
+                Spacer()
+            }) {
+                Text("Power Eggs")
+                NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
+                    Text("Golden Eggs")
+                }
+            }
+            .modifier(Splatfont2(size: 20))
+        }
+        .navigationBarTitle(UnixTime.dateFromTimestamp(stats.schedule!))
+//        .navigationBarItems(trailing: RecordButton)
+    }
+    
+    private var RecordButton: some View {
+        NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
+            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable() }
+                .frame(width: 30, height: 30)
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 

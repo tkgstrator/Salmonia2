@@ -30,8 +30,8 @@ class CrewInfoCore: ObservableObject {
         token = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).observe { [self] _ in
             guard let crew = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", pid).first else { return }
             nsaid = pid
-            imageUri = crew.image
-            nickname = crew.name
+            imageUri = crew.image ?? DEFAULT_IMAGE
+            nickname = crew.name.value
             job_num = crew.job_num
             ikura_total = crew.ikura_total
             defeated = crew.boss_defeated

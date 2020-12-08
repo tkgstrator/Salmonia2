@@ -23,7 +23,7 @@ struct ResultView: View {
                     HStack(alignment: .top, spacing: 5) {
                         ForEach(Range(1 ... result.wave.count)) { idx in
                             VStack(spacing: 0) {
-                                ResultWaveView.environmentObject(result.wave[idx - 1])
+                                ResultWaveView().environmentObject(result.wave[idx - 1])
                                 SpecialUseView(special: result.getSP()[idx - 1])
                             }
                         }

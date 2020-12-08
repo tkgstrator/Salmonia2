@@ -24,9 +24,9 @@ struct CrewListView: View {
                 ForEach(user.favuser.indices, id:\.self) { idx in
                     NavigationLink(destination: OtherPlayerView().environmentObject(CrewInfoCore(user.favuser[idx].nsaid))) {
                         HStack {
-                            URLImage(url: URL(string: user.favuser[idx].image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
+                            URLImage(url: URL(string: user.favuser[idx].image ?? DEFAULT_IMAGE)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
                                 .frame(width: 60, height: 60)
-                            Text(user.favuser[idx].name).frame(maxWidth: .infinity)
+                            Text(user.favuser[idx].name.value).frame(maxWidth: .infinity)
                             Text(user.favuser[idx].evalValue.value.value).frame(minWidth: 60)
                         }
                     }

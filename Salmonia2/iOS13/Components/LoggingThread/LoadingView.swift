@@ -12,14 +12,14 @@ import SplatNet2
 import SwiftyJSON
 
 struct LoadingView: View {
-    
+    @EnvironmentObject var user: SalmoniaUserCore
     @State var log = Log()
 
     var body: some View {
         LoggingThread(log: $log)
             .onAppear() {
                 do {
-                    guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APPError.user }
+                    // guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APPError.user }
                     if user.account.isEmpty { throw APPError.user }
                     guard let api_token = user.api_token else { throw APPError.apitoken }
                     let version = user.isVersion // X-Product Versionの読み込み
@@ -59,10 +59,11 @@ struct LoadingView: View {
                                 
                                 guard let job_num: Int = summary["summary"]["card"]["job_num"].int else { return }
                                 #if DEBUG
-                                let tmp: Int = realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
-//                                let tmp: Int = job_num - 10 print("JOB IDS", job_num, tmp)
+                                let tmp: Int = user.isUnlock[2] == true ? 0 : realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
+                                user.isUnlock[2].toggle()
                                 #else
-                                let tmp: Int = realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
+                                let tmp: Int = user.isUnlock[2] == true ? 0 : realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
+                                user.isUnlock[2] = false
                                 #endif
                                 if job_num == tmp {
                                     log.status = "No new results"

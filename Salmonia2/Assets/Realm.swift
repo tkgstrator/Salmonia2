@@ -21,7 +21,7 @@ class SalmoniaUserRealm: Object {
     dynamic var account = List<UserInfoRealm>()
     dynamic var favuser = List<CrewInfoRealm>()
     
-    let placeholder: [Bool] = [false, false, false]
+    let placeholder: [Bool] = [false, false, false, false]
     
     convenience required init(isUnlock: [Bool]) {
         self.init()
@@ -48,8 +48,8 @@ class UserInfoRealm: Object {
 
 class CrewInfoRealm: Object {
     
-    @objc dynamic var name: String = "-" // username from SplatNet2
-    @objc dynamic var image: String = "" // userimage url from SplatNet2
+    @objc dynamic var name: String? // username from SplatNet2
+    @objc dynamic var image: String? // userimage url from SplatNet2
     @objc dynamic var nsaid: String = "" // data-nsa-id from SplatNet2
     @objc dynamic var job_num: Int = 0
     @objc dynamic var ikura_total: Int = 0
@@ -157,6 +157,7 @@ class PlayerResultsRealm: Object {
     dynamic var weapon_list = List<Int>()
     dynamic var special_counts = List<Int>()
     let result = LinkingObjects(fromType: CoopResultsRealm.self, property: "player")
+//    let nsaid = LinkingObjects(fromType: CrewInfoRealm.self, property: "nsaid")
     
     static func getids() -> [String] {
         guard let realm = try? Realm() else { return [] }
@@ -170,7 +171,7 @@ class PlayerResultsRealm: Object {
 
 extension PlayerResultsRealm {
     var imageUri: String {
-        return realm?.objects(CrewInfoRealm.self).filter("nsaid=%@", self.nsaid!).first?.image ?? "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/56a95fe848fd7f41"
+        return realm?.objects(CrewInfoRealm.self).filter("nsaid=%@", self.nsaid!).first?.image ?? "https://raw.githubusercontent.com/tkgstrator/Salmonia2/master/Salmonia2/Assets.xcassets/Default.imageset/default-1.png"
     }
 }
 

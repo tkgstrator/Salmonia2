@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import URLImage
 
 struct LoggingThread: View {
     @Binding var log: Log
@@ -51,11 +52,24 @@ struct LoggingThread: View {
             .font(.custom("Roboto Mono", size: 22))
             .padding(.horizontal, 16)
             Spacer()
+            Paypal
         }
         .navigationBarTitle("Logging Thread", displayMode: .large)
         .navigationBarBackButtonHidden(log.isLock)
     }
+    
+    private var Paypal: some View {
+        Image("Paypal")
+            .resizable()
+            .frame(width: 80, height: 80)
+            .clipShape(Circle())
+            .padding(.bottom)
+            .onTapGesture {
+            UIApplication.shared.open(URL(string: "https://www.paypal.me/salmonia")!)
+        }
+    }
 }
+
 
 struct LoggingThread_Previews: PreviewProvider {
     static var previews: some View {

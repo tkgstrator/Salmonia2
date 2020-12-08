@@ -26,6 +26,7 @@
 "Application" = "アプリケーション";
 "Update" = "更新";
 "Unlock" = "アンロック";
+"How to use" = "つかいかた";
 "X-Product Version" = "X-Product Version";
 "Version" = "バージョン";
 "Add" = "追加";
@@ -34,6 +35,7 @@
 "Free" = "無料";
 "Paid" = "有料";
 "Donation" = "寄付";
+"Force Update" = "強制アップデート";
 "Multiple Accounts" = "複数アカウント";
 "Monthly Pass" = "月額登録";
 "Future Rotation" = "将来のシフト";
@@ -101,6 +103,8 @@
 "Crew Grade" = "ナカマ評価"; // The average grade of crew you played with
 "Team Power Eggs" = "チーム赤イクラ数";
 "Team Golden Eggs" = "チーム金イクラ数";
+"Power Eggs Ratio" = "個人赤イクラ率";
+"Golden Eggs Ratio" = "個人金イクラ率";
 "Power Eggs" = "赤イクラ数";
 "Golden Eggs" = "金イクラ数";
 "Boss Defeated" = "ボス討伐数";
@@ -140,5 +144,6 @@
 "Add new NSO account" = "新規アカウントを追加しました";
 "Update NSO account" = "アカウント情報を更新しました";
 "Wrong request" = "誤ったリクエストです";
-"Login Salmon Stats" = "Salmon Statsにログインしてください";
+"Login Salmon Stats" = "Salmon Statsにログインしました";
 "Try again" = "再度試してください";
+"Too many requests" = "時間をおいてから再度試してください";
