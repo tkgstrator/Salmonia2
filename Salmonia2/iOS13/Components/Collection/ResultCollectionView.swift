@@ -16,23 +16,15 @@ struct ResultCollectionView: View {
     @State var isEnable: [Bool] = [true, true, true, true, true]
     
     var body: some View {
-        Group {
-            Text("Found: \(core.results.count)").frame(maxWidth: .infinity)
-            .modifier(Splatfont(size: 16))
-            .frame(height: 10)
-            Divider()
-            List {
-                ForEach(core.results.indices, id:\.self) { idx in
-                    NavigationLink(destination: ResultView().environmentObject(core.results[idx])) {
-                        ResultStack().environmentObject(core.results[idx])
-                    }
+        List {
+            ForEach(core.results.indices, id:\.self) { idx in
+                NavigationLink(destination: ResultView().environmentObject(core.results[idx])) {
+                    ResultStack().environmentObject(core.results[idx])
                 }
             }
         }
         .navigationBarTitle("Results")
-//        .navigationBarTitle(Text("Results " + String(core.results.count)), displayMode: .large)
         .navigationBarItems(trailing: AddButton)
-
     }
     
     private var AddButton: some View {
@@ -117,7 +109,7 @@ struct ResultCollectionView: View {
                 Section(header: HStack {
                     Spacer()
                     Text("Golden Eggs")
-                        .modifier(Splatfont(size: 22))
+                        .modifier(Splatfont2(size: 18))
                         .foregroundColor(.yellow)
                     Spacer()
                 }) {
@@ -128,22 +120,21 @@ struct ResultCollectionView: View {
                                onEditingChanged: { pressed in
                                 update()
                                },
-                               minimumValueLabel: Text("0").modifier(Splatfont(size: 16)),
-                               maximumValueLabel: Text("200").modifier(Splatfont(size: 16)),
+                               minimumValueLabel: Text("0").modifier(Splatfont2(size: 16)),
+                               maximumValueLabel: Text("200").modifier(Splatfont2(size: 16)),
                                label: { EmptyView() }
                         ).accentColor(.yellow)
-                        Text("\(Int(sliderValue))").modifier(Splatfont(size: 20))
+                        Text("\(Int(sliderValue))").modifier(Splatfont2(size: 18))
                     }
                 }
                 Section(header: HStack {
                     Spacer()
-                    Text("Stage").modifier(Splatfont(size: 22)).foregroundColor(.yellow)
+                    Text("Stage").modifier(Splatfont2(size: 18)).foregroundColor(.yellow)
                     Spacer()
                 }) {
                     ForEach(Range(0 ... 4)) { idx in
-                        Toggle(isOn: $isEnable[idx]) {
-                            Text(StageType.allCases[idx].stage_name!.localized).modifier(Splatfont(size: 20))
-                        }
+                        Toggle(StageType.allCases[idx].stage_name!.localized, isOn: $isEnable[idx])
+                            .modifier(Splatfont2(size: 16))
                     }
                 }
             }.onDisappear() {

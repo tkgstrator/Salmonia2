@@ -12,42 +12,35 @@ import RealmSwift
 struct UserListView: View {
     
     @EnvironmentObject var user: SalmoniaUserCore
-    @State private var editMode = EditMode.inactive
+//    @State private var editMode = EditMode.inactive
     @State var isVisible: Bool = false
 
     var body: some View {
         List {
-            ForEach(user.account.indices, id:\.self) { idx in
-                HStack {
-                    URLImage(url: URL(string: user.account[idx].image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
-                        .frame(width: 60, height: 60)
-                    Text(user.account[idx].name).frame(maxWidth: .infinity)
-                    Toggle(isOn: $user.isActiveArray[idx]) { }
-                        .disabled(!user.isPurchase)
-                        .onTapGesture{ onActive(idx: idx) }
+            Section(header: Text("My accounts")) {
+                ForEach(user.account.indices, id:\.self) { idx in
+                    HStack {
+                        URLImage(url: URL(string: user.account[idx].image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
+                            .frame(width: 60, height: 60)
+                        Text(user.account[idx].name).frame(maxWidth: .infinity)
+                        Toggle(isOn: $user.isActiveArray[idx]) { }
+                            .disabled(!user.isPurchase)
+                            .onTapGesture{ onActive(idx: idx) }
+                    }
                 }
+//                .onMove(perform: onMove)
             }
-            .onMove(perform: onMove)
 //            .onDelete(perform: onDelete)
         }
         .navigationBarTitle("My Accounts")
         .modifier(Splatfont(size: 18))
-//        .navigationBarItems(leading: addButton, trailing: EditButton())
         .navigationBarItems(trailing: Login)
-        .environment(\.editMode, $editMode)
+//        .environment(\.editMode, $editMode)
     }
     
     private var Login: some View {
-        HStack(spacing: 10) {
-            switch editMode {
-            case .active:
-                EmptyView().frame(width: 0)
-            default:
-                Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Text("Add") }
-//                Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Image(systemName: "plus") }
-            }
-            EditButton()
-        }.font(.system(size: 18))
+        Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Text("Add") }
+//            .font(.system(size: 18))
     }
     
     private func onActive(idx: Int) {

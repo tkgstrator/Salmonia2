@@ -31,6 +31,7 @@
 		1058AC9C256DF764008A34F7 /* fangzheng.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */; };
 		1058ACAC256DFAAC008A34F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1058ACAE256DFAAC008A34F7 /* Localizable.strings */; };
 		10613B7C257F317F0000AE30 /* UISearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10613B7B257F317F0000AE30 /* UISearchView.swift */; };
+		10613B85257F57620000AE30 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10613B84257F57620000AE30 /* WebView.swift */; };
 		108456A8257CCCA3006EB397 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108456A7257CCCA3006EB397 /* Global.swift */; };
 		108F2C67257766BB00287900 /* SyncUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108F2C66257766BB00287900 /* SyncUserData.swift */; };
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
@@ -126,6 +127,7 @@
 		1058ACAD256DFAAC008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		105F690E252F33F2003306C8 /* Salmonia2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Salmonia2.entitlements; sourceTree = "<group>"; };
 		10613B7B257F317F0000AE30 /* UISearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchView.swift; sourceTree = "<group>"; };
+		10613B84257F57620000AE30 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		108456A7257CCCA3006EB397 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		108F2C66257766BB00287900 /* SyncUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncUserData.swift; sourceTree = "<group>"; };
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
@@ -294,6 +296,16 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		10613B80257F51C60000AE30 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				1048631525697630001FDFBD /* CoopShiftCollectionView.swift */,
+				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
+				10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		108F2C6B257766C600287900 /* LoggingThread */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,10 +400,9 @@
 		10BB34B6252175170046CBCA /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				10613B84257F57620000AE30 /* WebView.swift */,
+				10613B80257F51C60000AE30 /* Collection */,
 				108F2C6B257766C600287900 /* LoggingThread */,
-				1048631525697630001FDFBD /* CoopShiftCollectionView.swift */,
-				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
-				10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */,
 				10BB34B9252175170046CBCA /* ResultView.swift */,
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
 				10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */,
@@ -724,6 +735,7 @@
 				10EFA39E252398820027209D /* CrewListView.swift in Sources */,
 				1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */,
 				10BB349A252174F60046CBCA /* Realm.swift in Sources */,
+				10613B85257F57620000AE30 /* WebView.swift in Sources */,
 				10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */,
 				105396D825260CEB00132668 /* StageRecordCore.swift in Sources */,
 				105396DD25260D5000132668 /* WaveType.swift in Sources */,

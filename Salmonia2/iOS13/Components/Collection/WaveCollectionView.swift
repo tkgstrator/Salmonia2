@@ -21,21 +21,14 @@ struct WaveCollectionView: View {
     @State var isStage: [Bool] = [true, true, true, true, true]
     
     var body: some View {
-        Group {
-            Text("Found: \(core.waves.count)")
-                .frame(maxWidth: .infinity)
-                .modifier(Splatfont(size: 16))
-                .frame(height: 10)
-            Divider()
-            List {
-                ForEach(core.waves.indices, id:\.self) { idx in
-                    NavigationLink(destination: ResultView().environmentObject(core.waves[idx].result.first!)) {
-                        WaveStack().environmentObject(core.waves[idx])
-                    }
+        List {
+            ForEach(core.waves.indices, id:\.self) { idx in
+                NavigationLink(destination: ResultView().environmentObject(core.waves[idx].result.first!)) {
+                    WaveStack().environmentObject(core.waves[idx])
                 }
             }
         }
-        .navigationBarTitle("Wave Search", displayMode: .large)
+        .navigationBarTitle("Wave Results")
         .navigationBarItems( trailing: filterButton)
     }
     
@@ -121,14 +114,14 @@ struct WaveCollectionView: View {
 //                        Text(String(collected_ratio) + "%")
                         Text((StageType.init(stage_id: data.result.first!.stage_id)?.stage_name!.localized)!)
                     }
-                    .modifier(Splatfont(size: 14))
+                    .modifier(Splatfont2(size: 14))
                     .foregroundColor(.yellow)
                     HStack {
                         Text(data.water_level!.localized)
                         Text(data.event_type!.localized)
                     }
                 }
-                .modifier(Splatfont(size: 16))
+                .modifier(Splatfont2(size: 16))
                 // ブキとか？
                 // 金イクラ数とかの情報（イカリング2準拠スタイル）
                 Spacer()
@@ -146,7 +139,6 @@ struct WaveCollectionView: View {
                 }
                 .frame(width: 80)
                 .modifier(Splatfont2(size: 16))
-                .modifier(Splatfont2(size: 18)).font(.custom("Splatfont2", size: 16))
             }
             
         }

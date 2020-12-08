@@ -10,31 +10,24 @@ import URLImage
 
 struct StageRecordView: View {
     var body: some View {
-        VStack(spacing: 10) {
-            Text("Stage Records")
-                .foregroundColor(.cOrange)
-                .modifier(Splatfont(size: 20))
-                .frame(maxWidth: .infinity)
-                .frame(height: 32)
-                .background(Color.cDarkGray)
-                .padding(.bottom, 10)
-            ForEach(StageType.allCases, id:\.self) { stage in
+        ForEach(StageType.allCases, id:\.self) { stage in
+            ZStack {
                 NavigationLink(destination: StageRecordsView().environmentObject(StageRecordCore(stage.stage_id!))) {
-                    HStack {
-                        URLImage(url: URL(string: stage.image_url!)!) { image in image.resizable()}
-                            .frame(width: 112, height: 63)
-                            .clipped()
-                            .clipShape(RoundedRectangle(cornerRadius: 8.0))
-                        //Spacer()
-                        Group {
-                            Text(stage.stage_name!.localized)
-                                .modifier(Splatfont(size: 18))
-                        }.frame(maxWidth: .infinity)
-                    }
+                    EmptyView()
                 }
-                .buttonStyle(PlainButtonStyle())
-            }.padding(.horizontal, 10)
+                .opacity(0.0)
+                HStack {
+                    URLImage(url: URL(string: stage.image_url!)!) { image in image.resizable()}
+                        .frame(width: 96, height: 54)
+                        .clipped()
+                        .clipShape(RoundedRectangle(cornerRadius: 8.0))
+                    Text(stage.stage_name!.localized)
+                        .modifier(Splatfont2(size: 16))
+                        .frame(maxWidth: .infinity)
+                }
+            }
         }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 

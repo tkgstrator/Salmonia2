@@ -17,13 +17,7 @@ struct ShiftStatsView: View {
     
     var body: some View {
         List {
-            Section(header: HStack {
-                HStack {
-                    Spacer()
-                    Text("Overview").modifier(Splatfont(size: 22))
-                    Spacer()
-                }
-            }) {
+            Section(header: Text("Overview")) {
                 ShiftStatsStack(title: "Job Num", value: stats.job_num)
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
@@ -38,11 +32,7 @@ struct ShiftStatsView: View {
                     ShiftStatsStack(title: "Splashdown", value: stats.special[3].per)
                 }
             }
-            Section(header: HStack {
-                Spacer()
-                Text("Max").modifier(Splatfont(size: 22))
-                Spacer()
-            }){
+            Section(header: Text("Max")){
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
                 ShiftStatsStack(title: "Grade Point", value: stats.max_grade_point)
                 if (stats.job_num != nil) {
@@ -63,15 +53,7 @@ struct ShiftStatsView: View {
                     }
                 }
             }
-            Section(header:HStack {
-                Spacer()
-                if !user.isUnlock[3] {
-                    Text("Avg").modifier(Splatfont(size: 22))
-                } else {
-                    Text("Shinzo").modifier(Splatfont(size: 22))
-                }
-                Spacer()
-            }) {
+            Section(header: Text("Avg")) {
                 ShiftStatsStack(title: "Clear Wave", value: stats.avg_clear_wave)
                 ShiftStatsStack(title: "Crew Grade", value: stats.avg_crew_grade)
                 ShiftStatsStack(title: "Team Power Eggs", value: stats.avg_team_power_eggs)
@@ -82,27 +64,19 @@ struct ShiftStatsView: View {
                 ShiftStatsStack(title: "Rescue Count", value: stats.avg_rescue)
                 ShiftStatsStack(title: "Help Count", value: stats.avg_dead)
             }
-            Section(header:HStack {
-                Spacer()
-                Text("Boss Defeated").modifier(Splatfont(size: 22))
-                Spacer()
-            }) {
+            Section(header: Text("Boss defeated")) {
                 ForEach(BossType.allCases.indices, id:\.self) { idx in
                     ShiftStatsStack(title: (BossType.allCases[idx].boss_name!), value: stats.boss_defeated[idx].per)
                 }
             }
-            Section(header:HStack {
-                Spacer()
-                Text("Global Records").modifier(Splatfont(size: 22))
-                Spacer()
-            }) {
+            Section(header: Text("Global Records")) {
                 Text("Power Eggs")
                 NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
                     Text("Golden Eggs")
                 }
             }
-            .modifier(Splatfont2(size: 20))
         }
+        .modifier(Splatfont2(size: 18))
         .navigationBarTitle(UnixTime.dateFromTimestamp(stats.schedule!))
 //        .navigationBarItems(trailing: RecordButton)
     }
@@ -128,7 +102,7 @@ struct StatsChartView: View {
             Section(header: HStack {
                 Spacer()
                 Text("Total")
-                    .modifier(Splatfont(size: 22))
+                    .modifier(Splatfont2(size: 18))
                     .foregroundColor(.yellow)
                 Spacer()
             }) {
@@ -139,7 +113,7 @@ struct StatsChartView: View {
                         Text("\(record.total[1].value)").frame(width: 55)
                         Text("(\(record.total[0].value))").frame(width: 55)
                     }
-                    .font(.custom("Splatfont2", size: 20))
+                    .font(.custom("Splatfont2", size: 16))
                 }
                 HStack {
                     Text("No Night Event")
@@ -148,14 +122,14 @@ struct StatsChartView: View {
                         Text("\(record.no_night_total[1].value)").frame(width: 55)
                         Text("(\(record.no_night_total[0].value))").frame(width: 55)
                     }
-                    .font(.custom("Splatfont2", size: 20))
+                    .font(.custom("Splatfont2", size: 18))
                 }
             }
             ForEach(Range(0 ... 2)) { tide in
                 Section(header: HStack {
                     Spacer()
                     Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)")
-                        .modifier(Splatfont(size: 22))
+                        .modifier(Splatfont2(size: 18))
                         .foregroundColor(.orange)
                     Spacer()
                 }) {
@@ -169,7 +143,7 @@ struct StatsChartView: View {
                                     Text("\(record.personal[tide][event].value)").frame(width: 55)
                                     Text("(\(record.global[tide][event].value))").frame(width: 55)
                                 }
-                                .font(.custom("Splatfont2", size: 20))
+                                .font(.custom("Splatfont2", size: 16))
                             }
                             //                                }
                         }
@@ -177,7 +151,7 @@ struct StatsChartView: View {
                 }
             }
         }
-        .modifier(Splatfont2(size: 20))
+        .modifier(Splatfont2(size: 18))
         .navigationBarTitle("Global Records")
     }
     
@@ -248,10 +222,10 @@ private struct ShiftStatsStack: View {
     var body: some View {
         HStack {
             Text(title.localized)
-                .modifier(Splatfont2(size: 20))
+                .modifier(Splatfont2(size: 16))
             Spacer()
             Text(value)
-                .font(.custom("Splatfont2", size: 20))
+                .font(.custom("Splatfont2", size: 16))
         }
     }
 }

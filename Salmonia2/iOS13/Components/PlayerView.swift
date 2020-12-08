@@ -13,20 +13,17 @@ struct PlayerView: View {
     
     var body: some View {
         VStack(alignment: .trailing) {
-            HStack {
-                NavigationLink(destination: ResultCollectionView()) {
+            VStack(spacing: 0) {
+                HStack {
                     URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
-                        .frame(width: 85, height: 85)
-                }.buttonStyle(PlainButtonStyle())
-                Text(user.nickname).modifier(Splatfont(size: 29)).frame(maxWidth: .infinity)
-            }.padding(.horizontal, 10)
-            Text("Overview".localized)
-                .foregroundColor(.cOrange)
-                .modifier(Splatfont(size: 21))
-                .frame(maxWidth: .infinity)
-                .frame(height: 32)
-                .background(Color.cDarkGray)
-                .padding(.bottom, 5)
+                        .frame(width: 60, height: 60)
+                    Text(user.nickname).modifier(Splatfont(size: 20)).frame(maxWidth: .infinity)
+                }
+                NavigationLink(destination: ResultCollectionView()) {
+                    Text("Job results").modifier(Splatfont2(size: 16))
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
             HStack {
                 Spacer()
                 VStack(spacing: 0) {
@@ -46,9 +43,7 @@ struct PlayerView: View {
                 }
                 Spacer()
             }
-            .padding(.bottom, 5)
             .font(.custom("Splatfont", size: 18))
-//            .modifier(Splatfont(size: 18))
             .padding(.horizontal, 10)
             CrewSearch
         }

@@ -29,14 +29,14 @@ struct SettingView: View {
             UserStatus
             Application
         }
-        .modifier(Splatfont(size: 20))
+//        .modifier(Splatfont(size: 20))
         .listStyle(GroupedListStyle())
-        .navigationBarTitle("Settings", displayMode: .large)
+        .navigationBarTitle("Settings")
     }
     
     private var Application: some View {
         Section(header: Text("Application")
-                    .modifier(Splatfont(size: 18))
+//                    .modifier(Splatfont(size: 16))
                     .foregroundColor(.cOrange)) {
             HStack {
                 Text("How to use")
@@ -75,8 +75,8 @@ struct SettingView: View {
     }
     
     private var UserSection: some View {
-        Section(header: Text("My Accounts")
-                    .modifier(Splatfont(size: 18))
+        Section(header: Text("Status")
+//                    .modifier(Splatfont(size: 18))
                     .foregroundColor(.cOrange)) {
             NavigationLink(destination: UserListView()) { Text("Sign in") }
             //            NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) { Text("Fav Crews") }
@@ -90,7 +90,7 @@ struct SettingView: View {
     
     private var UserStatus: some View {
         Section(header: Text("Feature")
-                    .modifier(Splatfont(size: 18))
+//                    .modifier(Splatfont(size: 18))
                     .foregroundColor(.cOrange)) {
             HStack {
                 NavigationLink(destination: SyncUserData()) {

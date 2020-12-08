@@ -11,27 +11,30 @@ import URLImage
 struct SalmoniaView: View {
     
     @EnvironmentObject var user: UserInfoCore
-    
-//    init() {
-//        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "Splatfont", size: 36)!]
-//        UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: "Splatfont", size: 20)!]
-//    }
-    
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            ScrollView  {
-                PlayerView().padding(.top, 15)
-                CoopShiftView()
-                StageRecordView()
+            List  {
+                Section(header: Text("Overview")) {
+                    User
+                    Status
+                    Results
+                }
+                Section(header: Text("Shift Schedule")) {
+                    CoopShiftView()
+                }
+                Section(header: Text("Stage Records")) {
+                    StageRecordView()
+                }
             }
             Update().padding(.trailing, 20).padding(.bottom, 20)
         }
-//        .navigationBarHidden(true)
+        .listStyle(GroupedListStyle())
         .navigationBarTitle("Salmonia")
-        .navigationBarItems(leading: Setting, trailing: HStack(spacing: 15) {
-            Search
-            SalmonStats
-        })
+//        .navigationBarItems(leading: Setting, trailing: HStack(spacing: 15) {
+//            Search
+//            SalmonStats
+//        })
     }
     
     private var Title: some View {
@@ -40,13 +43,55 @@ struct SalmoniaView: View {
     }
     
     private var User: some View {
-        HStack {
-            URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }.frame(width: 35, height: 35)
-            Spacer()
-            Text(user.nickname)
-                .modifier(Splatfont(size: 24))
-                .frame(maxWidth: .infinity)
+        NavigationLink(destination: SettingView()) {
+            HStack {
+                URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(Circle()) }.frame(width: 70, height: 70)
+                Text(user.nickname)
+                    .modifier(Splatfont(size: 20))
+                    .frame(maxWidth: .infinity)
+            }
         }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    private var Results: some View {
+        Group {
+            NavigationLink(destination: ResultCollectionView()) {
+                Text("Job Results")
+                    .modifier(Splatfont2(size: 16))
+            }
+            NavigationLink(destination: WaveCollectionView()) {
+                Text("Wave Results")
+                    .modifier(Splatfont2(size: 16))
+            }
+            NavigationLink(destination: WebBrowser(address: "https://salmon-stats-api.yuki.games/auth/twitter"))
+            {
+                Text("Salmon Stats")
+                    .modifier(Splatfont2(size: 16))
+            }
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    private var Status: some View {
+        HStack {
+            Spacer()
+            VStack(spacing: 0) {
+                Text("Jobs")
+                Text("\(user.job_num)")
+            }
+            Spacer()
+            VStack(spacing: 0) {
+                Text("Eggs")
+                HStack {
+                    Text("\(user.golden_ikura_total)").foregroundColor(.yellow)
+                    Text("/")
+                    Text("\(user.ikura_total)").foregroundColor(.red)
+                }
+            }
+            Spacer()
+        }
+        .modifier(Splatfont2(size: 16))
     }
     
     private var Search: some View {
@@ -56,12 +101,13 @@ struct SalmoniaView: View {
         .buttonStyle(PlainButtonStyle())
     }
     
-    private var SalmonStats: some View {
-        NavigationLink(destination: WebKitView())
-        {
-            Image(systemName: "snow").resizable().scaledToFit().frame(width: 30, height: 30)
-        }.buttonStyle(PlainButtonStyle())
-    }
+//    private var SalmonStats: some View {
+//        NavigationLink(destination: WebKitView())
+//        {
+//            Image(systemName: "snow").resizable().scaledToFit().frame(width: 30, height: 30)
+//        }
+//        .buttonStyle(PlainButtonStyle())
+//    }
 
     private var Setting: some View {
         NavigationLink(destination: SettingView()){
@@ -88,7 +134,7 @@ struct SalmoniaView: View {
         var body: some View {
             NavigationLink(destination: LoadingView()){
                 ZStack {
-                    Circle().frame(width: 60, height: 60).foregroundColor(.cDarkGray)
+                    Circle().frame(width: 60, height: 60).foregroundColor(.cBlue)
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!) { image in image.renderingMode(.original).resizable() }
                         .frame(width: 30, height: 30)
                 }
