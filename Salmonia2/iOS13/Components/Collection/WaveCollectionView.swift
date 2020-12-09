@@ -47,7 +47,7 @@ struct WaveCollectionView: View {
             Section(header: HStack {
                 Spacer()
                 Text("Stage")
-                    .modifier(Splatfont(size: 22))
+                    .modifier(Splatfont2(size: 18))
                     .foregroundColor(.yellow)
                 Spacer()
             }) {
@@ -60,7 +60,7 @@ struct WaveCollectionView: View {
             Section(header: HStack {
                 Spacer()
                 Text("Tide")
-                    .modifier(Splatfont(size: 22))
+                    .modifier(Splatfont2(size: 18))
                     .foregroundColor(.yellow)
                 Spacer()
             }) {
@@ -73,7 +73,7 @@ struct WaveCollectionView: View {
             Section(header: HStack {
                 Spacer()
                 Text("Event")
-                    .modifier(Splatfont(size: 22))
+                    .modifier(Splatfont2(size: 18))
                     .foregroundColor(.yellow)
                 Spacer()
             }) {
@@ -84,7 +84,7 @@ struct WaveCollectionView: View {
                 }
             }
         }
-        .modifier(Splatfont(size: 18))
+        .modifier(Splatfont2(size: 16))
         .onDisappear() {
             // 画面を閉じるときにアップデートしてみよう
             var water_level: [Int] = []
@@ -111,15 +111,12 @@ struct WaveCollectionView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-//                        Text(String(collected_ratio) + "%")
                         Text((StageType.init(stage_id: data.result.first!.stage_id)?.stage_name!.localized)!)
+                        Text(data.water_level!.localized)
                     }
                     .modifier(Splatfont2(size: 14))
                     .foregroundColor(.yellow)
-                    HStack {
-                        Text(data.water_level!.localized)
-                        Text(data.event_type!.localized)
-                    }
+                    Text(data.event_type!.localized)
                 }
                 .modifier(Splatfont2(size: 16))
                 // ブキとか？

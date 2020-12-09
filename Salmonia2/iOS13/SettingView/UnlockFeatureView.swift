@@ -25,9 +25,9 @@ struct UnlockFeatureView: View {
                 Toggle(isOn: $user.isUnlock[2]) {
                     Text("Force Update")
                 }
-                Toggle(isOn: $user.isUnlock[3]) {
-                    Text("Hidden Feature")
-                }.disabled(true)
+//                Toggle(isOn: $user.isUnlock[3]) {
+//                    Text("Hidden Feature")
+//                }.disabled(true)
             }
             Section(header: Text("Paid")
                         .font(.custom("Splatfont2", size: 16))
