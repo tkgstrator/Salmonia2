@@ -155,9 +155,6 @@ struct PastCoopShiftView: View {
                 }
             }
             .frame(height: 120)
-            .padding(.all, 8)
-            .background(BackgroundMask)
-            .mask(RoundedRectangle(cornerRadius: 12.0))
             .modifier(Splatfont2(size: 18))
         }
         
@@ -170,23 +167,21 @@ struct PastCoopShiftView: View {
         }
         
         private var ShiftInfoOverview: some View {
-            VStack(alignment: .leading, spacing: 5) {
-                HStack {
-                    URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/2e4ca1b65a2eb7e4aacf38a8eb88b456.png")!) { image in image.resizable().frame(width: 33, height: 22)}
-                    Text(phase.start_time.year + " " + phase.start_time.time + " - " + phase.end_time.time)
-                        .font(.custom("Splatfont2", size: 18))
-                }.frame(height: 22)
-                Line().stroke(style: StrokeStyle(lineWidth: 3, dash: [8], dashPhase: 5)).frame(height: 2).foregroundColor(.cLightGray)
-            }.frame(maxHeight: 25)
+            HStack {
+                Text(phase.start_time.year + " " + phase.start_time.time + " - " + phase.end_time.time)
+                    .font(.custom("Splatfont2", size: 16))
+                Spacer()
+            }
         }
         
         private var ShiftStageWeapon: some View {
             HStack {
-                VStack(spacing: 5) {
+                VStack(spacing: 0) {
                     URLImage(url: URL(string: (StageType(stage_id: phase.stage_id)?.image_url)!)!) { image in image.resizable().frame(width: 112, height: 63) }.clipShape(RoundedRectangle(cornerRadius: 8.0))
                     Text((StageType.init(stage_id: phase.stage_id)?.stage_name!)!.localized)
                         .modifier(Splatfont2(size: 14))
-                }.padding(.top, 10)
+                        .padding(.bottom, 8)
+                }
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Supplied Weapons")
                         .modifier(Splatfont2(size: 16))
@@ -201,21 +196,12 @@ struct PastCoopShiftView: View {
                             }
                         }
                     }
-                    .padding(.bottom, 15)
+                    .padding(.bottom, 20)
                     .frame(maxWidth: .infinity)
                 }
                 //                .frame(maxHeight: 81)
             }
             .frame(maxHeight: 81)
-        }
-        
-        struct Line: Shape {
-            func path(in rect: CGRect) -> Path {
-                var path = Path()
-                path.move(to: CGPoint(x: 0, y: 0))
-                path.addLine(to: CGPoint(x: rect.width, y:0))
-                return path
-            }
         }
     }
 }

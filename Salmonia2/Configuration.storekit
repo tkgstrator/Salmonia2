@@ -1,7 +1,7 @@
 {
   "products" : [
     {
-      "displayPrice" : "0.00",
+      "displayPrice" : "3.99",
       "familyShareable" : false,
       "internalID" : "EE59DF22",
       "localizations" : [
@@ -21,12 +21,12 @@
       "type" : "Consumable"
     },
     {
-      "displayPrice" : "0.00",
+      "displayPrice" : "3.99",
       "familyShareable" : false,
       "internalID" : "C63A1E48",
       "localizations" : [
         {
-          "description" : "Enable multiple accounts",
+          "description" : "Enable multiple accounts.",
           "displayName" : "Multiple Accounts",
           "locale" : "en_US"
         },
@@ -56,20 +56,20 @@
           "adHocOffers" : [
 
           ],
-          "displayPrice" : "0",
+          "displayPrice" : "3.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "55294509",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "No description",
-              "displayName" : "No title",
+              "description" : "Donate to the developer as operating cost.",
+              "displayName" : "Monthly Pass",
               "locale" : "en_US"
             },
             {
-              "description" : "作者を応援します",
-              "displayName" : "継続型支援",
+              "description" : "Salmonia2運営を支援します",
+              "displayName" : "月額登録",
               "locale" : "ja"
             }
           ],

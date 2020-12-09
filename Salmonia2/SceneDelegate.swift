@@ -28,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(CoopShiftCore())
             .environmentObject(UserResultCore())
             .environmentObject(WaveResultCore())
+            .environmentObject(FeatureProductCore())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

@@ -13,6 +13,7 @@
 "Coop Shift Rotation" = "シフトスケジュール";
 
 // Settings
+"Accounts" = "アカウント";
 "NSO Accounts" = "NSOアカウント";
 "Fav Crews" = "お気に入りユーザ";
 "Registered" = "トウロク";
@@ -38,14 +39,15 @@
 "Force Update" = "強制アップデート";
 "Multiple Accounts" = "複数アカウント";
 "Monthly Pass" = "月額登録";
-"Future Rotation" = "将来のシフト";
-"Grizzco Weapons" = "クマサン印ブキ";
+"Future Rotation" = "将来のシフトを表示";
+"Grizzco Weapons" = "クマサン印ブキを表示";
 "Hidden Feature" = "隠し機能";
 "$3.99" = "¥500";
 
 // Settings->Feature's description
-"Enable multiple accounts" = "複数アカウントを有効化";
-"Donate to the developer" = "開発者を支援";
+"Enable multiple accounts." = "複数アカウントの同時リザルト取得ができるようになります";
+"Willing to add new features." = "新機能実装を応戦する寄付をします";
+"Donate to the developer as operating cost." = "開発者を支援";
 
 // Global->Stage Names
 "Spawning Grounds" = "シェケナダム";
@@ -58,6 +60,8 @@
 "Overview" = "概要";
 "Jobs" = "バイト回数";
 "Eggs" = "イクラ数";
+"Job Results" = "リザルト";
+"Wave Results" = "WAVE内容";
 "Shift Schedule" = "シフトスケジュール";
 "Stage Records" = "ステージキロク";
 "Favorite Crew" = "お気に入りユーザ";
@@ -92,6 +96,7 @@
 "Total" = "総合";
 "Max" = "最高";
 "Avg" = "平均";
+"Boss defeated" = "オオモノ討伐";
 "Salmon Rate" = "シャケレート";
 "Defeated" = "討伐"; // Boss defeated
 "Bomb Launcher" = "ボムピッチャー";
@@ -107,7 +112,7 @@
 "Golden Eggs Ratio" = "個人金イクラ率";
 "Power Eggs" = "赤イクラ数";
 "Golden Eggs" = "金イクラ数";
-"Boss Defeated" = "ボス討伐数";
+"Boss Defeated" = "オオモノ討伐数";
 "Rescue Count" = "救助数";
 "Help Count" = "被救助数";
 "Goldie" = "キンシャケ";

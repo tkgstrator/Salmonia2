@@ -242,3 +242,14 @@ class SalmonRecordsRealm: Object {
         return "sash"
     }
 }
+
+class FeatureProductRealm: Object {
+    @objc dynamic var productIdentifier: String = ""
+    @objc dynamic var localizedTitle: String = ""
+    @objc dynamic var localizedDescription: String = ""
+    @objc dynamic var localizedPrice: String = ""
+    
+    override static func primaryKey() -> String? {
+        return "productIdentifier"
+    }
+}

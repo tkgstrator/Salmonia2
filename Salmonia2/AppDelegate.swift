@@ -106,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if (oldSchemaVersion < 16) {
                     migration.deleteData(forType: "CoopShiftRealm")
                 }
-                if (oldSchemaVersion < 20) {
+                if (oldSchemaVersion < 17) {
                     migration.enumerateObjects(ofType: CrewInfoRealm.className()) { oldObject, newObject in
                         if oldObject!["name"] as! String == "-" {
                             newObject!["name"] = nil

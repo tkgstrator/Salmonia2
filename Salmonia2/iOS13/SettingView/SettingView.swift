@@ -28,6 +28,7 @@ struct SettingView: View {
             UserSection
             UserStatus
             Application
+            AdBannerView()
         }
 //        .modifier(Splatfont2(size: 16))
 //        .listStyle(GroupedListStyle())
@@ -37,7 +38,8 @@ struct SettingView: View {
     private var Application: some View {
         Section(header: Text("Application")
                     .modifier(Splatfont2(size: 16))
-                    .foregroundColor(.cOrange)) {
+                    .foregroundColor(.cOrange))
+        {
             HStack {
                 Text("How to use")
                 Spacer()
@@ -48,15 +50,6 @@ struct SettingView: View {
                 Text("X-Product Version")
                 Spacer()
                 Text("\(user.isVersion)")
-            }.onLongPressGesture {
-                user.isUnlock[3].toggle()
-                user.updateUnlock(user.isUnlock)
-                switch user.isUnlock[3] {
-                case true:
-                    notification(title: .success, message: .unlock)
-                case false:
-                    notification(title: .success, message: .lock)
-                }
             }
             HStack {
                 Text("Version")

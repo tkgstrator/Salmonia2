@@ -17,7 +17,10 @@ struct UserListView: View {
 
     var body: some View {
         List {
-            Section(header: Text("My accounts")) {
+            Section(header: Text("My Accounts")
+                .modifier(Splatfont2(size: 16))
+                .foregroundColor(.cOrange))
+            {
                 ForEach(user.account.indices, id:\.self) { idx in
                     HStack {
                         URLImage(url: URL(string: user.account[idx].image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
@@ -32,7 +35,7 @@ struct UserListView: View {
             }
 //            .onDelete(perform: onDelete)
         }
-        .navigationBarTitle("My Accounts")
+        .navigationBarTitle("Accounts")
         .modifier(Splatfont(size: 18))
         .navigationBarItems(trailing: Login)
         .environment(\.editMode, $editMode)

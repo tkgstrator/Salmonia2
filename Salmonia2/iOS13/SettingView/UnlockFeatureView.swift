@@ -10,6 +10,11 @@ import SwiftyStoreKit
 
 struct UnlockFeatureView: View {
     @EnvironmentObject var user: SalmoniaUserCore
+    @EnvironmentObject var paid: FeatureProductCore
+    
+    init() {
+        retrieveProduct()
+    }
     
     var body: some View {
         List {
@@ -32,125 +37,114 @@ struct UnlockFeatureView: View {
             Section(header: Text("Paid")
                         .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange)) {
-                HStack {
-                    VStack(alignment: .leading ){
-                        Text("Multiple Accounts")
-                        Text("Enable multiple accounts").modifier(Splatfont2(size: 14))
-                    }
-                    Spacer()
-                    if user.isPurchase == false {
-                        MultipleAccounts
-                            .onTapGesture {
-                                callStoreKit("work.tkgstrator.Salmonia2.MultipleAccounts")
+                ForEach(paid.features.reversed(), id:\.self) { feature in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text(feature.localizedTitle.localized)
+                                Text(feature.localizedPrice!)
+                                    .modifier(Splatfont2(size: 16))
                             }
-                    } else {
-                        MultipleAccountsPurchased
-                    }
-                    
-                }.frame(height: 60)
-                HStack {
-                    VStack(alignment: .leading ){
-                        Text("Donation")
-                        Text("Donate to the developer").modifier(Splatfont2(size: 14))
-                    }
-                    Spacer()
-                    Text("$3.99")
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.white, lineWidth: 3)
-                        )
-                        .onTapGesture {
-                            callStoreKit("work.tkgstrator.Salmonia2.Consumable.Donation")
+                            Text(feature.localizedDescription.localized)
+                                .modifier(Splatfont2(size: 14))
                         }
-                }.frame(height: 60)
-                HStack {
-                    VStack(alignment: .leading ){
-                        Text("Monthly Pass")
-                        Text("Donate to the developer").modifier(Splatfont2(size: 14))
-                    }
-                    Spacer()
-                    Text("$3.99")
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.white, lineWidth: 3)
-                        )
-                        .onTapGesture {
-                            callStoreKit("work.tkgstrator.Salmonia2.MonthlyPass")
+                        Spacer()
+                        if feature.productIdentifier == "work.tkgstrator.Salmonia2.MonthlyPass" {
+                            PayButton(title: "Subscribe", product: feature.productIdentifier)
+                        } else {
+                            PayButton(title: "Purchase", product: feature.productIdentifier)
                         }
-                }.frame(height: 60)
+                    }.frame(height: 60)
+                }
             }
         }
         .modifier(Splatfont2(size: 16))
         .navigationBarTitle("Feature")
         .onDisappear() {
-            print(user.isUnlock)
             user.updateUnlock(user.isUnlock)
         }
     }
+   
+    func retrieveProduct() {
+        let productIds = ["work.tkgstrator.Salmonia2.MultipleAccounts", "work.tkgstrator.Salmonia2.Consumable.Donation", "work.tkgstrator.Salmonia2.MonthlyPass"]
+        autoreleasepool {
+            guard let realm = try? Realm() else { return }
+            for productId in productIds {
+                SwiftyStoreKit.retrieveProductsInfo([productId]) { result in
+                    if let product = result.retrievedProducts.first {
+                        let value: [String: String] = [
+                            "productIdentifier": productId,
+                            "localizedTitle": product.localizedTitle,
+                            "localizedDescription": product.localizedDescription,
+                            "localizedPrice": product.localizedPrice!
+                        ]
+                        realm.beginWrite()
+                        realm.create(FeatureProductRealm.self, value: value, update: .all)
+                        try? realm.commitWrite()
+                    }
+                    else if let invalidProductId = result.invalidProductIDs.first {
+                        print("Invalid product identifier: \(invalidProductId)")
+                    }
+                    else {
+                        print("Error: \(result.error)")
+                    }
+                }
+            }
+        }
+    }
     
-    private var MultipleAccounts: some View {
-        Text("$3.99")
-            .padding(.horizontal, 20)
-            .padding(.vertical, 5)
+    struct PayButton: View {
+        var title: String = ""
+        var product: String = ""
+        
+        var body: some View {
+            Button(title) {
+                callStoreKit(product)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .padding(.horizontal, 10)
+            .padding(.vertical, 3)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color.white, lineWidth: 3)
             )
-    }
-    
-    private var MultipleAccountsPurchased: some View {
-        Text("Paid")
-            .padding(.horizontal, 20)
-            .padding(.vertical, 5)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.cGray, lineWidth: 3)
-            )
-            .foregroundColor(Color.cGray)
-    }
-    
-    func callStoreKit(_ product: String) {
-        SwiftyStoreKit.purchaseProduct(product, quantity: 1, atomically: true) { result in
-            switch result {
-            case .success(let purchase):
-                switch purchase.productId {
-                case "work.tkgstrator.Salmonia2.MultipleAccounts":
+        }
+        
+        func callStoreKit(_ product: String) -> Void {
+            SwiftyStoreKit.purchaseProduct(product, quantity: 1, atomically: true) { result in
+                switch result {
+                case .success(let purchase):
                     guard let realm = try? Realm() else { return }
                     let user = realm.objects(SalmoniaUserRealm.self)
-                    try! realm.write {
-                        user.setValue(true, forKey: "isPurchase")
+                    switch purchase.productId {
+                    case "work.tkgstrator.Salmonia2.MultipleAccounts":
+                        try! realm.write {
+                            user.setValue(true, forKey: "isPurchase")
+                        }
+                    case "work.tkgstrator.Salmonia2.Consumable":
+                        try! realm.write {
+                            user.setValue(true, forKey: "isPurchase")
+                        }
+                    case "work.tkgstrator.Salmonia2.MonthlyPass":
+                        try! realm.write {
+                            user.setValue(true, forKey: "isPurchase")
+                        }
+                    default:
+                        break
                     }
-                case "work.tkgstrator.Salmonia2.Consumable":
-                    guard let realm = try? Realm() else { return }
-                    let user = realm.objects(SalmoniaUserRealm.self)
-                    try! realm.write {
-                        user.setValue(true, forKey: "isPurchase")
+                case .error(let error):
+                    switch error.code {
+                    case .unknown: print("Unknown error. Please contact support")
+                    case .clientInvalid: print("Not allowed to make the payment")
+                    case .paymentCancelled: break
+                    case .paymentInvalid: print("The purchase identifier was invalid")
+                    case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                    case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                    case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                    case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                    case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                    default: print((error as NSError).localizedDescription)
                     }
-                case "work.tkgstrator.Salmonia2.MonthlyPass":
-                    guard let realm = try? Realm() else { return }
-                    let user = realm.objects(SalmoniaUserRealm.self)
-                    try! realm.write {
-                        user.setValue(true, forKey: "isPurchase")
-                    }
-                default:
-                    break
-                }
-            case .error(let error):
-                switch error.code {
-                case .unknown: print("Unknown error. Please contact support")
-                case .clientInvalid: print("Not allowed to make the payment")
-                case .paymentCancelled: break
-                case .paymentInvalid: print("The purchase identifier was invalid")
-                case .paymentNotAllowed: print("The device is not allowed to make the payment")
-                case .storeProductNotAvailable: print("The product is not available in the current storefront")
-                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
-                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
-                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
-                default: print((error as NSError).localizedDescription)
                 }
             }
         }

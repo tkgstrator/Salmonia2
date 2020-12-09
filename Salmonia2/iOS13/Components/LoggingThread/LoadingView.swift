@@ -60,7 +60,7 @@ struct LoadingView: View {
                                 guard let job_num: Int = summary["summary"]["card"]["job_num"].int else { return }
                                 #if DEBUG
                                 let tmp: Int = user.isUnlock[2] == true ? 0 : realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
-                                user.isUnlock[2].toggle()
+                                user.isUnlock[2] = false
                                 #else
                                 let tmp: Int = user.isUnlock[2] == true ? 0 : realm.objects(CoopResultsRealm.self).filter("nsaid=%@", nsaid).max(ofProperty: "job_id") ?? 0
                                 user.isUnlock[2] = false
