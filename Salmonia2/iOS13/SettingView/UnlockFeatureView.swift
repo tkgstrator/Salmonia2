@@ -14,7 +14,7 @@ struct UnlockFeatureView: View {
     var body: some View {
         List {
             Section(header: Text("Free")
-                        .font(.custom("Splatfont", size: 18))
+                        .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange)) {
                 Toggle(isOn: $user.isUnlock[0]) {
                     Text("Future Rotation")
@@ -30,12 +30,12 @@ struct UnlockFeatureView: View {
                 }.disabled(true)
             }
             Section(header: Text("Paid")
-                        .font(.custom("Splatfont", size: 18))
+                        .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange)) {
                 HStack {
                     VStack(alignment: .leading ){
                         Text("Multiple Accounts")
-                        Text("Enable multiple accounts").modifier(Splatfont(size: 14))
+                        Text("Enable multiple accounts").modifier(Splatfont2(size: 14))
                     }
                     Spacer()
                     if user.isPurchase == false {
@@ -51,7 +51,7 @@ struct UnlockFeatureView: View {
                 HStack {
                     VStack(alignment: .leading ){
                         Text("Donation")
-                        Text("Donate to the developer").modifier(Splatfont(size: 14))
+                        Text("Donate to the developer").modifier(Splatfont2(size: 14))
                     }
                     Spacer()
                     Text("$3.99")
@@ -68,7 +68,7 @@ struct UnlockFeatureView: View {
                 HStack {
                     VStack(alignment: .leading ){
                         Text("Monthly Pass")
-                        Text("Donate to the developer").modifier(Splatfont(size: 14))
+                        Text("Donate to the developer").modifier(Splatfont2(size: 14))
                     }
                     Spacer()
                     Text("$3.99")
@@ -84,7 +84,7 @@ struct UnlockFeatureView: View {
                 }.frame(height: 60)
             }
         }
-        .modifier(Splatfont(size: 18))
+        .modifier(Splatfont2(size: 16))
         .navigationBarTitle("Feature")
         .onDisappear() {
             print(user.isUnlock)

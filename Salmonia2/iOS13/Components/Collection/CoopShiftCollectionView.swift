@@ -17,10 +17,10 @@ struct PastCoopShiftView: View {
     @State var isPlayed: Bool = false
     // private var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
     
-    init() {
-        UITableView.appearance().tableFooterView = UIView()
-        UITableView.appearance().separatorStyle = .none
-    }
+//    init() {
+//        UITableView.appearance().tableFooterView = UIView()
+//        UITableView.appearance().separatorStyle = .none
+//    }
     
     var body: some View {
         if #available(iOS 14.0, *) {
@@ -61,7 +61,7 @@ struct PastCoopShiftView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
+//                .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
                 ForEach(phase.all.indices, id:\.self) { idx in
                     ZStack {
                         NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.all[idx].start_time))) {
@@ -72,7 +72,7 @@ struct PastCoopShiftView: View {
                         CoopShiftStack(phase: phase.all[idx], isRareWeapon: $phase.isUnlockWeapon)
                     }
                 }
-                .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
+//                .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
             }
             .navigationBarTitle("Coop Shift Rotation")
             .navigationBarItems(trailing: FilterButton)
@@ -101,7 +101,7 @@ struct PastCoopShiftView: View {
                 Section(header: HStack {
                     Spacer()
                     Text("Rotation")
-                        .modifier(Splatfont(size: 22))
+                        .modifier(Splatfont2(size: 18))
                         .foregroundColor(.cOrange)
                     Spacer()
                 }) {
@@ -127,7 +127,7 @@ struct PastCoopShiftView: View {
                 Section(header: HStack {
                     Spacer()
                     Text("Options")
-                        .modifier(Splatfont(size: 22))
+                        .modifier(Splatfont2(size: 18))
                         .foregroundColor(.cOrange)
                     Spacer()
                 }) {
@@ -136,7 +136,7 @@ struct PastCoopShiftView: View {
                     }
                 }
             }
-            .modifier(Splatfont(size: 18))
+            .modifier(Splatfont2(size: 16))
             .onDisappear() {
                 phase.update(isEnable: isEnable, isPlayed: isPlayed, isTime: isTime)
             }

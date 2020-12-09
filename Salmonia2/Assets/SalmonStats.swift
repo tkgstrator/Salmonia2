@@ -86,7 +86,9 @@ class SalmonStats {
             }
     }
     
-    class func uploadSalmonStats(token: String, _ results: [Dictionary<String, Any>]) -> JSON {
+    class func uploadSalmonStats(token: String, _ results: [Dictionary<String, Any>]) throws -> JSON {
+        print("API TOKEN", token)
+        print("RESULTS", results.count)
         let semaphore = DispatchSemaphore(value: 0)
         let queue = DispatchQueue.global(qos: .utility)
         
@@ -96,6 +98,7 @@ class SalmonStats {
             "Authorization": "Bearer " + token
         ]
         let body = ["results": results]
+        var error: Error? = nil
         
         var salmon_ids: JSON = JSON()
         AF.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header)
@@ -105,13 +108,14 @@ class SalmonStats {
                 switch response.result {
                 case .success(let value):
                     salmon_ids = JSON(value)
-                case .failure(let error):
-                    print(error)
+                case .failure(let e):
+                    error = e
                 }
                 semaphore.signal()
             }
         semaphore.wait()
-        return salmon_ids
+        guard let _ = error else { return salmon_ids }
+        throw error!
     }
     
     private class func get(laravel_session: String) throws -> JSON {

@@ -21,24 +21,14 @@ struct CoopShiftView: View {
                 .opacity(0.0)
                 CoopShiftStack(phase: $phases.data[idx])
             }
-            .buttonStyle(PlainButtonStyle())
         }
+        CoopShift
     }
     
     var CoopShift: some View {
         NavigationLink(destination: PastCoopShiftView()) {
-            HStack {
-                ZStack {
-                    Image("CoopBar")
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(.cDarkGray)
-                    Text("Coop Shift Rotation")
-                        .modifier(Splatfont2(size: 20))
-                }
-            }
-            //            .frame(maxWidth: 240)
+            Text("Coop Shift Rotation")
+                .modifier(Splatfont2(size: 16))
         }
         .buttonStyle(PlainButtonStyle())
     }

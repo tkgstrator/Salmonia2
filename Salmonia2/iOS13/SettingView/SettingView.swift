@@ -29,14 +29,14 @@ struct SettingView: View {
             UserStatus
             Application
         }
-//        .modifier(Splatfont(size: 20))
-        .listStyle(GroupedListStyle())
+//        .modifier(Splatfont2(size: 16))
+//        .listStyle(GroupedListStyle())
         .navigationBarTitle("Settings")
     }
     
     private var Application: some View {
         Section(header: Text("Application")
-//                    .modifier(Splatfont(size: 16))
+                    .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
             HStack {
                 Text("How to use")
@@ -64,6 +64,7 @@ struct SettingView: View {
                 Text("\(version)")
             }.onLongPressGesture { isImported() }
         }
+        .modifier(Splatfont2(size: 16))
     }
     
     private func isImported() {
@@ -76,7 +77,7 @@ struct SettingView: View {
     
     private var UserSection: some View {
         Section(header: Text("Status")
-//                    .modifier(Splatfont(size: 18))
+                    .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
             NavigationLink(destination: UserListView()) { Text("Sign in") }
             //            NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) { Text("Fav Crews") }
@@ -86,11 +87,12 @@ struct SettingView: View {
                 Text("\((user.api_token != nil ? "Registered" : "Unregistered").localized)")
             }
         }
+        .modifier(Splatfont2(size: 16))
     }
     
     private var UserStatus: some View {
         Section(header: Text("Feature")
-//                    .modifier(Splatfont(size: 18))
+                    .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
             HStack {
                 NavigationLink(destination: SyncUserData()) {
@@ -115,6 +117,7 @@ struct SettingView: View {
                 }
             }
         }
+        .modifier(Splatfont2(size: 16))
     }
     
     // 通知を出す

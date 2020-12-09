@@ -12,7 +12,7 @@ import RealmSwift
 struct UserListView: View {
     
     @EnvironmentObject var user: SalmoniaUserCore
-//    @State private var editMode = EditMode.inactive
+    @State private var editMode = EditMode.inactive
     @State var isVisible: Bool = false
 
     var body: some View {
@@ -28,18 +28,21 @@ struct UserListView: View {
                             .onTapGesture{ onActive(idx: idx) }
                     }
                 }
-//                .onMove(perform: onMove)
+                .onMove(perform: onMove)
             }
 //            .onDelete(perform: onDelete)
         }
         .navigationBarTitle("My Accounts")
         .modifier(Splatfont(size: 18))
         .navigationBarItems(trailing: Login)
-//        .environment(\.editMode, $editMode)
+        .environment(\.editMode, $editMode)
     }
     
     private var Login: some View {
-        Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Text("Add") }
+        HStack {
+            Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Text("Add") }
+            EditButton()
+        }
 //            .font(.system(size: 18))
     }
     

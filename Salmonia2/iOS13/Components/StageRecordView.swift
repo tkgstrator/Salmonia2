@@ -36,11 +36,7 @@ private struct StageRecordsView: View {
     
     var body: some View {
         List {
-            Section(header: HStack {
-                Spacer()
-                Text("Overview").modifier(Splatfont(size: 22)).foregroundColor(.yellow)
-                Spacer()
-            }) {
+            Section(header: Text("Overview").modifier(Splatfont2(size: 16)).foregroundColor(.yellow)) {
                 HStack {
                     Text("Jobs")
                     Spacer()
@@ -67,11 +63,8 @@ private struct StageRecordsView: View {
                 //                    Text(String(record.srpower[1].value))
                 //                }
             }
-            Section(header: HStack {
-                Spacer()
-                Text("Record").modifier(Splatfont(size: 22)).foregroundColor(.yellow)
-                Spacer()
-            }) {
+            .modifier(Splatfont2(size: 16))
+            Section(header: Text("Record").modifier(Splatfont2(size: 16)).foregroundColor(.yellow)) {
                 HStack {
                     Text("All")
                     Spacer()
@@ -82,28 +75,25 @@ private struct StageRecordsView: View {
                     Spacer()
                     Text("\(record.team_golden_eggs[1].value)")
                 }
-                ForEach(Range(0 ... 2)) { tide in
-                    Section(header: HStack {
-                        Spacer()
-                        Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").modifier(Splatfont(size: 20)).foregroundColor(.orange)
-                        Spacer()
-                    }) {
-                        ForEach(Range(0 ... 6)) { event in
-                            if record.golden_eggs[tide][event] != nil {
-                                NavigationLink(destination: ResultView().environmentObject(record.salmon_id[tide][event]!)) {
-                                    HStack {
-                                        Text("\((EventType.init(event_id: event)?.event_name)!.localized)")
-                                        Spacer()
-                                        Text("\(record.golden_eggs[tide][event].value)")
-                                    }
+            }
+            .modifier(Splatfont2(size: 16))
+            ForEach(Range(0 ... 2)) { tide in
+                Section(header: Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").modifier(Splatfont2(size: 16)).foregroundColor(.orange)) {
+                    ForEach(Range(0 ... 6)) { event in
+                        if record.golden_eggs[tide][event] != nil {
+                            NavigationLink(destination: ResultView().environmentObject(record.salmon_id[tide][event]!)) {
+                                HStack {
+                                    Text("\((EventType.init(event_id: event)?.event_name)!.localized)")
+                                    Spacer()
+                                    Text("\(record.golden_eggs[tide][event].value)")
                                 }
                             }
                         }
                     }
                 }
+                .modifier(Splatfont2(size: 16))
             }
         }
-        .modifier(Splatfont2(size: 20))
         .navigationBarTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!.localized)
     }
 }

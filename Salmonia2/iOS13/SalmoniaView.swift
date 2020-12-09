@@ -15,21 +15,20 @@ struct SalmoniaView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             List  {
-                Section(header: Text("Overview")) {
+                Section(header: Text("Overview").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                     User
                     Status
                     Results
                 }
-                Section(header: Text("Shift Schedule")) {
+                Section(header: Text("Shift Schedule").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                     CoopShiftView()
                 }
-                Section(header: Text("Stage Records")) {
+                Section(header: Text("Stage Records").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                     StageRecordView()
                 }
             }
             Update().padding(.trailing, 20).padding(.bottom, 20)
         }
-        .listStyle(GroupedListStyle())
         .navigationBarTitle("Salmonia")
 //        .navigationBarItems(leading: Setting, trailing: HStack(spacing: 15) {
 //            Search
@@ -69,6 +68,10 @@ struct SalmoniaView: View {
                 Text("Salmon Stats")
                     .modifier(Splatfont2(size: 16))
             }
+//            NavigationLink(destination: PastCoopShiftView()) {
+//                Text("Coop Shift Rotation")
+//                    .modifier(Splatfont2(size: 16))
+//            }
         }
         .buttonStyle(PlainButtonStyle())
     }

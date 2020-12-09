@@ -12,7 +12,7 @@ struct ContentView: View {
         NavigationView {
             SalmoniaView()
         }
-        .environmentObject(UserInfoCore())
+        .listStyle(GroupedListStyle())
     }
 }
 

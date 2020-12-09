@@ -17,7 +17,10 @@ struct ShiftStatsView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Overview")) {
+            Section(header: Text("Overview")
+                        .modifier(Splatfont2(size: 16))
+                        .foregroundColor(.cOrange))
+            {
                 ShiftStatsStack(title: "Job Num", value: stats.job_num)
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
@@ -32,7 +35,10 @@ struct ShiftStatsView: View {
                     ShiftStatsStack(title: "Splashdown", value: stats.special[3].per)
                 }
             }
-            Section(header: Text("Max")){
+            Section(header: Text("Max")
+                        .modifier(Splatfont2(size: 16))
+                        .foregroundColor(.cOrange))
+            {
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
                 ShiftStatsStack(title: "Grade Point", value: stats.max_grade_point)
                 if (stats.job_num != nil) {
@@ -53,7 +59,10 @@ struct ShiftStatsView: View {
                     }
                 }
             }
-            Section(header: Text("Avg")) {
+            Section(header: Text("Avg")
+                        .modifier(Splatfont2(size: 16))
+                        .foregroundColor(.cOrange))
+            {
                 ShiftStatsStack(title: "Clear Wave", value: stats.avg_clear_wave)
                 ShiftStatsStack(title: "Crew Grade", value: stats.avg_crew_grade)
                 ShiftStatsStack(title: "Team Power Eggs", value: stats.avg_team_power_eggs)
@@ -64,21 +73,27 @@ struct ShiftStatsView: View {
                 ShiftStatsStack(title: "Rescue Count", value: stats.avg_rescue)
                 ShiftStatsStack(title: "Help Count", value: stats.avg_dead)
             }
-            Section(header: Text("Boss defeated")) {
+            Section(header: Text("Boss defeated")
+                        .modifier(Splatfont2(size: 16))
+                        .foregroundColor(.cOrange))
+            {
                 ForEach(BossType.allCases.indices, id:\.self) { idx in
                     ShiftStatsStack(title: (BossType.allCases[idx].boss_name!), value: stats.boss_defeated[idx].per)
                 }
             }
-            Section(header: Text("Global Records")) {
+            Section(header: Text("Global Records")
+                        .modifier(Splatfont2(size: 16))
+                        .foregroundColor(.cOrange)) {
                 Text("Power Eggs")
+                    .font(.custom("Splatfont2", size: 16))
                 NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
                     Text("Golden Eggs")
+                        .font(.custom("Splatfont2", size: 16))
                 }
             }
         }
-        .modifier(Splatfont2(size: 18))
         .navigationBarTitle(UnixTime.dateFromTimestamp(stats.schedule!))
-//        .navigationBarItems(trailing: RecordButton)
+        //        .navigationBarItems(trailing: RecordButton)
     }
     
     private var RecordButton: some View {
@@ -92,20 +107,17 @@ struct ShiftStatsView: View {
 
 struct StatsChartView: View {
     @EnvironmentObject var record: ShiftRecordCore
-
+    
     init(_ start_time: Int) {
         getShiftRecords(start_time: start_time)
     }
     
     var body: some View {
         List {
-            Section(header: HStack {
-                Spacer()
-                Text("Total")
-                    .modifier(Splatfont2(size: 18))
-                    .foregroundColor(.yellow)
-                Spacer()
-            }) {
+            Section(header: Text("Total")
+                        .modifier(Splatfont2(size: 16))
+                        .foregroundColor(.yellow))
+            {
                 HStack {
                     Text("All")
                     Spacer()
@@ -113,7 +125,6 @@ struct StatsChartView: View {
                         Text("\(record.total[1].value)").frame(width: 55)
                         Text("(\(record.total[0].value))").frame(width: 55)
                     }
-                    .font(.custom("Splatfont2", size: 16))
                 }
                 HStack {
                     Text("No Night Event")
@@ -122,17 +133,14 @@ struct StatsChartView: View {
                         Text("\(record.no_night_total[1].value)").frame(width: 55)
                         Text("(\(record.no_night_total[0].value))").frame(width: 55)
                     }
-                    .font(.custom("Splatfont2", size: 18))
                 }
             }
+            .font(.custom("Splatfont2", size: 16))
             ForEach(Range(0 ... 2)) { tide in
-                Section(header: HStack {
-                    Spacer()
-                    Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)")
-                        .modifier(Splatfont2(size: 18))
-                        .foregroundColor(.orange)
-                    Spacer()
-                }) {
+                Section(header: Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)")
+                            .modifier(Splatfont2(size: 16))
+                            .foregroundColor(.orange))
+                {
                     ForEach(Range(0 ... 6)) { event in
                         if record.global[tide][event] != nil {
                             //                                NavigationLink(destination: ResultView().environmentObject(record.salmon_id[tide][event]!)) {
@@ -143,15 +151,15 @@ struct StatsChartView: View {
                                     Text("\(record.personal[tide][event].value)").frame(width: 55)
                                     Text("(\(record.global[tide][event].value))").frame(width: 55)
                                 }
-                                .font(.custom("Splatfont2", size: 16))
+                                
                             }
+                            .font(.custom("Splatfont2", size: 16))
                             //                                }
                         }
                     }
                 }
             }
         }
-        .modifier(Splatfont2(size: 18))
         .navigationBarTitle("Global Records")
     }
     
@@ -180,7 +188,7 @@ struct StatsChartView: View {
                 switch (response.result) {
                 case .success(let value):
                     // データベースに書き込む
-//                    let records: RealmSwift.List<WaveRecordsRealm> = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first!.records
+                    //                    let records: RealmSwift.List<WaveRecordsRealm> = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first!.records
                     let json = JSON(value)["records"] // 全体のリザルトであることに注意
                     
                     var waves: [JSON] = []

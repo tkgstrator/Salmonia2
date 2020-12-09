@@ -88,10 +88,10 @@ struct LoadingView: View {
                                 
                                 let data: [[Dictionary<String, Any>]] = results.map({ $0.dictionaryObject! }).chunked(by: 10)
                                 for result in data {
-                                    let response: JSON = SalmonStats.uploadSalmonStats(token: api_token, result)
+                                    let response: JSON = try SalmonStats.uploadSalmonStats(token: api_token, result)
                                     let ids: [(Int, Int)] = response.map({ ($0.1["job_id"].intValue, $0.1["salmon_id"].intValue) })
                                     salmon_ids.append(contentsOf: ids)
-                                    Thread.sleep(forTimeInterval: 3)
+                                    Thread.sleep(forTimeInterval: 5)
                                 }
                                 
                                 // データの作成を行う
@@ -120,7 +120,6 @@ struct LoadingView: View {
                                     let value: [String: Any] = ["nsaid": crew["nsa_id"].stringValue, "name": crew["nickname"].stringValue, "image": crew["thumbnail_url"].stringValue]
                                     realm.create(CrewInfoRealm.self, value: value, update: .all)
                                 }
-
                                 realm.create(UserInfoRealm.self, value: card as Any, update: .modified)
                                 try realm.commitWrite()
                             } catch {
