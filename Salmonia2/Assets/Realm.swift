@@ -21,7 +21,7 @@ class SalmoniaUserRealm: Object {
     dynamic var account = List<UserInfoRealm>()
     dynamic var favuser = List<CrewInfoRealm>()
     
-    let placeholder: [Bool] = [false, false, false, false]
+    let placeholder: [Bool] = [false, false, false, false, false, false]
     
     convenience required init(isUnlock: [Bool]) {
         self.init()

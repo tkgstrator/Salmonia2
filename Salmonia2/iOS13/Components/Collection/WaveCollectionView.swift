@@ -28,7 +28,7 @@ struct WaveCollectionView: View {
                 }
             }
         }
-        .navigationBarTitle("Wave Results")
+        .navigationBarTitle("Wave Search")
         .navigationBarItems( trailing: filterButton)
     }
     

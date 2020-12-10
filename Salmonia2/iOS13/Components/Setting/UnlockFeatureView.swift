@@ -30,9 +30,12 @@ struct UnlockFeatureView: View {
                 Toggle(isOn: $user.isUnlock[2]) {
                     Text("Force Update")
                 }
-//                Toggle(isOn: $user.isUnlock[3]) {
-//                    Text("Hidden Feature")
-//                }.disabled(true)
+                Toggle(isOn: $user.isUnlock[3]) {
+                    Text("Login in Safari")
+                }
+                Toggle(isOn: $user.isUnlock[4]) {
+                    Text("Disable Ads")
+                }
             }
             Section(header: Text("Paid")
                         .font(.custom("Splatfont2", size: 16))
@@ -42,7 +45,7 @@ struct UnlockFeatureView: View {
                         VStack(alignment: .leading) {
                             HStack {
                                 Text(feature.localizedTitle.localized)
-                                Text(feature.localizedPrice!)
+                                Text(feature.localizedPrice!.localized)
                                     .modifier(Splatfont2(size: 16))
                             }
                             Text(feature.localizedDescription.localized)
@@ -50,9 +53,9 @@ struct UnlockFeatureView: View {
                         }
                         Spacer()
                         if feature.productIdentifier == "work.tkgstrator.Salmonia2.MonthlyPass" {
-                            PayButton(title: "Subscribe", product: feature.productIdentifier)
+                            PayButton(title: "Subscribe".localized, product: feature.productIdentifier)
                         } else {
-                            PayButton(title: "Purchase", product: feature.productIdentifier)
+                            PayButton(title: "Purchase".localized, product: feature.productIdentifier)
                         }
                     }.frame(height: 60)
                 }

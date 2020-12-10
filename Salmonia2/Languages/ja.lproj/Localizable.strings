@@ -1,5 +1,4 @@
 // TitleBar
-
 "Settings" = "設定";
 "Log" = "ログ";
 "Results" = "リザルト";
@@ -11,6 +10,7 @@
 "My Accounts" = "マイアカウント";
 "Sign in" = "サインイン";
 "Coop Shift Rotation" = "シフトスケジュール";
+"Achievement" = "実績";
 
 // Settings
 "Accounts" = "アカウント";
@@ -36,18 +36,21 @@
 "Free" = "無料";
 "Paid" = "有料";
 "Donation" = "寄付";
-"Force Update" = "強制アップデート";
+"Force Update" = "強制データ取得";
 "Multiple Accounts" = "複数アカウント";
 "Monthly Pass" = "月額登録";
 "Future Rotation" = "将来のシフトを表示";
 "Grizzco Weapons" = "クマサン印ブキを表示";
-"Hidden Feature" = "隠し機能";
+"Login in Safari" = "ログインページをSafariでひらく";
+"Disable Ads" = "広告を非表示";
 "$3.99" = "¥500";
 
 // Settings->Feature's description
+"Purchase" = "購入";
+"Subscribe" = "購読";
 "Enable multiple accounts." = "複数アカウントの同時リザルト取得ができるようになります";
 "Willing to add new features." = "新機能実装を応戦する寄付をします";
-"Donate to the developer as operating cost." = "開発者を支援";
+"Donate to the developer as operating cost." = "開発者を支援します";
 
 // Global->Stage Names
 "Spawning Grounds" = "シェケナダム";
@@ -55,6 +58,10 @@
 "Lost Outpost" = "海上集落シャケト場";
 "Salmonid Smokeyard" = "トキシラズいぶし工房";
 "Ruins of Ark Polaris" = "朽ちた箱舟 ポラリス";
+
+// Achievement
+"Boss" = "オオモノシャケ";
+"Special" = "スペシャルウエポン";
 
 // Top
 "Overview" = "概要";
@@ -125,6 +132,9 @@
 "Griller" = "グリル";
 "Drizzler" = "コウモリ";
 
+// Result
+"Score" = "スコア";
+
 // Clear/Failure in SplatNet2
 "Clear!" = "Clear!!";
 "Defeat" = "Failure";
@@ -141,7 +151,6 @@
 "Only played" = "プレイしたシフトのみ"; // The roatations you played
 "Rotation" = "編成";
 "Options" = "オプション";
-
 
 // Notification's description
 "Success" = "成功";

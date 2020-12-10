@@ -28,7 +28,6 @@ struct SettingView: View {
             UserSection
             UserStatus
             Application
-            AdBannerView()
         }
 //        .modifier(Splatfont2(size: 16))
 //        .listStyle(GroupedListStyle())

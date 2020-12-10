@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var user: SalmoniaUserCore
     var body: some View {
-        NavigationView {
-            SalmoniaView()
+        ZStack(alignment: .bottom) {
+            NavigationView {
+                SalmoniaView()
+            }
+            if !user.isUnlock[4] {
+                AdBannerView()
+            }
         }
         .listStyle(GroupedListStyle())
     }

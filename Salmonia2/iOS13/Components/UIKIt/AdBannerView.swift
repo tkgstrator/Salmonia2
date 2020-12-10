@@ -17,7 +17,7 @@ struct AdBannerViewController: UIViewControllerRepresentable {
         #if DEBUG
         view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         #else
-        view.adUnitID = "ca-app-pub-7107468397673752~9578437542"
+        view.adUnitID = "ca-app-pub-7107468397673752/8265355873"
         #endif
         view.rootViewController = viewController
         viewController.view.addSubview(view)
@@ -32,10 +32,7 @@ struct AdBannerViewController: UIViewControllerRepresentable {
 
 struct AdBannerView: View {
     var body: some View {
-        HStack {
-            Spacer()
-            AdBannerViewController().frame(width: 320, height: 50)
-            Spacer()
-        }
+        AdBannerViewController()
+            .frame(width: 320, height: 50)
     }
 }

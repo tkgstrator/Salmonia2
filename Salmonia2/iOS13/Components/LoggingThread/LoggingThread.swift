@@ -63,7 +63,7 @@ struct LoggingThread: View {
             .resizable()
             .frame(width: 80, height: 80)
             .clipShape(Circle())
-            .padding(.bottom)
+            .padding(.bottom, 60)
             .onTapGesture {
             UIApplication.shared.open(URL(string: "https://www.paypal.me/salmonia")!)
         }

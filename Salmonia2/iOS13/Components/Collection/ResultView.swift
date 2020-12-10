@@ -24,6 +24,17 @@ struct ResultView: View {
                         Spacer()
                         ForEach(Range(1 ... result.wave.count)) { idx in
                             VStack(spacing: 0) {
+                                if !result.is_clear && idx == result.failure_wave.value {
+                                    Text(result.failure_reason!)
+                                        .padding(.bottom, 5)
+                                        .modifier(Splatfont2(size: 12))
+                                        .foregroundColor(.cOrange)
+                                        .frame(height: 12)
+                                } else {
+                                    Text("")
+                                        .padding(.bottom, 5)
+                                        .frame(height: 12)
+                                }
                                 ResultWaveView().environmentObject(result.wave[idx - 1])
                                 SpecialUseView(special: result.getSP()[idx - 1])
                             }
@@ -294,7 +305,7 @@ struct ResultView: View {
                                     Text("\(player.boss_kill_counts[id])")
                                     
                                 }
-                                .font(.custom("Splatfont", size: 18))
+                                .font(.custom("Splatfont", size: 16))
                                 .frame(maxWidth: .infinity)
                             }
                         }
@@ -303,10 +314,10 @@ struct ResultView: View {
                 HStack {
                     Text("Score")
                         .frame(width: 50)
-                        .font(.custom("Splatfont", size: 16))
+                        .font(.custom("Splatfont", size: 15))
                     ForEach(result.player, id:\.self) { player in
                         Text(String(player.srpower))
-                            .font(.custom("Splatfont", size: 16))
+                            .font(.custom("Splatfont", size: 15))
                     }
                     .frame(maxWidth: .infinity)
                 }

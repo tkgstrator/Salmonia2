@@ -13,6 +13,7 @@ import RealmSwift
 let realm = try! Realm()
 
 class CrewInfoCore: ObservableObject {
+
     private var token: NotificationToken?
     
     @Published var nsaid: String = ""

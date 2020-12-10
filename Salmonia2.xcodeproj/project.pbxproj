@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0197874F5AEC8957F95F41F7 /* Pods_Salmonia2_Salmonia2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C69011429A37B249AF600929 /* Pods_Salmonia2_Salmonia2UITests.framework */; };
-		100F85D925665E8D0057558A /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 100F85D825665E8D0057558A /* SwiftUICharts */; };
 		1017B8EBF2680C372EDDF670 /* Pods_Salmonia2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9D0B70F54B3519E215C550 /* Pods_Salmonia2.framework */; };
 		1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A025209C7C001B41B0 /* AppDelegate.swift */; };
 		1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A225209C7C001B41B0 /* SceneDelegate.swift */; };
@@ -34,6 +33,9 @@
 		10613B85257F57620000AE30 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10613B84257F57620000AE30 /* WebView.swift */; };
 		10613BCA2580FB170000AE30 /* FeatureProductCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10613BC92580FB170000AE30 /* FeatureProductCore.swift */; };
 		10613BD225818F310000AE30 /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10613BD125818F310000AE30 /* AdBannerView.swift */; };
+		10613C122581A2920000AE30 /* SFSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10613C112581A2920000AE30 /* SFSafariView.swift */; };
+		1063EE122581B7180050F4D0 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1063EE112581B7180050F4D0 /* AchievementView.swift */; };
+		1063EE1B2581B7A40050F4D0 /* AchievementCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1063EE1A2581B7A40050F4D0 /* AchievementCore.swift */; };
 		108456A8257CCCA3006EB397 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108456A7257CCCA3006EB397 /* Global.swift */; };
 		108F2C67257766BB00287900 /* SyncUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108F2C66257766BB00287900 /* SyncUserData.swift */; };
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
@@ -132,6 +134,9 @@
 		10613B84257F57620000AE30 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		10613BC92580FB170000AE30 /* FeatureProductCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureProductCore.swift; sourceTree = "<group>"; };
 		10613BD125818F310000AE30 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
+		10613C112581A2920000AE30 /* SFSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariView.swift; sourceTree = "<group>"; };
+		1063EE112581B7180050F4D0 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
+		1063EE1A2581B7A40050F4D0 /* AchievementCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCore.swift; sourceTree = "<group>"; };
 		108456A7257CCCA3006EB397 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		108F2C66257766BB00287900 /* SyncUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncUserData.swift; sourceTree = "<group>"; };
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
@@ -193,7 +198,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				100F85D925665E8D0057558A /* SwiftUICharts in Frameworks */,
 				10BB350D252182220046CBCA /* StoreKit.framework in Frameworks */,
 				1017B8EBF2680C372EDDF670 /* Pods_Salmonia2.framework in Frameworks */,
 			);
@@ -306,8 +310,19 @@
 				1048631525697630001FDFBD /* CoopShiftCollectionView.swift */,
 				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
 				10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */,
+				10BB34B9252175170046CBCA /* ResultView.swift */,
 			);
 			path = Collection;
+			sourceTree = "<group>";
+		};
+		1063EE162581B7340050F4D0 /* UIKIt */ = {
+			isa = PBXGroup;
+			children = (
+				10613BD125818F310000AE30 /* AdBannerView.swift */,
+				10613C112581A2920000AE30 /* SFSafariView.swift */,
+				10613B84257F57620000AE30 /* WebView.swift */,
+			);
+			path = UIKIt;
 			sourceTree = "<group>";
 		};
 		108F2C6B257766C600287900 /* LoggingThread */ = {
@@ -353,6 +368,7 @@
 		10BB348B252174F60046CBCA /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1063EE1A2581B7A40050F4D0 /* AchievementCore.swift */,
 				10BB3490252174F60046CBCA /* CrewInfoCore.swift */,
 				10613BC92580FB170000AE30 /* FeatureProductCore.swift */,
 				10BB348E252174F60046CBCA /* UserResultCore.swift */,
@@ -383,7 +399,6 @@
 			children = (
 				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
 				10B10C3E252859180025057F /* SalmonStatsView.swift */,
-				10BB34B1252175170046CBCA /* SettingView */,
 				10BB348B252174F60046CBCA /* Core */,
 				10BB34B6252175170046CBCA /* Components */,
 			);
@@ -391,7 +406,7 @@
 			path = Salmonia2/iOS13;
 			sourceTree = SOURCE_ROOT;
 		};
-		10BB34B1252175170046CBCA /* SettingView */ = {
+		10BB34B1252175170046CBCA /* Setting */ = {
 			isa = PBXGroup;
 			children = (
 				10BB34B2252175170046CBCA /* UserListView.swift */,
@@ -399,17 +414,17 @@
 				10BB34B4252175170046CBCA /* UnlockFeatureView.swift */,
 				10EFA39D252398810027209D /* CrewListView.swift */,
 			);
-			path = SettingView;
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		10BB34B6252175170046CBCA /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				10613B84257F57620000AE30 /* WebView.swift */,
-				10613BD125818F310000AE30 /* AdBannerView.swift */,
+				1063EE162581B7340050F4D0 /* UIKIt */,
 				10613B80257F51C60000AE30 /* Collection */,
 				108F2C6B257766C600287900 /* LoggingThread */,
-				10BB34B9252175170046CBCA /* ResultView.swift */,
+				10BB34B1252175170046CBCA /* Setting */,
+				1063EE112581B7180050F4D0 /* AchievementView.swift */,
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
 				10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */,
 				1053967C2524206200132668 /* StageRecordView.swift */,
@@ -465,7 +480,6 @@
 			);
 			name = Salmonia2;
 			packageProductDependencies = (
-				100F85D825665E8D0057558A /* SwiftUICharts */,
 			);
 			productName = Salmonia2;
 			productReference = 1037E39D25209C7C001B41B0 /* Salmonia2.app */;
@@ -704,6 +718,7 @@
 				10BB34BD252175170046CBCA /* UserListView.swift in Sources */,
 				10BB34C0252175170046CBCA /* SalmoniaView.swift in Sources */,
 				105396F425264C2000132668 /* WeaponType.swift in Sources */,
+				1063EE122581B7180050F4D0 /* AchievementView.swift in Sources */,
 				10BB34C4252175170046CBCA /* PlayerView.swift in Sources */,
 				1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */,
 				10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */,
@@ -737,6 +752,7 @@
 				104863112568D0C2001FDFBD /* ShiftRecordCore.swift in Sources */,
 				10BB349B252174F60046CBCA /* UnixTime.swift in Sources */,
 				10BB34A3252174F60046CBCA /* Modifier.swift in Sources */,
+				10613C122581A2920000AE30 /* SFSafariView.swift in Sources */,
 				10BB349D252174F60046CBCA /* UserResultCore.swift in Sources */,
 				10BB34A0252174F60046CBCA /* UserInfoCore.swift in Sources */,
 				10BB34C2252175170046CBCA /* LoggingThread.swift in Sources */,
@@ -745,6 +761,7 @@
 				10BB349A252174F60046CBCA /* Realm.swift in Sources */,
 				10613B85257F57620000AE30 /* WebView.swift in Sources */,
 				10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */,
+				1063EE1B2581B7A40050F4D0 /* AchievementCore.swift in Sources */,
 				105396D825260CEB00132668 /* StageRecordCore.swift in Sources */,
 				105396DD25260D5000132668 /* WaveType.swift in Sources */,
 				10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */,
@@ -953,7 +970,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -980,7 +997,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1138,14 +1155,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		100F85D825665E8D0057558A /* SwiftUICharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 100F85D725665E8C0057558A /* XCRemoteSwiftPackageReference "ChartView" */;
-			productName = SwiftUICharts;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1037E39525209C7C001B41B0 /* Project object */;
 }

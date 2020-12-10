@@ -11,7 +11,8 @@ import URLImage
 struct SalmoniaView: View {
     
     @EnvironmentObject var user: UserInfoCore
-
+    @EnvironmentObject var account: SalmoniaUserCore
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             List  {
@@ -27,7 +28,7 @@ struct SalmoniaView: View {
                     StageRecordView()
                 }
             }
-            Update().padding(.trailing, 20).padding(.bottom, 20)
+            Update().padding(.trailing, 20).padding(.bottom, 60)
         }
         .navigationBarTitle("Salmonia")
 //        .navigationBarItems(leading: Setting, trailing: HStack(spacing: 15) {
@@ -68,10 +69,12 @@ struct SalmoniaView: View {
                 Text("Salmon Stats")
                     .modifier(Splatfont2(size: 16))
             }
-//            NavigationLink(destination: PastCoopShiftView()) {
-//                Text("Coop Shift Rotation")
-//                    .modifier(Splatfont2(size: 16))
-//            }
+            if account.isPurchase {
+                NavigationLink(destination: AchievementView()) {
+                    Text("Achievement")
+                        .modifier(Splatfont2(size: 16))
+                }
+            }
         }
         .buttonStyle(PlainButtonStyle())
     }

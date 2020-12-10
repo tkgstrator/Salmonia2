@@ -35,6 +35,9 @@ struct UserListView: View {
             }
 //            .onDelete(perform: onDelete)
         }
+        .sheet(isPresented: $isVisible) {
+            SFSafariView(url: URL(string: oauthurl)!)
+        }
         .navigationBarTitle("Accounts")
         .modifier(Splatfont(size: 18))
         .navigationBarItems(trailing: Login)
@@ -43,7 +46,13 @@ struct UserListView: View {
     
     private var Login: some View {
         HStack {
-            Button(action: { UIApplication.shared.open(URL(string: oauthurl)!) }) { Text("Add") }
+            Button(action: {
+                if !user.isUnlock[3] {
+                    isVisible.toggle()
+                } else {
+                    UIApplication.shared.open(URL(string: oauthurl)!)
+                }
+            }) { Text("Add") }
             EditButton()
         }
 //            .font(.system(size: 18))
