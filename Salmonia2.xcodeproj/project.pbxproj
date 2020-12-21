@@ -3,12 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0197874F5AEC8957F95F41F7 /* Pods_Salmonia2_Salmonia2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C69011429A37B249AF600929 /* Pods_Salmonia2_Salmonia2UITests.framework */; };
 		1017B8EBF2680C372EDDF670 /* Pods_Salmonia2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9D0B70F54B3519E215C550 /* Pods_Salmonia2.framework */; };
+		101D2BF32590F5820011B794 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BEE2590F5820011B794 /* CryptoSwift.framework */; };
+		101D2BF42590F5820011B794 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BEF2590F5820011B794 /* Realm.framework */; };
+		101D2BF52590F5820011B794 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF02590F5820011B794 /* SwiftyStoreKit.framework */; };
+		101D2BF62590F5820011B794 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF12590F5820011B794 /* SwiftyJSON.framework */; };
+		101D2BF72590F5820011B794 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF22590F5820011B794 /* Alamofire.framework */; };
 		1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A025209C7C001B41B0 /* AppDelegate.swift */; };
 		1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A225209C7C001B41B0 /* SceneDelegate.swift */; };
 		1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A425209C7C001B41B0 /* ContentView.swift */; };
@@ -70,7 +75,6 @@
 		10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BB252175170046CBCA /* CoopShiftView.swift */; };
 		10BB34C6252175170046CBCA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BC252175170046CBCA /* LoadingView.swift */; };
 		10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB350025217EFF0046CBCA /* CoopShiftCore.swift */; };
-		10BB350D252182220046CBCA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BB350C252182220046CBCA /* StoreKit.framework */; };
 		10E414B825679DE4006E28D7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E414B725679DE4006E28D7 /* Log.swift */; };
 		10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA355252191340027209D /* SalmoniaUserCore.swift */; };
 		10EFA35E2521DCD00027209D /* ShiftStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */; };
@@ -102,6 +106,11 @@
 
 /* Begin PBXFileReference section */
 		0B9D0B70F54B3519E215C550 /* Pods_Salmonia2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Salmonia2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		101D2BEE2590F5820011B794 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
+		101D2BEF2590F5820011B794 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		101D2BF02590F5820011B794 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
+		101D2BF12590F5820011B794 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		101D2BF22590F5820011B794 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		1037E39D25209C7C001B41B0 /* Salmonia2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Salmonia2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1037E3A025209C7C001B41B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1037E3A225209C7C001B41B0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,7 +207,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10BB350D252182220046CBCA /* StoreKit.framework in Frameworks */,
+				101D2BF32590F5820011B794 /* CryptoSwift.framework in Frameworks */,
+				101D2BF42590F5820011B794 /* Realm.framework in Frameworks */,
+				101D2BF52590F5820011B794 /* SwiftyStoreKit.framework in Frameworks */,
+				101D2BF62590F5820011B794 /* SwiftyJSON.framework in Frameworks */,
+				101D2BF72590F5820011B794 /* Alamofire.framework in Frameworks */,
 				1017B8EBF2680C372EDDF670 /* Pods_Salmonia2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,16 +382,16 @@
 			isa = PBXGroup;
 			children = (
 				1063EE1A2581B7A40050F4D0 /* AchievementCore.swift */,
+				10BB350025217EFF0046CBCA /* CoopShiftCore.swift */,
 				10BB3490252174F60046CBCA /* CrewInfoCore.swift */,
 				10613BC92580FB170000AE30 /* FeatureProductCore.swift */,
-				10BB348E252174F60046CBCA /* UserResultCore.swift */,
-				10F2825B2530B58700D7B2BE /* WaveResultCore.swift */,
-				10BB3491252174F60046CBCA /* UserInfoCore.swift */,
-				10EFA3682521DE6E0027209D /* UserStatsCore.swift */,
-				10BB350025217EFF0046CBCA /* CoopShiftCore.swift */,
 				104863102568D0C2001FDFBD /* ShiftRecordCore.swift */,
 				10EFA355252191340027209D /* SalmoniaUserCore.swift */,
 				105396D725260CEA00132668 /* StageRecordCore.swift */,
+				10EFA3682521DE6E0027209D /* UserStatsCore.swift */,
+				10BB3491252174F60046CBCA /* UserInfoCore.swift */,
+				10BB348E252174F60046CBCA /* UserResultCore.swift */,
+				10F2825B2530B58700D7B2BE /* WaveResultCore.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -440,6 +453,11 @@
 		12C17511674C0BC2989472F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				101D2BF22590F5820011B794 /* Alamofire.framework */,
+				101D2BEE2590F5820011B794 /* CryptoSwift.framework */,
+				101D2BEF2590F5820011B794 /* Realm.framework */,
+				101D2BF12590F5820011B794 /* SwiftyJSON.framework */,
+				101D2BF02590F5820011B794 /* SwiftyStoreKit.framework */,
 				10BB350C252182220046CBCA /* StoreKit.framework */,
 				0B9D0B70F54B3519E215C550 /* Pods_Salmonia2.framework */,
 				C69011429A37B249AF600929 /* Pods_Salmonia2_Salmonia2UITests.framework */,
@@ -473,6 +491,7 @@
 				1037E39A25209C7C001B41B0 /* Frameworks */,
 				1037E39B25209C7C001B41B0 /* Resources */,
 				42C0E994351A40405C8F57C8 /* [CP] Embed Pods Frameworks */,
+				101D2BEA2590F4970011B794 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -558,7 +577,6 @@
 			);
 			mainGroup = 1037E39425209C7C001B41B0;
 			packageReferences = (
-				100F85D725665E8C0057558A /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 1037E39E25209C7C001B41B0 /* Products */;
 			projectDirPath = "";
@@ -607,6 +625,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		101D2BEA2590F4970011B794 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
 		11E0F314FC091314411EF74B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -970,16 +1011,20 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Salmonia2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -997,17 +1042,21 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = Salmonia2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1144,17 +1193,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		100F85D725665E8C0057558A /* XCRemoteSwiftPackageReference "ChartView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AppPear/ChartView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 1037E39525209C7C001B41B0 /* Project object */;
 }

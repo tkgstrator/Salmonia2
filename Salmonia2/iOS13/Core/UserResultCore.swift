@@ -12,9 +12,8 @@ import RealmSwift
 
 class UserResultCore: ObservableObject {
     private var token: NotificationToken?
-//    private var realm = try! Realm()
 
-    @Published var results:  Results<CoopResultsRealm> = try! Realm().objects(CoopResultsRealm.self)
+    @Published var results:  Results<CoopResultsRealm> = realm.objects(CoopResultsRealm.self)
     
     func update(_ golden_eggs: Int, _ stage: [Int]) {
         // 金イクラ数指定が0のときはplay_timeでソーティングする

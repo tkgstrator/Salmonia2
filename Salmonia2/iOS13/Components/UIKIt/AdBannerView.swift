@@ -12,6 +12,8 @@ import GoogleMobileAds
 struct AdBannerViewController: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
         let view = GADBannerView(adSize: kGADAdSizeBanner)
         let viewController = UIViewController()
         #if DEBUG

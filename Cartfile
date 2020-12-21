@@ -1,0 +1,5 @@
+github "SwiftyJSON/SwiftyJSON"
+github "krzyzanowskim/CryptoSwift"
+github "Alamofire/Alamofire"
+github "realm/realm-cocoa"
+github "bizz84/SwiftyStoreKit"

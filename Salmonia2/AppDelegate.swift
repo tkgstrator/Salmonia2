@@ -13,10 +13,12 @@ import SwiftyStoreKit
 import UserNotifications
 import Firebase
 import FirebaseMessaging
+import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
+    let isUnlock = [false, false, false, false, false, false]
     func registerForPushNotifications() {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.delegate = self
@@ -65,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         try? getXProduceVersion()
         FirebaseApp.configure()
         registerForPushNotifications()
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
     }
     
@@ -95,12 +98,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func realmMigration() {
         // データベースのマイグレーション
         var config = Realm.Configuration(
-            schemaVersion: 19,
-            migrationBlock: { migration, oldSchemaVersion in
+            schemaVersion: 20,
+            migrationBlock: { [self] migration, oldSchemaVersion in
                 print(oldSchemaVersion, migration)
-                if (oldSchemaVersion < 19) {
+                if (oldSchemaVersion < 20) {
                     migration.enumerateObjects(ofType: SalmoniaUserRealm.className()) { _, newObject in
-                        newObject!["isUnlock"] = [false, false, false, false, false, false]
+                        newObject!["isUnlock"] = isUnlock
                     }
                 }
                 if (oldSchemaVersion < 16) {
@@ -147,7 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let users = realm.objects(SalmoniaUserRealm.self)
         if users.isEmpty {
             realm.beginWrite()
-            let user = SalmoniaUserRealm(isUnlock: [false, false, false, false, false, false])
+            let user = SalmoniaUserRealm(isUnlock: isUnlock)
             realm.add(user)
             try? realm.commitWrite()
         }

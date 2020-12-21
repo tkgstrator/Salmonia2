@@ -21,7 +21,9 @@ struct ShiftStatsView: View {
                         .modifier(Splatfont2(size: 16))
                         .foregroundColor(.cOrange))
             {
-                ShiftStatsStack(title: "Job Num", value: stats.job_num)
+                NavigationLink(destination: ResultCollectionView()) {
+                    ShiftStatsStack(title: "Job Num", value: stats.job_num)
+                }
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
                 ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)

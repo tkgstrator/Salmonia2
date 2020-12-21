@@ -13,12 +13,18 @@ struct AchievementView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Boss")) {
+            Section(header: Text("Boss")
+                        .font(.custom("Splatfont2", size: 16))
+                        .foregroundColor(.cOrange)
+            ) {
                 ForEach(stats.boss_counts.indices, id:\.self) { idx in
                     BossStack(stats: $stats.boss_counts[idx])
                 }
             }
-            Section(header: Text("Special")) {
+            Section(header: Text("Clear Ratio")
+                        .font(.custom("Splatfont2", size: 16))
+                        .foregroundColor(.cOrange)
+            ) {
                 ForEach(stats.special_clear_ratio.indices, id:\.self) { idx in
                     SpecialStack(stats: $stats.special_clear_ratio[idx])
                 }
