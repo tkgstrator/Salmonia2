@@ -10,7 +10,7 @@ import URLImage
 import RealmSwift
 
 struct ResultCollectionView: View {
-    @ObservedObject var core =  UserResultCore()
+    @ObservedObject var core = UserResultCore()
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
     @State var isEnable: [Bool] = [true, true, true, true, true]
@@ -18,8 +18,8 @@ struct ResultCollectionView: View {
     var body: some View {
         List {
             ForEach(core.results.indices, id:\.self) { idx in
-                NavigationLink(destination: ResultView().environmentObject(core.results[idx])) {
-                    ResultStack().environmentObject(core.results[idx])
+                NavigationLink(destination: ResultView(result: core.results[idx])) {
+                    ResultStack(result: core.results[idx])
                 }
             }
         }
@@ -44,7 +44,7 @@ struct ResultCollectionView: View {
     }
     
     private struct ResultStack: View {
-        @EnvironmentObject var result: CoopResultsRealm
+        @ObservedObject var result: CoopResultsRealm
         
         var body: some View {
             HStack {

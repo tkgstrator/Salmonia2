@@ -13,7 +13,7 @@ import URLImage
 
 struct ShiftStatsView: View {
     @EnvironmentObject var user: SalmoniaUserCore
-    @EnvironmentObject var stats: UserStatsCore
+    @ObservedObject var stats: UserStatsCore
     
     var body: some View {
         List {

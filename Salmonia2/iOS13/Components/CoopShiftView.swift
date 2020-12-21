@@ -15,7 +15,7 @@ struct CoopShiftView: View {
     var body: some View {
         ForEach(phases.data.indices, id:\.self) { idx in
             ZStack {
-                NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phases.data[idx].start_time))) {
+                NavigationLink(destination: ShiftStatsView(stats: UserStatsCore(start_time: phases.data[idx].start_time))) {
                     EmptyView()
                 }
                 .opacity(0.0)

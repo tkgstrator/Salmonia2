@@ -24,6 +24,15 @@ class UserResultCore: ObservableObject {
         }
     }
     
+    // シフトIDを指定して初期化
+    init(start_time: Int) {
+        // 変更があるたびに再読込するだけ
+        token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
+            results = realm.objects(CoopResultsRealm.self).filter("start_time=%@", start_time).sorted(byKeyPath: "play_time", ascending: false)
+        }
+    }
+    
+    // シフトIDを指定せず初期化
     init() {
         // 変更があるたびに再読込するだけ
         token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
