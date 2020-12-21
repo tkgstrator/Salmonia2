@@ -21,9 +21,9 @@ struct ShiftStatsView: View {
                         .modifier(Splatfont2(size: 16))
                         .foregroundColor(.cOrange))
             {
-                NavigationLink(destination: ResultCollectionView()) {
-                    ShiftStatsStack(title: "Job Num", value: stats.job_num)
-                }
+//                NavigationLink(destination: ResultCollectionView(core: )) {
+//                    ShiftStatsStack(title: "Job Num", value: stats.job_num)
+//                }
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
                 ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)
@@ -44,19 +44,19 @@ struct ShiftStatsView: View {
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
                 ShiftStatsStack(title: "Grade Point", value: stats.max_grade_point)
                 if (stats.job_num != nil) {
-                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[0])) {
+                    NavigationLink(destination: ResultView(result: stats.max_results[0])) {
                         ShiftStatsStack(title: "Team Power Eggs", value: stats.max_team_power_eggs)
                     }
-                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[1])) {
+                    NavigationLink(destination: ResultView(result: stats.max_results[1])) {
                         ShiftStatsStack(title: "Team Golden Eggs", value: stats.max_team_golden_eggs)
                     }
-                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[2])) {
+                    NavigationLink(destination: ResultView(result: stats.max_results[2])) {
                         ShiftStatsStack(title: "Power Eggs", value: stats.max_my_power_eggs)
                     }
-                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[3])) {
+                    NavigationLink(destination: ResultView(result: stats.max_results[3])) {
                         ShiftStatsStack(title: "Golden Eggs", value: stats.max_my_golden_eggs)
                     }
-                    NavigationLink(destination: ResultView().environmentObject(stats.max_results[4])) {
+                    NavigationLink(destination: ResultView(result: stats.max_results[4])) {
                         ShiftStatsStack(title: "Boss Defeated", value: stats.max_defeated)
                     }
                 }

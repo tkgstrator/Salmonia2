@@ -81,7 +81,7 @@ private struct StageRecordsView: View {
                 Section(header: Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").modifier(Splatfont2(size: 16)).foregroundColor(.orange)) {
                     ForEach(Range(0 ... 6)) { event in
                         if record.golden_eggs[tide][event] != nil {
-                            NavigationLink(destination: ResultView().environmentObject(record.salmon_id[tide][event]!)) {
+                            NavigationLink(destination: ResultView(result: record.salmon_id[tide][event]!)) {
                                 HStack {
                                     Text("\((EventType.init(event_id: event)?.event_name)!.localized)")
                                     Spacer()

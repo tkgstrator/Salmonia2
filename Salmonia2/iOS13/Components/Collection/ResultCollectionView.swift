@@ -10,7 +10,7 @@ import URLImage
 import RealmSwift
 
 struct ResultCollectionView: View {
-    @ObservedObject var core = UserResultCore()
+    @ObservedObject var core: UserResultCore
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
     @State var isEnable: [Bool] = [true, true, true, true, true]
@@ -151,6 +151,6 @@ struct ResultCollectionView: View {
 
 struct ResultCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ResultCollectionView()
+        ResultCollectionView(core: UserResultCore())
     }
 }

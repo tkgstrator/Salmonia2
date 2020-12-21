@@ -23,7 +23,7 @@ struct WaveCollectionView: View {
     var body: some View {
         List {
             ForEach(core.waves.indices, id:\.self) { idx in
-                NavigationLink(destination: ResultView().environmentObject(core.waves[idx].result.first!)) {
+                NavigationLink(destination: ResultView(result: core.waves[idx].result.first!)) {
                     WaveStack().environmentObject(core.waves[idx])
                 }
             }

@@ -11,7 +11,7 @@ import RealmSwift
 import URLImage
 
 struct ResultView: View {
-    @EnvironmentObject var result: CoopResultsRealm
+    @ObservedObject var result: CoopResultsRealm
     @State var isVisible: Bool = true
     @State var isEnable: Bool = false
     
