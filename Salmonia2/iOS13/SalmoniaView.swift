@@ -115,13 +115,6 @@ struct SalmoniaView: View {
 //        .buttonStyle(PlainButtonStyle())
 //    }
 
-    private var Setting: some View {
-        NavigationLink(destination: SettingView()){
-            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/bb035c04e62c044139986540e6c3b8b3.png")!) { image in image.renderingMode(.template).resizable() }
-                .frame(width: 30, height: 30).foregroundColor(.white)
-        }
-    }
-    
     struct Update: View {
         @GestureState var isLongPress = false
         @State var isComplete = false

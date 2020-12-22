@@ -45,7 +45,8 @@ struct CrewListView: View {
         NavigationLink(destination: CrewSearchView()){
             ZStack {
                 Circle().frame(width: 60, height: 60).foregroundColor(.blue)
-                Image(systemName: "plus").resizable().aspectRatio(contentMode: .fit).frame(width: 30)
+                Image(systemName: "plus")
+                    .Modifier()
             }
         }.buttonStyle(PlainButtonStyle())
     }

@@ -23,6 +23,8 @@
 "Sync Username" = "Update Usename";
 "Import Results" = "Import Results";
 "Application" = "Application";
+"Free user" = "Free";
+"Pro user" = "Pro";
 "Update" = "Update";
 "Unlock" = "Unlock";
 "X-Product Version" = "X-Product Version";
@@ -37,7 +39,6 @@
 "Monthly Pass" = "Monthly Pass";
 "Future Rotation" = "Future Rotation";
 "Grizzco Weapons" = "Grizzco Weapons";
-"Hidden Feature" = "Hidden Feature";
 "$3.99" = "$3.99";
 
 // Settings->Feature's description

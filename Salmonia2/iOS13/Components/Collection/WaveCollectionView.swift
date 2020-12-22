@@ -24,7 +24,7 @@ struct WaveCollectionView: View {
         List {
             ForEach(core.waves.indices, id:\.self) { idx in
                 NavigationLink(destination: ResultView(result: core.waves[idx].result.first!)) {
-                    WaveStack().environmentObject(core.waves[idx])
+                    WaveStack(wave: core.waves[idx])
                 }
             }
         }
@@ -34,9 +34,10 @@ struct WaveCollectionView: View {
     
     var filterButton: some View {
         HStack {
-            Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
-                isVisible.toggle()
-            }.sheet(isPresented: $isVisible) {
+            Image(systemName: "magnifyingglass")
+                .Modifier()
+                .onTapGesture() { isVisible.toggle()}
+                .sheet(isPresented: $isVisible) {
                 WaveFilterView
             }
         }
@@ -105,18 +106,18 @@ struct WaveCollectionView: View {
     }
     
     struct WaveStack: View {
-        @EnvironmentObject var data: WaveDetailRealm
+        @ObservedObject var wave: WaveDetailRealm
 
         var body: some View {
             HStack {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Text((StageType.init(stage_id: data.result.first!.stage_id)?.stage_name!.localized)!)
-                        Text(data.water_level!.localized)
+                        Text((StageType.init(stage_id: wave.result.first!.stage_id)?.stage_name!.localized)!)
+                        Text(wave.water_level!.localized)
                     }
                     .modifier(Splatfont2(size: 14))
                     .foregroundColor(.yellow)
-                    Text(data.event_type!.localized)
+                    Text(wave.event_type!.localized)
                 }
                 .modifier(Splatfont2(size: 16))
                 // ブキとか？
@@ -126,12 +127,12 @@ struct WaveCollectionView: View {
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
-                        Text("x\(data.golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
+                        Text("x\(wave.golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
                     }
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
-                        Text("x\(data.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
+                        Text("x\(wave.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
                     }
                 }
                 .frame(width: 80)

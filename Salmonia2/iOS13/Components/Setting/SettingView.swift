@@ -49,7 +49,7 @@ struct SettingView: View {
                 Text("X-Product Version")
                 Spacer()
                 Text("\(user.isVersion)")
-            }
+            }.onLongPressGesture { user.isPurchase.toggle() }
             HStack {
                 Text("Version")
                 Spacer()
@@ -77,6 +77,11 @@ struct SettingView: View {
                 Text("laravel session")
                 Spacer()
                 Text("\((user.api_token != nil ? "Registered" : "Unregistered").localized)")
+            }
+            HStack {
+                Text("User type")
+                Spacer()
+                Text("\((user.isPurchase ? "Pro user" : "Free user").localized)")
             }
         }
         .modifier(Splatfont2(size: 16))

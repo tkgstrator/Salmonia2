@@ -59,19 +59,14 @@ struct ResultView: View {
     
     private var Button: some View {
         HStack {
-            if isVisible {
-                Image(systemName: "person.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30)
-                    .onTapGesture() {
-                        isVisible.toggle()
-                    }
-            } else {
-                Image(systemName: "person.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30)
-                    .foregroundColor(.gray)
-                    .onTapGesture() {
-                        isVisible.toggle()
-                    }
-            }
-            Image(systemName: "info.circle.fill").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
+            Image(systemName: "person.circle.fill")
+                .Modifier(isVisible)
+                .onTapGesture() {
+                    isVisible.toggle()
+                }
+            Image(systemName: "info.circle.fill")
+                .Modifier()
+                .onTapGesture() {
                 isEnable.toggle()
             }.sheet(isPresented: $isEnable) {
                 ResultDetailView(isVisible: $isVisible).environmentObject(result)

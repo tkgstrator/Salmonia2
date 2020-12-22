@@ -14,12 +14,13 @@ struct ResultCollectionView: View {
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
     @State var isEnable: [Bool] = [true, true, true, true, true]
+    @State var isPersonal: Bool = false
     
     var body: some View {
         List {
             ForEach(core.results.indices, id:\.self) { idx in
                 NavigationLink(destination: ResultView(result: core.results[idx])) {
-                    ResultStack(result: core.results[idx])
+                    ResultStack(result: core.results[idx], isPersonal: $isPersonal)
                 }
             }
         }
@@ -29,14 +30,18 @@ struct ResultCollectionView: View {
     
     private var AddButton: some View {
         HStack(spacing: 15) {
-            NavigationLink(destination: LoadingView())
-            {
-                URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!) { image in image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
-                    .frame(width: 30, height: 30)
-            }
-            Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
-                self.isVisible.toggle()
-            }.sheet(isPresented: $isVisible) {
+//            NavigationLink(destination: LoadingView())
+//            {
+//                URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!) { image in image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
+//                    .frame(width: 30, height: 30)
+//            }
+            Image(systemName: "person.circle.fill")
+                .Modifier(isPersonal)
+                .onTapGesture() { isPersonal.toggle() }
+            Image(systemName: "magnifyingglass")
+                .Modifier()
+                .onTapGesture() { isVisible.toggle() }
+                .sheet(isPresented: $isVisible) {
                 ResultFilterView(core: core, sliderValue: $sliderValue, isEnable: $isEnable)
             }
         }
@@ -45,6 +50,7 @@ struct ResultCollectionView: View {
     
     private struct ResultStack: View {
         @ObservedObject var result: CoopResultsRealm
+        @Binding var isPersonal: Bool
         
         var body: some View {
             HStack {
@@ -68,8 +74,7 @@ struct ResultCollectionView: View {
                 }
                 .modifier(Splatfont(size: 16))
                 .frame(minWidth: 80)
-                // ブキとか？
-                // 金イクラ数とかの情報（イカリング2準拠スタイル）
+                
                 Text(String(result.danger_rate)+"%")
                     .font(.custom("Splatfont", size: 16))
                 Spacer()
@@ -77,12 +82,20 @@ struct ResultCollectionView: View {
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
-                        Text("x\(result.golden_eggs)").frame(width: 50, height: 16, alignment: .leading)
+                        if isPersonal {
+                            Text("x\(result.player.first!.golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
+                        } else {
+                            Text("x\(result.golden_eggs)").frame(width: 50, height: 16, alignment: .leading)
+                        }
                     }
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
                             .frame(width: 20, height: 20)
-                        Text("x\(result.power_eggs)").frame(width: 50, height: 16, alignment: .leading)
+                        if isPersonal {
+                            Text("x\(result.player.first!.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
+                        } else {
+                            Text("x\(result.power_eggs)").frame(width: 50, height: 16, alignment: .leading)
+                        }
                     }
                 }
                 .frame(width: 80)

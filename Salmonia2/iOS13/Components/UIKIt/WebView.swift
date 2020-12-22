@@ -154,7 +154,9 @@ struct WebBrowser: View {
                 //                notification(title: .failure, message: .laravel)
             }
         }) {
-            Image(systemName: "snow").resizable().foregroundColor(Color.blue).scaledToFit().frame(width: 25, height: 25)
+            Image(systemName: "snow")
+                .Modifier()
+                .foregroundColor(.blue)
         }
     }
     

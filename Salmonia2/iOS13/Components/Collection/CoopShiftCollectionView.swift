@@ -81,7 +81,9 @@ struct PastCoopShiftView: View {
     
     private var FilterButton: some View {
         HStack {
-            Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30).onTapGesture() {
+            Image(systemName: "magnifyingglass")
+                .Modifier()
+                .onTapGesture() {
                 isVisible.toggle()
             }.sheet(isPresented: $isVisible) {
                 CoopFilterView(phase: phase, isEnable: $isEnable, isPlayed: $isPlayed, isTime: $isTime)

@@ -21,9 +21,14 @@ struct ShiftStatsView: View {
                         .modifier(Splatfont2(size: 16))
                         .foregroundColor(.cOrange))
             {
-//                NavigationLink(destination: ResultCollectionView(core: )) {
-//                    ShiftStatsStack(title: "Job Num", value: stats.job_num)
-//                }
+                // 課金しているユーザだけが個別のリザルトにジャンプできる
+                if user.isPurchase {
+                    NavigationLink(destination: ResultCollectionView(core: UserResultCore(start_time: stats.schedule!))) {
+                        ShiftStatsStack(title: "Job Num", value: stats.job_num)
+                    }
+                } else {
+                    ShiftStatsStack(title: "Job Num", value: stats.job_num)
+                }
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
                 ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)

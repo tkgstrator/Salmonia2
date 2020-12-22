@@ -11,6 +11,17 @@ import URLImage
 import RealmSwift
 import WebKit
 
+
+extension Image {
+    func Modifier(_ isEnabled: Bool = true) -> some View {
+        self
+            .resizable()
+            .scaledToFit()
+            .foregroundColor(isEnabled ? .white : .cGray)
+            .frame(width: 25, height: 25)
+    }
+}
+
 struct Splatfont: ViewModifier {
     let size: CGFloat
     
