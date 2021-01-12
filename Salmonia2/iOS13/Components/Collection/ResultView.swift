@@ -25,17 +25,17 @@ struct ResultView: View {
                         ForEach(Range(1 ... result.wave.count)) { idx in
                             VStack(spacing: 0) {
                                 if !result.is_clear && idx == result.failure_wave.value {
-                                    Text(result.failure_reason!)
+                                    Text(result.failure_reason!.localized)
                                         .padding(.bottom, 5)
-                                        .modifier(Splatfont2(size: 12))
+                                        .modifier(Splatfont2(size: 14))
                                         .foregroundColor(.cOrange)
                                         .frame(height: 12)
                                 } else {
                                     Text("")
                                         .padding(.bottom, 5)
-                                        .frame(height: 12)
+                                        .frame(height: 14)
                                 }
-                                ResultWaveView().environmentObject(result.wave[idx - 1])
+                                ResultWaveView(wave: result.wave[idx - 1])
                                 SpecialUseView(special: result.getSP()[idx - 1])
                             }
                             if idx != result.wave.count {
@@ -120,12 +120,15 @@ struct ResultView: View {
     
     
     private struct ResultWaveView: View {
-        @EnvironmentObject var wave: WaveDetailRealm
+        @ObservedObject var wave: WaveDetailRealm
         
         var body: some View {
             VStack {
                 VStack {
-                    Text("WAVE")
+                    HStack {
+                        Text("WAVE")
+                        Text("\(wave.result.first!.wave.index(of: wave)! + 1)")
+                    }
                         .foregroundColor(.black)
                         .font(.custom("Splatfont2", size: 16))
                     HStack(spacing: 0) {
@@ -133,7 +136,7 @@ struct ResultView: View {
                         Text("/")
                         Text("\(wave.quota_num)")
                     }
-                    .frame(height: 30)
+                    .frame(height: 34)
                     .frame(minWidth: 100)
                     .foregroundColor(.white)
                     .background(Color.init(UIColor.init("2A270B")))

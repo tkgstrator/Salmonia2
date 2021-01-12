@@ -10,6 +10,7 @@ import SwiftUI
 import RealmSwift
 import SplatNet2
 import SwiftyJSON
+import OAuthSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -92,6 +93,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         guard let url = URLContexts.first?.url else { return }
+        
         guard let session_token_code = url.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { return }
         let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
         

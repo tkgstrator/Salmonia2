@@ -5,14 +5,22 @@
 //  Created by devonly on 2020-09-22.
 //
 
+import UIKit
 import SwiftUI
 import URLImage
+import BetterSafariView
+import OAuthSwift
+import SwifteriOS
+import SafariServices
+import AuthenticationServices
 
 struct SalmoniaView: View {
     
     @EnvironmentObject var user: UserInfoCore
     @EnvironmentObject var account: SalmoniaUserCore
-    
+    @State var isVisible: Bool = false
+    @State var isSafari: Bool = false
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             List  {
@@ -64,10 +72,31 @@ struct SalmoniaView: View {
                 Text("Wave Results")
                     .modifier(Splatfont2(size: 16))
             }
-            NavigationLink(destination: WebBrowser(address: "https://salmon-stats-api.yuki.games/auth/twitter"))
-            {
-                Text("Salmon Stats")
-                    .modifier(Splatfont2(size: 16))
+            if account.api_token != nil {
+                Button(action: {
+                    isVisible.toggle()
+                }) {
+                    HStack {
+                        Text("Salmon Stats")
+                            .modifier(Splatfont2(size: 16))
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(Color(.tertiaryLabel))
+                            .font(.system(size: 14, weight: .semibold))
+                    }
+                    .background(Color.white.opacity(0.0001))
+                }
+                .safariView(isPresented: $isVisible) {
+                    SafariView(url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter")!, configuration: SafariView.Configuration(
+                        entersReaderIfAvailable: false,
+                        barCollapsingEnabled: true
+                    ))
+                }
+            } else {
+                NavigationLink(destination: WebBrowser(address: "https://salmon-stats-api.yuki.games/auth/twitter")) {
+                    Text("Salmon Stats")
+                        .modifier(Splatfont2(size: 16))
+                }
             }
             if account.isPurchase {
                 NavigationLink(destination: AchievementView()) {

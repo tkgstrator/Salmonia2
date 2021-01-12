@@ -30,9 +30,9 @@ struct UnlockFeatureView: View {
                 Toggle(isOn: $user.isUnlock[2]) {
                     Text("Force Update")
                 }
-                Toggle(isOn: $user.isUnlock[3]) {
-                    Text("Login in Safari")
-                }
+//                Toggle(isOn: $user.isUnlock[3]) {
+//                    Text("Login in Safari")
+//                }
                 Toggle(isOn: $user.isUnlock[4]) {
                     Text("Disable Ads")
                 }
@@ -81,6 +81,7 @@ struct UnlockFeatureView: View {
                             "localizedDescription": product.localizedDescription,
                             "localizedPrice": product.localizedPrice!
                         ]
+                        print(product.localizedTitle)
                         realm.beginWrite()
                         realm.create(FeatureProductRealm.self, value: value, update: .all)
                         try? realm.commitWrite()

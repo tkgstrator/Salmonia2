@@ -49,12 +49,14 @@ struct SettingView: View {
                 Text("X-Product Version")
                 Spacer()
                 Text("\(user.isVersion)")
-            }.onLongPressGesture { user.isPurchase.toggle() }
+            }
+//            .onLongPressGesture { user.isPurchase.toggle() }
             HStack {
                 Text("Version")
                 Spacer()
                 Text("\(version)")
-            }.onLongPressGesture { isImported() }
+            }
+            .onLongPressGesture { isImported() }
         }
         .modifier(Splatfont2(size: 16))
     }

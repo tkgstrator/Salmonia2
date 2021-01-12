@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "9e0328127dfb801cefe8ac53a13c0c90a7770448",
+          "version": "5.4.0"
+        }
+      },
+      {
+        "package": "SplatNet2",
+        "repositoryURL": "https://github.com/tkgstrator/SplatNet2",
+        "state": {
+          "branch": null,
+          "revision": "4171d8fd06449508196ec8c7fcb87bd0920b7eba",
+          "version": "0.1.6"
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "https://github.com/SwiftyJSON/SwiftyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
+          "version": "5.0.0"
+        }
+      },
+      {
+        "package": "URLImage",
+        "repositoryURL": "https://github.com/dmytro-anokhin/url-image",
+        "state": {
+          "branch": null,
+          "revision": "520a997733560d1eaa6cc60c445807e7db1984c6",
+          "version": "2.1.12"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

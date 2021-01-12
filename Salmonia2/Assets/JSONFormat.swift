@@ -104,11 +104,12 @@ public class JF {
         // 辞書型配列にガンガン追加していく
         let grade_point: Int? = my_results["grade_point"].int
         let clear_wave: Int = response["clear_waves"].intValue
+        let fail_reason_id: Int? = response["fail_reason_id"].int
         
         dict.updateValue(end_time, forKey: "end_time") // シフトからとってこなきゃいけないのでめんどくさい
         dict.updateValue(stage_id, forKey: "stage_id") // ないんだが？？
         dict.updateValue(clear_wave == 3 ? nil : clear_wave + 1, forKey: "failure_wave")
-        dict.updateValue(reasons[clear_wave]!, forKey: "failure_reason")
+        dict.updateValue(fail_reason_id == nil ? nil : reasons[fail_reason_id!], forKey: "failure_reason")
         dict.updateValue(getGradePoint(grade_point), forKey: "grade_point") // クソ適当（後で直す
         dict.updateValue(getGradeID(grade_point), forKey: "grade_id") // 求めてみた
         dict.updateValue(play_time, forKey: "play_time")

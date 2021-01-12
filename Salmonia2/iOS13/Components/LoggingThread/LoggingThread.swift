@@ -51,8 +51,8 @@ struct LoggingThread: View {
             }
             .font(.custom("Roboto Mono", size: 22))
             .padding(.horizontal, 16)
-            Spacer()
-            Paypal
+//            Spacer()
+//            Paypal
         }
         .navigationBarTitle("Logging Thread", displayMode: .large)
         .navigationBarBackButtonHidden(log.isLock)

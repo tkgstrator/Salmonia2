@@ -3,3 +3,5 @@ github "krzyzanowskim/CryptoSwift"
 github "Alamofire/Alamofire"
 github "realm/realm-cocoa"
 github "bizz84/SwiftyStoreKit"
+github "OAuthSwift/OAuthSwift" ~> 2.0.0
+github "mattdonnelly/Swifter"

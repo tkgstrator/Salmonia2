@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import SafariServices
 import URLImage
 import RealmSwift
+import BetterSafariView
 
 struct UserListView: View {
     
@@ -35,8 +37,11 @@ struct UserListView: View {
             }
 //            .onDelete(perform: onDelete)
         }
-        .sheet(isPresented: $isVisible) {
-            SFSafariView(url: URL(string: oauthurl)!)
+        .safariView(isPresented: $isVisible) {
+            SafariView(url: URL(string: oauthurl)!, configuration: SafariView.Configuration(
+                entersReaderIfAvailable: false,
+                barCollapsingEnabled: true
+            ))
         }
         .navigationBarTitle("Accounts")
         .modifier(Splatfont(size: 18))
@@ -44,7 +49,7 @@ struct UserListView: View {
         .environment(\.editMode, $editMode)
     }
     
-    private var Login: some View {
+    var Login: some View {
         HStack {
             Button(action: {
                 if !user.isUnlock[3] {

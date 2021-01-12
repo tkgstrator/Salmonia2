@@ -83,6 +83,9 @@
 "low" = "Low tide";
 "normal" = "Normal";
 "high" = "High tide";
+"time_limit" = "Time Up!";
+"wipe_out" = "DEFEAT!";
+"WAVE" = "Wave";
 
 // Stats
 "Total" = "Total";

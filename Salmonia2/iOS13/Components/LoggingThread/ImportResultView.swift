@@ -72,11 +72,23 @@ struct ImportResultView: View {
                                         for (idx, (_, result)) in results.enumerated() {
                                             // 重複チェックを行う
                                             let start_time: Int = UnixTime.timestampFromDate(date: result["start_at"].stringValue)
+                                            log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
                                             if time.filter({ abs($0 - start_time) <= 10 }).isEmpty {
-                                                log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
                                                 realm.create(CoopResultsRealm.self, value: JF.FromSalmonStats(nsaid: nsaid, result), update: .modified)
                                             } else {
-                                                log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
+                                                // 失敗理由がバグっているので修正する
+                                                let reasons: [Int: String?] = [
+                                                    0: nil,
+                                                    1: "wipe_out",
+                                                    2: "time_limit",
+                                                    3: nil
+                                                ]
+                                                
+                                                let play_time: Int = UnixTime.timestampFromDate(date: result["start_at"].stringValue)
+                                                let oldresult: CoopResultsRealm = realm.objects(CoopResultsRealm.self).filter("play_time=%@", play_time).first!
+                                                let failure_reason_id: Int = result["fail_reason_id"].int ?? 0
+                                                let failure_reason: String? = reasons[failure_reason_id]!
+                                                oldresult.failure_reason = failure_reason
                                             }
                                             nsaids.append(contentsOf: result["members"].map({ $0.1.stringValue }))
                                              Thread.sleep(forTimeInterval: 0.01)
