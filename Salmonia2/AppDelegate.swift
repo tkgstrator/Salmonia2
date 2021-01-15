@@ -155,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             try? realm.commitWrite()
         }
         
-        let url = "https://script.google.com/macros/s/AKfycbyzVfi2BXni9V439fFtRAqQSjXzNxiUSKFFNEjQ7VNNQlCfcCXt/exec"
+        var url = "https://salmonia2-api.netlify.app/coop.json"
         // シフト情報を取得する
         AF.request(url, method: .get)
             .validate(statusCode: 200..<300)
@@ -169,10 +169,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         realm.create(CoopShiftRealm.self, value: value as Any, update: .all)
                     }
                     try? realm.commitWrite()
-                case .failure:
+                case .failure(let error):
+                    print(error)
                     break
                 }
             }
+        url = "https://salmonia2-api.netlify.app/version.json"
         // X-Product Versionを取得する
         AF.request(url, method: .post)
             .validate(statusCode: 200..<300)

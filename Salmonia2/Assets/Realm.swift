@@ -170,6 +170,12 @@ class PlayerResultsRealm: Object {
 }
 
 extension PlayerResultsRealm {
+    var count: Int {
+        return realm?.objects(PlayerResultsRealm.self).filter("nsaid=%@", self.nsaid!).count ?? 0
+    }
+}
+
+extension PlayerResultsRealm {
     var imageUri: String {
         return realm?.objects(CrewInfoRealm.self).filter("nsaid=%@", self.nsaid!).first?.image ?? "https://raw.githubusercontent.com/tkgstrator/Salmonia2/master/Salmonia2/Assets.xcassets/Default.imageset/default-1.png"
     }

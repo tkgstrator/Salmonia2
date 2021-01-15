@@ -76,21 +76,7 @@ struct SalmoniaView: View {
                 Button(action: {
                     isVisible.toggle()
                 }) {
-                    HStack {
-                        Text("Salmon Stats")
-                            .modifier(Splatfont2(size: 16))
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .foregroundColor(Color(.tertiaryLabel))
-                            .font(.system(size: 14, weight: .semibold))
-                    }
-                    .background(Color.white.opacity(0.0001))
-                }
-                .safariView(isPresented: $isVisible) {
-                    SafariView(url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter")!, configuration: SafariView.Configuration(
-                        entersReaderIfAvailable: false,
-                        barCollapsingEnabled: true
-                    ))
+                    BSafariView(isPresented: $isVisible, title: "Salmon Stats", url: "https://salmon-stats-api.yuki.games/auth/twitter")
                 }
             } else {
                 NavigationLink(destination: WebBrowser(address: "https://salmon-stats-api.yuki.games/auth/twitter")) {

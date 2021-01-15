@@ -46,7 +46,7 @@ struct ImportResultView: View {
                         }
                     }
                     
-                    guard let iksm_session: String = accounts.first?.iksm_session else { return }
+//                    guard let iksm_session: String = accounts.first?.iksm_session else { return }
                     let time: [Int] = Array(Set(realm.objects(CoopResultsRealm.self).map({ $0.play_time })))
                     
                     // 全ユーザに対してリザルト取得（重いぞ）
@@ -85,7 +85,7 @@ struct ImportResultView: View {
                                                 ]
                                                 
                                                 let play_time: Int = UnixTime.timestampFromDate(date: result["start_at"].stringValue)
-                                                let oldresult: CoopResultsRealm = realm.objects(CoopResultsRealm.self).filter("play_time=%@", play_time).first!
+                                                let oldresult: CoopResultsRealm = realm.objects(CoopResultsRealm.self).filter("play_time BETWEEN %@", [play_time - 10, play_time + 10]).first!
                                                 let failure_reason_id: Int = result["fail_reason_id"].int ?? 0
                                                 let failure_reason: String? = reasons[failure_reason_id]!
                                                 oldresult.failure_reason = failure_reason

@@ -204,18 +204,31 @@ struct ResultView: View {
                         }
                     }.frame(height: 30)
                     HStack {
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
-                            .frame(width: 20, height: 20)
-                        Text(String(player.golden_ikura_num)).frame(width: 30)
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
-                            .frame(width: 20, height: 20)
-                        Text(String(player.ikura_num)).frame(width: 48)
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/c003ffe0a5580e4c8b1bc9df1e0a30d2.png")!) { image in image.resizable()}
-                            .frame(width: 50, height: 20)
-                        Text(String(player.help_count)).frame(width: 30)
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5d447dcfcb3b0c31ffb2efca58a6e799.png")!) { image in image.resizable()}
-                            .frame(width: 50, height: 20)
-                        Text(String(player.dead_count)).frame(width: 30)
+                        Spacer()
+                        Group {
+                            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
+                                .frame(width: 20, height: 20)
+                            Text(String(player.golden_ikura_num)).frame(width: 30)
+                        }
+                        Spacer()
+                        Group {
+                            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
+                                .frame(width: 20, height: 20)
+                            Text(String(player.ikura_num)).frame(width: 48)
+                        }
+                        Spacer()
+                        Group {
+                            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/c003ffe0a5580e4c8b1bc9df1e0a30d2.png")!) { image in image.resizable()}
+                                .frame(width: 50, height: 20)
+                            Text(String(player.help_count)).frame(width: 30)
+                        }
+                        Spacer()
+                        Group {
+                            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5d447dcfcb3b0c31ffb2efca58a6e799.png")!) { image in image.resizable()}
+                                .frame(width: 50, height: 20)
+                            Text(String(player.dead_count)).frame(width: 30)
+                        }
+                        Spacer()
                     }.frame(height: 24)
                 }
                 .font(.custom("Splatfont2", size: 18))
@@ -312,14 +325,23 @@ struct ResultView: View {
                 HStack {
                     Text("Score")
                         .frame(width: 50)
-                        .font(.custom("Splatfont", size: 15))
+                        .font(.custom("Splatfont", size: 14))
                     ForEach(result.player, id:\.self) { player in
                         Text(String(player.srpower))
-                            .font(.custom("Splatfont", size: 15))
+                            .font(.custom("Splatfont", size: 16))
                     }
                     .frame(maxWidth: .infinity)
                 }
-//                .modifier(Splatfont(size: 12))
+                HStack {
+                    Text("Match")
+                        .frame(width: 50)
+                        .font(.custom("Splatfont", size: 14))
+                    ForEach(result.player, id:\.self) { player in
+                        Text(String(player.count))
+                            .font(.custom("Splatfont", size: 16))
+                    }
+                    .frame(maxWidth: .infinity)
+                }
             }
         }
 

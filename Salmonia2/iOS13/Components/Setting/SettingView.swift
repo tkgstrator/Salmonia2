@@ -10,28 +10,49 @@ import SplatNet2
 import RealmSwift
 import WebKit
 import SwiftyJSON
-import MobileCoreServices
+//import MobileCoreServices
 import Alamofire
 import UserNotifications
-import AVKit
-import SafariServices
+//import AVKit
+//import SafariServices
+import BetterSafariView
 
 struct SettingView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var core: UserResultCore
-    @State var isVisible: Bool = false
-    
+    @State var isPresented: [Bool] = [false, false, false]
+    @State var online: Int? = nil
+    @State var idle: Int? = nil
+    @State var ver: String? = nil
+    @State var timeRemaining: Int = 30
+
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     let version: String = "\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!))(\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)))"
     
     var body: some View {
         List {
             UserSection
             UserStatus
+            LanPlayStatus
             Application
         }
-//        .modifier(Splatfont2(size: 16))
-//        .listStyle(GroupedListStyle())
         .navigationBarTitle("Settings")
+    }
+    
+    private func getLanPlayStatus() {
+        let url = "https://script.google.com/macros/s/AKfycbzcfuAotwS7eAD9VDSZ62SRXYyH2k5AK4mpuEp1EkEykGCnJOothFxv/exec"
+        AF.request(url, method: .get)
+            .responseJSON() { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    online = json["online"].intValue
+                    idle = json["idle"].intValue
+                    ver = json["version"].stringValue
+                case .failure:
+                    break
+                }
+        }
     }
     
     private var Application: some View {
@@ -39,12 +60,8 @@ struct SettingView: View {
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange))
         {
-            HStack {
-                Text("How to use")
-                Spacer()
-            }.onTapGesture {
-                UIApplication.shared.open(URL(string: "https://tkgstrator.work/?p=28236")!)
-            }
+            BSafariView(isPresented: $isPresented[0], title: "How to use", url: "https://tkgstrator.work/?p=28236")
+            BSafariView(isPresented: $isPresented[2], title: "Privacy poricy", url: "https://tkgstrator.work/?page_id=25126")
             HStack {
                 Text("X-Product Version")
                 Spacer()
@@ -67,6 +84,38 @@ struct SettingView: View {
         realm.beginWrite()
         salmonia.isImported = user.isImported
         try? realm.commitWrite()
+    }
+    
+    private var LanPlayStatus: some View {
+        Section(header: Text("LanPlay")
+                    .modifier(Splatfont2(size: 16))
+                    .foregroundColor(.cOrange)) {
+            BSafariView(isPresented: $isPresented[1], title: "What's LanPlay", url: "https://tkgstrator.work/?p=5240")
+            HStack {
+                Text("Online members")
+                Spacer()
+                Text("\(online.value)")
+            }
+            HStack {
+                Text("Idle members")
+                Spacer()
+                Text("\(idle.value)")
+            }
+            HStack {
+                Text("Server version")
+                Spacer()
+                Text("\(ver.value)")
+            }
+        }
+        .onReceive(timer) { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            }
+            else {
+                getLanPlayStatus()
+            }
+        }
+        .modifier(Splatfont2(size: 16))
     }
     
     private var UserSection: some View {

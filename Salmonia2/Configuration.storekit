@@ -36,7 +36,7 @@
           "locale" : "ja"
         }
       ],
-      "productID" : "work.tkgstrator.Salmonia2.MultipleAccounts",
+      "productID" : "work.tkgstrator.Salmonia2.Accounts",
       "referenceName" : "Multiple Accounts",
       "type" : "NonConsumable"
     }

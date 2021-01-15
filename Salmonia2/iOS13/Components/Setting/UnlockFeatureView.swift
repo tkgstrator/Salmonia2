@@ -69,7 +69,7 @@ struct UnlockFeatureView: View {
     }
    
     func retrieveProduct() {
-        let productIds = ["work.tkgstrator.Salmonia2.MultipleAccounts", "work.tkgstrator.Salmonia2.Consumable.Donation", "work.tkgstrator.Salmonia2.MonthlyPass"]
+        let productIds = ["work.tkgstrator.Salmonia2.Accounts", "work.tkgstrator.Salmonia2.Consumable.Donation", "work.tkgstrator.Salmonia2.MonthlyPass"]
         autoreleasepool {
             guard let realm = try? Realm() else { return }
             for productId in productIds {

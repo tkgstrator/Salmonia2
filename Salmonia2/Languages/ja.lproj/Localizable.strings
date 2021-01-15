@@ -29,6 +29,12 @@
 "User type" = "ユーザタイプ";
 "Free user" = "フリー";
 "Pro user" = "プロフェッショナル";
+"LanPlay" = "ランプレイ";
+"What's LanPlay" = "LanPlayについて";
+"Online members" = "オンライン人数";
+"Idle members" = "待機人数";
+"Server version" = "サーババージョン";
+"Privacy poricy" = "プライバシーポリシー";
 "Unlock" = "アンロック";
 "How to use" = "つかいかた";
 "X-Product Version" = "X-Product Version";
@@ -102,6 +108,7 @@
 "high" = "満潮";
 "time_limit" = "時間切れ";
 "wipe_out" = "ゼンメツ!";
+"Match" = "マッチ";
 
 // Stats
 "Global Records" = "世界記録";
