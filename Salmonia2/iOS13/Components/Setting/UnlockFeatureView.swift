@@ -12,10 +12,6 @@ struct UnlockFeatureView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var paid: FeatureProductCore
     
-    init() {
-        retrieveProduct()
-    }
-    
     var body: some View {
         List {
             Section(header: Text("Free")
@@ -68,34 +64,7 @@ struct UnlockFeatureView: View {
         }
     }
    
-    func retrieveProduct() {
-        let productIds = ["work.tkgstrator.Salmonia2.Accounts", "work.tkgstrator.Salmonia2.Consumable.Donation", "work.tkgstrator.Salmonia2.MonthlyPass"]
-        autoreleasepool {
-            guard let realm = try? Realm() else { return }
-            for productId in productIds {
-                SwiftyStoreKit.retrieveProductsInfo([productId]) { result in
-                    if let product = result.retrievedProducts.first {
-                        let value: [String: String] = [
-                            "productIdentifier": productId,
-                            "localizedTitle": product.localizedTitle,
-                            "localizedDescription": product.localizedDescription,
-                            "localizedPrice": product.localizedPrice!
-                        ]
-                        print(product.localizedTitle)
-                        realm.beginWrite()
-                        realm.create(FeatureProductRealm.self, value: value, update: .all)
-                        try? realm.commitWrite()
-                    }
-                    else if let invalidProductId = result.invalidProductIDs.first {
-                        print("Invalid product identifier: \(invalidProductId)")
-                    }
-                    else {
-                        print("Error: \(result.error)")
-                    }
-                }
-            }
-        }
-    }
+
     
     struct PayButton: View {
         var title: String = ""
@@ -114,43 +83,46 @@ struct UnlockFeatureView: View {
             )
         }
         
-        func callStoreKit(_ product: String) -> Void {
+        func callStoreKit(_ product: String) -> () {
             SwiftyStoreKit.purchaseProduct(product, quantity: 1, atomically: true) { result in
                 switch result {
-                case .success(let purchase):
-                    guard let realm = try? Realm() else { return }
-                    let user = realm.objects(SalmoniaUserRealm.self)
-                    switch purchase.productId {
-                    case "work.tkgstrator.Salmonia2.MultipleAccounts":
-                        try! realm.write {
-                            user.setValue(true, forKey: "isPurchase")
+                case .success(let product):
+                    print("Purchase Success: \(product)")
+                    SwiftyStoreKit.fetchReceipt(forceRefresh: false) { result in
+                        switch result {
+                        case .success(let receipt):
+                            let encryptedReceipt = receipt.base64EncodedString(options: [])
+                            print("Fetch receipt success:\n\(encryptedReceipt)")
+                        case .error(let error):
+                            print("Fetch receipt failed: \(error)")
                         }
-                    case "work.tkgstrator.Salmonia2.Consumable":
-                        try! realm.write {
-                            user.setValue(true, forKey: "isPurchase")
-                        }
-                    case "work.tkgstrator.Salmonia2.MonthlyPass":
-                        try! realm.write {
-                            user.setValue(true, forKey: "isPurchase")
-                        }
-                    default:
-                        break
                     }
                 case .error(let error):
+//                    self.hud.dismiss()
                     switch error.code {
-                    case .unknown: print("Unknown error. Please contact support")
-                    case .clientInvalid: print("Not allowed to make the payment")
-                    case .paymentCancelled: break
-                    case .paymentInvalid: print("The purchase identifier was invalid")
-                    case .paymentNotAllowed: print("The device is not allowed to make the payment")
-                    case .storeProductNotAvailable: print("The product is not available in the current storefront")
-                    case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
-                    case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
-                    case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                    case .unknown:
+                        print("Unknown error. Please contact support")
+                    case .clientInvalid:
+                        print("Not allowed to make the payment")
+                    case .paymentCancelled:
+                        break
+                    case .paymentInvalid:
+                        print("The purchase identifier was invalid")
+                    case .paymentNotAllowed:
+                        print("The device is not allowed to make the payment")
+                    case .storeProductNotAvailable:
+                        print("The product is not available in the current storefront")
+                    case .cloudServicePermissionDenied:
+                        print("Access to cloud service information is not allowed")
+                    case .cloudServiceNetworkConnectionFailed:
+                        print("Could not connect to the network")
+                    case .cloudServiceRevoked:
+                        print("User has revoked permission to use this cloud service")
                     default: print((error as NSError).localizedDescription)
                     }
                 }
             }
+        
         }
     }
 }

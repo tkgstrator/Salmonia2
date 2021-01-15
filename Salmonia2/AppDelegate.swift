@@ -15,6 +15,8 @@ import Firebase
 import FirebaseMessaging
 import GoogleMobileAds
 
+let realm = try! Realm()
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
@@ -62,12 +64,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
-        realmMigration()
-        initSwiftyStoreKit()
-        try? getXProduceVersion()
-        FirebaseApp.configure()
-        registerForPushNotifications()
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        realmMigration() // データベースのマイグレーション
+        initSwiftyStoreKit() // StoreKitの初期化
+        try? getXProductVersion() // プロダクトIDを更新
+        try? getFutureRotation() // 将来のシフトを取得
+        FirebaseApp.configure() // Firebaseの設定
+        registerForPushNotifications() // Push通知
+        GADMobileAds.sharedInstance().start(completionHandler: nil) // Google Adsense
+        retrieveProduct()
         return true
     }
     
@@ -95,38 +99,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("Failed to register: \(error)")
     }
     
+    // データベースのマイグレーション
     func realmMigration() {
-        // データベースのマイグレーション
-        var config = Realm.Configuration(
-            schemaVersion: 20,
+        let config = Realm.Configuration(
+            schemaVersion: 22,
             migrationBlock: { [self] migration, oldSchemaVersion in
-                print(oldSchemaVersion, migration)
+                print("MIGRATION", oldSchemaVersion)
+                // 毎回再読込する
+                if (oldSchemaVersion < 21) {
+                    migration.enumerateObjects(ofType: FeatureProductRealm.className()) { oldObject, newObject in
+                        migration.delete(newObject!)
+                    }
+                }
                 if (oldSchemaVersion < 20) {
                     migration.enumerateObjects(ofType: SalmoniaUserRealm.className()) { _, newObject in
                         newObject!["isUnlock"] = isUnlock
                     }
                 }
-                if (oldSchemaVersion < 16) {
-                    migration.deleteData(forType: "CoopShiftRealm")
-                }
-                if (oldSchemaVersion < 17) {
-                    migration.enumerateObjects(ofType: CrewInfoRealm.className()) { oldObject, newObject in
-                        if oldObject!["name"] as! String == "-" {
-                            newObject!["name"] = nil
-                        }
-                        if oldObject!["image"] as! String == "" {
-                            newObject!["image"] = nil
-                        }
-                    }
-                }
             })
         Realm.Configuration.defaultConfiguration = config
-        config = Realm.Configuration()
-        config.deleteRealmIfMigrationNeeded = true
     }
     
+    // 課金システムを搭載
     func initSwiftyStoreKit() {
-        // 課金システムを搭載
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
@@ -138,13 +133,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 case .failed, .purchasing, .deferred:
                     break // do nothing
                 @unknown default:
-                    print("ERROR")
+                    break
                 }
             }
         }
     }
     
-    func getXProduceVersion() throws -> () {
+    // アプリの課金情報を取得する
+    func retrieveProduct() {
+        let productIds = ["work.tkgstrator.Salmonia2.Accounts", "work.tkgstrator.Salmonia2.Consumable.Donation", "work.tkgstrator.Salmonia2.MonthlyPass"]
+        autoreleasepool {
+            guard let realm = try? Realm() else { return }
+            for productId in productIds {
+                SwiftyStoreKit.retrieveProductsInfo([productId]) { result in
+                    if let product = result.retrievedProducts.first {
+                        let value: [String: String] = [
+                            "productIdentifier": productId,
+                            "localizedTitle": product.localizedTitle,
+                            "localizedDescription": product.localizedDescription,
+                            "localizedPrice": product.localizedPrice!
+                        ]
+                        print(product.localizedTitle)
+                        realm.beginWrite()
+                        realm.create(FeatureProductRealm.self, value: value, update: .all)
+                        try? realm.commitWrite()
+                    }
+                    else if let invalidProductId = result.invalidProductIDs.first {
+                        print("Invalid product identifier: \(invalidProductId)")
+                    }
+                    else {
+                        print("Error: \(result.error)")
+                    }
+                }
+            }
+        }
+    }
+    
+    func getXProductVersion() throws -> () {
         let realm = try Realm()
         // Salmoniaユーザがいなければ作成
         let users = realm.objects(SalmoniaUserRealm.self)
@@ -155,7 +180,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             try? realm.commitWrite()
         }
         
-        var url = "https://salmonia2-api.netlify.app/coop.json"
+        let url = "https://salmonia2-api.netlify.app/version.json"
+        // X-Product Versionを取得する
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .validate(contentType: ["application/json"])
+            .responseJSON() { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    realm.beginWrite()
+                    realm.objects(SalmoniaUserRealm.self).first?.isVersion = json["version"].stringValue
+                    try? realm.commitWrite()
+                case .failure:
+                    break
+                }
+            }
+    }
+    
+    func getFutureRotation() throws -> () {
+        let realm = try Realm()
+        // Salmoniaユーザがいなければ作成
+        let users = realm.objects(SalmoniaUserRealm.self)
+        if users.isEmpty {
+            realm.beginWrite()
+            let user = SalmoniaUserRealm(isUnlock: isUnlock)
+            realm.add(user)
+            try? realm.commitWrite()
+        }
+        
+        let url = "https://salmonia2-api.netlify.app/coop.json"
         // シフト情報を取得する
         AF.request(url, method: .get)
             .validate(statusCode: 200..<300)
@@ -174,22 +228,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     break
                 }
             }
-        url = "https://salmonia2-api.netlify.app/version.json"
-        // X-Product Versionを取得する
-        AF.request(url, method: .post)
-            .validate(statusCode: 200..<300)
-            .validate(contentType: ["application/json"])
-            .responseJSON() { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    realm.beginWrite()
-                    realm.objects(SalmoniaUserRealm.self).first?.isVersion = json["version"].stringValue
-                    try? realm.commitWrite()
-                case .failure:
-                    break
-                }
-            }
+        
     }
 }
 

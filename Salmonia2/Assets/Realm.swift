@@ -14,9 +14,7 @@ class SalmoniaUserRealm: Object {
     
     @objc dynamic var api_token: String? = nil // Access token from Salmon Stats
     @objc dynamic var isImported: Bool = false
-    @objc dynamic var isPurchase: Bool = false
-    @objc dynamic var isDevelop: Bool = false
-    @objc dynamic var isVersion: String = "1.9.0"
+    @objc dynamic var isVersion: String = "1.10.0"
     dynamic var isUnlock = List<Bool>()
     dynamic var account = List<UserInfoRealm>()
     dynamic var favuser = List<CrewInfoRealm>()
@@ -254,6 +252,8 @@ class FeatureProductRealm: Object {
     @objc dynamic var localizedTitle: String = ""
     @objc dynamic var localizedDescription: String = ""
     @objc dynamic var localizedPrice: String = ""
+    @objc dynamic var isValid: Bool = false
+//    @objc dynamic var isExpired: Int = 0
     
     override static func primaryKey() -> String? {
         return "productIdentifier"

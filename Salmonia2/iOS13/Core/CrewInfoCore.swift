@@ -10,8 +10,6 @@ import SwiftUI
 import Combine
 import RealmSwift
 
-let realm = try! Realm()
-
 class CrewInfoCore: ObservableObject {
 
     private var token: NotificationToken?

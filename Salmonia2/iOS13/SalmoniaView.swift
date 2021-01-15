@@ -73,9 +73,7 @@ struct SalmoniaView: View {
                     .modifier(Splatfont2(size: 16))
             }
             if account.api_token != nil {
-                Button(action: {
-                    isVisible.toggle()
-                }) {
+                Button(action: { isVisible.toggle() }) {
                     BSafariView(isPresented: $isVisible, title: "Salmon Stats", url: "https://salmon-stats-api.yuki.games/auth/twitter")
                 }
             } else {

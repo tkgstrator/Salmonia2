@@ -40,7 +40,7 @@ struct SettingView: View {
     }
     
     private func getLanPlayStatus() {
-        let url = "https://script.google.com/macros/s/AKfycbzcfuAotwS7eAD9VDSZ62SRXYyH2k5AK4mpuEp1EkEykGCnJOothFxv/exec"
+        let url = "http://tkgstrator.work:11451/info"
         AF.request(url, method: .get)
             .responseJSON() { response in
                 switch response.result {

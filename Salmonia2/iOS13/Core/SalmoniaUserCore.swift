@@ -30,8 +30,6 @@ class SalmoniaUserCore: ObservableObject {
             api_token = user.api_token
             isImported = user.isImported
             isUnlock = Array(user.isUnlock.map({ $0 }))
-            isDevelop = user.isDevelop
-            isPurchase = user.isPurchase
             account = user.account
             favuser = user.favuser
             isActiveArray = user.account.map({ $0.isActive })
