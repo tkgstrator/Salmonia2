@@ -77,9 +77,20 @@ struct SalmoniaView: View {
                     BSafariView(isPresented: $isVisible, title: "Salmon Stats", url: "https://salmon-stats-api.yuki.games/auth/twitter")
                 }
             } else {
-                NavigationLink(destination: WebBrowser(address: "https://salmon-stats-api.yuki.games/auth/twitter")) {
+                Button(action: { isVisible.toggle() }) {
                     Text("Salmon Stats")
-                        .modifier(Splatfont2(size: 16))
+                }
+                .webAuthenticationSession(isPresented: $isVisible) {
+                    WebAuthenticationSession(
+                        url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter?redirect_to=salmon-stats://")!,
+                        callbackURLScheme: "salmon-stats"
+                    ) { callbackURL, error in
+                        guard let oauth_token = callbackURL?.absoluteString.capture(pattern: "oauth_token=(.*)&", group: 1) else { return }
+                        
+                        guard let oauth_verifier = callbackURL?.absoluteString.capture(pattern: "oauth_verifier=(.*)", group: 1) else { return }
+                        print(callbackURL?.absoluteURL)
+                        print(oauth_token, oauth_verifier)
+                    }
                 }
             }
             if account.isPurchase {
