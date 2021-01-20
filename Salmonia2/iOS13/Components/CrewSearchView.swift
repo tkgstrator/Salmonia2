@@ -40,7 +40,7 @@ struct CrewSearchView: View {
             }
             List {
                 ForEach(players, id:\.self) { player in
-                    NavigationLink(destination: SalmonStatsView().environmentObject(CrewInfoCore(player.nsaid))) {
+//                    NavigationLink(destination: SalmonStatsView().environmentObject(CrewInfoCore(player.nsaid))) {
                         HStack {
                             URLImage(url: URL(string: player.thumbnail_url)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                                 .frame(width: 50, height: 50)
@@ -50,7 +50,7 @@ struct CrewSearchView: View {
                             } else {
                                 Text("").frame(width: 20)
                             }
-                        }
+//                        }
                     }
                     .onAppear() {
                         SalmonStats.getPlayerOverView(nsaid: player.nsaid)

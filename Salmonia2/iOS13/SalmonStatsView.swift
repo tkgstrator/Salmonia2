@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct SalmonStatsView: View {
-    @EnvironmentObject var player: CrewInfoCore
+    var nsaid: String
     
     var body: some View {
         ScrollView {
             OtherPlayerView()
+                .environmentObject(CrewInfoCore(nsaid))
         }
         .padding(.horizontal, 10)
-        .navigationBarTitle(player.nickname)
+        .navigationBarTitle(nsaid)
     }
 }
 
-struct SalmonStatsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SalmonStatsView()
-    }
-}
+//struct SalmonStatsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SalmonStatsView()
+//    }
+//}

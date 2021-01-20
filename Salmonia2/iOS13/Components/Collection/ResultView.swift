@@ -128,7 +128,7 @@ struct ResultView: View {
     
     var ResultPlayerView: some View {
         ForEach(result.player, id:\.self) { player in
-            NavigationLink(destination: SalmonStatsView()) {
+            NavigationLink(destination: SalmonStatsView(nsaid: player.nsaid!)) {
                 VStack(spacing: 0) {
                     HStack {
                         Text(isVisible ? player.name.value : "-")
