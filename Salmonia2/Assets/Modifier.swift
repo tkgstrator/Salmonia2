@@ -31,15 +31,12 @@ struct Splatfont: ViewModifier {
                 content
                 .font(.custom("FZYHFW--GB1-0", size: size + 4))
 //                .minimumScaleFactor(0.7)
-//                .lineLimit(1)
         } else {
             return
                 content
                 .font(.custom("Splatfont", size: size))
 //                .minimumScaleFactor(0.7)
-//                .lineLimit(1)
         }
-        //            .frame(height: size)
     }
 }
 

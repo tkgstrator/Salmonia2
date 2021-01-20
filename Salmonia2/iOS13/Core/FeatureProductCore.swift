@@ -21,10 +21,7 @@ class FeatureProductCore: ObservableObject {
         // 変更があるたびに再読込するだけ
         token = realm.objects(FeatureProductRealm.self).observe { [self] _ in
             let products = realm.objects(FeatureProductRealm.self)
-            features = [] // 一度リストを空っぽにする
-            for product in products {
-                features.append(Product(product))
-            }
+            features = products.map({Product($0)})
         }
     }
     
@@ -37,12 +34,14 @@ class FeatureProductCore: ObservableObject {
         var productIdentifier: String
         var localizedDescription: String
         var localizedTitle: String
+        var isValid: Bool
         
         init(_ product: FeatureProductRealm) {
             productIdentifier = product.productIdentifier
             localizedTitle = product.localizedTitle
             localizedDescription = product.localizedDescription
             localizedPrice = product.localizedPrice
+            isValid = product.isValid
         }
     }
 }

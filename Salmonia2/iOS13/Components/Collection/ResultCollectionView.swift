@@ -59,15 +59,10 @@ struct ResultCollectionView: View {
                         Text("Clear!")
                             .foregroundColor(.green)
                     } else {
-                        VStack {
+                        VStack(spacing: 0) {
                             Text("Defeat")
+                            Text("Wave \(result.failure_wave.value!)")
                                 .frame(height: 16)
-                            HStack {
-                                Text("Wave")
-                                    .frame(height: 11)
-                                Text("\(result.failure_wave.value!)")
-                                    .frame(height: 11)
-                            }
                         }
                         .foregroundColor(.orange)
                     }

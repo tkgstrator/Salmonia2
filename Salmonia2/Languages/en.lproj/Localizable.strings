@@ -62,7 +62,7 @@
 "Enter username" = "Enter username";
 
 // In Stage Records View
-"Clear Ratio" = "Crear Ratio";
+"Clear Ratio" = "Clear Ratio";
 "Total Power Eggs" = "Total Power Eggs";
 "Total Golden Eggs" = "Total Golden Eggs";
 "Max Grade" = "Max Grade"; // The grade of profressional(i.e 999)
@@ -99,8 +99,8 @@
 "Grade Point" = "Grade Point"; // The grade of profressional
 "Clear Wave" = "Clear Wave";
 "Crew Grade" = "Crew Grade"; // The average grade of crew you played with
-"Team Power Eggs" = "Total Power Eggs";
-"Team Golden Eggs" = "Total Golden Eggs";
+"Team Power Eggs" = "Team Power Eggs";
+"Team Golden Eggs" = "Team Golden Eggs";
 "Power Eggs" = "Power Eggs";
 "Golden Eggs" = "Golden Eggs";
 "Boss Defeated" = "Boss Defeated";

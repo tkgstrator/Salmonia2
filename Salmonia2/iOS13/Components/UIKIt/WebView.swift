@@ -83,34 +83,6 @@ struct WebBrowser: View {
         Text(verbatim: browser.url?.absoluteString.removingPercentEncoding ?? "")
     }
     
-    var LItems: some View {
-        HStack {
-            Button(action: {
-                self.browser.goBack()
-            }) {
-                ItemImage(systemName: "chevron.left")
-            }.disabled(!browser.canGoBack)
-        }
-    }
-    
-    var TItems: some View {
-        Login
-//        HStack {
-//            Button(action: {
-//                if self.browser.isLoading {
-//                    self.browser.stopLoading()
-//                } else {
-//                    self.browser.reload()
-//                }
-//            }) {
-//                ItemImage(systemName: browser.isLoading
-//                            ? "xmark"
-//                            : "arrow.clockwise"
-//                )
-//            }
-//        }
-    }
-    
     func notification(title: Notification, message: Notification) {
         
         let content = UNMutableNotificationContent()
@@ -133,40 +105,36 @@ struct WebBrowser: View {
         UNUserNotificationCenter.current().add(request)
     }
     
-    private var Login: some View {
-        Button(action: {
-            WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
-                cookies in
-                for cookie in cookies {
-                    if cookie.name == "laravel_session" {
-                        let laravel_session = cookie.value
-                        do {
-                            let api_token = try SalmonStats.getAPIToken(laravel_session)
-                            let user = realm.objects(SalmoniaUserRealm.self)
-                            try? realm.write { user.setValue(api_token, forKey: "api_token")}
-                            notification(title: .success, message: .laravel)
-                            return
-                        } catch {
-                            notification(title: .failure, error: error)
+    @State var isPresented: Bool = false
+    @State var message: String  = ""
+    @State var isSuccess: Bool = false
+    let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+
+    var body: some View {
+        SUIWebBrowserView(browserObject: browser)
+            .onReceive(timer) { _ in
+                if isSuccess == false {
+                    WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
+                        cookies in
+                        for cookie in cookies {
+                            if cookie.name == "laravel_session" {
+                                let laravel_session = cookie.value
+                                do {
+                                    let api_token = try SalmonStats.getAPIToken(laravel_session)
+                                    let user = realm.objects(SalmoniaUserRealm.self)
+                                    try? realm.write { user.setValue(api_token, forKey: "api_token") }
+                                    message = "Success"
+                                    isSuccess = true
+                                    isPresented = true
+                                } catch {
+                                }
+                            }
                         }
                     }
                 }
-                //                notification(title: .failure, message: .laravel)
             }
-        }) {
-            Image(systemName: "snow")
-                .Modifier()
-                .foregroundColor(.blue)
-        }
-    }
-    
-    var body: some View {
-        
-        //       NavigationView {
-        SUIWebBrowserView(browserObject: browser)
-            .edgesIgnoringSafeArea(.all)
-        //               .navigationBarTitle("Salmon Stats")
-            .navigationBarItems(leading: LItems, trailing: TItems)
-        //       }.navigationViewStyle(StackNavigationViewStyle())
+            .alert(isPresented: $isPresented) {
+                Alert(title: Text("Login Salmon Stats"), message: Text("\(message)"))
+            }
     }
 }

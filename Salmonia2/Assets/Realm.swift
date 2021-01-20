@@ -14,6 +14,7 @@ class SalmoniaUserRealm: Object {
     
     @objc dynamic var api_token: String? = nil // Access token from Salmon Stats
     @objc dynamic var isImported: Bool = false
+    @objc dynamic var isPurchase: Bool = false
     @objc dynamic var isVersion: String = "1.10.0"
     dynamic var isUnlock = List<Bool>()
     dynamic var account = List<UserInfoRealm>()

@@ -26,17 +26,14 @@ struct UnlockFeatureView: View {
                 Toggle(isOn: $user.isUnlock[2]) {
                     Text("Force Update")
                 }
-//                Toggle(isOn: $user.isUnlock[3]) {
-//                    Text("Login in Safari")
-//                }
-                Toggle(isOn: $user.isUnlock[4]) {
+                Toggle(isOn: $user.isUnlock[3]) {
                     Text("Disable Ads")
                 }
             }
             Section(header: Text("Paid")
                         .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange)) {
-                ForEach(paid.features.reversed(), id:\.self) { feature in
+                ForEach(Array(paid.features.reversed()), id:\.self) { feature in
                     HStack {
                         VStack(alignment: .leading) {
                             HStack {
@@ -48,11 +45,7 @@ struct UnlockFeatureView: View {
                                 .modifier(Splatfont2(size: 14))
                         }
                         Spacer()
-                        if feature.productIdentifier == "work.tkgstrator.Salmonia2.MonthlyPass" {
-                            PayButton(title: "Subscribe".localized, product: feature.productIdentifier)
-                        } else {
-                            PayButton(title: "Purchase".localized, product: feature.productIdentifier)
-                        }
+                        PayButton(isValid: feature.isValid, isSubscribed: false, product: feature.productIdentifier)
                     }.frame(height: 60)
                 }
             }
@@ -67,11 +60,12 @@ struct UnlockFeatureView: View {
 
     
     struct PayButton: View {
-        var title: String = ""
-        var product: String = ""
+        var isValid: Bool
+        var isSubscribed: Bool
+        var product: String
         
         var body: some View {
-            Button(title) {
+            Button(!isSubscribed ? isValid ? "Purchased" : "Purchase" : isValid ? "Subscribed" : "Subscribe") {
                 callStoreKit(product)
             }
             .buttonStyle(PlainButtonStyle())
@@ -81,6 +75,7 @@ struct UnlockFeatureView: View {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color.white, lineWidth: 3)
             )
+            .disabled(isValid)
         }
         
         func callStoreKit(_ product: String) -> () {
@@ -93,6 +88,14 @@ struct UnlockFeatureView: View {
                         case .success(let receipt):
                             let encryptedReceipt = receipt.base64EncodedString(options: [])
                             print("Fetch receipt success:\n\(encryptedReceipt)")
+                            // 購入処理をここに書く
+                            // 購入したら強制的にユーザタイプを変更する（まあこれでいいや）
+                            guard let data = realm.objects(FeatureProductRealm.self).filter("productIdentifier=%@", product.productId).first else { return }
+                            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+                            realm.beginWrite()
+                            data.isValid = true
+                            user.isPurchase = true
+                            try? realm.commitWrite()
                         case .error(let error):
                             print("Fetch receipt failed: \(error)")
                         }

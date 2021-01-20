@@ -31,9 +31,6 @@ class CoopShiftCore: ObservableObject {
             
             data = Array(realm.objects(CoopShiftRealm.self).filter("start_time>=%@", end_time).sorted(byKeyPath: "start_time", ascending: true).prefix(3))
             
-            // 
-            
-            
             // アンロックしていないとき
             if !isUnlockRotation {
                 all = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: false)

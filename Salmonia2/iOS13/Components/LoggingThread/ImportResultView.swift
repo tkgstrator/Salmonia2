@@ -55,7 +55,7 @@ struct ImportResultView: View {
                         DispatchQueue(label: "Import").async {
                             log.status = "Connecting"
                             #if DEBUG
-                            let metadata: (link: Int, job_num: Int) = (5, 1000)
+                            let metadata: (link: Int, job_num: Int) = (15, 3000)
                             #else
                             guard let metadata = try? getLastLink(nsaid: nsaid) else { return }
                             #endif

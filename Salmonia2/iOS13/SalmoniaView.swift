@@ -13,6 +13,7 @@ import OAuthSwift
 import SwifteriOS
 import SafariServices
 import AuthenticationServices
+import Alamofire
 
 struct SalmoniaView: View {
     
@@ -39,10 +40,6 @@ struct SalmoniaView: View {
             Update().padding(.trailing, 20).padding(.bottom, 60)
         }
         .navigationBarTitle("Salmonia")
-//        .navigationBarItems(leading: Setting, trailing: HStack(spacing: 15) {
-//            Search
-//            SalmonStats
-//        })
     }
     
     private var Title: some View {
@@ -72,33 +69,7 @@ struct SalmoniaView: View {
                 Text("Wave Results")
                     .modifier(Splatfont2(size: 16))
             }
-            if account.api_token != nil {
-                Button(action: { isVisible.toggle() }) {
-                    BSafariView(isPresented: $isVisible, title: "Salmon Stats", url: "https://salmon-stats-api.yuki.games/auth/twitter")
-                }
-            } else {
-                Button(action: { isVisible.toggle() }) {
-                    Text("Salmon Stats")
-                }
-                .webAuthenticationSession(isPresented: $isVisible) {
-                    WebAuthenticationSession(
-                        url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter?redirect_to=salmon-stats://")!,
-                        callbackURLScheme: "salmon-stats"
-                    ) { callbackURL, error in
-                        guard let oauth_token = callbackURL?.absoluteString.capture(pattern: "oauth_token=(.*)&", group: 1) else { return }
-                        
-                        guard let oauth_verifier = callbackURL?.absoluteString.capture(pattern: "oauth_verifier=(.*)", group: 1) else { return }
-                        print(callbackURL?.absoluteURL)
-                        print(oauth_token, oauth_verifier)
-                    }
-                }
-            }
-            if account.isPurchase {
-                NavigationLink(destination: AchievementView()) {
-                    Text("Achievement")
-                        .modifier(Splatfont2(size: 16))
-                }
-            }
+            BSalmonStatsView(isPresented: $isVisible)
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -124,36 +95,9 @@ struct SalmoniaView: View {
         .modifier(Splatfont2(size: 16))
     }
     
-    private var Search: some View {
-        NavigationLink(destination: WaveCollectionView()) {
-            Image(systemName: "magnifyingglass").resizable().scaledToFit().frame(width: 30, height: 30)
-        }
-        .buttonStyle(PlainButtonStyle())
-    }
-    
-//    private var SalmonStats: some View {
-//        NavigationLink(destination: WebKitView())
-//        {
-//            Image(systemName: "snow").resizable().scaledToFit().frame(width: 30, height: 30)
-//        }
-//        .buttonStyle(PlainButtonStyle())
-//    }
-
     struct Update: View {
-        @GestureState var isLongPress = false
         @State var isComplete = false
-        
-        var longPress: some Gesture {
-            LongPressGesture(minimumDuration: 0.3, maximumDistance: 1.0)
-                .updating($isLongPress) { current, gesture, transaction in
-                    gesture = current
-                    transaction.animation = Animation.easeIn(duration: 2.0)
-                }
-                .onEnded { finished in
-                    isComplete = finished
-                }
-        }
-        
+
         var body: some View {
             NavigationLink(destination: LoadingView()){
                 ZStack {

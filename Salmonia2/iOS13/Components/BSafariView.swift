@@ -43,6 +43,54 @@ struct BSafariView: View {
     }
 }
 
+struct BSalmonStatsView: View {
+    @Binding var isPresented: Bool
+
+    var body: some View {
+        Button(action: {
+            isPresented.toggle()
+        }) {
+            HStack {
+                Text("Salmon Stats")
+                    .modifier(Splatfont2(size: 16))
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(Color(.tertiaryLabel))
+                    .font(.system(size: 14, weight: .semibold))
+            }
+            .background(Color.white.opacity(0.0001))
+        }
+        .buttonStyle(PlainButtonStyle())
+        .safariView(isPresented: $isPresented) {
+            SafariView(url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter")!)
+        }
+    }
+}
+
+struct BSalmonStatsLoginView: View {
+    @Binding var isPresented: Bool
+
+    var body: some View {
+        Button(action: {
+            isPresented.toggle()
+        }) {
+            HStack {
+                Text("Salmon Stats")
+                    .modifier(Splatfont2(size: 16))
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(Color(.tertiaryLabel))
+                    .font(.system(size: 14, weight: .semibold))
+            }
+            .background(Color.white.opacity(0.0001))
+        }
+        .buttonStyle(PlainButtonStyle())
+        .sheet(isPresented: $isPresented) {
+            WebBrowser(address: "https://salmon-stats-api.yuki.games/auth/twitter")
+        }
+    }
+}
+
 //struct SafariView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        SafariView()

@@ -11,7 +11,6 @@ struct Log {
     var errorCode: String? = nil
     var errorDescription: String? = nil
     var status: String? = nil
-//    var bias: Double = 2
     var isLock: Bool = true
     var isValid: Bool = true
     var progress: (id: Int?, min: Int?, max: Int?) = (nil, nil, nil)

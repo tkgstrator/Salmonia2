@@ -40,9 +40,13 @@ class UserStatsCore: ObservableObject {
     @Published var boss_defeated: [Double?] = [nil, nil, nil, nil, nil, nil, nil, nil, nil]
     @Published var max_results: [CoopResultsRealm] = []
     @Published var special: [Double?] = [nil, nil, nil, nil]
+    @Published var isRareWeapon: Bool = true
     
     init(start_time: Int) {
         token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
+            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+            isRareWeapon = user.isUnlock[1] // クマブキアンロック情報を取得
+            
             schedule = start_time
             let _nsaids = realm.objects(UserInfoRealm.self)
             let nsaids: [String] = Array(_nsaids.map({ $0.nsaid }))
@@ -95,8 +99,8 @@ class UserStatsCore: ObservableObject {
                 avg_rescue = Double(total_help_count / Double(job_num ?? 0)).round(digit: 2)
                 avg_defeated = Double(total_defeated / Double(job_num ?? 0)).round(digit: 2)
 
-                rate_power_eggs = (Double(total_my_power_eggs) / Double(total_power_eggs!)).round(digit: 2)
-                rate_golden_eggs = (Double(total_my_golden_eggs) / Double(total_golden_eggs!)).round(digit: 2)
+                rate_power_eggs = (Double(total_my_power_eggs) / Double(total_power_eggs!)).round(digit: 4)
+                rate_golden_eggs = (Double(total_my_golden_eggs) / Double(total_golden_eggs!)).round(digit: 4)
                 for (idx, sp) in [2, 7, 8, 9].enumerated() {
                     if job_num != nil {
                         special[idx] = (Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)).round(digit: 4)
@@ -129,7 +133,6 @@ extension UserStatsCore {
             let avg: Double? = realm.objects(CoopResultsRealm.self).filter("start_time=%@", start_time).average(ofProperty: "golden_eggs")
             golden_eggs.append(avg!)
         }
-        print(golden_eggs)
         return golden_eggs
     }
     
@@ -142,5 +145,9 @@ extension UserStatsCore {
             power_eggs.append(avg!)
         }
         return power_eggs
+    }
+    
+    var shift: CoopShiftRealm {
+        return realm.objects(CoopShiftRealm.self).filter("start_time=%@", self.schedule).first!
     }
 }

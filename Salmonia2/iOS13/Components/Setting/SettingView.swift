@@ -20,7 +20,11 @@ import BetterSafariView
 struct SettingView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var core: UserResultCore
-    @State var isPresented: [Bool] = [false, false, false]
+    // 0はSalmon Stats
+    // 1は使い方ページ
+    // 2はLanPlayについて
+    // 3はプライバシーポリシー
+    @State var isPresented: [Bool] = [false, false, false, false]
     @State var online: Int? = nil
     @State var idle: Int? = nil
     @State var ver: String? = nil
@@ -31,6 +35,7 @@ struct SettingView: View {
     
     var body: some View {
         List {
+            SignIn
             UserSection
             UserStatus
             LanPlayStatus
@@ -60,14 +65,14 @@ struct SettingView: View {
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange))
         {
-            BSafariView(isPresented: $isPresented[0], title: "How to use", url: "https://tkgstrator.work/?p=28236")
+            BSafariView(isPresented: $isPresented[1], title: "How to use", url: "https://tkgstrator.work/?p=28236")
             BSafariView(isPresented: $isPresented[2], title: "Privacy poricy", url: "https://tkgstrator.work/?page_id=25126")
             HStack {
                 Text("X-Product Version")
                 Spacer()
                 Text("\(user.isVersion)")
             }
-//            .onLongPressGesture { user.isPurchase.toggle() }
+            
             HStack {
                 Text("Version")
                 Spacer()
@@ -90,7 +95,7 @@ struct SettingView: View {
         Section(header: Text("LanPlay")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
-            BSafariView(isPresented: $isPresented[1], title: "What's LanPlay", url: "https://tkgstrator.work/?p=5240")
+            BSafariView(isPresented: $isPresented[3], title: "What's LanPlay", url: "https://tkgstrator.work/?p=5240")
             HStack {
                 Text("Online members")
                 Spacer()
@@ -118,12 +123,20 @@ struct SettingView: View {
         .modifier(Splatfont2(size: 16))
     }
     
+    private var SignIn: some View {
+        Section(header: Text("Sign in")
+                    .modifier(Splatfont2(size: 16))
+                    .foregroundColor(.cOrange)) {
+            NavigationLink(destination: UserListView()) { Text("SplatNet2") }
+            BSalmonStatsLoginView(isPresented: $isPresented[0])
+        }
+        .modifier(Splatfont2(size: 16))
+    }
+    
     private var UserSection: some View {
         Section(header: Text("Status")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
-            NavigationLink(destination: UserListView()) { Text("Sign in") }
-            //            NavigationLink(destination: CrewListView().environmentObject(SalmoniaUserCore())) { Text("Fav Crews") }
             HStack {
                 Text("laravel session")
                 Spacer()
@@ -132,7 +145,7 @@ struct SettingView: View {
             HStack {
                 Text("User type")
                 Spacer()
-                Text("\((user.isPurchase ? "Pro user" : "Free user").localized)")
+                Text("\((user.isPurchase ? "Unlimited" : "Limited").localized)")
             }
         }
         .modifier(Splatfont2(size: 16))

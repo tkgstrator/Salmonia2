@@ -27,8 +27,8 @@
 "Application" = "アプリケーション";
 "Update" = "更新";
 "User type" = "ユーザタイプ";
-"Free user" = "フリー";
-"Pro user" = "プロフェッショナル";
+"Limited" = "フリー";
+"Unlimited" = "プロフェッショナル";
 "LanPlay" = "ランプレイ";
 "What's LanPlay" = "LanPlayについて";
 "Online members" = "オンライン人数";
@@ -56,7 +56,9 @@
 
 // Settings->Feature's description
 "Purchase" = "購入";
+"Purchased" = "購入済";
 "Subscribe" = "購読";
+"Subscribed" = "購読済";
 "Enable multiple accounts." = "複数アカウントの同時リザルト取得ができるようになります";
 "Willing to add new features." = "新機能実装を応戦する寄付をします";
 "Donate to the developer as operating cost." = "開発者を支援します";
@@ -167,9 +169,5 @@
 // Notification's description
 "Success" = "成功";
 "Failure" = "失敗";
-"Add new NSO account" = "新規アカウントを追加しました";
-"Update NSO account" = "アカウント情報を更新しました";
-"Wrong request" = "誤ったリクエストです";
-"Login Salmon Stats" = "Salmon Statsにログインしました";
-"Try again" = "再度試してください";
-"Too many requests" = "時間をおいてから再度試してください";
+"Login SplatNet2" = "ログイン成功";
+"Login Salmon Stats" = "ログイン成功";
