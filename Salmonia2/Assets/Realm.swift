@@ -104,27 +104,13 @@ class CoopResultsRealm: Object {
         return ["start_time"]
     }
     
-    func getSP() -> [[Int]] {
-        var usage: [[Int]] = []
-        for (wave, _) in self.wave.enumerated() {
-            var tmp: [Int] = []
-            for player in self.player {
-                let special_id: Int = player.special_id
-                let count: Int = player.special_counts[wave]
-                
-                switch count {
-                case 1:
-                    tmp.append(special_id)
-                case 2:
-                    tmp.append(special_id)
-                    tmp.append(special_id)
-                default:
-                    break
-                }
-            }
-            usage.append(tmp)
+    func special_usage(_ wave: Int) -> [[Int]] {
+        var usage: [Int] = []
+        for player in self.player {
+            usage += [Int](repeating: player.special_id, count: player.special_counts[wave])
         }
-        return usage
+        print(usage.chunked(by: 4))
+        return usage.chunked(by: 4)
     }
 }
 

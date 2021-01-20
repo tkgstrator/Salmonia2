@@ -33,6 +33,7 @@
 		105396DD25260D5000132668 /* WaveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396DC25260D5000132668 /* WaveType.swift */; };
 		105396F425264C2000132668 /* WeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396F325264C2000132668 /* WeaponType.swift */; };
 		1056CF402533E9430078E3B4 /* CrewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */; };
+		1057D6E225B7E56B00666242 /* SpecialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1057D6E125B7E56B00666242 /* SpecialType.swift */; };
 		1058AC9C256DF764008A34F7 /* fangzheng.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */; };
 		1058ACAC256DFAAC008A34F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1058ACAE256DFAAC008A34F7 /* Localizable.strings */; };
 		10613B7C257F317F0000AE30 /* UISearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10613B7B257F317F0000AE30 /* UISearchView.swift */; };
@@ -138,6 +139,7 @@
 		105396DC25260D5000132668 /* WaveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveType.swift; sourceTree = "<group>"; };
 		105396F325264C2000132668 /* WeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponType.swift; sourceTree = "<group>"; };
 		1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewSearchView.swift; sourceTree = "<group>"; };
+		1057D6E125B7E56B00666242 /* SpecialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialType.swift; sourceTree = "<group>"; };
 		1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fangzheng.ttf; sourceTree = "<group>"; };
 		1058ACA3256DFA60008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		1058ACAD256DFAAC008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -316,9 +318,10 @@
 				1053968425242A7000132668 /* StageType.swift */,
 				10B10C492528EC480025057F /* BossType.swift */,
 				105396F325264C2000132668 /* WeaponType.swift */,
-				1053969225242F5000132668 /* PlayerInfo.swift */,
 				105396DC25260D5000132668 /* WaveType.swift */,
+				1057D6E125B7E56B00666242 /* SpecialType.swift */,
 				10B10C4E252913220025057F /* RankType.swift */,
+				1053969225242F5000132668 /* PlayerInfo.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */,
 				1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */,
 				10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */,
+				1057D6E225B7E56B00666242 /* SpecialType.swift in Sources */,
 				10E414B825679DE4006E28D7 /* Log.swift in Sources */,
 				1053969325242F5000132668 /* PlayerInfo.swift in Sources */,
 				10B10C4F252913220025057F /* RankType.swift in Sources */,

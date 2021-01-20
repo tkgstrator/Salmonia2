@@ -12,69 +12,32 @@ import URLImage
 
 struct ResultView: View {
     @ObservedObject var result: CoopResultsRealm
+    @State var maxWidth: CGFloat = UIScreen.main.bounds.size.width >= 360 ? 120 : 100
     @State var isVisible: Bool = true
     @State var isEnable: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 5) {
-                    ResultOverview
-                    HStack(alignment: .top, spacing: 5) {
-                        Spacer()
-                        ForEach(Range(1 ... result.wave.count)) { idx in
-                            VStack(spacing: 0) {
-                                if !result.is_clear && idx == result.failure_wave.value {
-                                    Text(result.failure_reason!.localized)
-                                        .padding(.bottom, 5)
-                                        .modifier(Splatfont2(size: 14))
-                                        .foregroundColor(.cOrange)
-                                        .frame(height: 12)
-                                } else {
-                                    Text("")
-                                        .padding(.bottom, 5)
-                                        .frame(height: 14)
-                                }
-                                ResultWaveView(wave: result.wave[idx - 1])
-                                SpecialUseView(special: result.getSP()[idx - 1])
-                            }
-                            if idx != result.wave.count {
-                                Spacer()
-                            }
-                        }
-                        Spacer()
-                    }
-                    VStack(spacing: 5) {
-                        ForEach(Range(1...result.player.count)) { idx in
-                            ResultPlayerView(isVisible: $isVisible).environmentObject(result.player[idx - 1])
-                        }
-                    }
-                }
+            ScrollView(.vertical, showsIndicators: false) {
+                ResultOverview
+                ResultWaveView
+                ResultPlayerView
             }
-            .navigationBarItems(trailing: Button)
         }
-        .padding(.horizontal, 10)
+        .navigationBarItems(trailing: UIButton)
         .navigationBarTitle(Text("Detail"))
     }
-    
-    private var Button: some View {
+
+    var UIButton: some View {
         HStack {
-            Image(systemName: "person.circle.fill")
-                .Modifier(isVisible)
-                .onTapGesture() {
-                    isVisible.toggle()
-                }
-            Image(systemName: "info.circle.fill")
-                .Modifier()
-                .onTapGesture() {
-                isEnable.toggle()
-            }.sheet(isPresented: $isEnable) {
-                ResultDetailView(isVisible: $isVisible).environmentObject(result)
-            }
+            Button(action: { isVisible.toggle() }) { Image(systemName: "person.circle.fill").Modifier(isVisible) }
+            Button(action: { isEnable.toggle() }) { Image(systemName: "info.circle.fill").Modifier(isEnable) }
+        }.sheet(isPresented: $isEnable) {
+            ResultDetailView(isVisible: $isVisible).environmentObject(result)
         }
     }
     
-    private var ResultOverview: some View {
+    var ResultOverview: some View {
         ZStack {
             URLImage(url: URL(string: (StageType.init(stage_id: result.stage_id)?.image_url)!)!) { image in image.resizable().aspectRatio(contentMode: .fill).clipShape(RoundedRectangle(cornerRadius: 8.0)) }
                 .frame(height: 120)
@@ -115,94 +78,69 @@ struct ResultView: View {
             }
             .font(.custom("Splatfont2", size: 18))
         }
-        .frame(height: 120)
+        .frame(height: 100)
     }
     
     
-    private struct ResultWaveView: View {
-        @ObservedObject var wave: WaveDetailRealm
-        
-        var body: some View {
-            VStack {
-                VStack {
-                    HStack {
-                        Text("WAVE")
-                        Text("\(wave.result.first!.wave.index(of: wave)! + 1)")
-                    }
+    var ResultWaveView: some View {
+        HStack(alignment: .top) {
+            ForEach(result.wave, id:\.self) { wave in
+                VStack(spacing: 5) {
+                    VStack(spacing: 0) {
+                        HStack {
+                            Text("WAVE \(wave.result.first!.wave.index(of: wave)! + 1)")
+                        }
                         .foregroundColor(.black)
                         .font(.custom("Splatfont2", size: 16))
-                    HStack(spacing: 0) {
-                        Text("\(wave.golden_ikura_num)")
-                        Text("/")
-                        Text("\(wave.quota_num)")
-                    }
-                    .frame(height: 34)
-                    .frame(minWidth: 100)
-                    .foregroundColor(.white)
-                    .background(Color.init(UIColor.init("2A270B")))
-                    .font(.custom("Splatfont2", size: 24))
-                    Group {
-                        Text(String(wave.ikura_num))
-                            .foregroundColor(.red)
-                            .font(.custom("Splatfont2", size: 16))
-                        Text(wave.water_level!.localized)
-                        Text(wave.event_type!.localized)
-                    }.foregroundColor(.black)
-                    .frame(height: 22)
-                    .modifier(Splatfont2(size: 14))
-                }
-                .background(Color.yellow).clipShape(RoundedRectangle(cornerRadius: 3.0))
-                //            .mask(Image("board").resizable())
-                Text(String(wave.golden_ikura_pop_num))
-                    .frame(height: 22)
-                    .font(.custom("Splatfont2", size: 16))
-            }
-        }
-    }
-    
-    private struct SpecialUseView: View {
-        private var usage: [[Int]] = []
-        
-        init(special: [Int]) {
-            usage = special.chunked(by: 4)
-        }
-        
-        var body: some View {
-            VStack(spacing: 0) {
-                ForEach(usage.indices, id:\.self) { column in
-                    HStack(spacing: 0) {
-                        ForEach(usage[column].indices, id:\.self) { idx in
-                            URLImage(url: FImage.getURL(usage[column][idx], 2)) { image in image.resizable() }
-                                .frame(width: 25, height: 25)
+                        Text("\(wave.golden_ikura_num)/\(wave.quota_num)")
+                            .font(.custom("Splatfont2", size: 26))
+                            .padding(.horizontal, 5)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 36)
+                            .minimumScaleFactor(0.7)
+                            .lineLimit(1)
+                            .background(Color.init(UIColor.init("2A270B")))
+                        Group {
+                            Text("\(wave.ikura_num)")
+                                .foregroundColor(.red)
+                            Text(wave.water_level!.localized)
+                            Text(wave.event_type!.localized)
                         }
-                    }.frame(minWidth: 100, alignment: .leading)
+                        .frame(height: 26)
+                        .foregroundColor(.black)
+                        .font(.custom("Splatfont2", size: 16))
+                    }
+                    .background(Color.yellow).clipShape(RoundedRectangle(cornerRadius: 3.0))
+                    ForEach(result.special_usage(wave.result.first!.wave.index(of: wave)!), id:\.self) { usage in
+                        HStack(spacing: 0) {
+                            ForEach(usage, id:\.self) { special in
+                                URLImage(url: SpecialType(special_id: special)!.image_url) { image in image.resizable() }
+                                    .frame(width: maxWidth/4, height: maxWidth/4)
+                            }
+                        }
+                        .frame(width: maxWidth, alignment: .leading)
+                    }
                 }
             }
-            .frame(minWidth: 100, alignment: .leading)
+            .frame(width: maxWidth)
         }
     }
     
-    private struct ResultPlayerView: View {
-        @EnvironmentObject var player: PlayerResultsRealm
-        @Binding var isVisible: Bool
-        
-        var body: some View {
-            NavigationLink(destination: SalmonStatsView().environmentObject(CrewInfoCore(player.nsaid!))) {
+    var ResultPlayerView: some View {
+        ForEach(result.player, id:\.self) { player in
+            NavigationLink(destination: SalmonStatsView()) {
                 VStack(spacing: 0) {
                     HStack {
-                        Text(isVisible ? player.name.value : "-").font(.custom("Splatfont2", size: 18)).frame(width: 140)
+                        Text(isVisible ? player.name.value : "-")
                         Spacer()
-                        Text("x\(player.boss_kill_counts.reduce(0, +))")
-                            .foregroundColor(.blue)
-                            .font(.custom("Splatfont2", size: 16))
-                        Spacer()
-                        URLImage(url: FImage.getURL(player.special_id, 2)) { image in image.resizable() }
+                        URLImage(url: SpecialType(special_id: player.special_id)!.image_url) { image in image.resizable() }
                             .frame(width: 30, height: 30)
-                        ForEach(player.weapon_list, id:\.self) { weapon in
-                            URLImage(url: FImage.getURL(weapon, 1)) { image in image.resizable() }
+                        ForEach(Range(0 ... result.wave.count - 1).indices, id:\.self) { wave in
+                            URLImage(url: WeaponType(weapon_id: player.weapon_list[wave])!.image_url) { image in image.resizable() }
                                 .frame(width: 30, height: 30)
                         }
-                    }.frame(height: 30)
+                    }
+                    .padding(.horizontal, 5)
                     HStack {
                         Spacer()
                         Group {
@@ -217,34 +155,36 @@ struct ResultView: View {
                             Text(String(player.ikura_num)).frame(width: 48)
                         }
                         Spacer()
-                        Group {
+                        if maxWidth == 100 {
                             URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/c003ffe0a5580e4c8b1bc9df1e0a30d2.png")!) { image in image.resizable()}
                                 .frame(width: 50, height: 20)
-                            Text(String(player.help_count)).frame(width: 30)
+                            Text("\(player.help_count)/\(player.dead_count)").frame(width: 50)
+                        } else {
+                            Group {
+                                URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/c003ffe0a5580e4c8b1bc9df1e0a30d2.png")!) { image in image.resizable()}
+                                    .frame(width: 50, height: 20)
+                                Text(String(player.help_count)).frame(width: 30)
+                            }
+                            Spacer()
+                            Group {
+                                URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5d447dcfcb3b0c31ffb2efca58a6e799.png")!) { image in image.resizable()}
+                                    .frame(width: 50, height: 20)
+                                Text(String(player.dead_count)).frame(width: 30)
+                            }
                         }
                         Spacer()
-                        Group {
-                            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5d447dcfcb3b0c31ffb2efca58a6e799.png")!) { image in image.resizable()}
-                                .frame(width: 50, height: 20)
-                            Text(String(player.dead_count)).frame(width: 30)
-                        }
-                        Spacer()
-                    }.frame(height: 24)
+                    }
+                    .frame(height: 24)
                 }
-                .font(.custom("Splatfont2", size: 18))
-//                .modifier(Splatfont2(size: 18))
             }
             .buttonStyle(PlainButtonStyle())
-            .onAppear() {
-                SalmonStats.getPlayerOverView(nsaid: player.nsaid!)
-            }
         }
+        .font(.custom("Splatfont2", size: 16))
     }
     
     private struct ResultDetailView: View {
-        //        @EnvironmentObject var players: RealmSwift.List<PlayerResultsRealm>
-        @EnvironmentObject var result: CoopResultsRealm
         
+        @EnvironmentObject var result: CoopResultsRealm
         @Binding var isVisible: Bool
         @State var ILORATE: [Double?] = [nil, nil, nil, nil]
         @State var BIAS: [Double?] = [nil, nil, nil, nil]
@@ -328,6 +268,8 @@ struct ResultView: View {
                         .font(.custom("Splatfont", size: 14))
                     ForEach(result.player, id:\.self) { player in
                         Text(String(player.srpower))
+                            .minimumScaleFactor(0.7)
+                            .lineLimit(1)
                             .font(.custom("Splatfont", size: 16))
                     }
                     .frame(maxWidth: .infinity)
