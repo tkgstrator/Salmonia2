@@ -14,7 +14,6 @@
 		101D2BF52590F5820011B794 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF02590F5820011B794 /* SwiftyStoreKit.framework */; };
 		101D2BF62590F5820011B794 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF12590F5820011B794 /* SwiftyJSON.framework */; };
 		101D2BF72590F5820011B794 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF22590F5820011B794 /* Alamofire.framework */; };
-		103470BC25961DF30005CEDB /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 103470BB25961DF30005CEDB /* OAuthSwift */; };
 		1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A025209C7C001B41B0 /* AppDelegate.swift */; };
 		1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A225209C7C001B41B0 /* SceneDelegate.swift */; };
 		1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A425209C7C001B41B0 /* ContentView.swift */; };
@@ -213,7 +212,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				103470BC25961DF30005CEDB /* OAuthSwift in Frameworks */,
 				101D2BF32590F5820011B794 /* CryptoSwift.framework in Frameworks */,
 				101D2BF42590F5820011B794 /* Realm.framework in Frameworks */,
 				101D2BF52590F5820011B794 /* SwiftyStoreKit.framework in Frameworks */,
@@ -510,7 +508,6 @@
 			name = Salmonia2;
 			packageProductDependencies = (
 				107319F625955F5D0037F19B /* BetterSafariView */,
-				103470BB25961DF30005CEDB /* OAuthSwift */,
 			);
 			productName = Salmonia2;
 			productReference = 1037E39D25209C7C001B41B0 /* Salmonia2.app */;
@@ -590,7 +587,6 @@
 			mainGroup = 1037E39425209C7C001B41B0;
 			packageReferences = (
 				107319F525955F5D0037F19B /* XCRemoteSwiftPackageReference "BetterSafariView" */,
-				103470BA25961DF30005CEDB /* XCRemoteSwiftPackageReference "OAuthSwift" */,
 			);
 			productRefGroup = 1037E39E25209C7C001B41B0 /* Products */;
 			projectDirPath = "";
@@ -1044,7 +1040,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.3;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1076,7 +1072,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.3;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1215,14 +1211,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		103470BA25961DF30005CEDB /* XCRemoteSwiftPackageReference "OAuthSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OAuthSwift/OAuthSwift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.2;
-			};
-		};
 		107319F525955F5D0037F19B /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
@@ -1234,11 +1222,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		103470BB25961DF30005CEDB /* OAuthSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 103470BA25961DF30005CEDB /* XCRemoteSwiftPackageReference "OAuthSwift" */;
-			productName = OAuthSwift;
-		};
 		107319F625955F5D0037F19B /* BetterSafariView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 107319F525955F5D0037F19B /* XCRemoteSwiftPackageReference "BetterSafariView" */;

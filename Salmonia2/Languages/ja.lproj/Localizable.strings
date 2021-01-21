@@ -11,6 +11,7 @@
 "Sign in" = "サインイン";
 "Coop Shift Rotation" = "シフトスケジュール";
 "Achievement" = "実績";
+"Shist Stats" = "シフト統計";
 
 // Settings
 "Accounts" = "アカウント";
@@ -111,6 +112,9 @@
 "time_limit" = "時間切れ";
 "wipe_out" = "ゼンメツ!";
 "Match" = "マッチ";
+"Boss Salmonids defeated" = "オオモノシャケを倒した回数";
+"Boss defeated" = "オオモノ討伐数";
+"Appearances" = "出現数";
 
 // Stats
 "Global Records" = "世界記録";

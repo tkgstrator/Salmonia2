@@ -39,23 +39,23 @@ struct OptionView: View {
         .buttonStyle(PlainButtonStyle())
     }
     
-    var CoopShift: some View {
-        NavigationLink(destination: PastCoopShiftView()) {
-            HStack {
-                ZStack {
-                    Image("CoopBar")
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(.cGray)
-                    Text("Coop Shift Rotation")
-                        .modifier(Splatfont2(size: 22))
-                }
-            }
-            .frame(maxWidth: 300)
-        }
-        .buttonStyle(PlainButtonStyle())
-    }
+//    var CoopShift: some View {
+//        NavigationLink(destination: PastCoopShiftView()) {
+//            HStack {
+//                ZStack {
+//                    Image("CoopBar")
+//                        .renderingMode(.template)
+//                        .resizable()
+//                        .scaledToFit()
+//                        .foregroundColor(.cGray)
+//                    Text("Coop Shift Rotation")
+//                        .modifier(Splatfont2(size: 22))
+//                }
+//            }
+//            .frame(maxWidth: 300)
+//        }
+//        .buttonStyle(PlainButtonStyle())
+//    }
     
     private var CrewSearch: some View {
         NavigationLink(destination: CrewListView()) {

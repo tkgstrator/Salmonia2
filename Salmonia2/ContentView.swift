@@ -14,7 +14,7 @@ struct ContentView: View {
             NavigationView {
                 SalmoniaView()
             }
-            if user.isUnlock[3] {
+            if !user.isUnlock[3] {
                 AdBannerView()
             }
         }

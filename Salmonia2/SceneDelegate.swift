@@ -10,7 +10,6 @@ import SwiftUI
 import RealmSwift
 import SplatNet2
 import SwiftyJSON
-import OAuthSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

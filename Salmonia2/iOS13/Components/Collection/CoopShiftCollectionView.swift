@@ -9,7 +9,7 @@ import SwiftUI
 import URLImage
 import RealmSwift
 
-struct PastCoopShiftView: View {
+struct CoopShiftCollectionView: View {
     @ObservedObject var phase = CoopShiftCore()
     @State var isVisible: Bool = false
     @State var isTime: [Bool] = [true, true, true]

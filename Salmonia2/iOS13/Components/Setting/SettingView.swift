@@ -28,9 +28,8 @@ struct SettingView: View {
     @State var online: Int? = nil
     @State var idle: Int? = nil
     @State var ver: String? = nil
-    @State var timeRemaining: Int = 30
 
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     let version: String = "\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!))(\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)))"
     
     var body: some View {
@@ -113,12 +112,7 @@ struct SettingView: View {
             }
         }
         .onReceive(timer) { _ in
-            if timeRemaining > 0 {
-                timeRemaining -= 1
-            }
-            else {
-                getLanPlayStatus()
-            }
+            getLanPlayStatus()
         }
         .modifier(Splatfont2(size: 16))
     }
@@ -181,18 +175,6 @@ struct SettingView: View {
         .modifier(Splatfont2(size: 16))
     }
     
-    // 通知を出す
-    func notification(title: Notification, message: Notification) {
-        
-        let content = UNMutableNotificationContent()
-        content.title = title.localizedDescription.localized
-        content.body = message.localizedDescription.localized
-        content.sound = UNNotificationSound.default
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-        UNUserNotificationCenter.current().add(request)
-    }
-    
     // Salmon Run Recordsからデータをとってくる（重い）
     func updateSalmonRunRecords() {
         AF.request("https://script.google.com/macros/s/AKfycbyD9cZfl81ZaaSnDcT4oc3APSfQ8L6CgwMqsRtvbqT3KF7Irpk/exec", method: .get)
@@ -237,9 +219,7 @@ struct SettingView: View {
                     print(error)
                 }
             }
-            
             try? realm.commitWrite()
-            notification(title: .success, message: .update)
         }
     }
     

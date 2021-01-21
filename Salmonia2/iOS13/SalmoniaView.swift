@@ -9,7 +9,6 @@ import UIKit
 import SwiftUI
 import URLImage
 import BetterSafariView
-import OAuthSwift
 import SwifteriOS
 import SafariServices
 import AuthenticationServices
