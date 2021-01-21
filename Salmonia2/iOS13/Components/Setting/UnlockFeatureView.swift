@@ -30,6 +30,9 @@ struct UnlockFeatureView: View {
                     Text("Disable Ads")
                 }
                 .disabled(!user.isPurchase)
+                Toggle(isOn: $user.isUnlock[4]) {
+                    Text("Legacy Style")
+                }
             }
             Section(header: Text("Paid")
                         .font(.custom("Splatfont2", size: 16))

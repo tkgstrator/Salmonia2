@@ -155,31 +155,53 @@ struct ResultView: View {
     
     var ResultPlayerView: some View {
         ForEach(result.player, id:\.self) { player in
-//            NavigationLink(destination: SalmonStatsView(nsaid: player.nsaid!)) {
-//                    URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/5c78e75c54e0c25ef13e7d846bda6742.png")!) { image in
-//                        image.resizable()
-//                            .renderingMode(.template)
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(maxWidth: 360)
-//                            .foregroundColor(Color.init(UIColor.init("FF7500")))
-//                    }
-//                    .overlay(
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("\(isVisible ? player.name.value : "-")")
-                                .font(.custom("Splatfont2", size: 18))
-                                .shadow(color: .black, radius: 0, x: 1, y: 1)
-                            HStack {
-                                WeaponListView(player: player)
-                                PlayeResultView(player: player)
-                            }
-                        }
-                        .frame(alignment: .bottom)
-//                    )
-
-//            }
-//            .buttonStyle(PlainButtonStyle())
+            VStack(alignment: .leading, spacing: 0) {
+                Text("\(isVisible ? player.name.value : "-")")
+                    .font(.custom("Splatfont2", size: 18))
+                    .frame(maxWidth:. infinity)
+                    .padding(.leading, -maxWidth * 1.5)
+                HStack {
+                    WeaponListView(player: player)
+                    PlayeResultView(player: player)
+                }
+                .frame(maxWidth: .infinity)
+//                HStack(spacing: 0) {
+//                    Text("Matching")
+//                    Text(" x\(player.count)")
+//                }
+//                LegacyStyleView(player: player)
+            }
+            .frame(alignment: .bottom)
         }
         .font(.custom("Splatfont2", size: 16))
+    }
+    
+    struct LegacyStyleView: View {
+        var player: PlayerResultsRealm
+        
+        private let BOSS = [
+            "https://app.splatoon2.nintendo.net/images/bundled/9b2673de42f00d4fd836bd4684741505.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/337dde2c83705a75263aefdc15740f1c.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/631ea65c8cc2d9fd04f6c7458914d030.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/79d75f769115befab060b27401538402.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/2466752cf11ef6326e2add430101bff6.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/862656b37d071e75ad31750c9e18ed15.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/367e6e1c33ab3ae2a1c857f4c75f017e.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/7f8e44737240e3caa52d6c4f457164d9.png",
+            "https://app.splatoon2.nintendo.net/images/bundled/7ecdec1e23a3d0089b38038b0217827c.png"
+        ]
+        
+        var body: some View {
+            HStack {
+                ForEach(player.result.first!.boss_counts.indices, id:\.self) { idx in
+                    if (player.result.first!.boss_counts[idx] != 0) {
+                        URLImage(url: URL(string: BOSS[idx])!) { image in image.resizable().aspectRatio(contentMode: .fit).frame(width: 10) }
+                        Text("\(player.boss_kill_counts[idx])")
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity)
+        }
     }
     
     struct WeaponListView: View {
@@ -190,9 +212,9 @@ struct ResultView: View {
             VStack(spacing: 0) {
                 HStack(spacing: 3) {
                     ForEach(player.weapon_list, id:\.self) { weapon in
-                        URLImage(url: WeaponType(weapon_id: weapon)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(width: maxWidth)}
+                        URLImage(url: WeaponType(weapon_id: weapon)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: maxWidth)}
                     }
-                    URLImage(url: SpecialType(special_id: player.special_id)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(width: maxWidth)}
+                    URLImage(url: SpecialType(special_id: player.special_id)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: maxWidth)}
                 }
                 HStack(spacing: 0) {
                     if UIScreen.main.bounds.size.width >= 360 {
@@ -206,6 +228,7 @@ struct ResultView: View {
                 .shadow(color: .black, radius: 0, x: 1, y: 1)
                 .foregroundColor(Color.init(UIColor.init("E5F100")))
             }
+//            .frame(maxWidth: .infinity)
         }
     }
     
@@ -254,6 +277,7 @@ struct ResultView: View {
                     .padding(.horizontal, 5)
                 }
             }
+//            .frame(maxWidth: .infinity)
         }
     }
     
@@ -265,6 +289,7 @@ struct ResultView: View {
         @State var BIAS: [Double?] = [nil, nil, nil, nil]
         
         private let DEFAULT_IMAGE = "https://raw.githubusercontent.com/tkgstrator/Salmonia2/master/Salmonia2/Assets.xcassets/Default.imageset/default-1.png"
+        
         private let BOSS = [
             "https://app.splatoon2.nintendo.net/images/bundled/9b2673de42f00d4fd836bd4684741505.png",
             "https://app.splatoon2.nintendo.net/images/bundled/337dde2c83705a75263aefdc15740f1c.png",
@@ -276,13 +301,14 @@ struct ResultView: View {
             "https://app.splatoon2.nintendo.net/images/bundled/7f8e44737240e3caa52d6c4f457164d9.png",
             "https://app.splatoon2.nintendo.net/images/bundled/7ecdec1e23a3d0089b38038b0217827c.png"
         ]
+
         
         var body: some View {
             List {
                 Section(header: Header) {
                     BossView
                 }
-                Section(header: Text("Eval")) {
+                Section(header: Text("Eval").font(.custom("Splatfont2", size: 16))) {
                     PlayerScoreView
                         .font(.custom("Splatfont2", size: 16))
                 }
@@ -291,6 +317,16 @@ struct ResultView: View {
         
         var PlayerScoreView: some View {
             Group {
+                HStack {
+                    Text("Defeated")
+                        .frame(width: 40)
+                    ForEach(result.player, id:\.self) { player in
+                        Text(String(player.boss_kill_counts.sum()))
+                            .minimumScaleFactor(0.7)
+                            .lineLimit(1)
+                            .frame(maxWidth: .infinity)
+                    }
+                }
                 HStack {
                     Text("Score")
                         .frame(width: 40)

@@ -52,6 +52,7 @@
 "Future Rotation" = "将来のシフトを表示";
 "Grizzco Weapons" = "クマサン印ブキを表示";
 "Login in Safari" = "ログインページをSafariでひらく";
+"Legacy Style" = "旧スタイルを使う";
 "Disable Ads" = "広告を非表示";
 "$3.99" = "¥500";
 
@@ -115,6 +116,7 @@
 "Boss Salmonids defeated" = "オオモノシャケを倒した回数";
 "Boss defeated" = "オオモノ討伐数";
 "Appearances" = "出現数";
+"Eval" = "評価";
 
 // Stats
 "Global Records" = "世界記録";
