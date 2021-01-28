@@ -23,6 +23,38 @@ enum APPError: Error {
     case unavailable
 }
 
+enum SKError: Error {
+    case unknown
+    case invalid
+    case expired
+}
+
+extension SKError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .unknown:
+            return "Unknown Error"
+        case .invalid:
+            return "Invalid ProductId"
+        case .expired:
+            return "Subscription is Expired"
+        }
+    }
+}
+
+extension SKError: CustomNSError {
+    var errorCode: Int {
+        switch self {
+        case .unknown:
+            return 9999
+        case .invalid:
+            return 1000
+        case .expired:
+            return 2000
+        }
+    }
+}
+
 extension APPError: LocalizedError {
     var errorDescription: String? {
         switch self {
@@ -77,40 +109,6 @@ extension APPError: CustomNSError {
             return 1002
         case .unavailable:
             return 9503
-        }
-    }
-}
-
-enum Notification {
-    case login
-    case update
-    case laravel
-    case unlock
-    case lock
-    case error
-    case success
-    case failure
-}
-
-extension Notification {
-    var localizedDescription: String {
-        switch self {
-        case .login:
-            return "Add new NSO account"
-        case .update:
-            return "Update NSO account"
-        case .laravel:
-            return "Login Salmon Stats"
-        case .unlock:
-            return "Unlock feature"
-        case .lock:
-            return "Lock feature"
-        case .error:
-            return "Unkonwn error"
-        case .success:
-            return "Success"
-        case .failure:
-            return "Failure"
         }
     }
 }

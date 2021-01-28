@@ -12,6 +12,7 @@ import URLImage
 
 struct ResultView: View {
     @ObservedObject var result: CoopResultsRealm
+    @EnvironmentObject var user: SalmoniaUserCore
     @State var maxWidth: CGFloat = UIScreen.main.bounds.size.width >= 360 ? 120 : 100
     @State var isVisible: Bool = true
     @State var isEnable: Bool = false
@@ -155,21 +156,36 @@ struct ResultView: View {
     
     var ResultPlayerView: some View {
         ForEach(result.player, id:\.self) { player in
-            VStack(alignment: .leading, spacing: 0) {
-                Text("\(isVisible ? player.name.value : "-")")
-                    .font(.custom("Splatfont2", size: 18))
-                    .frame(maxWidth:. infinity)
-                    .padding(.leading, -maxWidth * 1.5)
-                HStack {
+            VStack(spacing: 0) {
+                HStack(alignment: .bottom) {
+                    Text("\(isVisible ? player.name.value : "-")")
+                        .font(.custom("Splatfont2", size: 18))
+                    Spacer()
+                    if user.isUnlock[4] {
+                        VStack(alignment: .leading, spacing: 3) {
+                            if isVisible && result.player.index(of: player) != 0 {
+                                HStack(spacing: 0) {
+                                    Text("Matching")
+                                    Text(" x\(player.count)")
+                                }
+                                .frame(height: 11)
+                            }
+                            HStack(spacing: 0) {
+                                Text("Rate")
+                                Text(" " + String(player.srpower))
+                            }
+                            .frame(height: 11)
+                        }
+                        .font(.custom("Splatfont2", size: 11))
+                        .shadow(color: .black, radius: 0, x: 1, y: 1)
+                        .foregroundColor(.cOrange)
+                    }
+                }
+                .frame(maxWidth: maxWidth * 2.5)
+                HStack(alignment: .top) {
                     WeaponListView(player: player)
                     PlayeResultView(player: player)
                 }
-                .frame(maxWidth: .infinity)
-//                HStack(spacing: 0) {
-//                    Text("Matching")
-//                    Text(" x\(player.count)")
-//                }
-//                LegacyStyleView(player: player)
             }
             .frame(alignment: .bottom)
         }
@@ -222,13 +238,12 @@ struct ResultView: View {
                     } else {
                         Text("Boss Defeated")
                     }
-                    Text(" x\(player.boss_kill_counts.sum())")
+                    Text(" \(player.boss_kill_counts.sum())")
                 }
                 .font(.custom("Splatfont2", size: 12))
                 .shadow(color: .black, radius: 0, x: 1, y: 1)
                 .foregroundColor(Color.init(UIColor.init("E5F100")))
             }
-//            .frame(maxWidth: .infinity)
         }
     }
     
@@ -319,12 +334,39 @@ struct ResultView: View {
             Group {
                 HStack {
                     Text("Defeated")
+                        .lineLimit(1)
                         .frame(width: 40)
                     ForEach(result.player, id:\.self) { player in
-                        Text(String(player.boss_kill_counts.sum()))
-                            .minimumScaleFactor(0.7)
-                            .lineLimit(1)
-                            .frame(maxWidth: .infinity)
+                        if player.boss_kill_counts.sum() * 4 >= result.boss_counts.sum() {
+                            Text(String(player.boss_kill_counts.sum()))
+                                .minimumScaleFactor(0.7)
+                                .lineLimit(1)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.yellow)
+                        } else {
+                            Text(String(player.boss_kill_counts.sum()))
+                                .minimumScaleFactor(0.7)
+                                .lineLimit(1)
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                }
+                HStack {
+                    Text("Egg")
+                        .frame(width: 40)
+                    ForEach(result.player, id:\.self) { player in
+                        if player.golden_ikura_num * 3 >= result.wave.map({ $0.quota_num }).reduce(0, +) {
+                            Text(String(player.golden_ikura_num))
+                                .minimumScaleFactor(0.7)
+                                .lineLimit(1)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.yellow)
+                        } else {
+                            Text(String(player.golden_ikura_num))
+                                .minimumScaleFactor(0.7)
+                                .lineLimit(1)
+                                .frame(maxWidth: .infinity)
+                        }
                     }
                 }
                 HStack {
@@ -392,72 +434,8 @@ struct ResultView: View {
             .padding(.leading, 45)
         }
     }
-    
 }
             
-//                ForEach(Range(0 ... 8), id:\.self) { id in
-//                    if result.boss_counts[id] != 0 {
-//                        HStack {
-//                            VStack(spacing: 0) {
-//                                URLImage(url: URL(string: BOSS[id])!) { image in image.resizable().aspectRatio(1, contentMode: .fit) }
-//                                    .frame(width: 35)
-//                                if result.boss_kill_counts[id] == result.boss_counts[id] {
-//                                    Text("\(result.boss_kill_counts[id])/\(result.boss_counts[id])")
-//                                        .frame(height: 12)
-//                                        .font(.custom("Splatfont", size: 14))
-//                                        .foregroundColor(.yellow)
-//                                } else {
-//                                    Text("\(result.boss_kill_counts[id])/\(result.boss_counts[id])")
-//                                        .frame(height: 12)
-//                                        .font(.custom("Splatfont", size: 14))
-//                                }
-//                            }
-//                            .frame(width: 50)
-//                            ForEach(result.player, id:\.self) { player in
-//                                VStack(spacing: 0) {
-//                                    Text("\(player.boss_kill_counts[id])")
-//
-//                                }
-//                                .font(.custom("Splatfont", size: 16))
-//                                .frame(maxWidth: .infinity)
-//                            }
-//                        }
-//                    }
-//                }
-//                HStack {
-//                    Text("Score")
-//                        .frame(width: 50)
-//                        .font(.custom("Splatfont", size: 14))
-//                    ForEach(result.player, id:\.self) { player in
-//                        Text(String(player.srpower))
-//                            .minimumScaleFactor(0.7)
-//                            .lineLimit(1)
-//                            .font(.custom("Splatfont", size: 16))
-//                    }
-//                    .frame(maxWidth: .infinity)
-//                }
-//                HStack {
-//                    Text("Match")
-//                        .frame(width: 50)
-//                        .font(.custom("Splatfont", size: 14))
-//                    ForEach(result.player, id:\.self) { player in
-//                        Text(String(player.count))
-//                            .font(.custom("Splatfont", size: 16))
-//                    }
-//                    .frame(maxWidth: .infinity)
-//                }
-//            }
-//            .background(Color.black)
-//            .edgesIgnoringSafeArea(.all)
-        
-//        private var Geggs: some View {
-//            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
-//                .frame(width: 15, height: 15)
-//        }
-//        private var Peggs: some View {
-//            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
-//                .frame(width: 15, height: 15)
-//        }
 
 func CalcBias(_ result: CoopResultsRealm, _ nsaid: String) -> Double {
     let player: PlayerResultsRealm = result.player.filter("nsaid=%@", nsaid).first!
@@ -477,13 +455,17 @@ func CalcBias(_ result: CoopResultsRealm, _ nsaid: String) -> Double {
     bias.golden = min(rate + Double(10 * (golden_ikura_num * 3 - quota_num)) / (9.0 * 160.0), max_bias)
     
     switch (bias.golden < rate, bias.defeated < rate) {
-    case (true, true):
+    case (true, true): // どちらもレート以上の実力
         return max(bias.golden, bias.defeated)
-    case (true, false):
+    case (true, false): // 金イクラだけは納品している
         return max(bias.defeated, rate)
-    case (false, true):
-        return min(bias.defeated, rate)
-    case (false, false):
+    case (false, true): // オオモノだけはたおしている
+        if bias.defeated == max_bias {
+            return bias.defeated // とてもたおしている場合
+        } else { // そこまでたおせていない場合
+            return min(bias.defeated, rate)
+        }
+    case (false, false): // どちらもできていない
         return min(bias.golden, bias.defeated)
     }
 }

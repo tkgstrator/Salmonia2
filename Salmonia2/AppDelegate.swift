@@ -122,11 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     // 課金システムを搭載
     func initSwiftyStoreKit() {
-        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+        SwiftyStoreKit.completeTransactions(atomically: false) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
                 case .purchased, .restored:
                     if purchase.needsFinishTransaction {
+                        print(purchase.transaction)
                         SwiftyStoreKit.finishTransaction(purchase.transaction)
                     }
                 // Unlock content
@@ -141,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     // アプリの課金情報を取得する
     func retrieveProduct() {
-        let productIds = ["work.tkgstrator.Salmonia2.Accounts", "work.tkgstrator.Salmonia2.Consumable.Donation", "work.tkgstrator.Salmonia2.MonthlyPass"]
+        let productIds = ["work.tkgstrator.Salmonia2.Accounts"]
         autoreleasepool {
             guard let realm = try? Realm() else { return }
             for productId in productIds {
@@ -153,7 +154,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             "localizedDescription": product.localizedDescription,
                             "localizedPrice": product.localizedPrice!
                         ]
+                        print(product.productIdentifier)
                         print(product.localizedTitle)
+                        print(product.localizedDescription)
+                        print(product.localizedPrice)
                         realm.beginWrite()
                         realm.create(FeatureProductRealm.self, value: value, update: .all)
                         try? realm.commitWrite()

@@ -57,16 +57,6 @@ extension UserInfoRealm {
     }
 }
 
-//extension Results where Element: UserInfoRealm {
-//    func move(_ from: Int, _ to: Int) {
-//        let _tmp = self[from].index
-//        try? Realm().write() {
-//            self[from].index = self[to].index
-//            self[to].index = _tmp
-//        }
-//    }
-//}
-
 extension Double {
     // Swiftは桁丸めに対応していなので丸めるやつ
     func round(digit: Int) -> Double {
