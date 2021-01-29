@@ -10,7 +10,9 @@ import URLImage
 import RealmSwift
 
 struct ResultCollectionView: View {
-    @ObservedObject var core: UserResultCore
+    @EnvironmentObject var core: UserResultCore // 全リザルトを取得
+    @EnvironmentObject var phase: CoopShiftCore // クマブキを表示するかどうかの情報
+    @EnvironmentObject var user: SalmoniaUserCore // 課金しているかどうかの情報
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
     @State var isEnable: [Bool] = [true, true, true, true, true]
@@ -18,9 +20,12 @@ struct ResultCollectionView: View {
     
     var body: some View {
         List {
-            ForEach(core.results.indices, id:\.self) { idx in
-                NavigationLink(destination: ResultView(result: core.results[idx])) {
-                    ResultStack(result: core.results[idx], isPersonal: $isPersonal)
+            ForEach(core.data.indices, id:\.self) { idx in
+                CoopShiftStack(phase: core.data[idx].phase, isRareWeapon: $phase.isUnlockWeapon)
+                ForEach(core.data[idx].results, id:\.self) { result in
+                    NavigationLink(destination: ResultView(result: result)) {
+                        ResultStack(result: result, isPersonal: $isPersonal)
+                    }
                 }
             }
         }
@@ -30,11 +35,6 @@ struct ResultCollectionView: View {
     
     private var AddButton: some View {
         HStack(spacing: 15) {
-//            NavigationLink(destination: LoadingView())
-//            {
-//                URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!) { image in image.renderingMode(.original).resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
-//                    .frame(width: 30, height: 30)
-//            }
             Image(systemName: "person.circle.fill")
                 .Modifier(isPersonal)
                 .onTapGesture() { isPersonal.toggle() }
@@ -51,7 +51,8 @@ struct ResultCollectionView: View {
     private struct ResultStack: View {
         @ObservedObject var result: CoopResultsRealm
         @Binding var isPersonal: Bool
-        
+        var gradeID: [String] = ["Intern", "Apparentice","Part-Timer", "Go-Getter", "Overachiever", "Profreshional"]
+
         var body: some View {
             HStack {
                 Group {
@@ -62,17 +63,56 @@ struct ResultCollectionView: View {
                         VStack(spacing: 0) {
                             Text("Defeat")
                             Text("Wave \(result.failure_wave.value!)")
-                                .frame(height: 16)
+                                .frame(height: 12)
                         }
+                        .font(.custom("Splatfont", size: 14))
                         .foregroundColor(.orange)
                     }
                 }
-                .modifier(Splatfont(size: 16))
-                .frame(minWidth: 80)
-                
-                Text(String(result.danger_rate)+"%")
-                    .font(.custom("Splatfont", size: 16))
-                Spacer()
+                .frame(minWidth: 60)
+                // 評価の変動とかを載せるやつ
+                Group {
+                    Spacer()
+                    if result.grade_point_delta.value != nil && !isPersonal {
+                        if result.grade_point_delta.value! > 0 {
+                            Group {
+                                Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                                    .lineLimit(1)
+                                Text("\(result.grade_point.value.value)")
+                                Text("↑")
+                                    .foregroundColor(.cRed)
+                                    .font(.custom("Splatfont", size: 20))
+                            }
+                        }
+                        if result.grade_point_delta.value! == 0 {
+                            Group {
+                                Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                                    .lineLimit(1)
+                                Text("\(result.grade_point.value.value)")
+                                Text("→")
+                                    .font(.custom("Splatfont", size: 20))
+                            }
+                            .foregroundColor(.cGray)
+                        }
+                        if result.grade_point_delta.value! < 0 {
+                            Group {
+                                Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                                    .lineLimit(1)
+                                Text("\(result.grade_point.value.value)")
+                                Text("↓")
+                                    .font(.custom("Splatfont", size: 20))
+                            }
+                            .foregroundColor(.cGray)
+                        }
+                    }
+                    if result.grade_point_delta.value == nil || isPersonal {
+                        Text("\(result.grade_id.value != nil ? gradeID[result.grade_id.value ?? 5].localized : "-")")
+                            .lineLimit(1)
+                        Text(String(result.danger_rate)+"%")
+                    }
+                    Spacer()
+                }
+                .font(.custom("Splatfont", size: 16))
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
@@ -96,6 +136,7 @@ struct ResultCollectionView: View {
                 .frame(width: 80)
                 .font(.custom("Splatfont2", size: 16))
             }
+            .font(.custom("Splatfont", size: 14))
         }
     }
     
@@ -159,6 +200,6 @@ struct ResultCollectionView: View {
 
 struct ResultCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ResultCollectionView(core: UserResultCore())
+        ResultCollectionView()
     }
 }

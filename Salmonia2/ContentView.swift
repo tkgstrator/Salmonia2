@@ -18,7 +18,7 @@ struct ContentView: View {
                 AdBannerView()
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+//        .navigationViewStyle(StackNavigationViewStyle())
         .listStyle(GroupedListStyle())
     }
 }

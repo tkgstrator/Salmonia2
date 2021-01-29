@@ -49,6 +49,7 @@
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
 		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
+		10B9776825C44E4B005A0470 /* ShiftStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B9776725C44E4B005A0470 /* ShiftStatsView.swift */; };
 		10BB00822530F63D0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00842530F63D0081C6EB /* Localizable.strings */; };
 		10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00902530F66A0081C6EB /* Localizable.strings */; };
 		10BB00A125310C1C0081C6EB /* WaveCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */; };
@@ -80,7 +81,6 @@
 		10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB350025217EFF0046CBCA /* CoopShiftCore.swift */; };
 		10E414B825679DE4006E28D7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E414B725679DE4006E28D7 /* Log.swift */; };
 		10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA355252191340027209D /* SalmoniaUserCore.swift */; };
-		10EFA35E2521DCD00027209D /* ShiftStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */; };
 		10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3682521DE6E0027209D /* UserStatsCore.swift */; };
 		10EFA39E252398820027209D /* CrewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA39D252398810027209D /* CrewListView.swift */; };
 		10EFA3A325239E0A0027209D /* ImportResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3A225239E0A0027209D /* ImportResultView.swift */; };
@@ -156,6 +156,7 @@
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
+		10B9776725C44E4B005A0470 /* ShiftStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftStatsView.swift; sourceTree = "<group>"; };
 		10BB00532530C3B00081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		10BB00832530F63D0081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10BB008F2530F66A0081C6EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -190,7 +191,6 @@
 		10BB350C252182220046CBCA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		10E414B725679DE4006E28D7 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		10EFA355252191340027209D /* SalmoniaUserCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaUserCore.swift; sourceTree = "<group>"; };
-		10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShiftStatsView.swift; path = ../ShiftStatsView.swift; sourceTree = "<group>"; };
 		10EFA3682521DE6E0027209D /* UserStatsCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCore.swift; sourceTree = "<group>"; };
 		10EFA39D252398810027209D /* CrewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewListView.swift; sourceTree = "<group>"; };
 		10EFA3A225239E0A0027209D /* ImportResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportResultView.swift; sourceTree = "<group>"; };
@@ -267,7 +267,10 @@
 			isa = PBXGroup;
 			children = (
 				105F690E252F33F2003306C8 /* Salmonia2.entitlements */,
-				10BB34B0252175170046CBCA /* iOS13 */,
+				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
+				10B10C3E252859180025057F /* SalmonStatsView.swift */,
+				10BB348B252174F60046CBCA /* Core */,
+				10BB34B6252175170046CBCA /* Components */,
 				10BB3489252174F60046CBCA /* Assets */,
 				10BB00632530C4350081C6EB /* Languages */,
 				1037E3A025209C7C001B41B0 /* AppDelegate.swift */,
@@ -413,18 +416,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		10BB34B0252175170046CBCA /* iOS13 */ = {
-			isa = PBXGroup;
-			children = (
-				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
-				10B10C3E252859180025057F /* SalmonStatsView.swift */,
-				10BB348B252174F60046CBCA /* Core */,
-				10BB34B6252175170046CBCA /* Components */,
-			);
-			name = iOS13;
-			path = Salmonia2/iOS13;
-			sourceTree = SOURCE_ROOT;
-		};
 		10BB34B1252175170046CBCA /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,7 +436,7 @@
 				10BB34B1252175170046CBCA /* Setting */,
 				1063EE112581B7180050F4D0 /* AchievementView.swift */,
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
-				10EFA35D2521DCCF0027209D /* ShiftStatsView.swift */,
+				10B9776725C44E4B005A0470 /* ShiftStatsView.swift */,
 				1053967C2524206200132668 /* StageRecordView.swift */,
 				10BB34BA252175170046CBCA /* PlayerView.swift */,
 				1053968A25242EE500132668 /* OtherPlayerView.swift */,
@@ -776,7 +767,6 @@
 				1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */,
 				10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */,
 				10BB34C6252175170046CBCA /* LoadingView.swift in Sources */,
-				10EFA35E2521DCD00027209D /* ShiftStatsView.swift in Sources */,
 				1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */,
 				10F2825C2530B58700D7B2BE /* WaveResultCore.swift in Sources */,
 				108F2C67257766BB00287900 /* SyncUserData.swift in Sources */,
@@ -795,6 +785,7 @@
 				1056CF402533E9430078E3B4 /* CrewSearchView.swift in Sources */,
 				10B10C4A2528EC480025057F /* BossType.swift in Sources */,
 				10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */,
+				10B9776825C44E4B005A0470 /* ShiftStatsView.swift in Sources */,
 				1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */,
 				10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */,
 				1057D6E225B7E56B00666242 /* SpecialType.swift in Sources */,

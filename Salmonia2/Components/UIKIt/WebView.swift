@@ -83,28 +83,6 @@ struct WebBrowser: View {
         Text(verbatim: browser.url?.absoluteString.removingPercentEncoding ?? "")
     }
     
-    func notification(title: Notification, message: Notification) {
-        
-        let content = UNMutableNotificationContent()
-        content.title = title.localizedDescription.localized
-        content.body = message.localizedDescription.localized
-        content.sound = UNNotificationSound.default
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-        UNUserNotificationCenter.current().add(request)
-    }
-    
-    func notification(title: Notification, error: Error) {
-        
-        let content = UNMutableNotificationContent()
-        content.title = title.localizedDescription.localized
-        content.body = error.localizedDescription.localized
-        content.sound = UNNotificationSound.default
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)
-        UNUserNotificationCenter.current().add(request)
-    }
-    
     @State var isPresented: Bool = false
     @State var message: String  = ""
     @State var isSuccess: Bool = false

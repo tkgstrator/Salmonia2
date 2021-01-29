@@ -24,7 +24,7 @@ struct ShiftStatsView: View {
                 CoopShiftStack(phase: stats.shift, isRareWeapon: $stats.isRareWeapon)
                 // 課金しているユーザだけが個別のリザルトにジャンプできる
                 if user.isPurchase {
-                    NavigationLink(destination: ResultCollectionView(core: UserResultCore(start_time: stats.schedule!))) {
+                    NavigationLink(destination: ResultCollectionView()) {
                         ShiftStatsStack(title: "Job Num", value: stats.job_num)
                     }
                 } else {

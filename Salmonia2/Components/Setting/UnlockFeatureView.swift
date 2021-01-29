@@ -17,22 +17,11 @@ struct UnlockFeatureView: View {
             Section(header: Text("Free")
                         .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange)) {
-                Toggle(isOn: $user.isUnlock[0]) {
-                    Text("Future Rotation")
-                }
-                Toggle(isOn: $user.isUnlock[1]) {
-                    Text("Grizzco Weapons")
-                }
-                Toggle(isOn: $user.isUnlock[2]) {
-                    Text("Force Update")
-                }
-                Toggle(isOn: $user.isUnlock[3]) {
-                    Text("Disable Ads")
-                }
-                .disabled(!user.isPurchase)
-                Toggle(isOn: $user.isUnlock[4]) {
-                    Text("Legacy Style")
-                }
+                Toggle("Future Rotation", isOn: $user.isUnlock[0])
+                Toggle("Grizzco Weapons", isOn: $user.isUnlock[1])
+                Toggle("Force Update", isOn: $user.isUnlock[2])
+                Toggle("Disable Ads", isOn: $user.isUnlock[3])
+                Toggle("Legacy Style", isOn: $user.isUnlock[4])
             }
             Section(header: Text("Paid")
                         .font(.custom("Splatfont2", size: 16))
@@ -60,9 +49,7 @@ struct UnlockFeatureView: View {
             user.updateUnlock(user.isUnlock)
         }
     }
-   
 
-    
     struct PayButton: View {
         var isValid: Bool
         var isSubscribed: Bool
