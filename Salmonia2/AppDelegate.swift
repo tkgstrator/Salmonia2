@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // データベースのマイグレーション
     func realmMigration() {
         let config = Realm.Configuration(
-            schemaVersion: 24,
+            schemaVersion: 25,
             migrationBlock: { [self] migration, oldSchemaVersion in
                 print("MIGRATION", oldSchemaVersion)
                 // 毎回再読込する
