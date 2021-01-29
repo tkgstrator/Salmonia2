@@ -166,9 +166,6 @@ struct ResultCollectionView: View {
                         Slider(value: $sliderValue,
                                in: 0 ... 200,
                                step: 1,
-                               onEditingChanged: { pressed in
-                                update()
-                               },
                                minimumValueLabel: Text("0").modifier(Splatfont2(size: 16)),
                                maximumValueLabel: Text("200").modifier(Splatfont2(size: 16)),
                                label: { EmptyView() }

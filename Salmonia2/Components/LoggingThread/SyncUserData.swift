@@ -41,7 +41,7 @@ struct SyncUserData: View {
                         }
                         
                         // マッチングした仲間のnsaidを全て抽出する
-                        let players = Array(Set(realm.objects(PlayerResultsRealm.self).map({ $0.nsaid! })))
+                        var players = Array(Set(realm.objects(PlayerResultsRealm.self).map({ $0.nsaid! })))
                         log.progress = (nil, 0, players.count)
                         
                         let _players = players.chunked(by: 200)
@@ -60,6 +60,7 @@ struct SyncUserData: View {
                             }
                         }
                         // 全部終わったらアップデートする
+                        players = Array(realm.objects(CrewInfoRealm.self).map({ $0.nsaid })) // BANされたアカウント対策
                         for nsaid in players {
                             guard let player = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", nsaid).first else { return }
                             realm.objects(PlayerResultsRealm.self).filter("nsaid=%@", nsaid).setValue(player.name, forKey: "name")
