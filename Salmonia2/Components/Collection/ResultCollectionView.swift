@@ -76,7 +76,7 @@ struct ResultCollectionView: View {
                         if result.grade_point_delta.value! > 0 {
                             Group {
                                 Text("\(gradeID[result.grade_id.value ?? 5].localized)")
-                                    .lineLimit(1)
+//                                    .lineLimit(1)
                                 Text("\(result.grade_point.value.value)")
                                 Text("↑")
                                     .foregroundColor(.cRed)
@@ -86,7 +86,7 @@ struct ResultCollectionView: View {
                         if result.grade_point_delta.value! == 0 {
                             Group {
                                 Text("\(gradeID[result.grade_id.value ?? 5].localized)")
-                                    .lineLimit(1)
+//                                    .lineLimit(1)
                                 Text("\(result.grade_point.value.value)")
                                 Text("→")
                                     .font(.custom("Splatfont", size: 20))
@@ -96,7 +96,7 @@ struct ResultCollectionView: View {
                         if result.grade_point_delta.value! < 0 {
                             Group {
                                 Text("\(gradeID[result.grade_id.value ?? 5].localized)")
-                                    .lineLimit(1)
+//                                    .lineLimit(1)
                                 Text("\(result.grade_point.value.value)")
                                 Text("↓")
                                     .font(.custom("Splatfont", size: 20))
@@ -106,7 +106,7 @@ struct ResultCollectionView: View {
                     }
                     if result.grade_point_delta.value == nil || isPersonal {
                         Text("\(result.grade_id.value != nil ? gradeID[result.grade_id.value ?? 5].localized : "-")")
-                            .lineLimit(1)
+//                            .lineLimit(1)
                         Text(String(result.danger_rate)+"%")
                     }
                     Spacer()

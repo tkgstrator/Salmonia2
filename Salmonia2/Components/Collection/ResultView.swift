@@ -115,7 +115,7 @@ struct ResultView: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: 36)
                             .minimumScaleFactor(0.7)
-                            .lineLimit(1)
+//                            .lineLimit(1)
                             .background(Color.init(UIColor.init("2A270B")))
                         Group {
                             Text("\(wave.ikura_num)")
@@ -133,7 +133,7 @@ struct ResultView: View {
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 3)
                         Text("Appearances")
-                            .lineLimit(1)
+//                            .lineLimit(1)
                         Text(" x\(wave.golden_ikura_pop_num)")
                     }
                     .font(.custom("Splatfont2", size: 12))
@@ -244,7 +244,7 @@ struct ResultView: View {
                             .frame(width: 18, height: 18)
                         Spacer()
                         Text("x" + String(player.golden_ikura_num))
-                            .lineLimit(1)
+//                            .lineLimit(1)
                     }
                     .frame(width: maxWidth)
                     .padding(.horizontal, 5)
@@ -253,7 +253,7 @@ struct ResultView: View {
                             .frame(width: 20.5, height: 15)
                         Spacer()
                         Text("x" + String(player.ikura_num))
-                            .lineLimit(1)
+//                            .lineLimit(1)
                     }
                     .frame(width: maxWidth)
                     .padding(.horizontal, 5)
@@ -323,7 +323,7 @@ struct ResultView: View {
                     ForEach(result.player, id:\.self) { player in
                         Text(String(player.boss_kill_counts.sum()))
                             .minimumScaleFactor(0.7)
-                            .lineLimit(1)
+//                            .lineLimit(1)
                             .frame(maxWidth: .infinity)
                     }
                 }
@@ -333,7 +333,7 @@ struct ResultView: View {
                     ForEach(result.player, id:\.self) { player in
                         Text(String(player.srpower))
                             .minimumScaleFactor(0.7)
-                            .lineLimit(1)
+//                            .lineLimit(1)
                             .frame(maxWidth: .infinity)
                     }
                 }
@@ -383,7 +383,7 @@ struct ResultView: View {
                         URLImage(url: URL(string: isVisible ? player.imageUri : DEFAULT_IMAGE)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                             .frame(width: 50, height: 50)
                         Text(isVisible ? player.name.value : "-")
-                            .lineLimit(1)
+//                            .lineLimit(1)
                     }
                     .font(.custom("Splatfont2", size: 12))
                     .frame(maxWidth: .infinity)

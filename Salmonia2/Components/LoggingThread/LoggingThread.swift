@@ -20,10 +20,10 @@ struct LoggingThread: View {
                 Text("Developed by @Herlingum")
                     .minimumScaleFactor(0.7)
                 Text("Thanks @Yukinkling, @barley_ural")
-                    .lineLimit(1)
+//                    .lineLimit(1)
                     .minimumScaleFactor(0.7)
                 Text("API @frozenpandaman, @nexusmine")
-                    .lineLimit(1)
+//                    .lineLimit(1)
                     .minimumScaleFactor(0.7)
             }
             .font(.custom("Roboto Mono", size: 18))

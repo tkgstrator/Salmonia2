@@ -30,12 +30,10 @@ struct Splatfont: ViewModifier {
             return
                 content
                 .font(.custom("FZYHFW--GB1-0", size: size + 4))
-//                .minimumScaleFactor(0.7)
         } else {
             return
                 content
                 .font(.custom("Splatfont", size: size))
-//                .minimumScaleFactor(0.7)
         }
     }
 }
@@ -49,13 +47,13 @@ struct Splatfont2: ViewModifier {
                 content
                 .font(.custom("FZYHFW--GB1-0", size: size))
                 .minimumScaleFactor(0.7)
-                .lineLimit(1)
+//                .lineLimit(1)
         } else {
             return
                 content
                 .font(.custom("Splatfont2", size: size))
                 .minimumScaleFactor(0.7)
-                .lineLimit(1)
+//                .lineLimit(1)
         }
         //            .frame(height: size)
     }

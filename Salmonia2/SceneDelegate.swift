@@ -30,6 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(WaveResultCore())
             .environmentObject(AchievementCore())
             .environmentObject(FeatureProductCore())
+            .environment(\.lineLimit, 1)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

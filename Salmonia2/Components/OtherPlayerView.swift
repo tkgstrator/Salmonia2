@@ -18,11 +18,9 @@ struct OtherPlayerView: View {
     var body: some View {
         ScrollView {
             HStack {
-//                NavigationLink(destination: ResultCollectionView().environmentObject(UserResultCore())) {
                 URLImage(url: URL(string: player.imageUri ?? "https://cdn-image-e0d67c509fb203858ebcb2fe3f88c2aa.baas.nintendo.com/1/c9714d21f0dce5c6")!) { image in
                     image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                     .frame(width: 80, height: 80)
-//                }.buttonStyle(PlainButtonStyle())
                 Text(player.nickname).modifier(Splatfont(size: 28)).frame(maxWidth: .infinity)
             }
             Text("Overview").foregroundColor(.cOrange).modifier(Splatfont(size: 20))
@@ -31,18 +29,18 @@ struct OtherPlayerView: View {
                 VStack(spacing: 0) {
                     Text("Jobs")
                         .modifier(Splatfont(size: 18))
-                        .lineLimit(1)
+//                        .lineLimit(1)
                         .minimumScaleFactor(0.7)
                     Text("\(player.job_num)")
                         .font(.custom("Splatfont", size: 18))
-                        .lineLimit(1)
+//                        .lineLimit(1)
                         .minimumScaleFactor(0.7)
                 }
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Avg Eggs")
                         .modifier(Splatfont(size: 18))
-                        .lineLimit(1)
+//                        .lineLimit(1)
                         .minimumScaleFactor(0.7)
                     HStack {
                         Text(String((Double(player.golden_ikura_total) / Double(player.job_num)).round(digit: 2))).foregroundColor(.yellow)
@@ -50,20 +48,20 @@ struct OtherPlayerView: View {
                         Text(String((Double(player.ikura_total) / Double(player.job_num)).round(digit: 2))).foregroundColor(.red)
                     }
                     .font(.custom("Splatfont", size: 18))
-                    .lineLimit(1)
+//                    .lineLimit(1)
                     .minimumScaleFactor(0.7)
                 }
                 Spacer()
                 VStack(spacing: 0) {
                     Text("Defeated")
                         .modifier(Splatfont(size: 18))
-                        .lineLimit(1)
+//                        .lineLimit(1)
                         .minimumScaleFactor(0.7)
                     HStack {
                         Text(String((Double(player.defeated) / Double(player.job_num)).round(digit: 2)))
                     }
                     .font(.custom("Splatfont", size: 18))
-                    .lineLimit(1)
+//                    .lineLimit(1)
                     .minimumScaleFactor(0.7)
                 }
                 Spacer()
