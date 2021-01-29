@@ -28,6 +28,13 @@ class UserResultCore: ObservableObject {
             data = start_time.map({ UserCoopResult(start_time: $0) })
         }
     }
+
+    init(_ start_time: Int) {
+        token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
+            data = [UserCoopResult(start_time: start_time)]
+        }
+
+    }
     
     deinit {
         token?.invalidate()

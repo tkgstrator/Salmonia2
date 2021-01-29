@@ -19,7 +19,7 @@ struct PlayerView: View {
                         .frame(width: 60, height: 60)
                     Text(user.nickname).modifier(Splatfont(size: 20)).frame(maxWidth: .infinity)
                 }
-                NavigationLink(destination: ResultCollectionView()) {
+                NavigationLink(destination: ResultCollectionView(core: UserResultCore())) {
                     Text("Job results").modifier(Splatfont2(size: 16))
                 }
                 .buttonStyle(PlainButtonStyle())

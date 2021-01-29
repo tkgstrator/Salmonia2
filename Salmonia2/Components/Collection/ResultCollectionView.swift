@@ -10,7 +10,8 @@ import URLImage
 import RealmSwift
 
 struct ResultCollectionView: View {
-    @EnvironmentObject var core: UserResultCore // 全リザルトを取得
+    @ObservedObject var core: UserResultCore
+//    @EnvironmentObject var core: UserResultCore // 全リザルトを取得
     @EnvironmentObject var user: SalmoniaUserCore // 課金しているかどうかの情報
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
@@ -196,6 +197,7 @@ struct ResultCollectionView: View {
 
 struct ResultCollectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ResultCollectionView()
+        ResultCollectionView(core: UserResultCore())
+//        ResultCollectionView()
     }
 }
