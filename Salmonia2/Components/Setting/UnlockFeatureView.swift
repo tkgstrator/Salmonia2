@@ -11,6 +11,9 @@ import SwiftyStoreKit
 struct UnlockFeatureView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var paid: FeatureProductCore
+    @State var isVisible: Bool = false
+    @State var mLog: String = ""
+    @State var mTitle: String = ""
     
     var body: some View {
         List {
@@ -42,14 +45,83 @@ struct UnlockFeatureView: View {
                     }.frame(height: 60)
                 }
             }
+            Section(header: Text("Option")
+                        .font(.custom("Splatfont2", size: 16))
+                        .foregroundColor(.cOrange)) {
+                HStack {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Restore")
+                                .modifier(Splatfont2(size: 16))
+                        }
+                        Text("Restore purchased product")
+                            .modifier(Splatfont2(size: 14))
+                    }
+                    Spacer()
+                    RestoreButton
+                }.frame(height: 60)
+            }
         }
         .modifier(Splatfont2(size: 16))
         .navigationBarTitle("Feature")
+        .alert(isPresented: $isVisible) {
+            Alert(title: Text(mTitle.localized), message: Text(mLog.localized))
+        }
         .onDisappear() {
-            user.updateUnlock(user.isUnlock)
+            user.updateUnlock(user.isUnlock) // アンロックした情報を書き込む
+        }
+    }
+    
+    func restoreStoreKit() {
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                mTitle = "Failed"
+                mLog = "Restore Failed"
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+            } else if results.restoredPurchases.count > 0 {
+                mLog = "Restore Success"
+                for product in results.restoredPurchases {
+                    print(product.productId)
+                    do {
+                        guard let data = realm.objects(FeatureProductRealm.self).filter("productIdentifier=%@", product.productId).first else { throw SKError.invalid }
+                        guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw SKError.unknown}
+                        realm.beginWrite()
+                        data.isValid = false
+                        user.isPurchase = false
+                        try? realm.commitWrite()
+                        mTitle = "Success"
+                        mLog = "Restore Success"
+                        print("Success")
+                    } catch(let error) {
+                        mTitle = "Failed"
+                        mLog = error.localizedDescription
+                        print("Failed")
+                    }
+                }
+                print("Restore Success: \(results.restoredPurchases)")
+            } else {
+                mTitle = "Failed"
+                mLog = "Nothing to Restore"
+                print("Nothing to Restore")
+            }
+            isVisible = true
         }
     }
 
+    
+    var RestoreButton: some View {
+        Button("Restore") {
+            restoreStoreKit()
+        }
+        .buttonStyle(PlainButtonStyle())
+        .padding(.horizontal, 10)
+        .padding(.vertical, 3)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.white, lineWidth: 3)
+        )
+    }
+    
     struct PayButton: View {
         var isValid: Bool
         var isSubscribed: Bool
@@ -92,7 +164,7 @@ struct UnlockFeatureView: View {
                         }
                     }
                 case .error(let error):
-//                    self.hud.dismiss()
+                    //                    self.hud.dismiss()
                     switch error.code {
                     case .unknown:
                         print("Unknown error. Please contact support")
@@ -116,7 +188,6 @@ struct UnlockFeatureView: View {
                     }
                 }
             }
-        
         }
     }
 }

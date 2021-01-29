@@ -127,3 +127,35 @@ extension Color {
     static let cLightGray = Color("cLightGray")
     static let cBlue = Color("cBlue")
 }
+
+enum SKError: Error {
+    case unknown
+    case invalid
+    case expired
+}
+
+extension SKError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .unknown:
+            return "Unknown Error"
+        case .invalid:
+            return "Invalid ProductId"
+        case .expired:
+            return "Subscription is Expired"
+        }
+    }
+}
+
+extension SKError: CustomNSError {
+    var errorCode: Int {
+        switch self {
+        case .unknown:
+            return 9999
+        case .invalid:
+            return 1000
+        case .expired:
+            return 2000
+        }
+    }
+}

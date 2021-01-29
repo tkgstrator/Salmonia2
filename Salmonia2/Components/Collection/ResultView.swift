@@ -12,6 +12,7 @@ import URLImage
 
 struct ResultView: View {
     @ObservedObject var result: CoopResultsRealm
+    @EnvironmentObject var user: SalmoniaUserCore
     @State var maxWidth: CGFloat = UIScreen.main.bounds.size.width >= 360 ? 120 : 100
     @State var isVisible: Bool = true
     @State var isEnable: Bool = false
@@ -155,21 +156,36 @@ struct ResultView: View {
     
     var ResultPlayerView: some View {
         ForEach(result.player, id:\.self) { player in
-            VStack(alignment: .leading, spacing: 0) {
-                Text("\(isVisible ? player.name.value : "-")")
-                    .font(.custom("Splatfont2", size: 18))
-                    .frame(maxWidth:. infinity)
-                    .padding(.leading, -maxWidth * 1.5)
-                HStack {
+            VStack(spacing: 0) {
+                HStack(alignment: .bottom) {
+                    Text("\(isVisible ? player.name.value : "-")")
+                        .font(.custom("Splatfont2", size: 18))
+                    Spacer()
+                    if user.isUnlock[4] {
+                        VStack(alignment: .leading, spacing: 3) {
+                            if isVisible && result.player.index(of: player) != 0 {
+                                HStack(spacing: 0) {
+                                    Text("Matching")
+                                    Text(" x\(player.count)")
+                                }
+                                .frame(height: 11)
+                            }
+                            HStack(spacing: 0) {
+                                Text("Rate")
+                                Text(" " + String(player.srpower))
+                            }
+                            .frame(height: 11)
+                        }
+                        .font(.custom("Splatfont2", size: 11))
+                        .shadow(color: .black, radius: 0, x: 1, y: 1)
+                        .foregroundColor(.cOrange)
+                    }
+                }
+                .frame(maxWidth: maxWidth * 2.5)
+                HStack(alignment: .top) {
                     WeaponListView(player: player)
                     PlayeResultView(player: player)
                 }
-                .frame(maxWidth: .infinity)
-//                HStack(spacing: 0) {
-//                    Text("Matching")
-//                    Text(" x\(player.count)")
-//                }
-//                LegacyStyleView(player: player)
             }
             .frame(alignment: .bottom)
         }

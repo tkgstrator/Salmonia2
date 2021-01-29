@@ -11,7 +11,7 @@
 "Sign in" = "サインイン";
 "Coop Shift Rotation" = "シフトスケジュール";
 "Achievement" = "実績";
-"Shist Stats" = "シフト統計";
+"Shift Stats" = "シフト統計";
 
 // Settings
 "Accounts" = "アカウント";
@@ -61,6 +61,12 @@
 "Purchased" = "購入済";
 "Subscribe" = "購読";
 "Subscribed" = "購読済";
+"Restore" = "復元";
+"Option" = "オプション";
+"Nothing to Restore" = "復元する項目がありません";
+"Restore Success" = "復元成功しました";
+"Restore Failed" = "復元失敗しました";
+"Restore purchased product" = "購入済みの製品を復元します";
 "Enable multiple accounts." = "複数アカウントの同時リザルト取得ができるようになります";
 "Willing to add new features." = "新機能実装を応戦する寄付をします";
 "Donate to the developer as operating cost." = "開発者を支援します";
@@ -116,7 +122,11 @@
 "Boss Salmonids defeated" = "オオモノシャケを倒した回数";
 "Boss defeated" = "オオモノ討伐数";
 "Appearances" = "出現数";
+"Matching" = "マッチング回数";
+"Rate" = "レーティング";
+"Egg" = "イクラ";
 "Eval" = "評価";
+"Score" = "スコア";
 
 // Stats
 "Global Records" = "世界記録";
@@ -152,13 +162,16 @@
 "Griller" = "グリル";
 "Drizzler" = "コウモリ";
 
-// Result
-"Score" = "スコア";
-
 // Clear/Failure in SplatNet2
 "Clear!" = "Clear!!";
 "Defeat" = "Failure";
 "Hazard Level Max!!" = "キケン度MAX!!";
+"Intern" = "けんしゅう";
+"Apparentice" = "かけだし";
+"Part-Timer" = "はんにんまえ";
+"Go-Getter" = "いちにんまえ";
+"Overachiever" = "じゅくれん";
+"Profreshional" = "たつじん";
 "Stage" = "ステージ";
 "Avg Eggs" = "平均イクラ数";
 

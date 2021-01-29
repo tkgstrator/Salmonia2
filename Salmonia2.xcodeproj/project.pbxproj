@@ -67,7 +67,7 @@
 		10BB34A4252174F60046CBCA /* RobotoMono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BB3496252174F60046CBCA /* RobotoMono.ttf */; };
 		10BB34A5252174F60046CBCA /* Splatfont1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BB3497252174F60046CBCA /* Splatfont1.ttf */; };
 		10BB34A6252174F60046CBCA /* Splatfont2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 10BB3498252174F60046CBCA /* Splatfont2.ttf */; };
-		10BB34A7252174F60046CBCA /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3499252174F60046CBCA /* Enum.swift */; };
+		10BB34A7252174F60046CBCA /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3499252174F60046CBCA /* Error.swift */; };
 		10BB34BD252175170046CBCA /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B2252175170046CBCA /* UserListView.swift */; };
 		10BB34BE252175170046CBCA /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B3252175170046CBCA /* SettingView.swift */; };
 		10BB34BF252175170046CBCA /* UnlockFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B4252175170046CBCA /* UnlockFeatureView.swift */; };
@@ -175,7 +175,7 @@
 		10BB3496252174F60046CBCA /* RobotoMono.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RobotoMono.ttf; sourceTree = "<group>"; };
 		10BB3497252174F60046CBCA /* Splatfont1.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont1.ttf; sourceTree = "<group>"; };
 		10BB3498252174F60046CBCA /* Splatfont2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatfont2.ttf; sourceTree = "<group>"; };
-		10BB3499252174F60046CBCA /* Enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		10BB3499252174F60046CBCA /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		10BB34B2252175170046CBCA /* UserListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
 		10BB34B3252175170046CBCA /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		10BB34B4252175170046CBCA /* UnlockFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlockFeatureView.swift; sourceTree = "<group>"; };
@@ -315,7 +315,7 @@
 		1053968925242DC600132668 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
-				10BB3499252174F60046CBCA /* Enum.swift */,
+				10BB3499252174F60046CBCA /* Error.swift */,
 				1053968425242A7000132668 /* StageType.swift */,
 				10B10C492528EC480025057F /* BossType.swift */,
 				105396F325264C2000132668 /* WeaponType.swift */,
@@ -779,7 +779,7 @@
 				1048631625697630001FDFBD /* CoopShiftCollectionView.swift in Sources */,
 				10BB34BE252175170046CBCA /* SettingView.swift in Sources */,
 				108456A8257CCCA3006EB397 /* Global.swift in Sources */,
-				10BB34A7252174F60046CBCA /* Enum.swift in Sources */,
+				10BB34A7252174F60046CBCA /* Error.swift in Sources */,
 				10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */,
 				10BB34A1252174F60046CBCA /* Extension.swift in Sources */,
 				1056CF402533E9430078E3B4 /* CrewSearchView.swift in Sources */,
@@ -1018,7 +1018,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1031,7 +1031,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1049,7 +1049,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1063,7 +1063,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
