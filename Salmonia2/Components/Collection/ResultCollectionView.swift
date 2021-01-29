@@ -11,7 +11,6 @@ import RealmSwift
 
 struct ResultCollectionView: View {
     @EnvironmentObject var core: UserResultCore // 全リザルトを取得
-    @EnvironmentObject var phase: CoopShiftCore // クマブキを表示するかどうかの情報
     @EnvironmentObject var user: SalmoniaUserCore // 課金しているかどうかの情報
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
@@ -21,7 +20,7 @@ struct ResultCollectionView: View {
     var body: some View {
         List {
             ForEach(core.data.indices, id:\.self) { idx in
-                CoopShiftStack(phase: core.data[idx].phase, isRareWeapon: $phase.isUnlockWeapon)
+                CoopShiftStack(phase: core.data[idx].phase)
                 ForEach(core.data[idx].results, id:\.self) { result in
                     NavigationLink(destination: ResultView(result: result)) {
                         ResultStack(result: result, isPersonal: $isPersonal)

@@ -19,7 +19,7 @@ struct CoopShiftView: View {
                     EmptyView()
                 }
                 .opacity(0.0)
-                CoopShiftStack(phase: phases.data[idx], isRareWeapon: $phases.isUnlockWeapon)
+                CoopShiftStack(phase: phases.data[idx])
             }
         }
         NavigationLink(destination: CoopShiftCollectionView()) {

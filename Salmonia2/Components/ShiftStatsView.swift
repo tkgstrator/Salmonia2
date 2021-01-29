@@ -21,7 +21,7 @@ struct ShiftStatsView: View {
                         .modifier(Splatfont2(size: 16))
                         .foregroundColor(.cOrange))
             {
-                CoopShiftStack(phase: stats.shift, isRareWeapon: $stats.isRareWeapon)
+                CoopShiftStack(phase: stats.shift)
                 // 課金しているユーザだけが個別のリザルトにジャンプできる
                 if user.isPurchase {
                     NavigationLink(destination: ResultCollectionView()) {

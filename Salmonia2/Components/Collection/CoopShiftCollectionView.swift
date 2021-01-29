@@ -41,7 +41,7 @@ struct CoopShiftCollectionView: View {
                             }
                             .opacity(0.0)
                             .buttonStyle(PlainButtonStyle())
-                            CoopShiftStack(phase: phase.all[idx], isRareWeapon: $phase.isUnlockWeapon)
+                            CoopShiftStack(phase: phase.all[idx])
                         }
                     }
                 }
@@ -69,7 +69,7 @@ struct CoopShiftCollectionView: View {
                         }
                         .opacity(0.0)
                         .buttonStyle(PlainButtonStyle())
-                        CoopShiftStack(phase: phase.all[idx], isRareWeapon: $phase.isUnlockWeapon)
+                        CoopShiftStack(phase: phase.all[idx])
                     }
                 }
                 //                .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
@@ -148,7 +148,7 @@ struct CoopShiftCollectionView: View {
 
 struct CoopShiftStack: View {
     @ObservedObject var phase: CoopShiftRealm
-    @Binding var isRareWeapon: Bool
+    @EnvironmentObject var shift: CoopShiftCore
     
     var body: some View {
         GeometryReader { geometry in
@@ -165,7 +165,6 @@ struct CoopShiftStack: View {
         ZStack {
             Color.black.opacity(0.8)
             Image("CoopMask").resizable(resizingMode: .tile).renderingMode(.template).foregroundColor(.white).opacity(0.8)
-            
         }
     }
     
@@ -194,7 +193,7 @@ struct CoopShiftStack: View {
                         URLImage(url: WeaponType(weapon_id: weapon)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: 45)}
                     }
                     Group {
-                        if isRareWeapon && phase.weapon_list[3] == -1 {
+                        if shift.isUnlockWeapon && phase.weapon_list[3] == -1 {
                             URLImage(url: WeaponType(weapon_id: phase.rare_weapon)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: 45)}
                         }
                     }
