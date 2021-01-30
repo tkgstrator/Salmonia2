@@ -335,12 +335,35 @@ struct ResultView: View {
             Group {
                 HStack {
                     Text("Defeated")
+                        .lineLimit(1)
                         .frame(width: 40)
                     ForEach(result.player, id:\.self) { player in
-                        Text(String(player.boss_kill_counts.sum()))
-                            .minimumScaleFactor(0.7)
-//                            .lineLimit(1)
-                            .frame(maxWidth: .infinity)
+                        if player.boss_kill_counts.sum() * 4 >= result.boss_counts.sum() {
+                            Text(String(player.boss_kill_counts.sum()))
+                                .minimumScaleFactor(0.7)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.yellow)
+                        } else {
+                            Text(String(player.boss_kill_counts.sum()))
+                                .minimumScaleFactor(0.7)
+                                .frame(maxWidth: .infinity)
+                        }
+                    }
+                }
+                HStack {
+                    Text("Egg")
+                        .frame(width: 40)
+                    ForEach(result.player, id:\.self) { player in
+                        if player.golden_ikura_num * 3 >= result.wave.map({ $0.quota_num }).reduce(0, +) {
+                            Text(String(player.golden_ikura_num))
+                                .minimumScaleFactor(0.7)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.yellow)
+                        } else {
+                            Text(String(player.golden_ikura_num))
+                                .minimumScaleFactor(0.7)
+                                .frame(maxWidth: .infinity)
+                        }
                     }
                 }
                 HStack {
@@ -349,13 +372,12 @@ struct ResultView: View {
                     ForEach(result.player, id:\.self) { player in
                         Text(String(player.srpower))
                             .minimumScaleFactor(0.7)
-//                            .lineLimit(1)
                             .frame(maxWidth: .infinity)
                     }
                 }
             }
         }
-        
+
         var BossView: some View {
             ForEach(result.boss_counts.indices, id:\.self) { idx in
                 if result.boss_counts[idx] != 0 {

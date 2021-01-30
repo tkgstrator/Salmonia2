@@ -31,6 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(AchievementCore())
             .environmentObject(FeatureProductCore())
             .environment(\.lineLimit, 1)
+            .environment(\.minimumScaleFactor, 0.7)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

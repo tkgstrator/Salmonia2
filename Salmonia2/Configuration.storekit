@@ -3,26 +3,6 @@
     {
       "displayPrice" : "3.99",
       "familyShareable" : false,
-      "internalID" : "EE59DF22",
-      "localizations" : [
-        {
-          "description" : "Willing to add new features.",
-          "displayName" : "Donation",
-          "locale" : "en_US"
-        },
-        {
-          "description" : "新しい機能の追加に意欲的になります。",
-          "displayName" : "作者を応援します",
-          "locale" : "ja"
-        }
-      ],
-      "productID" : "work.tkgstrator.Salmonia2.Consumable.Donation",
-      "referenceName" : "Donation",
-      "type" : "Consumable"
-    },
-    {
-      "displayPrice" : "3.99",
-      "familyShareable" : false,
       "internalID" : "C63A1E48",
       "localizations" : [
         {
@@ -45,42 +25,7 @@
 
   },
   "subscriptionGroups" : [
-    {
-      "id" : "00CFC627",
-      "localizations" : [
 
-      ],
-      "name" : "Salmonia2",
-      "subscriptions" : [
-        {
-          "adHocOffers" : [
-
-          ],
-          "displayPrice" : "3.99",
-          "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "55294509",
-          "introductoryOffer" : null,
-          "localizations" : [
-            {
-              "description" : "Donate to the developer as operating cost.",
-              "displayName" : "Monthly Pass",
-              "locale" : "en_US"
-            },
-            {
-              "description" : "Salmonia2運営を支援します",
-              "displayName" : "月額登録",
-              "locale" : "ja"
-            }
-          ],
-          "productID" : "work.tkgstrator.Salmonia2.MonthlyPass",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Monthly Pass",
-          "subscriptionGroupID" : "00CFC627",
-          "type" : "RecurringSubscription"
-        }
-      ]
-    }
   ],
   "version" : {
     "major" : 1,
