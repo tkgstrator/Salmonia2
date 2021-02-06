@@ -1,5 +1,1 @@
-github "Alamofire/Alamofire" ~> 5.2
-github "SwiftyJSON/SwiftyJSON" ~4.0
-github "krzyzanowskim/CryptoSwift" ~> 1.3.8
 github "realm/realm-cocoa" ~> 10.5.0
-github "bizz84/SwiftyStoreKit" "develop"

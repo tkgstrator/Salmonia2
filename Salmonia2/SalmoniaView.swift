@@ -9,7 +9,6 @@ import UIKit
 import SwiftUI
 import URLImage
 import BetterSafariView
-import SwifteriOS
 import SafariServices
 import AuthenticationServices
 import Alamofire

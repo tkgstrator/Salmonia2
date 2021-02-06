@@ -9,11 +9,6 @@
 /* Begin PBXBuildFile section */
 		0197874F5AEC8957F95F41F7 /* Pods_Salmonia2_Salmonia2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C69011429A37B249AF600929 /* Pods_Salmonia2_Salmonia2UITests.framework */; };
 		1017B8EBF2680C372EDDF670 /* Pods_Salmonia2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B9D0B70F54B3519E215C550 /* Pods_Salmonia2.framework */; };
-		101D2BF32590F5820011B794 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BEE2590F5820011B794 /* CryptoSwift.framework */; };
-		101D2BF42590F5820011B794 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BEF2590F5820011B794 /* Realm.framework */; };
-		101D2BF52590F5820011B794 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF02590F5820011B794 /* SwiftyStoreKit.framework */; };
-		101D2BF62590F5820011B794 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF12590F5820011B794 /* SwiftyJSON.framework */; };
-		101D2BF72590F5820011B794 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF22590F5820011B794 /* Alamofire.framework */; };
 		1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A025209C7C001B41B0 /* AppDelegate.swift */; };
 		1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A225209C7C001B41B0 /* SceneDelegate.swift */; };
 		1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3A425209C7C001B41B0 /* ContentView.swift */; };
@@ -79,6 +74,14 @@
 		10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BB252175170046CBCA /* CoopShiftView.swift */; };
 		10BB34C6252175170046CBCA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BC252175170046CBCA /* LoadingView.swift */; };
 		10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB350025217EFF0046CBCA /* CoopShiftCore.swift */; };
+		10E16ACF25CE94C200B3624D /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 10E16ACE25CE94C200B3624D /* SwiftyStoreKit */; };
+		10E16AF425CE960F00B3624D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BF22590F5820011B794 /* Alamofire.framework */; };
+		10E16AF525CE960F00B3624D /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 101D2BEF2590F5820011B794 /* Realm.framework */; };
+		10E16AFB25CE961000B3624D /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10E16AF725CE961000B3624D /* RealmSwift.framework */; };
+		10E16B3625CE976700B3624D /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 10E16B3525CE976700B3624D /* URLImage */; };
+		10E16B3C25CE979500B3624D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 10E16B3B25CE979500B3624D /* Alamofire */; };
+		10E16B4225CE97B700B3624D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 10E16B4125CE97B700B3624D /* SwiftyJSON */; };
+		10E16B6225CE980A00B3624D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10E16B6125CE980A00B3624D /* CryptoSwift */; };
 		10E414B825679DE4006E28D7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E414B725679DE4006E28D7 /* Log.swift */; };
 		10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA355252191340027209D /* SalmoniaUserCore.swift */; };
 		10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3682521DE6E0027209D /* UserStatsCore.swift */; };
@@ -189,6 +192,10 @@
 		10BB350025217EFF0046CBCA /* CoopShiftCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopShiftCore.swift; sourceTree = "<group>"; };
 		10BB3508252181300046CBCA /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		10BB350C252182220046CBCA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		10E16AF625CE961000B3624D /* CryptoSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoSwift.xcframework; path = Carthage/Build/iOS/CryptoSwift.xcframework; sourceTree = "<group>"; };
+		10E16AF725CE961000B3624D /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		10E16AF825CE961000B3624D /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/iOS/Alamofire.xcframework; sourceTree = "<group>"; };
+		10E16AF925CE961000B3624D /* SwiftyJSON.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftyJSON.xcframework; path = Carthage/Build/iOS/SwiftyJSON.xcframework; sourceTree = "<group>"; };
 		10E414B725679DE4006E28D7 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		10EFA355252191340027209D /* SalmoniaUserCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaUserCore.swift; sourceTree = "<group>"; };
 		10EFA3682521DE6E0027209D /* UserStatsCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCore.swift; sourceTree = "<group>"; };
@@ -212,11 +219,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				101D2BF32590F5820011B794 /* CryptoSwift.framework in Frameworks */,
-				101D2BF42590F5820011B794 /* Realm.framework in Frameworks */,
-				101D2BF52590F5820011B794 /* SwiftyStoreKit.framework in Frameworks */,
-				101D2BF62590F5820011B794 /* SwiftyJSON.framework in Frameworks */,
-				101D2BF72590F5820011B794 /* Alamofire.framework in Frameworks */,
+				10E16AFB25CE961000B3624D /* RealmSwift.framework in Frameworks */,
+				10E16B3625CE976700B3624D /* URLImage in Frameworks */,
+				10E16B4225CE97B700B3624D /* SwiftyJSON in Frameworks */,
+				10E16B6225CE980A00B3624D /* CryptoSwift in Frameworks */,
+				10E16AF425CE960F00B3624D /* Alamofire.framework in Frameworks */,
+				10E16B3C25CE979500B3624D /* Alamofire in Frameworks */,
+				10E16AF525CE960F00B3624D /* Realm.framework in Frameworks */,
+				10E16ACF25CE94C200B3624D /* SwiftyStoreKit in Frameworks */,
 				107319F725955F5D0037F19B /* BetterSafariView in Frameworks */,
 				1017B8EBF2680C372EDDF670 /* Pods_Salmonia2.framework in Frameworks */,
 			);
@@ -452,6 +462,10 @@
 		12C17511674C0BC2989472F4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10E16AF825CE961000B3624D /* Alamofire.xcframework */,
+				10E16AF625CE961000B3624D /* CryptoSwift.xcframework */,
+				10E16AF725CE961000B3624D /* RealmSwift.framework */,
+				10E16AF925CE961000B3624D /* SwiftyJSON.xcframework */,
 				101D2BF22590F5820011B794 /* Alamofire.framework */,
 				101D2BEE2590F5820011B794 /* CryptoSwift.framework */,
 				101D2BEF2590F5820011B794 /* Realm.framework */,
@@ -499,6 +513,11 @@
 			name = Salmonia2;
 			packageProductDependencies = (
 				107319F625955F5D0037F19B /* BetterSafariView */,
+				10E16ACE25CE94C200B3624D /* SwiftyStoreKit */,
+				10E16B3525CE976700B3624D /* URLImage */,
+				10E16B3B25CE979500B3624D /* Alamofire */,
+				10E16B4125CE97B700B3624D /* SwiftyJSON */,
+				10E16B6125CE980A00B3624D /* CryptoSwift */,
 			);
 			productName = Salmonia2;
 			productReference = 1037E39D25209C7C001B41B0 /* Salmonia2.app */;
@@ -578,6 +597,11 @@
 			mainGroup = 1037E39425209C7C001B41B0;
 			packageReferences = (
 				107319F525955F5D0037F19B /* XCRemoteSwiftPackageReference "BetterSafariView" */,
+				10E16ACD25CE94C200B3624D /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
+				10E16B3425CE976700B3624D /* XCRemoteSwiftPackageReference "url-image" */,
+				10E16B3A25CE979500B3624D /* XCRemoteSwiftPackageReference "Alamofire" */,
+				10E16B4025CE97B700B3624D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				10E16B6025CE980A00B3624D /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 1037E39E25209C7C001B41B0 /* Products */;
 			projectDirPath = "";
@@ -595,11 +619,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10BB34A5252174F60046CBCA /* Splatfont1.ttf in Resources */,
+				10BB34A6252174F60046CBCA /* Splatfont2.ttf in Resources */,
 				1058AC9C256DF764008A34F7 /* fangzheng.ttf in Resources */,
 				10BB34A4252174F60046CBCA /* RobotoMono.ttf in Resources */,
 				1058ACAC256DFAAC008A34F7 /* Localizable.strings in Resources */,
-				10BB34A6252174F60046CBCA /* Splatfont2.ttf in Resources */,
-				10BB34A5252174F60046CBCA /* Splatfont1.ttf in Resources */,
 				1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */,
 				10BB00822530F63D0081C6EB /* Localizable.strings in Resources */,
 				10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */,
@@ -634,14 +658,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/CryptoSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/OAuthSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwifteriOS.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -1210,6 +1228,46 @@
 				minimumVersion = 2.2.2;
 			};
 		};
+		10E16ACD25CE94C200B3624D /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.16.3;
+			};
+		};
+		10E16B3425CE976700B3624D /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.3;
+			};
+		};
+		10E16B3A25CE979500B3624D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+		10E16B4025CE97B700B3624D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		10E16B6025CE980A00B3624D /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.8;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1217,6 +1275,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 107319F525955F5D0037F19B /* XCRemoteSwiftPackageReference "BetterSafariView" */;
 			productName = BetterSafariView;
+		};
+		10E16ACE25CE94C200B3624D /* SwiftyStoreKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10E16ACD25CE94C200B3624D /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
+			productName = SwiftyStoreKit;
+		};
+		10E16B3525CE976700B3624D /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10E16B3425CE976700B3624D /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+		10E16B3B25CE979500B3624D /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10E16B3A25CE979500B3624D /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		10E16B4125CE97B700B3624D /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10E16B4025CE97B700B3624D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		10E16B6125CE980A00B3624D /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10E16B6025CE980A00B3624D /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

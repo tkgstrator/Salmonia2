@@ -1,6 +1,5 @@
 github "Alamofire/Alamofire" "5.4.1"
-github "OAuthSwift/OAuthSwift" "2.1.2"
-github "SwiftyJSON/SwiftyJSON" "5.0.0"
+github "SwiftyJSON/SwiftyJSON" "4.3.0"
 github "bizz84/SwiftyStoreKit" "9270d2f3ee7df08973f3c10e5563a2e610ebaadb"
 github "krzyzanowskim/CryptoSwift" "1.3.8"
-github "realm/realm-cocoa" "v10.5.0"
+github "realm/realm-cocoa" "v10.5.1"
