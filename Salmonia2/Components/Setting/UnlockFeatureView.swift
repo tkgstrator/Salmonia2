@@ -24,7 +24,11 @@ struct UnlockFeatureView: View {
                 Toggle("Grizzco Weapons", isOn: $user.isUnlock[1])
                 Toggle("Force Update", isOn: $user.isUnlock[2])
                 Toggle("Disable Ads", isOn: $user.isUnlock[3])
+                    .disabled(!user.isPurchase)
                 Toggle("Legacy Style", isOn: $user.isUnlock[4])
+                    .disabled(!user.isPurchase)
+                Toggle("Gaming Style", isOn: $user.isUnlock[5])
+                    .disabled(!user.isPurchase)
             }
             Section(header: Text("Paid")
                         .font(.custom("Splatfont2", size: 16))

@@ -64,13 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print(NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0])
+        GADMobileAds.sharedInstance().start(completionHandler: nil) // Google Adsense
         realmMigration() // データベースのマイグレーション
         initSwiftyStoreKit() // StoreKitの初期化
         try? getXProductVersion() // プロダクトIDを更新
         try? getFutureRotation() // 将来のシフトを取得
         FirebaseApp.configure() // Firebaseの設定
         registerForPushNotifications() // Push通知
-        GADMobileAds.sharedInstance().start(completionHandler: nil) // Google Adsense
         retrieveProduct()
         return true
     }

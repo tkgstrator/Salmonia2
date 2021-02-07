@@ -18,12 +18,10 @@ struct ResultView: View {
     @State var isEnable: Bool = false
     
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.vertical, showsIndicators: false) {
-                ResultOverview
-                ResultWaveView
-                ResultPlayerView
-            }
+        ScrollView(.vertical, showsIndicators: false) {
+            ResultOverview
+            ResultWaveView
+            ResultPlayerView
         }
         .navigationBarItems(trailing: UIButton)
         .navigationBarTitle(Text("Detail"))
@@ -115,8 +113,6 @@ struct ResultView: View {
                             .padding(.horizontal, 5)
                             .frame(maxWidth: .infinity)
                             .frame(height: 36)
-                            .minimumScaleFactor(0.7)
-//                            .lineLimit(1)
                             .background(Color.init(UIColor.init("2A270B")))
                         Group {
                             Text("\(wave.ikura_num)")
@@ -134,7 +130,6 @@ struct ResultView: View {
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 3)
                         Text("Appearances")
-//                            .lineLimit(1)
                         Text(" x\(wave.golden_ikura_pop_num)")
                     }
                     .font(.custom("Splatfont2", size: 12))
@@ -160,6 +155,8 @@ struct ResultView: View {
                 HStack(alignment: .bottom) {
                     Text("\(isVisible ? player.name.value : "-")")
                         .font(.custom("Splatfont2", size: 18))
+                        .frame(width: 120)
+                        .rainbowAnimation(user.isUnlock[5])
                     Spacer()
                     if user.isUnlock[4] {
                         VStack(alignment: .leading, spacing: 3) {
@@ -260,7 +257,6 @@ struct ResultView: View {
                             .frame(width: 18, height: 18)
                         Spacer()
                         Text("x" + String(player.golden_ikura_num))
-//                            .lineLimit(1)
                     }
                     .frame(width: maxWidth)
                     .padding(.horizontal, 5)
@@ -269,7 +265,6 @@ struct ResultView: View {
                             .frame(width: 20.5, height: 15)
                         Spacer()
                         Text("x" + String(player.ikura_num))
-//                            .lineLimit(1)
                     }
                     .frame(width: maxWidth)
                     .padding(.horizontal, 5)
@@ -293,7 +288,6 @@ struct ResultView: View {
                     .padding(.horizontal, 5)
                 }
             }
-//            .frame(maxWidth: .infinity)
         }
     }
     
@@ -421,7 +415,6 @@ struct ResultView: View {
                         URLImage(url: URL(string: isVisible ? player.imageUri : DEFAULT_IMAGE)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                             .frame(width: 50, height: 50)
                         Text(isVisible ? player.name.value : "-")
-//                            .lineLimit(1)
                     }
                     .font(.custom("Splatfont2", size: 12))
                     .frame(maxWidth: .infinity)
@@ -432,77 +425,13 @@ struct ResultView: View {
     }
     
 }
-            
-//                ForEach(Range(0 ... 8), id:\.self) { id in
-//                    if result.boss_counts[id] != 0 {
-//                        HStack {
-//                            VStack(spacing: 0) {
-//                                URLImage(url: URL(string: BOSS[id])!) { image in image.resizable().aspectRatio(1, contentMode: .fit) }
-//                                    .frame(width: 35)
-//                                if result.boss_kill_counts[id] == result.boss_counts[id] {
-//                                    Text("\(result.boss_kill_counts[id])/\(result.boss_counts[id])")
-//                                        .frame(height: 12)
-//                                        .font(.custom("Splatfont", size: 14))
-//                                        .foregroundColor(.yellow)
-//                                } else {
-//                                    Text("\(result.boss_kill_counts[id])/\(result.boss_counts[id])")
-//                                        .frame(height: 12)
-//                                        .font(.custom("Splatfont", size: 14))
-//                                }
-//                            }
-//                            .frame(width: 50)
-//                            ForEach(result.player, id:\.self) { player in
-//                                VStack(spacing: 0) {
-//                                    Text("\(player.boss_kill_counts[id])")
-//
-//                                }
-//                                .font(.custom("Splatfont", size: 16))
-//                                .frame(maxWidth: .infinity)
-//                            }
-//                        }
-//                    }
-//                }
-//                HStack {
-//                    Text("Score")
-//                        .frame(width: 50)
-//                        .font(.custom("Splatfont", size: 14))
-//                    ForEach(result.player, id:\.self) { player in
-//                        Text(String(player.srpower))
-//                            .minimumScaleFactor(0.7)
-//                            .lineLimit(1)
-//                            .font(.custom("Splatfont", size: 16))
-//                    }
-//                    .frame(maxWidth: .infinity)
-//                }
-//                HStack {
-//                    Text("Match")
-//                        .frame(width: 50)
-//                        .font(.custom("Splatfont", size: 14))
-//                    ForEach(result.player, id:\.self) { player in
-//                        Text(String(player.count))
-//                            .font(.custom("Splatfont", size: 16))
-//                    }
-//                    .frame(maxWidth: .infinity)
-//                }
-//            }
-//            .background(Color.black)
-//            .edgesIgnoringSafeArea(.all)
-        
-//        private var Geggs: some View {
-//            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
-//                .frame(width: 15, height: 15)
-//        }
-//        private var Peggs: some View {
-//            URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
-//                .frame(width: 15, height: 15)
-//        }
 
 func CalcBias(_ result: CoopResultsRealm, _ nsaid: String) -> Double {
     let player: PlayerResultsRealm = result.player.filter("nsaid=%@", nsaid).first!
     let danger_rate: Double = result.danger_rate
     let rate: Double = (danger_rate * 3 / 5.0 + 80) / 160.0 // レートから計算されるバイアス
     let max_bias: Double = danger_rate == 200 ? 1.5 : 1.25 // 最大のバイアス
-
+    
     var bias: (defeated: Double, golden: Double) = (0.0, 0.0)
     
     let quota_num = result.wave.map({ $0.quota_num }).reduce(0, +)

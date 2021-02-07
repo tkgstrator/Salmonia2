@@ -38,6 +38,7 @@
 "Privacy poricy" = "プライバシーポリシー";
 "Unlock" = "アンロック";
 "How to use" = "つかいかた";
+"Update iksm_session" = "イカスミセッション更新";
 "X-Product Version" = "X-Product Version";
 "Version" = "バージョン";
 "Add" = "追加";
@@ -53,6 +54,7 @@
 "Grizzco Weapons" = "クマサン印ブキを表示";
 "Login in Safari" = "ログインページをSafariでひらく";
 "Legacy Style" = "旧スタイルを使う";
+"Gaming Style" = "ゲーミングスタイルを使う";
 "Disable Ads" = "広告を非表示";
 "$3.99" = "¥500";
 
@@ -70,6 +72,7 @@
 "Enable multiple accounts." = "複数アカウントの同時リザルト取得ができるようになります";
 "Willing to add new features." = "新機能実装を応戦する寄付をします";
 "Donate to the developer as operating cost." = "開発者を支援します";
+"Input iksm_session" = "イカスミセッションを入力してください";
 
 // Global->Stage Names
 "Spawning Grounds" = "シェケナダム";
@@ -187,6 +190,25 @@
 
 // Notification's description
 "Success" = "成功";
-"Failure" = "失敗";
+"Failed" = "失敗";
+"OK" = "確認";
+"CANCEL" = "取消";
 "Login SplatNet2" = "ログイン成功";
 "Login Salmon Stats" = "ログイン成功";
+
+// Error localizedDescription
+"Wrong Request" = "誤ったリクエスト";
+"No Accounts Found" = "該当するアカウントがありません";
+"Iksm Session is Unauthorized/Expired" = "有効期限切れ";
+"Insecure Connection/Disallowed User Agent" = "許可されていないリクエスト";
+"Invalid Splatoon Token" = "無効なトークン";
+"Method Not Allowed" = "許可されていないプロトコル";
+"Unauthorized Splatoon Token" = "承認されていないトークン";
+"Nintendo API Changed" = "APIの仕様変更";
+"Too Many Requests" = "リクエストが多すぎます";
+"Server is Unavailable" = "サーバが利用不可です";
+"Unknown Error" = "不明なエラーです";
+
+// Alert Description
+"Manual Update" = "手動アップデート";
+"Update Success" = "アップデート成功";

@@ -11,6 +11,7 @@ import SwiftUI
 
 enum APPError: Error {
     case unknown
+    case empty
     case expired
     case realm
     case user
@@ -28,6 +29,8 @@ extension APPError: LocalizedError {
         switch self {
         case .unknown:
             return "Unknown Error"
+        case .empty:
+            return "No Accounts Found"
         case .expired:
             return "Iksm Session is Unauthorized/Expired"
         case .realm:
@@ -57,6 +60,8 @@ extension APPError: CustomNSError {
         switch self {
         case .unknown:
             return 9999
+        case .empty:
+            return 9402
         case .expired:
             return 9403
         case .realm:

@@ -10,11 +10,8 @@ import SplatNet2
 import RealmSwift
 import WebKit
 import SwiftyJSON
-//import MobileCoreServices
 import Alamofire
 import UserNotifications
-//import AVKit
-//import SafariServices
 import BetterSafariView
 
 struct SettingView: View {
@@ -24,10 +21,13 @@ struct SettingView: View {
     // 1は使い方ページ
     // 2はLanPlayについて
     // 3はプライバシーポリシー
-    @State var isPresented: [Bool] = [false, false, false, false]
+    @State var isPresented: [Bool] = [false, false, false, false, false]
+    @State var isAlert: Bool = false // 手動設定のアラート用
+    @State var message: String = ""
     @State var online: Int? = nil
     @State var idle: Int? = nil
     @State var ver: String? = nil
+    @State var iksm_session: String = ""
 
     let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
     let version: String = "\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!))(\(String(describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)))"
@@ -141,6 +141,39 @@ struct SettingView: View {
                 Spacer()
                 Text("\((user.isPurchase ? "Unlimited" : "Limited").localized)")
             }
+            HStack {
+                Button("Update iksm_session") {
+                    isPresented[4].toggle()
+                }
+                TextFieldAlertView(
+                    text: $iksm_session,
+                    isShowingAlert: $isPresented[4],
+                    placeholder: "",
+                    isSecureTextEntry: true,
+                    title: "Manual Update".localized,
+                    message: "Input iksm_session".localized,
+                    leftButtonTitle: "CANCEL",
+                    rightButtonTitle: "OK",
+                    leftButtonAction: nil, rightButtonAction: {
+                        do {
+                            let nsaid = try SplatNet2.getPlayerId(iksm_session)
+                            guard let user = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid).first else { throw APPError.empty }
+                            realm.beginWrite()
+                            user.iksm_session = iksm_session
+                            try realm.commitWrite()
+                            isAlert = true
+                            message = "Update Success"
+                        } catch(let error) {
+                            isAlert = true
+                            message = error.localizedDescription
+                        }
+                    })
+                    .alert(isPresented: $isAlert) {
+                        Alert(title: Text(message.localized))
+                    }
+            }
+            .buttonStyle(PlainButtonStyle())
+            .disabled(!user.isPurchase)
         }
         .modifier(Splatfont2(size: 16))
     }
