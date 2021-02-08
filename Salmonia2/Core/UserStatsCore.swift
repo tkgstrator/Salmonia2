@@ -148,6 +148,6 @@ extension UserStatsCore {
     }
     
     var shift: CoopShiftRealm {
-        return realm.objects(CoopShiftRealm.self).filter("start_time=%@", self.schedule).first!
+        return realm.objects(CoopShiftRealm.self).filter("start_time=%@", self.schedule as Any).first!
     }
 }

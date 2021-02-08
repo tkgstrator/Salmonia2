@@ -11,7 +11,7 @@ import RealmSwift
 
 struct ResultCollectionView: View {
     @ObservedObject var core: UserResultCore
-//    @EnvironmentObject var core: UserResultCore // 全リザルトを取得
+    //    @EnvironmentObject var core: UserResultCore // 全リザルトを取得
     @EnvironmentObject var user: SalmoniaUserCore // 課金しているかどうかの情報
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
@@ -42,8 +42,8 @@ struct ResultCollectionView: View {
                 .Modifier()
                 .onTapGesture() { isVisible.toggle() }
                 .sheet(isPresented: $isVisible) {
-                ResultFilterView(core: core, sliderValue: $sliderValue, isEnable: $isEnable)
-            }
+                    ResultFilterView(core: core, sliderValue: $sliderValue, isEnable: $isEnable)
+                }
         }
         
     }
@@ -52,91 +52,129 @@ struct ResultCollectionView: View {
         @ObservedObject var result: CoopResultsRealm
         @Binding var isPersonal: Bool
         var gradeID: [String] = ["Intern", "Apparentice","Part-Timer", "Go-Getter", "Overachiever", "Profreshional"]
-
+        
+        
         var body: some View {
             HStack {
-                Group {
-                    if result.is_clear {
-                        Text("Clear!")
-                            .foregroundColor(.green)
-                    } else {
-                        VStack(spacing: 0) {
-                            Text("Defeat")
-                            Text("Wave \(result.failure_wave.value!)")
-                                .frame(height: 12)
-                        }
-                        .font(.custom("Splatfont", size: 14))
-                        .foregroundColor(.orange)
-                    }
-                }
-                .frame(minWidth: 60)
-                // 評価の変動とかを載せるやつ
-                Group {
-                    Spacer()
-                    if result.grade_point_delta.value != nil && !isPersonal {
-                        if result.grade_point_delta.value! > 0 {
-                            Group {
-                                Text("\(gradeID[result.grade_id.value ?? 5].localized)")
-//                                    .lineLimit(1)
-                                Text("\(result.grade_point.value.value)")
-                                Text("↑")
-                                    .foregroundColor(.cRed)
-                                    .font(.custom("Splatfont", size: 20))
-                            }
-                        }
-                        if result.grade_point_delta.value! == 0 {
-                            Group {
-                                Text("\(gradeID[result.grade_id.value ?? 5].localized)")
-//                                    .lineLimit(1)
-                                Text("\(result.grade_point.value.value)")
-                                Text("→")
-                                    .font(.custom("Splatfont", size: 20))
-                            }
-                            .foregroundColor(.cGray)
-                        }
-                        if result.grade_point_delta.value! < 0 {
-                            Group {
-                                Text("\(gradeID[result.grade_id.value ?? 5].localized)")
-//                                    .lineLimit(1)
-                                Text("\(result.grade_point.value.value)")
-                                Text("↓")
-                                    .font(.custom("Splatfont", size: 20))
-                            }
-                            .foregroundColor(.cGray)
-                        }
-                    }
-                    if result.grade_point_delta.value == nil || isPersonal {
-                        Text("\(result.grade_id.value != nil ? gradeID[result.grade_id.value ?? 5].localized : "-")")
-//                            .lineLimit(1)
-                        Text(String(result.danger_rate)+"%")
-                    }
-                    Spacer()
-                }
-                .font(.custom("Splatfont", size: 16))
-                VStack(alignment: .leading, spacing: 5) {
+                JobResult
+                Spacer()
+                RateDelta
+                Spacer()
+                EggResult
+            }
+            .font(.custom("Splatfont", size: 16))
+        }
+        
+        var EggResult: some View {
+            VStack(alignment: .leading, spacing: 5) {
+                switch isPersonal {
+                case true: // 個人成績を表示
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
-                            .frame(width: 20, height: 20)
-                        if isPersonal {
-                            Text("x\(result.player.first!.golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
-                        } else {
-                            Text("x\(result.golden_eggs)").frame(width: 50, height: 16, alignment: .leading)
-                        }
+                            .frame(width: 18, height: 18)
+                        Text("x\(result.player.first!.golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
                     }
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
-                            .frame(width: 20, height: 20)
-                        if isPersonal {
-                            Text("x\(result.player.first!.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
-                        } else {
-                            Text("x\(result.power_eggs)").frame(width: 50, height: 16, alignment: .leading)
-                        }
+                            .frame(width: 18, height: 18)
+                        Text("x\(result.player.first!.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
+                    }
+                case false: // チーム成績を表示
+                    HStack {
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
+                            .frame(width: 18, height: 18)
+                        Text("x\(result.golden_eggs)").frame(width: 50, height: 16, alignment: .leading)
+                    }
+                    HStack {
+                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
+                            .frame(width: 18, height: 18)
+                        Text("x\(result.power_eggs)").frame(width: 50, height: 16, alignment: .leading)
                     }
                 }
-                .frame(width: 80)
-                .font(.custom("Splatfont2", size: 16))
             }
-            .font(.custom("Splatfont", size: 14))
+            .frame(width: 80)
+            .font(.custom("Splatfont2", size: 14))
+        }
+        
+        var JobResult: some View {
+            switch result.is_clear {
+            case true:
+                return AnyView(ZStack(alignment: .topLeading) {
+                    Text(String(result.id))
+                        .offset(y: -10)
+                        .font(.custom("Splatfont2", size: 9))
+                        .foregroundColor(.cGray)
+                    Text("Clear!")
+                        .foregroundColor(.green)
+                        .font(.custom("Splatfont", size: 14))
+                })
+                .frame(width: 50, height: 30)
+            case false:
+                return AnyView(ZStack(alignment: .topLeading) {
+                    Text(String(result.id))
+                        .offset(y: -10)
+                        .font(.custom("Splatfont2", size: 9))
+                        .foregroundColor(.cGray)
+                    Text("Defeat")
+                        .foregroundColor(.cOrange)
+                        .font(.custom("Splatfont", size: 14))
+                })
+                .frame(width: 50, height: 30)
+            }
+        }
+        
+        var RateDelta: some View {
+            switch (!isPersonal, result.grade_point.value != nil) {
+            case (true, true): // レート表示
+                switch result.failure_wave.value {
+                case nil: // クリアした場合
+                    return AnyView(Group {
+                        Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                        Text("\(result.grade_point.value!)")
+                        Text("↑")
+                            .foregroundColor(.cRed)
+                            .font(.custom("Splatfont", size: 20))
+                    })
+                case 3: // WAVE3で失敗
+                    return AnyView( Group {
+                        Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                        Text("\(result.grade_point.value!)")
+                        Text("→")
+                            .font(.custom("Splatfont", size: 20))
+                    }.foregroundColor(.cGray))
+                case 2: // WAVE1で失敗
+                    return AnyView (Group {
+                        Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                        Text("\(result.grade_point.value!)")
+                        Text("↓")
+                            .font(.custom("Splatfont", size: 20))
+                    }.foregroundColor(.cGray))
+                case 1: // WAVE1で失敗
+                    return AnyView (Group {
+                        Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                        Text("\(result.grade_point.value!)")
+                        Text("↓")
+                            .font(.custom("Splatfont", size: 20))
+                    }.foregroundColor(.cGray))
+                default:
+                    return AnyView(EmptyView())
+                }
+            case (true, false): // キケン度表示
+                return AnyView(Group {
+                    Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                    Text(String(result.danger_rate)+"%")
+                })
+            case (false, true): // キケン度表示
+                return AnyView(Group {
+                    Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                    Text(String(result.danger_rate)+"%")
+                })
+            case (false, false):
+                return AnyView(Group {
+                    Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                    Text(String(result.danger_rate)+"%")
+                })
+            }
         }
     }
     
@@ -198,6 +236,6 @@ struct ResultCollectionView: View {
 struct ResultCollectionView_Previews: PreviewProvider {
     static var previews: some View {
         ResultCollectionView(core: UserResultCore())
-//        ResultCollectionView()
+        //        ResultCollectionView()
     }
 }

@@ -15,13 +15,7 @@ struct CoopShiftCollectionView: View {
     @State var isTime: [Bool] = [true, true, true]
     @State var isEnable: [Bool] = [true, true, true, true, true, true, true, true]
     @State var isPlayed: Bool = false
-    // private var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
-    
-    //    init() {
-    //        UITableView.appearance().tableFooterView = UIView()
-    //        UITableView.appearance().separatorStyle = .none
-    //    }
-    
+
     var body: some View {
         if #available(iOS 14.0, *) {
             ScrollViewReader { proxy in
@@ -113,19 +107,6 @@ struct CoopShiftCollectionView: View {
                         }
                     }
                 }
-                //                Section(header: HStack {
-                //                    Spacer()
-                //                    Text("Years")
-                //                        .modifier(Splatfont(size: 22))
-                //                        .foregroundColor(.cOrange)
-                //                    Spacer()
-                //                }) {
-                //                    ForEach(Range(0...2)) { idx in
-                //                        Toggle(isOn: $isTime[idx]) {
-                //                            Text(String(idx + 2019))
-                //                        }
-                //                    }
-                //                }
                 Section(header: HStack {
                     Spacer()
                     Text("Options")

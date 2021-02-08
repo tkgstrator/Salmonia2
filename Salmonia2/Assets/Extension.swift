@@ -72,6 +72,10 @@ extension Double {
     func round(digit: Int) -> Double {
         return floor((pow(10.0, digit) as NSDecimalNumber).doubleValue * self) / (pow(10.0, digit) as NSDecimalNumber).doubleValue
     }
+    
+    var per: String {
+        return self.isNaN ? String(0.0) : String((self * 100).round(digit: 2)) + "%"
+    }
 }
 
 extension Collection {

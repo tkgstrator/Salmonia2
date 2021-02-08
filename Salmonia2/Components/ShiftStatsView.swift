@@ -23,13 +23,17 @@ struct ShiftStatsView: View {
             {
                 CoopShiftStack(phase: stats.shift)
                 // 課金しているユーザだけが個別のリザルトにジャンプできる
-                if user.isPurchase {
-                    NavigationLink(destination: ResultCollectionView(core: UserResultCore(stats.schedule!))) {
-                        ShiftStatsStack(title: "Job Num", value: stats.job_num)
-                    }
-                } else {
-                    ShiftStatsStack(title: "Job Num", value: stats.job_num)
-                }
+//                switch user.isPurchase {
+//                case true:
+//                    return AnyView(
+//                        NavigationLink(destination: ResultCollectionView(core: UserResultCore(stats.schedule!))) {
+//                            ShiftStatsStack(title: "Job Num", value: stats.job_num)
+//                        })
+//                case false:
+//                    return AnyView(
+//                        ShiftStatsStack(title: "Job Num", value: stats.job_num)
+//                    )
+//                }
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
                 ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)
@@ -99,6 +103,14 @@ struct ShiftStatsView: View {
                         .font(.custom("Splatfont2", size: 16))
                 }
             }
+            Section(header: Text("Analysis")
+                        .modifier(Splatfont2(size: 16))
+                        .foregroundColor(.cOrange)) {
+                NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
+                    Text("Wave")
+                        .font(.custom("Splatfont2", size: 16))
+                }
+            }
         }
         .navigationBarTitle("Shift Stats")
         //        .navigationBarItems(trailing: RecordButton)
@@ -110,6 +122,21 @@ struct ShiftStatsView: View {
                 .frame(width: 30, height: 30)
         }
         .buttonStyle(PlainButtonStyle())
+    }
+    
+    struct ShiftStatsStack: View {
+        var title: String = ""
+        var value: Any? = nil
+        
+        var body: some View {
+            HStack {
+                Text(title.localized)
+                    .modifier(Splatfont2(size: 16))
+                Spacer()
+                Text(value.value)
+                    .font(.custom("Splatfont2", size: 16))
+            }
+        }
     }
 }
 
@@ -223,26 +250,6 @@ struct StatsChartView: View {
                     break
                 }
             }
-    }
-}
-
-private struct ShiftStatsStack: View {
-    private var value: String
-    private var title: String
-    
-    init(title: String, value: Any?) {
-        self.value = value.value
-        self.title = title
-    }
-    
-    var body: some View {
-        HStack {
-            Text(title.localized)
-                .modifier(Splatfont2(size: 16))
-            Spacer()
-            Text(value)
-                .font(.custom("Splatfont2", size: 16))
-        }
     }
 }
 

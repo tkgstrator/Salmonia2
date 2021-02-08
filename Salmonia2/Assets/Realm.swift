@@ -114,6 +114,12 @@ class CoopResultsRealm: Object {
     }
 }
 
+extension CoopResultsRealm {
+    var id: Int {
+        return realm!.objects(CoopResultsRealm.self).filter("start_time=%@ and play_time<=%@", self.start_time, self.play_time).count
+    }
+}
+
 class WaveDetailRealm: Object {
     
     @objc dynamic var event_type: String?

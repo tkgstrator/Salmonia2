@@ -52,16 +52,6 @@ private struct StageRecordsView: View {
                     Spacer()
                     Text("\(record.grade_point.value)")
                 }
-                //                HStack {
-                //                    Text("Salmon Rate")
-                //                    Spacer()
-                //                    Text(String(record.srpower[0].value))
-                //                }
-                //                HStack {
-                //                    Text("Max Salmon Rate")
-                //                    Spacer()
-                //                    Text(String(record.srpower[1].value))
-                //                }
             }
             .modifier(Splatfont2(size: 16))
             Section(header: Text("Record").modifier(Splatfont2(size: 16)).foregroundColor(.yellow)) {
