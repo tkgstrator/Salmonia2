@@ -62,7 +62,7 @@ struct ResultCollectionView: View {
                 Spacer()
                 EggResult
             }
-            .font(.custom("Splatfont", size: 16))
+            .font(.custom("Splatfont", size: 14))
         }
         
         var EggResult: some View {
@@ -92,7 +92,7 @@ struct ResultCollectionView: View {
                     }
                 }
             }
-            .frame(width: 80)
+            .frame(width: 55)
             .font(.custom("Splatfont2", size: 14))
         }
         

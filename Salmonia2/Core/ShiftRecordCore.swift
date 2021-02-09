@@ -53,7 +53,6 @@ class ShiftRecordCore: ObservableObject {
                     if (!(tide == 0 && event <= 3 && event >= 1) && !(tide != 0 && event == 6)) {
                         event_occur[tide][event] = personal_records.filter("event_type=%@ and water_level=%@", event_type, water_level).count
                     }
-                    print(average[tide][event], variance[tide][event])
                 }
             }
             

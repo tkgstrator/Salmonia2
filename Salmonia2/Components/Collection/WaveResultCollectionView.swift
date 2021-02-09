@@ -12,10 +12,10 @@ struct WaveResultCollectionView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Probabirity").font(.custom("Splatfont2", 14))) {
+            Section(header: Text("Probability").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                 HStack {
                     Text("Event")
-                        .frame(maxWidth: 110)
+                        .frame(maxWidth: .infinity)
                     ForEach(Range(0 ... 2)) { water_level in
                         Text("\((WaveType.init(water_level: water_level)?.water_name)!.localized)")
                             .frame(minWidth: 60)
@@ -31,7 +31,8 @@ struct WaveResultCollectionView: View {
                                 .modifier(Splatfont2(size: 10))
                                 .foregroundColor(.cGray)
                             Text("\(EventType.init(event_id: event_type)!.event_name!.localized)")
-                                .frame(maxWidth: 110)
+                                .frame(maxWidth: .infinity)
+//                                .frame(maxWidth: 110)
                         }
                         ForEach(Range(0...2), id:\.self) { water_level in
                             switch stats.event_occur[water_level][event_type] {
@@ -46,15 +47,11 @@ struct WaveResultCollectionView: View {
                                         .foregroundColor(.cGray)
                                     Text("\(stats.event_occur[water_level][event_type].value)")
                                         .frame(minWidth: 60)
-                                    if (stats.average[water_level][event_type] != nil || (stats.event_occur[water_level][event_type] ?? 0) >= 2) {
+                                    if (stats.average[water_level][event_type] != nil) {
                                         Text(String(stats.average[water_level][event_type]!.round(digit: 2)))
                                             .offset(y: 20)
                                             .modifier(Splatfont2(size: 12))
                                             .foregroundColor(.yellow)
-                                        //                                    Text(String((stats.variance[water_level][event_type]! + stats.average[water_level][event_type]!).round(digit: 2)))
-                                        //                                        .offset(y: 30)
-                                        //                                        .modifier(Splatfont2(size: 10))
-                                        //                                        .foregroundColor(.cGray)
                                     }
                                 }
                                 .frame(height: 60)

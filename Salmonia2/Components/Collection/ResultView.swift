@@ -428,38 +428,46 @@ struct ResultView: View {
 
 func CalcBias(_ result: CoopResultsRealm, _ nsaid: String) -> Double {
     let player: PlayerResultsRealm = result.player.filter("nsaid=%@", nsaid).first!
-    let danger_rate: Double = result.danger_rate
-    let rate: Double = (danger_rate * 3 / 5.0 + 80) / 160.0 // レートから計算されるバイアス
-    let max_bias: Double = danger_rate == 200 ? 1.5 : 1.25 // 最大のバイアス
+    let base: [Double] = [
+        Double((result.danger_rate * 3) / 5 + 120) / 160, // MAX
+        Double((result.danger_rate * 3) / 5 + 80) / 160, // BASE
+    ]
     
-    var bias: (defeated: Double, golden: Double) = (0.0, 0.0)
-    
-    let quota_num = result.wave.map({ $0.quota_num }).reduce(0, +)
-    let defeated_num = player.boss_kill_counts.sum()
-    let appear_num = result.boss_counts.sum()
-    
-    let golden_ikura_num = player.golden_ikura_num
-    
-    bias.defeated = min(Double(defeated_num * 99) / Double(17 * appear_num), max_bias)
-    bias.golden = min(rate + Double(10 * (golden_ikura_num * 3 - quota_num)) / (9.0 * 160.0), max_bias)
-    
-    switch (bias.golden < rate, bias.defeated < rate) {
-    case (true, true):
-        return max(bias.golden, bias.defeated)
-    case (true, false):
-        return max(bias.defeated, rate)
-    case (false, true):
-        return min(bias.defeated, rate)
-    case (false, false):
-        return min(bias.golden, bias.defeated)
+    let bias: [Double] = [
+        Double(player.boss_kill_counts.sum() * 99) / Double(17 * result.boss_counts.sum()), // DEFEATED
+        Double((result.danger_rate * 3) / 5 + 80) / 160 + Double(player.golden_ikura_num * 3 - result.wave.sum(ofProperty: "quota_num")) / (9 * 160)// GOLDEN
+    ]
+
+    // 最低限のノルマ
+    let quota: [Bool] = [
+        (min(result.wave.sum(ofProperty: "quota_num"), result.wave.sum(ofProperty: "golden_ikura_num")) / 5) <= player.golden_ikura_num, // ノルマか納品数の少ない方の20%
+        min(result.boss_kill_counts.sum() / 5, result.boss_counts.sum() / 6) <= player.boss_kill_counts.sum(), // 討伐数の25%か出現数の20%の小さい方のどちらか
+    ]
+//    print(bias, quota)
+
+    switch (quota[0], quota[1]) {
+    case (true, true): // どちらもした
+        switch (bias.min()! >  base.max()!) {
+        case true: // 抜群の成績
+            return bias.reduce(0, +) / 2
+        case false: // 平均以上の働き
+            return min(base.max()!, bias.max()!)
+        }
+    case (true, false): // 納品だけはした
+        return min(base.min()!, bias.reduce(0, +) / 2)
+    case (false, true): // 討伐だけはした
+        return bias.reduce(0, +) / 2
+    case (false, false): // どちらもしてない
+        return bias.min()!
     }
 }
 
 extension PlayerResultsRealm {
     var srpower: Double {
-        let bossrate: [Int] = [1783, 1609, 2649, 1587, 1534, 1563, 1500, 1783, 2042]
+        let bossrate: [[Int]] =
+            [[1783, 1609, 2649, 1587, 1534, 1563, 1500, 1783, 2042]]
         let bias: Double = CalcBias(self.result.first!, self.nsaid!)
-        let baserate: Int = Array(zip(self.boss_kill_counts, bossrate)).map{ $0 * $1 }.reduce(0, +) / max(1, self.boss_kill_counts.sum())
+        let baserate: Int = Array(zip(self.boss_kill_counts, bossrate[0])).map{ $0 * $1 }.reduce(0, +) / max(1, self.boss_kill_counts.sum())
         
         return Double(Double(baserate) * bias).round(digit: 1)
     }

@@ -23,17 +23,17 @@ struct ShiftStatsView: View {
             {
                 CoopShiftStack(phase: stats.shift)
                 // 課金しているユーザだけが個別のリザルトにジャンプできる
-//                switch user.isPurchase {
-//                case true:
-//                    return AnyView(
-//                        NavigationLink(destination: ResultCollectionView(core: UserResultCore(stats.schedule!))) {
-//                            ShiftStatsStack(title: "Job Num", value: stats.job_num)
-//                        })
-//                case false:
-//                    return AnyView(
-//                        ShiftStatsStack(title: "Job Num", value: stats.job_num)
-//                    )
-//                }
+                switch user.isPurchase {
+                case true:
+                    AnyView(
+                        NavigationLink(destination: ResultCollectionView(core: UserResultCore(stats.schedule!))) {
+                            ShiftStatsStack(title: "Job Num", value: stats.job_num)
+                        })
+                case false:
+                    AnyView(
+                        ShiftStatsStack(title: "Job Num", value: stats.job_num)
+                    )
+                }
                 ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
                 ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
                 ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)
@@ -103,13 +103,19 @@ struct ShiftStatsView: View {
                         .font(.custom("Splatfont2", size: 16))
                 }
             }
-            Section(header: Text("Analysis")
+            Section(header: Text("Advanced")
                         .modifier(Splatfont2(size: 16))
                         .foregroundColor(.cOrange)) {
                 NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
-                    Text("Wave")
+                    Text("Wave Analysis")
                         .font(.custom("Splatfont2", size: 16))
                 }
+                .disabled(!user.isPurchase)
+                NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
+                    Text("Boss Salmonids Analysis")
+                        .font(.custom("Splatfont2", size: 16))
+                }
+                .disabled(true)
             }
         }
         .navigationBarTitle("Shift Stats")

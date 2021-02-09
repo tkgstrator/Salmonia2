@@ -105,6 +105,11 @@
 "All" = "夜あり"; // Include night event
 "No Night Event" = "昼のみ"; // Without night event
 "Record" = "キロク"; // The records of collecting golden eggs
+"Probability" = "確率";
+"Analysis" = "分析";
+"Advanced" = "詳細";
+"Wave Analysis" = "WAVE分析";
+"Boss Salmonids Analysis" = "オオモノ分析";
 
 // Event & Tide
 "Tide" = "潮位";

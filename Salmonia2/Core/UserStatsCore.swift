@@ -41,6 +41,7 @@ class UserStatsCore: ObservableObject {
     @Published var max_results: [CoopResultsRealm] = []
     @Published var special: [Double?] = [nil, nil, nil, nil]
     @Published var isRareWeapon: Bool = true
+    @Published var salmonids: [(count: Int, result: CoopResultsRealm)] = []
     
     init(start_time: Int) {
         token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
@@ -106,7 +107,8 @@ class UserStatsCore: ObservableObject {
                         special[idx] = (Double(results.filter({ $0.player[0].special_id == sp}).count) / Double(job_num!)).round(digit: 4)
                     }
                 }
-
+                
+                // なんかの計算式（とてもダサい）
                 max_results = []
                 max_results.append(results.filter("power_eggs=%@",  max_team_power_eggs).first!)
                 max_results.append(results.filter("golden_eggs=%@", max_team_golden_eggs).first!)

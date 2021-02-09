@@ -109,7 +109,6 @@ class CoopResultsRealm: Object {
         for player in self.player {
             usage += [Int](repeating: player.special_id, count: player.special_counts[wave])
         }
-        print(usage.chunked(by: 4))
         return usage.chunked(by: 4)
     }
 }
@@ -148,8 +147,7 @@ class PlayerResultsRealm: Object {
     dynamic var weapon_list = List<Int>()
     dynamic var special_counts = List<Int>()
     let result = LinkingObjects(fromType: CoopResultsRealm.self, property: "player")
-//    let nsaid = LinkingObjects(fromType: CrewInfoRealm.self, property: "nsaid")
-    
+
     static func getids() -> [String] {
         guard let realm = try? Realm() else { return [] }
         return Array(Set(realm.objects(PlayerResultsRealm.self).map({ $0.nsaid! })))
@@ -179,8 +177,7 @@ class CoopShiftRealm: Object {
     @objc dynamic var stage_id: Int = 0
     @objc dynamic var rare_weapon: Int = 0
     dynamic var weapon_list = List<Int>()
-//    dynamic var records = List<WaveRecordsRealm>()
-    
+
     override static func primaryKey() -> String? {
         return "start_time"
     }
@@ -195,8 +192,7 @@ class WaveRecordsRealm: Object {
     @objc dynamic var ikura_num = 0
     @objc dynamic var ukey = Int()
     @objc dynamic var sash: String? = nil
-//    let shift = LinkingObjects(fromType: CoopShiftRealm.self, property: "records")
-    
+
     func configure(tide: Int, event: Int, start_time: Int) {
         self.start_time = start_time
         self.water_level = tide
@@ -246,8 +242,7 @@ class FeatureProductRealm: Object {
     @objc dynamic var localizedDescription: String = ""
     @objc dynamic var localizedPrice: String = ""
     @objc dynamic var isValid: Bool = false
-//    @objc dynamic var isExpired: Int = 0
-    
+
     override static func primaryKey() -> String? {
         return "productIdentifier"
     }
