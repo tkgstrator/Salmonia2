@@ -45,6 +45,7 @@
 		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
 		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
+		10B87FAC25D3AA240018596A /* WeaponCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */; };
 		10B9776825C44E4B005A0470 /* ShiftStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B9776725C44E4B005A0470 /* ShiftStatsView.swift */; };
 		10BB00822530F63D0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00842530F63D0081C6EB /* Localizable.strings */; };
 		10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00902530F66A0081C6EB /* Localizable.strings */; };
@@ -163,6 +164,7 @@
 		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
+		10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCollectionView.swift; sourceTree = "<group>"; };
 		10B9776725C44E4B005A0470 /* ShiftStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftStatsView.swift; sourceTree = "<group>"; };
 		10BB00532530C3B00081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		10BB00832530F63D0081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				1048631525697630001FDFBD /* CoopShiftCollectionView.swift */,
+				10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */,
 				10BB34B7252175170046CBCA /* ResultCollectionView.swift */,
 				10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */,
 				106764E425D0D8B10085B1CD /* WaveResultCollectionView.swift */,
@@ -804,6 +807,7 @@
 				10BB34C6252175170046CBCA /* LoadingView.swift in Sources */,
 				1037E3A325209C7C001B41B0 /* SceneDelegate.swift in Sources */,
 				10F2825C2530B58700D7B2BE /* WaveResultCore.swift in Sources */,
+				10B87FAC25D3AA240018596A /* WeaponCollectionView.swift in Sources */,
 				108F2C67257766BB00287900 /* SyncUserData.swift in Sources */,
 				10BB34C3252175170046CBCA /* ResultView.swift in Sources */,
 				10613BCA2580FB170000AE30 /* FeatureProductCore.swift in Sources */,

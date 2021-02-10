@@ -17,112 +17,18 @@ struct ShiftStatsView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Overview")
-                        .modifier(Splatfont2(size: 16))
-                        .foregroundColor(.cOrange))
-            {
-                CoopShiftStack(phase: stats.shift)
-                // 課金しているユーザだけが個別のリザルトにジャンプできる
-                switch user.isPurchase {
-                case true:
-                    AnyView(
-                        NavigationLink(destination: ResultCollectionView(core: UserResultCore(stats.schedule!))) {
-                            ShiftStatsStack(title: "Job Num", value: stats.job_num)
-                        })
-                case false:
-                    AnyView(
-                        ShiftStatsStack(title: "Job Num", value: stats.job_num)
-                    )
-                }
-                ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
-                ShiftStatsStack(title: "Clear Ratio", value: stats.clear_ratio.per)
-                ShiftStatsStack(title: "Total Power Eggs", value: stats.total_power_eggs)
-                ShiftStatsStack(title: "Total Golden Eggs", value: stats.total_golden_eggs)
-                ShiftStatsStack(title: "Power Eggs Ratio", value: stats.rate_power_eggs.per)
-                ShiftStatsStack(title: "Golden Eggs Ratio", value: stats.rate_golden_eggs.per)
-                Group {
-                    ShiftStatsStack(title: "Bomb Launcher", value: stats.special[0].per)
-                    ShiftStatsStack(title: "Sting Ray", value: stats.special[1].per)
-                    ShiftStatsStack(title: "Inkjet", value: stats.special[2].per)
-                    ShiftStatsStack(title: "Splashdown", value: stats.special[3].per)
-                }
-            }
-            Section(header: Text("Max")
-                        .modifier(Splatfont2(size: 16))
-                        .foregroundColor(.cOrange))
-            {
-                ShiftStatsStack(title: "Salmon Rate", value: stats.srpower[1]?.round(digit: 2))
-                ShiftStatsStack(title: "Grade Point", value: stats.max_grade_point)
-                if (stats.job_num != nil) {
-                    NavigationLink(destination: ResultView(result: stats.max_results[0])) {
-                        ShiftStatsStack(title: "Team Power Eggs", value: stats.max_team_power_eggs)
-                    }
-                    NavigationLink(destination: ResultView(result: stats.max_results[1])) {
-                        ShiftStatsStack(title: "Team Golden Eggs", value: stats.max_team_golden_eggs)
-                    }
-                    NavigationLink(destination: ResultView(result: stats.max_results[2])) {
-                        ShiftStatsStack(title: "Power Eggs", value: stats.max_my_power_eggs)
-                    }
-                    NavigationLink(destination: ResultView(result: stats.max_results[3])) {
-                        ShiftStatsStack(title: "Golden Eggs", value: stats.max_my_golden_eggs)
-                    }
-                    NavigationLink(destination: ResultView(result: stats.max_results[4])) {
-                        ShiftStatsStack(title: "Boss Defeated", value: stats.max_defeated)
-                    }
-                }
-            }
-            Section(header: Text("Avg")
-                        .modifier(Splatfont2(size: 16))
-                        .foregroundColor(.cOrange))
-            {
-                ShiftStatsStack(title: "Clear Wave", value: stats.avg_clear_wave)
-                ShiftStatsStack(title: "Crew Grade", value: stats.avg_crew_grade)
-                ShiftStatsStack(title: "Team Power Eggs", value: stats.avg_team_power_eggs)
-                ShiftStatsStack(title: "Team Golden Eggs", value: stats.avg_team_golden_eggs)
-                ShiftStatsStack(title: "Power Eggs", value: stats.avg_my_power_eggs)
-                ShiftStatsStack(title: "Golden Eggs", value: stats.avg_my_golden_eggs)
-                ShiftStatsStack(title: "Boss Defeated", value: stats.avg_defeated)
-                ShiftStatsStack(title: "Rescue Count", value: stats.avg_rescue)
-                ShiftStatsStack(title: "Help Count", value: stats.avg_dead)
-            }
-            Section(header: Text("Boss defeated")
-                        .modifier(Splatfont2(size: 16))
-                        .foregroundColor(.cOrange))
-            {
-                ForEach(BossType.allCases.indices, id:\.self) { idx in
-                    ShiftStatsStack(title: (BossType.allCases[idx].boss_name!), value: stats.boss_defeated[idx].per)
-                }
-            }
-            Section(header: Text("Global Records")
-                        .modifier(Splatfont2(size: 16))
-                        .foregroundColor(.cOrange)) {
-                Text("Power Eggs")
-                    .font(.custom("Splatfont2", size: 16))
-                NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
-                    Text("Golden Eggs")
-                        .font(.custom("Splatfont2", size: 16))
-                }
-            }
-            Section(header: Text("Advanced")
-                        .modifier(Splatfont2(size: 16))
-                        .foregroundColor(.cOrange)) {
-                NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
-                    Text("Wave Analysis")
-                        .font(.custom("Splatfont2", size: 16))
-                }
-                .disabled(!user.isPurchase)
-                NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
-                    Text("Boss Salmonids Analysis")
-                        .font(.custom("Splatfont2", size: 16))
-                }
-                .disabled(true)
-            }
+            Overview
+            MaxResult
+            AvgResult
+            BossDefeated
+            GlobalRecords
+            Advanced
         }
         .navigationBarTitle("Shift Stats")
         //        .navigationBarItems(trailing: RecordButton)
     }
     
-    private var RecordButton: some View {
+    var RecordButton: some View {
         NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
             URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable() }
                 .frame(width: 30, height: 30)
@@ -130,9 +36,139 @@ struct ShiftStatsView: View {
         .buttonStyle(PlainButtonStyle())
     }
     
-    struct ShiftStatsStack: View {
+    var Overview: some View {
+        Section(header: Text("Overview")
+                    .modifier(Splatfont2(size: 16))
+                    .foregroundColor(.cOrange))
+        {
+            CoopShiftStack(phase: stats.shift)
+            switch user.isPurchase {
+            case true:
+                AnyView(
+                    NavigationLink(destination: ResultCollectionView(core: UserResultCore(stats.schedule!))) {
+                        StatsColumn(title: "Job Num", value: stats.job_num)
+                    })
+            case false:
+                AnyView(
+                    StatsColumn(title: "Job Num", value: stats.job_num)
+                )
+            }
+            Group {
+                StatsColumn(title: "Salmon Rate", value: stats.srpower[0]?.round)
+                StatsColumn(title: "Clear Ratio", value: stats.clear_ratio.per)
+                StatsColumn(title: "Total Power Eggs", value: stats.total_power_eggs)
+                StatsColumn(title: "Total Golden Eggs", value: stats.total_golden_eggs)
+                StatsColumn(title: "Power Eggs Ratio", value: stats.rate_power_eggs.per)
+                StatsColumn(title: "Golden Eggs Ratio", value: stats.rate_golden_eggs.per)
+            }
+        }
+//         課金しているユーザだけが個別のリザルトにジャンプできる
+//        StatsColumn(title: "Salmon Rate", value: stats.srpower[0]?.round(digit: 2))
+//        StatsColumn(title: "Clear Ratio", value: stats.clear_ratio.per)
+//        StatsColumn(title: "Total Power Eggs", value: stats.total_power_eggs)
+//        StatsColumn(title: "Total Golden Eggs", value: stats.total_golden_eggs)
+//        StatsColumn(title: "Power Eggs Ratio", value: stats.rate_power_eggs.per)
+//        StatsColumn(title: "Golden Eggs Ratio", value: stats.rate_golden_eggs.per)
+//        Group {
+//            StatsColumn(title: "Bomb Launcher", value: stats.special[0].per)
+//            StatsColumn(title: "Sting Ray", value: stats.special[1].per)
+//            StatsColumn(title: "Inkjet", value: stats.special[2].per)
+//            StatsColumn(title: "Splashdown", value: stats.special[3].per)
+//        }
+    }
+    
+    var MaxResult: some View {
+        Section(header: Text("Max")
+                    .modifier(Splatfont2(size: 16))
+                    .foregroundColor(.cOrange))
+        {
+            StatsColumn(title: "Salmon Rate", value: stats.srpower[1]?.round)
+            StatsColumn(title: "Grade Point", value: stats.max_grade_point)
+            if (stats.job_num != nil) {
+                NavigationLink(destination: ResultView(result: stats.max_results[0])) {
+                    StatsColumn(title: "Team Power Eggs", value: stats.max_team_power_eggs)
+                }
+                NavigationLink(destination: ResultView(result: stats.max_results[1])) {
+                    StatsColumn(title: "Team Golden Eggs", value: stats.max_team_golden_eggs)
+                }
+                NavigationLink(destination: ResultView(result: stats.max_results[2])) {
+                    StatsColumn(title: "Power Eggs", value: stats.max_my_power_eggs)
+                }
+                NavigationLink(destination: ResultView(result: stats.max_results[3])) {
+                    StatsColumn(title: "Golden Eggs", value: stats.max_my_golden_eggs)
+                }
+                NavigationLink(destination: ResultView(result: stats.max_results[4])) {
+                    StatsColumn(title: "Boss Defeated", value: stats.max_defeated)
+                }
+            }
+        }
+    }
+    
+    var AvgResult: some View {
+        Section(header: Text("Avg")
+                    .modifier(Splatfont2(size: 16))
+                    .foregroundColor(.cOrange))
+        {
+            StatsColumn(title: "Clear Wave", value: stats.avg_clear_wave?.round)
+            StatsColumn(title: "Crew Grade", value: stats.avg_crew_grade?.round)
+            StatsColumn(title: "Team Power Eggs", value: stats.avg_team_power_eggs?.round)
+            StatsColumn(title: "Team Golden Eggs", value: stats.avg_team_golden_eggs?.round)
+            StatsColumn(title: "Power Eggs", value: stats.avg_my_power_eggs?.round)
+            StatsColumn(title: "Golden Eggs", value: stats.avg_my_golden_eggs?.round)
+            StatsColumn(title: "Boss Defeated", value: stats.avg_defeated?.round)
+            StatsColumn(title: "Rescue Count", value: stats.avg_rescue?.round)
+            StatsColumn(title: "Help Count", value: stats.avg_dead?.round)
+        }
+    }
+    
+    var BossDefeated: some View {
+        Section(header: Text("Boss defeated")
+                    .modifier(Splatfont2(size: 16))
+                    .foregroundColor(.cOrange))
+        {
+            ForEach(BossType.allCases.indices, id:\.self) { idx in
+                StatsColumn(title: (BossType.allCases[idx].boss_name!), value: stats.boss_defeated[idx].per)
+            }
+        }
+    }
+    
+    var GlobalRecords: some View {
+        Section(header: Text("Global Records")
+                    .modifier(Splatfont2(size: 16))
+                    .foregroundColor(.cOrange)) {
+            Text("Power Eggs")
+                .font(.custom("Splatfont2", size: 16))
+            NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
+                Text("Golden Eggs")
+                    .font(.custom("Splatfont2", size: 16))
+            }
+        }
+    }
+    
+    var Advanced: some View {
+        Section(header: Text("Advanced")
+                    .modifier(Splatfont2(size: 16))
+                    .foregroundColor(.cOrange)) {
+            NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
+                Text("Wave Analysis")
+                    .font(.custom("Splatfont2", size: 16))
+            }
+            .disabled(!user.isPurchase)
+            NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
+                Text("Boss Salmonids Analysis")
+                    .font(.custom("Splatfont2", size: 16))
+            }
+            .disabled(true)
+            NavigationLink(destination: WeaponCollectionView(weapon_lists: stats.weapon_lists.chunked(by: 5))){
+                Text("Random Weapon Analysis")
+                    .font(.custom("Splatfont2", size: 16))
+            }
+        }
+    }
+    
+    struct StatsColumn: View {
         var title: String = ""
-        var value: Any? = nil
+        var value: Any?
         
         var body: some View {
             HStack {

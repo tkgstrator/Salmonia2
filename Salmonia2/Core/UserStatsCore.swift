@@ -18,7 +18,7 @@ class UserStatsCore: ObservableObject {
     @Published var clear_ratio: Double?
     @Published var total_power_eggs: Int?
     @Published var total_golden_eggs: Int?
-    @Published var srpower: [Double?] = [0.0, 0.0]
+    @Published var srpower: [Double?] = [nil, nil]
     @Published var rate_power_eggs: Double?
     @Published var rate_golden_eggs: Double?
     @Published var max_grade_point: Int?
@@ -40,17 +40,19 @@ class UserStatsCore: ObservableObject {
     @Published var max_results: [CoopResultsRealm] = []
     @Published var special: [Double?] = [nil, nil, nil, nil]
     @Published var isRareWeapon: Bool = true
-    @Published var salmonids: [(count: Int, result: CoopResultsRealm)] = []
+    //    @Published var salmonids: [(count: Int, result: CoopResultsRealm)] = []
     @Published var player_total: [Int?] = [nil, nil, nil, nil]
     @Published var total_eggs: [Int?] = [nil, nil]
+    @Published var weapon_lists: [WeaponList] = []
     
     init(start_time: Int) {
         token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
             guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+            guard let shift = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first else { return }
             let nsaids: [String] = Array(user.account.filter("isActive=true").map({ $0.nsaid }))
             isRareWeapon = user.isUnlock[1] // クマブキアンロック情報を取得
             schedule = start_time
-
+            
             // リザルト一覧からシフトを指定して取得
             let results = realm.objects(CoopResultsRealm.self).filter("start_time=%@ and nsaid IN %@", start_time, nsaids)
             let player = realm.objects(PlayerResultsRealm.self).filter("ANY result.start_time=%@ and nsaid IN %@", start_time, nsaids)
@@ -73,7 +75,7 @@ class UserStatsCore: ObservableObject {
                 // 合計を求める
                 total_power_eggs = results.sum(ofProperty: "power_eggs")
                 total_golden_eggs = results.sum(ofProperty: "golden_eggs")
-
+                
                 // 平均を求める
                 avg_team_power_eggs = results.average(ofProperty: "power_eggs")
                 avg_team_golden_eggs = results.average(ofProperty: "golden_eggs")
@@ -103,7 +105,7 @@ class UserStatsCore: ObservableObject {
                 clear_ratio = Double(results.filter("is_clear=true").count) / Double(job_num!)
                 rate_power_eggs = player.sum(ofProperty: "ikura_num") / results.sum(ofProperty: "power_eggs")
                 rate_golden_eggs = player.sum(ofProperty: "golden_ikura_num") / results.sum(ofProperty: "golden_eggs")
-
+                
                 max_results = [
                     results.filter("power_eggs=%@", max_team_power_eggs).first!,
                     results.filter("golden_eggs=%@", max_team_golden_eggs).first!,
@@ -111,14 +113,49 @@ class UserStatsCore: ObservableObject {
                     player.filter("golden_ikura_num=%@", max_my_golden_eggs).first!.result.first!,
                     player.filter({ $0.boss_kill_counts.sum() == max_defeated }).first!.result.first!
                 ]
-
                 srpower = SRPower(results)
+            }
+            
+            // ブキカウントはバイト回数0でも行う
+            // 出現したブキの回数をカウント
+            let weapon_list: [Int] = Array(player.flatMap({ Array($0.weapon_list.map({ $0 })) }))
+            let all_weapon_list: [Int] = Array(WeaponType.allCases.map({ $0.weapon_id! }))
+            let now_weapon_list: [Int] = Array(shift.weapon_list.map({ $0 })) + [shift.rare_weapon]
+            
+            switch shift.weapon_list.contains(-1) {
+            case true: // 緑ランダムがある
+                weapon_lists = all_weapon_list
+                    .filter({ ($0 >= 0 && $0 <= 10000) || ($0 == shift.rare_weapon) })
+                    .sorted(by: <)
+                    .map({ WeaponList(weapon_id: $0, count: weapon_list.count($0)) })
+            case false: // 緑ランダムはない
+                switch shift.weapon_list.contains(-2) {
+                case true: // 黄金編成 OK
+                    weapon_lists = all_weapon_list
+                        .filter({ $0 >= 20000 })
+                        .sorted(by: <)
+                        .map({ WeaponList(weapon_id: $0, count: weapon_list.count($0)) })
+                case false: // 通常編成 OK
+                    weapon_lists = shift.weapon_list
+                        .sorted(by: <)
+                        .map({ WeaponList(weapon_id: $0, count: weapon_list.count($0)) })
+                }
             }
         }
     }
     
     deinit {
         token?.invalidate()
+    }
+}
+
+struct WeaponList: Hashable {
+    var weapon_id: Int
+    var count: Int?
+    var image_url: URL {
+        get {
+            return WeaponType.init(weapon_id: weapon_id)!.image_url
+        }
     }
 }
 
@@ -133,8 +170,12 @@ extension Array where Element == Int {
     }
     
     // 出現回数をカウントして出現率を返す
-    func count(_ value: Int) -> Int {
-        return self.filter({ $0 == value }).count
+    func count(_ value: Int) -> Int? {
+        return self.filter({ $0 == value }).count == 0 ? nil : self.filter({ $0 == value }).count
+    }
+    
+    var countNum: [WeaponList] {
+        return Array(WeaponType.allCases.map({ $0.weapon_id! }).filter({ $0 >= 0})).sorted(by: <).map({ WeaponList(weapon_id: $0, count: self.count($0)) })
     }
 }
 

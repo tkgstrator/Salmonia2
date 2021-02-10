@@ -73,11 +73,13 @@ struct ResultView: View {
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable() }
                         .frame(width: 24, height: 24)
                     Text("x\(result.golden_eggs)")
+                        .rainbowAnimation(user.isUnlock[5])
                         .shadow(color: .black, radius: 0, x: 1, y: 1)
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable() }
                         .frame(width: 24, height: 24)
                     Text("x\(result.power_eggs)")
                         .shadow(color: .black, radius: 0, x: 1, y: 1)
+                        .rainbowAnimation(user.isUnlock[5])
                 }.frame(maxWidth: .infinity)
             }
             .font(.custom("Splatfont2", size: 18))
@@ -110,6 +112,7 @@ struct ResultView: View {
                         .font(.custom("Splatfont2", size: 16))
                         Text("\(wave.golden_ikura_num)/\(wave.quota_num)")
                             .font(.custom("Splatfont2", size: 26))
+                            .rainbowAnimation(user.isUnlock[5])
                             .padding(.horizontal, 5)
                             .frame(maxWidth: .infinity)
                             .frame(height: 36)
@@ -218,7 +221,6 @@ struct ResultView: View {
     }
     
     struct WeaponListView: View {
-        
         var player: PlayerResultsRealm
         var maxWidth: CGFloat = UIScreen.main.bounds.size.width >= 360 ? 35 : 30
         var body: some View {
@@ -241,7 +243,6 @@ struct ResultView: View {
                 .shadow(color: .black, radius: 0, x: 1, y: 1)
                 .foregroundColor(Color.init(UIColor.init("E5F100")))
             }
-//            .frame(maxWidth: .infinity)
         }
     }
     
@@ -443,7 +444,6 @@ func CalcBias(_ result: CoopResultsRealm, _ nsaid: String) -> Double {
         (min(result.wave.sum(ofProperty: "quota_num"), result.wave.sum(ofProperty: "golden_ikura_num")) / 5) <= player.golden_ikura_num, // ノルマか納品数の少ない方の20%
         min(result.boss_kill_counts.sum() / 5, result.boss_counts.sum() / 6) <= player.boss_kill_counts.sum(), // 討伐数の25%か出現数の20%の小さい方のどちらか
     ]
-//    print(bias, quota)
 
     switch (quota[0], quota[1]) {
     case (true, true): // どちらもした

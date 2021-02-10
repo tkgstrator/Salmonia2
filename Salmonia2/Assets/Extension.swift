@@ -73,6 +73,10 @@ extension Double {
         return floor((pow(10.0, digit) as NSDecimalNumber).doubleValue * self) / (pow(10.0, digit) as NSDecimalNumber).doubleValue
     }
     
+    var round: Double {
+        return floor((pow(10.0, 2) as NSDecimalNumber).doubleValue * self) / (pow(10.0, 2) as NSDecimalNumber).doubleValue
+    }
+    
     var per: String {
         return self.isNaN ? String(0.0) : String((self * 100).round(digit: 2)) + "%"
     }

@@ -110,6 +110,8 @@
 "Advanced" = "詳細";
 "Wave Analysis" = "WAVE分析";
 "Boss Salmonids Analysis" = "オオモノ分析";
+"Random Weapon Analysis" = "ランダムブキ分析";
+"Random Weapon" = "ランダムブキ";
 
 // Event & Tide
 "Tide" = "潮位";
