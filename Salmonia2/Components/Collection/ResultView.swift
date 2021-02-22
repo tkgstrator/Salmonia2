@@ -20,20 +20,11 @@ struct ResultView: View {
     @State var isEnable: Bool = false
     
     var body: some View {
-        ZStack {
-            ScrollView(.vertical, showsIndicators: false) {
-                ResultOverview
-                ResultWaveView
-                ResultPlayerView
-            }
-            if #available(iOS 14.0, *) {
-                RectangleGetter(rect: $rect)
-                    .ignoresSafeArea(.container, edges: .bottom)
-            } else {
-                RectangleGetter(rect: $rect)
-            }
+        ScrollView(.vertical, showsIndicators: false) {
+            ResultOverview
+            ResultWaveView
+            ResultPlayerView
         }
-//        .background(RectangleGetter(rect: $rect))
         .navigationBarItems(trailing: UIButton)
         .navigationBarTitle(Text("Result Detail"))
     }
@@ -42,10 +33,6 @@ struct ResultView: View {
         HStack {
             Button(action: { isVisible.toggle() }) { Image(systemName: "person.circle.fill").Modifier(isVisible) }
             Button(action: { isEnable.toggle() }) { Image(systemName: "info.circle.fill").Modifier(isEnable) }
-            Button(action: {
-                guard let image: UIImage = UIApplication.shared.windows[0].rootViewController?.view!.convertToImage() else { return }
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-            }) { Image(systemName: "info.circle.fill").Modifier(isEnable) }
         }.sheet(isPresented: $isEnable) {
             ResultDetailView(isVisible: $isVisible).environmentObject(result)
         }
