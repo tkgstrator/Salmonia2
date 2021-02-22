@@ -20,12 +20,20 @@ struct ResultView: View {
     @State var isEnable: Bool = false
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            ResultOverview
-            ResultWaveView
-            ResultPlayerView
+        ZStack {
+            ScrollView(.vertical, showsIndicators: false) {
+                ResultOverview
+                ResultWaveView
+                ResultPlayerView
+            }
+            if #available(iOS 14.0, *) {
+                RectangleGetter(rect: $rect)
+                    .ignoresSafeArea(.container, edges: .bottom)
+            } else {
+                RectangleGetter(rect: $rect)
+            }
         }
-        .background(RectangleGetter(rect: $rect))
+//        .background(RectangleGetter(rect: $rect))
         .navigationBarItems(trailing: UIButton)
         .navigationBarTitle(Text("Result Detail"))
     }
@@ -35,9 +43,9 @@ struct ResultView: View {
             Button(action: { isVisible.toggle() }) { Image(systemName: "person.circle.fill").Modifier(isVisible) }
             Button(action: { isEnable.toggle() }) { Image(systemName: "info.circle.fill").Modifier(isEnable) }
             Button(action: {
-                guard let snapshot: UIImage = UIApplication.shared.windows[0].rootViewController?.view!.getImage(rect: self.rect) else { return }
-                UIImageWriteToSavedPhotosAlbum(snapshot, nil, nil, nil)
-            }) { Image(systemName: "photo.fill").Modifier(isEnable) }
+                guard let image: UIImage = UIApplication.shared.windows[0].rootViewController?.view!.convertToImage() else { return }
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }) { Image(systemName: "info.circle.fill").Modifier(isEnable) }
         }.sheet(isPresented: $isEnable) {
             ResultDetailView(isVisible: $isVisible).environmentObject(result)
         }
@@ -445,6 +453,25 @@ struct ResultView: View {
     }
 }
 
+//struct RectangleGetter: View {
+//    @Binding var rect: CGRect
+//
+//    var body: some View {
+//        GeometryReader { geometry in
+//            createView(proxy: geometry)
+//        }
+//    }
+//
+//    func createView(proxy: GeometryProxy) -> some View {
+//        DispatchQueue.main.async {
+//            self.rect = proxy.frame(in: .global)
+//            print("Global", proxy.frame(in: .global))
+//            print("Local", proxy.frame(in: .local))
+//        }
+//        return Rectangle().fill(Color.clear)
+//    }
+//}
+
 struct RectangleGetter: View {
     @Binding var rect: CGRect
     
@@ -456,9 +483,7 @@ struct RectangleGetter: View {
     
     func createView(proxy: GeometryProxy) -> some View {
         DispatchQueue.main.async {
-            self.rect = proxy.frame(in: .global)
-            print("Global", proxy.frame(in: .global))
-            print("Local", proxy.frame(in: .local))
+            rect = proxy.frame(in: .global)
         }
         return Rectangle().fill(Color.clear)
     }
@@ -510,12 +535,11 @@ extension PlayerResultsRealm {
     }
 }
 
-// スクリーンショット保存用のextension
-extension UIView {
-    func getImage(rect: CGRect) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(bounds: rect)
-        return renderer.image { rendererContext in
-            layer.render(in: rendererContext.cgContext)
+public extension UIView {
+    func convertToImage() -> UIImage {
+       let imageRenderer = UIGraphicsImageRenderer.init(size: bounds.size)
+        return imageRenderer.image { context in
+            layer.render(in: context.cgContext)
         }
     }
 }
