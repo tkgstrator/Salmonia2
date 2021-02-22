@@ -13,8 +13,8 @@ import URLImage
 
 struct ShiftStatsView: View {
     @EnvironmentObject var user: SalmoniaUserCore
-    @ObservedObject var stats: UserStatsCore
-    
+    @EnvironmentObject var stats: UserStatsCore
+
     var body: some View {
         List {
             Overview
@@ -29,7 +29,7 @@ struct ShiftStatsView: View {
     }
     
     var RecordButton: some View {
-        NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
+        NavigationLink(destination: StatsChartView(stats.schedule!)) {
             URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable() }
                 .frame(width: 30, height: 30)
         }
@@ -60,6 +60,12 @@ struct ShiftStatsView: View {
                 StatsColumn(title: "Total Golden Eggs", value: stats.total_golden_eggs)
                 StatsColumn(title: "Power Eggs Ratio", value: stats.rate_power_eggs.per)
                 StatsColumn(title: "Golden Eggs Ratio", value: stats.rate_golden_eggs.per)
+            }
+            Group {
+                StatsColumn(title: "Bomb Launcher", value: stats.special[0].per)
+                StatsColumn(title: "Sting Ray", value: stats.special[1].per)
+                StatsColumn(title: "Inkjet", value: stats.special[2].per)
+                StatsColumn(title: "Splashdown", value: stats.special[3].per)
             }
         }
 //         課金しているユーザだけが個別のリザルトにジャンプできる
@@ -138,7 +144,7 @@ struct ShiftStatsView: View {
                     .foregroundColor(.cOrange)) {
             Text("Power Eggs")
                 .font(.custom("Splatfont2", size: 16))
-            NavigationLink(destination: StatsChartView(stats.schedule!).environmentObject(ShiftRecordCore(stats.schedule!))) {
+            NavigationLink(destination: StatsChartView(stats.schedule!)) {
                 Text("Golden Eggs")
                     .font(.custom("Splatfont2", size: 16))
             }
@@ -149,12 +155,12 @@ struct ShiftStatsView: View {
         Section(header: Text("Advanced")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
-            NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
+            NavigationLink(destination: WaveResultCollectionView(stats: stats)) {
                 Text("Wave Analysis")
                     .font(.custom("Splatfont2", size: 16))
             }
             .disabled(!user.isPurchase)
-            NavigationLink(destination: WaveResultCollectionView(stats: ShiftRecordCore(stats.schedule!))){
+            NavigationLink(destination: WaveResultCollectionView(stats: stats)) {
                 Text("Boss Salmonids Analysis")
                     .font(.custom("Splatfont2", size: 16))
             }
@@ -167,6 +173,7 @@ struct ShiftStatsView: View {
     }
     
     struct StatsColumn: View {
+        @EnvironmentObject var rainbow: RainbowCore
         var title: String = ""
         var value: Any?
         
@@ -174,16 +181,18 @@ struct ShiftStatsView: View {
             HStack {
                 Text(title.localized)
                     .modifier(Splatfont2(size: 16))
+                    .rainbowAnimation(rainbow.shiftParam)
                 Spacer()
                 Text(value.value)
                     .font(.custom("Splatfont2", size: 16))
+                    .rainbowAnimation(rainbow.shiftValue)
             }
         }
     }
 }
 
 struct StatsChartView: View {
-    @EnvironmentObject var record: ShiftRecordCore
+    @EnvironmentObject var record: UserStatsCore
     
     init(_ start_time: Int) {
         getShiftRecords(start_time: start_time)

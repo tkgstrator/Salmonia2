@@ -11,8 +11,7 @@ import RealmSwift
 
 struct ResultCollectionView: View {
     @ObservedObject var core: UserResultCore
-    //    @EnvironmentObject var core: UserResultCore // 全リザルトを取得
-    @EnvironmentObject var user: SalmoniaUserCore // 課金しているかどうかの情報
+
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
     @State var isEnable: [Bool] = [true, true, true, true, true]
@@ -50,6 +49,7 @@ struct ResultCollectionView: View {
     
     private struct ResultStack: View {
         @ObservedObject var result: CoopResultsRealm
+        @EnvironmentObject var rainbow: RainbowCore
         @Binding var isPersonal: Bool
         var gradeID: [String] = ["Intern", "Apparentice","Part-Timer", "Go-Getter", "Overachiever", "Profreshional"]
         
@@ -130,7 +130,9 @@ struct ResultCollectionView: View {
                 case nil: // クリアした場合
                     return AnyView(Group {
                         Text("\(gradeID[result.grade_id.value ?? 5].localized)")
+                            .rainbow(rainbow.result)
                         Text("\(result.grade_point.value!)")
+                            .rainbow(rainbow.result)
                         Text("↑")
                             .foregroundColor(.cRed)
                             .font(.custom("Splatfont", size: 20))

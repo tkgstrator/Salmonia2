@@ -46,12 +46,33 @@
 			<key>orderHint</key>
 			<integer>24</integer>
 		</dict>
+		<key>GettingStarted (Playground) 1.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>28</integer>
+		</dict>
+		<key>GettingStarted (Playground) 2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>29</integer>
+		</dict>
+		<key>GettingStarted (Playground).xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>27</integer>
+		</dict>
 		<key>Playground (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>25</integer>
 		</dict>
 		<key>Playground (Playground) 10.xcscheme</key>
 		<dict>
@@ -128,7 +149,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>26</integer>
 		</dict>
 		<key>Playground (Playground) 20.xcscheme</key>
 		<dict>
@@ -443,7 +464,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>24</integer>
 		</dict>
 	</dict>
 </dict>

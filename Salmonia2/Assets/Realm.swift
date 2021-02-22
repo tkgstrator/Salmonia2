@@ -236,7 +236,7 @@ class SalmonRecordsRealm: Object {
     }
 }
 
-class FeatureProductRealm: Object {
+class FeatureProductRealm: Object, Codable {
     @objc dynamic var productIdentifier: String = ""
     @objc dynamic var localizedTitle: String = ""
     @objc dynamic var localizedDescription: String = ""

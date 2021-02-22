@@ -112,10 +112,11 @@ struct WaveCollectionView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Text((StageType.init(stage_id: wave.result.first!.stage_id)?.stage_name!.localized)!)
                         Text(wave.water_level!.localized)
+                        Text((StageType.init(stage_id: wave.result.first!.stage_id)?.stage_name!.localized)!)
                     }
                     .modifier(Splatfont2(size: 14))
+                    .frame(height: 14)
                     .foregroundColor(.yellow)
                     Text(wave.event_type!.localized)
                 }
@@ -126,17 +127,17 @@ struct WaveCollectionView: View {
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
-                            .frame(width: 20, height: 20)
+                            .frame(width: 18, height: 18)
                         Text("x\(wave.golden_ikura_num)").frame(width: 50, height: 16, alignment: .leading)
                     }
                     HStack {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable()}
-                            .frame(width: 20, height: 20)
+                            .frame(width: 18, height: 18)
                         Text("x\(wave.ikura_num)").frame(width: 50, height: 16, alignment: .leading)
                     }
                 }
-                .frame(width: 80)
-                .modifier(Splatfont2(size: 16))
+                .frame(width: 55)
+                .modifier(Splatfont2(size: 14))
             }
             
         }

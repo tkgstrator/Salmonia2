@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WaveResultCollectionView: View {
-    @ObservedObject var stats: ShiftRecordCore
+    @ObservedObject var stats: UserStatsCore
     
     var body: some View {
         List {

@@ -12,7 +12,7 @@ struct Rainbow: ViewModifier {
     let hueColors = stride(from: 0, to: 1, by: 0.01).map {
         Color(hue: $0, saturation: 1, brightness: 1)
     }
-    
+
     func body(content: Content) -> some View {
         content
             .overlay(GeometryReader { (proxy: GeometryProxy) in
@@ -59,8 +59,13 @@ struct RainbowAnimation: ViewModifier {
 
 
 extension View {
-    func rainbow() -> some View {
-        self.modifier(Rainbow())
+    func rainbow(_ flag: Bool) -> some View {
+        switch flag {
+        case true:
+            return AnyView(self.modifier(Rainbow()))
+        case false:
+            return AnyView(self)
+        }
     }
     
     func rainbowAnimation(_ flag: Bool) -> some View {

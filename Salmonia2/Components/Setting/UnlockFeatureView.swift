@@ -11,6 +11,7 @@ import SwiftyStoreKit
 struct UnlockFeatureView: View {
     @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var paid: FeatureProductCore
+    @EnvironmentObject var unlock: UnlockCore
     @State var isVisible: Bool = false
     @State var mLog: String = ""
     @State var mTitle: String = ""
@@ -20,15 +21,10 @@ struct UnlockFeatureView: View {
             Section(header: Text("Free")
                         .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange)) {
-                Toggle("Future Rotation", isOn: $user.isUnlock[0])
-                Toggle("Grizzco Weapons", isOn: $user.isUnlock[1])
-                Toggle("Force Update", isOn: $user.isUnlock[2])
-                Toggle("Disable Ads", isOn: $user.isUnlock[3])
-                    .disabled(!user.isPurchase)
-                Toggle("Legacy Style", isOn: $user.isUnlock[4])
-                    .disabled(!user.isPurchase)
-                Toggle("Gaming Style", isOn: $user.isUnlock[5])
-                    .disabled(!user.isPurchase)
+                Toggle("Future Rotation", isOn: $unlock.futureRotation)
+                Toggle("Grizzco Weapons", isOn: $unlock.rareWeapon)
+                Toggle("Force Update", isOn: $unlock.forceReload)
+                Toggle("Hide My Nickname", isOn: $unlock.displayName)
             }
             Section(header: Text("Paid")
                         .font(.custom("Splatfont2", size: 16))
@@ -37,17 +33,25 @@ struct UnlockFeatureView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             HStack {
-                                Text(feature.localizedTitle.localized)
-                                Text(feature.localizedPrice!.localized)
+                                Text(feature.localizedTitle)
+                                Text(feature.localizedPrice)
                                     .modifier(Splatfont2(size: 16))
                             }
-                            Text(feature.localizedDescription.localized)
+                            Text(feature.localizedDescription)
                                 .modifier(Splatfont2(size: 14))
                         }
                         Spacer()
                         PayButton(isValid: feature.isValid, isSubscribed: false, product: feature.productIdentifier)
                     }.frame(height: 60)
                 }
+                Toggle("Disable Ads", isOn: $unlock.disableAds)
+                    .disabled(!user.isPurchase)
+                Toggle("Legacy Style", isOn: $unlock.legacyStyle)
+                    .disabled(!user.isPurchase)
+                NavigationLink(destination: RainbowConfiguration()) {
+                    Text("Gaming Style")
+                }
+                .disabled(!user.isPurchase)
             }
             Section(header: Text("Option")
                         .font(.custom("Splatfont2", size: 16))
@@ -90,8 +94,8 @@ struct UnlockFeatureView: View {
                         guard let data = realm.objects(FeatureProductRealm.self).filter("productIdentifier=%@", product.productId).first else { throw SKError.invalid }
                         guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw SKError.unknown}
                         realm.beginWrite()
-                        data.isValid = false
-                        user.isPurchase = false
+                        data.isValid = true
+                        user.isPurchase = true
                         try? realm.commitWrite()
                         mTitle = "Success"
                         mLog = "Restore Success"

@@ -15,7 +15,7 @@ struct CoopShiftCollectionView: View {
     @State var isTime: [Bool] = [true, true, true]
     @State var isEnable: [Bool] = [true, true, true, true, true, true, true, true]
     @State var isPlayed: Bool = false
-
+    
     var body: some View {
         if #available(iOS 14.0, *) {
             ScrollViewReader { proxy in
@@ -30,7 +30,9 @@ struct CoopShiftCollectionView: View {
                     .frame(maxWidth: .infinity)
                     ForEach(phase.all.indices, id:\.self) { idx in
                         ZStack {
-                            NavigationLink(destination: ShiftStatsView(stats: UserStatsCore(start_time: phase.all[idx].start_time))) {
+                            NavigationLink(destination: ShiftStatsView()
+                                            .environmentObject(UserStatsCore(start_time: phase.all[idx].start_time))
+                            ) {
                                 EmptyView()
                             }
                             .opacity(0.0)
@@ -58,7 +60,9 @@ struct CoopShiftCollectionView: View {
                 //                .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
                 ForEach(phase.all.indices, id:\.self) { idx in
                     ZStack {
-                        NavigationLink(destination: ShiftStatsView(stats: UserStatsCore(start_time: phase.all[idx].start_time))) {
+                        NavigationLink(destination: ShiftStatsView()
+                                        .environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)
+                                        )) {
                             EmptyView()
                         }
                         .opacity(0.0)
@@ -130,6 +134,7 @@ struct CoopShiftCollectionView: View {
 struct CoopShiftStack: View {
     @ObservedObject var phase: CoopShiftRealm
     @EnvironmentObject var shift: CoopShiftCore
+    @EnvironmentObject var unlock: UnlockCore
     
     var body: some View {
         GeometryReader { geometry in
@@ -174,7 +179,7 @@ struct CoopShiftStack: View {
                         URLImage(url: WeaponType(weapon_id: weapon)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: 45)}
                     }
                     Group {
-                        if shift.isUnlockWeapon && phase.weapon_list[3] == -1 {
+                        if unlock.rareWeapon && phase.weapon_list[3] == -1 {
                             URLImage(url: WeaponType(weapon_id: phase.rare_weapon)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: 45)}
                         }
                     }

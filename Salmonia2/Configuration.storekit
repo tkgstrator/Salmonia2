@@ -1,28 +1,29 @@
 {
   "products" : [
     {
-      "displayPrice" : "3.99",
+      "displayPrice" : "500",
       "familyShareable" : false,
       "internalID" : "C63A1E48",
       "localizations" : [
         {
-          "description" : "Enable multiple accounts.",
-          "displayName" : "Multiple Accounts",
-          "locale" : "en_US"
-        },
-        {
-          "description" : "複数アカウントの同時リザルト取得ができるようになります",
+          "description" : "アカウント切り替えができるようになります",
           "displayName" : "複数アカウント有効化",
           "locale" : "ja"
+        },
+        {
+          "description" : "Enable multiple NSO accounts.",
+          "displayName" : "Multi Accounts",
+          "locale" : "en_US"
         }
       ],
-      "productID" : "work.tkgstrator.Salmonia2.Accounts",
-      "referenceName" : "Multiple Accounts",
+      "productID" : "work.tkgstrator.Salmonia2.MultiAccounts",
+      "referenceName" : "複数アカウント有効化",
       "type" : "NonConsumable"
     }
   ],
   "settings" : {
-
+    "_locale" : "ja",
+    "_storefront" : "JPN"
   },
   "subscriptionGroups" : [
 

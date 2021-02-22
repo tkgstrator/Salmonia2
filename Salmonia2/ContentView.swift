@@ -9,16 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var user: SalmoniaUserCore
+    @EnvironmentObject var unlock: UnlockCore
+    
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             NavigationView {
                 SalmoniaView()
             }
-            if !user.isUnlock[3] {
+            if !unlock.disableAds {
                 AdBannerView()
             }
         }
-//        .navigationViewStyle(StackNavigationViewStyle())
         .listStyle(GroupedListStyle())
     }
 }

@@ -12,7 +12,9 @@ import URLImage
 
 struct ResultView: View {
     @ObservedObject var result: CoopResultsRealm
-    @EnvironmentObject var user: SalmoniaUserCore
+    @EnvironmentObject var rainbow: RainbowCore
+    @EnvironmentObject var unlock: UnlockCore
+    @State private var rect: CGRect = .zero // スクリーンショット保存用のやつ
     @State var maxWidth: CGFloat = UIScreen.main.bounds.size.width >= 360 ? 120 : 100
     @State var isVisible: Bool = true
     @State var isEnable: Bool = false
@@ -23,14 +25,19 @@ struct ResultView: View {
             ResultWaveView
             ResultPlayerView
         }
+        .background(RectangleGetter(rect: $rect))
         .navigationBarItems(trailing: UIButton)
-        .navigationBarTitle(Text("Detail"))
+        .navigationBarTitle(Text("Result Detail"))
     }
 
     var UIButton: some View {
         HStack {
             Button(action: { isVisible.toggle() }) { Image(systemName: "person.circle.fill").Modifier(isVisible) }
             Button(action: { isEnable.toggle() }) { Image(systemName: "info.circle.fill").Modifier(isEnable) }
+            Button(action: {
+                guard let snapshot: UIImage = UIApplication.shared.windows[0].rootViewController?.view!.getImage(rect: self.rect) else { return }
+                UIImageWriteToSavedPhotosAlbum(snapshot, nil, nil, nil)
+            }) { Image(systemName: "photo.fill").Modifier(isEnable) }
         }.sheet(isPresented: $isEnable) {
             ResultDetailView(isVisible: $isVisible).environmentObject(result)
         }
@@ -73,13 +80,13 @@ struct ResultView: View {
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable() }
                         .frame(width: 24, height: 24)
                     Text("x\(result.golden_eggs)")
-                        .rainbowAnimation(user.isUnlock[5])
+                        .rainbowAnimation(rainbow.resultOverview)
                         .shadow(color: .black, radius: 0, x: 1, y: 1)
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable() }
                         .frame(width: 24, height: 24)
                     Text("x\(result.power_eggs)")
                         .shadow(color: .black, radius: 0, x: 1, y: 1)
-                        .rainbowAnimation(user.isUnlock[5])
+                        .rainbowAnimation(rainbow.resultOverview)
                 }.frame(maxWidth: .infinity)
             }
             .font(.custom("Splatfont2", size: 18))
@@ -112,7 +119,7 @@ struct ResultView: View {
                         .font(.custom("Splatfont2", size: 16))
                         Text("\(wave.golden_ikura_num)/\(wave.quota_num)")
                             .font(.custom("Splatfont2", size: 26))
-                            .rainbowAnimation(user.isUnlock[5])
+                            .rainbowAnimation(rainbow.resultQuota)
                             .padding(.horizontal, 5)
                             .frame(maxWidth: .infinity)
                             .frame(height: 36)
@@ -156,12 +163,24 @@ struct ResultView: View {
         ForEach(result.player, id:\.self) { player in
             VStack(spacing: 0) {
                 HStack(alignment: .bottom) {
-                    Text("\(isVisible ? player.name.value : "-")")
-                        .font(.custom("Splatfont2", size: 18))
-                        .frame(width: 120)
-                        .rainbowAnimation(user.isUnlock[5])
+                    Group { // プレイヤー名表示
+                        switch result.player.index(of: player) == 0 {
+                        case true:
+                            switch unlock.displayName {
+                            case true:
+                                Text("\(isVisible ? player.name.value : "-")")
+                            case false:
+                                Text("\(player.name.value)")
+                            }
+                        case false:
+                            Text("\(isVisible ? player.name.value : "-")")
+                        }
+                    }
+                    .font(.custom("Splatfont2", size: 18))
+                    .frame(width: 120)
+                    .rainbowAnimation(rainbow.resultName)
                     Spacer()
-                    if user.isUnlock[4] {
+                    if unlock.legacyStyle {
                         VStack(alignment: .leading, spacing: 3) {
                             if isVisible && result.player.index(of: player) != 0 {
                                 HStack(spacing: 0) {
@@ -424,7 +443,25 @@ struct ResultView: View {
             .padding(.leading, 45)
         }
     }
+}
+
+struct RectangleGetter: View {
+    @Binding var rect: CGRect
     
+    var body: some View {
+        GeometryReader { geometry in
+            createView(proxy: geometry)
+        }
+    }
+    
+    func createView(proxy: GeometryProxy) -> some View {
+        DispatchQueue.main.async {
+            self.rect = proxy.frame(in: .global)
+            print("Global", proxy.frame(in: .global))
+            print("Local", proxy.frame(in: .local))
+        }
+        return Rectangle().fill(Color.clear)
+    }
 }
 
 func CalcBias(_ result: CoopResultsRealm, _ nsaid: String) -> Double {
@@ -470,5 +507,15 @@ extension PlayerResultsRealm {
         let baserate: Int = Array(zip(self.boss_kill_counts, bossrate[0])).map{ $0 * $1 }.reduce(0, +) / max(1, self.boss_kill_counts.sum())
         
         return Double(Double(baserate) * bias).round(digit: 1)
+    }
+}
+
+// スクリーンショット保存用のextension
+extension UIView {
+    func getImage(rect: CGRect) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: rect)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
     }
 }

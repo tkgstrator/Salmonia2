@@ -30,7 +30,7 @@ class FeatureProductCore: ObservableObject {
     }
     
     struct Product: Hashable {
-        var localizedPrice: String?
+        var localizedPrice: String
         var productIdentifier: String
         var localizedDescription: String
         var localizedTitle: String

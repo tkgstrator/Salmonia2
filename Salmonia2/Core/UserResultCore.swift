@@ -31,6 +31,7 @@ class UserResultCore: ObservableObject {
 
     init(_ start_time: Int) {
         token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
+            print("重いやつが呼ばれました")
             data = [UserCoopResult(start_time: start_time)]
         }
 

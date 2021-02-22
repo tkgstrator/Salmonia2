@@ -11,8 +11,13 @@ import Combine
 import RealmSwift
 
 class CoopShiftCore: ObservableObject {
-    private var token: NotificationToken?
+    private var token: NotificationToken? // Realmを関しsる
+    private var futureRotation: NSKeyValueObservation? // UserDefaultsを監視する
+    private var rareWeapon: NSKeyValueObservation? // TOPページのクマブキ表示切り替え用
+    
     private let current_time: Int = Int(Date().timeIntervalSince1970) // 現在時刻を取得
+    
+    @ObservedObject var unlock = UnlockCore()
 
     @Published var isUnlockWeapon: Bool = false
     @Published var isUnlockRotation: Bool = false
@@ -21,21 +26,23 @@ class CoopShiftCore: ObservableObject {
     @Published var all: Results<CoopShiftRealm>  = realm.objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time", ascending: false)
 
     init() {
-        // 変更があるたびに再読込するだけ
-        token = realm.objects(CoopShiftRealm.self).observe { [self] _ in
-            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
-            guard let end_time: Int = realm.objects(CoopShiftRealm.self).filter("end_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: true).last?.start_time else { return }
-            
-            isUnlockRotation = user.isUnlock[0] // 将来のシフトアンロク情報
-            isUnlockWeapon = user.isUnlock[1] // クマブキアンロック情報を取得
-            
-            data = Array(realm.objects(CoopShiftRealm.self).filter("start_time>=%@", end_time).sorted(byKeyPath: "start_time", ascending: true).prefix(3))
-            
-            // アンロックしていないとき
-            if !isUnlockRotation {
-                all = realm.objects(CoopShiftRealm.self).filter("start_time<=%@", current_time).sorted(byKeyPath: "start_time", ascending: false)
+        // これは固定なので毎回呼ばなくても大丈夫
+        data = Array(realm.objects(CoopShiftRealm.self).filter("end_time>=%@", current_time).sorted(byKeyPath: "start_time", ascending: true).prefix(2))
+
+        // シフトをどこまで表示するかどうか
+        futureRotation = UserDefaults.standard.observe(\.futureRotation, options: [.initial, .new], changeHandler: { [weak self] (defaults, change) in
+            if self!.unlock.futureRotation {
+                self!.all = realm.objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time", ascending: false)
+            } else {
+                self!.all = realm.objects(CoopShiftRealm.self).filter("start_time <=%@", self!.current_time).sorted(byKeyPath: "start_time", ascending: false)
             }
-        }
+        })
+
+        // TOPページのレアブキ更新用
+        rareWeapon = UserDefaults.standard.observe(\.rareWeapon, options: [.initial, .new], changeHandler: { [weak self] (defaults, change) in
+            self!.data = Array(realm.objects(CoopShiftRealm.self).filter("end_time>=%@", self!.current_time).sorted(byKeyPath: "start_time", ascending: true).prefix(2))
+        })
+
     }
     
     func update(isEnable: [Bool], isPlayed: Bool, isTime: [Bool]) {
@@ -58,7 +65,8 @@ class CoopShiftCore: ObservableObject {
         }
         _start_time = _start_time.sorted() // ソートします
 
-        if !isUnlockRotation {
+        // シフトをどこまで表示するかどうか
+        if !unlock.futureRotation {
             all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@ AND start_time<=%@", _start_time, current_time).sorted(byKeyPath: "start_time", ascending: false)
         } else {
             all = realm.objects(CoopShiftRealm.self).filter("start_time IN %@", _start_time).sorted(byKeyPath: "start_time", ascending: false)
@@ -67,5 +75,18 @@ class CoopShiftCore: ObservableObject {
     
     deinit {
         token?.invalidate()
+        futureRotation?.invalidate()
     }
+}
+
+extension UserDefaults {
+    @objc dynamic var futureRotation: Bool {
+        return bool(forKey: "futureRotation")
+    }
+
+    @objc dynamic var rareWeapon: Bool {
+        return bool(forKey: "rareWeapon")
+    }
+
+    
 }

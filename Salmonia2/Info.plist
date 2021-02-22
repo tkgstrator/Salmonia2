@@ -31,6 +31,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>リザルト画像を保存します</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>リザルト画像を保存します</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

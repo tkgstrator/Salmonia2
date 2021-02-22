@@ -2,7 +2,7 @@
 "Settings" = "設定";
 "Log" = "ログ";
 "Results" = "リザルト";
-"Detail" = "詳細";
+"Result Detail" = "リザルト詳細";
 "Feature" = "機能";
 "User List" = "ユーザリスト";
 "Wave Search" = "WAVE検索";
@@ -54,8 +54,9 @@
 "Grizzco Weapons" = "クマサン印ブキを表示";
 "Login in Safari" = "ログインページをSafariでひらく";
 "Legacy Style" = "旧スタイルを使う";
-"Gaming Style" = "ゲーミングスタイルを使う";
+"Gaming Style" = "ゲーミングスタイル設定";
 "Disable Ads" = "広告を非表示";
+"Hide My Nickname" = "自分の名前も隠す";
 "$3.99" = "¥500";
 
 // Settings->Feature's description
@@ -69,9 +70,8 @@
 "Restore Success" = "復元成功しました";
 "Restore Failed" = "復元失敗しました";
 "Restore purchased product" = "購入済みの製品を復元します";
-"Enable multiple accounts." = "複数アカウントの同時リザルト取得ができるようになります";
-"Willing to add new features." = "新機能実装を応戦する寄付をします";
-"Donate to the developer as operating cost." = "開発者を支援します";
+"Multi Accounts" = "複数アカウント有効化";
+"Enable multiple NSO accounts." = "複数のニンテンドーアカウントが利用できます";
 "Input iksm_session" = "イカスミセッションを入力してください";
 
 // Global->Stage Names
@@ -219,3 +219,15 @@
 // Alert Description
 "Manual Update" = "手動アップデート";
 "Update Success" = "アップデート成功";
+
+// Gaming Configuration
+"Gaming Configuration" = "ゲーミング設定";
+"Navigation Title" = "ナビゲーションタイトル";
+"System" = "システム";
+"Player Grade" = "プレイヤー評価";
+"Overview" = "概要";
+"Player Name" = "プレイヤー名";
+"Wave Quota" = "ノルマ";
+"Details" = "詳細";
+"Parameter" = "パラメータ";
+"Value" = "値";

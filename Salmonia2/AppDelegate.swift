@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // データベースのマイグレーション
     func realmMigration() {
         let config = Realm.Configuration(
-            schemaVersion: 25,
+            schemaVersion: 26,
             migrationBlock: { [self] migration, oldSchemaVersion in
                 print("MIGRATION", oldSchemaVersion)
                 // 毎回再読込する
@@ -111,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         migration.delete(newObject!)
                     }
                 }
-                if (oldSchemaVersion < 24) {
+                if (oldSchemaVersion < 26) {
                     migration.enumerateObjects(ofType: SalmoniaUserRealm.className()) { _, newObject in
                         newObject!["isUnlock"] = isUnlock
                     }
@@ -122,6 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     // 課金システムを搭載
     func initSwiftyStoreKit() {
+        print("課金システムを初期化します")
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
@@ -141,7 +142,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     // アプリの課金情報を取得する
     func retrieveProduct() {
-        let productIds = ["work.tkgstrator.Salmonia2.Accounts", "work.tkgstrator.Salmonia2.Consumable.Donation", "work.tkgstrator.Salmonia2.MonthlyPass"]
+//        let url = "https://salmonia2-api.netlify.app/product.json"
+//        // シフト情報を取得する
+//        AF.request(url, method: .get)
+//            .validate(statusCode: 200..<300)
+//            .validate(contentType: ["application/json"])
+//            .responseJSON() { response in
+//                switch response.result {
+//                case .success(let value):
+//                    realm.beginWrite()
+//                    for (_, product) in JSON(value) {
+//                        realm.create(FeatureProductRealm.self, value: product.dictionaryObject!, update: .all)
+//                    }
+//                    try? realm.commitWrite()
+//                case .failure(let error):
+//                    print(error)
+//                    break
+//                }
+//            }
+        let productIds = ["work.tkgstrator.Salmonia2.MultiAccounts"]
         autoreleasepool {
             guard let realm = try? Realm() else { return }
             for productId in productIds {
@@ -155,7 +174,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         ]
                         print(product.localizedTitle)
                         realm.beginWrite()
-                        realm.create(FeatureProductRealm.self, value: value, update: .all)
+                        if product.localizedDescription != "" {
+                            realm.create(FeatureProductRealm.self, value: value, update: .all)
+                        }
                         try? realm.commitWrite()
                     }
                     else if let invalidProductId = result.invalidProductIDs.first {
@@ -228,7 +249,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     break
                 }
             }
-        
     }
 }
 

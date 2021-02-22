@@ -28,8 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(CoopShiftCore())
             .environmentObject(UserResultCore())
             .environmentObject(WaveResultCore())
-            .environmentObject(AchievementCore())
             .environmentObject(FeatureProductCore())
+            .environmentObject(RainbowCore())
+            .environmentObject(UnlockCore())
             .environment(\.lineLimit, 1)
             .environment(\.minimumScaleFactor, 0.8)
 
