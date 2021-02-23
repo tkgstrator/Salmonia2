@@ -56,3 +56,17 @@ class RainbowCore: ObservableObject {
     @UserDefault(forKey: "shiftValue", defaultValue: false)
     var shiftValue: Bool
 }
+
+class MainCore: ObservableObject {
+    @UserDefault(forKey: "playerName", defaultValue: "Salmonia2")
+    var playerName: String
+    @UserDefault(forKey: "playerId", defaultValue: "")
+    var playerId: String
+    @UserDefault(forKey: "playerKey", defaultValue: "")
+    var playerKey: String
+    @UserDefault(forKey: "playerToken", defaultValue: "")
+    var playerToken: String
+    @UserDefault(forKey: "version", defaultValue: "")
+    var verion: String
+
+}

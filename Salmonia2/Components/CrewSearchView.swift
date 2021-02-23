@@ -67,7 +67,7 @@ struct CrewSearchView: View {
             guard let iksm_session = user.account.first?.iksm_session else { throw APPError.iksm }
             DispatchQueue(label: "Search").async {
                 do {
-                    if keyword.isEmpty { throw APPError.noempty }
+//                    if keyword.isEmpty { throw APPError.noempty }
                     players.removeAll()
 
                     let url = "https://salmon-stats-api.yuki.games/api/players/search?name=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"

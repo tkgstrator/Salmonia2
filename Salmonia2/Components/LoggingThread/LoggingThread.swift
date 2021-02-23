@@ -9,75 +9,29 @@ import SwiftUI
 import URLImage
 
 struct LoggingThread: View {
-    @Binding var log: Log
-    @State var elapsedTime: Double = 0.0
-
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-
+    @Binding var log: ProgressLog
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         Group {
-            VStack {
-                Text("Developed by @Herlingum")
-                    .minimumScaleFactor(0.7)
-                Text("Thanks @Yukinkling, @barley_ural")
-                    .minimumScaleFactor(0.7)
-                Text("API @frozenpandaman, @nexusmine")
-                    .minimumScaleFactor(0.7)
-            }
-            .font(.custom("Roboto Mono", size: 18))
-            
+            Credit
             Divider()
-            VStack {
-                HStack {
-                    Text("Status:")
-                    Spacer()
-                    if log.isValid == true {
-                        if log.progress.min != nil && log.progress.min == log.progress.max {
-                            Text("Done").onAppear() {
-                                log.isLock = false
-                            }
-                        } else {
-                            Text("\(log.status.value)")
-                        }
-                    } else {
-                        Text("\(log.errorDescription.value)")
-                    }
-                }
-                HStack {
-                    Text("Results:")
-                    Spacer()
-                    if log.isValid == true {
-                        Text("\(log.progress.id.value)(\(log.progress.min.value)/\(log.progress.max.value))")
-                    } else {
-                        Text("-(-/-)")
-                    }
-                }
-            }
-            .font(.custom("Roboto Mono", size: 22))
-            .padding(.horizontal, 16)
+            MBCircleProgressBar(log: $log, lineWidth: 5, color: Color.red, size: 250)
             Spacer()
-//            Paypal
         }
         .navigationBarTitle("Logging Thread", displayMode: .large)
-        .navigationBarBackButtonHidden(log.isLock)
     }
     
-    private var Paypal: some View {
-        Image("Paypal")
-            .resizable()
-            .frame(width: 80, height: 80)
-            .clipShape(Circle())
-            .padding(.bottom, 60)
-            .onTapGesture {
-            UIApplication.shared.open(URL(string: "https://www.paypal.me/salmonia")!)
+    var Credit: some View {
+        VStack {
+            Text("Developed by @Herlingum")
+                .minimumScaleFactor(0.7)
+            Text("Thanks @Yukinkling, @barley_ural")
+                .minimumScaleFactor(0.7)
+            Text("API @frozenpandaman, @nexusmine")
+                .minimumScaleFactor(0.7)
         }
-    }
-}
-
-
-struct LoggingThread_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("Hello, World")
-        //        LoggingThread()
+        .font(.custom("Roboto Mono", size: 16))
     }
 }

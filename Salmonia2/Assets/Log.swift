@@ -6,12 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct Log {
-    var errorCode: String? = nil
-    var errorDescription: String? = nil
-    var status: String? = nil
-    var isLock: Bool = true
-    var isValid: Bool = true
-    var progress: (id: Int?, min: Int?, max: Int?) = (nil, nil, nil)
+struct ProgressLog {
+    var progress: CGFloat = 0.0 // 進行度を表す値
+    var localizedDescription: String? // 現在の状態を出力
+    var errorCode: Int? // エラーコード
+    var errorDescription: String? // エラーの内容
 }

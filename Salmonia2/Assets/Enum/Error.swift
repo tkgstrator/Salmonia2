@@ -20,7 +20,6 @@ enum APPError: Error {
     case apitoken
     case iksm
     case session
-    case noempty
     case unavailable
 }
 
@@ -28,32 +27,58 @@ extension APPError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .unknown:
-            return "Unknown Error"
+            return "ERROR_UNKNOWN"
         case .empty:
-            return "No Accounts Found"
+            return "ERROR_EMPTY"
         case .expired:
-            return "Iksm Session is Unauthorized/Expired"
+            return "ERROR_EXPIRED"
         case .realm:
-            return "Realm Database Broken"
+            return "ERROR_REALM"
         case .user:
-            return "Login SplatNet2"
+            return "ERROR_USER"
         case .coop:
-            return "Realm Database Broken"
+            return "ERROR_COOP"
         case .active:
-            return "No Active NSO Account"
+            return "ERROR_ACTIVE"
         case .apitoken:
-            return "Login Salmon Stats"
+            return "ERROR_TOKEN"
         case .iksm:
-            return "No iksm session"
+            return "ERROR_SESSIONKEY"
         case .session:
-            return "No session token"
-        case .noempty:
-            return "Input Emtpy"
+            return "ERROR_SESSIONTOKEN"
         case .unavailable:
-            return "Server is Unavailable"
+            return "ERROR_UNAVAILABLE"
+        }
+    }
+    
+    var localizedDescription: String? {
+        switch self {
+        case .unknown:
+            return "DESC_UNKNOWN"
+        case .empty:
+            return "DESC_EMPTY"
+        case .expired:
+            return "DESC_EXPIRED"
+        case .realm:
+            return "DESC_REALM"
+        case .user:
+            return "DESC_USER"
+        case .coop:
+            return "DESC_COOP"
+        case .active:
+            return "DESC_ACTIVE"
+        case .apitoken:
+            return "DESC_TOKEN"
+        case .iksm:
+            return "DESC_SESSIONKEY"
+        case .session:
+            return "DESC_SESSIONTOKEN"
+        case .unavailable:
+            return "DESC_UNAVAILABLE"
         }
     }
 }
+
 
 extension APPError: CustomNSError {
     var errorCode: Int {
@@ -78,48 +103,11 @@ extension APPError: CustomNSError {
             return 1000
         case .session:
             return 1001
-        case .noempty:
-            return 1002
         case .unavailable:
             return 9503
         }
     }
 }
-
-enum Notification {
-    case login
-    case update
-    case laravel
-    case unlock
-    case lock
-    case error
-    case success
-    case failure
-}
-
-extension Notification {
-    var localizedDescription: String {
-        switch self {
-        case .login:
-            return "Add new NSO account"
-        case .update:
-            return "Update NSO account"
-        case .laravel:
-            return "Login Salmon Stats"
-        case .unlock:
-            return "Unlock feature"
-        case .lock:
-            return "Lock feature"
-        case .error:
-            return "Unkonwn error"
-        case .success:
-            return "Success"
-        case .failure:
-            return "Failure"
-        }
-    }
-}
-
 
 extension Color {
     static let cGreen = Color("cGreen")
@@ -143,11 +131,11 @@ extension SKError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .unknown:
-            return "Unknown Error"
+            return "PAYMENT_UNKNOWN"
         case .invalid:
-            return "Invalid ProductId"
+            return "PAYMENT_INVALID"
         case .expired:
-            return "Subscription is Expired"
+            return "PAIMENT_EXPIRED"
         }
     }
 }

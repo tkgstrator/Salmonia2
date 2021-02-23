@@ -13,108 +13,10 @@ import SplatNet2
 
 struct ImportResultView: View {
     @EnvironmentObject var user: SalmoniaUserCore
-    @State var log = Log()
+    @State var mainLog: ProgressLog = ProgressLog()
 
     var body: some View {
-        LoggingThread(log: $log)
-            .onAppear() {
-                do {
-                    guard let realm = try? Realm() else { return }
-                    guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw APPError.active }
-                    let accounts = user.account.filter("isActive=%@", true)
-                    let version = user.isVersion
-                    
-                    // ユーザ名とか取得するためにセッションキーが必要
-                    guard let _iksm_session: String = accounts.first?.iksm_session else { throw APPError.active }
-                    guard let session_token: String = accounts.first?.session_token else { throw APPError.active }
-                    
-                    // 二回目以降のインポートを無効化する
-                    try? realm.write {
-                        realm.objects(SalmoniaUserRealm.self).first?.isImported = true
-                    }
-                    
-                    // ニックネームとか取得に必要なので
-                    if !SplatNet2.isValid(iksm_session: _iksm_session) {
-                        do {
-                            let response = try SplatNet2.genIksmSession(session_token, version: version)
-                            let iksm_session = response["iksm_session"].stringValue
-                            try? realm.write {
-                                accounts.first?.iksm_session = iksm_session
-                            }
-                        } catch {
-                            log.errorDescription = "Unknown error"
-                        }
-                    }
-                    
-//                    guard let iksm_session: String = accounts.first?.iksm_session else { return }
-                    let time: [Int] = Array(Set(realm.objects(CoopResultsRealm.self).map({ $0.play_time })))
-                    
-                    // 全ユーザに対してリザルト取得（重いぞ）
-                    for account in accounts {
-                        let nsaid: String = account.nsaid
-                        DispatchQueue(label: "Import").async {
-                            log.status = "Connecting"
-                            #if DEBUG
-                            let metadata: (link: Int, job_num: Int) = (15, 3000)
-                            #else
-                            guard let metadata = try? getLastLink(nsaid: nsaid) else { return }
-                            #endif
-                            log.progress = (nil, 0, metadata.job_num)
-                            DispatchQueue(label: "Pages").async {
-                                for page in Range(1 ... metadata.link) {
-                                    var nsaids: [String] = []
-                                    log.status = "Downloading"
-                                    guard let results: JSON = try? getResults(nsaid: nsaid, page: page) else { return }
-                                    log.status = "Importing"
-                                    autoreleasepool {
-                                        guard let realm = try? Realm() else { return }
-                                        realm.beginWrite()
-                                        for (idx, (_, result)) in results.enumerated() {
-                                            // 重複チェックを行う
-                                            let start_time: Int = UnixTime.timestampFromDate(date: result["start_at"].stringValue)
-                                            log.progress = (result["id"].intValue, (page - 1) * 200 + idx + 1, metadata.job_num)
-                                            if time.filter({ abs($0 - start_time) <= 10 }).isEmpty {
-                                                realm.create(CoopResultsRealm.self, value: JF.FromSalmonStats(nsaid: nsaid, result), update: .modified)
-                                            } else {
-                                                // 失敗理由がバグっているので修正する
-                                                let reasons: [Int: String?] = [
-                                                    0: nil,
-                                                    1: "wipe_out",
-                                                    2: "time_limit",
-                                                    3: nil
-                                                ]
-                                                
-                                                let play_time: Int = UnixTime.timestampFromDate(date: result["start_at"].stringValue)
-                                                let oldresult: CoopResultsRealm = realm.objects(CoopResultsRealm.self).filter("play_time BETWEEN %@", [play_time - 10, play_time + 10]).first!
-                                                let failure_reason_id: Int = result["fail_reason_id"].int ?? 0
-                                                let failure_reason: String? = reasons[failure_reason_id]!
-                                                oldresult.failure_reason = failure_reason
-                                            }
-                                            nsaids.append(contentsOf: result["members"].map({ $0.1.stringValue }))
-                                             Thread.sleep(forTimeInterval: 0.01)
-                                        }
-//                                        do {
-//                                            let crews: JSON = try SplatNet2.getPlayerNickName(Array(Set(nsaids)), iksm_session: iksm_session)
-//                                            for (_, crew) in crews["nickname_and_icons"] {
-//                                                let value: [String: Any] = ["nsaid": crew["nsa_id"].stringValue, "name": crew["nickname"].stringValue, "image": crew["thumbnail_url"].stringValue]
-//                                                realm.create(CrewInfoRealm.self, value: value, update: .all)
-//                                            }
-//                                        } catch(let error) {
-//                                            log.isValid = false
-//                                            log.errorDescription = error.localizedDescription
-//                                        }
-                                        try? realm.commitWrite()
-                                    } // autoreleasepool
-//                                    Thread.sleep(forTimeInterval: 5)
-                                } // Pages
-                            } // DispatchQueue ASync
-                        } // DispatchQueue ASync
-                    }
-                } catch {
-                    log.isValid = false
-                    log.errorDescription = error.localizedDescription
-                }
-            }
+        LoggingThread(log: $mainLog)
             .navigationBarTitle("Logging Thread", displayMode: .large)
     }
     
@@ -138,8 +40,8 @@ struct ImportResultView: View {
     
 }
 
-struct ImportResultView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImportResultView()
-    }
-}
+//struct ImportResultView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImportResultView()
+//    }
+//}

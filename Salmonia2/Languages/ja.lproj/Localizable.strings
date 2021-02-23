@@ -203,7 +203,7 @@
 "Login SplatNet2" = "ログイン成功";
 "Login Salmon Stats" = "ログイン成功";
 
-// Error localizedDescription
+// SplatNet2が返すエラーコード
 "Wrong Request" = "誤ったリクエスト";
 "No Accounts Found" = "該当するアカウントがありません";
 "Iksm Session is Unauthorized/Expired" = "有効期限切れ";
@@ -215,6 +215,29 @@
 "Too Many Requests" = "リクエストが多すぎます";
 "Server is Unavailable" = "サーバが利用不可です";
 "Unknown Error" = "不明なエラーです";
+
+// Salmonia2が返すエラー
+"ERROR_UNKONWN" = "不明なエラーです";
+"ERROR_EMPTY" = "イカリング2でログインしてください";
+"ERROR_EXPIRED" = "有効期限切れです";
+"ERROR_REALM" = "データベースが壊れています";
+"ERROR_USER" = " ユーザが追加されていません";
+"ERROR_COOP" = "";
+"ERROR_ACTIVE" = "ユーザが選択されていません";
+"ERROR_TOKEN" = "トークンが";
+"ERROR_UNAVAILABLE" = "サーバが利用不可です";
+
+// Salmonia2が返すエラーに対する対処法
+"DESC_UNKONWN" = "開発者に連絡してください";
+"DESC_EMPTY" = "イカリング2でログインしてください";
+"DESC_EXPIRED" = "イカリング2で再ログインしてください";
+"DESC_REALM" = "アプリを再インストールしてください";
+"DESC_USER" = "設定から一つ以上のアカウントを有効化してください";
+"DESC_COOP" = "";
+"DESC_ACTIVE" = "設定から一つ以上のアカウントを有効化してください";
+"DESC_TOKEN" = "設定からSalmon Statsにログインしてください";
+"DESC_UNAVAILABLE" = "任天堂サーバがメンテナンス中です";
+
 
 // Alert Description
 "Manual Update" = "手動アップデート";
