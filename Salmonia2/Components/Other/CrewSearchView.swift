@@ -12,7 +12,6 @@ import URLImage
 import RealmSwift
 
 struct CrewSearchView: View {
-    @EnvironmentObject var user: SalmoniaUserCore
     @State var players: [Player] = []
     @State var nickname: String = ""
     @State var isEditing: Bool = false
@@ -36,7 +35,7 @@ struct CrewSearchView: View {
     var body: some View {
         VStack {
             SearchBar(text: $nickname, placeholder: "") { text in
-                searchPlayer(keyword: nickname)
+//                searchPlayer(keyword: nickname)
             }
             List {
                 ForEach(players, id:\.self) { player in
@@ -62,41 +61,41 @@ struct CrewSearchView: View {
         .navigationBarTitle("Crew Search", displayMode: .large)
     }
     
-    private func searchPlayer(keyword: String) {
-        do {
-            guard let iksm_session = user.account.first?.iksm_session else { throw APPError.iksm }
-            DispatchQueue(label: "Search").async {
-                do {
-//                    if keyword.isEmpty { throw APPError.noempty }
-                    players.removeAll()
-
-                    let url = "https://salmon-stats-api.yuki.games/api/players/search?name=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-                    let realm = try Realm()
-                    var response = try SAF.request(url)
-                    var _users = response["users"].map({$0.1})
-                    _users.append(contentsOf: response["names"].map({$0.1}))
-                    let nsaids: [String] = Array(Set(_users.map({ $0["player_id"].stringValue })).prefix(5))
-                    
-                    // 任天堂公式APIからデータを取得
-                    response = try SplatNet2.getPlayerNickName(nsaids, iksm_session: iksm_session)
-                    let nicknames = response["nickname_and_icons"]
-                    
-                    realm.beginWrite()
-                    for (_, nickname) in nicknames {
-                        let name = nickname["nickname"].stringValue
-                        let image = nickname["thumbnail_url"].stringValue
-                        let nsaid = nickname["nsa_id"].stringValue
-                        realm.create(CrewInfoRealm.self, value: CrewInfoRealm(name: name, image: image, nsaid: nsaid), update: .all)
-                        let json = JSON(_users.filter({ $0["player_id"].stringValue == nsaid}).last.map({ ["id": $0["id"].int, "nsaid": nsaid, "registered": $0["id"].int != nil, "nickname": name, "thumbnail_url": image] }))
-                        players.append(Player(player: json))
-                    }
-                    try realm.commitWrite()
-                } catch {
-                }
-            }
-        } catch {
-        }
-    }
+//    private func searchPlayer(keyword: String) {
+//        do {
+//            guard let iksm_session = user.account.first?.iksm_session else { throw APPError.iksm }
+//            DispatchQueue(label: "Search").async {
+//                do {
+////                    if keyword.isEmpty { throw APPError.noempty }
+//                    players.removeAll()
+//
+//                    let url = "https://salmon-stats-api.yuki.games/api/players/search?name=\(keyword.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+//                    let realm = try Realm()
+//                    var response = try SAF.request(url)
+//                    var _users = response["users"].map({$0.1})
+//                    _users.append(contentsOf: response["names"].map({$0.1}))
+//                    let nsaids: [String] = Array(Set(_users.map({ $0["player_id"].stringValue })).prefix(5))
+//
+//                    // 任天堂公式APIからデータを取得
+//                    response = try SplatNet2.getPlayerNickName(nsaids, iksm_session: iksm_session)
+//                    let nicknames = response["nickname_and_icons"]
+//
+//                    realm.beginWrite()
+//                    for (_, nickname) in nicknames {
+//                        let name = nickname["nickname"].stringValue
+//                        let image = nickname["thumbnail_url"].stringValue
+//                        let nsaid = nickname["nsa_id"].stringValue
+//                        realm.create(CrewInfoRealm.self, value: CrewInfoRealm(name: name, image: image, nsaid: nsaid), update: .all)
+//                        let json = JSON(_users.filter({ $0["player_id"].stringValue == nsaid}).last.map({ ["id": $0["id"].int, "nsaid": nsaid, "registered": $0["id"].int != nil, "nickname": name, "thumbnail_url": image] }))
+//                        players.append(Player(player: json))
+//                    }
+//                    try realm.commitWrite()
+//                } catch {
+//                }
+//            }
+//        } catch {
+//        }
+//    }
 }
 
 struct CrewSearchView_Previews: PreviewProvider {

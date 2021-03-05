@@ -10,24 +10,6 @@ import RealmSwift
 import Combine
 import CryptoSwift
 
-class SalmoniaUserRealm: Object {
-    
-    @objc dynamic var api_token: String? = nil // Access token from Salmon Stats
-    @objc dynamic var isImported: Bool = false
-    @objc dynamic var isPurchase: Bool = false
-    @objc dynamic var isVersion: String = "1.10.0"
-    dynamic var isUnlock = List<Bool>()
-    dynamic var account = List<UserInfoRealm>()
-    dynamic var favuser = List<CrewInfoRealm>()
-    
-    let placeholder: [Bool] = [false, false, false, false, false, false]
-    
-    convenience required init(isUnlock: [Bool]) {
-        self.init()
-        self.isUnlock.append(objectsIn: isUnlock)
-    }
-}
-
 class UserInfoRealm: Object {
     
     @objc dynamic var name: String = "" // username from SplatNet2

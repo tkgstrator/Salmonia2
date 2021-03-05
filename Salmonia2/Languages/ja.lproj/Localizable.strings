@@ -221,10 +221,10 @@
 "ERROR_EMPTY" = "イカリング2でログインしてください";
 "ERROR_EXPIRED" = "有効期限切れです";
 "ERROR_REALM" = "データベースが壊れています";
-"ERROR_USER" = " ユーザが追加されていません";
-"ERROR_COOP" = "";
+"ERROR_USER" = "イカリング2のユーザが追加されていません";
+"ERROR_COOP" = "リザルトが見つかりません";
 "ERROR_ACTIVE" = "ユーザが選択されていません";
-"ERROR_TOKEN" = "トークンが";
+"ERROR_TOKEN" = "Salmon Statsの認証トークンが未設定です";
 "ERROR_UNAVAILABLE" = "サーバが利用不可です";
 
 // Salmonia2が返すエラーに対する対処法
@@ -233,11 +233,12 @@
 "DESC_EXPIRED" = "イカリング2で再ログインしてください";
 "DESC_REALM" = "アプリを再インストールしてください";
 "DESC_USER" = "設定から一つ以上のアカウントを有効化してください";
-"DESC_COOP" = "";
+"DESC_COOP" = "サーモンランを一戦以上遊んでください";
 "DESC_ACTIVE" = "設定から一つ以上のアカウントを有効化してください";
 "DESC_TOKEN" = "設定からSalmon Statsにログインしてください";
 "DESC_UNAVAILABLE" = "任天堂サーバがメンテナンス中です";
 
+"DEF_ERROR_CODE" = "エラーコード";
 
 // Alert Description
 "Manual Update" = "手動アップデート";

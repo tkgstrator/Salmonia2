@@ -26,31 +26,15 @@ class UserInfoCore: ObservableObject {
     
     init() {
         token = realm.objects(UserInfoRealm.self).observe { [self] _ in
-            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
-            account = user.account
-            guard let _account = user.account.first else { return }
-            nsaid = _account.nsaid
-            nickname = _account.name
-            imageUri = _account.image
-            iksm_session = _account.iksm_session
-            session_token = _account.session_token
-            job_num = _account.job_num
-            ikura_total = _account.ikura_total
-            golden_ikura_total = _account.golden_ikura_total
-        }
-        
-        token = realm.objects(SalmoniaUserRealm.self).observe { [self] _ in
-            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
-            account = user.account
-            guard let _account = user.account.first else { return }
-            nsaid = _account.nsaid
-            nickname = _account.name
-            imageUri = _account.image
-            iksm_session = _account.iksm_session
-            session_token = _account.session_token
-            job_num = _account.job_num
-            ikura_total = _account.ikura_total
-            golden_ikura_total = _account.golden_ikura_total
+            guard let account = realm.objects(UserInfoRealm.self).filter("isActive=%@", true).first else { return }
+            nsaid = account.nsaid
+            nickname = account.name
+            imageUri = account.image
+            iksm_session = account.iksm_session
+            session_token = account.session_token
+            job_num = account.job_num
+            ikura_total = account.ikura_total
+            golden_ikura_total = account.golden_ikura_total
         }
     }
     

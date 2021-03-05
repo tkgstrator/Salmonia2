@@ -45,27 +45,27 @@ struct PlayerView: View {
             }
             .font(.custom("Splatfont", size: 18))
             .padding(.horizontal, 10)
-            CrewSearch
+//            CrewSearch
         }
     }
     
-    private var CrewSearch: some View {
-        NavigationLink(destination: CrewListView()) {
-            HStack {
-                ZStack {
-                    Image("CoopBar")
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(.cDarkGray)
-                    Text("Favorite Crew")
-                        .modifier(Splatfont2(size: 20))
-                }
-            }
-            .frame(maxWidth: 240)
-        }
-        .buttonStyle(PlainButtonStyle())
-    }
+//    private var CrewSearch: some View {
+//        NavigationLink(destination: CrewListView()) {
+//            HStack {
+//                ZStack {
+//                    Image("CoopBar")
+//                        .renderingMode(.template)
+//                        .resizable()
+//                        .scaledToFit()
+//                        .foregroundColor(.cDarkGray)
+//                    Text("Favorite Crew")
+//                        .modifier(Splatfont2(size: 20))
+//                }
+//            }
+//            .frame(maxWidth: 240)
+//        }
+//        .buttonStyle(PlainButtonStyle())
+//    }
 }
 
 struct PlayerView_Previews: PreviewProvider {

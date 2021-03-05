@@ -12,7 +12,6 @@ import RealmSwift
 import URLImage
 
 struct ShiftStatsView: View {
-    @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var stats: UserStatsCore
 
     var body: some View {
@@ -42,17 +41,18 @@ struct ShiftStatsView: View {
                     .foregroundColor(.cOrange))
         {
             CoopShiftStack(phase: stats.shift)
-            switch user.isPurchase {
-            case true:
-                AnyView(
-                    NavigationLink(destination: ResultCollectionView(core: UserResultCore(stats.schedule!))) {
-                        StatsColumn(title: "Job Num", value: stats.job_num)
-                    })
-            case false:
-                AnyView(
-                    StatsColumn(title: "Job Num", value: stats.job_num)
-                )
-            }
+            // TODO: ここも課金情報直す
+//            switch user.isPurchase {
+//            case true:
+//                AnyView(
+//                    NavigationLink(destination: ResultCollectionView(core: UserResultCore(stats.schedule!))) {
+//                        StatsColumn(title: "Job Num", value: stats.job_num)
+//                    })
+//            case false:
+//                AnyView(
+//                    StatsColumn(title: "Job Num", value: stats.job_num)
+//                )
+//            }
             Group {
                 StatsColumn(title: "Salmon Rate", value: stats.srpower[0]?.round)
                 StatsColumn(title: "Clear Ratio", value: stats.clear_ratio.per)
@@ -159,12 +159,12 @@ struct ShiftStatsView: View {
                 Text("Wave Analysis")
                     .font(.custom("Splatfont2", size: 16))
             }
-            .disabled(!user.isPurchase)
+//            .disabled(!user.isPurchase)
             NavigationLink(destination: WaveResultCollectionView(stats: stats)) {
                 Text("Boss Salmonids Analysis")
                     .font(.custom("Splatfont2", size: 16))
             }
-            .disabled(true)
+//            .disabled(true)
             NavigationLink(destination: WeaponCollectionView(weapon_lists: stats.weapon_lists.chunked(by: 5))){
                 Text("Random Weapon Analysis")
                     .font(.custom("Splatfont2", size: 16))

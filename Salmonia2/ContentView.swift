@@ -8,19 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var unlock: UnlockCore
+    @EnvironmentObject var main: MainCore
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            NavigationView {
-                SalmoniaView()
-            }
-            if !unlock.disableAds {
-                AdBannerView()
+        NavigationView {
+            ZStack {
+                BackGround
+                TopMenu
             }
         }
-        .listStyle(GroupedListStyle())
+    }
+    
+    var TopMenu: some View {
+        switch main.isLogin {
+        case true:
+            return AnyView(SalmoniaView())
+        case false:
+            return AnyView(LoginMenu())
+        }
+    }
+    
+    var BackGround: some View {
+        LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom)
+            .edgesIgnoringSafeArea(.all)
     }
 }
 

@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = ContentView()
-            .environmentObject(SalmoniaUserCore())
             .environmentObject(UserInfoCore())
             .environmentObject(CoopShiftCore())
             .environmentObject(UserResultCore())
@@ -31,8 +30,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(FeatureProductCore())
             .environmentObject(RainbowCore())
             .environmentObject(UnlockCore())
+            .environmentObject(MainCore())
             .environment(\.lineLimit, 1)
             .environment(\.minimumScaleFactor, 0.8)
+            .listStyle(GroupedListStyle())
+            .buttonStyle(PlainButtonStyle())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {

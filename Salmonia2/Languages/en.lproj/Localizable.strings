@@ -1,3 +1,24 @@
+"TEXT_WELCOME" = "Welcome to Salmonia2";
+"BTN_LOGIN" = "Sign in";
+"BTN_LOGIN_LEGACY" = "Sign in";
+"BTN_LOGIN_MODERN" = "Sign in";
+"BTN_REGISTER" = "Sign up";
+"BTN_REGISTER_TWITTER" = "Sign up";
+
+
+"TITLE_WELCOME" = "Welcome";
+"TITLE_SALMONIA" = "Salmonia";
+
+"HEADER_OVERVIEW" = "Overview";
+"HEADER_SCHEDULE" = "Shift Schedule";
+"HEADER_REDCORDS" = "Stage Records";
+
+"TEXT_LOGIN_SALMON_STATS" = "Sign in Salmon Stats";
+"DESC_LOGIN_SALMON_STATS" = "Using Salmonia, you need sign in Salmon Stats with twtter account.";
+
+
+
+
 // TitleBar
 "Settings" = "Settings";
 "Log" = "Log";

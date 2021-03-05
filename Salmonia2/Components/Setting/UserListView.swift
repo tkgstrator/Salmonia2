@@ -15,8 +15,7 @@ import SwiftyJSON
 import SplatNet2
 
 struct UserListView: View {
-    
-    @EnvironmentObject var user: SalmoniaUserCore
+    @EnvironmentObject var user: UserInfoCore
     @State private var editMode = EditMode.inactive
     @State var isVisible: Bool = false
     @State var isSuccess: Bool = false
@@ -35,9 +34,9 @@ struct UserListView: View {
                         URLImage(url: URL(string: user.account[idx].image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
                             .frame(width: 60, height: 60)
                         Text(user.account[idx].name).frame(maxWidth: .infinity)
-                        Toggle(isOn: $user.isActiveArray[idx]) { }
-                            .disabled(!user.isPurchase)
-                            .onTapGesture{ onActive(idx: idx) }
+//                        Toggle(isOn: $user.isActiveArray[idx]) { }
+//                            .disabled(!user.isPurchase)
+//                            .onTapGesture{ onActive(idx: idx) }
                     }
                 }
                 .onMove(perform: onMove)
@@ -61,46 +60,26 @@ struct UserListView: View {
                         guard let session_token_code = callbackURL?.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { return }
                         print(session_token_code)
                         let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
-                        guard let version = try? Realm().objects(SalmoniaUserRealm.self).first?.isVersion else { return }
-                        
-                        DispatchQueue(label: "Login").async {
-                            do {
-                                var response: JSON = JSON()
-                                response = try SplatNet2.getSessionToken(session_token_code, session_token_code_verifier)
-                                let session_token = response["session_token"].stringValue
-                                response = try SplatNet2.genIksmSession(session_token, version: version)
-                                guard let thumbnail_url = response["user"]["thumbnail_url"].string else { throw APPError.iksm }
-                                guard let nickname = response["user"]["nickname"].string else { throw APPError.iksm }
-                                guard let iksm_session = response["iksm_session"].string else { throw APPError.iksm }
-                                guard let nsaid = response["nsaid"].string else { throw APPError.iksm }
-                                guard let realm = try? Realm() else { throw APPError.realm }
-                                try? realm.write {
-                                    let account = realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid)
-                                    switch account.isEmpty {
-                                    case true: // 新規作成
-                                        guard let _user: SalmoniaUserRealm = realm.objects(SalmoniaUserRealm.self).first else { return }
-                                        let _account: [String: Any?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token, "isActive": _user.account.isEmpty]
-                                        let account: UserInfoRealm = UserInfoRealm(value: _account)
-                                        realm.add(account, update: .modified)
-                                        _user.account.append(account)
-                                    case false: // 再ログイン（アップデート）
-                                        guard let _user: SalmoniaUserRealm = realm.objects(SalmoniaUserRealm.self).first else { return }
-                                        guard let session_token = account.first?.session_token else { return }
-                                        account.setValue(iksm_session, forKey: "iksm_session")
-                                        account.setValue(session_token, forKey: "session_token")
-                                        account.setValue(thumbnail_url, forKey: "image")
-                                        account.setValue(nickname, forKey: "name")
-                                        if _user.account.filter("nsaid=%@", nsaid).count == 0 {
-                                            _user.account.append(account.first!)
-                                        }
-                                    }
-                                }
-                                isSuccess = true
-                            } catch  {
-                                isSuccess = true
-                                isFailure = true
-                                errorMessage = error.localizedDescription
+                        let version: String = "1.10.1"
+                        do {
+                            guard let session_token_code = callbackURL?.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { throw APPError.value }
+                            let session_token_code_verifier = "OwaTAOolhambwvY3RXSD-efxqdBEVNnQkc0bBJ7zaak"
+                            var response: JSON = JSON()
+                            response = try SplatNet2.getSessionToken(session_token_code, session_token_code_verifier)
+                            guard let session_token: String = response["session_token"].string else { throw APPError.value }
+                            response = try SplatNet2.genIksmSession(session_token, version: version)
+                            guard let thumbnail_url = response["user"]["thumbnail_url"].string else { throw APPError.iksm }
+                            guard let nickname = response["user"]["nickname"].string else { throw APPError.iksm }
+                            guard let iksm_session = response["iksm_session"].string else { throw APPError.iksm }
+                            guard let nsaid = response["nsaid"].string else { throw APPError.iksm }
+                            guard let realm = try? Realm() else { throw APPError.realm }
+                            try realm.write {
+                                let value: [String: Any?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token, "isActive": true]
+                                realm.create(UserInfoRealm.self, value: value, update: .all)
                             }
+                            print("LOGIN DONE")
+                        } catch {
+                            // TODO: エラー発生時の処理を書く
                         }
                     }
                 }

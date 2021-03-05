@@ -12,7 +12,6 @@ import SwiftyJSON
 import SplatNet2
 
 struct ImportResultView: View {
-    @EnvironmentObject var user: SalmoniaUserCore
     @State var mainLog: ProgressLog = ProgressLog()
 
     var body: some View {

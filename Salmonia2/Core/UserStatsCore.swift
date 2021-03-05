@@ -58,10 +58,11 @@ class UserStatsCore: ObservableObject {
     
     init(start_time: Int) {
         token = realm.objects(CoopResultsRealm.self).observe { [self] _ in
-            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+//            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
             guard let shift = realm.objects(CoopShiftRealm.self).filter("start_time=%@", start_time).first else { return }
-            let nsaids: [String] = Array(user.account.filter("isActive=true").map({ $0.nsaid }))
-            isRareWeapon = user.isUnlock[1] // クマブキアンロック情報を取得
+            let nsaids: [String] = Array(realm.objects(UserInfoRealm.self).filter("isActive=true").map({ $0.nsaid }))
+            // TODO: アンロック情報
+            isRareWeapon = true // クマブキアンロック情報を取得
             schedule = start_time
             
             // リザルト一覧からシフトを指定して取得
@@ -118,10 +119,10 @@ class UserStatsCore: ObservableObject {
                 rate_golden_eggs = player.sum(ofProperty: "golden_ikura_num") / results.sum(ofProperty: "golden_eggs")
                 
                 max_results = [
-                    results.filter("power_eggs=%@", max_team_power_eggs).first!,
-                    results.filter("golden_eggs=%@", max_team_golden_eggs).first!,
-                    player.filter("ikura_num=%@", max_my_power_eggs).first!.result.first!,
-                    player.filter("golden_ikura_num=%@", max_my_golden_eggs).first!.result.first!,
+                    results.filter("power_eggs=%@", max_team_power_eggs as Any).first!,
+                    results.filter("golden_eggs=%@", max_team_golden_eggs as Any).first!,
+                    player.filter("ikura_num=%@", max_my_power_eggs as Any).first!.result.first!,
+                    player.filter("golden_ikura_num=%@", max_my_golden_eggs as Any).first!.result.first!,
                     player.filter({ $0.boss_kill_counts.sum() == max_defeated }).first!.result.first!
                 ]
                 
@@ -254,10 +255,10 @@ extension UserStatsCore {
     
     func count(_ event_type: Int) -> Int {
         guard let event = EventType.init(event_id: event_type)?.event_name else { return 0 }
-        return realm.objects(WaveDetailRealm.self).filter("ANY result.start_time=%@ and event_type=%@", self.schedule, event).count
+        return realm.objects(WaveDetailRealm.self).filter("ANY result.start_time=%@ and event_type=%@", self.schedule as Any, event).count
     }
     
     var count: Int {
-        return realm.objects(WaveDetailRealm.self).filter("ANY result.start_time=%@", self.schedule).count
+        return realm.objects(WaveDetailRealm.self).filter("ANY result.start_time=%@", self.schedule as Any).count
     }
 }

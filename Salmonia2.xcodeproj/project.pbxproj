@@ -19,9 +19,9 @@
 		1037E3C325209C7E001B41B0 /* Salmonia2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1037E3C225209C7E001B41B0 /* Salmonia2UITests.swift */; };
 		1046326625E199EA0051A7B1 /* UserDefaultsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1046326525E199EA0051A7B1 /* UserDefaultsCore.swift */; };
 		1048631625697630001FDFBD /* CoopShiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048631525697630001FDFBD /* CoopShiftCollectionView.swift */; };
+		10538BA325E57F56009206F4 /* SwiftUIRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 10538BA225E57F56009206F4 /* SwiftUIRefresh */; };
 		1053967D2524206200132668 /* StageRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053967C2524206200132668 /* StageRecordView.swift */; };
 		1053968525242A7000132668 /* StageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053968425242A7000132668 /* StageType.swift */; };
-		1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053968A25242EE500132668 /* OtherPlayerView.swift */; };
 		1053969325242F5000132668 /* PlayerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1053969225242F5000132668 /* PlayerInfo.swift */; };
 		105396D825260CEB00132668 /* StageRecordCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396D725260CEA00132668 /* StageRecordCore.swift */; };
 		105396DD25260D5000132668 /* WaveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105396DC25260D5000132668 /* WaveType.swift */; };
@@ -41,10 +41,10 @@
 		10723AEA25DBB9E400D4400A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10723AE925DBB9E400D4400A /* RealmSwift */; };
 		107319F725955F5D0037F19B /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = 107319F625955F5D0037F19B /* BetterSafariView */; };
 		107319FC2595E2940037F19B /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107319FB2595E2940037F19B /* DisclosureIndicator.swift */; };
-		108456A8257CCCA3006EB397 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108456A7257CCCA3006EB397 /* Global.swift */; };
 		108F2C67257766BB00287900 /* SyncUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108F2C66257766BB00287900 /* SyncUserData.swift */; };
 		10A8043A25AFB24200654DAC /* BSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8043925AFB24200654DAC /* BSafariView.swift */; };
-		10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C3E252859180025057F /* SalmonStatsView.swift */; };
+		10AC289E25F24AF500189E46 /* LoginMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC289D25F24AF500189E46 /* LoginMenu.swift */; };
+		10AC28A325F24B0B00189E46 /* SalmonStatsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */; };
 		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
 		10B87FAC25D3AA240018596A /* WeaponCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */; };
@@ -52,13 +52,10 @@
 		10BB00822530F63D0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00842530F63D0081C6EB /* Localizable.strings */; };
 		10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00902530F66A0081C6EB /* Localizable.strings */; };
 		10BB00A125310C1C0081C6EB /* WaveCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */; };
-		10BB00A625313AE90081C6EB /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB00A525313AE90081C6EB /* OptionView.swift */; };
 		10BB349A252174F60046CBCA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348A252174F60046CBCA /* Realm.swift */; };
 		10BB349B252174F60046CBCA /* UnixTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348C252174F60046CBCA /* UnixTime.swift */; };
 		10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348D252174F60046CBCA /* JSONFormat.swift */; };
 		10BB349D252174F60046CBCA /* UserResultCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348E252174F60046CBCA /* UserResultCore.swift */; };
-		10BB349E252174F60046CBCA /* FImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348F252174F60046CBCA /* FImage.swift */; };
-		10BB349F252174F60046CBCA /* CrewInfoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3490252174F60046CBCA /* CrewInfoCore.swift */; };
 		10BB34A0252174F60046CBCA /* UserInfoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3491252174F60046CBCA /* UserInfoCore.swift */; };
 		10BB34A1252174F60046CBCA /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3492252174F60046CBCA /* Extension.swift */; };
 		10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB3493252174F60046CBCA /* SalmonStats.swift */; };
@@ -85,11 +82,8 @@
 		10E16B3C25CE979500B3624D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 10E16B3B25CE979500B3624D /* Alamofire */; };
 		10E16B4225CE97B700B3624D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 10E16B4125CE97B700B3624D /* SwiftyJSON */; };
 		10E16B6225CE980A00B3624D /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10E16B6125CE980A00B3624D /* CryptoSwift */; };
-		10E414B825679DE4006E28D7 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E414B725679DE4006E28D7 /* Log.swift */; };
 		10E743B825E192FF0098C4B9 /* RainbowConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E743B725E192FF0098C4B9 /* RainbowConfiguration.swift */; };
-		10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA355252191340027209D /* SalmoniaUserCore.swift */; };
 		10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3682521DE6E0027209D /* UserStatsCore.swift */; };
-		10EFA39E252398820027209D /* CrewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA39D252398810027209D /* CrewListView.swift */; };
 		10EFA3A325239E0A0027209D /* ImportResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3A225239E0A0027209D /* ImportResultView.swift */; };
 		10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10EFA3A72523A0DB0027209D /* Alamofire.swift */; };
 		10F2812725308C9E00D7B2BE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 10F2812625308C9E00D7B2BE /* GoogleService-Info.plist */; };
@@ -139,7 +133,6 @@
 		1048631525697630001FDFBD /* CoopShiftCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopShiftCollectionView.swift; sourceTree = "<group>"; };
 		1053967C2524206200132668 /* StageRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordView.swift; sourceTree = "<group>"; };
 		1053968425242A7000132668 /* StageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageType.swift; sourceTree = "<group>"; };
-		1053968A25242EE500132668 /* OtherPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherPlayerView.swift; sourceTree = "<group>"; };
 		1053969225242F5000132668 /* PlayerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInfo.swift; sourceTree = "<group>"; };
 		105396D725260CEA00132668 /* StageRecordCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageRecordCore.swift; sourceTree = "<group>"; };
 		105396DC25260D5000132668 /* WaveType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveType.swift; sourceTree = "<group>"; };
@@ -158,10 +151,10 @@
 		10613BD125818F310000AE30 /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
 		106764E425D0D8B10085B1CD /* WaveResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveResultCollectionView.swift; sourceTree = "<group>"; };
 		107319FB2595E2940037F19B /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
-		108456A7257CCCA3006EB397 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		108F2C66257766BB00287900 /* SyncUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncUserData.swift; sourceTree = "<group>"; };
 		10A8043925AFB24200654DAC /* BSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSafariView.swift; sourceTree = "<group>"; };
-		10B10C3E252859180025057F /* SalmonStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsView.swift; sourceTree = "<group>"; };
+		10AC289D25F24AF500189E46 /* LoginMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenu.swift; sourceTree = "<group>"; };
+		10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsMenu.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
 		10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCollectionView.swift; sourceTree = "<group>"; };
@@ -170,13 +163,10 @@
 		10BB00832530F63D0081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10BB008F2530F66A0081C6EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveCollectionView.swift; sourceTree = "<group>"; };
-		10BB00A525313AE90081C6EB /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		10BB348A252174F60046CBCA /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		10BB348C252174F60046CBCA /* UnixTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnixTime.swift; sourceTree = "<group>"; };
 		10BB348D252174F60046CBCA /* JSONFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFormat.swift; sourceTree = "<group>"; };
 		10BB348E252174F60046CBCA /* UserResultCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserResultCore.swift; sourceTree = "<group>"; };
-		10BB348F252174F60046CBCA /* FImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FImage.swift; sourceTree = "<group>"; };
-		10BB3490252174F60046CBCA /* CrewInfoCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrewInfoCore.swift; sourceTree = "<group>"; };
 		10BB3491252174F60046CBCA /* UserInfoCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfoCore.swift; sourceTree = "<group>"; };
 		10BB3492252174F60046CBCA /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		10BB3493252174F60046CBCA /* SalmonStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalmonStats.swift; sourceTree = "<group>"; };
@@ -204,11 +194,8 @@
 		10E16AF725CE961000B3624D /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		10E16AF825CE961000B3624D /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/iOS/Alamofire.xcframework; sourceTree = "<group>"; };
 		10E16AF925CE961000B3624D /* SwiftyJSON.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SwiftyJSON.xcframework; path = Carthage/Build/iOS/SwiftyJSON.xcframework; sourceTree = "<group>"; };
-		10E414B725679DE4006E28D7 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		10E743B725E192FF0098C4B9 /* RainbowConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainbowConfiguration.swift; sourceTree = "<group>"; };
-		10EFA355252191340027209D /* SalmoniaUserCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmoniaUserCore.swift; sourceTree = "<group>"; };
 		10EFA3682521DE6E0027209D /* UserStatsCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsCore.swift; sourceTree = "<group>"; };
-		10EFA39D252398810027209D /* CrewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewListView.swift; sourceTree = "<group>"; };
 		10EFA3A225239E0A0027209D /* ImportResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportResultView.swift; sourceTree = "<group>"; };
 		10EFA3A72523A0DB0027209D /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		10F2812625308C9E00D7B2BE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -228,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10538BA325E57F56009206F4 /* SwiftUIRefresh in Frameworks */,
 				10723AEA25DBB9E400D4400A /* RealmSwift in Frameworks */,
 				10723AE825DBB9E400D4400A /* Realm in Frameworks */,
 				10E16B3625CE976700B3624D /* URLImage in Frameworks */,
@@ -286,16 +274,16 @@
 			children = (
 				105F690E252F33F2003306C8 /* Salmonia2.entitlements */,
 				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
-				10B10C3E252859180025057F /* SalmonStatsView.swift */,
 				10BB348B252174F60046CBCA /* Core */,
 				10BB34B6252175170046CBCA /* Components */,
 				10BB3489252174F60046CBCA /* Assets */,
+				1053968925242DC600132668 /* Enum */,
 				10BB00632530C4350081C6EB /* Languages */,
 				1037E3A025209C7C001B41B0 /* AppDelegate.swift */,
 				1037E3A225209C7C001B41B0 /* SceneDelegate.swift */,
+				1037E3A425209C7C001B41B0 /* ContentView.swift */,
 				10BB3508252181300046CBCA /* Configuration.storekit */,
 				10F2812625308C9E00D7B2BE /* GoogleService-Info.plist */,
-				1037E3A425209C7C001B41B0 /* ContentView.swift */,
 				1037E3A625209C7D001B41B0 /* Assets.xcassets */,
 				1037E3AB25209C7D001B41B0 /* LaunchScreen.storyboard */,
 				1037E3AE25209C7D001B41B0 /* Info.plist */,
@@ -379,6 +367,30 @@
 			path = LoggingThread;
 			sourceTree = "<group>";
 		};
+		10AC289225F24A5100189E46 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
+				10B9776725C44E4B005A0470 /* ShiftStatsView.swift */,
+				1053967C2524206200132668 /* StageRecordView.swift */,
+				10BB34BA252175170046CBCA /* PlayerView.swift */,
+				1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */,
+				10613B7B257F317F0000AE30 /* UISearchView.swift */,
+				107319FB2595E2940037F19B /* DisclosureIndicator.swift */,
+				10A8043925AFB24200654DAC /* BSafariView.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		10AC289625F24A8400189E46 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				10AC289D25F24AF500189E46 /* LoginMenu.swift */,
+				10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		10BB00632530C4350081C6EB /* Languages */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,17 +404,13 @@
 		10BB3489252174F60046CBCA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				108456A7257CCCA3006EB397 /* Global.swift */,
-				10E414B725679DE4006E28D7 /* Log.swift */,
 				10BB348A252174F60046CBCA /* Realm.swift */,
 				10BB348D252174F60046CBCA /* JSONFormat.swift */,
-				10BB348F252174F60046CBCA /* FImage.swift */,
 				10BB348C252174F60046CBCA /* UnixTime.swift */,
 				10EFA3A72523A0DB0027209D /* Alamofire.swift */,
 				10BB3493252174F60046CBCA /* SalmonStats.swift */,
 				10BB3492252174F60046CBCA /* Extension.swift */,
 				10BB3494252174F60046CBCA /* Modifier.swift */,
-				1053968925242DC600132668 /* Enum */,
 				10BB3495252174F60046CBCA /* Fonts */,
 			);
 			path = Assets;
@@ -412,9 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				10BB350025217EFF0046CBCA /* CoopShiftCore.swift */,
-				10BB3490252174F60046CBCA /* CrewInfoCore.swift */,
 				10613BC92580FB170000AE30 /* FeatureProductCore.swift */,
-				10EFA355252191340027209D /* SalmoniaUserCore.swift */,
 				105396D725260CEA00132668 /* StageRecordCore.swift */,
 				10EFA3682521DE6E0027209D /* UserStatsCore.swift */,
 				10BB3491252174F60046CBCA /* UserInfoCore.swift */,
@@ -443,7 +449,6 @@
 				10BB34B3252175170046CBCA /* SettingView.swift */,
 				10BB34B4252175170046CBCA /* UnlockFeatureView.swift */,
 				10E743B725E192FF0098C4B9 /* RainbowConfiguration.swift */,
-				10EFA39D252398810027209D /* CrewListView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -451,21 +456,13 @@
 		10BB34B6252175170046CBCA /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				10AC289625F24A8400189E46 /* Login */,
+				10AC289225F24A5100189E46 /* Other */,
 				10DA21F725CFFED40085B3F7 /* Option */,
 				1063EE162581B7340050F4D0 /* UIKIt */,
 				10613B80257F51C60000AE30 /* Collection */,
 				108F2C6B257766C600287900 /* LoggingThread */,
 				10BB34B1252175170046CBCA /* Setting */,
-				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
-				10B9776725C44E4B005A0470 /* ShiftStatsView.swift */,
-				1053967C2524206200132668 /* StageRecordView.swift */,
-				10BB34BA252175170046CBCA /* PlayerView.swift */,
-				1053968A25242EE500132668 /* OtherPlayerView.swift */,
-				10BB00A525313AE90081C6EB /* OptionView.swift */,
-				1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */,
-				10613B7B257F317F0000AE30 /* UISearchView.swift */,
-				107319FB2595E2940037F19B /* DisclosureIndicator.swift */,
-				10A8043925AFB24200654DAC /* BSafariView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -525,7 +522,8 @@
 				1037E39A25209C7C001B41B0 /* Frameworks */,
 				1037E39B25209C7C001B41B0 /* Resources */,
 				42C0E994351A40405C8F57C8 /* [CP] Embed Pods Frameworks */,
-				101D2BEA2590F4970011B794 /* ShellScript */,
+				101D2BEA2590F4970011B794 /* Carthage Install */,
+				10AC28AA25F257A000189E46 /* Warning */,
 			);
 			buildRules = (
 			);
@@ -541,6 +539,7 @@
 				10E16B6125CE980A00B3624D /* CryptoSwift */,
 				10723AE725DBB9E400D4400A /* Realm */,
 				10723AE925DBB9E400D4400A /* RealmSwift */,
+				10538BA225E57F56009206F4 /* SwiftUIRefresh */,
 			);
 			productName = Salmonia2;
 			productReference = 1037E39D25209C7C001B41B0 /* Salmonia2.app */;
@@ -626,6 +625,7 @@
 				10E16B4025CE97B700B3624D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				10E16B6025CE980A00B3624D /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 				10723AE625DBB9E400D4400A /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				10538BA125E57F56009206F4 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */,
 			);
 			productRefGroup = 1037E39E25209C7C001B41B0 /* Products */;
 			projectDirPath = "";
@@ -674,7 +674,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		101D2BEA2590F4970011B794 /* ShellScript */ = {
+		101D2BEA2590F4970011B794 /* Carthage Install */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -685,6 +685,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 			);
+			name = "Carthage Install";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -692,6 +693,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+		10AC28AA25F257A000189E46 /* Warning */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Warning;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | \\\n    xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | \\\n    perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
 		};
 		11E0F314FC091314411EF74B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -800,7 +819,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10BB349E252174F60046CBCA /* FImage.swift in Sources */,
 				10BB34BD252175170046CBCA /* UserListView.swift in Sources */,
 				10BB34C0252175170046CBCA /* SalmoniaView.swift in Sources */,
 				105396F425264C2000132668 /* WeaponType.swift in Sources */,
@@ -817,13 +835,11 @@
 				105C318025E531F800BAFE10 /* LoggingView.swift in Sources */,
 				10613BCA2580FB170000AE30 /* FeatureProductCore.swift in Sources */,
 				10BB34BF252175170046CBCA /* UnlockFeatureView.swift in Sources */,
-				10BB349F252174F60046CBCA /* CrewInfoCore.swift in Sources */,
 				107319FC2595E2940037F19B /* DisclosureIndicator.swift in Sources */,
 				10EFA3A325239E0A0027209D /* ImportResultView.swift in Sources */,
 				1048631625697630001FDFBD /* CoopShiftCollectionView.swift in Sources */,
 				10BB34BE252175170046CBCA /* SettingView.swift in Sources */,
 				106764E525D0D8B10085B1CD /* WaveResultCollectionView.swift in Sources */,
-				108456A8257CCCA3006EB397 /* Global.swift in Sources */,
 				10BB34A7252174F60046CBCA /* Error.swift in Sources */,
 				10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */,
 				10BB34A1252174F60046CBCA /* Extension.swift in Sources */,
@@ -831,10 +847,8 @@
 				10B10C4A2528EC480025057F /* BossType.swift in Sources */,
 				10BB34A2252174F60046CBCA /* SalmonStats.swift in Sources */,
 				10B9776825C44E4B005A0470 /* ShiftStatsView.swift in Sources */,
-				1053968B25242EE500132668 /* OtherPlayerView.swift in Sources */,
 				10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */,
 				1057D6E225B7E56B00666242 /* SpecialType.swift in Sources */,
-				10E414B825679DE4006E28D7 /* Log.swift in Sources */,
 				1053969325242F5000132668 /* PlayerInfo.swift in Sources */,
 				10B10C4F252913220025057F /* RankType.swift in Sources */,
 				10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */,
@@ -842,19 +856,18 @@
 				10613BD225818F310000AE30 /* AdBannerView.swift in Sources */,
 				10BB349B252174F60046CBCA /* UnixTime.swift in Sources */,
 				10BB34A3252174F60046CBCA /* Modifier.swift in Sources */,
+				10AC28A325F24B0B00189E46 /* SalmonStatsMenu.swift in Sources */,
 				10DA203E25CF8F300085B3F7 /* TextFieldAlert.swift in Sources */,
+				10AC289E25F24AF500189E46 /* LoginMenu.swift in Sources */,
 				10BB349D252174F60046CBCA /* UserResultCore.swift in Sources */,
 				10BB34A0252174F60046CBCA /* UserInfoCore.swift in Sources */,
 				10BB34C2252175170046CBCA /* LoggingThread.swift in Sources */,
-				10EFA39E252398820027209D /* CrewListView.swift in Sources */,
 				1037E3A525209C7C001B41B0 /* ContentView.swift in Sources */,
 				10A8043A25AFB24200654DAC /* BSafariView.swift in Sources */,
 				10BB349A252174F60046CBCA /* Realm.swift in Sources */,
 				10613B85257F57620000AE30 /* WebView.swift in Sources */,
-				10EFA356252191340027209D /* SalmoniaUserCore.swift in Sources */,
 				105396D825260CEB00132668 /* StageRecordCore.swift in Sources */,
 				105396DD25260D5000132668 /* WaveType.swift in Sources */,
-				10B10C3F252859180025057F /* SalmonStatsView.swift in Sources */,
 				1053967D2524206200132668 /* StageRecordView.swift in Sources */,
 				10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */,
 				10DA21F925CFFEE60085B3F7 /* Rainbow.swift in Sources */,
@@ -863,7 +876,6 @@
 				10BB00A125310C1C0081C6EB /* WaveCollectionView.swift in Sources */,
 				1053968525242A7000132668 /* StageType.swift in Sources */,
 				10613B7C257F317F0000AE30 /* UISearchView.swift in Sources */,
-				10BB00A625313AE90081C6EB /* OptionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,6 +983,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -988,7 +1001,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -996,6 +1009,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_WORKSPACE = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -1034,6 +1048,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1045,7 +1060,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1053,6 +1068,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 				VALIDATE_WORKSPACE = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -1065,7 +1081,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1074,11 +1090,12 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Salmonia2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.6;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1096,7 +1113,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1106,11 +1123,12 @@
 				);
 				GCC_OPTIMIZATION_LEVEL = fast;
 				INFOPLIST_FILE = Salmonia2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.6;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = work.tkgstrator.Salmonia2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1249,6 +1267,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		10538BA125E57F56009206F4 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUIRefresh";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 		10723AE625DBB9E400D4400A /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
@@ -1308,6 +1334,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		10538BA225E57F56009206F4 /* SwiftUIRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10538BA125E57F56009206F4 /* XCRemoteSwiftPackageReference "SwiftUIRefresh" */;
+			productName = SwiftUIRefresh;
+		};
 		10723AE725DBB9E400D4400A /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 10723AE625DBB9E400D4400A /* XCRemoteSwiftPackageReference "realm-cocoa" */;

@@ -111,11 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         migration.delete(newObject!)
                     }
                 }
-                if (oldSchemaVersion < 26) {
-                    migration.enumerateObjects(ofType: SalmoniaUserRealm.className()) { _, newObject in
-                        newObject!["isUnlock"] = isUnlock
-                    }
-                }
             })
         Realm.Configuration.defaultConfiguration = config
     }
@@ -191,15 +186,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func getXProductVersion() throws -> () {
-        let realm = try Realm()
-        // Salmoniaユーザがいなければ作成
-        let users = realm.objects(SalmoniaUserRealm.self)
-        if users.isEmpty {
-            realm.beginWrite()
-            let user = SalmoniaUserRealm(isUnlock: isUnlock)
-            realm.add(user)
-            try? realm.commitWrite()
-        }
+//        let realm = try Realm()
+//        // Salmoniaユーザがいなければ作成
+//        let users = realm.objects(SalmoniaUserRealm.self)
+//        if users.isEmpty {
+//            realm.beginWrite()
+//            let user = SalmoniaUserRealm(isUnlock: isUnlock)
+//            realm.add(user)
+//            try? realm.commitWrite()
+//        }
         
         let url = "https://salmonia2-api.netlify.app/version.json"
         // X-Product Versionを取得する
@@ -211,7 +206,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 case .success(let value):
                     let json = JSON(value)
                     realm.beginWrite()
-                    realm.objects(SalmoniaUserRealm.self).first?.isVersion = json["version"].stringValue
+//                    realm.objects(SalmoniaUserRealm.self).first?.isVersion = json["version"].stringValue
                     try? realm.commitWrite()
                 case .failure:
                     break
@@ -222,13 +217,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func getFutureRotation() throws -> () {
         let realm = try Realm()
         // Salmoniaユーザがいなければ作成
-        let users = realm.objects(SalmoniaUserRealm.self)
-        if users.isEmpty {
-            realm.beginWrite()
-            let user = SalmoniaUserRealm(isUnlock: isUnlock)
-            realm.add(user)
-            try? realm.commitWrite()
-        }
+//        let users = realm.objects(SalmoniaUserRealm.self)
+//        if users.isEmpty {
+//            realm.beginWrite()
+//            let user = SalmoniaUserRealm(isUnlock: isUnlock)
+//            realm.add(user)
+//            try? realm.commitWrite()
+//        }
         
         let url = "https://salmonia2-api.netlify.app/coop.json"
         // シフト情報を取得する

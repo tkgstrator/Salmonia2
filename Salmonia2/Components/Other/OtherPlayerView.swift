@@ -86,7 +86,7 @@ struct OtherPlayerView: View {
 //        }
         .padding(.horizontal, 10)
         .navigationBarTitle(player.nickname)
-        .navigationBarItems(trailing: favButton)
+//        .navigationBarItems(trailing: favButton)
     }
     
     private func getPlayerSRPower(nsaid: String, completion: @escaping (Double?) -> ()) {
@@ -167,31 +167,14 @@ struct OtherPlayerView: View {
         return max(bias.defeated, bias.golden, rate)
     }
 
-    private var favButton: some View {
-        switch player.isFav {
-        case true:
-            return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "bookmark.fill").resizable().aspectRatio(contentMode: .fit).frame(height: 20) })
-        case false:
-            return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "bookmark.fill").resizable().aspectRatio(contentMode: .fit).frame(height: 20).foregroundColor(.gray) })
-        }
-    }
-    
-    private func onToggleFav() {
-        guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
-        guard let player = realm.objects(CrewInfoRealm.self).filter("nsaid=%@", player.nsaid).first else { return }
-        let favuser = user.favuser.filter("nsaid=%@", player.nsaid)
-        
-        try! realm.write {
-            player.isFav.toggle()
-            switch favuser.isEmpty {
-            case true:
-                user.favuser.append(player)
-            case false:
-                guard let index = user.favuser.index(of: player) else { return }
-                user.favuser.remove(at: index)
-            }
-        }
-    }
+//    private var favButton: some View {
+//        switch player.isFav {
+//        case true:
+//            return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "bookmark.fill").resizable().aspectRatio(contentMode: .fit).frame(height: 20) })
+//        case false:
+//            return AnyView(Button(action: { onToggleFav() }) { Image(systemName: "bookmark.fill").resizable().aspectRatio(contentMode: .fit).frame(height: 20).foregroundColor(.gray) })
+//        }
+//    }
 }
 
 //struct OtherPlayerView_Previews: PreviewProvider {

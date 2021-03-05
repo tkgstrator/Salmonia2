@@ -16,33 +16,28 @@ import Alamofire
 struct SalmoniaView: View {
     
     @EnvironmentObject var user: UserInfoCore
-    @EnvironmentObject var account: SalmoniaUserCore
     @State var isVisible: Bool = false
     @State var isSafari: Bool = false
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             List  {
-                Section(header: Text("Overview").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
+                Section(header: Text("HEADER_OVERVIEW").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                     User
                     Status
                     Results
                 }
-                Section(header: Text("Shift Schedule").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
+                Section(header: Text("HEADER_SCHEDULE").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                     CoopShiftView()
                 }
-                Section(header: Text("Stage Records").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
+                Section(header: Text("HEADER_RECORDS").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                     StageRecordView()
                 }
             }
             Update().padding(.trailing, 20).padding(.bottom, 60)
         }
-        .navigationBarTitle("Salmonia")
-    }
-    
-    private var Title: some View {
-        Text("Salmonia")
-            .modifier(Splatfont(size: 24))
+        .navigationBarTitle("TITLE_SALMONIA")
+        .navigationBarBackButtonHidden(true)
     }
     
     private var User: some View {

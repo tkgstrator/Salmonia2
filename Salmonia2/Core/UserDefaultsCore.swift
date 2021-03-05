@@ -58,15 +58,13 @@ class RainbowCore: ObservableObject {
 }
 
 class MainCore: ObservableObject {
-    @UserDefault(forKey: "playerName", defaultValue: "Salmonia2")
-    var playerName: String
-    @UserDefault(forKey: "playerId", defaultValue: "")
-    var playerId: String
-    @UserDefault(forKey: "playerKey", defaultValue: "")
-    var playerKey: String
-    @UserDefault(forKey: "playerToken", defaultValue: "")
-    var playerToken: String
+    // ログインしたかどうかを保存している
+    @UserDefault(forKey: "isLogin", defaultValue: false)
+    var isLogin: Bool
+    // Salmon StatsのAPI-TOKENを保存している
+    @UserDefault(forKey: "apiToken", defaultValue: nil)
+    var apiToken: String?
+    // X-Product Versionを保存している
     @UserDefault(forKey: "version", defaultValue: "")
     var verion: String
-
 }

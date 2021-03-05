@@ -9,7 +9,6 @@ import RealmSwift
 import SwiftyStoreKit
 
 struct UnlockFeatureView: View {
-    @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var paid: FeatureProductCore
     @EnvironmentObject var unlock: UnlockCore
     @State var isVisible: Bool = false
@@ -45,13 +44,13 @@ struct UnlockFeatureView: View {
                     }.frame(height: 60)
                 }
                 Toggle("Disable Ads", isOn: $unlock.disableAds)
-                    .disabled(!user.isPurchase)
+//                    .disabled(!user.isPurchase)
                 Toggle("Legacy Style", isOn: $unlock.legacyStyle)
-                    .disabled(!user.isPurchase)
+//                    .disabled(!user.isPurchase)
                 NavigationLink(destination: RainbowConfiguration()) {
                     Text("Gaming Style")
                 }
-                .disabled(!user.isPurchase)
+//                .disabled(!user.isPurchase)
             }
             Section(header: Text("Option")
                         .font(.custom("Splatfont2", size: 16))
@@ -75,9 +74,6 @@ struct UnlockFeatureView: View {
         .alert(isPresented: $isVisible) {
             Alert(title: Text(mTitle.localized), message: Text(mLog.localized))
         }
-        .onDisappear() {
-            user.updateUnlock(user.isUnlock) // アンロックした情報を書き込む
-        }
     }
     
     func restoreStoreKit() {
@@ -91,11 +87,12 @@ struct UnlockFeatureView: View {
                 for product in results.restoredPurchases {
                     print(product.productId)
                     do {
+                        // TODO: 課金情報直せ
                         guard let data = realm.objects(FeatureProductRealm.self).filter("productIdentifier=%@", product.productId).first else { throw SKError.invalid }
-                        guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw SKError.unknown}
+//                        guard let user = realm.objects(SalmoniaUserRealm.self).first else { throw SKError.unknown}
                         realm.beginWrite()
                         data.isValid = true
-                        user.isPurchase = true
+//                        user.isPurchase = true
                         try? realm.commitWrite()
                         mTitle = "Success"
                         mLog = "Restore Success"
@@ -162,10 +159,10 @@ struct UnlockFeatureView: View {
                             // 購入処理をここに書く
                             // 購入したら強制的にユーザタイプを変更する（まあこれでいいや）
                             guard let data = realm.objects(FeatureProductRealm.self).filter("productIdentifier=%@", product.productId).first else { return }
-                            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
+//                            guard let user = realm.objects(SalmoniaUserRealm.self).first else { return }
                             realm.beginWrite()
                             data.isValid = true
-                            user.isPurchase = true
+//                            user.isPurchase = true
                             try? realm.commitWrite()
                         case .error(let error):
                             print("Fetch receipt failed: \(error)")

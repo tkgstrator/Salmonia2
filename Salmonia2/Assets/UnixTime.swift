@@ -68,7 +68,6 @@ func SRPower(_ results: Results<CoopResultsRealm>) -> [Double?] {
             ilorate[1] = max((ilorate[0] ?? 0.0) + delta, (ilorate[1] ?? 0)).round(digit: 2)
             ilorate[0] = ((ilorate[0] ?? 0.0) + delta).round(digit: 2)
         }
-//        print(baserate, bias, salmonrate, ilorate)
     }
     return ilorate
 }
@@ -89,6 +88,5 @@ func CalcBias(_ result: CoopResultsRealm) -> Double {
     if (result.player[0].golden_ikura_num * 3 >= quota_num && defeated_num * 5 >= appear_num) {
         bias.golden = min(rate + Double(10 * (result.player[0].golden_ikura_num * 3 - quota_num)) / (9.0 * 160.0), max_bias)
     }
-//    print(bias.defeated, bias.golden, rate)
     return max(bias.defeated, bias.golden, rate)
 }

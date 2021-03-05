@@ -15,7 +15,6 @@ import UserNotifications
 import BetterSafariView
 
 struct SettingView: View {
-    @EnvironmentObject var user: SalmoniaUserCore
     @EnvironmentObject var core: UserResultCore
     // 0はSalmon Stats
     // 1は使い方ページ
@@ -67,9 +66,14 @@ struct SettingView: View {
             BSafariView(isPresented: $isPresented[1], title: "How to use", url: "https://tkgstrator.work/?p=28236")
             BSafariView(isPresented: $isPresented[2], title: "Privacy poricy", url: "https://tkgstrator.work/?page_id=25126")
             HStack {
+                Button(action: { UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!) }) {
+                    Text("SETTING_DELETE_MAIN")
+                }
+            }
+            HStack {
                 Text("X-Product Version")
                 Spacer()
-                Text("\(user.isVersion)")
+//                Text("\(user.isVersion)")
             }
             
             HStack {
@@ -77,19 +81,10 @@ struct SettingView: View {
                 Spacer()
                 Text("\(version)")
             }
-            .onLongPressGesture { isImported() }
         }
         .modifier(Splatfont2(size: 16))
     }
-    
-    private func isImported() {
-        user.isImported.toggle() // 反転させる
-        guard let salmonia = realm.objects(SalmoniaUserRealm.self).first else { return }
-        realm.beginWrite()
-        salmonia.isImported = user.isImported
-        try? realm.commitWrite()
-    }
-    
+
     private var LanPlayStatus: some View {
         Section(header: Text("LanPlay")
                     .modifier(Splatfont2(size: 16))
@@ -131,15 +126,16 @@ struct SettingView: View {
         Section(header: Text("Status")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
+            // TODO: 課金情報ステータス直せ
             HStack {
                 Text("laravel session")
                 Spacer()
-                Text("\((user.api_token != nil ? "Registered" : "Unregistered").localized)")
+//                Text("\((user.api_token != nil ? "Registered" : "Unregistered").localized)")
             }
             HStack {
                 Text("User type")
                 Spacer()
-                Text("\((user.isPurchase ? "Unlimited" : "Limited").localized)")
+//                Text("\((user.isPurchase ? "Unlimited" : "Limited").localized)")
             }
             HStack {
                 Button("Update iksm_session") {
@@ -172,8 +168,7 @@ struct SettingView: View {
                         Alert(title: Text(message.localized))
                     }
             }
-            .buttonStyle(PlainButtonStyle())
-            .disabled(!user.isPurchase)
+//            .disabled(!user.isPurchase)
         }
         .modifier(Splatfont2(size: 16))
     }
@@ -190,14 +185,15 @@ struct SettingView: View {
                     }
                 }
             }
-            if !user.isImported {
-                NavigationLink(destination: ImportResultView()) {
-                    HStack {
-                        Text("Import Results")
-                        Spacer()
-                    }
-                }
-            }
+            // TODO: 取り込み機能直せ
+//            if !user.isImported {
+//                NavigationLink(destination: ImportResultView()) {
+//                    HStack {
+//                        Text("Import Results")
+//                        Spacer()
+//                    }
+//                }
+//            }
             NavigationLink(destination: UnlockFeatureView()) {
                 HStack {
                     Text("Unlock")

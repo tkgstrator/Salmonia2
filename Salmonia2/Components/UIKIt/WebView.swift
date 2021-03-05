@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WebKit
+import Combine
 
 public class SUIWebBrowserObject: WKWebView, WKNavigationDelegate, ObservableObject {
     private var observers: [NSKeyValueObservation?] = []
@@ -64,6 +65,8 @@ public struct SUIWebBrowserView: UIViewRepresentable {
 }
 
 struct WebBrowser: View {
+    @State var isSuccess: Bool = false
+    @EnvironmentObject var main: MainCore
     @ObservedObject var browser = SUIWebBrowserObject()
     @Environment(\.presentationMode) var presentationMode
     
@@ -83,36 +86,30 @@ struct WebBrowser: View {
         Text(verbatim: browser.url?.absoluteString.removingPercentEncoding ?? "")
     }
     
-    @State var isPresented: Bool = false
-    @State var message: String  = ""
-    @State var isSuccess: Bool = false
-    let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
-
     var body: some View {
         SUIWebBrowserView(browserObject: browser)
-            .onReceive(timer) { _ in
-                if isSuccess == false {
-                    WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
-                        cookies in
-                        for cookie in cookies {
-                            if cookie.name == "laravel_session" {
-                                let laravel_session = cookie.value
+            .onAppear {
+                WKWebView().configuration.websiteDataStore.httpCookieStore.getAllCookies {
+                    cookies in
+                    for cookie in cookies {
+                        if cookie.name == "laravel_session" {
+                            let laravel_session = cookie.value
+                            DispatchQueue(label: "Login").async {
+                                Thread.sleep(forTimeInterval: 10)
                                 do {
-                                    let api_token = try SalmonStats.getAPIToken(laravel_session)
-                                    let user = realm.objects(SalmoniaUserRealm.self)
-                                    try? realm.write { user.setValue(api_token, forKey: "api_token") }
-                                    message = "Success"
-                                    isSuccess = true
-                                    isPresented = true
+                                    main.apiToken = try SalmonStats.getAPIToken(laravel_session)
+                                    main.isLogin.toggle()
+                                    isSuccess.toggle()
                                 } catch {
+                                    
                                 }
                             }
                         }
                     }
                 }
             }
-            .alert(isPresented: $isPresented) {
-                Alert(title: Text("Login Salmon Stats"), message: Text("\(message)"))
-            }
+        NavigationLink(destination: SalmoniaView(), isActive: $isSuccess) {
+            EmptyView()
+        }
     }
 }

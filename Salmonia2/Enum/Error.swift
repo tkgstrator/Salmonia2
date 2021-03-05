@@ -21,6 +21,7 @@ enum APPError: Error {
     case iksm
     case session
     case unavailable
+    case value
 }
 
 extension APPError: LocalizedError {
@@ -48,6 +49,8 @@ extension APPError: LocalizedError {
             return "ERROR_SESSIONTOKEN"
         case .unavailable:
             return "ERROR_UNAVAILABLE"
+        case .value:
+            return "ERROR_VALUE"
         }
     }
     
@@ -75,6 +78,8 @@ extension APPError: LocalizedError {
             return "DESC_SESSIONTOKEN"
         case .unavailable:
             return "DESC_UNAVAILABLE"
+        case .value:
+            return "DESC_VALUE"
         }
     }
 }
@@ -105,6 +110,8 @@ extension APPError: CustomNSError {
             return 1001
         case .unavailable:
             return 9503
+        case .value:
+            return 9504
         }
     }
 }

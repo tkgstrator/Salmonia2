@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIRefresh
 import URLImage
 import RealmSwift
 
@@ -16,8 +17,13 @@ struct ResultCollectionView: View {
     @State var sliderValue: Double = 0
     @State var isEnable: [Bool] = [true, true, true, true, true]
     @State var isPersonal: Bool = false
-    
-    var body: some View {
+    @State private var isShowing: Bool = false
+    @State private var isDebugLog: Bool = false
+    @State private var debugMessage: String = ""
+    @State private var debugCode: Int = 9999
+    @State private var debugDescription: String = ""
+        
+        var body: some View {
         List {
             ForEach(core.data.indices, id:\.self) { idx in
                 CoopShiftStack(phase: core.data[idx].phase)
@@ -27,6 +33,26 @@ struct ResultCollectionView: View {
                     }
                 }
             }
+        }
+        .pullToRefresh(isShowing: $isShowing) {
+            DispatchQueue(label: "Loading").async {
+                do {
+                    try Salmonia2.updateResults()
+                } catch {
+                    let error = error as! CustomNSError
+                    print(error.errorCode)
+                    debugCode = error.errorCode
+                    debugMessage = error.localizedDescription
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        isShowing = false
+                        isDebugLog = true
+                    }
+                }
+            }
+        }
+        .onChange(of: isShowing) { value in }
+        .alert(isPresented: $isDebugLog) {
+            Alert(title: Text("DEF_ERROR_CODE".localized + String(debugCode)), message: Text(debugMessage.localized))
         }
         .navigationBarTitle("Results")
         .navigationBarItems(trailing: AddButton)
@@ -52,7 +78,6 @@ struct ResultCollectionView: View {
         @EnvironmentObject var rainbow: RainbowCore
         @Binding var isPersonal: Bool
         var gradeID: [String] = ["Intern", "Apparentice","Part-Timer", "Go-Getter", "Overachiever", "Profreshional"]
-        
         
         var body: some View {
             HStack {
