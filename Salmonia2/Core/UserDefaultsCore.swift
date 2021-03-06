@@ -64,7 +64,13 @@ class MainCore: ObservableObject {
     // Salmon StatsのAPI-TOKENを保存している
     @UserDefault(forKey: "apiToken", defaultValue: nil)
     var apiToken: String?
+    // 先頭ユーザのiksm_session
+    @UserDefault(forKey: "iksmSession", defaultValue: nil)
+    var iksmSession: String?
+    // 課金したかどうかの情報
+    @UserDefault(forKey: "userType", defaultValue: false)
+    var userType: Bool
     // X-Product Versionを保存している
-    @UserDefault(forKey: "version", defaultValue: "")
+    @UserDefault(forKey: "version", defaultValue: "1.0.0")
     var verion: String
 }

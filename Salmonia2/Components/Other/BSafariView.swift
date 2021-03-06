@@ -75,7 +75,7 @@ struct BSalmonStatsLoginView: View {
             isPresented.toggle()
         }) {
             HStack {
-                Text("Salmon Stats")
+                Text("SETTING_SALMON_STATS")
                     .modifier(Splatfont2(size: 16))
                 Spacer()
                 Image(systemName: "chevron.right")

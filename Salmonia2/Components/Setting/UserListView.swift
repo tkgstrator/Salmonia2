@@ -22,31 +22,46 @@ struct UserListView: View {
     @State var isFailure: Bool = false
     @State var isUserInteraction: Bool = false
     @State var errorMessage: String? = nil
-
+    
     var body: some View {
         List {
-            Section(header: Text("My Accounts")
-                .modifier(Splatfont2(size: 16))
-                .foregroundColor(.cOrange))
+            Section(header: Text("HEADER_ENABLE")
+                        .modifier(Splatfont2(size: 16))
+                        .foregroundColor(.cOrange))
             {
-                ForEach(user.account.indices, id:\.self) { idx in
-                    HStack {
-                        URLImage(url: URL(string: user.account[idx].image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0))}
+                ForEach(user.account, id:\.self) { account in
+                    HStack(spacing: 0) {
+                        URLImage(url: URL(string: account.image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
                             .frame(width: 60, height: 60)
-                        Text(user.account[idx].name).frame(maxWidth: .infinity)
-//                        Toggle(isOn: $user.isActiveArray[idx]) { }
-//                            .disabled(!user.isPurchase)
-//                            .onTapGesture{ onActive(idx: idx) }
+                        Text(account.name)
+                            .modifier(Splatfont2(size: 18))
+                            .frame(maxWidth: .infinity)
                     }
+                    .contextMenu(ContextMenu(menuItems: {
+                        Menu("SETTING_ENABLE_DISABLE") {
+                            Button(action: { } ) { Text("SETTING_ENABLE") }
+                            Button(action: { } ) { Text("SETTING_DISABLE") }
+                        }
+                        Button(action: { } ) { Text("SETTING_UPDATE") }
+                    }))
                 }
                 .onMove(perform: onMove)
+                .onDelete(perform: onDelete)
             }
-//            .onDelete(perform: onDelete)
         }
         .navigationBarTitle("Accounts")
         .modifier(Splatfont(size: 18))
         .navigationBarItems(trailing: Login)
         .environment(\.editMode, $editMode)
+    }
+    
+    struct UserList: View {
+        @State var account: UserInfoRealm
+        var body: some View {
+            HStack {
+                Text(account.name).frame(maxWidth: .infinity)
+            }
+        }
     }
     
     var Login: some View {
@@ -88,7 +103,7 @@ struct UserListView: View {
                 }
             EditButton()
         }
-//            .font(.system(size: 18))
+        //            .font(.system(size: 18))
     }
     
     private func onActive(idx: Int) {
@@ -105,6 +120,7 @@ struct UserListView: View {
     }
     
     private func onMove(source: IndexSet, destination: Int) {
+        print("MOVE", source, destination)
         try? Realm().write {
             user.account.move(fromOffsets: source, toOffset: destination)
         }

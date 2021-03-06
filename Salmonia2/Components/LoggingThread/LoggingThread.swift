@@ -20,7 +20,8 @@ struct LoggingThread: View {
             MBCircleProgressBar(log: $log, lineWidth: 5, color: Color.red, size: 250)
             Spacer()
         }
-        .navigationBarTitle("Logging Thread", displayMode: .large)
+        .navigationTitle("TITLE_LOGGING_THREAD")
+        .navigationBarBackButtonHidden(true)
     }
     
     var Credit: some View {

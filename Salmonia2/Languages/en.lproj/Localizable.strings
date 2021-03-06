@@ -1,164 +1,172 @@
+// テキストの翻訳
 "TEXT_WELCOME" = "Welcome to Salmonia2";
+"TEXT_LOGIN_SALMON_STATS" = "Sign in Salmon Stats";
+
+// ボタンの翻訳
 "BTN_LOGIN" = "Sign in";
 "BTN_LOGIN_LEGACY" = "Sign in";
 "BTN_LOGIN_MODERN" = "Sign in";
 "BTN_REGISTER" = "Sign up";
 "BTN_REGISTER_TWITTER" = "Sign up";
+"BTN_CANCEL" = "Cancel";
+"BTN_CONFIRM" = "Confirm";
+"BTN_ERROR_DISMISS" = "Dismiss";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
 
+// アラートのタイトル
+"ALERT_TITLE_DELETE" = "Erase Settings";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
 
+// アラートのテキスト（ドットを忘れないように）
+"ALERT_TEXT_DELETE" = "This operation can not be undone.";
+
+// タイトルの翻訳
 "TITLE_WELCOME" = "Welcome";
 "TITLE_SALMONIA" = "Salmonia";
+"TITLE_SETTINGS" = "Settings";
+"TITLE_ACCOUNTS" = "My Accounts";
+"TITLE_SHIFT_STATS" = "Shift Stats";
+"TITLE_WAVE_ANALYSIS" = "Wave Analysis";
+"TITLE_WEAPON_ANALYSIS" = "Weapon Analysis";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
 
+// ヘッダーの翻訳
 "HEADER_OVERVIEW" = "Overview";
 "HEADER_SCHEDULE" = "Shift Schedule";
 "HEADER_REDCORDS" = "Stage Records";
+"HEADER_SIGN_IN" = "Sign in";
+"HEADER_STATUS" = "Status";
+"HEADER_FEATURE" = "Feature";
+"HEADER_LANPLAY" = "LanPlay";
+"HEADER_APPLICATION" = "Application";
+"HEADER_ACTIVE" = "Active";
+"HEADER_INACTIVE" = "Inactive";
+"HEADER_MAX_VALUE" = "Max";
+"HEADER_AVG_VALUE" = "Avg";
+"HEADER_BOSS_DEFEATED" = "Boss Defeated";
+"HEADER_GLOBAL_RECORDS" = "Global Records";
+"HEADER_ADVANCED" = "Advanced";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
 
-"TEXT_LOGIN_SALMON_STATS" = "Sign in Salmon Stats";
-"DESC_LOGIN_SALMON_STATS" = "Using Salmonia, you need sign in Salmon Stats with twtter account.";
+// フッターの翻訳
 
 
+// 設定画面の翻訳
+"SETTING_SPLATNET2" = "SplatNet2";
+"SETTING_SALMON_STATS" = "Salmon Stats";
+"SETTING_LARAVEL_SESSION" = "Laravel Session";
+"SETTING_USER_TYPE" = "User Type";
+"SETTING_UPDATE_NAME" = "Update Nickname";
+"SETTING_IMPORT_RESULTS" = "Import Results";
+"SETTING_UNLOCK" = "Unlock";
+"SETTING_UPDATE_TOKEN" = "Set Iksm Session";
+"SETTING_WHAT_LANPLAY" = "What's LanPlay";
+"SETTING_LANPLAY_ONLINE" = "Online Members";
+"SETTING_LANPLAY_IDLE" = "Idle Members";
+"SETTING_LANPLAY_VERSION" = "Version";
+"SETTING_TUTORIAL" = "Tutorial";
+"SETTING_PRIVACY" = "Privacy Policy";
+"SETTING_DELETE_MAIN" = "Detele Settings";
+"SETTING_XPRODUCT_VERSION" = "X-Product Version";
+"SETTING_APP_VERSION" = "Version";
+"SETTING_REGISTERED" = "Registered";
+"SETTING_UNREGISTERED" = "Unregistered";
+"SETTING_LIMITED" = "Limited";
+"SETTING_UNLIMITED" = "Unlimited";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+
+// 統計表示の翻訳
+"STATS_SRPOWER" = "SR Power";
+"STATS_CLEAR_RATIO" = "Clear Ratio";
+"STATS_TEAM_IKURA" = "Team Power Eggs";
+"STATS_TEAM_GOLDEN_IKURA" = "Team Golden Eggs";
+"STATS_IKURA_RATIO" = "Power Eggs Ratio";
+"STATS_GOLDEN_IKURA_RATIO" = "Golden Eggs Ratio";
+"STATS_SP_RATIO_BOM" = "Bomb Pitcher";
+"STATS_SP_RATIO_RAY" = "Sting Ray";
+"STATS_SP_RATIO_JET" = "Inkjet";
+"STATS_SP_RATIO_SPL" = "Splashdown";
+"STATS_GRADE_POINT" = "Grade Point";
+"STATS_CLEAR_WAVE" = "Clear Wave";
+"STATS_CREW_GRADE" = "Crew Grade";
+"STATS_BOSS_DEFEATED" = "Boss Defeated";
+"STATS_RESCUE_COUNT" = "Rescue Count";
+"STATS_HELP_COUNT" = "Help Count";
+"STATS_" = "";
+"STATS_" = "";
+"STATS_" = "";
+"STATS_" = "";
+"STATS_" = "";
+"STATS_" = "";
+
+// 説明の翻訳
+"DESC_LOGIN_SALMON_STATS" = "Using Salmonia2, you need sign in Salmon Stats with twtter account.";
+"DESC_LOGIN_SPLATNET2" = "Using Salmonia2, you need sign in Nintendo Switch Online account.";
 
 
-// TitleBar
-"Settings" = "Settings";
-"Log" = "Log";
-"Results" = "Results";
-"Detail" = "Result detail";
-"Feature" = "Feature";
-"User List" = "User List";
-"Wave Search" = "Wave Search";
-"Crew Search" = "Crew Search";
-"My Accounts" = "My Accounts";
-"Sign in" = "Sign in";
-"Coop Shift Rotation" = "Shift Schdule";
+// エラー
+"ERROR_UNKONWN" = "";
+"ERROR_EMPTY" = "";
+"ERROR_EXPIRED" = "";
+"ERROR_REALM" = "";
+"ERROR_USER" = "";
+"ERROR_COOP" = "";
+"ERROR_ACTIVE" = "";
+"ERROR_TOKEN" = "";
+"ERROR_UNAVAILABLE" = "";
+"ERROR_VALUE" = "";
 
-// Settings
-"NSO Accounts" = "NSO Accounts";
-"Fav Crews" = "Fav Crews";
-"Registered" = "Registered";
-"Unregistered" = "Unregistered";
-"User" = "User";
-"Status" = "Status";
-"iksm session" = "iksm session";
-"laravel session" = "laravel session";
-"Sync Username" = "Update Usename";
-"Import Results" = "Import Results";
-"Application" = "Application";
-"Free user" = "Free";
-"Pro user" = "Pro";
-"Update" = "Update";
-"Unlock" = "Unlock";
-"X-Product Version" = "X-Product Version";
-"Version" = "Version";
-"Add" = "Add";
-
-// Settings->Features
-"Free" = "Free";
-"Paid" = "Paid";
-"Donation" = "Donation";
-"Multiple Accounts" = "Multiple Accounts";
-"Monthly Pass" = "Monthly Pass";
-"Future Rotation" = "Display Future Rotation";
-"Grizzco Weapons" = "Display Grizzco Weapons";
-"$3.99" = "$3.99";
-
-// Settings->Feature's description
-"Enable multiple accounts" = "Enable multiple accounts";
-"Donate to the developer" = "Donate to the developer";
-
-// Global->Stage Names
-"Spawning Grounds" = "Spawning Grounds";
-"Marooner's Bay" = "Marooner's Bay";
-"Lost Outpost" = "Lost Outpost";
-"Salmonid Smokeyard" = "Salmonid Smokeyard";
-"Ruins of Ark Polaris" = "Ruins of Ark Polaris";
-
-// Top
-"Overview" = "Overview";
-"Jobs" = "Jobs";
-"Eggs" = "Eggs";
-"Shift Schedule" = "Shift Schedule";
-"Stage Records" = "Stage Records";
-"Favorite Crew" = "Favorite Crew";
-"Enter username" = "Enter username";
-
-// In Stage Records View
-"Clear Ratio" = "Clear Ratio";
-"Total Power Eggs" = "Total Power Eggs";
-"Total Golden Eggs" = "Total Golden Eggs";
-"Max Grade" = "Max Grade"; // The grade of profressional(i.e 999)
-"All" = "All"; // Include night event
-"No Night Event" = "No Night Event"; // Without night event
-"Record" = "Record"; // The records of collecting golden eggs
-
-// Event & Tide
-"Tide" = "Tide";
-"Event" = "Event";
-"-" = "No Event"; // No Event
-"rush" = "Rush";
-"goldie-seeking" = "Goldie Seeking";
-"griller" = "The Griller";
-"the-mothership" = "The Mothership";
-"fog" = "Fog";
-"cohock-charge" = "Cohock Charge";
-"low" = "Low tide";
-"normal" = "Normal";
-"high" = "High tide";
-"time_limit" = "Time Up!";
-"wipe_out" = "DEFEAT!";
-"WAVE" = "Wave";
-
-// Stats
-"Total" = "Total";
-"Max" = "Max";
-"Avg" = "Avg";
-"Defeated" = "Defeated"; // Boss defeated
-"Bomb Launcher" = "Bomb Launcher";
-"Sting Ray" = "Sting Ray";
-"Inkjet" = "Inkjet";
-"Splashdown" = "Splashdown";
-"Grade Point" = "Grade Point"; // The grade of profressional
-"Clear Wave" = "Clear Wave";
-"Crew Grade" = "Crew Grade"; // The average grade of crew you played with
-"Team Power Eggs" = "Team Power Eggs";
-"Team Golden Eggs" = "Team Golden Eggs";
-"Power Eggs" = "Power Eggs";
-"Golden Eggs" = "Golden Eggs";
-"Boss Defeated" = "Boss Defeated";
-"Rescue Count" = "Rescue Count";
-"Help Count" = "Help Count";
-"Goldie" = "Goldie";
-"Steelhead" = "Steelhead";
-"Flyfish" = "Flyfish";
-"Scrapper" = "Scrapper";
-"Steel Eel" = "Steel Eel";
-"Stinger" = "Stinger";
-"Maws" = "Maws";
-"Griller" = "Griller";
-"Drizzler" = "Drizzler";
-
-// Clear/Failure in SplatNet2
-"Clear!" = "Clear!";
-"Defeat" = "Defeat";
-"Hazard Level Max!!" = "Hazard Level Max!!";
-"Stage" = "Stage";
-"Avg Eggs" = "Avg Eggs";
-
-// In Coop Shift Rotation
-"Supplied Weapons" = "Supplied Weapons";
-"Grizzco Rotation" = "Grizzco Rotaion";
-"All Random Rotation" = "All Random Rotation";
-"One Random Rotation" = "One Random Rotation";
-"Normal Rotation" = "Normal Rotation";
-"Only played" = "Only played"; // The roatations you played
-"Rotation" = "Rotation";
-"Options" = "Options";
-
-// Notification's description
-"Success" = "Success";
-"Failure" = "Failure";
-"Add new NSO account" = "Add new NSO account";
-"Update NSO account" = "Update NSO account";
-"Wrong request" = "Wrong request";
-"Login Salmon Stats" = "Login Salmon Stats";
-"Try again" = "Try again";
+// エラーの内容
+"DESC_UNKONWN" = "";
+"DESC_EMPTY" = "";
+"DESC_EXPIRED" = "";
+"DESC_REALM" = "";
+"DESC_USER" = "";
+"DESC_COOP" = "";
+"DESC_ACTIVE" = "";
+"DESC_TOKEN" = "";
+"DESC_UNAVAILABLE" = "";

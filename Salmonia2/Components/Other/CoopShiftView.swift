@@ -15,19 +15,12 @@ struct CoopShiftView: View {
     var body: some View {
         ForEach(phase.data.indices, id:\.self) { idx in
             ZStack {
-                NavigationLink(destination: ShiftStatsView()
-                                .environmentObject(UserStatsCore(start_time: phase.data[idx].start_time))
-                ) {
-                    EmptyView()
-                }
+                NavigationLink(destination: ShiftStatsView().environmentObject(UserStatsCore(start_time: phase.data[idx].start_time))) { EmptyView() }
                 .opacity(0.0)
                 CoopShiftStack(phase: phase.data[idx])
             }
         }
-        NavigationLink(destination: CoopShiftCollectionView()) {
-            Text("Coop Shift Rotation")
-                .modifier(Splatfont2(size: 16))
-        }
+        NavigationLink(destination: CoopShiftCollectionView()) { Text("TITLE_SHIFT_ROTATION").modifier(Splatfont2(size: 16)) }
         .buttonStyle(PlainButtonStyle())
     }
 }

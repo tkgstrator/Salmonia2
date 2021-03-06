@@ -23,8 +23,7 @@ struct ShiftStatsView: View {
             GlobalRecords
             Advanced
         }
-        .navigationBarTitle("Shift Stats")
-        //        .navigationBarItems(trailing: RecordButton)
+        .navigationTitle("TITLE_SHIFT_STATS")
     }
     
     var RecordButton: some View {
@@ -36,7 +35,7 @@ struct ShiftStatsView: View {
     }
     
     var Overview: some View {
-        Section(header: Text("Overview")
+        Section(header: Text("HEADER_OVERVIEW")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange))
         {
@@ -54,18 +53,19 @@ struct ShiftStatsView: View {
 //                )
 //            }
             Group {
-                StatsColumn(title: "Salmon Rate", value: stats.srpower[0]?.round)
-                StatsColumn(title: "Clear Ratio", value: stats.clear_ratio.per)
-                StatsColumn(title: "Total Power Eggs", value: stats.total_power_eggs)
-                StatsColumn(title: "Total Golden Eggs", value: stats.total_golden_eggs)
-                StatsColumn(title: "Power Eggs Ratio", value: stats.rate_power_eggs.per)
-                StatsColumn(title: "Golden Eggs Ratio", value: stats.rate_golden_eggs.per)
+                StatsColumn(title: "STATS_SRPOWER", value: stats.srpower[0]?.round)
+                StatsColumn(title: "STATS_CLEAR_RATIO", value: stats.clear_ratio.per)
+                StatsColumn(title: "STATS_TEAM_IKURA", value: stats.total_power_eggs)
+                StatsColumn(title: "STATS_TEAM_GOLDEN_IKURA", value: stats.total_golden_eggs)
+                StatsColumn(title: "STATS_IKURA_RATIO", value: stats.rate_power_eggs.per)
+                StatsColumn(title: "STATS_GOLDEN_IKURA_RATIO", value: stats.rate_golden_eggs.per)
             }
+            // TODO: ここはグラフ表示の方が絶対楽しい
             Group {
-                StatsColumn(title: "Bomb Launcher", value: stats.special[0].per)
-                StatsColumn(title: "Sting Ray", value: stats.special[1].per)
-                StatsColumn(title: "Inkjet", value: stats.special[2].per)
-                StatsColumn(title: "Splashdown", value: stats.special[3].per)
+                StatsColumn(title: "STATS_SP_RATIO_BOM", value: stats.special[0].per)
+                StatsColumn(title: "STATS_SP_RATIO_RAY", value: stats.special[1].per)
+                StatsColumn(title: "STATS_SP_RATIO_JET", value: stats.special[2].per)
+                StatsColumn(title: "STATS_SP_RATIO_SPL", value: stats.special[3].per)
             }
         }
 //         課金しているユーザだけが個別のリザルトにジャンプできる
@@ -84,51 +84,51 @@ struct ShiftStatsView: View {
     }
     
     var MaxResult: some View {
-        Section(header: Text("Max")
+        Section(header: Text("HEADER_MAX_VALUE")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange))
         {
-            StatsColumn(title: "Salmon Rate", value: stats.srpower[1]?.round)
-            StatsColumn(title: "Grade Point", value: stats.max_grade_point)
+            StatsColumn(title: "STATS_SRPOWER", value: stats.srpower[1]?.round)
+            StatsColumn(title: "STATS_GRADE_POINT", value: stats.max_grade_point)
             if (stats.job_num != nil) {
                 NavigationLink(destination: ResultView(result: stats.max_results[0])) {
-                    StatsColumn(title: "Team Power Eggs", value: stats.max_team_power_eggs)
+                    StatsColumn(title: "STATS_TEAM_IKURA", value: stats.max_team_power_eggs)
                 }
                 NavigationLink(destination: ResultView(result: stats.max_results[1])) {
-                    StatsColumn(title: "Team Golden Eggs", value: stats.max_team_golden_eggs)
+                    StatsColumn(title: "STATS_TEAM_GOLDEN_IKURA", value: stats.max_team_golden_eggs)
                 }
                 NavigationLink(destination: ResultView(result: stats.max_results[2])) {
-                    StatsColumn(title: "Power Eggs", value: stats.max_my_power_eggs)
+                    StatsColumn(title: "STATS_IKUEA_NUM", value: stats.max_my_power_eggs)
                 }
                 NavigationLink(destination: ResultView(result: stats.max_results[3])) {
-                    StatsColumn(title: "Golden Eggs", value: stats.max_my_golden_eggs)
+                    StatsColumn(title: "STATS_GOLDEN_IKUEA_NUM", value: stats.max_my_golden_eggs)
                 }
                 NavigationLink(destination: ResultView(result: stats.max_results[4])) {
-                    StatsColumn(title: "Boss Defeated", value: stats.max_defeated)
+                    StatsColumn(title: "STATS_BOSS_DEFEATED", value: stats.max_defeated)
                 }
             }
         }
     }
     
     var AvgResult: some View {
-        Section(header: Text("Avg")
+        Section(header: Text("HEADER_AVG_VALUE")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange))
         {
-            StatsColumn(title: "Clear Wave", value: stats.avg_clear_wave?.round)
-            StatsColumn(title: "Crew Grade", value: stats.avg_crew_grade?.round)
-            StatsColumn(title: "Team Power Eggs", value: stats.avg_team_power_eggs?.round)
-            StatsColumn(title: "Team Golden Eggs", value: stats.avg_team_golden_eggs?.round)
-            StatsColumn(title: "Power Eggs", value: stats.avg_my_power_eggs?.round)
-            StatsColumn(title: "Golden Eggs", value: stats.avg_my_golden_eggs?.round)
-            StatsColumn(title: "Boss Defeated", value: stats.avg_defeated?.round)
-            StatsColumn(title: "Rescue Count", value: stats.avg_rescue?.round)
-            StatsColumn(title: "Help Count", value: stats.avg_dead?.round)
+            StatsColumn(title: "STATS_CLEAR_WAVE", value: stats.avg_clear_wave?.round)
+            StatsColumn(title: "STATS_CREW_GRADE", value: stats.avg_crew_grade?.round)
+            StatsColumn(title: "STATS_TEAM_IKURA", value: stats.avg_team_power_eggs?.round)
+            StatsColumn(title: "STATS_TEAM_GOLDEN_IKURA", value: stats.avg_team_golden_eggs?.round)
+            StatsColumn(title: "STATS_IKURA_NUM", value: stats.avg_my_power_eggs?.round)
+            StatsColumn(title: "STATS_GOLDEN_IKURA", value: stats.avg_my_golden_eggs?.round)
+            StatsColumn(title: "STATS_BOSS_DEFEATED", value: stats.avg_defeated?.round)
+            StatsColumn(title: "STATS_RESCUE_COUNT", value: stats.avg_rescue?.round)
+            StatsColumn(title: "STATS_HELP_COUNT", value: stats.avg_dead?.round)
         }
     }
     
     var BossDefeated: some View {
-        Section(header: Text("Boss defeated")
+        Section(header: Text("HEADER_BOSS_DEFEATED")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange))
         {
@@ -139,34 +139,28 @@ struct ShiftStatsView: View {
     }
     
     var GlobalRecords: some View {
-        Section(header: Text("Global Records")
+        Section(header: Text("HEADER_GLOBAL_RECORDS")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
-            Text("Power Eggs")
+            Text("STATS_IKURA")
                 .font(.custom("Splatfont2", size: 16))
             NavigationLink(destination: StatsChartView(stats.schedule!)) {
-                Text("Golden Eggs")
+                Text("STATS_GOLDEN_IKURA")
                     .font(.custom("Splatfont2", size: 16))
             }
         }
     }
     
     var Advanced: some View {
-        Section(header: Text("Advanced")
+        Section(header: Text("HEADER_ADVANCED")
                     .modifier(Splatfont2(size: 16))
                     .foregroundColor(.cOrange)) {
             NavigationLink(destination: WaveResultCollectionView(stats: stats)) {
-                Text("Wave Analysis")
+                Text("TITLE_WAVE_ANALYSIS")
                     .font(.custom("Splatfont2", size: 16))
             }
-//            .disabled(!user.isPurchase)
-            NavigationLink(destination: WaveResultCollectionView(stats: stats)) {
-                Text("Boss Salmonids Analysis")
-                    .font(.custom("Splatfont2", size: 16))
-            }
-//            .disabled(true)
             NavigationLink(destination: WeaponCollectionView(weapon_lists: stats.weapon_lists.chunked(by: 5))){
-                Text("Random Weapon Analysis")
+                Text("TITLE_WEAPON_ANALYSIS")
                     .font(.custom("Splatfont2", size: 16))
             }
         }
@@ -200,12 +194,12 @@ struct StatsChartView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Total")
+            Section(header: Text("HEADER_TOTAL_EGGS")
                         .modifier(Splatfont2(size: 16))
                         .foregroundColor(.yellow))
             {
                 HStack {
-                    Text("All")
+                    Text("RECORD_ALL_EVENTS")
                     Spacer()
                     HStack {
                         Text("\(record.total[1].value)").frame(width: 55)
@@ -213,7 +207,7 @@ struct StatsChartView: View {
                     }
                 }
                 HStack {
-                    Text("No Night Event")
+                    Text("RECORD_NO_NIGHT")
                     Spacer()
                     HStack {
                         Text("\(record.no_night_total[1].value)").frame(width: 55)
@@ -229,7 +223,6 @@ struct StatsChartView: View {
                 {
                     ForEach(Range(0 ... 6)) { event in
                         if record.global[tide][event] != nil {
-                            //                                NavigationLink(destination: ResultView().environmentObject(record.salmon_id[tide][event]!)) {
                             HStack {
                                 Text("\((EventType.init(event_id: event)?.event_name)!.localized)")
                                 Spacer()
@@ -240,13 +233,12 @@ struct StatsChartView: View {
                                 
                             }
                             .font(.custom("Splatfont2", size: 16))
-                            //                                }
                         }
                     }
                 }
             }
         }
-        .navigationBarTitle("Global Records")
+        .navigationTitle("TITLE_GLOBAL_RECORDS")
     }
     
     func getShiftRecords(start_time: Int) {
@@ -303,9 +295,3 @@ struct StatsChartView: View {
             }
     }
 }
-
-//struct ShiftStatsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ShiftStatsView()
-//    }
-//}

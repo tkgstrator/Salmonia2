@@ -71,7 +71,6 @@
 		10BB34C1252175170046CBCA /* ResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B7252175170046CBCA /* ResultCollectionView.swift */; };
 		10BB34C2252175170046CBCA /* LoggingThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B8252175170046CBCA /* LoggingThread.swift */; };
 		10BB34C3252175170046CBCA /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34B9252175170046CBCA /* ResultView.swift */; };
-		10BB34C4252175170046CBCA /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BA252175170046CBCA /* PlayerView.swift */; };
 		10BB34C5252175170046CBCA /* CoopShiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BB252175170046CBCA /* CoopShiftView.swift */; };
 		10BB34C6252175170046CBCA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB34BC252175170046CBCA /* LoadingView.swift */; };
 		10BB350125217EFF0046CBCA /* CoopShiftCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB350025217EFF0046CBCA /* CoopShiftCore.swift */; };
@@ -182,7 +181,6 @@
 		10BB34B7252175170046CBCA /* ResultCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultCollectionView.swift; sourceTree = "<group>"; };
 		10BB34B8252175170046CBCA /* LoggingThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingThread.swift; sourceTree = "<group>"; };
 		10BB34B9252175170046CBCA /* ResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
-		10BB34BA252175170046CBCA /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		10BB34BB252175170046CBCA /* CoopShiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoopShiftView.swift; sourceTree = "<group>"; };
 		10BB34BC252175170046CBCA /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		10BB350025217EFF0046CBCA /* CoopShiftCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoopShiftCore.swift; sourceTree = "<group>"; };
@@ -373,7 +371,6 @@
 				10BB34BB252175170046CBCA /* CoopShiftView.swift */,
 				10B9776725C44E4B005A0470 /* ShiftStatsView.swift */,
 				1053967C2524206200132668 /* StageRecordView.swift */,
-				10BB34BA252175170046CBCA /* PlayerView.swift */,
 				1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */,
 				10613B7B257F317F0000AE30 /* UISearchView.swift */,
 				107319FB2595E2940037F19B /* DisclosureIndicator.swift */,
@@ -822,7 +819,6 @@
 				10BB34BD252175170046CBCA /* UserListView.swift in Sources */,
 				10BB34C0252175170046CBCA /* SalmoniaView.swift in Sources */,
 				105396F425264C2000132668 /* WeaponType.swift in Sources */,
-				10BB34C4252175170046CBCA /* PlayerView.swift in Sources */,
 				1037E3A125209C7C001B41B0 /* AppDelegate.swift in Sources */,
 				10EFA3692521DE6E0027209D /* UserStatsCore.swift in Sources */,
 				10BB34C6252175170046CBCA /* LoadingView.swift in Sources */,

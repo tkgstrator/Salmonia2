@@ -87,6 +87,4 @@ extension UserDefaults {
     @objc dynamic var rareWeapon: Bool {
         return bool(forKey: "rareWeapon")
     }
-
-    
 }

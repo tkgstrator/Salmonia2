@@ -21,14 +21,15 @@ struct SalmonStatsMenu: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 BackGround
-                VStack(spacing: 5) {
+                VStack(spacing: 30) {
                     Text("TEXT_LOGIN_SALMON_STATS")
                         .font(.system(size: 24, weight: .bold, design: .monospaced))
                     Text("DESC_LOGIN_SALMON_STATS")
                         .font(.system(size: 16, weight: .thin, design: .monospaced))
-                        .foregroundColor(.gray)
+                        .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                        .lineLimit(2)
+                        .lineLimit(3)
+                        .padding(.horizontal, 10)
                 }
                 .offset(x: 0, y: -geometry.size.height * 0.7)
                 VStack(spacing: 40) {

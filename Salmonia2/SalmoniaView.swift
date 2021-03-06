@@ -21,6 +21,7 @@ struct SalmoniaView: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
+            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
             List  {
                 Section(header: Text("HEADER_OVERVIEW").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                     User
@@ -45,21 +46,20 @@ struct SalmoniaView: View {
             HStack {
                 URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(Circle()) }.frame(width: 70, height: 70)
                 Text(user.nickname)
-                    .modifier(Splatfont(size: 20))
+                    .modifier(Splatfont2(size: 18))
                     .frame(maxWidth: .infinity)
             }
         }
-        .buttonStyle(PlainButtonStyle())
     }
     
     private var Results: some View {
         Group {
             NavigationLink(destination: ResultCollectionView(core: UserResultCore())) {
-                Text("Job Results")
+                Text("TITLE_JOB_RESULTS")
                     .modifier(Splatfont2(size: 16))
             }
             NavigationLink(destination: WaveCollectionView()) {
-                Text("Wave Results")
+                Text("TITLE_WAVE_RESULTS")
                     .modifier(Splatfont2(size: 16))
             }
             BSalmonStatsView(isPresented: $isVisible)
@@ -71,12 +71,12 @@ struct SalmoniaView: View {
         HStack {
             Spacer()
             VStack(spacing: 0) {
-                Text("Jobs")
+                Text("OVERVIE_JOBS")
                 Text("\(user.job_num)")
             }
             Spacer()
             VStack(spacing: 0) {
-                Text("Eggs")
+                Text("OVERVIEW_EGGS")
                 HStack {
                     Text("\(user.golden_ikura_total)").foregroundColor(.yellow)
                     Text("/")

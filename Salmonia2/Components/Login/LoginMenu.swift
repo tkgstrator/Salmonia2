@@ -15,7 +15,7 @@ struct LoginMenu: View {
     @State var isActive: Bool = false
     @State var isAlert: Bool = false
     @State var isEnable: [Bool] = [false, false]
-    @State var error: APPError = .unknown
+    @State var error: APPError?
     
     // TODO: とりあえず今は定数を使っている
     private var version: String = "1.10.1"
@@ -26,9 +26,17 @@ struct LoginMenu: View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 BackGround
-                Text("TEXT_WELCOME")
-                    .font(.system(size: 24, weight: .bold, design: .monospaced))
-                    .offset(x: 0, y: -geometry.size.height * 0.7)
+                VStack(spacing: 30) {
+                    Text("TEXT_WELCOME")
+                        .font(.system(size: 24, weight: .bold, design: .monospaced))
+                    Text("DESC_LOGIN_SPLATNET2")
+                        .font(.system(size: 16, weight: .thin, design: .monospaced))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(3)
+                        .padding(.horizontal, 10)
+                }
+                .offset(x: 0, y: -geometry.size.height * 0.7)
                 VStack(spacing: 40) {
                     LoginButton
                     RegisterButton
@@ -39,6 +47,10 @@ struct LoginMenu: View {
         .buttonStyle(PlainButtonStyle())
         .navigationTitle("TITLE_WELCOME")
         .navigationBarBackButtonHidden(true)
+        .onDisappear() {
+            // TODO: 消滅時にアカウント情報をRealmに書き込む
+            // 削除したアカウントは消え、無効化したアカウントは下に移動する感じで
+        }
     }
     
     var LoginButton: some View {
@@ -51,7 +63,7 @@ struct LoginMenu: View {
                 .cornerRadius(10)
         }
         .webAuthenticationSession(isPresented: $isEnable[0]) {
-            WebAuthenticationSession(url: oauthURL, callbackURLScheme: "npf71b963c1b7b6d119") { callbackURL, error in
+            WebAuthenticationSession(url: oauthURL, callbackURLScheme: "npf71b963c1b7b6d119") { callbackURL, _ in
                 DispatchQueue(label: "Login").async {
                     do {
                         guard let session_token_code = callbackURL?.absoluteString.capture(pattern: "de=(.*)&", group: 1) else { throw APPError.value }
@@ -70,7 +82,7 @@ struct LoginMenu: View {
                             realm.create(UserInfoRealm.self, value: value, update: .all)
                         }
                         isActive.toggle()
-                    } catch {
+                    } catch (let error) {
                         // TODO: エラー発生時の処理を書く
                         self.error = error as! APPError
                         isAlert.toggle()
@@ -79,7 +91,7 @@ struct LoginMenu: View {
             }
         }
         .alert(isPresented: $isAlert) {
-            Alert(title: Text("Code: \(error.errorCode)"), message: Text("\(error.localizedDescription)"), dismissButton: .destructive(Text("BTN_ERROR_DISMISS")))
+            Alert(title: Text("Code: \(error!.errorCode)"), message: Text("\(error!.localizedDescription)"), dismissButton: .destructive(Text("BTN_ERROR_DISMISS")))
             
         }
     }
