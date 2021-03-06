@@ -71,7 +71,7 @@ struct SalmoniaView: View {
         HStack {
             Spacer()
             VStack(spacing: 0) {
-                Text("OVERVIE_JOBS")
+                Text("OVERVIEW_JOBS")
                 Text("\(user.job_num)")
             }
             Spacer()

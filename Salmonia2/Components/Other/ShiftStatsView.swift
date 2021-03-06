@@ -189,14 +189,14 @@ struct StatsChartView: View {
     @EnvironmentObject var record: UserStatsCore
     
     init(_ start_time: Int) {
+        // 読み込み時に新規レコードを保存する
+        print("GET SHIFT RECORDS")
         getShiftRecords(start_time: start_time)
     }
     
     var body: some View {
         List {
-            Section(header: Text("HEADER_TOTAL_EGGS")
-                        .modifier(Splatfont2(size: 16))
-                        .foregroundColor(.yellow))
+            Section(header: Text("HEADER_TOTAL_EGGS").modifier(Splatfont2(size: 16)).foregroundColor(.yellow))
             {
                 HStack {
                     Text("RECORD_ALL_EVENTS")
