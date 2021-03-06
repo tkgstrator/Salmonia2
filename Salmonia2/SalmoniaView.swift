@@ -37,7 +37,7 @@ struct SalmoniaView: View {
             }
             Update().padding(.trailing, 20).padding(.bottom, 60)
         }
-        .navigationBarTitle("TITLE_SALMONIA")
+        .navigationTitle("TITLE_SALMONIA")
         .navigationBarBackButtonHidden(true)
     }
     

@@ -25,7 +25,7 @@ struct UserListView: View {
     
     var body: some View {
         List {
-            Section(header: Text("HEADER_ENABLE")
+            Section(header: Text("HEADER_ACTIVE")
                         .modifier(Splatfont2(size: 16))
                         .foregroundColor(.cOrange))
             {
@@ -49,7 +49,7 @@ struct UserListView: View {
                 .onDelete(perform: onDelete)
             }
         }
-        .navigationBarTitle("Accounts")
+        .navigationTitle("HEADER_MY_ACCOUNTS")
         .modifier(Splatfont(size: 18))
         .navigationBarItems(trailing: Login)
         .environment(\.editMode, $editMode)
@@ -66,7 +66,7 @@ struct UserListView: View {
     
     var Login: some View {
         HStack {
-            Button(action: { isVisible = true }) { Text("Add") }
+            Button(action: { isVisible = true }) { Text("BTN_ADD") }
                 .webAuthenticationSession(isPresented: $isVisible) {
                     WebAuthenticationSession(
                         url: URL(string: oauthurl)!,

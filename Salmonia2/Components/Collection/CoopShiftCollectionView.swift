@@ -17,52 +17,21 @@ struct CoopShiftCollectionView: View {
     @State var isPlayed: Bool = false
     
     var body: some View {
-        if #available(iOS 14.0, *) {
-            ScrollViewReader { proxy in
-                List {
-                    VStack(spacing: 0) {
-                        URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/a185b309f5cdad94942849070de04ce2.png")!) { image in image.resizable().aspectRatio(contentMode: .fit).frame(width: 200) }
-                        ZStack {
-                            Image("CoopShedule").resizable().aspectRatio(contentMode: .fit).frame(height: 52)
-                            Text("Shift Schedule").modifier(Splatfont(size: 18)).foregroundColor(.cOrange).padding(.top, 7)
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                    ForEach(phase.all.indices, id:\.self) { idx in
-                        ZStack {
-                            NavigationLink(destination: ShiftStatsView()
-                                            .environmentObject(UserStatsCore(start_time: phase.all[idx].start_time))
-                            ) {
-                                EmptyView()
-                            }
-                            .opacity(0.0)
-                            .buttonStyle(PlainButtonStyle())
-                            CoopShiftStack(phase: phase.all[idx])
-                        }
-                    }
-                }
-                .onAppear() {
-                    proxy.scrollTo((phase.all.count - phase.now.count - 1), anchor: .center)
-                }
-            }
-            .navigationBarTitle("Coop Shift Rotation", displayMode: .large)
-            .navigationBarItems(trailing: FilterButton)
-        } else {
+        ScrollViewReader { proxy in
             List {
                 VStack(spacing: 0) {
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/a185b309f5cdad94942849070de04ce2.png")!) { image in image.resizable().aspectRatio(contentMode: .fit).frame(width: 200) }
                     ZStack {
                         Image("CoopShedule").resizable().aspectRatio(contentMode: .fit).frame(height: 52)
-                        Text("Shift Schedule").modifier(Splatfont(size: 18)).foregroundColor(.cOrange).padding(.top, 7)
+                        Text("TITLE_SHIFT_SCHEDULE").modifier(Splatfont(size: 18)).foregroundColor(.cOrange).padding(.top, 7)
                     }
                 }
                 .frame(maxWidth: .infinity)
-                //                .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
                 ForEach(phase.all.indices, id:\.self) { idx in
                     ZStack {
                         NavigationLink(destination: ShiftStatsView()
-                                        .environmentObject(UserStatsCore(start_time: phase.all[idx].start_time)
-                                        )) {
+                                        .environmentObject(UserStatsCore(start_time: phase.all[idx].start_time))
+                        ) {
                             EmptyView()
                         }
                         .opacity(0.0)
@@ -70,14 +39,16 @@ struct CoopShiftCollectionView: View {
                         CoopShiftStack(phase: phase.all[idx])
                     }
                 }
-                //                .listRowBackground(Color.cDarkRed.edgesIgnoringSafeArea(.all))
             }
-            .navigationBarTitle("Coop Shift Rotation")
-            .navigationBarItems(trailing: FilterButton)
+            .onAppear() {
+                proxy.scrollTo((phase.all.count - phase.now.count - 1), anchor: .center)
+            }
         }
+        .navigationTitle("TITLE_SHIFT_SCHEDULE")
+        .navigationBarItems(trailing: FilterButton)
     }
     
-    private var FilterButton: some View {
+    var FilterButton: some View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .Modifier()
@@ -88,36 +59,24 @@ struct CoopShiftCollectionView: View {
                 }
         }
     }
+}
+
+private struct CoopFilterView: View {
+    @ObservedObject var phase: CoopShiftCore
+    @Binding var isEnable: [Bool]
+    @Binding var isPlayed: Bool
+    @Binding var isTime: [Bool]
+    var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
     
-    private struct CoopFilterView: View {
-        @ObservedObject var phase: CoopShiftCore
-        @Binding var isEnable: [Bool]
-        @Binding var isPlayed: Bool
-        @Binding var isTime: [Bool]
-        var types: [String] = ["Grizzco Rotation", "All Random Rotation", "One Random Rotation", "Normal Rotation"]
-        
-        var body: some View {
-            List {
-                Section(header: HStack {
-                    Spacer()
-                    Text("Rotation")
-                        .modifier(Splatfont2(size: 18))
-                        .foregroundColor(.cOrange)
-                    Spacer()
-                }) {
-                    ForEach(Range(0...3)) { idx in
-                        Toggle(isOn: $isEnable[idx]) {
-                            Text((types[idx]).localized)
-                        }
+    var body: some View {
+        List {
+            Section(header: Text("HEADER_COOP_ROTAION").modifier(Splatfont2(size: 18)).foregroundColor(.cOrange)) {
+                ForEach(Range(0...3)) { idx in
+                    Toggle(isOn: $isEnable[idx]) {
+                        Text((types[idx]).localized)
                     }
                 }
-                Section(header: HStack {
-                    Spacer()
-                    Text("Options")
-                        .modifier(Splatfont2(size: 18))
-                        .foregroundColor(.cOrange)
-                    Spacer()
-                }) {
+                Section(header: Text("HEADER_OPTION").modifier(Splatfont2(size: 18)).foregroundColor(.cOrange)) {
                     Toggle(isOn: $isPlayed) {
                         Text("Only played")
                     }
@@ -171,7 +130,7 @@ struct CoopShiftStack: View {
                     .padding(.bottom, 8)
             }
             VStack(alignment: .leading, spacing: 5) {
-                Text("Supplied Weapons")
+                Text("SUPPLIED_WEAPONS")
                     .modifier(Splatfont2(size: 16))
                     .frame(height: 14)
                 HStack {

@@ -31,7 +31,7 @@ struct RainbowConfiguration: View {
             }
         }
         .font(.custom("Splatfont2", size: 16))
-        .navigationBarTitle("Gaming Configuration")
+        .navigationTitle("Gaming Configuration")
     }
 }
 

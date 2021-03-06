@@ -11,7 +11,7 @@
 "BTN_CANCEL" = "Cancel";
 "BTN_CONFIRM" = "Confirm";
 "BTN_ERROR_DISMISS" = "Dismiss";
-"BTN_" = "";
+"BTN_ADD" = "Add";
 "BTN_" = "";
 "BTN_" = "";
 "BTN_" = "";
@@ -43,9 +43,9 @@
 "TITLE_SHIFT_STATS" = "Shift Stats";
 "TITLE_WAVE_ANALYSIS" = "Wave Analysis";
 "TITLE_WEAPON_ANALYSIS" = "Weapon Analysis";
-"TITLE_" = "";
-"TITLE_" = "";
-"TITLE_" = "";
+"TITLE_GLOBAL_RECORDS" = "Global Records";
+"TITLE_SHIFT_SCHEDULE" = "Shift Schedule";
+"TITLE_LOGGING_THREAD" = "Loggin Thread";
 "TITLE_" = "";
 "TITLE_" = "";
 "TITLE_" = "";
@@ -68,9 +68,9 @@
 "HEADER_BOSS_DEFEATED" = "Boss Defeated";
 "HEADER_GLOBAL_RECORDS" = "Global Records";
 "HEADER_ADVANCED" = "Advanced";
-"HEADER_" = "";
-"HEADER_" = "";
-"HEADER_" = "";
+"HEADER_TOTAL_EGGS" = "Total Eggs";
+"HEADER_RECORDS" = "Records";
+"HEADER_MY_ACCOUNTS" = "My Accounts";
 "HEADER_" = "";
 "HEADER_" = "";
 "HEADER_" = "";
@@ -143,6 +143,10 @@
 "STATS_" = "";
 "STATS_" = "";
 
+// 記録の翻訳
+"RECORD_ALL_EVENT" = "All";
+"RECORD_NO_NIGHT" = "No Night Event";
+
 // 説明の翻訳
 "DESC_LOGIN_SALMON_STATS" = "Using Salmonia2, you need sign in Salmon Stats with twtter account.";
 "DESC_LOGIN_SPLATNET2" = "Using Salmonia2, you need sign in Nintendo Switch Online account.";
@@ -170,3 +174,26 @@
 "DESC_ACTIVE" = "";
 "DESC_TOKEN" = "";
 "DESC_UNAVAILABLE" = "";
+
+// イベントや潮位など（フォーマットを揃えるかは謎
+"-" = "No Event";
+"rush" = "Rush";
+"goldie-seeking" = "Goldie Seeking";
+"griller" = "Griller";
+"the-mothership" = "The Mothership";
+"fog" = "Fog";
+"cohock-charge" = "Cohock Charge";
+"low" = "Low tide";
+"normal" = "Normal";
+"high" = "High tide";
+
+"Spawning Grounds" = "Spawning Grounds";
+"Marooner's Bay" = "Marooner's Bay";
+"Lost Outpost" = "Lost Outpost";
+"Salmonid Smokeyard" = "Salmonid Smokeyard";
+"Ruins of Ark Polaris" = "Ruins of Ark Polaris";
+"" = "";
+"" = "";
+
+// その他の翻訳
+"SUPPLIED_WEAPONS" = "Supplied Weapons";

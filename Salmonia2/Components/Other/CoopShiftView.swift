@@ -20,7 +20,7 @@ struct CoopShiftView: View {
                 CoopShiftStack(phase: phase.data[idx])
             }
         }
-        NavigationLink(destination: CoopShiftCollectionView()) { Text("TITLE_SHIFT_ROTATION").modifier(Splatfont2(size: 16)) }
+        NavigationLink(destination: CoopShiftCollectionView()) { Text("TITLE_SHIFT_SCHEDULE").modifier(Splatfont2(size: 16)) }
         .buttonStyle(PlainButtonStyle())
     }
 }

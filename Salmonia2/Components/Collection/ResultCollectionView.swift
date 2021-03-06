@@ -54,7 +54,7 @@ struct ResultCollectionView: View {
         .alert(isPresented: $isDebugLog) {
             Alert(title: Text("DEF_ERROR_CODE".localized + String(debugCode)), message: Text(debugMessage.localized))
         }
-        .navigationBarTitle("Results")
+        .navigationTitle("Results")
         .navigationBarItems(trailing: AddButton)
     }
     

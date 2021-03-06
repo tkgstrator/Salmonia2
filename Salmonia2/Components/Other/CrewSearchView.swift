@@ -58,7 +58,7 @@ struct CrewSearchView: View {
                 .modifier(Splatfont(size: 18))
             }
         }
-        .navigationBarTitle("Crew Search", displayMode: .large)
+        .navigationTitle("TITLE_CREW_SEARCH")
     }
     
 //    private func searchPlayer(keyword: String) {

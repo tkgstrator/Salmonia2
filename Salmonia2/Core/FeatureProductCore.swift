@@ -19,9 +19,9 @@ class FeatureProductCore: ObservableObject {
     
     init() {
         // 変更があるたびに再読込するだけ
-        token = realm.objects(FeatureProductRealm.self).observe { [self] _ in
+        token = realm.objects(FeatureProductRealm.self).observe { [weak self] _ in
             let products = realm.objects(FeatureProductRealm.self)
-            features = products.map({Product($0)})
+            self!.features = products.map({Product($0)})
         }
     }
     

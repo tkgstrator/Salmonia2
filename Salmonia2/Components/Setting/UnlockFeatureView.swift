@@ -70,7 +70,7 @@ struct UnlockFeatureView: View {
             }
         }
         .modifier(Splatfont2(size: 16))
-        .navigationBarTitle("Feature")
+        .navigationTitle("Feature")
         .alert(isPresented: $isVisible) {
             Alert(title: Text(mTitle.localized), message: Text(mLog.localized))
         }

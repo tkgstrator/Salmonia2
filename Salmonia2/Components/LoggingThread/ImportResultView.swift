@@ -16,7 +16,7 @@ struct ImportResultView: View {
 
     var body: some View {
         LoggingThread(log: $mainLog)
-            .navigationBarTitle("Logging Thread", displayMode: .large)
+            .navigationTitle("TITLE_LOGGING_THREAD")
     }
     
 

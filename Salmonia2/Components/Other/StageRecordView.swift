@@ -84,7 +84,7 @@ private struct StageRecordsView: View {
                 .modifier(Splatfont2(size: 16))
             }
         }
-        .navigationBarTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!.localized)
+        .navigationTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!.localized)
     }
 }
 
