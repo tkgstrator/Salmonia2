@@ -10,15 +10,17 @@ import URLImage
 
 struct LoggingThread: View {
     @Binding var log: ProgressLog
-    
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    
+
     var body: some View {
-        Group {
-            Credit
-            Divider()
-            MBCircleProgressBar(log: $log, lineWidth: 5, color: Color.red, size: 250)
-            Spacer()
+        ZStack {
+//            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom)
+//                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Credit
+                Divider()
+                MBCircleProgressBar(log: $log, lineWidth: 5, color: Color.red, size: 250)
+                Spacer()
+            }
         }
         .navigationTitle("TITLE_LOGGING_THREAD")
         .navigationBarBackButtonHidden(true)
@@ -26,14 +28,13 @@ struct LoggingThread: View {
     
     var Credit: some View {
         VStack {
-            Text("Developed by @Herlingum")
-                .minimumScaleFactor(0.7)
-            Text("Thanks @Yukinkling, @barley_ural")
-                .minimumScaleFactor(0.7)
-            Text("API @frozenpandaman, @nexusmine")
-                .minimumScaleFactor(0.7)
+            Text(verbatim: "Developed by @Herlingum")
+            Text(verbatim: "Thanks @Yukinkling, @barley_ural")
+            Text(verbatim: "API @frozenpandaman, @nexusmine")
         }
+        .minimumScaleFactor(0.7)
         .font(.custom("Roboto Mono", size: 16))
+        .foregroundColor(.white)
     }
 }
 

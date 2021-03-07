@@ -12,49 +12,37 @@ import RealmSwift
 
 struct ResultCollectionView: View {
     @ObservedObject var core: UserResultCore
-
+    
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
     @State var isEnable: [Bool] = [true, true, true, true, true]
+    @State var isActive: Bool = false
     @State var isPersonal: Bool = false
     @State private var isShowing: Bool = false
     @State private var isDebugLog: Bool = false
     @State private var debugMessage: String = ""
     @State private var debugCode: Int = 9999
     @State private var debugDescription: String = ""
-        
-        var body: some View {
-        List {
-            ForEach(core.data.indices, id:\.self) { idx in
-                CoopShiftStack(phase: core.data[idx].phase)
-                ForEach(core.data[idx].results, id:\.self) { result in
-                    NavigationLink(destination: ResultView(result: result)) {
-                        ResultStack(result: result, isPersonal: $isPersonal)
+    
+    var body: some View {
+        ZStack {
+            List {
+                ForEach(core.data.indices, id:\.self) { idx in
+                    CoopShiftStack(phase: core.data[idx].phase)
+                    ForEach(core.data[idx].results, id:\.self) { result in
+                        NavigationLink(destination: ResultView(result: result)) {
+                            ResultStack(result: result, isPersonal: $isPersonal)
+                        }
                     }
                 }
             }
+            NavigationLink(destination: LoadingView(), isActive: $isActive) { EmptyView() }
         }
-        .pullToRefresh(isShowing: $isShowing) {
-            DispatchQueue(label: "Loading").async {
-                do {
-                    try Salmonia2.updateResults()
-                } catch {
-                    let error = error as! CustomNSError
-                    print(error.errorCode)
-                    debugCode = error.errorCode
-                    debugMessage = error.localizedDescription
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        isShowing = false
-                        isDebugLog = true
-                    }
-                }
-            }
-        }
-        .onChange(of: isShowing) { value in }
+        .pullToRefresh(isShowing: $isShowing) { isActive.toggle() }
         .alert(isPresented: $isDebugLog) {
             Alert(title: Text("DEF_ERROR_CODE".localized + String(debugCode)), message: Text(debugMessage.localized))
         }
-        .navigationTitle("Results")
+        .navigationTitle("TITLE_RESULT_DETAIL")
         .navigationBarItems(trailing: AddButton)
     }
     
@@ -256,13 +244,5 @@ struct ResultCollectionView: View {
                 core.update(Int(sliderValue), list)
             }
         }
-    }
-}
-
-
-struct ResultCollectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        ResultCollectionView(core: UserResultCore())
-        //        ResultCollectionView()
     }
 }

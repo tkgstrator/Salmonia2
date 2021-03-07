@@ -17,17 +17,15 @@ struct UnlockFeatureView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Free")
+            Section(header: Text("HEADER_FREE_PRODUCT")
                         .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange)) {
-                Toggle("Future Rotation", isOn: $unlock.futureRotation)
-                Toggle("Grizzco Weapons", isOn: $unlock.rareWeapon)
-                Toggle("Force Update", isOn: $unlock.forceReload)
-                Toggle("Hide My Nickname", isOn: $unlock.displayName)
+                Toggle("FEATURE_ROTATION", isOn: $unlock.futureRotation)
+                Toggle("FEATURE_WEAPON", isOn: $unlock.rareWeapon)
+                Toggle("FEATURE_UPDATE", isOn: $unlock.forceReload)
+                Toggle("FEATURE_NICKNAME", isOn: $unlock.displayName)
             }
-            Section(header: Text("Paid")
-                        .font(.custom("Splatfont2", size: 16))
-                        .foregroundColor(.cOrange)) {
+            Section(header: Text("HEADER_PAID_PRODUCT").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
                 ForEach(Array(paid.features.reversed()), id:\.self) { feature in
                     HStack {
                         VStack(alignment: .leading) {
@@ -43,22 +41,22 @@ struct UnlockFeatureView: View {
                         PayButton(isValid: feature.isValid, isSubscribed: false, product: feature.productIdentifier)
                     }.frame(height: 60)
                 }
-                Toggle("Disable Ads", isOn: $unlock.disableAds)
+                Toggle("FEATURE_DISABLE_ADS", isOn: $unlock.disableAds)
 //                    .disabled(!user.isPurchase)
-                Toggle("Legacy Style", isOn: $unlock.legacyStyle)
+                Toggle("FEATURE_LEGACY_STYLE", isOn: $unlock.legacyStyle)
 //                    .disabled(!user.isPurchase)
                 NavigationLink(destination: RainbowConfiguration()) {
-                    Text("Gaming Style")
+                    Text("FEATURE_GAMING_STYLE")
                 }
 //                .disabled(!user.isPurchase)
             }
-            Section(header: Text("Option")
+            Section(header: Text("HEADER_OPTION")
                         .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange)) {
                 HStack {
                     VStack(alignment: .leading) {
                         HStack {
-                            Text("Restore")
+                            Text("FEATURE_RESTORE")
                                 .modifier(Splatfont2(size: 16))
                         }
                         Text("Restore purchased product")
@@ -70,7 +68,7 @@ struct UnlockFeatureView: View {
             }
         }
         .modifier(Splatfont2(size: 16))
-        .navigationTitle("Feature")
+        .navigationTitle("TITLE_FEATURE")
         .alert(isPresented: $isVisible) {
             Alert(title: Text(mTitle.localized), message: Text(mLog.localized))
         }
@@ -118,7 +116,6 @@ struct UnlockFeatureView: View {
         Button("Restore") {
             restoreStoreKit()
         }
-        .buttonStyle(PlainButtonStyle())
         .padding(.horizontal, 10)
         .padding(.vertical, 3)
         .overlay(
@@ -133,10 +130,9 @@ struct UnlockFeatureView: View {
         var product: String
         
         var body: some View {
-            Button(!isSubscribed ? isValid ? "Purchased" : "Purchase" : isValid ? "Subscribed" : "Subscribe") {
+            Button(!isSubscribed ? isValid ? "BTN_PURCHASED" : "BTN_PURCHASE" : isValid ? "BTN_SUBSCRIBED" : "BTN_SUBSCRIBE") {
                 callStoreKit(product)
             }
-            .buttonStyle(PlainButtonStyle())
             .padding(.horizontal, 10)
             .padding(.vertical, 3)
             .overlay(

@@ -28,7 +28,8 @@ struct LoginMenu: View {
                 BackGround
                 VStack(spacing: 30) {
                     Text("TEXT_WELCOME")
-                        .font(.system(size: 24, weight: .bold, design: .monospaced))
+                        .font(.system(size: 30, weight: .bold, design: .monospaced))
+                        .foregroundColor(.white)
                     Text("DESC_LOGIN_SPLATNET2")
                         .font(.system(size: 16, weight: .thin, design: .monospaced))
                         .foregroundColor(.white)
@@ -41,15 +42,11 @@ struct LoginMenu: View {
                     LoginButton
                     RegisterButton
                 }
-                .offset(x: 0, y: -80)
+                .offset(x: 0, y: -60)
             }
-        }
-        .buttonStyle(PlainButtonStyle())
-        .navigationTitle("TITLE_WELCOME")
-        .navigationBarBackButtonHidden(true)
-        .onDisappear() {
-            // TODO: 消滅時にアカウント情報をRealmに書き込む
-            // 削除したアカウントは消え、無効化したアカウントは下に移動する感じで
+            .navigationTitle("TITLE_WELCOME")
+            .navigationBarBackButtonHidden(true)
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
     
@@ -77,10 +74,23 @@ struct LoginMenu: View {
                         guard let iksm_session = response["iksm_session"].string else { throw APPError.iksm }
                         guard let nsaid = response["nsaid"].string else { throw APPError.iksm }
                         guard let realm = try? Realm() else { throw APPError.realm }
-                        try realm.write {
-                            let value: [String: Any?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token, "isActive": true]
+                        
+                        let value: [String: Any?] = ["nsaid": nsaid, "name": nickname, "image": thumbnail_url, "iksm_session": iksm_session, "session_token": session_token, "isActive": true]
+
+                        // MainRealmの情報を更新する
+                        realm.beginWrite()
+                        switch realm.objects(UserInfoRealm.self).filter("nsaid=%@", nsaid).isEmpty {
+                        case true:
+                            let user: UserInfoRealm = UserInfoRealm(value: value)
+                            let uuid: String = UIDevice.current.identifierForVendor!.uuidString
+                            guard let main: MainRealm = realm.objects(MainRealm.self).first else { return }
+                            main.active.append(user)
+                        case false:
                             realm.create(UserInfoRealm.self, value: value, update: .all)
                         }
+                        try? realm.commitWrite()
+                    
+                        // 終わったのでフラグを反転させる
                         isActive.toggle()
                     } catch (let error) {
                         // TODO: エラー発生時の処理を書く

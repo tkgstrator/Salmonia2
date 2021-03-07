@@ -62,7 +62,7 @@ struct WaveResultCollectionView: View {
                 .modifier(Splatfont2(size: 14))
             }
         }
-        .navigationTitle("Wave Analysis")
+        .navigationTitle("TITLE_WAVE_RESULTS")
     }
 }
 

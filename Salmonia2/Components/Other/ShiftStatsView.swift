@@ -31,7 +31,6 @@ struct ShiftStatsView: View {
             URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable() }
                 .frame(width: 30, height: 30)
         }
-        .buttonStyle(PlainButtonStyle())
     }
     
     var Overview: some View {

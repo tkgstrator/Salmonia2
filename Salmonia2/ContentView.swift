@@ -12,11 +12,25 @@ struct ContentView: View {
     @EnvironmentObject var main: MainCore
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                BackGround
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            NavigationView {
                 TopMenu
             }
+        case .pad:
+            NavigationView {
+                TopMenu
+            }
+        case .unspecified:
+            EmptyView()
+        case .tv:
+            EmptyView()
+        case .carPlay:
+            EmptyView()
+        case .mac:
+            EmptyView()
+        @unknown default:
+            EmptyView()
         }
     }
     

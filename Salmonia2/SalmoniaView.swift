@@ -12,17 +12,20 @@ import BetterSafariView
 import SafariServices
 import AuthenticationServices
 import Alamofire
+import SwiftUIRefresh
 
 struct SalmoniaView: View {
     
     @EnvironmentObject var user: UserInfoCore
+
     @State var isVisible: Bool = false
-    @State var isSafari: Bool = false
+    @State var isActive: Bool = false
+    @State var isShowing: Bool = false
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
-            List  {
+        ZStack {
+            NavigationLink(destination: LoadingView(), isActive: $isActive) { EmptyView() }
+            List {
                 Section(header: Text("HEADER_OVERVIEW").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
                     User
                     Status
@@ -35,7 +38,10 @@ struct SalmoniaView: View {
                     StageRecordView()
                 }
             }
-            Update().padding(.trailing, 20).padding(.bottom, 60)
+        }
+        .pullToRefresh(isShowing: $isShowing) {
+            isActive.toggle()
+            isShowing.toggle()
         }
         .navigationTitle("TITLE_SALMONIA")
         .navigationBarBackButtonHidden(true)
@@ -64,7 +70,6 @@ struct SalmoniaView: View {
             }
             BSalmonStatsView(isPresented: $isVisible)
         }
-        .buttonStyle(PlainButtonStyle())
     }
     
     private var Status: some View {
@@ -86,20 +91,6 @@ struct SalmoniaView: View {
             Spacer()
         }
         .modifier(Splatfont2(size: 16))
-    }
-    
-    struct Update: View {
-        @State var isComplete = false
-
-        var body: some View {
-            NavigationLink(destination: LoadingView()){
-                ZStack {
-                    Circle().frame(width: 60, height: 60).foregroundColor(.cBlue)
-                    URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/50732dded088309dfb8f436f3885e782.png")!) { image in image.renderingMode(.original).resizable() }
-                        .frame(width: 30, height: 30)
-                }
-            }
-        }
     }
 }
 

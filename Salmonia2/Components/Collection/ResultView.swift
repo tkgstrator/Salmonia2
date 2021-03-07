@@ -26,7 +26,7 @@ struct ResultView: View {
             ResultPlayerView
         }
         .navigationBarItems(trailing: UIButton)
-        .navigationTitle(Text("Result Detail"))
+        .navigationTitle("TITLE_JOB_RESULT")
     }
 
     var UIButton: some View {

@@ -76,7 +76,17 @@ struct SettingView: View {
                         title: Text("ALERT_TITLE_DELETE"),
                         message: Text("ALERT_TEXT_DELETE"),
                         primaryButton: .default(Text("BTN_CANCEL")),
-                        secondaryButton: .destructive(Text("BTN_CONFIRM"), action: { UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!) }
+                        secondaryButton: .destructive(Text("BTN_CONFIRM"), action: {
+                            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+                            autoreleasepool {
+                                realm.beginWrite()
+                                realm.delete(realm.objects(MainRealm.self))
+                                realm.delete(realm.objects(UserInfoRealm.self))
+                                realm.delete(realm.objects(CoopResultsRealm.self))
+                                realm.delete(realm.objects(WaveDetailRealm.self))
+                                try? realm.commitWrite()
+                            }
+                        }
                         )
                     )
                 }

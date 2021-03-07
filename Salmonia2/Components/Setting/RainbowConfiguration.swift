@@ -13,25 +13,25 @@ struct RainbowConfiguration: View {
 
     var body: some View {
         List{
-            Section(header: Text("System").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
-                Toggle("Navigation Title", isOn: $rainbow.title)
+            Section(header: Text("HEADER_SYSTEM").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
+                Toggle("GAMING_NAVIGATION_LINK", isOn: $rainbow.title)
             }
-            Section(header: Text("Results").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
-                Toggle("Player Grade", isOn: $rainbow.result)
+            Section(header: Text("HEADER_RESULTS").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
+                Toggle("GAMING_PLAYER_GRADE", isOn: $rainbow.result)
             }
-            Section(header: Text("Result Detail").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
-                Toggle("Overview", isOn: $rainbow.resultOverview)
-                Toggle("Player Name", isOn: $rainbow.resultName)
-                Toggle("Wave Quota", isOn: $rainbow.resultQuota)
-                Toggle("Details", isOn: $rainbow.resultPlayer)
+            Section(header: Text("HEADER_RESULT_DETAIL").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
+                Toggle("GAMING_OVERVIEW", isOn: $rainbow.resultOverview)
+                Toggle("GAMING_PLAYER_NAME", isOn: $rainbow.resultName)
+                Toggle("GAMING_WAVE_QUOTA", isOn: $rainbow.resultQuota)
+                Toggle("GAMING_DETAILS", isOn: $rainbow.resultPlayer)
             }
-            Section(header: Text("Shift Stats").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
-                Toggle("Parameter", isOn: $rainbow.shiftParam)
-                Toggle("Value", isOn: $rainbow.shiftValue)
+            Section(header: Text("HEADER_SHIFT_STATS").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
+                Toggle("GAMING_PARAMETER", isOn: $rainbow.shiftParam)
+                Toggle("GAMING_VALUE", isOn: $rainbow.shiftValue)
             }
         }
         .font(.custom("Splatfont2", size: 16))
-        .navigationTitle("Gaming Configuration")
+        .navigationTitle("TITLE_GAMING_CONFIG")
     }
 }
 

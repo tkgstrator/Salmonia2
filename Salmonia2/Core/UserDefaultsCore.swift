@@ -7,21 +7,7 @@
 
 import Foundation
 
-@propertyWrapper
-struct UserDefault<T> {
-    let forKey: String
-    let defaultValue: T
-
-    var wrappedValue: T {
-        get {
-            return UserDefaults.standard.object(forKey: forKey) as? T ?? defaultValue
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: forKey)
-        }
-    }
-}
-
+// 設定が有効化されているかどうか
 class UnlockCore: ObservableObject {
     @UserDefault(forKey: "futureRotation", defaultValue: false)
     var futureRotation: Bool
@@ -38,6 +24,7 @@ class UnlockCore: ObservableObject {
     
 }
 
+// レインボーカラーの設定
 class RainbowCore: ObservableObject {
     @UserDefault(forKey: "title", defaultValue: false)
     var title: Bool
@@ -64,9 +51,6 @@ class MainCore: ObservableObject {
     // Salmon StatsのAPI-TOKENを保存している
     @UserDefault(forKey: "apiToken", defaultValue: nil)
     var apiToken: String?
-    // 先頭ユーザのiksm_session
-    @UserDefault(forKey: "iksmSession", defaultValue: nil)
-    var iksmSession: String?
     // 課金したかどうかの情報
     @UserDefault(forKey: "userType", defaultValue: false)
     var userType: Bool

@@ -21,7 +21,6 @@ struct CoopShiftView: View {
             }
         }
         NavigationLink(destination: CoopShiftCollectionView()) { Text("TITLE_SHIFT_SCHEDULE").modifier(Splatfont2(size: 16)) }
-        .buttonStyle(PlainButtonStyle())
     }
 }
 

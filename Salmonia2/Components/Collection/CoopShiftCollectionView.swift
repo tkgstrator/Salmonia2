@@ -35,7 +35,6 @@ struct CoopShiftCollectionView: View {
                             EmptyView()
                         }
                         .opacity(0.0)
-                        .buttonStyle(PlainButtonStyle())
                         CoopShiftStack(phase: phase.all[idx])
                     }
                 }

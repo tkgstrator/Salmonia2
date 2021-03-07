@@ -39,7 +39,6 @@ struct BSafariView: View {
                 barCollapsingEnabled: true
             ))
         }
-        .buttonStyle(PlainButtonStyle())
     }
 }
 
@@ -60,7 +59,6 @@ struct BSalmonStatsView: View {
             }
             .background(Color.white.opacity(0.0001))
         }
-        .buttonStyle(PlainButtonStyle())
         .safariView(isPresented: $isPresented) {
             SafariView(url: URL(string: "https://salmon-stats-api.yuki.games/auth/twitter")!)
         }
@@ -84,7 +82,6 @@ struct BSalmonStatsLoginView: View {
             }
             .background(Color.white.opacity(0.0001))
         }
-        .buttonStyle(PlainButtonStyle())
         .sheet(isPresented: $isPresented) {
             WebBrowser(address: "https://salmon-stats-api.yuki.games/auth/twitter")
         }

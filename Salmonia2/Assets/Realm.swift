@@ -27,6 +27,25 @@ class UserInfoRealm: Object {
     }
 }
 
+
+// 有効化されているアカウントとそうでないアカウントをつくるためだけのよくわからんやつ
+class MainRealm: Object {
+    
+    // 保存したいユーザの情報を保存しておく
+    @objc dynamic var uuid: String = ""
+    @objc dynamic var api_token: String = ""
+    @objc dynamic var version: String = "1.10.1"
+    @objc dynamic var nsaid: String = ""
+    @objc dynamic var session_token: String = ""
+    @objc dynamic var iksm_session: String = ""
+    dynamic var active = List<UserInfoRealm>()
+    dynamic var inactive = List<UserInfoRealm>()
+    
+    override static func primaryKey() -> String? {
+        return "uuid"
+    }
+}
+
 class CrewInfoRealm: Object {
     
     @objc dynamic var name: String? // username from SplatNet2

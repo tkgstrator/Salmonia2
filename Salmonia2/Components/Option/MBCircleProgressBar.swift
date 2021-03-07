@@ -24,34 +24,12 @@ struct MBCircleProgressBar: View {
                     .rotationEffect(.degrees(-90))
                     .opacity(0.8)
                     .overlay(Text(String(log.progress.round) + "%"))
-                    .font(.custom("Roboto Mono", size: 16))
+                    .font(.custom("Roboto Mono", size: 20))
+                    .foregroundColor(.white)
                     .animation(.easeOut(duration: 0.2))
             }
             .padding(.all, 20)
             .frame(height: size)
-            // ログ表示
-            if log.errorCode != nil {
-                Group {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("Error Code:")
-                            Spacer()
-                            Text("\(log.errorCode.value)")
-                        }
-                        HStack {
-                            Text("Error Description:")
-                            Spacer()
-                            Text("\(log.errorDescription.value)")
-                        }
-                        HStack {
-                            Text("\(log.localizedDescription.value)")
-                                .lineLimit(2)
-                        }
-                    }
-                }
-                .padding(.horizontal, 10)
-                .font(.custom("Roboto Mono", size: 16))
-            }
         }
     }
 }

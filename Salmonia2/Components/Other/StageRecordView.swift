@@ -27,7 +27,6 @@ struct StageRecordView: View {
                 }
             }
         }
-        .buttonStyle(PlainButtonStyle())
     }
 }
 

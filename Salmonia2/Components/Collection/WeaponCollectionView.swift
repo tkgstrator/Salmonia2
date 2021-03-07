@@ -40,7 +40,7 @@ struct WeaponCollectionView: View {
                 }
             }
         }
-        .navigationTitle("Random Weapon")
+        .navigationTitle("TITLE_RANDOM_WEAPON")
     }
 }
 

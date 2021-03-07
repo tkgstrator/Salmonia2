@@ -37,7 +37,7 @@ struct SalmonStatsMenu: View {
                     LegacyLoginButton
                     RegisterButton
                 }
-                .offset(x: 0, y: -80)
+                .offset(x: 0, y: -60)
             }
         }
         .navigationTitle("TITLE_WELCOME")

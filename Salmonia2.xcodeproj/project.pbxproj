@@ -45,6 +45,7 @@
 		10A8043A25AFB24200654DAC /* BSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8043925AFB24200654DAC /* BSafariView.swift */; };
 		10AC289E25F24AF500189E46 /* LoginMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC289D25F24AF500189E46 /* LoginMenu.swift */; };
 		10AC28A325F24B0B00189E46 /* SalmonStatsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */; };
+		10AC28EB25F4C59500189E46 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC28EA25F4C59400189E46 /* UserDefaults.swift */; };
 		10B10C4A2528EC480025057F /* BossType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C492528EC480025057F /* BossType.swift */; };
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
 		10B87FAC25D3AA240018596A /* WeaponCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */; };
@@ -154,6 +155,7 @@
 		10A8043925AFB24200654DAC /* BSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSafariView.swift; sourceTree = "<group>"; };
 		10AC289D25F24AF500189E46 /* LoginMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenu.swift; sourceTree = "<group>"; };
 		10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsMenu.swift; sourceTree = "<group>"; };
+		10AC28EA25F4C59400189E46 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
 		10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCollectionView.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			children = (
 				105F690E252F33F2003306C8 /* Salmonia2.entitlements */,
 				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
+				10AC28E925F4C57D00189E46 /* Extension */,
 				10BB348B252174F60046CBCA /* Core */,
 				10BB34B6252175170046CBCA /* Components */,
 				10BB3489252174F60046CBCA /* Assets */,
@@ -386,6 +389,14 @@
 				10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		10AC28E925F4C57D00189E46 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				10AC28EA25F4C59400189E46 /* UserDefaults.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		10BB00632530C4350081C6EB /* Languages */ = {
@@ -848,6 +859,7 @@
 				1053969325242F5000132668 /* PlayerInfo.swift in Sources */,
 				10B10C4F252913220025057F /* RankType.swift in Sources */,
 				10BB349C252174F60046CBCA /* JSONFormat.swift in Sources */,
+				10AC28EB25F4C59500189E46 /* UserDefaults.swift in Sources */,
 				10BB34C1252175170046CBCA /* ResultCollectionView.swift in Sources */,
 				10613BD225818F310000AE30 /* AdBannerView.swift in Sources */,
 				10BB349B252174F60046CBCA /* UnixTime.swift in Sources */,

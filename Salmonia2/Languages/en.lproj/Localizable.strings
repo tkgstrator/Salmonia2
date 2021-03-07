@@ -1,5 +1,5 @@
 // テキストの翻訳
-"TEXT_WELCOME" = "Welcome to Salmonia2";
+"TEXT_WELCOME" = "Salmonia2";
 "TEXT_LOGIN_SALMON_STATS" = "Sign in Salmon Stats";
 
 // ボタンの翻訳
@@ -45,7 +45,17 @@
 "TITLE_WEAPON_ANALYSIS" = "Weapon Analysis";
 "TITLE_GLOBAL_RECORDS" = "Global Records";
 "TITLE_SHIFT_SCHEDULE" = "Shift Schedule";
-"TITLE_LOGGING_THREAD" = "Loggin Thread";
+"TITLE_LOGGING_THREAD" = "Logginig Thread";
+"TITLE_JOB_RESULTS" = "Job Results";
+"TITLE_WAVE_RESULTS" = "Wave Results";
+"TITLE_RESULT_DETAIL" = "Detail";
+"TITLE_FEATURE" = "Feature";
+"TITLE_GAMING_CONFIG" = "Gaming Style";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
 "TITLE_" = "";
 "TITLE_" = "";
 "TITLE_" = "";
@@ -71,14 +81,13 @@
 "HEADER_TOTAL_EGGS" = "Total Eggs";
 "HEADER_RECORDS" = "Records";
 "HEADER_MY_ACCOUNTS" = "My Accounts";
-"HEADER_" = "";
-"HEADER_" = "";
-"HEADER_" = "";
-"HEADER_" = "";
-"HEADER_" = "";
-"HEADER_" = "";
-"HEADER_" = "";
-"HEADER_" = "";
+"HEADER_SHIFT_STATS" = "Shift Stats";
+"HEADER_RESULT_DETAIL" = "Result Detail";
+"HEADER_JOB_RESULTS" = "Results";
+"HEADER_SYSTEM" = "System";
+"HEADER_RESULTS" = "Results";
+"HEADER_SHIFT_STATS" = "Shift Stats";
+"HEADER_RESULT_DETAIL" = "Result Detail";
 "HEADER_" = "";
 "HEADER_" = "";
 "HEADER_" = "";
@@ -108,6 +117,9 @@
 "SETTING_UNREGISTERED" = "Unregistered";
 "SETTING_LIMITED" = "Limited";
 "SETTING_UNLIMITED" = "Unlimited";
+"SETTING_UPDATE" = "Update";
+"SETTING_ENABLE" = "Enable";
+"SETTING_DISABLE" = "Disable";
 "SETTING_" = "";
 "SETTING_" = "";
 "SETTING_" = "";
@@ -115,9 +127,32 @@
 "SETTING_" = "";
 "SETTING_" = "";
 "SETTING_" = "";
-"SETTING_" = "";
-"SETTING_" = "";
-"SETTING_" = "";
+
+// 機能の翻訳
+"FEATURE_ROTATION" = "Future Rotations";
+"FEATURE_WEAPON" = "Grizzco Weapons";
+"FEATURE_UPDATE" = "Force Update";
+"FEATURE_NICKNAME" = "Hide My Nickname";
+"FEATURE_DISABLE_ADS" = "Disable Ads";
+"FEATURE_LEGACY_STYLE" = "Use Legacy Style";
+"FEATURE_GAMING_STYLE" = "Gaming Style";
+"FEATURE_" = "";
+"FEATURE_" = "";
+"FEATURE_" = "";
+"FEATURE_" = "";
+
+// ゲーミングスタイルの翻訳
+"GAMING_PLAYER_GRADE" = "Player Grade";
+"GAMING_OVERVIEW" = "Overview";
+"GAMING_PLAYER_NAME" = "Player Name";
+"GAMING_WAVE_QUOTA" = "Wave Quota";
+"GAMING_DETAILS" = "Details";
+"GAMING_PARAMETER" = "Parameter";
+"GAMING_VALUE" = "Value";
+"GAMING_" = "";
+"GAMING_" = "";
+"GAMING_" = "";
+"GAMING_" = "";
 
 // 統計表示の翻訳
 "STATS_SRPOWER" = "SR Power";

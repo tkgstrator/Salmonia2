@@ -19,6 +19,7 @@ class CoopShiftCore: ObservableObject {
     
     @ObservedObject var unlock = UnlockCore()
 
+    // TODO: 残削除したときにここのデータがよろしくない可能性が高い
     @Published var isUnlockWeapon: Bool = false
     @Published var isUnlockRotation: Bool = false
     @Published var data: [CoopShiftRealm] = []
@@ -26,23 +27,24 @@ class CoopShiftCore: ObservableObject {
     @Published var all: Results<CoopShiftRealm>  = realm.objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time", ascending: false)
 
     init() {
-        // これは固定なので毎回呼ばなくても大丈夫
-        data = Array(realm.objects(CoopShiftRealm.self).filter("end_time>=%@", current_time).sorted(byKeyPath: "start_time", ascending: true).prefix(2))
+        token = realm.objects(CoopShiftRealm.self).observe { [self] _ in
+            // これは固定なので毎回呼ばなくても大丈夫
+            data = Array(realm.objects(CoopShiftRealm.self).filter("end_time>=%@", current_time).sorted(byKeyPath: "start_time", ascending: true).prefix(2))
 
-        // シフトをどこまで表示するかどうか
-        futureRotation = UserDefaults.standard.observe(\.futureRotation, options: [.initial, .new], changeHandler: { [weak self] (defaults, change) in
-            if self!.unlock.futureRotation {
-                self!.all = realm.objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time", ascending: false)
-            } else {
-                self!.all = realm.objects(CoopShiftRealm.self).filter("start_time <=%@", self!.current_time).sorted(byKeyPath: "start_time", ascending: false)
-            }
-        })
+            // シフトをどこまで表示するかどうか
+            futureRotation = UserDefaults.standard.observe(\.futureRotation, options: [.initial, .new], changeHandler: { [weak self] (defaults, change) in
+                if self!.unlock.futureRotation {
+                    self!.all = realm.objects(CoopShiftRealm.self).sorted(byKeyPath: "start_time", ascending: false)
+                } else {
+                    self!.all = realm.objects(CoopShiftRealm.self).filter("start_time <=%@", self!.current_time).sorted(byKeyPath: "start_time", ascending: false)
+                }
+            })
 
-        // TOPページのレアブキ更新用
-        rareWeapon = UserDefaults.standard.observe(\.rareWeapon, options: [.initial, .new], changeHandler: { [weak self] (defaults, change) in
-            self!.data = Array(realm.objects(CoopShiftRealm.self).filter("end_time>=%@", self!.current_time).sorted(byKeyPath: "start_time", ascending: true).prefix(2))
-        })
-
+            // TOPページのレアブキ更新用
+            rareWeapon = UserDefaults.standard.observe(\.rareWeapon, options: [.initial, .new], changeHandler: { [weak self] (defaults, change) in
+                self!.data = Array(realm.objects(CoopShiftRealm.self).filter("end_time>=%@", self!.current_time).sorted(byKeyPath: "start_time", ascending: true).prefix(2))
+            })
+        }
     }
     
     func update(isEnable: [Bool], isPlayed: Bool, isTime: [Bool]) {
@@ -76,15 +78,5 @@ class CoopShiftCore: ObservableObject {
     deinit {
         token?.invalidate()
         futureRotation?.invalidate()
-    }
-}
-
-extension UserDefaults {
-    @objc dynamic var futureRotation: Bool {
-        return bool(forKey: "futureRotation")
-    }
-
-    @objc dynamic var rareWeapon: Bool {
-        return bool(forKey: "rareWeapon")
     }
 }

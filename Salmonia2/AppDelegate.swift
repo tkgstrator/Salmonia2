@@ -71,7 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         try? getFutureRotation() // 将来のシフトを取得
         FirebaseApp.configure() // Firebaseの設定
         registerForPushNotifications() // Push通知
-        retrieveProduct()
+        retrieveProduct() // 課金情報の取得
+        setMainConfiguration() // MainRealmの設定
         return true
     }
     
@@ -102,8 +103,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // データベースのマイグレーション
     func realmMigration() {
         let config = Realm.Configuration(
-            schemaVersion: 29,
+            schemaVersion: 0,
             migrationBlock: { [self] migration, oldSchemaVersion in
+                if oldSchemaVersion < 1 {
+                }
             })
         Realm.Configuration.defaultConfiguration = config
     }
@@ -158,6 +161,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         }
+    }
+    
+    func setMainConfiguration() {
+        let uuid: String = UIDevice.current.identifierForVendor!.uuidString
+        realm.beginWrite()
+        realm.create(MainRealm.self, value: ["uuid": uuid], update: .all)
+        try? realm.commitWrite()
+
     }
     
     func getXProductVersion() throws -> () {
