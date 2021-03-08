@@ -29,7 +29,6 @@
 		1056CF402533E9430078E3B4 /* CrewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1056CF3F2533E9430078E3B4 /* CrewSearchView.swift */; };
 		1057D6E225B7E56B00666242 /* SpecialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1057D6E125B7E56B00666242 /* SpecialType.swift */; };
 		1058AC9C256DF764008A34F7 /* fangzheng.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */; };
-		1058ACAC256DFAAC008A34F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1058ACAE256DFAAC008A34F7 /* Localizable.strings */; };
 		105C317B25E5195A00BAFE10 /* MBCircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C317A25E5195A00BAFE10 /* MBCircleProgressBar.swift */; };
 		105C318025E531F800BAFE10 /* LoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105C317F25E531F800BAFE10 /* LoggingView.swift */; };
 		10613B7C257F317F0000AE30 /* UISearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10613B7B257F317F0000AE30 /* UISearchView.swift */; };
@@ -50,7 +49,6 @@
 		10B10C4F252913220025057F /* RankType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B10C4E252913220025057F /* RankType.swift */; };
 		10B87FAC25D3AA240018596A /* WeaponCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */; };
 		10B9776825C44E4B005A0470 /* ShiftStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B9776725C44E4B005A0470 /* ShiftStatsView.swift */; };
-		10BB00822530F63D0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00842530F63D0081C6EB /* Localizable.strings */; };
 		10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 10BB00902530F66A0081C6EB /* Localizable.strings */; };
 		10BB00A125310C1C0081C6EB /* WaveCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */; };
 		10BB349A252174F60046CBCA /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BB348A252174F60046CBCA /* Realm.swift */; };
@@ -141,7 +139,6 @@
 		1057D6E125B7E56B00666242 /* SpecialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialType.swift; sourceTree = "<group>"; };
 		1058AC9B256DF6BF008A34F7 /* fangzheng.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fangzheng.ttf; sourceTree = "<group>"; };
 		1058ACA3256DFA60008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		1058ACAD256DFAAC008A34F7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		105C317A25E5195A00BAFE10 /* MBCircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBCircleProgressBar.swift; sourceTree = "<group>"; };
 		105C317F25E531F800BAFE10 /* LoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingView.swift; sourceTree = "<group>"; };
 		105F690E252F33F2003306C8 /* Salmonia2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Salmonia2.entitlements; sourceTree = "<group>"; };
@@ -156,12 +153,12 @@
 		10AC289D25F24AF500189E46 /* LoginMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenu.swift; sourceTree = "<group>"; };
 		10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsMenu.swift; sourceTree = "<group>"; };
 		10AC28EA25F4C59400189E46 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		10AC28F825F5142700189E46 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10B10C492528EC480025057F /* BossType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossType.swift; sourceTree = "<group>"; };
 		10B10C4E252913220025057F /* RankType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankType.swift; sourceTree = "<group>"; };
 		10B87FAB25D3AA240018596A /* WeaponCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponCollectionView.swift; sourceTree = "<group>"; };
 		10B9776725C44E4B005A0470 /* ShiftStatsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftStatsView.swift; sourceTree = "<group>"; };
 		10BB00532530C3B00081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		10BB00832530F63D0081C6EB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10BB008F2530F66A0081C6EB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		10BB00A025310C1C0081C6EB /* WaveCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveCollectionView.swift; sourceTree = "<group>"; };
 		10BB348A252174F60046CBCA /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
@@ -403,8 +400,6 @@
 			isa = PBXGroup;
 			children = (
 				10BB00902530F66A0081C6EB /* Localizable.strings */,
-				10BB00842530F63D0081C6EB /* Localizable.strings */,
-				1058ACAE256DFAAC008A34F7 /* Localizable.strings */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -655,9 +650,7 @@
 				10BB34A6252174F60046CBCA /* Splatfont2.ttf in Resources */,
 				1058AC9C256DF764008A34F7 /* fangzheng.ttf in Resources */,
 				10BB34A4252174F60046CBCA /* RobotoMono.ttf in Resources */,
-				1058ACAC256DFAAC008A34F7 /* Localizable.strings in Resources */,
 				1037E3AD25209C7D001B41B0 /* LaunchScreen.storyboard in Resources */,
-				10BB00822530F63D0081C6EB /* Localizable.strings in Resources */,
 				10BB008E2530F66A0081C6EB /* Localizable.strings in Resources */,
 				1037E3AA25209C7D001B41B0 /* Preview Assets.xcassets in Resources */,
 				1037E3A725209C7D001B41B0 /* Assets.xcassets in Resources */,
@@ -929,26 +922,11 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		1058ACAE256DFAAC008A34F7 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1058ACAD256DFAAC008A34F7 /* zh-Hant */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		10BB00842530F63D0081C6EB /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10BB00832530F63D0081C6EB /* ja */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		10BB00902530F66A0081C6EB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				10BB008F2530F66A0081C6EB /* en */,
+				10AC28F825F5142700189E46 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

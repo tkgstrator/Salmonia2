@@ -189,7 +189,7 @@
 
 // エラー
 "ERROR_UNKONWN" = "";
-"ERROR_EMPTY" = "";
+"ERROR_EMPTY" = "No new results";
 "ERROR_EXPIRED" = "";
 "ERROR_REALM" = "";
 "ERROR_USER" = "";

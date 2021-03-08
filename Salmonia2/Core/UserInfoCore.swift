@@ -60,7 +60,6 @@ class UserInfoCore: ObservableObject {
             print("USERDEFAULTS CHANGE", self!.api_token, self!.version)
         })
     }
-    
     deinit {
         token?.invalidate()
     }

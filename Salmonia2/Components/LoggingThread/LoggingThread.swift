@@ -18,7 +18,7 @@ struct LoggingThread: View {
             VStack {
                 Credit
                 Divider()
-                MBCircleProgressBar(log: $log, lineWidth: 5, color: Color.red, size: 250)
+                MBCircleProgressBar(log: $log, lineWidth: 5, size: 250)
                 Spacer()
             }
         }
@@ -34,7 +34,7 @@ struct LoggingThread: View {
         }
         .minimumScaleFactor(0.7)
         .font(.custom("Roboto Mono", size: 16))
-        .foregroundColor(.white)
+//        .foregroundColor(.white)
     }
 }
 

@@ -1,257 +1,243 @@
-// TitleBar
-"Settings" = "設定";
-"Log" = "ログ";
-"Results" = "リザルト";
-"Result Detail" = "リザルト詳細";
-"Feature" = "機能";
-"User List" = "ユーザリスト";
-"Wave Search" = "WAVE検索";
-"Crew Search" = "ナカマ検索";
-"My Accounts" = "マイアカウント";
-"Sign in" = "サインイン";
-"Coop Shift Rotation" = "シフトスケジュール";
-"Achievement" = "実績";
-"Shift Stats" = "シフト統計";
+// テキストの翻訳
+"TEXT_WELCOME" = "Salmonia2";
+"TEXT_LOGIN_SALMON_STATS" = "Sign in Salmon Stats";
 
-// Settings
-"Accounts" = "アカウント";
-"NSO Accounts" = "NSOアカウント";
-"Fav Crews" = "お気に入りユーザ";
-"Registered" = "トウロク";
-"Unregistered" = "ミトウロク";
-"User" = "ユーザ";
-"Status" = "ステータス";
-"iksm session" = "セッションキー";
-"laravel session" = "認証トークン";
-"Update Username" = "ユーザ名同期";
-"Import Results" = "リザルト取り込み";
-"Application" = "アプリケーション";
-"Update" = "更新";
-"User type" = "ユーザタイプ";
-"Limited" = "フリー";
-"Unlimited" = "プロフェッショナル";
-"LanPlay" = "ランプレイ";
-"What's LanPlay" = "LanPlayについて";
-"Online members" = "オンライン人数";
-"Idle members" = "待機人数";
-"Server version" = "サーババージョン";
-"Privacy poricy" = "プライバシーポリシー";
-"Unlock" = "アンロック";
-"How to use" = "つかいかた";
-"Update iksm_session" = "イカスミセッション更新";
-"X-Product Version" = "X-Product Version";
-"Version" = "バージョン";
-"Add" = "追加";
+// ボタンの翻訳
+"BTN_LOGIN" = "ログインする";
+"BTN_LOGIN_LEGACY" = "ログインする";
+"BTN_LOGIN_MODERN" = "ログインする";
+"BTN_REGISTER" = "登録する";
+"BTN_REGISTER_TWITTER" = "登録する";
+"BTN_CANCEL" = "キャンセル";
+"BTN_CONFIRM" = "確認";
+"BTN_ERROR_DISMISS" = "閉じる";
+"BTN_ADD" = "追加";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
+"BTN_" = "";
 
-// Settings->Features
-"Free" = "無料";
-"Paid" = "有料";
-"Donation" = "寄付";
-"Force Update" = "強制データ取得";
-"Multiple Accounts" = "複数アカウント";
-"Monthly Pass" = "月額登録";
-"Future Rotation" = "将来のシフトを表示";
-"Grizzco Weapons" = "クマサン印ブキを表示";
-"Login in Safari" = "ログインページをSafariでひらく";
-"Legacy Style" = "旧スタイルを使う";
-"Gaming Style" = "ゲーミングスタイル設定";
-"Disable Ads" = "広告を非表示";
-"Hide My Nickname" = "自分の名前も隠す";
-"$3.99" = "¥500";
+// アラートのタイトル
+"ALERT_TITLE_DELETE" = "設定を消去しますか";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
+"ALERT_" = "";
 
-// Settings->Feature's description
-"Purchase" = "購入";
-"Purchased" = "購入済";
-"Subscribe" = "購読";
-"Subscribed" = "購読済";
-"Restore" = "復元";
-"Option" = "オプション";
-"Nothing to Restore" = "復元する項目がありません";
-"Restore Success" = "復元成功しました";
-"Restore Failed" = "復元失敗しました";
-"Restore purchased product" = "購入済みの製品を復元します";
-"Multi Accounts" = "複数アカウント有効化";
-"Enable multiple NSO accounts." = "複数のニンテンドーアカウントが利用できます";
-"Input iksm_session" = "イカスミセッションを入力してください";
+// アラートのテキスト（ドットを忘れないように）
+"ALERT_TEXT_DELETE" = "この操作は取り消せません";
 
-// Global->Stage Names
-"Spawning Grounds" = "シェケナダム";
-"Marooner's Bay" = "難破船ドン・ブラコ";
-"Lost Outpost" = "海上集落シャケト場";
-"Salmonid Smokeyard" = "トキシラズいぶし工房";
-"Ruins of Ark Polaris" = "朽ちた箱舟 ポラリス";
+// タイトルの翻訳
+"TITLE_WELCOME" = "ようこそ";
+"TITLE_SALMONIA" = "Salmonia";
+"TITLE_SETTINGS" = "設定";
+"TITLE_ACCOUNTS" = "アカウント";
+"TITLE_SHIFT_STATS" = "シフト統計";
+"TITLE_WAVE_ANALYSIS" = "WAVES分析";
+"TITLE_WEAPON_ANALYSIS" = "ブキ分析";
+"TITLE_GLOBAL_RECORDS" = "全国記録";
+"TITLE_SHIFT_SCHEDULE" = "シフトスケジュール";
+"TITLE_LOGGING_THREAD" = "ログ";
+"TITLE_JOB_RESULTS" = "バイト記録";
+"TITLE_WAVE_RESULTS" = "WAVE記録";
+"TITLE_RESULT_DETAIL" = "詳細";
+"TITLE_FEATURE" = "機能";
+"TITLE_GAMING_CONFIG" = "ゲーミング設定";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
+"TITLE_" = "";
 
-// Achievement
-"Boss" = "オオモノシャケ";
-"Special" = "スペシャルウエポン";
+// ヘッダーの翻訳
+"HEADER_OVERVIEW" = "概要";
+"HEADER_SCHEDULE" = "シフトスケジュール";
+"HEADER_REDCORDS" = "ステージ記録";
+"HEADER_SIGN_IN" = "ログイン";
+"HEADER_STATUS" = "ステータス";
+"HEADER_FEATURE" = "機能";
+"HEADER_LANPLAY" = "LanPlay";
+"HEADER_APPLICATION" = "アプリケーション";
+"HEADER_ACTIVE" = "有効";
+"HEADER_INACTIVE" = "無効";
+"HEADER_MAX_VALUE" = "最高";
+"HEADER_AVG_VALUE" = "平均";
+"HEADER_BOSS_DEFEATED" = "オオモノ討伐";
+"HEADER_GLOBAL_RECORDS" = "全国記録";
+"HEADER_ADVANCED" = "詳細";
+"HEADER_TOTAL_EGGS" = "総赤イクラ";
+"HEADER_RECORDS" = "記録";
+"HEADER_MY_ACCOUNTS" = "アカウント";
+"HEADER_SHIFT_STATS" = "シフト統計";
+"HEADER_RESULT_DETAIL" = "詳細";
+"HEADER_JOB_RESULTS" = "バイト記録";
+"HEADER_SYSTEM" = "システム";
+"HEADER_RESULTS" = "記録";
+"HEADER_SHIFT_STATS" = "シフト統計";
+"HEADER_RESULT_DETAIL" = "Result Detail";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
 
-// Top
-"Overview" = "概要";
-"Jobs" = "バイト回数";
-"Eggs" = "イクラ数";
-"Job Results" = "リザルト";
-"Wave Results" = "WAVE内容";
-"Shift Schedule" = "シフトスケジュール";
-"Stage Records" = "ステージキロク";
-"Favorite Crew" = "お気に入りユーザ";
-"Enter user name" = "ユーザ名を入力";
+// フッターの翻訳
 
-// In Stage Records View
-"Job Num" = "バイト回数";
-"Clear Ratio" = "クリア率";
-"Total Power Eggs" = "総赤イクラ数";
-"Total Golden Eggs" = "総金イクラ数";
-"Max Grade" = "最高評価"; // The grade of profressional(i.e 999)
-"All" = "夜あり"; // Include night event
-"No Night Event" = "昼のみ"; // Without night event
-"Record" = "キロク"; // The records of collecting golden eggs
-"Probability" = "確率";
-"Analysis" = "分析";
-"Advanced" = "詳細";
-"Wave Analysis" = "WAVE分析";
-"Boss Salmonids Analysis" = "オオモノ分析";
-"Random Weapon Analysis" = "ランダムブキ分析";
-"Random Weapon" = "ランダムブキ";
 
-// Event & Tide
-"Tide" = "潮位";
-"Event" = "イベント";
-"-" = "イベントなし"; // No Event
+// 設定画面の翻訳
+"SETTING_SPLATNET2" = "SplatNet2";
+"SETTING_SALMON_STATS" = "Salmon Stats";
+"SETTING_LARAVEL_SESSION" = "Laravel Session";
+"SETTING_USER_TYPE" = "タイプ";
+"SETTING_UPDATE_NAME" = "名前更新";
+"SETTING_IMPORT_RESULTS" = "リザルトの取り込み";
+"SETTING_UNLOCK" = "アンロック";
+"SETTING_UPDATE_TOKEN" = "イカスミセッション設定";
+"SETTING_WHAT_LANPLAY" = "LanPlayについて";
+"SETTING_LANPLAY_ONLINE" = "オンラインメンバー数";
+"SETTING_LANPLAY_IDLE" = "待機メンバー数";
+"SETTING_LANPLAY_VERSION" = "バージョン";
+"SETTING_TUTORIAL" = "チュートリアルl";
+"SETTING_PRIVACY" = "プライバシーポリシー";
+"SETTING_DELETE_MAIN" = "設定削除";
+"SETTING_XPRODUCT_VERSION" = "APIバージョン";
+"SETTING_APP_VERSION" = "バージョン";
+"SETTING_REGISTERED" = "トウロク";
+"SETTING_UNREGISTERED" = "ミトウロク";
+"SETTING_LIMITED" = "フリー";
+"SETTING_UNLIMITED" = "プロフェッショナル";
+"SETTING_UPDATE" = "アップデート";
+"SETTING_ENABLE" = "有効化";
+"SETTING_DISABLE" = "無効化";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+"SETTING_" = "";
+
+// 機能の翻訳
+"FEATURE_ROTATION" = "将来のシフト表示";
+"FEATURE_WEAPON" = "支給クマブキ表示";
+"FEATURE_UPDATE" = "強制アップデート";
+"FEATURE_NICKNAME" = "自分の名前も隠す";
+"FEATURE_DISABLE_ADS" = "広告非表示";
+"FEATURE_LEGACY_STYLE" = "旧スタイルを使う";
+"FEATURE_GAMING_STYLE" = "ゲーミング設定";
+"FEATURE_" = "";
+"FEATURE_" = "";
+"FEATURE_" = "";
+"FEATURE_" = "";
+
+// ゲーミングスタイルの翻訳
+"GAMING_PLAYER_GRADE" = "プレイヤー評価";
+"GAMING_OVERVIEW" = "概要";
+"GAMING_PLAYER_NAME" = "プレイヤー名";
+"GAMING_WAVE_QUOTA" = "ノルマ";
+"GAMING_DETAILS" = "詳細";
+"GAMING_PARAMETER" = "項目";
+"GAMING_VALUE" = "値";
+"GAMING_" = "";
+"GAMING_" = "";
+"GAMING_" = "";
+"GAMING_" = "";
+
+// 統計表示の翻訳
+"STATS_SRPOWER" = "シャケレート";
+"STATS_CLEAR_RATIO" = "クリア率";
+"STATS_TEAM_IKURA" = "Team Power Eggs";
+"STATS_TEAM_GOLDEN_IKURA" = "Team Golden Eggs";
+"STATS_IKURA_RATIO" = "Power Eggs Ratio";
+"STATS_GOLDEN_IKURA_RATIO" = "Golden Eggs Ratio";
+"STATS_SP_RATIO_BOM" = "Bomb Pitcher";
+"STATS_SP_RATIO_RAY" = "Sting Ray";
+"STATS_SP_RATIO_JET" = "Inkjet";
+"STATS_SP_RATIO_SPL" = "Splashdown";
+"STATS_GRADE_POINT" = "Grade Point";
+"STATS_CLEAR_WAVE" = "Clear Wave";
+"STATS_CREW_GRADE" = "Crew Grade";
+"STATS_BOSS_DEFEATED" = "Boss Defeated";
+"STATS_RESCUE_COUNT" = "Rescue Count";
+"STATS_HELP_COUNT" = "Help Count";
+"STATS_IKURA" = "Power Eggs";
+"STATS_GOLDEN_IKURA" = "Golden Eggs";
+"STATS_" = "";
+"STATS_" = "";
+"STATS_" = "";
+"STATS_" = "";
+
+// 記録の翻訳
+"RECORD_ALL_EVENT" = "夜あり";
+"RECORD_NO_NIGHT" = "昼のみ";
+
+// 説明の翻訳
+"DESC_LOGIN_SALMON_STATS" = "Salmonia2の利用にはツイッターアカウントでSalmon Statsにログインする必要があります.";
+"DESC_LOGIN_SPLATNET2" = "Salmonia2の利用にはニンテンドースイッチオンラインのアカントが必要です";
+
+// エラーコード表示
+"ERROR_CODE_%@" = "エラーコード: %@";
+
+// エラー
+"ERROR_UNKONWN" = "不明なエラーです";
+"ERROR_EMPTY" = "新規リザルトがありません";
+"ERROR_EXPIRED" = "トークン期限切れ";
+"ERROR_REALM" = "データベース破損";
+"ERROR_USER" = "ユーザがありません";
+"ERROR_COOP" = "データが取得できませんでした";
+"ERROR_ACTIVE" = "有効なアカウントがありません";
+"ERROR_TOKEN" = "Salmon Statsのトークン期限切れ";
+"ERROR_UNAVAILABLE" = "サーバからの応答がありません";
+"ERROR_VALUE" = "不正な値を受け取りました";
+
+// エラーの内容
+"DESC_UNKONWN" = "";
+"DESC_EMPTY" = "";
+"DESC_EXPIRED" = "";
+"DESC_REALM" = "";
+"DESC_USER" = "";
+"DESC_COOP" = "";
+"DESC_ACTIVE" = "";
+"DESC_TOKEN" = "";
+"DESC_UNAVAILABLE" = "";
+
+// イベントや潮位など（フォーマットを揃えるかは謎
+"-" = "イベントなし";
 "rush" = "ラッシュ";
 "goldie-seeking" = "キンシャケ探し";
-"griller" = "グリル発進";
+"griller" = "グリル発進r";
 "the-mothership" = "ハコビヤ襲来";
 "fog" = "霧";
 "cohock-charge" = "ドスコイ大量発生";
 "low" = "干潮";
 "normal" = "通常";
 "high" = "満潮";
-"time_limit" = "時間切れ";
-"wipe_out" = "ゼンメツ!";
-"Match" = "マッチ";
-"Boss Salmonids defeated" = "オオモノシャケを倒した回数";
-"Boss defeated" = "オオモノ討伐数";
-"Appearances" = "出現数";
-"Matching" = "マッチング回数";
-"Rate" = "レーティング";
-"Egg" = "イクラ";
-"Eval" = "評価";
-"Score" = "スコア";
 
-// Stats
-"Global Records" = "世界記録";
-"Total" = "総合";
-"Max" = "最高";
-"Avg" = "平均";
-"Boss defeated" = "オオモノ討伐";
-"Salmon Rate" = "シャケレート";
-"Defeated" = "討伐"; // Boss defeated
-"Bomb Launcher" = "ボムピッチャー";
-"Sting Ray" = "ハイパープレッサー";
-"Inkjet" = "ジェットパック";
-"Splashdown" = "スーパーチャクチ";
-"Grade Point" = "評価"; // The grade of profressional
-"Clear Wave" = "クリアWAVE";
-"Crew Grade" = "ナカマ評価"; // The average grade of crew you played with
-"Team Power Eggs" = "チーム赤イクラ数";
-"Team Golden Eggs" = "チーム金イクラ数";
-"Power Eggs Ratio" = "個人赤イクラ率";
-"Golden Eggs Ratio" = "個人金イクラ率";
-"Power Eggs" = "赤イクラ数";
-"Golden Eggs" = "金イクラ数";
-"Boss Defeated" = "オオモノ討伐数";
-"Rescue Count" = "救助数";
-"Help Count" = "被救助数";
-"Goldie" = "キンシャケ";
-"Steelhead" = "バクダン";
-"Flyfish" = "カタパッド";
-"Scrapper" = "テッパン";
-"Steel Eel" = "ヘビ";
-"Stinger" = "タワー";
-"Maws" = "モグラ";
-"Griller" = "グリル";
-"Drizzler" = "コウモリ";
+"Spawning Grounds" = "シェケナダム";
+"Marooner's Bay" = "難破船ドン・ブラコ";
+"Lost Outpost" = "海上集落シャケト場t";
+"Salmonid Smokeyard" = "トキシラズいぶし工房";
+"Ruins of Ark Polaris" = "朽ちた方船 ポラリス";
+"" = "";
+"" = "";
 
-// Clear/Failure in SplatNet2
-"Clear!" = "Clear!!";
-"Defeat" = "Failure";
-"Hazard Level Max!!" = "キケン度MAX!!";
-"Intern" = "けんしゅう";
-"Apparentice" = "かけだし";
-"Part-Timer" = "はんにんまえ";
-"Go-Getter" = "いちにんまえ";
-"Overachiever" = "じゅくれん";
-"Profreshional" = "たつじん";
-"Stage" = "ステージ";
-"Avg Eggs" = "平均イクラ数";
+// その他の翻訳
+"SUPPLIED_WEAPONS" = "支給ブキ";
 
-// In Coop Shift Rotation
-"Supplied Weapons" = "支給ブキ";
-"Grizzco Rotation" = "黄金編成";
-"All Random Rotation" = "全緑編成";
-"One Random Rotation" = "一緑編成";
-"Normal Rotation" = "通常編成";
-"Only played" = "プレイしたシフトのみ"; // The roatations you played
-"Rotation" = "編成";
-"Options" = "オプション";
+// ログ表示
+"LOG_UPLOAD" = "アップロード中";
+"LOG_DOWNLOAD" = "ダウンロード中";
 
-// Notification's description
-"Success" = "成功";
-"Failed" = "失敗";
-"OK" = "確認";
-"CANCEL" = "取消";
-"Login SplatNet2" = "ログイン成功";
-"Login Salmon Stats" = "ログイン成功";
-
-// SplatNet2が返すエラーコード
-"Wrong Request" = "誤ったリクエスト";
-"No Accounts Found" = "該当するアカウントがありません";
-"Iksm Session is Unauthorized/Expired" = "有効期限切れ";
-"Insecure Connection/Disallowed User Agent" = "許可されていないリクエスト";
-"Invalid Splatoon Token" = "無効なトークン";
-"Method Not Allowed" = "許可されていないプロトコル";
-"Unauthorized Splatoon Token" = "承認されていないトークン";
-"Nintendo API Changed" = "APIの仕様変更";
-"Too Many Requests" = "リクエストが多すぎます";
-"Server is Unavailable" = "サーバが利用不可です";
-"Unknown Error" = "不明なエラーです";
-
-// Salmonia2が返すエラー
-"ERROR_UNKONWN" = "不明なエラーです";
-"ERROR_EMPTY" = "イカリング2でログインしてください";
-"ERROR_EXPIRED" = "有効期限切れです";
-"ERROR_REALM" = "データベースが壊れています";
-"ERROR_USER" = "イカリング2のユーザが追加されていません";
-"ERROR_COOP" = "リザルトが見つかりません";
-"ERROR_ACTIVE" = "ユーザが選択されていません";
-"ERROR_TOKEN" = "Salmon Statsの認証トークンが未設定です";
-"ERROR_UNAVAILABLE" = "サーバが利用不可です";
-
-// Salmonia2が返すエラーに対する対処法
-"DESC_UNKONWN" = "開発者に連絡してください";
-"DESC_EMPTY" = "イカリング2でログインしてください";
-"DESC_EXPIRED" = "イカリング2で再ログインしてください";
-"DESC_REALM" = "アプリを再インストールしてください";
-"DESC_USER" = "設定から一つ以上のアカウントを有効化してください";
-"DESC_COOP" = "サーモンランを一戦以上遊んでください";
-"DESC_ACTIVE" = "設定から一つ以上のアカウントを有効化してください";
-"DESC_TOKEN" = "設定からSalmon Statsにログインしてください";
-"DESC_UNAVAILABLE" = "任天堂サーバがメンテナンス中です";
-
-"DEF_ERROR_CODE" = "エラーコード";
-
-// Alert Description
-"Manual Update" = "手動アップデート";
-"Update Success" = "アップデート成功";
-
-// Gaming Configuration
-"Gaming Configuration" = "ゲーミング設定";
-"Navigation Title" = "ナビゲーションタイトル";
-"System" = "システム";
-"Player Grade" = "プレイヤー評価";
-"Overview" = "概要";
-"Player Name" = "プレイヤー名";
-"Wave Quota" = "ノルマ";
-"Details" = "詳細";
-"Parameter" = "パラメータ";
-"Value" = "値";
+"OVERVIEW_JOBS" = "バイト回数";
+"OVERVIEW_EGGS" = "イクラ数";
