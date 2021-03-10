@@ -23,7 +23,7 @@ struct CoopShiftCollectionView: View {
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/a185b309f5cdad94942849070de04ce2.png")!) { image in image.resizable().aspectRatio(contentMode: .fit).frame(width: 200) }
                     ZStack {
                         Image("CoopShedule").resizable().aspectRatio(contentMode: .fit).frame(height: 52)
-                        Text("TITLE_SHIFT_SCHEDULE").modifier(Splatfont(size: 18)).foregroundColor(.cOrange).padding(.top, 7)
+                        Text("TITLE_SHIFT_SCHEDULE").font(.custom("Splatfont", size: 18)).foregroundColor(.cOrange).padding(.top, 7)
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -50,7 +50,6 @@ struct CoopShiftCollectionView: View {
     var FilterButton: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .Modifier()
                 .onTapGesture() {
                     isVisible.toggle()
                 }.sheet(isPresented: $isVisible) {
@@ -69,19 +68,19 @@ private struct CoopFilterView: View {
     
     var body: some View {
         List {
-            Section(header: Text("HEADER_COOP_ROTAION").modifier(Splatfont2(size: 18)).foregroundColor(.cOrange)) {
+            Section(header: Text("HEADER_COOP_ROTAION").font(.custom("Splatfont2", size: 18)).foregroundColor(.cOrange)) {
                 ForEach(Range(0...3)) { idx in
                     Toggle(isOn: $isEnable[idx]) {
                         Text((types[idx]).localized)
                     }
                 }
-                Section(header: Text("HEADER_OPTION").modifier(Splatfont2(size: 18)).foregroundColor(.cOrange)) {
+                Section(header: Text("HEADER_OPTION").font(.custom("Splatfont2", size: 18)).foregroundColor(.cOrange)) {
                     Toggle(isOn: $isPlayed) {
                         Text("Only played")
                     }
                 }
             }
-            .modifier(Splatfont2(size: 16))
+            .font(.custom("Splatfont2", size: 16))
             .onDisappear() {
                 phase.update(isEnable: isEnable, isPlayed: isPlayed, isTime: isTime)
             }
@@ -102,7 +101,7 @@ struct CoopShiftStack: View {
             }
         }
         .frame(height: 120)
-        .modifier(Splatfont2(size: 18))
+        .font(.custom("Splatfont2", size: 18))
     }
     
     private var BackgroundMask: some View {
@@ -125,12 +124,12 @@ struct CoopShiftStack: View {
             VStack(spacing: 0) {
                 URLImage(url: URL(string: (StageType(stage_id: phase.stage_id)?.image_url)!)!) { image in image.resizable().frame(width: 112, height: 63) }.clipShape(RoundedRectangle(cornerRadius: 8.0))
                 Text((StageType.init(stage_id: phase.stage_id)?.stage_name!)!.localized)
-                    .modifier(Splatfont2(size: 14))
+                    .font(.custom("Splatfont2", size: 14))
                     .padding(.bottom, 8)
             }
             VStack(alignment: .leading, spacing: 5) {
                 Text("SUPPLIED_WEAPONS")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .frame(height: 14)
                 HStack {
                     ForEach(phase.weapon_list, id:\.self) { weapon in

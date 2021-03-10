@@ -12,10 +12,11 @@ import SwiftyJSON
 import RealmSwift
 
 struct LoginMenu: View {
+    @State var isPresented: Bool = false
     @State var isActive: Bool = false
     @State var isAlert: Bool = false
     @State var isEnable: [Bool] = [false, false]
-    @State var error: APPError?
+    @State var appError: CustomNSError?
     
     // TODO: とりあえず今は定数を使っている
     private var version: String = "1.10.1"
@@ -90,21 +91,17 @@ struct LoginMenu: View {
                             realm.create(UserInfoRealm.self, value: value, update: .all)
                         }
                         try? realm.commitWrite()
-                    
                         // 終わったのでフラグを反転させる
                         isActive.toggle()
                     } catch (let error) {
                         // TODO: エラー発生時の処理を書く
-                        self.error = error as! APPError
-                        isAlert.toggle()
+                        appError = error as? CustomNSError
+                        isPresented.toggle()
                     }
                 }
             }
         }
-        .alert(isPresented: $isAlert) {
-            Alert(title: Text("Code: \(error!.errorCode)"), message: Text("\(error!.localizedDescription)"), dismissButton: .destructive(Text("BTN_ERROR_DISMISS")))
-            
-        }
+        .alert(isPresented: $isPresented, error: appError)
     }
     
     var RegisterButton: some View {

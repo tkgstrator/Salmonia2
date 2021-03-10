@@ -7,54 +7,22 @@
 
 import Foundation
 import SwiftUI
-import URLImage
-import RealmSwift
-import WebKit
 
+struct AlertView: ViewModifier {
+    @Binding var isPresented: Bool
+    let error: CustomNSError
 
-extension Image {
-    func Modifier(_ isEnabled: Bool = true) -> some View {
-        self
-            .resizable()
-            .scaledToFit()
-            .foregroundColor(isEnabled ? .white : .cGray)
-            .frame(width: 25, height: 25)
+    func body(content: Content) -> some View {
+        content
+            .alert(isPresented: $isPresented) {
+                Alert(title: Text("ERROR_CODE_\(String(error.errorCode))"), message: Text(error.localizedDescription))
+            }
     }
 }
-
-struct Splatfont: ViewModifier {
-    let size: CGFloat
-    
-    func body(content: Content) -> some View {
-        if NSLocale.preferredLanguages[0].prefix(2) == "zh" {
-            return
-                content
-                .font(.custom("FZYHFW--GB1-0", size: size + 4))
-        } else {
-            return
-                content
-                .font(.custom("Splatfont", size: size))
-        }
-    }
-}
-
-struct Splatfont2: ViewModifier {
-    let size: CGFloat
-    
-    func body(content: Content) -> some View {
-        if NSLocale.preferredLanguages[0].prefix(2) == "zh" {
-            return
-                content
-                .font(.custom("FZYHFW--GB1-0", size: size))
-                .minimumScaleFactor(0.7)
-//                .lineLimit(1)
-        } else {
-            return
-                content
-                .font(.custom("Splatfont2", size: size))
-                .minimumScaleFactor(0.7)
-//                .lineLimit(1)
-        }
-        //            .frame(height: size)
+ 
+extension View {
+    func alert(isPresented: Binding<Bool>, error: CustomNSError?) -> some View {
+        guard let error = error else { return AnyView(self) }
+        return AnyView(self.modifier(AlertView(isPresented: isPresented, error: error)))
     }
 }

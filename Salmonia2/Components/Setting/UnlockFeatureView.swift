@@ -32,10 +32,10 @@ struct UnlockFeatureView: View {
                             HStack {
                                 Text(feature.localizedTitle)
                                 Text(feature.localizedPrice)
-                                    .modifier(Splatfont2(size: 16))
+                                    .font(.custom("Splatfont2", size: 16))
                             }
                             Text(feature.localizedDescription)
-                                .modifier(Splatfont2(size: 14))
+                                .font(.custom("Splatfont2", size: 14))
                         }
                         Spacer()
                         PayButton(isValid: feature.isValid, isSubscribed: false, product: feature.productIdentifier)
@@ -57,21 +57,18 @@ struct UnlockFeatureView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Text("FEATURE_RESTORE")
-                                .modifier(Splatfont2(size: 16))
+                                .font(.custom("Splatfont2", size: 16))
                         }
                         Text("Restore purchased product")
-                            .modifier(Splatfont2(size: 14))
+                            .font(.custom("Splatfont2", size: 14))
                     }
                     Spacer()
                     RestoreButton
                 }.frame(height: 60)
             }
         }
-        .modifier(Splatfont2(size: 16))
+        .font(.custom("Splatfont2", size: 16))
         .navigationTitle("TITLE_FEATURE")
-        .alert(isPresented: $isVisible) {
-            Alert(title: Text(mTitle.localized), message: Text(mLog.localized))
-        }
     }
     
     func restoreStoreKit() {

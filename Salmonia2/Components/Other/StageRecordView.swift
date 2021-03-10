@@ -22,7 +22,7 @@ struct StageRecordView: View {
                         .clipped()
                         .clipShape(RoundedRectangle(cornerRadius: 8.0))
                     Text(stage.stage_name!.localized)
-                        .modifier(Splatfont2(size: 16))
+                        .font(.custom("Splatfont2", size: 16))
                         .frame(maxWidth: .infinity)
                 }
             }
@@ -35,7 +35,7 @@ private struct StageRecordsView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Overview").modifier(Splatfont2(size: 16)).foregroundColor(.yellow)) {
+            Section(header: Text("Overview").font(.custom("Splatfont2", size: 16)).foregroundColor(.yellow)) {
                 HStack {
                     Text("Jobs")
                     Spacer()
@@ -52,8 +52,8 @@ private struct StageRecordsView: View {
                     Text("\(record.grade_point.value)")
                 }
             }
-            .modifier(Splatfont2(size: 16))
-            Section(header: Text("Record").modifier(Splatfont2(size: 16)).foregroundColor(.yellow)) {
+            .font(.custom("Splatfont2", size: 16))
+            Section(header: Text("Record").font(.custom("Splatfont2", size: 16)).foregroundColor(.yellow)) {
                 HStack {
                     Text("All")
                     Spacer()
@@ -65,9 +65,9 @@ private struct StageRecordsView: View {
                     Text("\(record.team_golden_eggs[1].value)")
                 }
             }
-            .modifier(Splatfont2(size: 16))
+            .font(.custom("Splatfont2", size: 16))
             ForEach(Range(0 ... 2)) { tide in
-                Section(header: Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").modifier(Splatfont2(size: 16)).foregroundColor(.orange)) {
+                Section(header: Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)").font(.custom("Splatfont2", size: 16)).foregroundColor(.orange)) {
                     ForEach(Range(0 ... 6)) { event in
                         if record.golden_eggs[tide][event] != nil {
                             NavigationLink(destination: ResultView(result: record.salmon_id[tide][event]!)) {
@@ -80,7 +80,7 @@ private struct StageRecordsView: View {
                         }
                     }
                 }
-                .modifier(Splatfont2(size: 16))
+                .font(.custom("Splatfont2", size: 16))
             }
         }
         .navigationTitle((StageType.init(stage_id: record.stage_id!)?.stage_name!)!.localized)

@@ -62,7 +62,7 @@ struct SettingView: View {
     
     private var Application: some View {
         Section(header: Text("HEADER_APPLICATION")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange))
         {
             BSafariView(isPresented: $isPresented[1], title: "SETTING_TUTORIAL", url: "https://tkgstrator.work/?p=28236")
@@ -103,12 +103,12 @@ struct SettingView: View {
                 Text("\(version)")
             }
         }
-        .modifier(Splatfont2(size: 16))
+        .font(.custom("Splatfont2", size: 16))
     }
     
     private var LanPlayStatus: some View {
         Section(header: Text("HEADER_LANPLAY")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange)) {
             BSafariView(isPresented: $isPresented[3], title: "SETTING_WHAT_LANPLAY", url: "https://tkgstrator.work/?p=5240")
             HStack {
@@ -130,22 +130,22 @@ struct SettingView: View {
         .onReceive(timer) { _ in
             getLanPlayStatus()
         }
-        .modifier(Splatfont2(size: 16))
+        .font(.custom("Splatfont2", size: 16))
     }
     
     private var SignIn: some View {
         Section(header: Text("HEADER_SIGN_IN")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange)) {
             NavigationLink(destination: UserListView()) { Text("SETTING_SPLATNET2") }
             BSalmonStatsLoginView(isPresented: $isPresented[0])
         }
-        .modifier(Splatfont2(size: 16))
+        .font(.custom("Splatfont2", size: 16))
     }
     
     private var UserSection: some View {
         Section(header: Text("HEADER_STATUS")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange)) {
             // TODO: 課金情報ステータス直せ
             HStack {
@@ -185,18 +185,15 @@ struct SettingView: View {
                             message = error.localizedDescription
                         }
                     })
-                    .alert(isPresented: $isAlert[0]) {
-                        Alert(title: Text(message.localized))
-                    }
             }
             .disabled(!main.userType)
         }
-        .modifier(Splatfont2(size: 16))
+        .font(.custom("Splatfont2", size: 16))
     }
     
     private var UserStatus: some View {
         Section(header: Text("HEADER_FEATURE")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange)) {
             HStack {
                 NavigationLink(destination: SyncUserData()) {
@@ -221,7 +218,7 @@ struct SettingView: View {
                 }
             }
         }
-        .modifier(Splatfont2(size: 16))
+        .font(.custom("Splatfont2", size: 16))
     }
     
     // ユーザ名を同期する

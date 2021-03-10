@@ -26,15 +26,15 @@ struct SalmoniaView: View {
         ZStack {
             NavigationLink(destination: LoadingView(), isActive: $isActive) { EmptyView() }
             List {
-                Section(header: Text("HEADER_OVERVIEW").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
+                Section(header: Text("HEADER_OVERVIEW").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
                     User
                     Status
                     Results
                 }
-                Section(header: Text("HEADER_SCHEDULE").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
+                Section(header: Text("HEADER_SCHEDULE").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
                     CoopShiftView()
                 }
-                Section(header: Text("HEADER_RECORDS").modifier(Splatfont2(size: 16)).foregroundColor(.cOrange)) {
+                Section(header: Text("HEADER_RECORDS").font(.custom("Splatfont2", size: 16)).foregroundColor(.cOrange)) {
                     StageRecordView()
                 }
             }
@@ -53,7 +53,7 @@ struct SalmoniaView: View {
             HStack {
                 URLImage(url: URL(string: user.imageUri)!) { image in image.resizable().clipShape(Circle()) }.frame(width: 70, height: 70)
                 Text(user.nickname)
-                    .modifier(Splatfont2(size: 18))
+                    .font(.custom("Splatfont2", size: 18))
                     .frame(maxWidth: .infinity)
             }
         }
@@ -63,11 +63,11 @@ struct SalmoniaView: View {
         Group {
             NavigationLink(destination: ResultCollectionView()) {
                 Text("TITLE_JOB_RESULTS")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
             }
             NavigationLink(destination: WaveCollectionView()) {
                 Text("TITLE_WAVE_RESULTS")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
             }
             BSalmonStatsView(isPresented: $isVisible)
         }
@@ -91,7 +91,7 @@ struct SalmoniaView: View {
             }
             Spacer()
         }
-        .modifier(Splatfont2(size: 16))
+        .font(.custom("Splatfont2", size: 16))
     }
 }
 

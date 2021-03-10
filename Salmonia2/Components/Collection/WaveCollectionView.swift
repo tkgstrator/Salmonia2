@@ -35,7 +35,6 @@ struct WaveCollectionView: View {
     var filterButton: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .Modifier()
                 .onTapGesture() { isVisible.toggle()}
                 .sheet(isPresented: $isVisible) {
                 WaveFilterView
@@ -48,7 +47,7 @@ struct WaveCollectionView: View {
             Section(header: HStack {
                 Spacer()
                 Text("Stage")
-                    .modifier(Splatfont2(size: 18))
+                    .font(.custom("Splatfont2", size: 18))
                     .foregroundColor(.yellow)
                 Spacer()
             }) {
@@ -61,7 +60,7 @@ struct WaveCollectionView: View {
             Section(header: HStack {
                 Spacer()
                 Text("Tide")
-                    .modifier(Splatfont2(size: 18))
+                    .font(.custom("Splatfont2", size: 18))
                     .foregroundColor(.yellow)
                 Spacer()
             }) {
@@ -74,7 +73,7 @@ struct WaveCollectionView: View {
             Section(header: HStack {
                 Spacer()
                 Text("Event")
-                    .modifier(Splatfont2(size: 18))
+                    .font(.custom("Splatfont2", size: 18))
                     .foregroundColor(.yellow)
                 Spacer()
             }) {
@@ -85,7 +84,6 @@ struct WaveCollectionView: View {
                 }
             }
         }
-        .modifier(Splatfont2(size: 16))
         .onDisappear() {
             // 画面を閉じるときにアップデートしてみよう
             var water_level: [Int] = []
@@ -115,12 +113,11 @@ struct WaveCollectionView: View {
                         Text(wave.water_level!.localized)
                         Text((StageType.init(stage_id: wave.result.first!.stage_id)?.stage_name!.localized)!)
                     }
-                    .modifier(Splatfont2(size: 14))
+                    .font(.custom("Splatfont2", size: 14))
                     .frame(height: 14)
                     .foregroundColor(.yellow)
                     Text(wave.event_type!.localized)
                 }
-                .modifier(Splatfont2(size: 16))
                 // ブキとか？
                 // 金イクラ数とかの情報（イカリング2準拠スタイル）
                 Spacer()
@@ -137,7 +134,6 @@ struct WaveCollectionView: View {
                     }
                 }
                 .frame(width: 55)
-                .modifier(Splatfont2(size: 14))
             }
             
         }

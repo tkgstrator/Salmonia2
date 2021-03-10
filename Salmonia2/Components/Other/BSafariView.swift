@@ -25,7 +25,6 @@ struct BSafariView: View {
         }) {
             HStack {
                 Text(title.localized)
-                    .modifier(Splatfont2(size: 16))
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color(.tertiaryLabel))
@@ -51,7 +50,7 @@ struct BSalmonStatsView: View {
         }) {
             HStack {
                 Text("Salmon Stats")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color(.tertiaryLabel))
@@ -74,7 +73,7 @@ struct BSalmonStatsLoginView: View {
         }) {
             HStack {
                 Text("SETTING_SALMON_STATS")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                 Spacer()
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color(.tertiaryLabel))

@@ -40,9 +40,6 @@ struct ResultCollectionView: View {
             NavigationLink(destination: LoadingView(), isActive: $isActive) { EmptyView() }
         }
         .pullToRefresh(isShowing: $isShowing) { isActive.toggle() }
-        .alert(isPresented: $isDebugLog) {
-            Alert(title: Text("DEF_ERROR_CODE".localized + String(debugCode)), message: Text(debugMessage.localized))
-        }
         .navigationTitle("TITLE_JOB_RESULTS")
         .navigationBarItems(trailing: AddButton)
     }
@@ -50,10 +47,8 @@ struct ResultCollectionView: View {
     private var AddButton: some View {
         HStack(spacing: 15) {
             Image(systemName: "person.circle.fill")
-                .Modifier(isPersonal)
                 .onTapGesture() { isPersonal.toggle() }
             Image(systemName: "magnifyingglass")
-                .Modifier()
                 .onTapGesture() { isVisible.toggle() }
                 .sheet(isPresented: $isVisible) {
                     ResultFilterView(core: core, sliderValue: $sliderValue, isEnable: $isEnable)
@@ -212,7 +207,7 @@ struct ResultCollectionView: View {
                 Section(header: HStack {
                     Spacer()
                     Text("Golden Eggs")
-                        .modifier(Splatfont2(size: 18))
+                        .font(.custom("Splatfont2", size: 18))
                         .foregroundColor(.yellow)
                     Spacer()
                 }) {
@@ -220,21 +215,21 @@ struct ResultCollectionView: View {
                         Slider(value: $sliderValue,
                                in: 0 ... 200,
                                step: 1,
-                               minimumValueLabel: Text("0").modifier(Splatfont2(size: 16)),
-                               maximumValueLabel: Text("200").modifier(Splatfont2(size: 16)),
+                               minimumValueLabel: Text("0").font(.custom("Splatfont2", size: 16)),
+                               maximumValueLabel: Text("200").font(.custom("Splatfont2", size: 16)),
                                label: { EmptyView() }
                         ).accentColor(.yellow)
-                        Text("\(Int(sliderValue))").modifier(Splatfont2(size: 18))
+                        Text("\(Int(sliderValue))").font(.custom("Splatfont2", size: 18))
                     }
                 }
                 Section(header: HStack {
                     Spacer()
-                    Text("Stage").modifier(Splatfont2(size: 18)).foregroundColor(.yellow)
+                    Text("Stage").font(.custom("Splatfont2", size: 18)).foregroundColor(.yellow)
                     Spacer()
                 }) {
                     ForEach(Range(0 ... 4)) { idx in
                         Toggle(StageType.allCases[idx].stage_name!.localized, isOn: $isEnable[idx])
-                            .modifier(Splatfont2(size: 16))
+                            .font(.custom("Splatfont2", size: 16))
                     }
                 }
             }.onDisappear() {

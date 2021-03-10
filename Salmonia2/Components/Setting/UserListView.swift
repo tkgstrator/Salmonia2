@@ -26,7 +26,7 @@ struct UserListView: View {
     var body: some View {
         List {
             Section(header: Text("HEADER_ACTIVE")
-                        .modifier(Splatfont2(size: 16))
+                        .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange))
             {
                 ForEach(user.active, id:\.self) { account in
@@ -34,7 +34,7 @@ struct UserListView: View {
                         URLImage(url: URL(string: account.image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
                             .frame(width: 60, height: 60)
                         Text(account.name)
-                            .modifier(Splatfont2(size: 18))
+                            .font(.custom("Splatfont2", size: 18))
                             .frame(maxWidth: .infinity)
                     }
 //                    .contextMenu(ContextMenu(menuItems: {
@@ -48,7 +48,7 @@ struct UserListView: View {
                 }
             }
             Section(header: Text("HEADER_INACTIVE")
-                        .modifier(Splatfont2(size: 16))
+                        .font(.custom("Splatfont2", size: 16))
                         .foregroundColor(.cOrange))
             {
                 ForEach(user.inactive, id:\.self) { account in
@@ -56,7 +56,7 @@ struct UserListView: View {
                         URLImage(url: URL(string: account.image)!) { image in image.resizable().clipShape(RoundedRectangle(cornerRadius: 8.0)) }
                             .frame(width: 60, height: 60)
                         Text(account.name)
-                            .modifier(Splatfont2(size: 18))
+                            .font(.custom("Splatfont2", size: 18))
                             .frame(maxWidth: .infinity)
                     }
 //                    .contextMenu(ContextMenu(menuItems: {
@@ -71,7 +71,7 @@ struct UserListView: View {
             }
         }
         .navigationTitle("HEADER_MY_ACCOUNTS")
-        .modifier(Splatfont(size: 18))
+        .font(.custom("Splatfont", size: 18))
         .navigationBarItems(trailing: Login)
         .environment(\.editMode, $editMode)
     }
@@ -129,9 +129,6 @@ struct UserListView: View {
                             }
                         }
                     }
-                }
-                .alert(isPresented: $isSuccess) {
-                    Alert(title: !isFailure ? Text("Success") : Text("Failure"), message: !isFailure ? Text("Login/Update SplatNet2") : Text(errorMessage.value))
                 }
             EditButton()
         }

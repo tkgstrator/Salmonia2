@@ -55,7 +55,7 @@ struct CrewSearchView: View {
                         SalmonStats.getPlayerOverView(nsaid: player.nsaid)
                     }
                 }
-                .modifier(Splatfont(size: 18))
+                .font(.custom("Splatfont", size: 18))
             }
         }
         .navigationTitle("TITLE_CREW_SEARCH")

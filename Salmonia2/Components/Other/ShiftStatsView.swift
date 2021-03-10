@@ -35,7 +35,7 @@ struct ShiftStatsView: View {
     
     var Overview: some View {
         Section(header: Text("HEADER_OVERVIEW")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange))
         {
             CoopShiftStack(phase: stats.shift)
@@ -84,7 +84,7 @@ struct ShiftStatsView: View {
     
     var MaxResult: some View {
         Section(header: Text("HEADER_MAX_VALUE")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange))
         {
             StatsColumn(title: "STATS_SRPOWER", value: stats.srpower[1]?.round)
@@ -111,7 +111,7 @@ struct ShiftStatsView: View {
     
     var AvgResult: some View {
         Section(header: Text("HEADER_AVG_VALUE")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange))
         {
             StatsColumn(title: "STATS_CLEAR_WAVE", value: stats.avg_clear_wave?.round)
@@ -128,7 +128,7 @@ struct ShiftStatsView: View {
     
     var BossDefeated: some View {
         Section(header: Text("HEADER_BOSS_DEFEATED")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange))
         {
             ForEach(BossType.allCases.indices, id:\.self) { idx in
@@ -139,7 +139,7 @@ struct ShiftStatsView: View {
     
     var GlobalRecords: some View {
         Section(header: Text("HEADER_GLOBAL_RECORDS")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange)) {
             Text("STATS_IKURA")
                 .font(.custom("Splatfont2", size: 16))
@@ -152,7 +152,7 @@ struct ShiftStatsView: View {
     
     var Advanced: some View {
         Section(header: Text("HEADER_ADVANCED")
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .foregroundColor(.cOrange)) {
             NavigationLink(destination: WaveResultCollectionView(stats: stats)) {
                 Text("TITLE_WAVE_ANALYSIS")
@@ -173,7 +173,7 @@ struct ShiftStatsView: View {
         var body: some View {
             HStack {
                 Text(title.localized)
-                    .modifier(Splatfont2(size: 16))
+                    .font(.custom("Splatfont2", size: 16))
                     .rainbowAnimation(rainbow.shiftParam)
                 Spacer()
                 Text(value.value)
@@ -195,7 +195,7 @@ struct StatsChartView: View {
     
     var body: some View {
         List {
-            Section(header: Text("HEADER_TOTAL_EGGS").modifier(Splatfont2(size: 16)).foregroundColor(.yellow))
+            Section(header: Text("HEADER_TOTAL_EGGS").font(.custom("Splatfont2", size: 16)).foregroundColor(.yellow))
             {
                 HStack {
                     Text("RECORD_ALL_EVENTS")
@@ -217,7 +217,7 @@ struct StatsChartView: View {
             .font(.custom("Splatfont2", size: 16))
             ForEach(Range(0 ... 2)) { tide in
                 Section(header: Text("\((WaveType.init(water_level: tide)?.water_name)!.localized)")
-                            .modifier(Splatfont2(size: 16))
+                            .font(.custom("Splatfont2", size: 16))
                             .foregroundColor(.orange))
                 {
                     ForEach(Range(0 ... 6)) { event in

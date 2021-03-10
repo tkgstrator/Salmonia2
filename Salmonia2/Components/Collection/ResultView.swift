@@ -31,8 +31,8 @@ struct ResultView: View {
 
     var UIButton: some View {
         HStack {
-            Button(action: { isVisible.toggle() }) { Image(systemName: "person.circle.fill").Modifier(isVisible) }
-            Button(action: { isEnable.toggle() }) { Image(systemName: "info.circle.fill").Modifier(isEnable) }
+            Button(action: { isVisible.toggle() }) { Image(systemName: "person.circle.fill") }
+            Button(action: { isEnable.toggle() }) { Image(systemName: "info.circle.fill") }
         }.sheet(isPresented: $isEnable) {
             ResultDetailView(isVisible: $isVisible).environmentObject(result)
         }
@@ -60,13 +60,13 @@ struct ResultView: View {
                 Group {
                     if self.result.danger_rate == 200 {
                         Text("RESULT_HAZARD_LEVEL_MAX")
-                            .modifier(Splatfont(size: 20))
+                            .font(.custom("Splatfont", size: 20))
                             .shadow(color: .black, radius: 0, x: 1, y: 1)
                             .foregroundColor(.yellow)
                             .frame(maxWidth: .infinity)
                     } else {
                         Text("RESULT_HAZARD_LEVEL_\(String(result.danger_rate))")
-                            .modifier(Splatfont(size: 20))
+                            .font(.custom("Splatfont", size: 20))
                             .shadow(color: .black, radius: 0, x: 1, y: 1)
                             .foregroundColor(.yellow)
                             .frame(maxWidth: .infinity)
@@ -100,7 +100,7 @@ struct ResultView: View {
                     if result.wave.index(of: wave)! + 1 == (result.failure_wave.value) {
                         Text(result.failure_reason!.localized)
                             .padding(.bottom, 5)
-                            .modifier(Splatfont2(size: 14))
+                            .font(.custom("Splatfont2", size: 14))
                             .foregroundColor(.cOrange)
                             .frame(height: 12)
                     } else {
