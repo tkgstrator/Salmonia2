@@ -11,7 +11,8 @@ import URLImage
 import RealmSwift
 
 struct ResultCollectionView: View {
-    @ObservedObject var core: UserResultCore
+    @EnvironmentObject var core: UserResultCore
+//    @ObservedObject var core: UserResultCore
     
     @State var isVisible: Bool = false
     @State var sliderValue: Double = 0
@@ -42,7 +43,7 @@ struct ResultCollectionView: View {
         .alert(isPresented: $isDebugLog) {
             Alert(title: Text("DEF_ERROR_CODE".localized + String(debugCode)), message: Text(debugMessage.localized))
         }
-        .navigationTitle("TITLE_RESULT_DETAIL")
+        .navigationTitle("TITLE_JOB_RESULTS")
         .navigationBarItems(trailing: AddButton)
     }
     

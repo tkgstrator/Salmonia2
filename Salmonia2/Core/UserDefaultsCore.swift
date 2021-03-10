@@ -45,9 +45,8 @@ class RainbowCore: ObservableObject {
 }
 
 class MainCore: ObservableObject {
-    // ログインしたかどうかを保存している
-    @UserDefault(forKey: "isLogin", defaultValue: false)
-    var isLogin: Bool
+    private var token: NSKeyValueObservation?
+    @Published var isLogin: Bool = UserDefaults.standard.bool(forKey: "isLogin")
     // Salmon StatsのAPI-TOKENを保存している
     @UserDefault(forKey: "apiToken", defaultValue: nil)
     var apiToken: String?
@@ -57,4 +56,18 @@ class MainCore: ObservableObject {
     // X-Product Versionを保存している
     @UserDefault(forKey: "version", defaultValue: "1.0.0")
     var verion: String
+    
+    init() {
+        // isLoginの値が変わったら即座にデータを再読込してViewの切り替えを行う
+        token = UserDefaults.standard.observe(\.isLogin, options: [.initial, .new], changeHandler: { [weak self] (defaults, change) in
+            self!.isLogin = UserDefaults.standard.bool(forKey: "isLogin")
+        })
+    }
+}
+
+extension UserDefaults {
+    @objc dynamic var isLogin: Bool {
+        return bool(forKey: "isLogin")
+    }
+    
 }

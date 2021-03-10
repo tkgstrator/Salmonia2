@@ -24,30 +24,31 @@ struct LoginMenu: View {
     
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .bottom) {
-                BackGround
+            ScrollView {
                 VStack(spacing: 30) {
                     Text("TEXT_WELCOME")
-                        .font(.system(size: 30, weight: .bold, design: .monospaced))
+                        .font(.custom("Times-Roman", size: 100))
+                        .minimumScaleFactor(0.3)
                         .foregroundColor(.white)
                     Text("DESC_LOGIN_SPLATNET2")
-                        .font(.system(size: 16, weight: .thin, design: .monospaced))
+                        .font(.custom("Times-Roman", size: 40))
+                        .minimumScaleFactor(0.5)
                         .foregroundColor(.white)
-                        .multilineTextAlignment(.center)
                         .lineLimit(3)
+                        .multilineTextAlignment(.center)
                         .padding(.horizontal, 10)
                 }
-                .offset(x: 0, y: -geometry.size.height * 0.7)
+                .position(x: geometry.frame(in: .local).midX, y: geometry.size.height / 4)
                 VStack(spacing: 40) {
                     LoginButton
                     RegisterButton
                 }
-                .offset(x: 0, y: -60)
+                .position(x: geometry.frame(in: .local).midX, y: 3 * geometry.size.height / 5)
             }
-            .navigationTitle("TITLE_WELCOME")
-            .navigationBarBackButtonHidden(true)
-            .navigationViewStyle(StackNavigationViewStyle())
         }
+        .background(BackGround)
+        .navigationTitle("TITLE_WELCOME")
+        .navigationBarHidden(true)
     }
     
     var LoginButton: some View {
@@ -55,7 +56,7 @@ struct LoginMenu: View {
             Text("BTN_LOGIN")
                 .font(.system(size: 20, weight: .bold, design: .monospaced))
                 .foregroundColor(.white)
-                .frame(width: 240, height: 60)
+                .frame(width: 144, height: 42)
                 .background(Color.blue)
                 .cornerRadius(10)
         }
@@ -111,8 +112,8 @@ struct LoginMenu: View {
             Text("BTN_REGISTER")
                 .font(.system(size: 20, weight: .bold, design: .monospaced))
                 .foregroundColor(.white)
-                .frame(width: 240, height: 60)
-                .background(Color.blue)
+                .frame(width: 144, height: 42)
+                .background(Color.blue.opacity(0.8))
                 .cornerRadius(10)
         }
         .safariView(isPresented: $isEnable[1]) {

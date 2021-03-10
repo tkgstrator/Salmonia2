@@ -26,7 +26,7 @@ struct ResultView: View {
             ResultPlayerView
         }
         .navigationBarItems(trailing: UIButton)
-        .navigationTitle("TITLE_JOB_RESULT")
+        .navigationTitle("TITLE_RESULT_DETAIL")
     }
 
     var UIButton: some View {
@@ -51,6 +51,7 @@ struct ResultView: View {
                                 .frame(width: 144, height: 24, alignment: .trailing).clipped().foregroundColor(.green)
                             Text(UnixTime.dateFromTimestamp(result.play_time))
                                 .font(.custom("Splatfont", size: 16))
+                                .foregroundColor(.white)
                                 .padding(.horizontal, 10)
                                 .shadow(color: .black, radius: 0, x: 1, y: 1)
                         }
@@ -58,13 +59,13 @@ struct ResultView: View {
                 }
                 Group {
                     if self.result.danger_rate == 200 {
-                        Text("Hazard Level MAX!!")
+                        Text("RESULT_HAZARD_LEVEL_MAX")
                             .modifier(Splatfont(size: 20))
                             .shadow(color: .black, radius: 0, x: 1, y: 1)
                             .foregroundColor(.yellow)
                             .frame(maxWidth: .infinity)
                     } else {
-                        Text("Hazard Level " + String(self.result.danger_rate) + "%")
+                        Text("RESULT_HAZARD_LEVEL_\(String(result.danger_rate))")
                             .modifier(Splatfont(size: 20))
                             .shadow(color: .black, radius: 0, x: 1, y: 1)
                             .foregroundColor(.yellow)
@@ -75,11 +76,13 @@ struct ResultView: View {
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable() }
                         .frame(width: 24, height: 24)
                     Text("x\(result.golden_eggs)")
+                        .foregroundColor(.white)
                         .rainbowAnimation(rainbow.resultOverview)
                         .shadow(color: .black, radius: 0, x: 1, y: 1)
                     URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/78f61aacb1fbb50f345cdf3016aa309e.png")!) { image in image.resizable() }
                         .frame(width: 24, height: 24)
                     Text("x\(result.power_eggs)")
+                        .foregroundColor(.white)
                         .shadow(color: .black, radius: 0, x: 1, y: 1)
                         .rainbowAnimation(rainbow.resultOverview)
                 }.frame(maxWidth: .infinity)
@@ -106,14 +109,12 @@ struct ResultView: View {
                             .frame(height: 12)
                     }
                     VStack(spacing: 0) {
-                        HStack(spacing: 0) {
-                            Text("WAVE")
-                            Text(" \(wave.result.first!.wave.index(of: wave)! + 1)")
-                        }
+                        Text("RESULT_WAVE_\(wave.result.first!.wave.index(of: wave)! + 1)")
                         .foregroundColor(.black)
                         .font(.custom("Splatfont2", size: 16))
                         Text("\(wave.golden_ikura_num)/\(wave.quota_num)")
                             .font(.custom("Splatfont2", size: 26))
+                            .foregroundColor(.white)
                             .rainbowAnimation(rainbow.resultQuota)
                             .padding(.horizontal, 5)
                             .frame(maxWidth: .infinity)
@@ -134,8 +135,7 @@ struct ResultView: View {
                         URLImage(url: URL(string: "https://app.splatoon2.nintendo.net/images/bundled/3aa6fb4ec1534196ede450667c1183dc.png")!) { image in image.resizable()}
                             .frame(width: 15, height: 15)
                             .padding(.horizontal, 3)
-                        Text("Appearances")
-                        Text(" x\(wave.golden_ikura_pop_num)")
+                        Text("RESULT_APPEARANCES_\(wave.golden_ikura_pop_num)")
                     }
                     .font(.custom("Splatfont2", size: 12))
                     ForEach(result.special_usage(wave.result.first!.wave.index(of: wave)!), id:\.self) { usage in
@@ -178,16 +178,10 @@ struct ResultView: View {
                     if unlock.legacyStyle {
                         VStack(alignment: .leading, spacing: 3) {
                             if isVisible && result.player.index(of: player) != 0 {
-                                HStack(spacing: 0) {
-                                    Text("Matching")
-                                    Text(" x\(player.count)")
-                                }
+                                Text("RESULT_MATCHING_\(player.count)")
                                 .frame(height: 11)
                             }
-                            HStack(spacing: 0) {
-                                Text("Rate")
-                                Text(" " + String(player.srpower))
-                            }
+                            Text("RESULT_RATING_\(String(player.srpower))")
                             .frame(height: 11)
                         }
                         .font(.custom("Splatfont2", size: 11))
@@ -245,13 +239,12 @@ struct ResultView: View {
                     }
                     URLImage(url: SpecialType(special_id: player.special_id)!.image_url) { image in image.resizable().aspectRatio(contentMode: .fit).frame(maxWidth: maxWidth)}
                 }
-                HStack(spacing: 0) {
+                Group {
                     if UIScreen.main.bounds.size.width >= 360 {
-                        Text("Boss Salmonids defeated")
+                        Text("RESULT_BOSS_DEFEATED_\(player.boss_kill_counts.sum())")
                     } else {
-                        Text("Boss Defeated")
+                        Text("RESULT_DEFEATED_\(player.boss_kill_counts.sum())")
                     }
-                    Text(" x\(player.boss_kill_counts.sum())")
                 }
                 .font(.custom("Splatfont2", size: 12))
                 .shadow(color: .black, radius: 0, x: 1, y: 1)

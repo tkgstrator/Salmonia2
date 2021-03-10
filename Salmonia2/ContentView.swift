@@ -10,39 +10,34 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var unlock: UnlockCore
     @EnvironmentObject var main: MainCore
-    
+
     var body: some View {
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            NavigationView {
-                TopMenu
-            }
-        case .pad:
-            NavigationView {
-                TopMenu
-            }
-        case .unspecified:
-            EmptyView()
-        case .tv:
-            EmptyView()
-        case .carPlay:
-            EmptyView()
-        case .mac:
-            EmptyView()
-        @unknown default:
-            EmptyView()
-        }
-    }
-    
-    var TopMenu: some View {
         switch main.isLogin {
         case true:
-            return AnyView(SalmoniaView())
+            TopView
+                .animation(.linear)
         case false:
-            return AnyView(LoginMenu())
+            LoginView
+                .animation(.linear)
         }
     }
     
+    var TopView: some View {
+        NavigationView {
+            SalmoniaView()
+            ResultCollectionView()
+        }
+        .navigationViewStyle(LegacyNavigationViewStyle())
+    }
+    
+    var LoginView: some View {
+        NavigationView {
+            LoginMenu()
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+
+    }
+
     var BackGround: some View {
         LinearGradient(gradient: Gradient(colors: [.blue, .black]), startPoint: .top, endPoint: .bottom)
             .edgesIgnoringSafeArea(.all)

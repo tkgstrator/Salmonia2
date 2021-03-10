@@ -65,7 +65,6 @@ public struct SUIWebBrowserView: UIViewRepresentable {
 }
 
 struct WebBrowser: View {
-    @State var isSuccess: Bool = false
     @EnvironmentObject var main: MainCore
     @ObservedObject var browser = SUIWebBrowserObject()
     @Environment(\.presentationMode) var presentationMode
@@ -76,11 +75,11 @@ struct WebBrowser: View {
         browser.load(URLRequest(url: u))
     }
     
-    func ItemImage(systemName: String) -> some View {
-        Image(systemName: systemName)
-            .imageScale(.large).aspectRatio(contentMode: .fit)
-            .frame(width: 32, height: 32)
-    }
+//    func ItemImage(systemName: String) -> some View {
+//        Image(systemName: systemName)
+//            .imageScale(.large).aspectRatio(contentMode: .fit)
+//            .frame(width: 32, height: 32)
+//    }
     
     var Title: Text {
         Text(verbatim: browser.url?.absoluteString.removingPercentEncoding ?? "")
@@ -99,7 +98,7 @@ struct WebBrowser: View {
                                 do {
                                     main.apiToken = try SalmonStats.getAPIToken(laravel_session)
                                     main.isLogin.toggle()
-                                    isSuccess.toggle()
+                                    print("LOGIN DONE")
                                 } catch {
                                     
                                 }
@@ -108,8 +107,5 @@ struct WebBrowser: View {
                     }
                 }
             }
-        NavigationLink(destination: SalmoniaView(), isActive: $isSuccess) {
-            EmptyView()
-        }
     }
 }

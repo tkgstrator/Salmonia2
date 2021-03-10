@@ -2,6 +2,7 @@
 "TEXT_WELCOME" = "Salmonia2";
 "TEXT_LOGIN_SALMON_STATS" = "Sign in Salmon Stats";
 
+
 // ボタンの翻訳
 "BTN_LOGIN" = "ログインする";
 "BTN_LOGIN_LEGACY" = "ログインする";
@@ -12,9 +13,9 @@
 "BTN_CONFIRM" = "確認";
 "BTN_ERROR_DISMISS" = "閉じる";
 "BTN_ADD" = "追加";
-"BTN_" = "";
-"BTN_" = "";
-"BTN_" = "";
+"BTN_PURCHASE" = "購入";
+"BTN_PURCHASED" = "購入済";
+"BTN_RESTORE" = "復元";
 "BTN_" = "";
 "BTN_" = "";
 "BTN_" = "";
@@ -46,8 +47,8 @@
 "TITLE_GLOBAL_RECORDS" = "全国記録";
 "TITLE_SHIFT_SCHEDULE" = "シフトスケジュール";
 "TITLE_LOGGING_THREAD" = "ログ";
-"TITLE_JOB_RESULTS" = "バイト記録";
-"TITLE_WAVE_RESULTS" = "WAVE記録";
+"TITLE_JOB_RESULTS" = "バイト一覧";
+"TITLE_WAVE_RESULTS" = "WAVE一覧";
 "TITLE_RESULT_DETAIL" = "詳細";
 "TITLE_FEATURE" = "機能";
 "TITLE_GAMING_CONFIG" = "ゲーミング設定";
@@ -88,6 +89,16 @@
 "HEADER_RESULTS" = "記録";
 "HEADER_SHIFT_STATS" = "シフト統計";
 "HEADER_RESULT_DETAIL" = "Result Detail";
+"HEADER_FREE_PRODUCT" = "無料コンテンツ";
+"HEADER_PAID_PRODUCT" = "有料コンテンツ";
+"HEADER_OPTION" = "オプション";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
+"HEADER_" = "";
 "HEADER_" = "";
 "HEADER_" = "";
 "HEADER_" = "";
@@ -153,6 +164,31 @@
 "GAMING_" = "";
 "GAMING_" = "";
 "GAMING_" = "";
+
+
+// リザルト詳細の翻訳
+"RESULT_MATCHING_%lld" = "マッチング回数 x%lld";
+"RESULT_RATING_%@" = "レーティング %@";
+"RESULT_BOSS_DEFEATED_%lld" = "オオモノシャケを倒した回数 x%lld";
+"RESULT_DEFEATED_%lld" = "オオモノ討伐数 x%lld";
+"RESULT_HAZARD_LEVEL_%@" = "キケン度%%@";
+"RESULT_WAVE_%lld" = "Wave %lld";
+"RESULT_APPEARANCES_%lld" = "出現数 x%lld";
+"RESULT_HAZARD_LEVEL_MAX" = "キケン度MAX!!";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
+"RESULT_" = "";
 
 // 統計表示の翻訳
 "STATS_SRPOWER" = "シャケレート";

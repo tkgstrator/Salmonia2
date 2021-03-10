@@ -42,6 +42,8 @@
 		107319FC2595E2940037F19B /* DisclosureIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107319FB2595E2940037F19B /* DisclosureIndicator.swift */; };
 		108F2C67257766BB00287900 /* SyncUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108F2C66257766BB00287900 /* SyncUserData.swift */; };
 		10A8043A25AFB24200654DAC /* BSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8043925AFB24200654DAC /* BSafariView.swift */; };
+		10ABDB1D25F798C30013E160 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10ABDB1C25F798C30013E160 /* View.swift */; };
+		10ABDB2225F7990F0013E160 /* CustomNavigationViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10ABDB2125F7990F0013E160 /* CustomNavigationViewStyle.swift */; };
 		10AC289E25F24AF500189E46 /* LoginMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC289D25F24AF500189E46 /* LoginMenu.swift */; };
 		10AC28A325F24B0B00189E46 /* SalmonStatsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */; };
 		10AC28EB25F4C59500189E46 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AC28EA25F4C59400189E46 /* UserDefaults.swift */; };
@@ -150,6 +152,8 @@
 		107319FB2595E2940037F19B /* DisclosureIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureIndicator.swift; sourceTree = "<group>"; };
 		108F2C66257766BB00287900 /* SyncUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncUserData.swift; sourceTree = "<group>"; };
 		10A8043925AFB24200654DAC /* BSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSafariView.swift; sourceTree = "<group>"; };
+		10ABDB1C25F798C30013E160 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		10ABDB2125F7990F0013E160 /* CustomNavigationViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationViewStyle.swift; sourceTree = "<group>"; };
 		10AC289D25F24AF500189E46 /* LoginMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenu.swift; sourceTree = "<group>"; };
 		10AC28A225F24B0B00189E46 /* SalmonStatsMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonStatsMenu.swift; sourceTree = "<group>"; };
 		10AC28EA25F4C59400189E46 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -271,15 +275,16 @@
 			children = (
 				105F690E252F33F2003306C8 /* Salmonia2.entitlements */,
 				10BB34B5252175170046CBCA /* SalmoniaView.swift */,
+				1037E3A425209C7C001B41B0 /* ContentView.swift */,
+				1037E3A025209C7C001B41B0 /* AppDelegate.swift */,
+				1037E3A225209C7C001B41B0 /* SceneDelegate.swift */,
 				10AC28E925F4C57D00189E46 /* Extension */,
 				10BB348B252174F60046CBCA /* Core */,
 				10BB34B6252175170046CBCA /* Components */,
 				10BB3489252174F60046CBCA /* Assets */,
+				10ABDB1B25F798B00013E160 /* Extension */,
 				1053968925242DC600132668 /* Enum */,
 				10BB00632530C4350081C6EB /* Languages */,
-				1037E3A025209C7C001B41B0 /* AppDelegate.swift */,
-				1037E3A225209C7C001B41B0 /* SceneDelegate.swift */,
-				1037E3A425209C7C001B41B0 /* ContentView.swift */,
 				10BB3508252181300046CBCA /* Configuration.storekit */,
 				10F2812625308C9E00D7B2BE /* GoogleService-Info.plist */,
 				1037E3A625209C7D001B41B0 /* Assets.xcassets */,
@@ -363,6 +368,16 @@
 				10EFA3A225239E0A0027209D /* ImportResultView.swift */,
 			);
 			path = LoggingThread;
+			sourceTree = "<group>";
+		};
+		10ABDB1B25F798B00013E160 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				10ABDB1C25F798C30013E160 /* View.swift */,
+				10ABDB2125F7990F0013E160 /* CustomNavigationViewStyle.swift */,
+			);
+			name = Extension;
+			path = Enum/Extension;
 			sourceTree = "<group>";
 		};
 		10AC289225F24A5100189E46 /* Other */ = {
@@ -872,6 +887,8 @@
 				1053967D2524206200132668 /* StageRecordView.swift in Sources */,
 				10EFA3A82523A0DB0027209D /* Alamofire.swift in Sources */,
 				10DA21F925CFFEE60085B3F7 /* Rainbow.swift in Sources */,
+				10ABDB1D25F798C30013E160 /* View.swift in Sources */,
+				10ABDB2225F7990F0013E160 /* CustomNavigationViewStyle.swift in Sources */,
 				10E743B825E192FF0098C4B9 /* RainbowConfiguration.swift in Sources */,
 				1046326625E199EA0051A7B1 /* UserDefaultsCore.swift in Sources */,
 				10BB00A125310C1C0081C6EB /* WaveCollectionView.swift in Sources */,

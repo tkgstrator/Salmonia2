@@ -60,7 +60,7 @@ struct SalmoniaView: View {
     
     private var Results: some View {
         Group {
-            NavigationLink(destination: ResultCollectionView(core: UserResultCore())) {
+            NavigationLink(destination: ResultCollectionView()) {
                 Text("TITLE_JOB_RESULTS")
                     .modifier(Splatfont2(size: 16))
             }

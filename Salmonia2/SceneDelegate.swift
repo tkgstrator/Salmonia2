@@ -33,6 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             .environmentObject(MainCore())
             .environment(\.lineLimit, 1)
             .environment(\.minimumScaleFactor, 0.8)
+            .textCase(nil)
             .listStyle(GroupedListStyle())
             .buttonStyle(PlainButtonStyle())
 
