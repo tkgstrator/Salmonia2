@@ -60,7 +60,9 @@ class MainCore: ObservableObject {
     init() {
         // isLoginの値が変わったら即座にデータを再読込してViewの切り替えを行う
         token = UserDefaults.standard.observe(\.isLogin, options: [.initial, .new], changeHandler: { [weak self] (defaults, change) in
+            // TODO: なんかエラー出てる
             self!.isLogin = UserDefaults.standard.bool(forKey: "isLogin")
+            print("LOAD USER DEFAULTS", self!.isLogin)
         })
     }
 }

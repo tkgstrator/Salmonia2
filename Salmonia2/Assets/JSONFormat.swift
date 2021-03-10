@@ -172,7 +172,7 @@ public class JF {
         result.updateValue(waves.map({ $0.golden_ikura_num }).reduce(0, +), forKey: "golden_eggs")
         result.updateValue(nsaid, forKey: "nsaid")
         // TODO: ここの画像読み込みをEnum使う
-//        result.updateValue(FImage.getStageId(String(response["schedule"]["stage"]["image"].stringValue.suffix(44))), forKey: "stage_id")
+        result.updateValue(StageType.init(image_url: "https://app.splatoon2.nintendo.net\(response["schedule"]["stage"]["image"].stringValue)")?.stage_id, forKey: "stage_id")
         result.updateValue(response["grade"]["id"].intValue, forKey: "grade_id")
         result.updateValue(response["boss_counts"].sorted(by: { Int($0.0)! < Int($1.0)! }).map({ $0.1["count"].intValue }), forKey: "boss_counts")
         result.updateValue(player_kill_counts, forKey: "boss_kill_counts")

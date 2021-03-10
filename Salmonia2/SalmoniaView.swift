@@ -38,6 +38,7 @@ struct SalmoniaView: View {
                     StageRecordView()
                 }
             }
+            .listStyle(SidebarListStyle())
         }
         .pullToRefresh(isShowing: $isShowing) {
             isActive.toggle()

@@ -27,11 +27,11 @@ struct LoginMenu: View {
             ScrollView {
                 VStack(spacing: 30) {
                     Text("TEXT_WELCOME")
-                        .font(.custom("Times-Roman", size: 100))
-                        .minimumScaleFactor(0.3)
+                        .font(.custom("RobotoMono", size: 60))
+                        .minimumScaleFactor(0.5)
                         .foregroundColor(.white)
                     Text("DESC_LOGIN_SPLATNET2")
-                        .font(.custom("Times-Roman", size: 40))
+                        .font(.custom("RobotoMono", size: 30))
                         .minimumScaleFactor(0.5)
                         .foregroundColor(.white)
                         .lineLimit(3)
@@ -54,7 +54,7 @@ struct LoginMenu: View {
     var LoginButton: some View {
         Button(action: { isEnable[0].toggle() }) {
             Text("BTN_LOGIN")
-                .font(.system(size: 20, weight: .bold, design: .monospaced))
+                .font(.custom("RobotoMono", size: 20))
                 .foregroundColor(.white)
                 .frame(width: 144, height: 42)
                 .background(Color.blue)
@@ -110,7 +110,7 @@ struct LoginMenu: View {
     var RegisterButton: some View {
         Button(action: { isEnable[1].toggle() }) {
             Text("BTN_REGISTER")
-                .font(.system(size: 20, weight: .bold, design: .monospaced))
+                .font(.custom("RobotoMono", size: 20))
                 .foregroundColor(.white)
                 .frame(width: 144, height: 42)
                 .background(Color.blue.opacity(0.8))

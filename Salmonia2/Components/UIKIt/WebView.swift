@@ -94,11 +94,10 @@ struct WebBrowser: View {
                         if cookie.name == "laravel_session" {
                             let laravel_session = cookie.value
                             DispatchQueue(label: "Login").async {
-                                Thread.sleep(forTimeInterval: 10)
+                                Thread.sleep(forTimeInterval: 5)
                                 do {
                                     main.apiToken = try SalmonStats.getAPIToken(laravel_session)
-                                    main.isLogin.toggle()
-                                    print("LOGIN DONE")
+                                    UserDefaults.standard.setValue(true, forKey: "isLogin")
                                 } catch {
                                     
                                 }
