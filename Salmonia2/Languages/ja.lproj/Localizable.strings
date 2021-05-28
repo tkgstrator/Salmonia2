@@ -119,10 +119,10 @@
 "SETTING_LANPLAY_ONLINE" = "オンラインメンバー数";
 "SETTING_LANPLAY_IDLE" = "待機メンバー数";
 "SETTING_LANPLAY_VERSION" = "バージョン";
-"SETTING_TUTORIAL" = "チュートリアルl";
+"SETTING_TUTORIAL" = "チュートリアル";
 "SETTING_PRIVACY" = "プライバシーポリシー";
 "SETTING_DELETE_MAIN" = "設定削除";
-"SETTING_XPRODUCT_VERSION" = "APIバージョン";
+"SETTING_XPRODUCT_VERSION" = "X-Product Version";
 "SETTING_APP_VERSION" = "バージョン";
 "SETTING_REGISTERED" = "トウロク";
 "SETTING_UNREGISTERED" = "ミトウロク";

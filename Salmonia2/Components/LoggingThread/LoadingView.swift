@@ -19,6 +19,7 @@ struct LoadingView: View {
     @State var mainlog: ProgressLog = ProgressLog()
     @State var isPresented: Bool = false
     @State var appError: CustomNSError?
+    private var version: String = UserDefaults.standard.string(forKey: "version") ?? "1.11.0"
     
     var body: some View {
         LoggingThread(log: $mainlog)
@@ -29,17 +30,11 @@ struct LoadingView: View {
             .onAppear {
                 // TODO: エラーを出力するように変更する
                 guard let api_token: String = user.api_token else { return }
-                guard let version: String = user.version else { return }
                 guard let session_token: String = user.session_token else { return }
                 guard let nsaid: String = user.nsaid else { return }
 
                 DispatchQueue(label: "LoadingView").async {
                     do {
-                        // TODO: ここでいろいろエラー発生させて検証
-                        #if DEBUG
-                        throw APPError.coop
-                        #endif
-                        
                         // DispatchQueue内では別にオブジェクトを用意する必要がある
                         guard let realm = try? Realm() else { return }
                         // イカスミセッションが切れていた場合

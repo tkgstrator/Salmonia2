@@ -52,6 +52,7 @@ struct ShiftStatsView: View {
 //                )
 //            }
             Group {
+                StatsColumn(title: "Job Num", value: stats.job_num)
                 StatsColumn(title: "STATS_SRPOWER", value: stats.srpower[0]?.round)
                 StatsColumn(title: "STATS_CLEAR_RATIO", value: stats.clear_ratio.per)
                 StatsColumn(title: "STATS_TEAM_IKURA", value: stats.total_power_eggs)

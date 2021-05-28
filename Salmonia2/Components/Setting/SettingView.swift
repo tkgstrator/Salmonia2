@@ -45,7 +45,7 @@ struct SettingView: View {
     }
     
     private func getLanPlayStatus() {
-        let url = "http://tkgstrator.work:11451/info"
+        let url = "http://ec2-13-231-102-57.ap-northeast-1.compute.amazonaws.com:11451/info"
         AF.request(url, method: .get)
             .responseJSON() { response in
                 switch response.result {

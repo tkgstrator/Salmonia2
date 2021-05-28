@@ -34,7 +34,7 @@ class MainRealm: Object {
     // 保存したいユーザの情報を保存しておく
     @objc dynamic var uuid: String = ""
     @objc dynamic var api_token: String = ""
-    @objc dynamic var version: String = "1.10.1"
+    @objc dynamic var version: String = "1.11.0"
     @objc dynamic var nsaid: String = ""
     @objc dynamic var session_token: String = ""
     @objc dynamic var iksm_session: String = ""

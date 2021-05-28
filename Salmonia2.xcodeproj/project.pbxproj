@@ -540,7 +540,6 @@
 				1037E39A25209C7C001B41B0 /* Frameworks */,
 				1037E39B25209C7C001B41B0 /* Resources */,
 				42C0E994351A40405C8F57C8 /* [CP] Embed Pods Frameworks */,
-				101D2BEA2590F4970011B794 /* Carthage Install */,
 				10AC28AA25F257A000189E46 /* Warning */,
 				1009110225F9005600FCA317 /* Build Version */,
 			);
@@ -708,26 +707,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncurrentNumber=$(/usr/libexec/PlistBuddy -c \"Print :CFBundleVersion\" \"$PRODUCT_SETTINGS_PATH\")\nif [ \"$buildNumber\" -ne \"$currentNumber\" ] ; then\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$PRODUCT_SETTINGS_PATH\"\nfi\n";
-		};
-		101D2BEA2590F4970011B794 /* Carthage Install */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
-			);
-			name = "Carthage Install";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
 		};
 		10AC28AA25F257A000189E46 /* Warning */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1103,7 +1082,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;
@@ -1135,7 +1114,7 @@
 				CODE_SIGN_ENTITLEMENTS = Salmonia2/Salmonia2.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Salmonia2/Preview Content\"";
 				DEVELOPMENT_TEAM = D9HU6JZF2Q;
 				ENABLE_PREVIEWS = YES;

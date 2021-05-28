@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // データベースのマイグレーション
     func realmMigration() {
         let config = Realm.Configuration(
-            schemaVersion: 0,
+            schemaVersion: 2048,
             migrationBlock: { [self] migration, oldSchemaVersion in
                 if oldSchemaVersion < 1 {
                 }
@@ -183,7 +183,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     let json = JSON(value)
                     guard let version: String = json["version"].string else { return }
                     UserDefaults.standard.setValue(version, forKey: "version")
-//                    realm.objects(SalmoniaUserRealm.self).first?.isVersion = json["version"].stringValue
                 case .failure:
                     break
                 }
